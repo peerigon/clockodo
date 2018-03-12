@@ -1,0 +1,32 @@
+{
+  "name": "clockodo-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peerigon/clockodo-node.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "clockodo",
+    "work time",
+    "project report",
+    "time tracking",
+    "api"
+  ],
+  "author": "developers@peerigon.com",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/peerigon/clockodo-node/issues"
+  },
+  "homepage": "https://github.com/peerigon/clockodo-node#readme",
+  "dependencies": {
+    "node-rest-client": "^3.1.0",
+    "when": "^3.7.8"
+  }
+}
