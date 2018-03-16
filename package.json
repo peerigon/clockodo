@@ -27,6 +27,7 @@
   "homepage": "https://github.com/peerigon/clockodo-node#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^5.0.1",
     "node-rest-client": "^3.1.0",
     "when": "^3.7.8"
   },
