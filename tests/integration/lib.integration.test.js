@@ -9,21 +9,22 @@ beforeEach(() => {
 });
 
 describe("integration test for apiRequest()", () => {
-    // beforeEach(() => {});
-
-    it("throws an error if passed a bad resource", () => {
-        // const goodResource = "users";
+    it("rejects and throws an error if passed a bad resource", () => {
         const badResource = "thisdoesntexist";
         const params = {};
         const excpectedError = new Error("Request failed with status code 404");
 
         expect.assertions(1);
 
-        return lib.apiRequest(badResource, params).catch(error => {
-            expect(error).toEqual(excpectedError);
-        });
+        return expect(lib.apiRequest(badResource, params)).rejects.toThrow(excpectedError);
     });
 
-    // it("rejects promise with data.error in case of an error ", () => {});
-    // it("resolves with data if no error", () => {});
+    it("resolves when given a valid resource", () => {
+        const goodResource = "users";
+        const params = {};
+
+        expect.assertions(1);
+
+        return expect(lib.apiRequest(goodResource, params)).resolves.not.toBeUndefined();
+    });
 });

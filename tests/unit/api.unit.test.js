@@ -1,34 +1,15 @@
 "use strict";
 
 require("dotenv").config();
-const clockodo = require("../../lib/api");
 const lib = require("../../lib/lib");
 const axios = require("axios");
 
 jest.mock("axios");
 
-// This file can probably be renamed to apiRequest.test or get.test or something
-
 beforeEach(() => {
-    clockodo.setClientSettings(process.env.CLOCKODO_USER, process.env.CLOCKODO_API_KEY);
     const expectedResponseData = {};
 
     axios.get.mockResolvedValue(expectedResponseData);
-});
-
-describe("apiRequest()", () => {
-    it("calls axios.get()", () => {
-        const resource = "users";
-        const params = {};
-
-        expect(axios.get.mock.calls.length).toEqual(0);
-
-        return lib.apiRequest(resource, params).then(data => {
-            expect(axios.get.mock.calls.length).toEqual(1);
-        });
-    });
-
-    // it("merges args", () => {});
 });
 
 describe("Api Endpoint Methods", () => {
