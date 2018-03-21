@@ -2,13 +2,19 @@
 
 require("dotenv").config();
 
-const clockodo = require("./lib/api");
+const Clockodo = require("./lib/api");
 
-clockodo.setClientSettings(process.env.CLOCKODO_USER, process.env.CLOCKODO_API_KEY);
+const clockodo = new Clockodo(process.env.CLOCKODO_USER, process.env.CLOCKODO_API_KEY);
+const params = {
+    time_since: "2017-01-01 00:00:00",
+    time_until: "2017-02-01 00:00:00",
+    "filter[billable]": 0,
+};
+
 clockodo
-    .getUsers()
+    .getEntries(params)
     .then(data => {
-        data.data.users.forEach(console.log);
+        console.log(data);
     })
     .catch(error => {
         console.log("caught", error);
