@@ -2,13 +2,15 @@
 
 require("dotenv").config();
 
-const lib = require("../../lib/lib");
+const { ClockodoApi } = require("../../lib/lib");
+
+let clockodo;
 
 beforeEach(() => {
-    lib.configure(process.env.CLOCKODO_USER, process.env.CLOCKODO_API_KEY);
+    clockodo = new ClockodoApi(process.env.CLOCKODO_USER, process.env.CLOCKODO_API_KEY);
 });
 
-describe("integration test for apiRequest()", () => {
+describe("integration test for get()", () => {
     it("rejects and throws an error if passed a bad resource", () => {
         const badResource = "thisdoesntexist";
         const params = {};
@@ -16,7 +18,7 @@ describe("integration test for apiRequest()", () => {
 
         expect.assertions(1);
 
-        return expect(lib.apiRequest(badResource, params)).rejects.toThrow(expectedError);
+        return expect(clockodo.get(badResource, params)).rejects.toThrow(expectedError);
     });
 
     it("resolves when given a valid resource (with no params passed)", () => {
@@ -24,16 +26,16 @@ describe("integration test for apiRequest()", () => {
 
         expect.assertions(1);
 
-        return expect(lib.apiRequest(goodResource)).resolves.toHaveProperty("users");
+        return expect(clockodo.get(goodResource)).resolves.toHaveProperty("users");
     });
 
     it("returns with immediate access to data", () => {
-        const getUser = "users/" + process.env.CLOCKODO_TEST_ID;
+        const getUser = "/users/" + process.env.CLOCKODO_TEST_ID;
         const expectedName = process.env.CLOCKODO_TEST_NAME;
 
         expect.assertions(1);
 
-        return lib.apiRequest(getUser).then(data => {
+        return clockodo.get(getUser).then(data => {
             expect(data.user.name).toBe(expectedName);
         });
     });

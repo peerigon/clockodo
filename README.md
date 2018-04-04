@@ -7,24 +7,45 @@ The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/ap
 Get user (email) and clockodo api key on "[My area](https://my.clockodo.com/en/users/editself)".
 
 ```
-const clockodo = require("clockodo-node");
-clockodo.setClientSettings("your@mail.com", "your-api-key");
+const Clockodo = require("clockodo-node");
+const clockodo = newClockodo("your@mail.com", "your-api-key");
 ```
 
-### getUserReports()
+We have provided methods for each of the endpoints available by the Clockodo API. The request parameters passed to the queries have been renamed for ease of use, and any key names in the response object returned by Clockodo have been converted to camel case. We have also cut the fluff to return only the data from the response.
+
+### getEntries(begin, end[, filters])
+
+#### Parameters:
+
+**begin**
+Type: String
+Description: Beginning date for the range of Clockodo entries to return. Should accept any valid date format, because it parses the string into the format Clockodo wants: "YYYY-MM-DD hh:mm:ss".
+
+**end**
+Type: String
+Description: End date for the range of Clockodo entries to return.
+
+**filters(optional)**
+
+* `filterUserId`: (string)
+* `filterCustomerId`: (string)
+* `filterProjectId`: (string)
+* `filterServiceId`: (string)
+* `filterBillable`: (enum) 0(unbillable), 1(billable), 2(billed and billable)
+* `filterText`: (string) text of entry
 
 Example:
 
 ```
 const options = {
-    type: 1,
-    year: 2018,
+    filterBillable: 2,
+    filterUserId: 007,
 };
 
 clockodo
-    .getUserReports(options)
-    .then((data) => {
-        console.log(data.userreports);
+    .getEntries("03-12-2016", "08-18-2017", options)
+    .then(data => {
+        console.log(data);
     });
 ```
 
@@ -49,8 +70,6 @@ More Infos: [Clockodo EntryGroups API](https://www.clockodo.com/de/api/entrygrou
 ### getCustomers()
 
 More Infos: [Clockodo Customers API](https://www.clockodo.com/de/api/customers/)
-
-
 
 ## License
 
