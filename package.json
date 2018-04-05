@@ -2,7 +2,7 @@
     "name": "clockodo-node",
     "version": "1.0.0",
     "description": "",
-    "main": "lib.js",
+    "main": "./lib/api.js",
     "scripts": {
         "test": "jest"
     },

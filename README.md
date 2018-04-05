@@ -7,8 +7,8 @@ The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/ap
 Get user (email) and clockodo api key on "[My area](https://my.clockodo.com/en/users/editself)".
 
 ```
-const Clockodo = require("clockodo-node");
-const clockodo = newClockodo("your@mail.com", "your-api-key");
+const ClockodoApi = require("clockodo-node");
+const clockodo = new ClockodoApi("your@mail.com", "your-api-key");
 ```
 
 We have provided methods for each of the endpoints available by the Clockodo API. The request parameters passed to the queries have been renamed for ease of use, and any key names in the response object returned by Clockodo have been converted to camel case. We have also cut the fluff to return only the data from the response.
@@ -18,11 +18,11 @@ We have provided methods for each of the endpoints available by the Clockodo API
 #### Parameters:
 
 **begin**
-Type: String
-Description: Beginning date for the range of Clockodo entries to return. Should accept any valid date format, because it parses the string into the format Clockodo wants: "YYYY-MM-DD hh:mm:ss".
+Type: String || Date || Array || ...
+Description: Beginning date for the range of Clockodo entries to return. Will accept options supported by [Moment.JS](http://momentjs.com/docs/#/parsing/). It parses the string into the format Clockodo ultimately wants: "YYYY-MM-DD hh:mm:ss".
 
 **end**
-Type: String
+Type: String || Date || Array || ...
 Description: End date for the range of Clockodo entries to return.
 
 **filters(optional)**
@@ -40,10 +40,12 @@ Example:
 const options = {
     filterBillable: 2,
     filterUserId: 007,
+    begin: 03-12-2016,
+    end: 08-12-2016,
 };
 
 clockodo
-    .getEntries("03-12-2016", "08-18-2017", options)
+    .getEntries(options)
     .then(data => {
         console.log(data);
     });
