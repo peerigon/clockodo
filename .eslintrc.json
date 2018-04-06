@@ -1,0 +1,7 @@
+{
+  "extends": ["peerigon", "peerigon/node"],
+  "root": true,
+  "rules": {
+    "camelcase": "off"
+  }
+}

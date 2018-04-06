@@ -1,0 +1,6 @@
+{
+    "extends": ["peerigon/tests"],
+    "env": {
+        "jest": true
+    }
+}

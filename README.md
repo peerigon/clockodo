@@ -12,12 +12,12 @@ npm install clockodo-node --save
 
 Then require the package. For the constructor arguments, you must get the user (email) and clockodo api key from the "[My area](https://my.clockodo.com/en/users/editself)" section of Clockodo's website.
 
-```
+```js
 const ClockodoApi = require("clockodo-node");
 const clockodo = new ClockodoApi("your@mail.com", "your-api-key");
 ```
 
-We have provided get methods for each of the endpoints available by the Clockodo API. The request parameters passed to the queries have been renamed for ease of use, and any key names in the response object returned by Clockodo have been converted to camel case. We have also cut the fluff to return only the data from the response.
+We have provided get methods for each of the endpoints available by the Clockodo API.
 
 ___
 
@@ -27,7 +27,7 @@ Get list of customers
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getCustomers()
@@ -63,7 +63,7 @@ Clockodo Customer ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getCustomer(8675309)
@@ -94,7 +94,7 @@ Clockodo Project ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getProject(21)
@@ -119,7 +119,7 @@ Get list of services
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getServices()
@@ -155,7 +155,7 @@ Clockodo Service ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getService(1989)
@@ -180,7 +180,7 @@ Get list of users
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getUsers()
@@ -215,7 +215,7 @@ Clockodo User ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getUser(101)
@@ -246,7 +246,7 @@ Clockodo Entry ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getEntry(2000)
@@ -271,13 +271,13 @@ Gets list of Clockodo activity entries.
 
 #### Parameters:
 
-**begin** *- Type: String || Date || Array || ...*
+**begin** *- Type: String*
 
-Beginning date for the range of Clockodo entries to return. Will accept options supported by [Moment.JS](http://momentjs.com/docs/#/parsing/). It parses the string into the format Clockodo ultimately wants: "YYYY-MM-DD hh:mm:ss".
+Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
 
-**end** *- Type: String || Date || Array || ...*
+**end** *- Type: String*
 
-End date for the range of Clockodo entries to return.
+End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
 
 **filters(optional)**
 
@@ -285,17 +285,17 @@ End date for the range of Clockodo entries to return.
 * `filterCustomerId`: (integer)
 * `filterProjectId`: (integer)
 * `filterServiceId`: (integer)
-* `filterBillable`: (enum) 0(un-billable), 1(billable), 2(billed and billable)
+* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
 * `filterText`: (string) text of entry
 
 #### Example:
 
-```
+```js
 const options = {
-    filterBillable: 2,
+    filterBillable: ClockodoApi.ENTRY_BILLED,
     filterUserId: 007,
-    begin: 03-12-2016,
-    end: 08-12-2016,
+    begin: "2017-08-18 00:00:00",
+    end: "2018-02-09 00:00:00",
 };
 
 clockodo
@@ -334,7 +334,7 @@ Count of days for which the tasks will be listed. *default: 8, max: 30*
 
 #### Example:
 
-```
+```js
 const options = {
     count: 6
 };
@@ -383,7 +383,7 @@ Task ID from Clockodo
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getTask(777)
@@ -423,13 +423,13 @@ Get a group of entries defined by your criteria.
 
 #### Parameters:
 
-**begin** *- Type: String || Date || Array || ...*
+**begin** *- Type: String*
 
-Beginning date for the range of Clockodo entries to return. Will accept options supported by [Moment.JS](http://momentjs.com/docs/#/parsing/). It parses the string into the format Clockodo ultimately wants: "YYYY-MM-DD hh:mm:ss".
+Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
 
-**end** *- Type: String || Date || Array || ...*
+**end** *- Type: String*
 
-End date for the range of Clockodo entries to return.
+End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
 
 **grouping** *- Type: Array*
 
@@ -453,7 +453,7 @@ Here are the list of Strings you can pass to the request. Passing multiple group
 * `filterCustomerId`: (integer)
 * `filterProjectId`: (integer)
 * `filterServiceId`: (integer)
-* `filterBillable`: (enum) 0(un-billable), 1(billable), 2(billed and billable)
+* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
 * `filterText`: (string) text of entry
 * `roundBy`: (integer) Rounds the duration of entries to provided minutes. *Default: 0*
 * `prependCustomer`: (Boolean) Prepends customer name to the front of project names. *Default: true*
@@ -461,10 +461,10 @@ Here are the list of Strings you can pass to the request. Passing multiple group
 
 #### Example:
 
-```
+```js
 const params = {
-    begin: "03-12-2016",
-    end: "08-18-2017",
+    begin: "2017-08-18 00:00:00",
+    end: "2018-02-09 00:00:00",
     grouping: ["customers_id", "projects_id"],
     roundBy: 15,
 };
@@ -497,7 +497,7 @@ Get currently running entry for the credentials attached to Clockodo object.
 
 #### Example:
 
-```
+```js
 clockodo
     .getClockRunning()
     .then(data => {
@@ -521,7 +521,7 @@ Get status information of the clock for the credentials attached to Clockodo obj
 
 #### Example:
 
-```
+```js
 clockodo
     .getClockStatus()
     .then(data => {
@@ -586,7 +586,7 @@ Year of absences
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getAbsences({ year: 2018 })
@@ -622,7 +622,7 @@ Clockodo Absence ID
 
 #### Example:
 
-```
+```js
 
 clockodo
     .getAbsence(007)
