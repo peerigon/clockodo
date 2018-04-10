@@ -10,15 +10,7 @@
         "type": "git",
         "url": "git+https://github.com/peerigon/clockodo-node.git"
     },
-    "keywords": [
-        "node",
-        "javascript",
-        "clockodo",
-        "work time",
-        "project report",
-        "time tracking",
-        "api"
-    ],
+    "keywords": ["node", "javascript", "clockodo", "work time", "project report", "time tracking", "api"],
     "author": "developers@peerigon.com",
     "license": "Unlicense",
     "bugs": {
@@ -41,9 +33,11 @@
         "eslint-plugin-import": "^2.9.0",
         "eslint-plugin-jsdoc": "^3.5.0",
         "jest": "^22.4.2",
+        "nock": "^9.2.3",
         "prompt": "^1.0.0"
     },
     "jest": {
-        "collectCoverage": true
+        "collectCoverage": true,
+        "testEnvironment": "node"
     }
 }
