@@ -14,10 +14,13 @@ Then require the package. For the constructor arguments, you must get the user (
 
 ```js
 const ClockodoApi = require("clockodo-node");
-const clockodo = new ClockodoApi("your@mail.com", "your-api-key");
+const clockodo = new ClockodoApi({
+  user: "your@mail.com",
+  apiKey: "your-api-key"
+});
 ```
 
-We have provided get methods for each of the endpoints available by the Clockodo API.
+We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
 
 ---
 
