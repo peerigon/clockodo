@@ -2,5 +2,8 @@
     "extends": ["peerigon/tests"],
     "env": {
         "jest": true
+    },
+    "rules": {
+        "camelcase": "off"
     }
 }

@@ -82,14 +82,14 @@ clockodo.getAbsences({ year: 2018 }).then(data => {
 
 ---
 
-### getClockRunning()
+### getClock()
 
 Get currently running entry for the credentials attached to Clockodo object.
 
 #### Example:
 
 ```js
-clockodo.getClockRunning().then(data => {
+clockodo.getClock().then(data => {
   console.log(data);
 });
 ```
@@ -104,14 +104,14 @@ clockodo.getClockRunning().then(data => {
 
 ---
 
-### getClockStatus()
+### getClockUpdate()
 
 Get status information of the clock for the credentials attached to Clockodo object.
 
 #### Example:
 
 ```js
-clockodo.getClockStatus().then(data => {
+clockodo.getClockUpdate().then(data => {
   console.log(data);
 });
 ```

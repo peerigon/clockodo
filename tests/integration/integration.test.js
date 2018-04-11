@@ -5,7 +5,11 @@ require("dotenv").config();
 const Clockodo = require("../../lib/api");
 const { ClockodoLib } = require("../../lib/lib");
 
-describe("Api.js", () => {
+// These tests depend on our real Clockodo account.
+// They can only be executed by Peerigon members or Travis CI.
+const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO_API_KEY);
+
+(hasCredentials ? describe : describe.skip)("Clockodo", () => {
     let userClockodo;
 
     beforeEach(() => {
@@ -14,24 +18,12 @@ describe("Api.js", () => {
 
     describe("getUsers()", () => {
         it("returns expected data format", () => {
-            const mockResponse = {
-                users: [
-                    {
-                        id: 2323,
-                        name: "Harry Potter",
-                        number: "7",
-                        email: "boywholived@hogwarts.com",
-                        role: "wizard",
-                        active: true,
-                        editLock: null,
-                    },
-                ],
-            };
+            const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
 
             expect.assertions(1);
 
             return userClockodo.getUsers().then(data => {
-                expect(Object.keys(data.users[0]).sort()).toEqual(Object.keys(mockResponse.users[0]).sort());
+                expect(Object.keys(data.users[0]).sort()).toEqual(expectedKeys.sort());
             });
         });
     });
@@ -87,27 +79,6 @@ describe("Api.js", () => {
             },
             10000
         );
-        it(
-            "throws an error with missing required parameter",
-            async () => {
-                const parameters = {
-                    begin: "2017-08-18 00:00:00",
-                    filterBillable: 2,
-                    filterUserId: 38557,
-                };
-                const missingParamName = "end";
-                const expectedError = new Error(`Missing required parameter "${ missingParamName }"`);
-
-                expect.assertions(1);
-
-                try {
-                    await userClockodo.getEntries(parameters);
-                } catch (e) {
-                    expect(e).toEqual(expectedError);
-                }
-            },
-            10000
-        );
     });
 
     describe("getEntryGroups()", () => {
@@ -127,12 +98,13 @@ describe("Api.js", () => {
                     "hourlyRate",
                     "hourlyRateIsEqualAndHasNoLumpSums",
                     "name",
+                    "note",
                     "restrictions",
                     "revenue",
                 ];
                 const parameters = {
                     begin: "2017-08-18 00:00:00",
-                    end: "2018-02-09 00:00:00",
+                    end: "2017-09-09 00:00:00",
                     grouping: ["customers_id"],
                 };
 
@@ -160,13 +132,14 @@ describe("Api.js", () => {
                     "hourlyRate",
                     "hourlyRateIsEqualAndHasNoLumpSums",
                     "name",
+                    "note",
                     "restrictions",
                     "revenue",
                     "subGroups",
                 ];
                 const parameters = {
                     begin: "2017-08-18 00:00:00",
-                    end: "2018-02-09 00:00:00",
+                    end: "2017-09-09 00:00:00",
                     grouping: ["customers_id", "projects_id"],
                 };
 
@@ -178,29 +151,9 @@ describe("Api.js", () => {
             },
             10000
         );
-        it(
-            "throws an error with missing required parameter",
-            async () => {
-                const parameters = {
-                    begin: "2017-08-18 00:00:00",
-                    end: "2018-02-09 00:00:00",
-                };
-                const missingParamName = "grouping";
-                const expectedError = new Error(`Missing required parameter "${ missingParamName }"`);
-
-                expect.assertions(1);
-
-                try {
-                    await userClockodo.getEntryGroups(parameters);
-                } catch (e) {
-                    expect(e).toEqual(expectedError);
-                }
-            },
-            10000
-        );
     });
 
-    describe("getClockRunning()", () => {
+    describe("getClock()", () => {
         it(
             "returns expected data format",
             () => {
@@ -208,7 +161,7 @@ describe("Api.js", () => {
 
                 expect.assertions(1);
 
-                return userClockodo.getClockRunning().then(data => {
+                return userClockodo.getClock().then(data => {
                     expect(Object.keys(data).sort()).toEqual(expectedKeys.sort());
                 });
             },
@@ -217,7 +170,7 @@ describe("Api.js", () => {
     });
 });
 
-describe("Lib.js get()", () => {
+(hasCredentials ? describe : describe.skip)("Lib.js get()", () => {
     let libClockodo;
 
     beforeEach(() => {
