@@ -4,21 +4,15 @@
     "description": "",
     "main": "./lib/api.js",
     "scripts": {
-        "test": "jest"
+        "lint": "eslint lib tests",
+        "test": "jest",
+        "posttest": "npm run lint"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/peerigon/clockodo-node.git"
     },
-    "keywords": [
-        "node",
-        "javascript",
-        "clockodo",
-        "work time",
-        "project report",
-        "time tracking",
-        "api"
-    ],
+    "keywords": ["node", "javascript", "clockodo", "work time", "project report", "time tracking", "api"],
     "author": "developers@peerigon.com",
     "license": "Unlicense",
     "bugs": {

@@ -25,8 +25,8 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getAbsences({});
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "year"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "year"');
             }
         });
     });
@@ -119,8 +119,8 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getEntries(parameters);
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "end"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "end"');
             }
         });
     });
@@ -161,8 +161,8 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getEntryGroups(parameters);
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "grouping"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "grouping"');
             }
         });
     });
@@ -256,8 +256,8 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getTaskDuration(parameters);
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "taskBillable"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "taskBillable"');
             }
         });
     });
@@ -299,8 +299,8 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getUserReport("200", {});
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "year"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "year"');
             }
         });
     });
@@ -320,26 +320,25 @@ describe("Clockodo (instance)", () => {
 
             try {
                 await clockodo.getUserReports({});
-            } catch (e) {
-                expect(e).toEqual(Error('Missing required parameter "year"'));
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "year"');
             }
         });
     });
 
     describe("Clockodo Constructor", () => {
-        /* eslint-disable no-unused-vars */
         it("throws an error when constructor is missing user email", () => {
             try {
-                const clockodoMissingUser = new Clockodo({ user: undefined, apiKey: "dfdsg34t643" });
+                void new Clockodo({ user: undefined, apiKey: "dfdsg34t643" });
             } catch (error) {
-                expect(error).toEqual(Error("Clockodo user expected to be a string, is typeof: undefined"));
+                expect(error.message).toEqual("Clockodo user expected to be a string, is typeof: undefined");
             }
         });
         it("throws an error when constructor is missing API key", () => {
             try {
-                const clockodoMissingUser = new Clockodo({ user: "test@gmail.com", apiKey: undefined });
+                void new Clockodo({ user: "test@gmail.com", apiKey: undefined });
             } catch (error) {
-                expect(error).toEqual(Error("Clockodo apikey expected to be a string, is typeof: undefined"));
+                expect(error.message).toEqual("Clockodo apikey expected to be a string, is typeof: undefined");
             }
         });
     });

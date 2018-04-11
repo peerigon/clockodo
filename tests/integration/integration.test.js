@@ -16,21 +16,21 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
     });
 
     describe("getUsers()", () => {
-        it("returns expected data format", () => {
+        it("returns expected data format", async () => {
             const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
 
             expect.assertions(1);
 
-            return clockodo.getUsers().then(data => {
-                expect(Object.keys(data.users[0]).sort()).toEqual(expectedKeys.sort());
-            });
+            const data = await clockodo.getUsers();
+
+            expect(Object.keys(data.users[0]).sort()).toEqual(expectedKeys.sort());
         });
     });
 
     describe("getEntries()", () => {
         it(
             "returns expected data format",
-            () => {
+            async () => {
                 const parameters = {
                     begin: "2017-08-18 00:00:00",
                     end: "2018-02-09 00:00:00",
@@ -40,14 +40,14 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
                 expect.assertions(5);
 
-                return clockodo.getEntries(parameters).then(data => {
-                    expect(data).toHaveProperty("entries");
-                    expect(data.entries.length).toBeGreaterThan(0);
+                const data = await clockodo.getEntries(parameters);
 
-                    expect(data.entries[0]).toHaveProperty("id");
-                    expect(data.entries[0]).toHaveProperty("duration");
-                    expect(data.entries[0]).toHaveProperty("budget");
-                });
+                expect(data).toHaveProperty("entries");
+                expect(data.entries.length).toBeGreaterThan(0);
+
+                expect(data.entries[0]).toHaveProperty("id");
+                expect(data.entries[0]).toHaveProperty("duration");
+                expect(data.entries[0]).toHaveProperty("budget");
             },
             10000
         );
@@ -56,7 +56,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
     describe("getEntryGroups()", () => {
         it(
             "returns expected data format with one group passed",
-            () => {
+            async () => {
                 const parameters = {
                     begin: "2017-08-18 00:00:00",
                     end: "2017-09-09 00:00:00",
@@ -65,20 +65,20 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
                 expect.assertions(5);
 
-                return clockodo.getEntryGroups(parameters).then(data => {
-                    expect(data).toHaveProperty("groups");
-                    expect(data.groups.length).toBeGreaterThan(0);
+                const data = await clockodo.getEntryGroups(parameters);
 
-                    expect(data.groups[0]).toHaveProperty("group");
-                    expect(data.groups[0]).toHaveProperty("groupedBy");
-                    expect(data.groups[0]).toHaveProperty("name");
-                });
+                expect(data).toHaveProperty("groups");
+                expect(data.groups.length).toBeGreaterThan(0);
+
+                expect(data.groups[0]).toHaveProperty("group");
+                expect(data.groups[0]).toHaveProperty("groupedBy");
+                expect(data.groups[0]).toHaveProperty("name");
             },
             10000
         );
         it(
             "returns expected data format with multiple groups passed",
-            () => {
+            async () => {
                 const parameters = {
                     begin: "2017-08-18 00:00:00",
                     end: "2017-09-09 00:00:00",
@@ -87,14 +87,14 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
                 expect.assertions(5);
 
-                return clockodo.getEntryGroups(parameters).then(data => {
-                    expect(data).toHaveProperty("groups");
-                    expect(data.groups.length).toBeGreaterThan(0);
+                const data = await clockodo.getEntryGroups(parameters);
 
-                    expect(data.groups[0]).toHaveProperty("group");
-                    expect(data.groups[0]).toHaveProperty("groupedBy");
-                    expect(data.groups[0]).toHaveProperty("name");
-                });
+                expect(data).toHaveProperty("groups");
+                expect(data.groups.length).toBeGreaterThan(0);
+
+                expect(data.groups[0]).toHaveProperty("group");
+                expect(data.groups[0]).toHaveProperty("groupedBy");
+                expect(data.groups[0]).toHaveProperty("name");
             },
             10000
         );
@@ -103,12 +103,12 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
     describe("getClock()", () => {
         it(
             "returns expected data format",
-            () => {
+            async () => {
                 expect.assertions(1);
 
-                return clockodo.getClock().then(data => {
-                    expect(data).toHaveProperty("running");
-                });
+                const data = await clockodo.getClock();
+
+                expect(data).toHaveProperty("running");
             },
             10000
         );
