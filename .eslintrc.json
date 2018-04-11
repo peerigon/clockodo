@@ -1,0 +1,4 @@
+{
+    "extends": ["peerigon", "peerigon/node"],
+    "root": true
+}
