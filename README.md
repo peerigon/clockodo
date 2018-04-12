@@ -7,7 +7,7 @@ The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/ap
 Install from NPM:
 
 ```
-npm install clockodo-node --save
+npm install clockodo --save
 ```
 
 Then require the package. For the constructor arguments, you must get the user (email) and clockodo api key from the "[My area](https://my.clockodo.com/en/users/editself)" section of Clockodo's website.
@@ -21,6 +21,8 @@ const clockodo = new ClockodoApi({
 ```
 
 We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
+
+Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
 
 ---
 
