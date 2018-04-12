@@ -1,7 +1,7 @@
 {
-    "name": "clockodo-node",
+    "name": "clockodo",
     "version": "1.0.0",
-    "description": "",
+    "description": "The Node/JavaScript Client for the Clockodo-API",
     "main": "./lib/api.js",
     "scripts": {
         "lint": "eslint lib tests",

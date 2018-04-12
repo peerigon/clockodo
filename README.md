@@ -13,7 +13,7 @@ npm install clockodo-node --save
 Then require the package. For the constructor arguments, you must get the user (email) and clockodo api key from the "[My area](https://my.clockodo.com/en/users/editself)" section of Clockodo's website.
 
 ```js
-const ClockodoApi = require("clockodo-node");
+const ClockodoApi = require("clockodo");
 const clockodo = new ClockodoApi({
   user: "your@mail.com",
   apiKey: "your-api-key"
