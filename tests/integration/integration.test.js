@@ -1,16 +1,18 @@
 "use strict";
 
+require("dotenv").config();
+
 const Clockodo = require("../../lib/api");
 
 // These tests depend on our real Clockodo account.
 // They can only be executed by Peerigon members or Travis CI.
-const hasCredentials = Boolean(CLOCKODO_USER && CLOCKODO_API_KEY);
+const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO_API_KEY);
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
     let clockodo;
 
     beforeEach(() => {
-        clockodo = new Clockodo({ user: CLOCKODO_USER, apiKey: CLOCKODO_API_KEY });
+        clockodo = new Clockodo({ user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY });
     });
 
     describe("getUsers()", () => {
