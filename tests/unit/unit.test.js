@@ -177,6 +177,23 @@ describe("Clockodo (instance)", () => {
             nockScope.done();
         });
     });
+    describe("getSearchTexts()", () => {
+        it("correctly builds getSearchTexts() request", async () => {
+            const givenParameters = {
+                searchProjectId: "300",
+            };
+            const expectedParameters = {
+                projects_id: "300",
+            };
+            const nockScope = nock(CLOCKODO_API)
+                .get("/searchtexts?" + stringify(expectedParameters))
+                .reply(200);
+
+            await clockodo.getSearchTexts(givenParameters);
+
+            nockScope.done();
+        });
+    });
     describe("getService()", () => {
         it("correctly builds getService() request", async () => {
             const nockScope = nock(CLOCKODO_API)
