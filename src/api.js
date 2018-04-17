@@ -1,15 +1,18 @@
 "use strict";
 
-var _require = require("./lib.js");
-
-const ClockodoLib = _require.ClockodoLib;
-
+const { ClockodoLib } = require("./lib.js");
 
 const clockodoApi = Symbol("api");
 const ENTRY_UNBILLABLE = 0;
 const ENTRY_NOT_BILLED = 1;
 const ENTRY_BILLED = 2;
-const REQUIRED_PARAMS_GET_TASK_DURATION = ["taskCustomerId", "taskProjectId", "taskServiceId", "taskText", "taskBillable"];
+const REQUIRED_PARAMS_GET_TASK_DURATION = [
+    "taskCustomerId",
+    "taskProjectId",
+    "taskServiceId",
+    "taskText",
+    "taskBillable",
+];
 const REQUIRED_PARAMS_GET_ENTRIES = ["begin", "end"];
 const REQUIRED_PARAMS_GET_ENTRY_GROUPS = ["begin", "end", "grouping"];
 const REQUIRED_PARAMS_GET_USER_REPORTS = ["year"];
@@ -113,7 +116,7 @@ function _checkRequired(params, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
 
     if (typeof missingParamName !== "undefined") {
-        throw new Error(`Missing required parameter "${missingParamName}"`);
+        throw new Error(`Missing required parameter "${ missingParamName }"`);
     }
 }
 
