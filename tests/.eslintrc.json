@@ -4,6 +4,7 @@
         "jest": true
     },
     "rules": {
-        "camelcase": "off"
+        "camelcase": "off",
+        "max-lines": "off"
     }
 }
