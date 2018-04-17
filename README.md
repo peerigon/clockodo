@@ -404,6 +404,47 @@ clockodo.getProject("21").then(data => {
 
 ---
 
+### getSearchTexts(params)
+
+Get the description(s) of the requested entries.
+
+#### Parameters:
+
+**options(optional)**
+
+* `searchTerm`: (string)
+* `searchCustomerId`: (string)
+* `searchProjectId`: (string)
+* `searchServiceId`: (string)
+* `billable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
+* `begin`: (string) Must be in the format of "YYYY-MM-DD HH:MM:SS"
+* `end`: (string) Must be in the format of "YYYY-MM-DD HH:MM:SS"
+
+#### Example:
+
+```js
+const options = {
+  searchProjectId: "300"
+};
+
+clockodo.getSearchTexts(options).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "texts": {
+    [string],
+    ...
+  }
+}
+```
+
+---
+
 ### getService(id)
 
 Get a service by its ID.
