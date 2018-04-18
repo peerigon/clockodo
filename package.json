@@ -8,7 +8,8 @@
         "lint": "eslint lib tests",
         "test": "jest",
         "posttest": "npm run lint",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build",
+        "release": "standard-version"
     },
     "repository": {
         "type": "git",
@@ -42,7 +43,8 @@
         "eslint-plugin-import": "^2.9.0",
         "eslint-plugin-jsdoc": "^3.5.0",
         "jest": "^22.4.2",
-        "nock": "^9.2.3"
+        "nock": "^9.2.3",
+        "standard-version": "^4.3.0"
     },
     "files": [
         "lib"
