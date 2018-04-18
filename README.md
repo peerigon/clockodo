@@ -1,8 +1,18 @@
-# Clockodo Node/JavaScript API
+Clockodo Node/JavaScript API
+============================
+**The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/api/).**
 
-The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/api/).
+[![](https://img.shields.io/npm/v/clockodo.svg)](https://www.npmjs.com/package/clockodo)
+[![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
+[![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
-### init API
+
+We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
+
+Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
+
+Installation
+-------------------------------
 
 Install from NPM:
 
@@ -20,11 +30,31 @@ const clockodo = new ClockodoApi({
 });
 ```
 
-We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
+Example
+-------------------------------
+```js
+const ClockodoApi = require("clockodo");
+const clockodo = new ClockodoApi({
+  user: "harry@hogwarts.wiz",
+  apiKey: "h0rcruXe7"
+});
 
-Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
+clockodo.getUsers()
+  .then(data => {
+    const matches = data.users.filter(user => {
+      return user.name === "Hagrid";
+    });
 
----
+    console.log(matches[0].id); // 98070
+  })
+  .catch(error){
+    console.log(error);
+  };
+
+```
+
+API
+--------------------------
 
 ### getAbsence(id)
 
