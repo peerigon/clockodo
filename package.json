@@ -14,7 +14,11 @@
         "type": "git",
         "url": "git+https://github.com/peerigon/clockodo.git"
     },
-    "keywords": ["time tracking", "api", "sdk"],
+    "keywords": [
+        "time tracking",
+        "api",
+        "sdk"
+    ],
     "author": "developers@peerigon.com",
     "license": "Unlicense",
     "bugs": {
@@ -40,7 +44,9 @@
         "jest": "^22.4.2",
         "nock": "^9.2.3"
     },
-    "files": ["lib"],
+    "files": [
+        "lib"
+    ],
     "jest": {
         "collectCoverage": true,
         "testEnvironment": "node",
