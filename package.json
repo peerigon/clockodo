@@ -1,44 +1,33 @@
 {
     "name": "clockodo",
     "version": "1.0.0",
-    "description": "The Node/JavaScript Client for the Clockodo-API",
+    "description": "Unofficial Node.js SDK for the Clockodo API",
     "main": "./lib/api.js",
-    "babel": {
-        "presets": [
-            [
-                "env",
-                {
-                    "targets": {
-                        "node": "6"
-                    }
-                }
-            ]
-        ]
-    },
     "scripts": {
         "build": "babel src -d lib",
         "lint": "eslint lib tests",
-        "pretest": "npm run build",
         "test": "jest",
-        "posttest": "npm run lint"
+        "posttest": "npm run lint",
+        "prepublishOnly": "npm run build"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/peerigon/clockodo-node.git"
+        "url": "git+https://github.com/peerigon/clockodo.git"
     },
-    "keywords": ["node", "javascript", "clockodo", "work time", "project report", "time tracking", "api"],
+    "keywords": ["time tracking", "api", "sdk"],
     "author": "developers@peerigon.com",
     "license": "Unlicense",
     "bugs": {
-        "url": "https://github.com/peerigon/clockodo-node/issues"
+        "url": "https://github.com/peerigon/clockodo/issues"
     },
-    "homepage": "https://github.com/peerigon/clockodo-node#readme",
+    "homepage": "https://github.com/peerigon/clockodo#readme",
     "dependencies": {
         "axios": "^0.18.0",
         "babel-cli": "^6.26.0",
         "camelcase": "^5.0.0",
         "deep-map-keys": "^1.2.0",
         "moment": "^2.21.0",
+        "object.entries": "^1.0.4",
         "qs": "^6.5.1"
     },
     "devDependencies": {
@@ -51,8 +40,12 @@
         "jest": "^22.4.2",
         "nock": "^9.2.3"
     },
+    "files": ["lib"],
     "jest": {
         "collectCoverage": true,
-        "testEnvironment": "node"
+        "testEnvironment": "node",
+        "transform": {
+            "^.+\\.jsx?$": "babel-jest"
+        }
     }
 }

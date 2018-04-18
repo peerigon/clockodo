@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 
-const Clockodo = require("../../lib/api");
+const Clockodo = require("../../src/api");
 
 // These tests depend on our real Clockodo account.
 // They can only be executed by Peerigon members or Travis CI.

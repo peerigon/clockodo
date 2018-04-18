@@ -3,7 +3,7 @@
 const { stringify } = require("querystring");
 const qs = require("qs");
 const nock = require("nock");
-const Clockodo = require("../../lib/api");
+const Clockodo = require("../../src/api");
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 

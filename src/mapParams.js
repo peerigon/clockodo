@@ -1,5 +1,7 @@
 "use strict";
 
+const entries = require("object.entries");
+
 const paramMapping = {
     begin: "time_since",
     end: "time_until",
@@ -26,7 +28,7 @@ const paramMapping = {
 module.exports = function mapParams(userParams) {
     const apiParams = {};
 
-    for (const [userParamName, value] of Object.entries(userParams)) {
+    for (const [userParamName, value] of entries(userParams)) {
         const apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
 
         apiParams[apiParamName] = value;
