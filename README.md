@@ -6,7 +6,7 @@
 [![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
 [![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
-We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
+We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.js file.
 
 Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
 
@@ -61,7 +61,7 @@ clockodo.getUsers()
   * [getCustomers()](#getcustomers)
   * [getEntry()](#getentryid)
   * [getEntries()](#getentriesbegin-end-filters)
-  *  [getEntryGroups()](#getentrygroupsbegin-end-grouping-options)
+  * [getEntryGroups()](#getentrygroupsbegin-end-grouping-options)
   * [getProject()](#getprojectid)
   * [getSearchTexts()](#getsearchtextsparams)
   * [getService()](#getserviceid)
@@ -72,6 +72,7 @@ clockodo.getUsers()
   * [getUserReports()](#getuserreportsid-params)
   * [getTasks()](#gettasksparams)
   * [getTaskDuration()](#gettaskdurationparams)
+
 ---
 
 ### getAbsence(id)
