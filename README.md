@@ -52,6 +52,28 @@ clockodo.getUsers()
 
 ## API
 
+* Get methods
+  * [getAbsence()](#getabsenceid)
+  * [getAbsences()](#getabsencesparams)
+  * [getClock()](#getclock)
+  * [getClockUpdate()](#getclockupdate)
+  * [getCustomer()](#getcustomerid)
+  * [getCustomers()](#getcustomers)
+  * [getEntry()](#getentryid)
+  * [getEntries()](#getentriesbegin-end-filters)
+  *  [getEntryGroups()](#getentrygroupsbegin-end-grouping-options)
+  * [getProject()](#getprojectid)
+  * [getSearchTexts()](#getsearchtextsparams)
+  * [getService()](#getserviceid)
+  * [getServices()](#getservices)
+  * [getUser()](#getuserid)
+  * [getUsers()](#getusers)
+  * [getUserReport()](#getuserreportid)
+  * [getUserReports()](#getuserreportsid-params)
+  * [getTasks()](#gettasksparams)
+  * [getTaskDuration()](#gettaskdurationparams)
+---
+
 ### getAbsence(id)
 
 Gets a selected absence by its ID.
