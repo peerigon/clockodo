@@ -29,6 +29,36 @@ class ClockodoLib {
 
         return deepMapKeys(response.data, key => camelCase(key));
     }
+    async put(resource, params = {}) {
+        const response = await this[axiosClient].put(resource, {
+            params: mapParams(params),
+            paramsSerializer(params) {
+                return qs.stringify(params, { arrayFormat: "brackets" });
+            },
+        });
+
+        return deepMapKeys(response.data, key => camelCase(key));
+    }
+    async post(resource, params = {}) {
+        const response = await this[axiosClient].post(resource, {
+            params: mapParams(params),
+            paramsSerializer(params) {
+                return qs.stringify(params, { arrayFormat: "brackets" });
+            },
+        });
+
+        return deepMapKeys(response.data, key => camelCase(key));
+    }
+    async delete(resource, params = {}) {
+        const response = await this[axiosClient].delete(resource, {
+            params: mapParams(params),
+            paramsSerializer(params) {
+                return qs.stringify(params, { arrayFormat: "brackets" });
+            },
+        });
+
+        return deepMapKeys(response.data, key => camelCase(key));
+    }
 }
 
 module.exports = {
