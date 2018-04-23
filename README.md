@@ -1,18 +1,16 @@
-Clockodo Node/JavaScript API
-============================
+# Clockodo Node/JavaScript API
+
 **The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/api/).**
 
 [![](https://img.shields.io/npm/v/clockodo.svg)](https://www.npmjs.com/package/clockodo)
 [![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
 [![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
-
 We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapParams.js file.
 
 Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
 
-Installation
--------------------------------
+## Installation
 
 Install from NPM:
 
@@ -30,8 +28,8 @@ const clockodo = new ClockodoApi({
 });
 ```
 
-Example
--------------------------------
+## Example
+
 ```js
 const ClockodoApi = require("clockodo");
 const clockodo = new ClockodoApi({
@@ -50,11 +48,9 @@ clockodo.getUsers()
   .catch(error){
     console.log(error);
   };
-
 ```
 
-API
---------------------------
+## API
 
 ### getAbsence(id)
 
@@ -579,6 +575,96 @@ clockodo.getUsers().then(data => {
     [object of type user],
     [object of type user], ...
   }
+}
+```
+
+---
+
+### getUserReport(id)
+
+Get a co-worker by their ID.
+
+#### Parameters:
+
+**id** _- Type: String_
+
+Clockodo user id
+
+**year** _- Type: String_
+
+Year for the user report that will be returned.
+
+**type (optional)** _- Type: Enum_
+
+Including the type in your request returns more specific data about hours worked over months/weeks/days.
+
+* `0`: Request only key data for the year (default)
+* `1`: Request key data for the year and the months
+* `2`: Request key data for the year, months and weeks
+* `3`: Request key data for the year, months, weeks and days
+* `4`: Request key data for the year, months, weeks and days; The day data does also include start and end times, as well as breaks
+
+#### Example:
+
+```js
+const params = {
+  year: 2018,
+  type: 2
+};
+
+clockodo.getUserReport("101", params).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "userreport": [object of type userreport]
+}
+```
+
+---
+
+### getUserReports(id, params)
+
+Get an employee/user's report, which contains data such as hours worked and holidays taken.
+
+#### Parameters:
+
+**year** _- Type: String_
+
+Year for the user reports that will be returned.
+
+**type (optional)** _- Type: Enum_
+
+Including the type in your request returns more specific data about hours worked over months/weeks/days.
+
+* `0`: Request only key data for the year (default)
+* `1`: Request key data for the year and the months
+* `2`: Request key data for the year, months and weeks
+* `3`: Request key data for the year, months, weeks and days
+* `4`: Request key data for the year, months, weeks and days; The day data does also include start and end times, as well as breaks
+
+#### Example:
+
+```js
+clockodo.getUserReports({ year: 2018 }).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "userreports":
+  [
+    [object of type userreport],
+    [object of type userreport],
+    ...
+  ]
 }
 ```
 
