@@ -180,7 +180,7 @@ describe("Clockodo (instance)", () => {
     describe("getSearchTexts()", () => {
         it("correctly builds getSearchTexts() request", async () => {
             const givenParameters = {
-                searchProjectId: "300",
+                projectId: "300",
             };
             const expectedParameters = {
                 projects_id: "300",
@@ -264,7 +264,7 @@ describe("Clockodo (instance)", () => {
         it("throws an error when getTaskDuration() is missing param", async () => {
             expect.assertions(1);
 
-            const parameters = {
+            const badParams = {
                 taskCustomerId: "23",
                 taskProjectId: "25",
                 taskServiceId: "42",
@@ -272,7 +272,7 @@ describe("Clockodo (instance)", () => {
             };
 
             try {
-                await clockodo.getTaskDuration(parameters);
+                await clockodo.getTaskDuration(badParams);
             } catch (error) {
                 expect(error.message).toEqual('Missing required parameter "taskBillable"');
             }
@@ -340,6 +340,90 @@ describe("Clockodo (instance)", () => {
             } catch (error) {
                 expect(error.message).toEqual('Missing required parameter "year"');
             }
+        });
+    });
+
+    describe("changeClockDuration()", () => {
+        it("correctly builds changeClockDuration() request", async () => {
+            const params = {
+                durationBefore: "300",
+                duration: "540",
+                offsetBefore: "60",
+            };
+            const expectedParameters = {
+                duration_before: "300",
+                duration: "540",
+                offset_before: "60",
+            };
+            const nockScope = nock(CLOCKODO_API)
+                .put("/clock/7082", expectedParameters)
+                .reply(200);
+
+            await clockodo.changeClockDuration("7082", params);
+
+            nockScope.done();
+        });
+        it("throws an error when getUserReports() is missing param", async () => {
+            expect.assertions(1);
+
+            const badParams = {
+                durationBefore: "300",
+                offsetBefore: "60",
+            };
+
+            try {
+                await clockodo.changeClockDuration("7082", badParams);
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "duration"');
+            }
+        });
+    });
+    describe("startClock()", () => {
+        it("correctly builds startClock() request", async () => {
+            const params = {
+                customerId: "24",
+                serviceId: "7",
+                projectId: "365",
+                billable: Clockodo.ENTRY_NOT_BILLED,
+            };
+            const expectedParameters = {
+                customers_id: "24",
+                services_id: "7",
+                projects_id: "365",
+                billable: Clockodo.ENTRY_NOT_BILLED,
+            };
+            const nockScope = nock(CLOCKODO_API)
+                .post("/clock", expectedParameters)
+                .reply(200);
+
+            await clockodo.startClock(params);
+
+            nockScope.done();
+        });
+        it("throws an error when getUserReports() is missing param", async () => {
+            expect.assertions(1);
+
+            const badParams = {
+                customerId: "24",
+                serviceId: "7",
+            };
+
+            try {
+                await clockodo.startClock(badParams);
+            } catch (error) {
+                expect(error.message).toEqual('Missing required parameter "billable"');
+            }
+        });
+    });
+    describe("stopClock()", () => {
+        it("correctly builds stopClock() request", async () => {
+            const nockScope = nock(CLOCKODO_API)
+                .delete("/clock/7082")
+                .reply(200);
+
+            await clockodo.stopClock("7082");
+
+            nockScope.done();
         });
     });
 

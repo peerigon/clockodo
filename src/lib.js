@@ -29,33 +29,24 @@ class ClockodoLib {
 
         return deepMapKeys(response.data, key => camelCase(key));
     }
-    // async put(resource, params = {}) {
-    //     const response = await this[axiosClient].put(resource, {
-    //         params: mapParams(params),
-    //         paramsSerializer(params) {
-    //             return qs.stringify(params, { arrayFormat: "brackets" });
-    //         },
-    //     });
-
-    //     return deepMapKeys(response.data, key => camelCase(key));
-    // }
     async post(resource, params = {}) {
-        const response = await this[axiosClient].post(resource, {
-            params: mapKeys(params),
-        });
+        const mappedObj = mapKeys(params);
+        const response = await this[axiosClient].post(resource, mappedObj);
 
         return deepMapKeys(response.data, key => camelCase(key));
     }
-    // async delete(resource, params = {}) {
-    //     const response = await this[axiosClient].delete(resource, {
-    //         params: mapParams(params),
-    //         paramsSerializer(params) {
-    //             return qs.stringify(params, { arrayFormat: "brackets" });
-    //         },
-    //     });
+    async put(resource, params = {}) {
+        const mappedObj = mapKeys(params);
+        const response = await this[axiosClient].put(resource, mappedObj);
 
-    //     return deepMapKeys(response.data, key => camelCase(key));
-    // }
+        return deepMapKeys(response.data, key => camelCase(key));
+    }
+    async delete(resource, params = {}) {
+        const mappedObj = mapKeys(params);
+        const response = await this[axiosClient].delete(resource, mappedObj);
+
+        return deepMapKeys(response.data, key => camelCase(key));
+    }
 }
 
 module.exports = {

@@ -17,6 +17,8 @@ const REQUIRED_PARAMS_GET_ENTRIES = ["begin", "end"];
 const REQUIRED_PARAMS_GET_ENTRY_GROUPS = ["begin", "end", "grouping"];
 const REQUIRED_PARAMS_GET_USER_REPORTS = ["year"];
 const REQUIRED_PARAMS_GET_ABSENCES = ["year"];
+const REQUIRED_PARAMS_START_CLOCK = ["customerId", "serviceId", "billable"];
+const REQUIRED_PARAMS_CHANGE_CLOCK_DURATION = ["durationBefore", "duration"];
 
 class Clockodo {
     constructor({ user, apiKey }) {
@@ -113,6 +115,34 @@ class Clockodo {
         _checkRequired(params, REQUIRED_PARAMS_GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports", params);
+    }
+
+    changeClockDuration(entryId, params) {
+        _checkRequired(params, REQUIRED_PARAMS_CHANGE_CLOCK_DURATION);
+
+        return this[clockodoApi].put("/clock/" + entryId, params);
+    }
+
+    startClock(params) {
+        _checkRequired(params, REQUIRED_PARAMS_START_CLOCK);
+
+        return this[clockodoApi].post("/clock", params);
+    }
+
+    stopClock(entryId, params) {
+        return this[clockodoApi].delete("/clock/" + entryId, params);
+    }
+
+    // not sure if this is done automatically. I should test this with someone who has permissions
+    // one parameter would be a function that should be called after a stop
+    stopThen(stopFunction, callback) {
+        this.stopFunction()
+            .then(() => {
+                callback();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 }
 
