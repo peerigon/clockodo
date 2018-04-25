@@ -1,59 +1,59 @@
 {
-    "name": "clockodo",
-    "version": "1.0.0",
-    "description": "Unofficial Node.js SDK for the Clockodo API",
-    "main": "./lib/api.js",
-    "scripts": {
-        "build": "babel src -d lib",
-        "lint": "eslint lib tests",
-        "test": "jest",
-        "posttest": "npm run lint",
-        "prepublishOnly": "npm run build",
-        "release": "standard-version"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/peerigon/clockodo.git"
-    },
-    "keywords": [
-        "time tracking",
-        "api",
-        "sdk"
-    ],
-    "author": "developers@peerigon.com",
-    "license": "Unlicense",
-    "bugs": {
-        "url": "https://github.com/peerigon/clockodo/issues"
-    },
-    "homepage": "https://github.com/peerigon/clockodo#readme",
-    "dependencies": {
-        "axios": "^0.18.0",
-        "babel-cli": "^6.26.0",
-        "camelcase": "^5.0.0",
-        "deep-map-keys": "^1.2.0",
-        "moment": "^2.21.0",
-        "object.entries": "^1.0.4",
-        "qs": "^6.5.1"
-    },
-    "devDependencies": {
-        "babel-preset-env": "^1.6.1",
-        "dotenv": "^5.0.1",
-        "eslint": "^4.18.2",
-        "eslint-config-peerigon": "^12.0.1",
-        "eslint-plugin-import": "^2.9.0",
-        "eslint-plugin-jsdoc": "^3.5.0",
-        "jest": "^22.4.2",
-        "nock": "^9.2.3",
-        "standard-version": "^4.3.0"
-    },
-    "files": [
-        "lib"
-    ],
-    "jest": {
-        "collectCoverage": true,
-        "testEnvironment": "node",
-        "transform": {
-            "^.+\\.jsx?$": "babel-jest"
-        }
+  "name": "clockodo",
+  "version": "1.1.0",
+  "description": "Unofficial Node.js SDK for the Clockodo API",
+  "main": "./lib/api.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "lint": "eslint lib tests",
+    "test": "jest",
+    "posttest": "npm run lint",
+    "prepublishOnly": "npm run build",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peerigon/clockodo.git"
+  },
+  "keywords": [
+    "time tracking",
+    "api",
+    "sdk"
+  ],
+  "author": "developers@peerigon.com",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/peerigon/clockodo/issues"
+  },
+  "homepage": "https://github.com/peerigon/clockodo#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "camelcase": "^5.0.0",
+    "deep-map-keys": "^1.2.0",
+    "moment": "^2.21.0",
+    "object.entries": "^1.0.4",
+    "qs": "^6.5.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.18.2",
+    "eslint-config-peerigon": "^12.0.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsdoc": "^3.5.0",
+    "jest": "^22.4.2",
+    "nock": "^9.2.3",
+    "standard-version": "^4.3.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "jest": {
+    "collectCoverage": true,
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
     }
+  }
 }
