@@ -132,18 +132,6 @@ class Clockodo {
     stopClock(entryId, params) {
         return this[clockodoApi].delete("/clock/" + entryId, params);
     }
-
-    // not sure if this is done automatically. I should test this with someone who has permissions
-    // one parameter would be a function that should be called after a stop
-    stopThen(stopFunction, callback) {
-        this.stopFunction()
-            .then(() => {
-                callback();
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
 }
 
 function _checkRequired(params, requiredList) {
