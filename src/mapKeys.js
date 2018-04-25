@@ -19,13 +19,16 @@ const paramMapping = {
     roundBy: "round_to_minutes",
     prependCustomer: "prepend_customer_to_project_name",
     calcHardBudgetRevenues: "calc_also_revenues_for_projects_with_hard_budget",
-    searchCustomerId: "customers_id",
-    searchProjectId: "projects_id",
-    searchServiceId: "services_id",
+    customerId: "customers_id",
+    projectId: "projects_id",
+    serviceId: "services_id",
+    userId: "users_id",
     searchTerm: "term",
+    durationBefore: "duration_before",
+    offsetBefore: "offset_before",
 };
 
-module.exports = function mapParams(userParams) {
+module.exports = function mapKeys(userParams) {
     const apiParams = {};
 
     for (const [userParamName, value] of entries(userParams)) {
