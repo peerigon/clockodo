@@ -33,108 +33,108 @@ class Clockodo {
         this[clockodoApi] = new ClockodoLib(user, apiKey);
     }
 
-    getAbsence(id) {
+    async getAbsence(id) {
         return this[clockodoApi].get("/absences/" + id);
     }
 
-    getAbsences(params) {
+    async getAbsences(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_ABSENCES);
 
         return this[clockodoApi].get("/absences", params);
     }
 
-    getClock() {
+    async getClock() {
         return this[clockodoApi].get("/clock");
     }
 
-    getClockUpdate() {
+    async getClockUpdate() {
         return this[clockodoApi].get("/clock/update");
     }
 
-    getCustomer(id) {
+    async getCustomer(id) {
         return this[clockodoApi].get("/customers/" + id);
     }
 
-    getCustomers() {
+    async getCustomers() {
         return this[clockodoApi].get("/customers");
     }
 
-    getEntries(params) {
+    async getEntries(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_ENTRIES);
 
         return this[clockodoApi].get("/entries", params);
     }
 
-    getEntryGroups(params) {
+    async getEntryGroups(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_ENTRY_GROUPS);
 
         return this[clockodoApi].get("/entrygroups", params);
     }
 
-    getProject(id) {
+    async getProject(id) {
         return this[clockodoApi].get("/projects/" + id);
     }
 
-    getSearchTexts(params) {
+    async getSearchTexts(params) {
         return this[clockodoApi].get("/searchtexts", params);
     }
 
-    getService(id) {
+    async getService(id) {
         return this[clockodoApi].get("/services/" + id);
     }
 
-    getServices() {
+    async getServices() {
         return this[clockodoApi].get("/services");
     }
 
-    getTasks(params) {
+    async getTasks(params) {
         return this[clockodoApi].get("/tasks", params);
     }
 
-    getTaskDuration(params) {
+    async getTaskDuration(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_TASK_DURATION);
 
         return this[clockodoApi].get("/tasks/duration", params);
     }
 
-    getUser(id) {
+    async getUser(id) {
         return this[clockodoApi].get("/users/" + id);
     }
 
-    getUsers() {
+    async getUsers() {
         return this[clockodoApi].get("/users");
     }
 
-    getUserReport(id, params) {
+    async getUserReport(id, params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports/" + id, params);
     }
 
-    getUserReports(params) {
+    async getUserReports(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports", params);
     }
 
-    changeClockDuration(entryId, params) {
+    async changeClockDuration(entryId, params) {
         _checkRequired(params, REQUIRED_PARAMS_CHANGE_CLOCK_DURATION);
 
         return this[clockodoApi].put("/clock/" + entryId, params);
     }
 
-    startClock(params) {
+    async startClock(params) {
         _checkRequired(params, REQUIRED_PARAMS_START_CLOCK);
 
         return this[clockodoApi].post("/clock", params);
     }
 
-    stopClock(entryId, params) {
+    async stopClock(entryId, params) {
         return this[clockodoApi].delete("/clock/" + entryId, params);
     }
 }
 
-function _checkRequired(params, requiredList) {
+function _checkRequired(params = {}, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
 
     if (typeof missingParamName !== "undefined") {

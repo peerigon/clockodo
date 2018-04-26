@@ -23,11 +23,7 @@ describe("Clockodo (instance)", () => {
         it("throws an error when getAbsences() is missing param", async () => {
             expect.assertions(1);
 
-            try {
-                await clockodo.getAbsences({});
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "year"');
-            }
+            return expect(clockodo.getAbsences()).rejects.toThrowError('Missing required parameter "year"');
         });
     });
     describe("getAbsences()", () => {
@@ -117,11 +113,7 @@ describe("Clockodo (instance)", () => {
                 filterUserId: 38557,
             };
 
-            try {
-                await clockodo.getEntries(parameters);
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "end"');
-            }
+            return expect(clockodo.getEntries(parameters)).rejects.toThrowError('Missing required parameter "end"');
         });
     });
     describe("getEntryGroups()", () => {
@@ -159,11 +151,9 @@ describe("Clockodo (instance)", () => {
                 end: "2017-09-09 00:00:00",
             };
 
-            try {
-                await clockodo.getEntryGroups(parameters);
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "grouping"');
-            }
+            return expect(clockodo.getEntryGroups(parameters)).rejects.toThrowError(
+                'Missing required parameter "grouping"'
+            );
         });
     });
     describe("getProject()", () => {
@@ -271,11 +261,9 @@ describe("Clockodo (instance)", () => {
                 taskText: "clean the dishes",
             };
 
-            try {
-                await clockodo.getTaskDuration(badParams);
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "taskBillable"');
-            }
+            return expect(clockodo.getTaskDuration(badParams)).rejects.toThrowError(
+                'Missing required parameter "taskBillable"'
+            );
         });
     });
     describe("getUser()", () => {
@@ -314,11 +302,7 @@ describe("Clockodo (instance)", () => {
         it("throws an error when getUserReport() is missing param", async () => {
             expect.assertions(1);
 
-            try {
-                await clockodo.getUserReport("200", {});
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "year"');
-            }
+            return expect(clockodo.getUserReport("200", {})).rejects.toThrowError('Missing required parameter "year"');
         });
     });
     describe("getUserReports()", () => {
@@ -335,11 +319,7 @@ describe("Clockodo (instance)", () => {
         it("throws an error when getUserReports() is missing param", async () => {
             expect.assertions(1);
 
-            try {
-                await clockodo.getUserReports({});
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "year"');
-            }
+            return expect(clockodo.getUserReports({})).rejects.toThrowError('Missing required parameter "year"');
         });
     });
 
@@ -371,11 +351,9 @@ describe("Clockodo (instance)", () => {
                 offsetBefore: "60",
             };
 
-            try {
-                await clockodo.changeClockDuration("7082", badParams);
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "duration"');
-            }
+            return expect(clockodo.changeClockDuration("7082", badParams)).rejects.toThrowError(
+                'Missing required parameter "duration"'
+            );
         });
     });
     describe("startClock()", () => {
@@ -408,11 +386,7 @@ describe("Clockodo (instance)", () => {
                 serviceId: "7",
             };
 
-            try {
-                await clockodo.startClock(badParams);
-            } catch (error) {
-                expect(error.message).toEqual('Missing required parameter "billable"');
-            }
+            return expect(clockodo.startClock(badParams)).rejects.toThrowError('Missing required parameter "billable"');
         });
     });
     describe("stopClock()", () => {
