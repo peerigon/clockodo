@@ -306,11 +306,11 @@ Gets list of Clockodo activity entries.
 
 **begin** _- Type: String_
 
-Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
+Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
 **end** _- Type: String_
 
-End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
+End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
 **filters(optional)**
 
@@ -361,11 +361,11 @@ Get a group of entries defined by your criteria.
 
 **begin** _- Type: String_
 
-Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
+Beginning date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
 **end** _- Type: String_
 
-End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:MM:SS"
+End date for the range of Clockodo entries to return. Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
 **grouping** _- Type: Array_
 
@@ -466,8 +466,8 @@ Get the description(s) of the requested entries.
 * `searchProjectId`: (string)
 * `searchServiceId`: (string)
 * `billable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
-* `begin`: (string) Must be in the format of "YYYY-MM-DD HH:MM:SS"
-* `end`: (string) Must be in the format of "YYYY-MM-DD HH:MM:SS"
+* `begin`: (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
+* `end`: (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
 #### Example:
 
