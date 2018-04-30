@@ -650,7 +650,7 @@ clockodo.getUserReport("101", params).then(data => {
 
 ---
 
-### getUserReports(id, params)
+### getUserReports(params)
 
 Get an employee/user's report, which contains data such as hours worked and holidays taken.
 
