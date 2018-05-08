@@ -143,7 +143,7 @@ function _checkRequired(params = {}, requiredList) {
 }
 
 Clockodo.ENTRY_BILLED = ENTRY_BILLED;
-Clockodo.ENTRY_NOT_BILLED = ENTRY_NOT_BILLED;
+Clockodo.ENTRY_BILLABLE = ENTRY_BILLABLE;
 Clockodo.ENTRY_UNBILLABLE = ENTRY_UNBILLABLE;
 
 module.exports = Clockodo;
