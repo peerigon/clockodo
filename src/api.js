@@ -4,7 +4,7 @@ const { ClockodoLib } = require("./lib.js");
 
 const clockodoApi = Symbol("api");
 const ENTRY_UNBILLABLE = 0;
-const ENTRY_NOT_BILLED = 1;
+const ENTRY_BILLABLE = 1;
 const ENTRY_BILLED = 2;
 const REQUIRED_PARAMS_GET_TASK_DURATION = [
     "taskCustomerId",

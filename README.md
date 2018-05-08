@@ -6,7 +6,7 @@
 [![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
 [![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
-We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request parameters from what you will see in the Clockodo docs, removing symbols, camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.js file.
+We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request and response object keys from what you will see in the Clockodo docs, removing symbols, converting to camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.js file.
 
 Further features and endpoints can be added on request. Please feel free to submit an issue or pull request.
 
@@ -72,8 +72,11 @@ clockodo.getUsers()
   * [getUserReports()](#getuserreportsid-params)
   * [getTasks()](#gettasksparams)
   * [getTaskDuration()](#gettaskdurationparams)
-
+* Post methods
+  * [startClock()](#startclockparams)
 ---
+
+## Get Methods
 
 ### getAbsence(id)
 
@@ -318,7 +321,7 @@ End date for the range of Clockodo entries to return. Must be in the format of "
 * `filterCustomerId`: (string)
 * `filterProjectId`: (string)
 * `filterServiceId`: (string)
-* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
+* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED
 * `filterText`: (string) text of entry
 
 #### Example:
@@ -389,7 +392,7 @@ Here are the list of Strings you can pass to the request. Passing multiple group
 * `filterCustomerId`: (string)
 * `filterProjectId`: (string)
 * `filterServiceId`: (string)
-* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
+* `filterBillable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED
 * `filterText`: (string) text of entry
 * `roundBy`: (integer) Rounds the duration of entries to provided minutes. _Default: 0_
 * `prependCustomer`: (Boolean) Prepends customer name to the front of project names. _Default: true_
@@ -465,7 +468,7 @@ Get the description(s) of the requested entries.
 * `searchCustomerId`: (string)
 * `searchProjectId`: (string)
 * `searchServiceId`: (string)
-* `billable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
+* `billable`: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED
 * `begin`: (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
 * `end`: (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
 
@@ -723,9 +726,9 @@ clockodo.getTasks(options).then(data => {
   {
     {
       "date": [date in YYYY-MM-DD],
-      "date_text": [date localized],
+      "dateText": [date localized],
       "duration": [duration in seconds, integer],
-      "duration_text": [duration in H:MM h],
+      "durationText": [duration in H:MM h],
       "tasks":
       {
         [object of type task],
@@ -764,7 +767,7 @@ The text of the task you want
 
 **taskBillable** _- Type: Enum_
 
-Use constants ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_NOT_BILLED, ClockodoApi.ENTRY_BILLED
+Use constants ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED
 
 **excludeIds** _- Type: Array_
 
@@ -795,9 +798,9 @@ clockodo.getTaskDuration(params).then(data => {
   {
     {
       "date": [date in YYYY-MM-DD],
-      "date_text": [date localized],
+      "dateText": [date localized],
       "duration": [duration in seconds, integer],
-      "duration_text": [duration in H:MM h],
+      "durationText": [duration in H:MM h],
       "tasks":
       {
         [object of type task],
@@ -807,6 +810,58 @@ clockodo.getTaskDuration(params).then(data => {
     },
     ...
   }
+}
+```
+
+---
+
+## Post methods
+
+### startClock(params)
+
+Get Clockodo Tasks (grouped entries).
+
+#### Parameters:
+
+**customerId** _- Type: string_
+
+Customer ID from Clockodo
+
+**serviceId** _- Type: string_
+
+Service ID from Clockodo
+
+**billable** _- Type: Enum_
+
+Use constants ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED
+
+**optional**
+
+* projectId(optional) _- Type: string_
+
+* userId(optional) _- Type: string_
+
+* text(optional) _- Type: string_ The text to attach to the entry
+
+#### Example:
+
+```js
+const options = {
+  customerId: "300",
+  serviceId: "0",
+  billable: ClockodoApi.ENTRY_UNBILLABLE,
+};
+
+clockodo.startClock(options).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "running": [object of type entry]
 }
 ```
 
