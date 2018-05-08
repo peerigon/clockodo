@@ -373,13 +373,13 @@ describe("Clockodo (instance)", () => {
                 customerId: "24",
                 serviceId: "7",
                 projectId: "365",
-                billable: Clockodo.ENTRY_NOT_BILLED,
+                billable: Clockodo.ENTRY_BILLABLE,
             };
             const expectedParameters = {
                 customers_id: "24",
                 services_id: "7",
                 projects_id: "365",
-                billable: Clockodo.ENTRY_NOT_BILLED,
+                billable: Clockodo.ENTRY_BILLABLE,
             };
             const nockScope = nock(CLOCKODO_API)
                 .post("/clock", expectedParameters)
@@ -407,6 +407,21 @@ describe("Clockodo (instance)", () => {
                 .reply(200);
 
             await clockodo.stopClock("7082");
+
+            nockScope.done();
+        });
+    });
+
+    describe("editEntry()", () => {
+        it("correctly builds editEntry() request", async () => {
+            const params = {
+                duration: "540",
+            };
+            const nockScope = nock(CLOCKODO_API)
+                .put("/entries/365", params)
+                .reply(200);
+
+            await clockodo.editEntry("365", params);
 
             nockScope.done();
         });

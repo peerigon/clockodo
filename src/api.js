@@ -136,6 +136,10 @@ class Clockodo {
     async stopClock(entryId, params) {
         return this[clockodoApi].delete("/clock/" + entryId, params);
     }
+
+    async editEntry(entryId, params) {
+        return this[clockodoApi].put("/entries/" + entryId, params);
+    }
 }
 
 function _checkRequired(params = {}, requiredList) {
