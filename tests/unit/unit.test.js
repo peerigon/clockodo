@@ -84,6 +84,17 @@ describe("Clockodo (instance)", () => {
             nockScope.done();
         });
     });
+    describe("getEntry()", () => {
+        it("correctly builds getEntry() request", async () => {
+            const nockScope = nock(CLOCKODO_API)
+                .get("/entries/04")
+                .reply(200);
+
+            await clockodo.getEntry("04");
+
+            nockScope.done();
+        });
+    });
     describe("getEntries()", () => {
         it("correctly builds getEntries() request", async () => {
             const givenParameters = {

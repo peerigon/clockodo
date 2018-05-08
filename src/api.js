@@ -59,6 +59,10 @@ class Clockodo {
         return this[clockodoApi].get("/customers");
     }
 
+    async getEntry(id) {
+        return this[clockodoApi].get("/entries/" + id);
+    }
+
     async getEntries(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_ENTRIES);
 
