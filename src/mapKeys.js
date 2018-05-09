@@ -26,6 +26,7 @@ const paramMapping = {
     searchTerm: "term",
     durationBefore: "duration_before",
     offsetBefore: "offset_before",
+    hourlyRate: "hourly_rate",
 };
 
 module.exports = function mapKeys(userParams) {

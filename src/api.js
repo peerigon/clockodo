@@ -59,6 +59,10 @@ class Clockodo {
         return this[clockodoApi].get("/customers");
     }
 
+    async getEntry(id) {
+        return this[clockodoApi].get("/entries/" + id);
+    }
+
     async getEntries(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_ENTRIES);
 
@@ -132,6 +136,10 @@ class Clockodo {
     async stopClock(entryId, params) {
         return this[clockodoApi].delete("/clock/" + entryId, params);
     }
+
+    async editEntry(entryId, params) {
+        return this[clockodoApi].put("/entries/" + entryId, params);
+    }
 }
 
 function _checkRequired(params = {}, requiredList) {
@@ -143,7 +151,7 @@ function _checkRequired(params = {}, requiredList) {
 }
 
 Clockodo.ENTRY_BILLED = ENTRY_BILLED;
-Clockodo.ENTRY_NOT_BILLED = ENTRY_NOT_BILLED;
+Clockodo.ENTRY_BILLABLE = ENTRY_BILLABLE;
 Clockodo.ENTRY_UNBILLABLE = ENTRY_UNBILLABLE;
 
 module.exports = Clockodo;
