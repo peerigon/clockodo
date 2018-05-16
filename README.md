@@ -74,6 +74,12 @@ clockodo.getUsers()
   * [getTaskDuration()](#gettaskdurationparams)
 * Post methods
   * [startClock()](#startclockparams)
+* Put methods
+  * [changeClockDuration()](#changeclockdurationid-params)
+  * [editEntry()](#editentryid-params)
+* Delete methods
+  * [stopClock()](#stopclockid-params)
+
 ---
 
 ## Get Methods
@@ -849,7 +855,7 @@ Use constants ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, Clockodo
 const options = {
   customerId: "300",
   serviceId: "0",
-  billable: ClockodoApi.ENTRY_UNBILLABLE,
+  billable: ClockodoApi.ENTRY_UNBILLABLE
 };
 
 clockodo.startClock(options).then(data => {
@@ -861,6 +867,154 @@ clockodo.startClock(options).then(data => {
 
 ```
 {
+  "running": [object of type entry]
+}
+```
+
+---
+
+## Put methods
+
+### changeClockDuration(id, params)
+
+Changes the duration of an entry. Because the ID returned by clock methods is just the entry ID, and this function can only be used after an entry is finished, there seems to be no difference from using editEntry().
+
+#### Parameters:
+
+**id** _- Type: String_
+
+The ID of the entry.
+
+**durationBefore** _- Type: string_
+
+The previously recorded duration (in seconds) of the entry you want to edit. The clock must be stopped because otherwise the request fails with an error.
+
+**duration** _- Type: string_
+
+The new duration (in seconds) of the entry.
+
+**optional**
+
+* offsetBefore _- Type: string_
+
+If you directly alter the duration of the clock/entry, then there will be a descrepancy in the difference of its timeSince and timeUntil and the duration value. That difference is represented by offset.
+
+At the time of this writing I am not sure what including this request parameter does because the Clockodo docs are sparse and I already had to do work to get this much information.
+
+#### Example:
+
+```js
+const options = {
+  durationBefore: "300",
+  duration: "200"
+};
+
+clockodo.changeClockDuration("37465", options).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "updated": [object of type entry],
+  "running": [object of type entry]
+}
+```
+
+---
+
+### editEntry(id, params)
+
+Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry() can seemingly mutate any of the accepted parameters even when the entry is running.
+
+#### Parameters:
+
+**id** _- Type: String_
+
+The ID of the entry.
+
+**optional**
+
+* customerId(optional) _- Type: string_
+
+* projectId(optional) _- Type: string_
+
+* serviceId(optional) _- Type: string_
+
+* userId(optional) _- Type: string_
+
+* billable(optional) _- Type: (enum) ClockodoApi.ENTRY_UNBILLABLE, ClockodoApi.ENTRY_BILLABLE, ClockodoApi.ENTRY_BILLED_
+
+* duration(optional) _- Type: string_ (in seconds)
+
+* lumpSum(optional) _- Type: string_
+
+* hourlyRate(optional) _- Type: integer_ ex: If you are paid 80 euros an hour, enter 80 here.
+
+* begin(optional): (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
+
+* end(optional): (string) Must be in the format of "YYYY-MM-DD HH:mm:ss"
+
+* text(optional) _- Type: string_ The text to attach to the entry
+
+#### Example:
+
+```js
+const options = {
+  hourlyRate: 25,
+  text: "air quotes consulting"
+};
+
+clockodo.editEntry("101", options).then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "entry": [object of type entry]
+}
+```
+
+---
+
+## Delete methods
+
+### stopClock(id, params)
+
+Stops a running clock/entry.
+
+#### Parameters:
+
+**id** _- Type: String_
+
+The ID of the entry.
+
+**optional**
+
+* duration(optional) _- Type: integer_
+
+* userId(optional) _- Type: string_
+
+* away(optional) _- Type: string_ Again, I don't know what this parameter does.
+
+#### Example:
+
+```js
+clockodo.changeClockDuration("321").then(data => {
+  console.log(data);
+});
+```
+
+#### Response:
+
+```
+{
+  "stopped": [object of type entry],
   "running": [object of type entry]
 }
 ```
