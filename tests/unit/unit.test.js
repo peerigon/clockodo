@@ -389,7 +389,7 @@ describe("Clockodo (instance)", () => {
 
             nockScope.done();
         });
-        it("throws an error when getUserReports() is missing param", async () => {
+        it("throws an error when startClock() is missing param", async () => {
             expect.assertions(1);
 
             const badParams = {
