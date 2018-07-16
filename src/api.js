@@ -144,9 +144,12 @@ class Clockodo {
 
 function _checkRequired(params = {}, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
+    const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");
 
     if (typeof missingParamName !== "undefined") {
         throw new Error(`Missing required parameter "${ missingParamName }"`);
+    } else if (typeof undefinedParam !== "undefined") {
+        throw new Error(`Missing required parameter "${ undefinedParam }"`);
     }
 }
 
