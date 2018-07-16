@@ -391,6 +391,160 @@ describe("Clockodo (instance)", () => {
                 );
             });
         });
+        describe("addCustomer()", () => {
+            it("correctly builds addCustomer() request", async () => {
+                const params = {
+                    billableDefault: Clockodo.ENTRY_BILLABLE,
+                };
+                const expectedParameters = {
+                    name: "Weyland-Yutani",
+                    billable_default: Clockodo.ENTRY_BILLABLE,
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/customers", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addCustomer("Weyland-Yutani", params);
+
+                nockScope.done();
+            });
+            it("throws an error when addCustomer() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addCustomer()).rejects.toThrowError(
+                    'Missing required parameter "name"'
+                );
+            });
+        });
+        describe("addProject()", () => {
+            it("correctly builds addProject() request", async () => {
+                const params = {
+                    active: true,
+                };
+                const expectedParameters = {
+                    name: "Clockodo Api Wrapper",
+                    customers_id: "01",
+                    active: true,
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/projects", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addProject("Clockodo Api Wrapper", "01", params);
+
+                nockScope.done();
+            });
+            it("throws an error when addProject() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addProject()).rejects.toThrowError(
+                    'Missing required parameter "name"'
+                );
+            });
+        });
+        describe("addService()", () => {
+            it("correctly builds addService() request", async () => {
+                const params = {
+                    active: true,
+                };
+                const expectedParameters = {
+                    name: "Thinking",
+                    active: true,
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/services", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addService("Thinking", params);
+
+                nockScope.done();
+            });
+            it("throws an error when addService() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addService()).rejects.toThrowError(
+                    'Missing required parameter "name"'
+                );
+            });
+        });
+        describe("addUser()", () => {
+            it("correctly builds addUser() request", async () => {
+                const expectedParameters = {
+                    name: "Merkel",
+                    number: "08",
+                    email: "angela@eu.eu",
+                    role: "Chancellor",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/users", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addUser("Merkel", "08", "angela@eu.eu", "Chancellor");
+
+                nockScope.done();
+            });
+            it("throws an error when addUser() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addUser("Merkel", "08", "angela@eu.eu")).rejects.toThrowError(
+                    'Missing required parameter "role"'
+                );
+            });
+        });
+        describe("addEntry()", () => {
+            it("correctly builds addEntry() request", async () => {
+                const params = {
+                    text: "this is an optional description",
+                };
+                const expectedParameters = {
+                    customers_id: "01",
+                    services_id: "02",
+                    billable: Clockodo.ENTRY_BILLABLE,
+                    text: "this is an optional description",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/entries", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addEntry("01", "02", Clockodo.ENTRY_BILLABLE, params);
+
+                nockScope.done();
+            });
+            it("throws an error when addEntry() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addEntry("01", "02")).rejects.toThrowError(
+                    'Missing required parameter "billable"'
+                );
+            });
+        });
+        describe("addAbsence()", () => {
+            it("correctly builds addAbsence() request", async () => {
+                const params = {
+                    note: "elternzeit",
+                };
+                const expectedParameters = {
+                    date_since: "2017-08-18 00:00:00",
+                    date_until: "2018-02-09 00:00:00",
+                    type: Clockodo.ABSENCE_TYPE_SPECIAL_LEAVE,
+                    note: "elternzeit",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .post("/absences", expectedParameters)
+                    .reply(200);
+
+                await clockodo.addAbsence("2017-08-18 00:00:00", "2018-02-09 00:00:00", Clockodo.ABSENCE_TYPE_SPECIAL_LEAVE, params);
+
+                nockScope.done();
+            });
+            it("throws an error when addAbsence() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.addAbsence("2017-08-18 00:00:00", "2018-02-09 00:00:00")).rejects.toThrowError(
+                    'Missing required parameter "type"'
+                );
+            });
+        });
     });
 
     describe("PUT", () => {
@@ -425,6 +579,113 @@ describe("Clockodo (instance)", () => {
                 return expect(clockodo.changeClockDuration("7082", badParams)).rejects.toThrowError(
                     'Missing required parameter "duration"'
                 );
+            });
+        });
+
+        describe("editCustomer()", () => {
+            it("correctly builds editCustomer() request", async () => {
+                const params = {
+                    name: "Mystery Gang",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .put("/customers/15", params)
+                    .reply(200);
+
+                await clockodo.editCustomer("15", params);
+
+                nockScope.done();
+            });
+        });
+
+        describe("editProject()", () => {
+            it("correctly builds editProject() request", async () => {
+                const params = {
+                    name: "power level",
+                    hourlyRate: "9001",
+                };
+                const expectedParameters = {
+                    name: "power level",
+                    hourly_rate: "9001",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .put("/projects/20", expectedParameters)
+                    .reply(200);
+
+                await clockodo.editProject("20", params);
+
+                nockScope.done();
+            });
+        });
+
+        describe("editService()", () => {
+            it("correctly builds editService() request", async () => {
+                const params = {
+                    name: "room service",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .put("/services/23", params)
+                    .reply(200);
+
+                await clockodo.editService("23", params);
+
+                nockScope.done();
+            });
+        });
+
+        describe("editUser()", () => {
+            it("correctly builds editUser() request", async () => {
+                const params = {
+                    name: "Moalo Loco",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .put("/users/33", params)
+                    .reply(200);
+
+                await clockodo.editUser("33", params);
+
+                nockScope.done();
+            });
+        });
+
+        describe("editEntryGroup()", () => {
+            it("correctly builds editEntryGroup() request", async () => {
+                const params = {
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2018-02-09 00:00:00",
+                    text: "chillin everyday",
+                };
+                const expectedParameters = {
+                    time_since: "2017-08-18 00:00:00",
+                    time_until: "2018-02-09 00:00:00",
+                    text: "chillin everyday",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .put("/entrygroups", expectedParameters)
+                    .reply(200);
+
+                await clockodo.editEntryGroup("2017-08-18 00:00:00", "2018-02-09 00:00:00", params);
+
+                nockScope.done();
+            });
+        });
+
+        /**
+        * ? Why does nock not match the requests when there is a value other than a string in my param object?
+        * ? If I put 'status: Clockodo.ABSENCE_STATUS_APPROVED', it treats the params object like it isn't an object
+        */
+        describe("editAbsence()", () => {
+            it("correctly builds editAbsence() request", async () => {
+                const params = {
+                    note: "seems fishy to me",
+                };
+                const nockScope = nock(CLOCKODO_API)
+                    .log(console.log)
+                    .put("/absences/74", params)
+                    .reply(200);
+
+                await clockodo.editAbsence("74", params);
+
+                nockScope.done();
             });
         });
 
