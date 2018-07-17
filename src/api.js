@@ -187,6 +187,34 @@ class Clockodo {
         return this[clockodoApi].delete("/clock/" + entryId, params);
     }
 
+    async deactivateCustomer(customerId) {
+        return this[clockodoApi].delete("/customers/" + customerId);
+    }
+
+    async deactivateProject(projectId) {
+        return this[clockodoApi].delete("/projects/" + projectId);
+    }
+
+    async deactivateService(serviceId) {
+        return this[clockodoApi].delete("/services/" + serviceId);
+    }
+
+    async deactivateUser(userId) {
+        return this[clockodoApi].delete("/users/" + userId);
+    }
+
+    async deleteEntry(entryId) {
+        return this[clockodoApi].delete("/entries/" + entryId);
+    }
+
+    async deleteEntryGroup(timeSince, timeUntil, params) {
+        return this[clockodoApi].delete("/entrygroups", { timeSince, timeUntil, ...params });
+    }
+
+    async deleteAbsence(absenceId) {
+        return this[clockodoApi].delete("/absences/" + absenceId);
+    }
+
     // ? Should I have errors thrown for missing IDs?
     async editCustomer(customerId, params) {
         return this[clockodoApi].put("/customers/" + customerId, params);
