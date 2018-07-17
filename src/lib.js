@@ -45,7 +45,7 @@ class ClockodoLib {
     }
     async delete(resource, params = {}) {
         const mappedObj = mapKeys(params);
-        const response = await this[axiosClient].delete(resource, mappedObj);
+        const response = await this[axiosClient].delete(resource, { data: mappedObj });
 
         return deepMapKeys(response.data, key => camelCase(key));
     }
