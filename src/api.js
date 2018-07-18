@@ -21,8 +21,8 @@ const REQUIRED_PARAMS_GET_TASK_DURATION = [
     "taskText",
     "taskBillable",
 ];
-const REQUIRED_PARAMS_GET_ENTRIES = ["begin", "end"];
-const REQUIRED_PARAMS_GET_ENTRY_GROUPS = ["begin", "end", "grouping"];
+const REQUIRED_PARAMS_GET_ENTRIES = ["timeSince", "timeUntil"];
+const REQUIRED_PARAMS_GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"];
 const REQUIRED_PARAMS_GET_USER_REPORTS = ["year"];
 const REQUIRED_PARAMS_GET_ABSENCES = ["year"];
 const REQUIRED_PARAMS_START_CLOCK = ["customerId", "serviceId", "billable"];
