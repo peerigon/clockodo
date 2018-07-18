@@ -51,10 +51,10 @@ class Clockodo {
         return this[clockodoApi].get("/absences/" + id);
     }
 
-    async getAbsences(params) {
-        _checkRequired(params, REQUIRED_PARAMS_GET_ABSENCES);
+    async getAbsences(year) {
+        _checkRequired({ year }, REQUIRED_PARAMS_GET_ABSENCES);
 
-        return this[clockodoApi].get("/absences", params);
+        return this[clockodoApi].get("/absences", { year });
     }
 
     async getClock() {
@@ -77,16 +77,16 @@ class Clockodo {
         return this[clockodoApi].get("/entries/" + id);
     }
 
-    async getEntries(params) {
-        _checkRequired(params, REQUIRED_PARAMS_GET_ENTRIES);
+    async getEntries(timeSince, timeUntil, params) {
+        _checkRequired({ timeSince, timeUntil, ...params }, REQUIRED_PARAMS_GET_ENTRIES);
 
-        return this[clockodoApi].get("/entries", params);
+        return this[clockodoApi].get("/entries", { timeSince, timeUntil, ...params });
     }
 
-    async getEntryGroups(params) {
-        _checkRequired(params, REQUIRED_PARAMS_GET_ENTRY_GROUPS);
+    async getEntryGroups(timeSince, timeUntil, grouping, params) {
+        _checkRequired({ timeSince, timeUntil, grouping, ...params }, REQUIRED_PARAMS_GET_ENTRY_GROUPS);
 
-        return this[clockodoApi].get("/entrygroups", params);
+        return this[clockodoApi].get("/entrygroups", { timeSince, timeUntil, grouping, ...params });
     }
 
     async getProject(id) {
@@ -109,6 +109,7 @@ class Clockodo {
         return this[clockodoApi].get("/tasks", params);
     }
 
+    //? We have 5 required parameters here. Is that too many to explicity define? 
     async getTaskDuration(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_TASK_DURATION);
 
@@ -123,28 +124,31 @@ class Clockodo {
         return this[clockodoApi].get("/users");
     }
 
-    async getUserReport(id, params) {
-        _checkRequired(params, REQUIRED_PARAMS_GET_USER_REPORTS);
+    //? Single Optional Parameter("type"). Should is still be inside a params object? 
+    async getUserReport(id, year, params) {
+        _checkRequired({ year, ...params }, REQUIRED_PARAMS_GET_USER_REPORTS);
 
-        return this[clockodoApi].get("/userreports/" + id, params);
+        return this[clockodoApi].get("/userreports/" + id, { year, ...params });
     }
 
-    async getUserReports(params) {
-        _checkRequired(params, REQUIRED_PARAMS_GET_USER_REPORTS);
+    //? Single Optional Parameter("type"). Should is still be inside a params object? 
+    async getUserReports(year, params) {
+        _checkRequired({ year, ...params }, REQUIRED_PARAMS_GET_USER_REPORTS);
 
-        return this[clockodoApi].get("/userreports", params);
+        return this[clockodoApi].get("/userreports", { year, ...params });
     }
 
-    async changeClockDuration(entryId, params) {
-        _checkRequired(params, REQUIRED_PARAMS_CHANGE_CLOCK_DURATION);
+    //? Single Optional Parameter("offset_before"). Should is still be inside a params object? 
+    async changeClockDuration(entryId, durationBefore, duration, params) {
+        _checkRequired({ durationBefore, duration, ...params }, REQUIRED_PARAMS_CHANGE_CLOCK_DURATION);
 
-        return this[clockodoApi].put("/clock/" + entryId, params);
+        return this[clockodoApi].put("/clock/" + entryId, { durationBefore, duration, ...params });
     }
 
-    async startClock(params) {
-        _checkRequired(params, REQUIRED_PARAMS_START_CLOCK);
+    async startClock(customerId, serviceId, billable, params) {
+        _checkRequired({ customerId, serviceId, billable, ...params }, REQUIRED_PARAMS_START_CLOCK);
 
-        return this[clockodoApi].post("/clock", params);
+        return this[clockodoApi].post("/clock", { customerId, serviceId, billable, ...params });
     }
 
     async addCustomer(name, params) {
@@ -245,6 +249,7 @@ class Clockodo {
     }
 }
 
+//TODO: rethink these error messages
 function _checkRequired(params = {}, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
     const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");

@@ -32,15 +32,13 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
             "returns expected data format",
             async () => {
                 const parameters = {
-                    begin: "2017-08-18 00:00:00",
-                    end: "2018-02-09 00:00:00",
                     filterBillable: 2,
                     filterUserId: 38557,
                 };
 
                 expect.assertions(5);
 
-                const data = await clockodo.getEntries(parameters);
+                const data = await clockodo.getEntries("2017-08-18 00:00:00", "2018-02-09 00:00:00", parameters);
 
                 expect(data).toHaveProperty("entries");
                 expect(data.entries.length).toBeGreaterThan(0);
@@ -57,15 +55,9 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
         it(
             "returns expected data format with one group passed",
             async () => {
-                const parameters = {
-                    begin: "2017-08-18 00:00:00",
-                    end: "2017-09-09 00:00:00",
-                    grouping: ["customers_id"],
-                };
-
                 expect.assertions(5);
 
-                const data = await clockodo.getEntryGroups(parameters);
+                const data = await clockodo.getEntryGroups("2017-08-18 00:00:00", "2017-09-09 00:00:00", ["customers_id"]);
 
                 expect(data).toHaveProperty("groups");
                 expect(data.groups.length).toBeGreaterThan(0);
@@ -79,15 +71,9 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
         it(
             "returns expected data format with multiple groups passed",
             async () => {
-                const parameters = {
-                    begin: "2017-08-18 00:00:00",
-                    end: "2017-09-09 00:00:00",
-                    grouping: ["projects_id", "services_id"],
-                };
-
                 expect.assertions(5);
 
-                const data = await clockodo.getEntryGroups(parameters);
+                const data = await clockodo.getEntryGroups("2017-08-18 00:00:00", "2017-09-09 00:00:00", ["projects_id", "services_id"]);
 
                 expect(data).toHaveProperty("groups");
                 expect(data.groups.length).toBeGreaterThan(0);
