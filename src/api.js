@@ -109,7 +109,7 @@ class Clockodo {
         return this[clockodoApi].get("/tasks", params);
     }
 
-    //? We have 5 required parameters here. Is that too many to explicity define? 
+    // ? We have 5 required parameters here. Is that too many to explicity define?
     async getTaskDuration(params) {
         _checkRequired(params, REQUIRED_PARAMS_GET_TASK_DURATION);
 
@@ -124,21 +124,21 @@ class Clockodo {
         return this[clockodoApi].get("/users");
     }
 
-    //? Single Optional Parameter("type"). Should is still be inside a params object? 
+    // ? Single Optional Parameter("type"). Should is still be inside a params object?
     async getUserReport(id, year, params) {
         _checkRequired({ year, ...params }, REQUIRED_PARAMS_GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports/" + id, { year, ...params });
     }
 
-    //? Single Optional Parameter("type"). Should is still be inside a params object? 
+    // ? Single Optional Parameter("type"). Should is still be inside a params object?
     async getUserReports(year, params) {
         _checkRequired({ year, ...params }, REQUIRED_PARAMS_GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports", { year, ...params });
     }
 
-    //? Single Optional Parameter("offset_before"). Should is still be inside a params object? 
+    // ? Single Optional Parameter("offset_before"). Should is still be inside a params object?
     async changeClockDuration(entryId, durationBefore, duration, params) {
         _checkRequired({ durationBefore, duration, ...params }, REQUIRED_PARAMS_CHANGE_CLOCK_DURATION);
 
@@ -249,7 +249,6 @@ class Clockodo {
     }
 }
 
-//TODO: rethink these error messages
 function _checkRequired(params = {}, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
     const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");

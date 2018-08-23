@@ -40,7 +40,11 @@ describe("Clockodo (instance)", () => {
 
                 nockScope.done();
             });
-            //TODO: Throw error test 
+            it("throws an error when getAbsences() is missing param", async () => {
+                expect.assertions(1);
+
+                return expect(clockodo.getAbsences()).rejects.toThrowError('Missing required parameter "year"');
+            });
         });
         describe("getClock()", () => {
             it("correctly builds getClock() request", async () => {
