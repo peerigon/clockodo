@@ -6,10 +6,11 @@
 [![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
 [![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
-##Note
+## Note
+
 The new version of this package features a breaking change. Please consult the changelog. Documentation will follow shortly
 
-----------
+---
 
 We have provided get methods for each of the endpoints available by the Clockodo API. We also renamed the request and response object keys from what you will see in the Clockodo docs, removing symbols, converting to camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.js file.
 
@@ -28,8 +29,8 @@ Then require the package. For the constructor arguments, you must get the user (
 ```js
 const ClockodoApi = require("clockodo");
 const clockodo = new ClockodoApi({
-  user: "your@mail.com",
-  apiKey: "your-api-key"
+    user: "your@mail.com",
+    apiKey: "your-api-key"
 });
 ```
 
@@ -57,33 +58,33 @@ clockodo.getUsers()
 
 ## API
 
-* Get methods
-  * [getAbsence()](#getabsenceid)
-  * [getAbsences()](#getabsencesparams)
-  * [getClock()](#getclock)
-  * [getClockUpdate()](#getclockupdate)
-  * [getCustomer()](#getcustomerid)
-  * [getCustomers()](#getcustomers)
-  * [getEntry()](#getentryid)
-  * [getEntries()](#getentriesbegin-end-filters)
-  * [getEntryGroups()](#getentrygroupsbegin-end-grouping-options)
-  * [getProject()](#getprojectid)
-  * [getSearchTexts()](#getsearchtextsparams)
-  * [getService()](#getserviceid)
-  * [getServices()](#getservices)
-  * [getUser()](#getuserid)
-  * [getUsers()](#getusers)
-  * [getUserReport()](#getuserreportid)
-  * [getUserReports()](#getuserreportsid-params)
-  * [getTasks()](#gettasksparams)
-  * [getTaskDuration()](#gettaskdurationparams)
-* Post methods
-  * [startClock()](#startclockparams)
-* Put methods
-  * [changeClockDuration()](#changeclockdurationid-params)
-  * [editEntry()](#editentryid-params)
-* Delete methods
-  * [stopClock()](#stopclockid-params)
+-   Get methods
+    -   [getAbsence()](#getabsenceid)
+    -   [getAbsences()](#getabsencesparams)
+    -   [getClock()](#getclock)
+    -   [getClockUpdate()](#getclockupdate)
+    -   [getCustomer()](#getcustomerid)
+    -   [getCustomers()](#getcustomers)
+    -   [getEntry()](#getentryid)
+    -   [getEntries()](#getentriesbegin-end-filters)
+    -   [getEntryGroups()](#getentrygroupsbegin-end-grouping-options)
+    -   [getProject()](#getprojectid)
+    -   [getSearchTexts()](#getsearchtextsparams)
+    -   [getService()](#getserviceid)
+    -   [getServices()](#getservices)
+    -   [getUser()](#getuserid)
+    -   [getUsers()](#getusers)
+    -   [getUserReport()](#getuserreportid)
+    -   [getUserReports()](#getuserreportsid-params)
+    -   [getTasks()](#gettasksparams)
+    -   [getTaskDuration()](#gettaskdurationparams)
+-   Post methods
+    -   [startClock()](#startclockparams)
+-   Put methods
+    -   [changeClockDuration()](#changeclockdurationid-params)
+    -   [editEntry()](#editentryid-params)
+-   Delete methods
+    -   [stopClock()](#stopclockid-params)
 
 ---
 
