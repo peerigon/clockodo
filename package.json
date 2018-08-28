@@ -44,7 +44,6 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsdoc": "^3.5.0",
     "jest": "^22.4.2",
-    "jsdoc-to-markdown": "^4.0.1",
     "nock": "^9.2.3",
     "standard-version": "^4.3.0"
   },
