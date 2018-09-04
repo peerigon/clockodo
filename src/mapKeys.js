@@ -2,9 +2,9 @@
 
 const entries = require("object.entries");
 
-//TODO: We want this to be a simple case transformation. Ensure that is all. 
-//! Example of this not being true: begin and end. For now I will add the other way of writing it as well. 
-//? API for Absences says countDays twice. I am guessing the second time should be their countHours
+// TODO: We want this to be a simple case transformation. Ensure that is all.
+// ! Example of this not being true: begin and end. For now I will add the other way of writing it as well.
+// ? API for Absences says countDays twice. I am guessing the second time should be their countHours
 const paramMapping = {
     begin: "time_since",
     end: "time_until",
