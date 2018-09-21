@@ -1,5 +1,5 @@
 "use strict";
-
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.ADD_ABSENCE = ["dateSince", "dateUntil", "type"];
 exports.ADD_CUSTOMER = ["name"];
 exports.ADD_ENTRY = ["customerId", "serviceId", "billable"];
@@ -33,14 +33,14 @@ exports.GET_USER = ["id"];
 exports.GET_USER_REPORTS = ["year"];
 exports.START_CLOCK = ["customerId", "serviceId", "billable"];
 exports.STOP_CLOCK = ["entryId"];
-
-exports.checkRequired = function (params = {}, requiredList) {
+function checkRequired(params = {}, requiredList) {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
     const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");
-
     if (typeof missingParamName !== "undefined") {
-        throw new Error(`Missing required parameter "${ missingParamName }"`);
-    } else if (typeof undefinedParam !== "undefined") {
-        throw new Error(`Missing required parameter "${ undefinedParam }"`);
+        throw new Error(`Missing required parameter "${missingParamName}"`);
     }
-};
+    else if (typeof undefinedParam !== "undefined") {
+        throw new Error(`Missing required parameter "${undefinedParam}"`);
+    }
+}
+exports.checkRequired = checkRequired;
