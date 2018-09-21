@@ -8,6 +8,7 @@ export declare const CHANGE_CLOCK_DURATION: string[];
 export declare const DEACTIVATE_CUSTOMER: string[];
 export declare const DEACTIVATE_PROJECT: string[];
 export declare const DEACTIVATE_SERVICE: string[];
+export declare const DEACTIVATE_USER: string[];
 export declare const DELETE_ENTRY: string[];
 export declare const DELETE_ENTRY_GROUP: string[];
 export declare const DELETE_ABSENCE: string[];

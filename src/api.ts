@@ -31,15 +31,15 @@ export class Clockodo {
     }
 
     async getAbsence({ id }: { id: string }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_ABSENCE);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_ABSENCE);
 
         return this[clockodoApi].get("/absences/" + id);
     }
 
     async getAbsences({ year }: { year: number }) {
-        REQUIRED.checkRequired(year, REQUIRED.GET_ABSENCES);
+        REQUIRED.checkRequired({ year }, REQUIRED.GET_ABSENCES);
 
-        return this[clockodoApi].get("/absences", year);
+        return this[clockodoApi].get("/absences", { year });
     }
 
     async getClock() {
@@ -51,7 +51,7 @@ export class Clockodo {
     }
 
     async getCustomer({ id }: { id: string }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_CUSTOMER);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_CUSTOMER);
 
         return this[clockodoApi].get("/customers/" + id);
     }
@@ -61,17 +61,17 @@ export class Clockodo {
     }
 
     async getEntry({ id }: { id: string }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_ENTRY);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_ENTRY);
 
         return this[clockodoApi].get("/entries/" + id);
     }
 
     async getEntries({ timeSince, timeUntil }: { timeSince: string; timeUntil: string }, options) {
-        const requiredAgruments = { timeSince, timeUntil };
+        const requiredArguments = { timeSince, timeUntil };
 
-        REQUIRED.checkRequired(requiredAgruments, REQUIRED.GET_ENTRIES);
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRIES);
 
-        return this[clockodoApi].get("/entries", { ...requiredAgruments, ...options });
+        return this[clockodoApi].get("/entries", { ...requiredArguments, ...options });
     }
 
     async getEntryGroups({ timeSince, timeUntil, grouping }, options) {
@@ -83,7 +83,7 @@ export class Clockodo {
     }
 
     async getProject({ id }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_PROJECT);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_PROJECT);
 
         return this[clockodoApi].get("/projects/" + id);
     }
@@ -93,7 +93,7 @@ export class Clockodo {
     }
 
     async getService({ id }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_SERVICE);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_SERVICE);
 
         return this[clockodoApi].get("/services/" + id);
     }
@@ -107,7 +107,7 @@ export class Clockodo {
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
 
-        return this[clockodoApi].get("/tasks", { ...requiredArguments, ...options });
+        return this[clockodoApi].get("/tasks/duration", { ...requiredArguments, ...options });
     }
 
     async getTasks(options) {
@@ -115,7 +115,7 @@ export class Clockodo {
     }
 
     async getUser({ id }) {
-        REQUIRED.checkRequired(id, REQUIRED.GET_USER);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_USER);
 
         return this[clockodoApi].get("/users/" + id);
     }
@@ -131,7 +131,7 @@ export class Clockodo {
     }
 
     async getUserReports({ year }, options) {
-        REQUIRED.checkRequired(year, REQUIRED.GET_USER_REPORTS);
+        REQUIRED.checkRequired({ year }, REQUIRED.GET_USER_REPORTS);
 
         return this[clockodoApi].get("/userreports", { year, ...options });
     }
@@ -153,7 +153,7 @@ export class Clockodo {
     }
 
     async addCustomer({ name }, options) {
-        REQUIRED.checkRequired(name, REQUIRED.ADD_CUSTOMER);
+        REQUIRED.checkRequired({ name }, REQUIRED.ADD_CUSTOMER);
 
         return this[clockodoApi].post("/customers", { name, ...options });
     }
@@ -165,17 +165,17 @@ export class Clockodo {
     }
 
     async addService({ name }, options) {
-        REQUIRED.checkRequired(name, REQUIRED.ADD_SERVICE);
+        REQUIRED.checkRequired({ name }, REQUIRED.ADD_SERVICE);
 
         return this[clockodoApi].post("/services", { name, ...options });
     }
 
     async addUser({ name, number, email, role }, options) {
-        const requiredAgruments = { name, number, email, role };
+        const requiredArguments = { name, number, email, role };
 
-        REQUIRED.checkRequired(requiredAgruments, REQUIRED.ADD_USER);
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_USER);
 
-        return this[clockodoApi].post("/users", { ...requiredAgruments, ...options });
+        return this[clockodoApi].post("/users", { ...requiredArguments, ...options });
     }
 
     async addEntry({ customerId, serviceId, billable }, options) {
@@ -195,7 +195,7 @@ export class Clockodo {
     }
 
     async stopClock({ entryId }, options) {
-        REQUIRED.checkRequired(entryId, REQUIRED.STOP_CLOCK);
+        REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
 
         return this[clockodoApi].delete("/clock/" + entryId, options);
     }
@@ -219,7 +219,7 @@ export class Clockodo {
     }
 
     async deactivateUser({ userId }, options) {
-        REQUIRED.checkRequired({ userId }, REQUIRED.DEACTIVATE_SERVICE);
+        REQUIRED.checkRequired({ userId }, REQUIRED.DEACTIVATE_USER);
 
         return this[clockodoApi].delete("/users/" + userId, options);
     }
@@ -231,11 +231,11 @@ export class Clockodo {
     }
 
     async deleteEntryGroup({ timeSince, timeUntil }, options) {
-        const requiredAgruments = { timeSince, timeUntil };
+        const requiredArguments = { timeSince, timeUntil };
 
-        REQUIRED.checkRequired(requiredAgruments, REQUIRED.DELETE_ENTRY_GROUP);
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.DELETE_ENTRY_GROUP);
 
-        return this[clockodoApi].delete("/entrygroups", { ...requiredAgruments, ...options });
+        return this[clockodoApi].delete("/entrygroups", { ...requiredArguments, ...options });
     }
 
     async deleteAbsence({ absenceId }, options) {
@@ -269,11 +269,11 @@ export class Clockodo {
     }
 
     async editEntryGroup({ timeSince, timeUntil }, options) {
-        const requiredAgruments = { timeSince, timeUntil };
+        const requiredArguments = { timeSince, timeUntil };
 
-        REQUIRED.checkRequired(requiredAgruments, REQUIRED.EDIT_ENTRY_GROUP);
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.EDIT_ENTRY_GROUP);
 
-        return this[clockodoApi].put("/entrygroups", { ...requiredAgruments, ...options });
+        return this[clockodoApi].put("/entrygroups", { ...requiredArguments, ...options });
     }
 
     async editAbsence({ absenceId }, options) {

@@ -1,4 +1,3 @@
-
 export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"];
 export const ADD_CUSTOMER = ["name"];
 export const ADD_ENTRY = ["customerId", "serviceId", "billable"];
@@ -9,6 +8,7 @@ export const CHANGE_CLOCK_DURATION = ["entryId", "durationBefore", "duration"];
 export const DEACTIVATE_CUSTOMER = ["customerId"];
 export const DEACTIVATE_PROJECT = ["projectId"];
 export const DEACTIVATE_SERVICE = ["serviceId"];
+export const DEACTIVATE_USER = ["userId"];
 export const DELETE_ENTRY = ["entryId"];
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"];
 export const DELETE_ABSENCE = ["absenceId"];
@@ -16,7 +16,7 @@ export const EDIT_CUSTOMER = ["customerId"];
 export const EDIT_PROJECT = ["projectId"];
 export const EDIT_SERVICE = ["serviceId"];
 export const EDIT_USER = ["userId"];
-export const EDIT_ENTRY_GROUP = ["timeSince, timeUntil"];
+export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"];
 export const EDIT_ABSENCE = ["absenceId"];
 export const EDIT_ENTRY = ["entryId"];
 export const GET_ABSENCE = ["id"];

@@ -2,19 +2,16 @@
 
 require("dotenv").config();
 
-const Clockodo = require("../../src/api");
+const { Clockodo } = require("../../dist/api");
 
 // These tests depend on our real Clockodo account.
 // They can only be executed by Peerigon members or Travis CI.
 const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO_API_KEY);
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
-    let clockodo;
+    const clockodo = new Clockodo({ user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY });
 
-    beforeEach(() => {
-        clockodo = new Clockodo({ user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY });
-    });
-
+    console.log(process.env);
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
             const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
@@ -38,7 +35,10 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
                 expect.assertions(5);
 
-                const data = await clockodo.getEntries("2017-08-18 00:00:00", "2018-02-09 00:00:00", parameters);
+                const data = await clockodo.getEntries(
+                    { timeSince: "2017-08-18 00:00:00", timeUntil: "2018-02-09 00:00:00" },
+                    parameters
+                );
 
                 expect(data).toHaveProperty("entries");
                 expect(data.entries.length).toBeGreaterThan(0);
@@ -57,7 +57,11 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
             async () => {
                 expect.assertions(5);
 
-                const data = await clockodo.getEntryGroups("2017-08-18 00:00:00", "2017-09-09 00:00:00", ["customers_id"]);
+                const data = await clockodo.getEntryGroups({
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2017-09-09 00:00:00",
+                    grouping: ["customers_id"],
+                });
 
                 expect(data).toHaveProperty("groups");
                 expect(data.groups.length).toBeGreaterThan(0);
@@ -73,7 +77,11 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
             async () => {
                 expect.assertions(5);
 
-                const data = await clockodo.getEntryGroups("2017-08-18 00:00:00", "2017-09-09 00:00:00", ["projects_id", "services_id"]);
+                const data = await clockodo.getEntryGroups({
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2017-09-09 00:00:00",
+                    grouping: ["projects_id", "services_id"],
+                });
 
                 expect(data).toHaveProperty("groups");
                 expect(data.groups.length).toBeGreaterThan(0);
