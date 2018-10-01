@@ -10,6 +10,11 @@ const CLOCKODO_API = "https://my.clockodo.com/api";
 describe("Clockodo (instance)", () => {
     const clockodo = new Clockodo({ user: "test", apiKey: "test" });
 
+    afterAll(() => {
+        nock.cleanAll();
+        nock.enableNetConnect();
+    });
+
     describe("Clockodo Constructor", () => {
         it("throws an error when constructor is missing user email", () => {
             try {
