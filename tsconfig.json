@@ -6,7 +6,7 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "checkJs": false,
-        "declaration": true,
+        "declaration": false,
         "moduleResolution": "node"
     },
     "include": ["./src/*"]
