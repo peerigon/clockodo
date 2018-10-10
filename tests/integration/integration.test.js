@@ -13,7 +13,6 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
     const clockodo = new Clockodo({ user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY });
 
-    console.log(process.env);
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
             const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
