@@ -1,15 +1,15 @@
 "use strict";
 
-const axios = require("axios");
-const camelCase = require("camelcase");
-const deepMapKeys = require("deep-map-keys");
-const qs = require("qs");
-const mapKeys = require("./mapKeys");
+import axios from "axios";
+import camelCase from "camelcase";
+import deepMapKeys from "deep-map-keys";
+import qs from "qs";
+import mapKeys from "./mapKeys";
 
 const ENDPOINT = "https://my.clockodo.com/api";
 const axiosClient = Symbol("axiosClient");
 
-class ClockodoLib {
+export class ClockodoLib {
     constructor(user, apiKey) {
         this[axiosClient] = axios.create({
             baseURL: ENDPOINT,
@@ -50,7 +50,3 @@ class ClockodoLib {
         return deepMapKeys(response.data, key => camelCase(key));
     }
 }
-
-module.exports = {
-    ClockodoLib,
-};
