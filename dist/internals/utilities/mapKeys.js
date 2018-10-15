@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 exports.__esModule = true;
-var object_entries_1 = __importDefault(require("object.entries"));
 // ? API for Absences says countDays twice. I am guessing the second time should be their countHours
 var paramMapping = {
     begin: "time_since",
@@ -49,7 +45,7 @@ var paramMapping = {
 };
 function mapKeys(userParams) {
     var apiParams = {};
-    for (var _i = 0, _a = object_entries_1["default"](userParams); _i < _a.length; _i++) {
+    for (var _i = 0, _a = Object.entries(userParams); _i < _a.length; _i++) {
         var _b = _a[_i], userParamName = _b[0], value = _b[1];
         var apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
         apiParams[apiParamName] = value;

@@ -34,7 +34,6 @@
     "camelcase": "^5.0.0",
     "deep-map-keys": "^1.2.0",
     "moment": "^2.21.0",
-    "object.entries": "^1.0.4",
     "qs": "^6.5.1"
   },
   "devDependencies": {
