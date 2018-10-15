@@ -3,7 +3,7 @@
 const { stringify } = require("querystring");
 const qs = require("qs");
 const nock = require("nock");
-const { Clockodo, ENTRY_BILLABLE, ENTRY_BILLED, ABSENCE_TYPE_SPECIAL_LEAVE } = require("../../dist/api");
+const { Clockodo, ENTRY_BILLABLE, ENTRY_BILLED, ABSENCE_TYPE_SPECIAL_LEAVE } = require("../../dist/internals/api");
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 

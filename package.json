@@ -2,7 +2,7 @@
   "name": "clockodo",
   "version": "1.1.1",
   "description": "Unofficial Node.js SDK for the Clockodo API",
-  "main": "./dist/api.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "npm run build -- -w",

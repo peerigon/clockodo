@@ -2,10 +2,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const object_entries_1 = __importDefault(require("object.entries"));
+exports.__esModule = true;
+var object_entries_1 = __importDefault(require("object.entries"));
 // ? API for Absences says countDays twice. I am guessing the second time should be their countHours
-const paramMapping = {
+var paramMapping = {
     begin: "time_since",
     end: "time_until",
     timeSince: "time_since",
@@ -45,14 +45,15 @@ const paramMapping = {
     billedMoney: "billed_money",
     billedCompletely: "billed_completely",
     confirmKey: "confirm_key",
-    textsId: "texts_id",
+    textsId: "texts_id"
 };
 function mapKeys(userParams) {
-    const apiParams = {};
-    for (const [userParamName, value] of object_entries_1.default(userParams)) {
-        const apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
+    var apiParams = {};
+    for (var _i = 0, _a = object_entries_1["default"](userParams); _i < _a.length; _i++) {
+        var _b = _a[_i], userParamName = _b[0], value = _b[1];
+        var apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
         apiParams[apiParamName] = value;
     }
     return apiParams;
 }
-exports.default = mapKeys;
+exports["default"] = mapKeys;

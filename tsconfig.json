@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "outDir": "./dist",
-        "target": "es2017",
+        "lib": ["es2017"],
         "module": "commonjs",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "checkJs": false,
-        "declaration": false,
+        "declaration": true,
         "moduleResolution": "node"
     },
     "include": ["./src/*"]

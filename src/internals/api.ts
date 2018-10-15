@@ -1,7 +1,7 @@
 "use strict";
 
-import { ClockodoLib } from "./lib";
-import * as REQUIRED from "./requiredParams";
+import { ClockodoLib } from "./utilities/lib";
+import * as REQUIRED from "./utilities/requiredParams";
 
 const clockodoApi = Symbol("api");
 

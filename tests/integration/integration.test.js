@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 
-const { Clockodo, ENTRY_BILLABLE } = require("../../dist/api");
+const { Clockodo, ENTRY_BILLABLE } = require("../../dist/internals/api");
 
 const TIME_SINCE = "2018-10-01 00:00:00";
 const TIME_UNTIL = "2018-12-30 00:00:00";
