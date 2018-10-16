@@ -1,7 +1,5 @@
 "use strict";
-
-import entries from "object.entries";
-
+Object.defineProperty(exports, "__esModule", { value: true });
 // ? API for Absences says countDays twice. I am guessing the second time should be their countHours
 const paramMapping = {
     begin: "time_since",
@@ -45,15 +43,12 @@ const paramMapping = {
     confirmKey: "confirm_key",
     textsId: "texts_id",
 };
-
-export default function mapKeys(userParams) {
+function mapKeys(userParams) {
     const apiParams = {};
-
-    for (const [userParamName, value] of entries(userParams)) {
+    for (const [userParamName, value] of Object.entries(userParams)) {
         const apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
-
         apiParams[apiParamName] = value;
     }
-
     return apiParams;
 }
+exports.default = mapKeys;

@@ -1,9 +1,8 @@
 "use strict";
 
-const { stringify } = require("querystring");
 const qs = require("qs");
 const nock = require("nock");
-const { Clockodo, ENTRY_BILLABLE, ENTRY_BILLED, ABSENCE_TYPE_SPECIAL_LEAVE } = require("../../dist/api");
+const { Clockodo, ENTRY_BILLABLE, ENTRY_BILLED, ABSENCE_TYPE_SPECIAL_LEAVE } = require("../../dist/internals/api");
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 
@@ -50,7 +49,7 @@ describe("Clockodo (instance)", () => {
                     year: 2018,
                 };
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/absences?" + stringify(expectedParameters))
+                    .get("/absences?" + qs.stringify(expectedParameters))
                     .reply(200);
 
                 await clockodo.getAbsences({ year: 2018 });
@@ -124,7 +123,7 @@ describe("Clockodo (instance)", () => {
                     "filter[billable]": ENTRY_BILLED,
                 };
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/entries?" + stringify(expectedParameters))
+                    .get("/entries?" + qs.stringify(expectedParameters))
                     .reply(200);
 
                 await clockodo.getEntries(
@@ -155,11 +154,11 @@ describe("Clockodo (instance)", () => {
                 const nockScope = nock(CLOCKODO_API)
                     .get(
                         "/entrygroups?" +
-                            stringify(timeRangeParameters) +
+                            qs.stringify(timeRangeParameters) +
                             "&" +
                             qs.stringify(groupingParameters, { arrayFormat: "brackets" }) +
                             "&" +
-                            stringify(optionalParameters)
+                            qs.stringify(optionalParameters)
                     )
                     .reply(200);
 
@@ -202,7 +201,7 @@ describe("Clockodo (instance)", () => {
                     projects_id: "300",
                 };
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/searchtexts?" + stringify(expectedParameters))
+                    .get("/searchtexts?" + qs.stringify(expectedParameters))
                     .reply(200);
 
                 await clockodo.getSearchTexts(givenParameters);
@@ -238,7 +237,7 @@ describe("Clockodo (instance)", () => {
                     count: 6,
                 };
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/tasks?" + stringify(parameters))
+                    .get("/tasks?" + qs.stringify(parameters))
                     .reply(200);
 
                 await clockodo.getTasks(parameters);
@@ -266,7 +265,7 @@ describe("Clockodo (instance)", () => {
                 const nockScope = nock(CLOCKODO_API)
                     .get(
                         "/tasks/duration?" +
-                            stringify(expectedParameters) +
+                            qs.stringify(expectedParameters) +
                             "&" +
                             qs.stringify(groupingParams, { arrayFormat: "brackets" })
                     )
@@ -316,7 +315,7 @@ describe("Clockodo (instance)", () => {
         describe("getUserReport()", () => {
             it("correctly builds getUserReport() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/userreports/1263?" + stringify({ year: 2017 }))
+                    .get("/userreports/1263?" + qs.stringify({ year: 2017 }))
                     .reply(200);
 
                 await clockodo.getUserReport({ id: "1263", year: 2017 });
@@ -334,7 +333,7 @@ describe("Clockodo (instance)", () => {
         describe("getUserReports()", () => {
             it("correctly builds getUserReports() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/userreports?" + stringify({ year: 2017 }))
+                    .get("/userreports?" + qs.stringify({ year: 2017 }))
                     .reply(200);
 
                 await clockodo.getUserReports({ year: 2017 });

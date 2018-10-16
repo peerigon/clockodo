@@ -63,4 +63,3 @@ typings/
 .DS_Store
 .vscode
 lib/
-index.js
