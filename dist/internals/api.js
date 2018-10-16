@@ -81,7 +81,7 @@ class Clockodo {
     async getServices() {
         return this[clockodoApi].get("/services");
     }
-    async getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable }, options) {
+    async getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }, options) {
         const requiredArguments = { taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable };
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
         return this[clockodoApi].get("/tasks/duration", Object.assign({}, requiredArguments, options));
