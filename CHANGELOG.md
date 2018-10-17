@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/peerigon/clockodo/compare/v1.1.1...v2.0.0) (2018-10-17)
+
+
+* Conversion to Typescript (#16) ([1bedec1](https://github.com/peerigon/clockodo/commit/1bedec1)), closes [#16](https://github.com/peerigon/clockodo/issues/16)
+
+
+### Features
+
+* adding function parameter types ([#21](https://github.com/peerigon/clockodo/issues/21)) ([f3c2499](https://github.com/peerigon/clockodo/commit/f3c2499))
+* Adds remaining endpoint methods and alters old method signatures ([#14](https://github.com/peerigon/clockodo/issues/14)) ([fb82c71](https://github.com/peerigon/clockodo/commit/fb82c71)), closes [#12](https://github.com/peerigon/clockodo/issues/12)
+
+
+### BREAKING CHANGES
+
+* Method Signature structure has been completely changed, and Node 6 support is dropped. 
+
+* fix: addresses security vulnerabilities. Also adds jsdoc-to-markdown dev dependency
+
+* fix: jsdoc-to-markdown should just be used globally. removed dependency
+
+* changes method signatures, adds useless jsdoc
+
+* feat: creates config for typescript
+
+* feat: converts files to typescript (and required changes that comes with the transformation)
+
+* fix: fixes tests and the bugs revealed from them
+
+* fix: updates integration test
+
+* fix: adds nock teardown in case it is influencing other test files
+
+* feat: upgrades min supported version to Node 8
+
+* chore: sets automatic generation of types files to false as I see no benefit
+* Method signatures have been changed to objects.
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/peerigon/clockodo/compare/v1.1.0...v1.1.1) (2018-05-09)
 
