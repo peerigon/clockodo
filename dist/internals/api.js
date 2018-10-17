@@ -17,8 +17,9 @@ exports.ABSENCE_TYPE_REGULAR_HOLIDAY = 1;
 exports.ABSENCE_TYPE_SPECIAL_LEAVE = 2;
 exports.ABSENCE_TYPE_REDUCTION_OF_OVERTIME = 3;
 exports.ABSENCE_TYPE_SICK_DAY = 4;
-exports.ABSENCE_STATUS_APPROVED = 0;
-exports.ABSENCE_STATUS_DECLINED = 1;
+exports.ABSENCE_STATUS_REPORTED = 0;
+exports.ABSENCE_STATUS_APPROVED = 1;
+exports.ABSENCE_STATUS_DECLINED = 2;
 exports.ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
 exports.ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 /* eslint-disable max-len */
@@ -81,7 +82,7 @@ class Clockodo {
     async getServices() {
         return this[clockodoApi].get("/services");
     }
-    async getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable }, options) {
+    async getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }, options) {
         const requiredArguments = { taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable };
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
         return this[clockodoApi].get("/tasks/duration", Object.assign({}, requiredArguments, options));
