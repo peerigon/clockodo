@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "./dist",
-        "lib": ["es2017"],
+        "lib": ["es2017", "esnext"],
         "target": "es2017",
         "module": "commonjs",
         "allowSyntheticDefaultImports": true,
