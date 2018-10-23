@@ -9,7 +9,7 @@
         "checkJs": false,
         "declaration": true,
         "moduleResolution": "node",
-        "types": ["node"]
+        "types": []
     },
     "include": ["./src/*"],
     "exclude": [
