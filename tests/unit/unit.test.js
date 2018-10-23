@@ -231,6 +231,29 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+        describe("getSingleTargetHourSet", () => {
+            it("correctly builds getSingleTargetHourSet() request", async () => {
+                const nockScope = nock(CLOCKODO_API)
+                    .get("/targethours/1234")
+                    .reply(200);
+
+                await clockodo.getSingleTargetHourSet({ id: "1234" });
+
+                nockScope.done();
+            });
+        });
+        describe("getTargetHours", () => {
+            it("correctly builds getTargetHours() request", async () => {
+
+                const nockScope = nock(CLOCKODO_API)
+                    .get("/targethours")
+                    .reply(200);
+
+                await clockodo.getTargetHours();
+
+                nockScope.done();
+            });
+        });
         describe("getTasks()", () => {
             it("correctly builds getTasks() request", async () => {
                 const parameters = {

@@ -58,6 +58,10 @@ export declare class Clockodo {
         id: string;
     }): Promise<any>;
     getServices(): Promise<any>;
+    getSingleTargetHourSet({ id }: {
+        id: string;
+    }): Promise<any>;
+    getTargetHours(options?: object): Promise<any>;
     getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }: {
         taskCustomerId: string;
         taskProjectId: string;

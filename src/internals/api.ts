@@ -121,6 +121,16 @@ export class Clockodo {
         return this[clockodoApi].get("/services");
     }
 
+    async getSingleTargetHourSet({ id }: { id: string }){
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_SINGLE_TARGET_HOUR_SET);
+
+        return this[clockodoApi].get("/targethours/" + id);
+    }
+
+    async getTargetHours(options?: object) {
+        return this[clockodoApi].get("/targethours", options );
+    }
+
     async getTaskDuration(
         {
             taskCustomerId,

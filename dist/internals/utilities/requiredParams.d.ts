@@ -27,6 +27,7 @@ export declare const GET_ENTRY: string[];
 export declare const GET_ENTRY_GROUPS: string[];
 export declare const GET_PROJECT: string[];
 export declare const GET_SERVICE: string[];
+export declare const GET_SINGLE_TARGET_HOUR_SET: string[];
 export declare const GET_TASK_DURATION: string[];
 export declare const GET_USER: string[];
 export declare const GET_USER_REPORTS: string[];

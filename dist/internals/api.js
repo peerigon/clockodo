@@ -82,6 +82,13 @@ class Clockodo {
     async getServices() {
         return this[clockodoApi].get("/services");
     }
+    async getSingleTargetHourSet({ id }) {
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_SINGLE_TARGET_HOUR_SET);
+        return this[clockodoApi].get("/targethours/" + id);
+    }
+    async getTargetHours(options) {
+        return this[clockodoApi].get("/targethours", options);
+    }
     async getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }, options) {
         const requiredArguments = { taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable };
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
