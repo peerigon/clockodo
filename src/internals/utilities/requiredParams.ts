@@ -27,6 +27,7 @@ export const GET_ENTRY = ["id"];
 export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"];
 export const GET_PROJECT = ["id"];
 export const GET_SERVICE = ["id"];
+export const GET_SINGLE_TARGET_HOUR_SET = ["id"];
 export const GET_TASK_DURATION = ["taskCustomerId", "taskProjectId", "taskServiceId", "taskText", "taskBillable"];
 export const GET_USER = ["id"];
 export const GET_USER_REPORTS = ["year"];

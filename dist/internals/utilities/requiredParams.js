@@ -29,6 +29,7 @@ exports.GET_ENTRY = ["id"];
 exports.GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"];
 exports.GET_PROJECT = ["id"];
 exports.GET_SERVICE = ["id"];
+exports.GET_SINGLE_TARGET_HOUR_SET = ["id"];
 exports.GET_TASK_DURATION = ["taskCustomerId", "taskProjectId", "taskServiceId", "taskText", "taskBillable"];
 exports.GET_USER = ["id"];
 exports.GET_USER_REPORTS = ["year"];

@@ -8,7 +8,10 @@
         "esModuleInterop": true,
         "checkJs": false,
         "declaration": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "types": ["@types/node", "node"],
+        "typeRoots": ["./node_modules/@types"]
     },
-    "include": ["./src/*"]
+    "include": ["./src/*"],
+    "exclude": ["node_modules"]
 }
