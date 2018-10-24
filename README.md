@@ -99,6 +99,8 @@ What a function call looks like for each of the defined endpoint methods. For an
     -   [getSearchTexts()](#getsearchtexts)
     -   [getService()](#getservice)
     -   [getServices()](#getservices)
+    -   [getSingleTargetHourSet()](#getsingletargethourset)
+    -   [getTargetHours()](#gettargethours)
     -   [getTasks()](#gettasks)
     -   [getTaskDuration()](#gettaskduration)
     -   [getUser()](#getuser)
@@ -311,6 +313,32 @@ Get list of services
 
 ```js
 clockodo.getServices().then(console.log);
+```
+
+---
+
+### getSingleTargetHourSet()
+
+Get a specific target hour period for a specific user by its ID (not the ID of the user)
+
+#### Example:
+
+```js
+clockodo.getSingleTargetHourSet({ id: "1234" }).then(console.log);
+```
+
+---
+
+### getTargetHours()
+
+Get list of target hours for all users, with option to pass an object with an `userId` to filter the history of target hours to a specific user.
+
+#### Example:
+
+```js
+clockodo.getTargetHours().then(console.log);
+// or
+clockodo.getTargetHours({ userId: 346923 }).then(console.log);
 ```
 
 ---
