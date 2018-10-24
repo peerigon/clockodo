@@ -9,10 +9,9 @@
         "checkJs": false,
         "declaration": true,
         "moduleResolution": "node",
-        "types": []
+        "types": ["@types/node", "node"],
+        "typeRoots": ["./node_modules/@types"]
     },
     "include": ["./src/*"],
-    "exclude": [
-        "node_modules",
-    ]
+    "exclude": ["node_modules"]
 }

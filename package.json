@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/peerigon/clockodo#readme",
   "dependencies": {
+    "@types/node": "^10.12.0",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "camelcase": "^5.0.0",
