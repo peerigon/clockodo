@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/peerigon/clockodo/compare/v3.0.0...v3.1.0) (2018-10-24)
+
+
+### Features
+
+* Add target hours ([#22](https://github.com/peerigon/clockodo/issues/22)) ([ec25b66](https://github.com/peerigon/clockodo/commit/ec25b66))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/peerigon/clockodo/compare/v1.1.1...v3.0.0) (2018-10-17)
 
