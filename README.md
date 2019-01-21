@@ -425,7 +425,7 @@ Get an employee/user's report, which contains data such as hours worked and holi
 #### Example:
 
 ```js
-clockodo.getUserReports({ year: 2017 }).then(console.log);
+clockodo.getUserReports({ year: 2017 }, { type: 1 }).then(console.log);
 ```
 
 ---
