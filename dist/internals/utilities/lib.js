@@ -10,6 +10,18 @@ const qs_1 = __importDefault(require("qs"));
 const mapKeys_1 = __importDefault(require("./mapKeys"));
 const ENDPOINT = "https://my.clockodo.com/api";
 const axiosClient = Symbol("axiosClient");
+const transformRequestOptions = params => {
+    let urlParams = [];
+    for (const [key, value] of Object.entries(params)) {
+        if (key === "grouping") {
+            urlParams.push(qs_1.default.stringify({ [key]: value }, { arrayFormat: "brackets" }));
+        }
+        else {
+            urlParams.push(qs_1.default.stringify({ [key]: value }, { arrayFormat: "repeat" }));
+        }
+    }
+    return urlParams.join('&');
+};
 class ClockodoLib {
     constructor(user, apiKey) {
         this[axiosClient] = axios_1.default.create({
@@ -23,9 +35,7 @@ class ClockodoLib {
     async get(resource, params = {}) {
         const response = await this[axiosClient].get(resource, {
             params: mapKeys_1.default(params),
-            paramsSerializer(params) {
-                return qs_1.default.stringify(params, { arrayFormat: "brackets" });
-            },
+            paramsSerializer: params => transformRequestOptions(params)
         });
         return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
     }
