@@ -290,7 +290,7 @@ describe("Clockodo (instance)", () => {
                         "/tasks/duration?" +
                             qs.stringify(expectedParameters) +
                             "&" +
-                            qs.stringify(groupingParams, { arrayFormat: "brackets" })
+                            qs.stringify(groupingParams, { arrayFormat: "repeat" })
                     )
                     .reply(200);
 
