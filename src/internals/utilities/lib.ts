@@ -35,7 +35,7 @@ export class ClockodoLib {
     async get(resource, params = {}) {
         const response = await this[axiosClient].get(resource, {
             params: mapKeys(params),
-            paramsSerializer: params => transformRequestOptions(params)
+            paramsSerializer: transformRequestOptions
         });
 
         return deepMapKeys(response.data, key => camelCase(key));
