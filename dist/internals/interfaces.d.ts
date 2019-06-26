@@ -90,7 +90,7 @@ export interface Task {
 }
 export interface EntryGroup {
     groupeyby: string;
-    group: string;
+    group: string | number;
     name: string;
     number: string;
     note: string;
