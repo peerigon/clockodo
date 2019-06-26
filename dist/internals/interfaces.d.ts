@@ -65,10 +65,10 @@ export interface Entry {
     budget?: number;
     budgetIsHours?: boolean;
     budgetIsNotStrict?: boolean;
-    customerName?: string;
-    projectName?: string;
-    serviceName?: string;
-    userName?: string;
+    customersName?: string;
+    projectsName?: string;
+    servicesName?: string;
+    usersName?: string;
 }
 export interface Task {
     day: string;
