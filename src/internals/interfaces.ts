@@ -151,7 +151,7 @@ export interface UserReportWeek {
     sumHours: number,
     sumReductionUsed: number,
     diff: number,
-    weekDetails: UserReportDay[],
+    dayDetails: UserReportDay[],
 }
 
 export interface Break {
