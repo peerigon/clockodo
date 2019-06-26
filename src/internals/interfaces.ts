@@ -10,7 +10,7 @@ export interface Customer {
 
 export interface Project {
     id: number,
-    customerId: number,
+    customersId: number,
     name: string,
     active: boolean,
     billableDefault: boolean,
@@ -44,13 +44,13 @@ export interface User {
 
 export interface Entry {
     id:number,
-    customerId: number,
-    projectId: number,
-    userId: number,
-    serviceId: number,
+    customersId: number,
+    projectsId: number,
+    usersId: number,
+    servicesId: number,
     billable: 0 | 1,
     billed: boolean,
-    textId: number,
+    textsId: number,
     text: string,
     duration: number,
     durationTime: string,
@@ -77,14 +77,14 @@ export interface Entry {
 
 export interface Task {
     day: string,
-    customerId: number,
-    customerName: string,
-    projectId: number,
-    projectName: string,
-    serviceId: number,
-    serviceName: string,
+    customersId: number,
+    customersName: string,
+    projectsId: number,
+    projectsName: string,
+    servicesId: number,
+    servicesName: string,
     billable: number,
-    textId: number,
+    textsId: number,
     text: string,
     duration: number,
     durationTime: string,
@@ -117,8 +117,8 @@ export interface EntryGroup {
 }
 
 export interface UserReport {
-    userId: number,
-    userName: string,
+    usersId: number,
+    usersName: string,
     sumTarget: number,
     sumHours: number,
     sumReductionUsed: number,
@@ -181,7 +181,7 @@ export interface UserReportDay {
 
 export interface Absence {
     id: number,
-    userId: number,
+    usersId: number,
     dateSince: string,
     dateUntil: string,
     status: number,
@@ -196,7 +196,7 @@ export interface Absence {
 
 export interface TargetHoursRow {
     id: number,
-    userId: number,
+    usersId: number,
     type: string,
     dateSince: string,
     dateUntil: string | null,
@@ -222,14 +222,14 @@ export interface TargetHoursRow {
 
 export interface HolidayQuotasRow {
     id: number,
-    userId: number,
+    usersId: number,
     yearSince: number,
     yearUntil: number,
     count: number,
 }
 
 export interface HolidaysCarryRow {
-    userId: number,
+    usersId: number,
     year: number,
     count: number,
     note: string,
@@ -255,12 +255,12 @@ export interface Paging {
 }
 
 export interface Filter {
-    userId?: number,
-    customerId?: number,
-    projectId?: number,
-    serviceId?: number,
+    usersId?: number,
+    customersId?: number,
+    projectsId?: number,
+    servicesId?: number,
     billable?: number,
     text?: string,
-    textId?: number,
+    textsId?: number,
     budgetType?: string,
 }
