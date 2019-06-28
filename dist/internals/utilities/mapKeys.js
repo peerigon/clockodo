@@ -40,7 +40,9 @@ const paramMapping = {
     countHours: "count_hours",
     billedMoney: "billed_money",
     billedCompletely: "billed_completely",
+    revenueFactor: "revenue_factor",
     confirmKey: "confirm_key",
+    editLock: "edit_lock",
     textsId: "texts_id",
 };
 function mapKeys(userParams) {

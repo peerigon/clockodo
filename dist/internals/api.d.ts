@@ -1,3 +1,4 @@
+import { AbsenceReturnType, AbsencesReturnType, DeleteReturnType, CustomerReturnType, CustomersReturnType, ProjectReturnType, ServiceReturnType, ServicesReturnType, UserReturnType, UsersReturnType, EntryReturnType, EntriesReturnType, TasksReturnType, TaskDurationReturnType, DeleteEntryGroupsReturnType, EditEntryGroupsReturnType, UserReportReturnType, UserReportsReturnType, ClockReturnType, ClockUpdateReturnType, ClockEditReturnType, ClockStopReturnType, TargetHoursReturnType, TargetHourReturnType, AddUserReturnType, SearchTextsReturnType, EntryGroupsReturnType } from "../internals/returnTypes";
 export declare const ENTRY_UNBILLABLE = 0;
 export declare const ENTRY_BILLABLE = 1;
 export declare const ENTRY_BILLED = 2;
@@ -28,141 +29,141 @@ export declare class Clockodo {
     });
     getAbsence({ id }: {
         id: string;
-    }): Promise<any>;
+    }): AbsenceReturnType;
     getAbsences({ year }: {
         year: number;
-    }): Promise<any>;
-    getClock(): Promise<any>;
-    getClockUpdate(): Promise<any>;
+    }): AbsencesReturnType;
+    getClock(): ClockReturnType;
+    getClockUpdate(): ClockUpdateReturnType;
     getCustomer({ id }: {
         id: string;
-    }): Promise<any>;
-    getCustomers(): Promise<any>;
+    }): CustomerReturnType;
+    getCustomers(): CustomersReturnType;
     getEntry({ id }: {
         id: string;
-    }): Promise<any>;
+    }): EntryReturnType;
     getEntries({ timeSince, timeUntil }: {
         timeSince: string;
         timeUntil: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): EntriesReturnType;
     getEntryGroups({ timeSince, timeUntil, grouping }: {
         timeSince: string;
         timeUntil: string;
         grouping: string[];
-    }, options?: object): Promise<any>;
+    }, options?: object): EntryGroupsReturnType;
     getProject({ id }: {
         id: string;
-    }): Promise<any>;
-    getSearchTexts(options?: object): Promise<any>;
+    }): ProjectReturnType;
+    getSearchTexts(options?: object): SearchTextsReturnType;
     getService({ id }: {
         id: string;
-    }): Promise<any>;
-    getServices(): Promise<any>;
+    }): ServiceReturnType;
+    getServices(): ServicesReturnType;
     getSingleTargetHourSet({ id }: {
         id: string;
-    }): Promise<any>;
-    getTargetHours(options?: object): Promise<any>;
+    }): TargetHourReturnType;
+    getTargetHours(options?: object): TargetHoursReturnType;
     getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }: {
         taskCustomerId: string;
         taskProjectId: string;
         taskServiceId: string;
         taskText: string;
         taskBillable: Billable;
-    }, options?: object): Promise<any>;
-    getTasks(options?: object): Promise<any>;
+    }, options?: object): TaskDurationReturnType;
+    getTasks(options?: object): TasksReturnType;
     getUser({ id }: {
         id: string;
-    }): Promise<any>;
-    getUsers(): Promise<any>;
+    }): UserReturnType;
+    getUsers(): UsersReturnType;
     getUserReport({ id, year }: {
         id: string;
         year: number;
-    }, options?: object): Promise<any>;
+    }, options?: object): UserReportReturnType;
     getUserReports({ year }: {
         year: number;
-    }, options?: object): Promise<any>;
+    }, options?: object): UserReportsReturnType;
     changeClockDuration({ entryId, durationBefore, duration }: {
         entryId: string;
         durationBefore: number;
         duration: number;
-    }, options?: object): Promise<any>;
+    }, options?: object): ClockEditReturnType;
     startClock({ customerId, serviceId, billable }: {
         customerId: string;
         serviceId: string;
         billable: Billable;
-    }, options?: object): Promise<any>;
+    }, options?: object): ClockReturnType;
     addCustomer({ name }: {
         name: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): CustomerReturnType;
     addProject({ name, customerId }: {
         name: string;
         customerId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ProjectReturnType;
     addService({ name }: {
         name: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ServiceReturnType;
     addUser({ name, number, email, role }: {
         name: string;
         number: string;
         email: string;
         role: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): AddUserReturnType;
     addEntry({ customerId, serviceId, billable }: {
         customerId: string;
         serviceId: string;
         billable: Billable;
-    }, options?: object): Promise<any>;
+    }, options?: object): EntryReturnType;
     addAbsence({ dateSince, dateUntil, type }: {
         dateSince: string;
         dateUntil: string;
         type: AbsenceType;
-    }, options?: object): Promise<any>;
+    }, options?: object): AbsenceReturnType;
     stopClock({ entryId }: {
         entryId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ClockStopReturnType;
     deactivateCustomer({ customerId }: {
         customerId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): CustomerReturnType;
     deactivateProject({ projectId }: {
         projectId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ProjectReturnType;
     deactivateService({ serviceId }: {
         serviceId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ServiceReturnType;
     deactivateUser({ userId }: {
         userId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): UserReturnType;
     deleteEntry({ entryId }: {
         entryId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): DeleteReturnType;
     deleteEntryGroup({ timeSince, timeUntil }: {
         timeSince: string;
         timeUntil: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): DeleteEntryGroupsReturnType;
     deleteAbsence({ absenceId }: {
         absenceId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): DeleteReturnType;
     editCustomer({ customerId }: {
         customerId: string;
     }, options?: object): Promise<any>;
     editProject({ projectId }: {
         projectId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ProjectReturnType;
     editService({ serviceId }: {
         serviceId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): ServiceReturnType;
     editUser({ userId }: {
         userId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): UserReturnType;
     editEntryGroup({ timeSince, timeUntil }: {
         timeSince: string;
         timeUntil: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): EditEntryGroupsReturnType;
     editAbsence({ absenceId }: {
         absenceId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): AbsenceReturnType;
     editEntry({ entryId }: {
         entryId: string;
-    }, options?: object): Promise<any>;
+    }, options?: object): EntryReturnType;
 }
 export {};
