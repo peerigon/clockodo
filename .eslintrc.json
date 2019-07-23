@@ -1,5 +1,8 @@
 {
-    "extends": ["peerigon", "peerigon/node"],
+    "extends": [
+        "peerigon",
+        "peerigon/node"
+    ],
     "root": true,
     "rules": {
         "require-await": "off"

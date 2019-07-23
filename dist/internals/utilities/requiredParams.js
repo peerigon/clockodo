@@ -35,7 +35,7 @@ exports.GET_USER = ["id"];
 exports.GET_USER_REPORTS = ["year"];
 exports.START_CLOCK = ["customerId", "serviceId", "billable"];
 exports.STOP_CLOCK = ["entryId"];
-function checkRequired(params = {}, requiredList) {
+exports.checkRequired = (params = {}, requiredList) => {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
     const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");
     if (typeof missingParamName !== "undefined") {
@@ -44,5 +44,4 @@ function checkRequired(params = {}, requiredList) {
     else if (typeof undefinedParam !== "undefined") {
         throw new Error(`Missing required parameter "${undefinedParam}"`);
     }
-}
-exports.checkRequired = checkRequired;
+};

@@ -1,4 +1,3 @@
-"use strict";
 
 // ? API for Absences says countDays twice. I am guessing the second time should be their countHours
 const paramMapping = {
@@ -46,7 +45,7 @@ const paramMapping = {
     textsId: "texts_id",
 };
 
-export default function mapKeys(userParams) {
+const mapKeys = (userParams) => {
     const apiParams = {};
 
     for (const [userParamName, value] of Object.entries(userParams)) {
@@ -56,4 +55,6 @@ export default function mapKeys(userParams) {
     }
 
     return apiParams;
-}
+};
+
+export default mapKeys;

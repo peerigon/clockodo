@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "npm run build -- -w",
-    "lint": "eslint lib tests",
+    "lint": "eslint src tests --ext js,ts",
     "pretest": "npm run build",
     "test": "jest",
     "posttest": "npm run lint",
@@ -38,16 +38,19 @@
     "qs": "^6.5.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
     "dotenv": "^5.0.1",
-    "eslint": "^4.18.2",
-    "eslint-config-peerigon": "^12.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-peerigon": "^22.0.0",
+    "eslint-import-resolver-typescript": "^1.1.1",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jsdoc": "^3.5.0",
+    "eslint-plugin-prefer-arrow": "^1.1.5",
     "husky": "^2.6.0",
     "jest": "^24.8.0",
     "nock": "^9.2.3",
     "standard-version": "^4.3.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.5.3"
   },
   "files": [
     "dist"

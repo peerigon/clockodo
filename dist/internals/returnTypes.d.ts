@@ -3,7 +3,7 @@ export declare type AbsenceReturnType = Promise<{
     absence: Absence;
 }>;
 export declare type AbsencesReturnType = Promise<{
-    absences: Absence[];
+    absences: Array<Absence>;
 }>;
 export declare type DeleteReturnType = Promise<{
     success: true;
@@ -12,7 +12,7 @@ export declare type CustomerReturnType = Promise<{
     customer: Customer;
 }>;
 export declare type CustomersReturnType = Promise<{
-    customers: Customer[];
+    customers: Array<Customer>;
 }>;
 export declare type ProjectReturnType = Promise<{
     project: Project;
@@ -21,13 +21,13 @@ export declare type ServiceReturnType = Promise<{
     service: Service;
 }>;
 export declare type ServicesReturnType = Promise<{
-    services: Service[];
+    services: Array<Service>;
 }>;
 export declare type UserReturnType = Promise<{
     user: User;
 }>;
 export declare type UsersReturnType = Promise<{
-    users: User[];
+    users: Array<User>;
 }>;
 export declare type EntryReturnType = Promise<{
     entry: Entry;
@@ -35,7 +35,7 @@ export declare type EntryReturnType = Promise<{
 export declare type EntriesReturnType = Promise<{
     paging: Paging;
     filter: Filter | null;
-    entries: Entry[];
+    entries: Array<Entry>;
 }>;
 export declare type TaskDurationReturnType = Promise<{
     task: {
@@ -43,16 +43,16 @@ export declare type TaskDurationReturnType = Promise<{
     };
 }>;
 export declare type TasksReturnType = Promise<{
-    days: {
+    days: Array<{
         date: string;
         dateText: string;
         duration: number;
         durationText: string;
-        tasks: Task[];
-    }[];
+        tasks: Array<Task>;
+    }>;
 }>;
 export declare type EntryGroupsReturnType = Promise<{
-    groups: EntryGroup[];
+    groups: Array<EntryGroup>;
 }>;
 export declare type EditEntryGroupsReturnType = Promise<{
     confirmKey: string;
@@ -72,7 +72,7 @@ export declare type UserReportReturnType = Promise<{
     userreport: UserReport;
 }>;
 export declare type UserReportsReturnType = Promise<{
-    userreports: UserReport[];
+    userreports: Array<UserReport>;
 }>;
 export declare type ClockReturnType = Promise<{
     running: Entry;
@@ -87,7 +87,7 @@ export declare type ClockEditReturnType = Promise<{
 }>;
 export declare type ClockUpdateReturnType = Promise<{
     running: Entry;
-    services: Service[];
+    services: Array<Service>;
     projects: Array<{
         id: number;
         name: string;
@@ -102,13 +102,13 @@ export declare type ClockUpdateReturnType = Promise<{
     user: User;
 }>;
 export declare type SearchTextsReturnType = Promise<{
-    texts: string[];
+    texts: Array<string>;
 }>;
 export declare type TargetHourReturnType = Promise<{
     targethours: TargetHoursRow;
 }>;
 export declare type TargetHoursReturnType = Promise<{
-    targethours: TargetHoursRow[];
+    targethours: Array<TargetHoursRow>;
 }>;
 export declare type AddUserReturnType = Promise<{
     success: "true";

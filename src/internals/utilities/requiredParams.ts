@@ -34,13 +34,13 @@ export const GET_USER_REPORTS = ["year"];
 export const START_CLOCK = ["customerId", "serviceId", "billable"];
 export const STOP_CLOCK = ["entryId"];
 
-export function checkRequired(params = {}, requiredList) {
+export const checkRequired = (params = {}, requiredList) => {
     const missingParamName = requiredList.find(paramName => paramName in params === false);
     const undefinedParam = requiredList.find(paramName => typeof params[paramName] === "undefined");
 
     if (typeof missingParamName !== "undefined") {
-        throw new Error(`Missing required parameter "${ missingParamName }"`);
+        throw new Error(`Missing required parameter "${missingParamName}"`);
     } else if (typeof undefinedParam !== "undefined") {
-        throw new Error(`Missing required parameter "${ undefinedParam }"`);
+        throw new Error(`Missing required parameter "${undefinedParam}"`);
     }
-}
+};

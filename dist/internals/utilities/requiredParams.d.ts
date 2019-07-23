@@ -33,4 +33,4 @@ export declare const GET_USER: string[];
 export declare const GET_USER_REPORTS: string[];
 export declare const START_CLOCK: string[];
 export declare const STOP_CLOCK: string[];
-export declare function checkRequired(params: {}, requiredList: any): void;
+export declare const checkRequired: (params: {}, requiredList: any) => void;

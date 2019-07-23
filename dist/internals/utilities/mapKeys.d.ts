@@ -1,1 +1,2 @@
-export default function mapKeys(userParams: any): {};
+declare const mapKeys: (userParams: any) => {};
+export default mapKeys;

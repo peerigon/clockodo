@@ -1,13 +1,13 @@
-export interface Customer {
+export declare type Customer = {
     id: number;
     name: string;
     number: string;
     active: boolean;
     billableDefault: boolean;
     note: string;
-    projects: Project[];
-}
-export interface Project {
+    projects: Array<Project>;
+};
+export declare type Project = {
     id: number;
     customersId: number;
     name: string;
@@ -21,15 +21,15 @@ export interface Project {
     billedMoney: number;
     billedCompletely: boolean;
     revenueFactor: number;
-}
-export interface Service {
+};
+export declare type Service = {
     id: number;
     name: string;
     number: string;
     active: boolean;
     note: string;
-}
-export interface User {
+};
+export declare type User = {
     id: number;
     name: string;
     number: string;
@@ -37,8 +37,14 @@ export interface User {
     role: string;
     active: boolean;
     editLock: string;
-}
-export interface Entry {
+    timeformat12h: boolean;
+    weekstartMonday: boolean;
+    language: string;
+    currency: string;
+    currencySymbol: string;
+    timezone: string;
+};
+export declare type Entry = {
     id: number;
     customersId: number;
     projectsId: number;
@@ -69,8 +75,8 @@ export interface Entry {
     projectsName?: string;
     servicesName?: string;
     usersName?: string;
-}
-export interface Task {
+};
+export declare type Task = {
     day: string;
     customersId: number;
     customersName: string;
@@ -87,14 +93,14 @@ export interface Task {
     isClocking: boolean;
     hasJustLumpSums: boolean;
     revenue?: number;
-}
-export interface EntryGroup {
+};
+export declare type EntryGroup = {
     groupeyby: string;
     group: string | number;
     name: string;
     number: string;
     note: string;
-    restrictions: string[];
+    restrictions: Array<string>;
     duration: number;
     revenue?: number;
     budgetUsed?: boolean;
@@ -107,9 +113,9 @@ export interface EntryGroup {
     durationWithoutRounding?: number;
     revenueWithoutRounding?: number;
     roundingSuccess?: boolean;
-    subGroups: EntryGroup[];
-}
-export interface UserReport {
+    subGroups: Array<EntryGroup>;
+};
+export declare type UserReport = {
     usersId: number;
     usersName: string;
     sumTarget: number;
@@ -124,9 +130,9 @@ export interface UserReport {
     holidaysUsed: number;
     specialHolidays: number;
     sickdays: number;
-    monthDetails: UserReportMonth[];
-}
-export interface UserReportMonth {
+    monthDetails: Array<UserReportMonth>;
+};
+export declare type UserReportMonth = {
     nr: number;
     sumTarget: number;
     sumHours: number;
@@ -134,22 +140,22 @@ export interface UserReportMonth {
     sumReductionUsed: number;
     sumOvertimeReduced: number;
     diff: number;
-    weekDetails: UserReportWeek[];
-}
-export interface UserReportWeek {
+    weekDetails: Array<UserReportWeek>;
+};
+export declare type UserReportWeek = {
     nr: number;
     sumTarget: number;
     sumHours: number;
     sumReductionUsed: number;
     diff: number;
-    dayDetails: UserReportDay[];
-}
-export interface Break {
+    dayDetails: Array<UserReportDay>;
+};
+export declare type Break = {
     since: string;
     until: string;
     length: number;
-}
-export interface UserReportDay {
+};
+export declare type UserReportDay = {
     date: string;
     weekday: number;
     nonbusiness: boolean;
@@ -165,9 +171,9 @@ export interface UserReportDay {
     diff: number;
     workStart: string;
     workEnd: string;
-    breaks: Break[];
-}
-export interface Absence {
+    breaks: Array<Break>;
+};
+export declare type Absence = {
     id: number;
     usersId: number;
     dateSince: string;
@@ -180,8 +186,8 @@ export interface Absence {
     dateEnquired: string;
     dateApproved: string;
     approvedBy: number;
-}
-export interface TargetHoursRow {
+};
+export declare type TargetHoursRow = {
     id: number;
     usersId: number;
     type: string;
@@ -205,38 +211,27 @@ export interface TargetHoursRow {
     workdayFriday: boolean;
     workdaySaturday: boolean;
     workdaySunday: boolean;
-}
-export interface HolidayQuotasRow {
+};
+export declare type HolidayQuotasRow = {
     id: number;
     usersId: number;
     yearSince: number;
     yearUntil: number;
     count: number;
-}
-export interface HolidaysCarryRow {
+};
+export declare type HolidaysCarryRow = {
     usersId: number;
     year: number;
     count: number;
     note: string;
-}
-export interface User {
-    name: string;
-    email: string;
-    role: string;
-    timeformat12h: boolean;
-    weekstartMonday: boolean;
-    language: string;
-    currency: string;
-    currencySymbol: string;
-    timezone: string;
-}
-export interface Paging {
+};
+export declare type Paging = {
     itemsPerPage: number;
     currentPage: number;
     countPages: number;
     countItems: number;
-}
-export interface Filter {
+};
+export declare type Filter = {
     usersId?: number;
     customersId?: number;
     projectsId?: number;
@@ -245,4 +240,4 @@ export interface Filter {
     text?: string;
     textsId?: number;
     budgetType?: string;
-}
+};

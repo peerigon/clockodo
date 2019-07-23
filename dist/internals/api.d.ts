@@ -1,4 +1,4 @@
-import { AbsenceReturnType, AbsencesReturnType, DeleteReturnType, CustomerReturnType, CustomersReturnType, ProjectReturnType, ServiceReturnType, ServicesReturnType, UserReturnType, UsersReturnType, EntryReturnType, EntriesReturnType, TasksReturnType, TaskDurationReturnType, DeleteEntryGroupsReturnType, EditEntryGroupsReturnType, UserReportReturnType, UserReportsReturnType, ClockReturnType, ClockUpdateReturnType, ClockEditReturnType, ClockStopReturnType, TargetHoursReturnType, TargetHourReturnType, AddUserReturnType, SearchTextsReturnType, EntryGroupsReturnType } from "../internals/returnTypes";
+import { AbsenceReturnType, AbsencesReturnType, DeleteReturnType, CustomerReturnType, CustomersReturnType, ProjectReturnType, ServiceReturnType, ServicesReturnType, UserReturnType, UsersReturnType, EntryReturnType, EntriesReturnType, TasksReturnType, TaskDurationReturnType, DeleteEntryGroupsReturnType, EditEntryGroupsReturnType, UserReportReturnType, UserReportsReturnType, ClockReturnType, ClockUpdateReturnType, ClockEditReturnType, ClockStopReturnType, TargetHoursReturnType, TargetHourReturnType, AddUserReturnType, SearchTextsReturnType, EntryGroupsReturnType } from "./returnTypes";
 export declare const ENTRY_UNBILLABLE = 0;
 export declare const ENTRY_BILLABLE = 1;
 export declare const ENTRY_BILLED = 2;
@@ -49,7 +49,7 @@ export declare class Clockodo {
     getEntryGroups({ timeSince, timeUntil, grouping }: {
         timeSince: string;
         timeUntil: string;
-        grouping: string[];
+        grouping: Array<string>;
     }, options?: object): EntryGroupsReturnType;
     getProject({ id }: {
         id: string;

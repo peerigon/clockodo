@@ -45,12 +45,12 @@ const paramMapping = {
     editLock: "edit_lock",
     textsId: "texts_id",
 };
-function mapKeys(userParams) {
+const mapKeys = (userParams) => {
     const apiParams = {};
     for (const [userParamName, value] of Object.entries(userParams)) {
         const apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
         apiParams[apiParamName] = value;
     }
     return apiParams;
-}
+};
 exports.default = mapKeys;
