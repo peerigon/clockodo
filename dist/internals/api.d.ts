@@ -6,6 +6,11 @@ export declare const ABSENCE_TYPE_REGULAR_HOLIDAY = 1;
 export declare const ABSENCE_TYPE_SPECIAL_LEAVE = 2;
 export declare const ABSENCE_TYPE_REDUCTION_OF_OVERTIME = 3;
 export declare const ABSENCE_TYPE_SICK_DAY = 4;
+export declare const ABSENCE_TYPE_SICK_DAY_OF_CHILD = 5;
+export declare const ABSENCE_TYPE_SCHOOL_FURTHER_EDUCATION = 6;
+export declare const ABSENCE_TYPE_MATERNITY_PROTECTION = 7;
+export declare const ABSENCE_TYPE_HOME_OFFICE = 8;
+export declare const ABSENCE_TYPE_WORK_OUT_OF_OFFICE = 9;
 export declare const ABSENCE_STATUS_REPORTED = 0;
 export declare const ABSENCE_STATUS_APPROVED = 1;
 export declare const ABSENCE_STATUS_DECLINED = 2;
@@ -20,7 +25,12 @@ declare const enum AbsenceType {
     ABSENCE_TYPE_REGULAR_HOLIDAY = 1,
     ABSENCE_TYPE_SPECIAL_LEAVE = 2,
     ABSENCE_TYPE_REDUCTION_OF_OVERTIME = 3,
-    ABSENCE_TYPE_SICK_DAY = 4
+    ABSENCE_TYPE_SICK_DAY = 4,
+    ABSENCE_TYPE_SICK_DAY_OF_CHILD = 5,
+    ABSENCE_TYPE_SCHOOL_FURTHER_EDUCATION = 6,
+    ABSENCE_TYPE_MATERNITY_PROTECTION = 7,
+    ABSENCE_TYPE_HOME_OFFICE = 8,
+    ABSENCE_TYPE_WORK_OUT_OF_OFFICE = 9
 }
 export declare class Clockodo {
     constructor({ user, apiKey }: {
