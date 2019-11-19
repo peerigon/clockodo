@@ -1,16 +1,12 @@
-# Clockodo Node/JavaScript API
+# Clockodo
 
-**The Node/JavaScript Client for the [Clockodo-API](https://www.clockodo.com/de/api/).**
+**Unofficial JavaScript SDK for the [Clockodo API](https://www.clockodo.com/de/api/).** Written in Typescript.
 
 [![](https://img.shields.io/npm/v/clockodo.svg)](https://www.npmjs.com/package/clockodo)
 [![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
 [![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=master)](https://travis-ci.org/peerigon/clockodo)
 
 ## Note
-
-Now written in Typescript!
-
----
 
 We have provided methods for each of the endpoints available by the Clockodo API. We also renamed the request and response object keys from what you will see in the Clockodo docs by removing symbols, converting to camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.ts file.
 
@@ -19,8 +15,6 @@ In general, the first argument for these functions is an object consisting of re
 Please feel free to submit an issue or pull request.
 
 ## Installation
-
-Install from NPM (or yarn):
 
 ```
 npm install clockodo --save
