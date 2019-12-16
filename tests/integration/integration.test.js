@@ -15,7 +15,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
-            const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
+            const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock", "editLockDyn"];
 
             expect.assertions(1);
 
@@ -96,7 +96,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
         );
     });
 
-    describe.only("can create and retrieve lump sums", () => {
+    describe("can create and retrieve lump sums", () => {
         it(
             "adds, retrieves and deletes lump sum entries",
             async () => {
