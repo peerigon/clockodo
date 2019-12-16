@@ -44,9 +44,16 @@ export class ClockodoLib {
 
     async post(resource, params = {}) {
         const mappedObj = mapKeys(params);
-        const response = await this[axiosClient].post(resource, mappedObj);
 
-        return deepMapKeys(response.data, key => camelCase(key));
+        try {
+            const response = await this[axiosClient].post(resource, mappedObj);
+
+            return deepMapKeys(response.data, key => camelCase(key));
+        } catch (error) {
+            console.log(error);
+            console.log(error.data);
+            throw error;
+        }
     }
 
     async put(resource, params = {}) {

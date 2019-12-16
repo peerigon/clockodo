@@ -356,4 +356,58 @@ export class Clockodo {
 
         return this[clockodoApi].put("/entries/" + entryId, options);
     }
+
+    async getLumpSumEntriesByUserId({
+        lumpSumEntryId,
+        timeUntil,
+        timeSince,
+        userId,
+    }: {
+        lumpSumEntryId: number;
+        userId: number;
+        timeUntil: string;
+        timeSince: string;
+    }, options?: object): EntriesReturnType {
+        REQUIRED.checkRequired({lumpSumEntryId, timeUntil, timeSince, userId}, REQUIRED.GET_LUMP_SUM);
+
+        return this[clockodoApi].get("/entries/", {
+            filterLumpSumId: lumpSumEntryId,
+            timeSince,
+            timeUntil,
+            userId,
+            ...options,
+        });
+    }
+
+    async addLumpSumEntryByUserId({
+        customerId,
+        lumpSumAmount,
+        lumpSumId,
+        text,
+        timeSince,
+    }: {
+        customerId: number;
+        lumpSumId: number;
+        lumpSumAmount: number;
+        timeSince: string;
+        text: string;
+    }, options?: object): EntryReturnType {
+        REQUIRED.checkRequired({
+            customerId,
+            lumpSumId,
+            lumpSumAmount,
+            text,
+            timeSince,
+        }, REQUIRED.ADD_LUMP_SUM);
+
+        return this[clockodoApi].post("/entries/", {
+            billable: 1,
+            customerId,
+            lumpSumAmount,
+            lumpSumId,
+            text,
+            timeSince,
+            ...options,
+        });
+    }
 }

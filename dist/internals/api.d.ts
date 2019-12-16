@@ -175,5 +175,18 @@ export declare class Clockodo {
     editEntry({ entryId }: {
         entryId: string;
     }, options?: object): EntryReturnType;
+    getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }: {
+        lumpSumEntryId: number;
+        userId: number;
+        timeUntil: string;
+        timeSince: string;
+    }, options?: object): EntriesReturnType;
+    addLumpSumEntryByUserId({ customerId, lumpSumAmount, lumpSumId, text, timeSince, }: {
+        customerId: number;
+        lumpSumId: number;
+        lumpSumAmount: number;
+        timeSince: string;
+        text: string;
+    }, options?: object): EntryReturnType;
 }
 export {};

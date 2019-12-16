@@ -95,4 +95,55 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
             10000
         );
     });
+
+    describe.only("can create and retrieve lump sums", () => {
+        it(
+            "adds, retrieves and deletes lump sum entries",
+            async () => {
+                const lumpSum = {
+                    customerId: 619336,
+                    lumpSumId: 4966,
+                    billable: 1,
+                    lumpSumAmount: 6.8,
+                    timeSince: "2019-12-16 14:59:00",
+                    text: "desc",
+                };
+
+                expect.assertions(2);
+                const data = await clockodo.addLumpSumEntryByUserId({
+                    ...lumpSum,
+                });
+
+                expect(data.entry).toMatchObject({
+                    customersId: 619336,
+                    lumpSumsId: 4966,
+                    billable: 1,
+                    lumpSumsAmount: 6.8,
+                    timeSince: "2019-12-16 14:59:00",
+                    text: "desc",
+                });
+
+                const result = await clockodo.getLumpSumEntriesByUserId({
+                    lumpSumEntryId: 4966,
+                    timeSince: "2019-12-16 00:01:00",
+                    timeUntil: "2019-12-16 23:59:00",
+                    userId: 62488,
+                });
+
+                expect(result.entries[0]).toMatchObject({
+                    customersId: 619336,
+                    lumpSumsId: 4966,
+                    billable: 1,
+                    lumpSumsAmount: 6.8,
+                    timeSince: "2019-12-16 14:59:00",
+                    text: "desc",
+                });
+
+                await clockodo.deleteEntry({
+                    entryId: data.entry.id,
+                });
+            },
+            10000
+        );
+    });
 });

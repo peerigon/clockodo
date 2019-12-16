@@ -19,6 +19,8 @@ export declare const EDIT_USER: string[];
 export declare const EDIT_ENTRY_GROUP: string[];
 export declare const EDIT_ABSENCE: string[];
 export declare const EDIT_ENTRY: string[];
+export declare const GET_LUMP_SUM: string[];
+export declare const ADD_LUMP_SUM: string[];
 export declare const GET_ABSENCE: string[];
 export declare const GET_ABSENCES: string[];
 export declare const GET_CUSTOMER: string[];

@@ -41,8 +41,15 @@ class ClockodoLib {
     }
     async post(resource, params = {}) {
         const mappedObj = mapKeys_1.default(params);
-        const response = await this[axiosClient].post(resource, mappedObj);
-        return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+        try {
+            const response = await this[axiosClient].post(resource, mappedObj);
+            return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+        }
+        catch (error) {
+            console.log(error);
+            console.log(error.data);
+            throw error;
+        }
     }
     async put(resource, params = {}) {
         const mappedObj = mapKeys_1.default(params);
