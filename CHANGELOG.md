@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/peerigon/clockodo/compare/v3.1.6...v3.2.0) (2019-12-17)
+
+
+
 ### [3.1.6](https://github.com/peerigon/clockodo/compare/v3.1.5...v3.1.6) (2019-09-23)
 
 
