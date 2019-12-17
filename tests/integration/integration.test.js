@@ -96,9 +96,9 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
         );
     });
 
-    describe("can create and retrieve lump sums", () => {
+    describe("lump sum entry methods", () => {
         it(
-            "adds, retrieves and deletes lump sum entries",
+            "adds and retrieves lump sum entries",
             async () => {
                 const lumpSum = {
                     customerId: 619336,
@@ -115,12 +115,12 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
                 });
 
                 expect(data.entry).toMatchObject({
-                    customersId: 619336,
-                    lumpSumsId: 4966,
-                    billable: 1,
-                    lumpSumsAmount: 6.8,
-                    timeSince: "2019-12-16 14:59:00",
-                    text: "desc",
+                    customersId: lumpSum.customerId,
+                    lumpSumsId: lumpSum.lumpSumId,
+                    billable: lumpSum.billable,
+                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    timeSince: lumpSum.timeSince,
+                    text: lumpSum.text,
                 });
 
                 const result = await clockodo.getLumpSumEntriesByUserId({
@@ -131,12 +131,12 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
                 });
 
                 expect(result.entries[0]).toMatchObject({
-                    customersId: 619336,
-                    lumpSumsId: 4966,
-                    billable: 1,
-                    lumpSumsAmount: 6.8,
-                    timeSince: "2019-12-16 14:59:00",
-                    text: "desc",
+                    customersId: lumpSum.customerId,
+                    lumpSumsId: lumpSum.lumpSumId,
+                    billable: lumpSum.billable,
+                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    timeSince: lumpSum.timeSince,
+                    text: lumpSum.text,
                 });
 
                 await clockodo.deleteEntry({
