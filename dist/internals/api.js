@@ -219,10 +219,9 @@ class Clockodo {
     async getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }, options) {
         REQUIRED.checkRequired({ lumpSumEntryId, timeUntil, timeSince, userId }, REQUIRED.GET_LUMP_SUM);
         return this[clockodoApi].get("/entries/", Object.assign({ filterLumpSumId: lumpSumEntryId, timeSince,
-            timeUntil,
-            userId }, options));
+            timeUntil, filterUserId: userId }, options));
     }
-    async addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, }, options) {
+    async addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, userId, }, options) {
         REQUIRED.checkRequired({
             customerId,
             lumpSumId,
@@ -235,7 +234,8 @@ class Clockodo {
             lumpSumId,
             text,
             timeSince,
-            projectId }, options));
+            projectId,
+            userId }, options));
     }
 }
 exports.Clockodo = Clockodo;

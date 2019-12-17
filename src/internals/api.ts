@@ -374,7 +374,7 @@ export class Clockodo {
             filterLumpSumId: lumpSumEntryId,
             timeSince,
             timeUntil,
-            userId,
+            filterUserId: userId,
             ...options,
         });
     }
@@ -386,6 +386,7 @@ export class Clockodo {
         lumpSumId,
         text,
         timeSince,
+        userId,
     }: {
         customerId: number;
         projectId?: number;
@@ -393,6 +394,7 @@ export class Clockodo {
         lumpSumAmount: number;
         timeSince: string;
         text: string;
+        userId?: number;
     }, options?: object): EntryReturnType {
         REQUIRED.checkRequired({
             customerId,
@@ -410,6 +412,7 @@ export class Clockodo {
             text,
             timeSince,
             projectId,
+            userId,
             ...options,
         });
     }
