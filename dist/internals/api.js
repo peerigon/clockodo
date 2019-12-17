@@ -222,7 +222,7 @@ class Clockodo {
             timeUntil,
             userId }, options));
     }
-    async addLumpSumEntryByUserId({ customerId, lumpSumAmount, lumpSumId, text, timeSince, }, options) {
+    async addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, }, options) {
         REQUIRED.checkRequired({
             customerId,
             lumpSumId,
@@ -234,7 +234,8 @@ class Clockodo {
             lumpSumAmount,
             lumpSumId,
             text,
-            timeSince }, options));
+            timeSince,
+            projectId }, options));
     }
 }
 exports.Clockodo = Clockodo;

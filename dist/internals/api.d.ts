@@ -181,8 +181,9 @@ export declare class Clockodo {
         timeUntil: string;
         timeSince: string;
     }, options?: object): EntriesReturnType;
-    addLumpSumEntryByUserId({ customerId, lumpSumAmount, lumpSumId, text, timeSince, }: {
+    addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, }: {
         customerId: number;
+        projectId?: number;
         lumpSumId: number;
         lumpSumAmount: number;
         timeSince: string;

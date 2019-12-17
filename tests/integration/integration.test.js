@@ -110,7 +110,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
                 };
 
                 expect.assertions(2);
-                const data = await clockodo.addLumpSumEntryByUserId({
+                const data = await clockodo.addLumpSumEntry({
                     ...lumpSum,
                 });
 

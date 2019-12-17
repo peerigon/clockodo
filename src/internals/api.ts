@@ -379,14 +379,16 @@ export class Clockodo {
         });
     }
 
-    async addLumpSumEntryByUserId({
+    async addLumpSumEntry({
         customerId,
+        projectId,
         lumpSumAmount,
         lumpSumId,
         text,
         timeSince,
     }: {
         customerId: number;
+        projectId?: number;
         lumpSumId: number;
         lumpSumAmount: number;
         timeSince: string;
@@ -407,6 +409,7 @@ export class Clockodo {
             lumpSumId,
             text,
             timeSince,
+            projectId,
             ...options,
         });
     }
