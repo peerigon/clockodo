@@ -216,5 +216,26 @@ class Clockodo {
         REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
         return this[clockodoApi].put("/entries/" + entryId, options);
     }
+    async getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }, options) {
+        REQUIRED.checkRequired({ lumpSumEntryId, timeUntil, timeSince, userId }, REQUIRED.GET_LUMP_SUM);
+        return this[clockodoApi].get("/entries/", Object.assign({ filterLumpSumId: lumpSumEntryId, timeSince,
+            timeUntil, filterUserId: userId }, options));
+    }
+    async addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, userId, }, options) {
+        REQUIRED.checkRequired({
+            customerId,
+            lumpSumId,
+            lumpSumAmount,
+            text,
+            timeSince,
+        }, REQUIRED.ADD_LUMP_SUM);
+        return this[clockodoApi].post("/entries/", Object.assign({ billable: 1, customerId,
+            lumpSumAmount,
+            lumpSumId,
+            text,
+            timeSince,
+            projectId,
+            userId }, options));
+    }
 }
 exports.Clockodo = Clockodo;

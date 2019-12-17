@@ -44,6 +44,9 @@ const paramMapping = {
     confirmKey: "confirm_key",
     editLock: "edit_lock",
     textsId: "texts_id",
+    filterLumpSumId: "filter[lumpSums_id]",
+    lumpSumAmount: "lumpSums_amount",
+    lumpSumId: "lumpSums_id",
 };
 const mapKeys = (userParams) => {
     const apiParams = {};

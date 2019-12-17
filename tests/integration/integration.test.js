@@ -15,7 +15,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
-            const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock"];
+            const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock", "editLockDyn"];
 
             expect.assertions(1);
 
@@ -91,6 +91,57 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
                 const data = await clockodo.getClock();
 
                 expect(data).toHaveProperty("running");
+            },
+            10000
+        );
+    });
+
+    describe("lump sum entry methods", () => {
+        it(
+            "adds and retrieves lump sum entries",
+            async () => {
+                const lumpSum = {
+                    customerId: 619336,
+                    lumpSumId: 4966,
+                    billable: 1,
+                    lumpSumAmount: 6.8,
+                    timeSince: "2019-12-16 14:59:00",
+                    text: "desc",
+                };
+
+                expect.assertions(2);
+                const data = await clockodo.addLumpSumEntry({
+                    ...lumpSum,
+                });
+
+                expect(data.entry).toMatchObject({
+                    customersId: lumpSum.customerId,
+                    lumpSumsId: lumpSum.lumpSumId,
+                    billable: lumpSum.billable,
+                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    timeSince: lumpSum.timeSince,
+                    text: lumpSum.text,
+                });
+
+                const result = await clockodo.getLumpSumEntriesByUserId({
+                    lumpSumEntryId: 4966,
+                    timeSince: "2019-12-16 00:01:00",
+                    timeUntil: "2019-12-16 23:59:00",
+                    userId: 62488,
+                });
+
+                expect(result.entries[0]).toMatchObject({
+                    customersId: lumpSum.customerId,
+                    lumpSumsId: lumpSum.lumpSumId,
+                    billable: lumpSum.billable,
+                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    timeSince: lumpSum.timeSince,
+                    text: lumpSum.text,
+                });
+
+                await clockodo.deleteEntry({
+                    entryId: data.entry.id,
+                });
             },
             10000
         );
