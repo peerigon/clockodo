@@ -1,10 +1,8 @@
 {
     "extends": [
         "peerigon",
-        "peerigon/node"
+        "peerigon/typescript",
+        "peerigon/styles/prefer-arrow"
     ],
-    "root": true,
-    "rules": {
-        "require-await": "off"
-    }
+    "root": true
 }
