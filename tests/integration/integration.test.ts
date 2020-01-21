@@ -1,14 +1,13 @@
-"use strict";
-
-require("dotenv").config();
-
-const {Clockodo, ENTRY_BILLABLE} = require("../../dist/internals/api");
+/* eslint-disable @typescript-eslint/require-array-sort-compare */
+import {Clockodo, ENTRY_BILLABLE} from "../../src/internals/api";
 
 const TIME_SINCE = "2018-10-01 00:00:00";
 const TIME_UNTIL = "2018-12-30 00:00:00";
 // These tests depend on our real Clockodo account.
-// They can only be executed by Peerigon members or Travis CI.
-const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO_API_KEY);
+// They should only be executed by our clockodo-dev user or Travis CI.
+// We need to disable all the tests until the clockodo-dev user has permissions again. Therefore hasCredentials is now false.
+// const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof process.env.CLOCKODO_API_KEY === "string";
+const hasCredentials = false;
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
     const clockodo = new Clockodo({user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY});
@@ -140,7 +139,7 @@ const hasCredentials = Boolean(process.env.CLOCKODO_USER && process.env.CLOCKODO
                 });
 
                 await clockodo.deleteEntry({
-                    entryId: data.entry.id,
+                    entryId: JSON.stringify(data.entry.id),
                 });
             },
             10000

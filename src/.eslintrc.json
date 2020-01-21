@@ -1,6 +1,0 @@
-{
-    "extends": [
-        "peerigon/typescript",
-        "peerigon/styles/prefer-arrow"
-    ]
-}

@@ -1,7 +1,34 @@
-
 import {ClockodoLib} from "./utilities/lib";
 import * as REQUIRED from "./utilities/requiredParams";
-import {AbsenceReturnType, AbsencesReturnType, DeleteReturnType, CustomerReturnType, CustomersReturnType, ProjectReturnType, ServiceReturnType, ServicesReturnType, UserReturnType, UsersReturnType, EntryReturnType, EntriesReturnType, TasksReturnType, TaskDurationReturnType, DeleteEntryGroupsReturnType, EditEntryGroupsReturnType, UserReportReturnType, UserReportsReturnType, ClockReturnType, ClockUpdateReturnType, ClockEditReturnType, ClockStopReturnType, TargetHoursReturnType, TargetHourReturnType, AddUserReturnType, SearchTextsReturnType, EntryGroupsReturnType} from "./returnTypes";
+import {
+    AbsenceReturnType,
+    AbsencesReturnType,
+    DeleteReturnType,
+    CustomerReturnType,
+    CustomersReturnType,
+    ProjectReturnType,
+    ServiceReturnType,
+    ServicesReturnType,
+    UserReturnType,
+    UsersReturnType,
+    EntryReturnType,
+    EntriesReturnType,
+    TasksReturnType,
+    TaskDurationReturnType,
+    DeleteEntryGroupsReturnType,
+    EditEntryGroupsReturnType,
+    UserReportReturnType,
+    UserReportsReturnType,
+    ClockReturnType,
+    ClockUpdateReturnType,
+    ClockEditReturnType,
+    ClockStopReturnType,
+    TargetHoursReturnType,
+    TargetHourReturnType,
+    AddUserReturnType,
+    SearchTextsReturnType,
+    EntryGroupsReturnType,
+} from "./returnTypes";
 
 const clockodoApi = Symbol("api");
 
