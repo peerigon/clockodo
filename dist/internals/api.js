@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -37,14 +38,17 @@ exports.ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
 exports.ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 /* eslint-disable max-len */
 class Clockodo {
-    constructor({ user, apiKey }) {
+    constructor({ user, apiKey, cacheTime }) {
         if (typeof user !== "string") {
             throw new Error("Clockodo user expected to be a string, is typeof: " + typeof user);
         }
         if (typeof apiKey !== "string") {
             throw new Error("Clockodo apikey expected to be a string, is typeof: " + typeof apiKey);
         }
-        this[clockodoApi] = new lib_1.ClockodoLib(user, apiKey);
+        if (Boolean(cacheTime) && typeof cacheTime !== "number") {
+            throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
+        }
+        this[clockodoApi] = new lib_1.ClockodoLib(user, apiKey, cacheTime);
     }
     getAbsence({ id }) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -89,14 +93,14 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { timeSince, timeUntil };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRIES);
-            return this[clockodoApi].get("/entries", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].get("/entries", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     getEntryGroups({ timeSince, timeUntil, grouping }, options) {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { timeSince, timeUntil, grouping };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRY_GROUPS);
-            return this[clockodoApi].get("/entrygroups", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].get("/entrygroups", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     getProject({ id }) {
@@ -136,7 +140,7 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
-            return this[clockodoApi].get("/tasks/duration", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].get("/tasks/duration", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     getTasks(options) {
@@ -171,14 +175,14 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { durationBefore, duration };
             REQUIRED.checkRequired(Object.assign({ entryId }, requiredArguments), REQUIRED.CHANGE_CLOCK_DURATION);
-            return this[clockodoApi].put("/clock/" + entryId, Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].put("/clock/" + entryId, Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     startClock({ customerId, serviceId, billable }, options) {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { customerId, serviceId, billable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
-            return this[clockodoApi].post("/clock", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].post("/clock", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     addCustomer({ name }, options) {
@@ -203,21 +207,21 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { name, number, email, role };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_USER);
-            return this[clockodoApi].post("/users", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].post("/users", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     addEntry({ customerId, serviceId, billable }, options) {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { customerId, serviceId, billable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY);
-            return this[clockodoApi].post("/entries", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].post("/entries", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     addAbsence({ dateSince, dateUntil, type }, options) {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { dateSince, dateUntil, type };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ABSENCE);
-            return this[clockodoApi].post("/absences", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].post("/absences", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     stopClock({ entryId }, options) {
@@ -260,7 +264,7 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { timeSince, timeUntil };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.DELETE_ENTRY_GROUP);
-            return this[clockodoApi].delete("/entrygroups", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].delete("/entrygroups", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     deleteAbsence({ absenceId }, options) {
@@ -297,7 +301,7 @@ class Clockodo {
         return __awaiter(this, void 0, void 0, function* () {
             const requiredArguments = { timeSince, timeUntil };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.EDIT_ENTRY_GROUP);
-            return this[clockodoApi].put("/entrygroups", Object.assign({}, requiredArguments, options));
+            return this[clockodoApi].put("/entrygroups", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
     editAbsence({ absenceId }, options) {

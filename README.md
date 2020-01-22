@@ -14,6 +14,10 @@ In general, the first argument for these functions is an object consisting of re
 
 Please feel free to submit an issue or pull request.
 
+## Development
+
+To run integration tests you need to create an `.env` by copying the `.env.example` and entering the dev-user credentials.
+
 ## Installation
 
 ```

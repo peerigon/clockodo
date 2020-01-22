@@ -10,7 +10,10 @@ const TIME_UNTIL = "2018-12-30 00:00:00";
 const hasCredentials = false;
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
-    const clockodo = new Clockodo({user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY});
+    const clockodo = new Clockodo({
+        user: process.env.CLOCKODO_USER,
+        apiKey: process.env.CLOCKODO_API_KEY,
+    });
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
@@ -34,7 +37,10 @@ const hasCredentials = false;
 
                 expect.assertions(3);
 
-                const data = await clockodo.getEntries({timeSince: TIME_SINCE, timeUntil: TIME_UNTIL}, parameters);
+                const data = await clockodo.getEntries({
+                    timeSince: TIME_SINCE,
+                    timeUntil: TIME_UNTIL,
+                }, parameters);
 
                 expect(data.entries[0]).toHaveProperty("id");
                 expect(data.entries[0]).toHaveProperty("duration");

@@ -42,6 +42,53 @@ describe("Clockodo (instance)", () => {
                 );
             }
         });
+        it("throws an error when constructor has cacheTime with type other than number", () => {
+            try {
+                void new Clockodo({
+                    user: "test@gmail.com", apiKey: "dfdsg34t643", cacheTime: "blub",
+                } as any
+                );
+            } catch (error) {
+                expect(error.message).toEqual("Clockodo cacheTime expected to be a number, is typeof: string");
+            }
+        });
+    });
+
+    describe("Cache", () => {
+        it("should cache the first request for cacheTime", async () => {
+            const clockodoWithCache = new Clockodo({
+                user: "test",
+                apiKey: "test",
+                cacheTime: 2000,
+            });
+
+            const userId = "007";
+            let requestCounter = 0;
+
+            const nockScope = nock(CLOCKODO_API)
+                .get(`/users/${userId}`)
+                .twice()
+                .reply(200, () => { requestCounter++; });
+
+            await clockodoWithCache.getUser({
+                id: userId,
+            });
+            expect(requestCounter).toBe(1);
+            // If cache is not working this would fail
+            await clockodoWithCache.getUser({
+                id: userId,
+            });
+            expect(requestCounter).toBe(1);
+
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+
+            await clockodoWithCache.getUser({
+                id: userId,
+            });
+            expect(requestCounter).toBe(2);
+
+            nockScope.done();
+        });
     });
 
     describe("GET", () => {
