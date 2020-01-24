@@ -321,7 +321,7 @@ describe("Clockodo (instance)", () => {
                     "task[billable]": 1,
                 };
 
-                const groupingParams = {excludeIds: ["217", "450"]};
+                const groupingParams = {excludeIds: [217, 450]};
 
                 const nockScope = nock(CLOCKODO_API)
                     .get(
