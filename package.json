@@ -1,6 +1,6 @@
 {
   "name": "clockodo",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "Unofficial Node.js SDK for the Clockodo API",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
