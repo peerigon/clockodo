@@ -139,7 +139,7 @@ const hasCredentials = false;
                 });
 
                 await clockodo.deleteEntry({
-                    entryId: JSON.stringify(data.entry.id),
+                    entryId: data.entry.id,
                 });
             },
             10000
