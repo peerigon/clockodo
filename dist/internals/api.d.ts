@@ -39,7 +39,7 @@ export declare class Clockodo {
         cacheTime?: number;
     });
     getAbsence({ id }: {
-        id: string;
+        id: number;
     }): AbsenceReturnType;
     getAbsences({ year }: {
         year: number;
@@ -47,11 +47,11 @@ export declare class Clockodo {
     getClock(): ClockReturnType;
     getClockUpdate(): ClockUpdateReturnType;
     getCustomer({ id }: {
-        id: string;
+        id: number;
     }): CustomerReturnType;
     getCustomers(): CustomersReturnType;
     getEntry({ id }: {
-        id: string;
+        id: number;
     }): EntryReturnType;
     getEntries({ timeSince, timeUntil }: {
         timeSince: string;
@@ -63,44 +63,44 @@ export declare class Clockodo {
         grouping: Array<string>;
     }, options?: object): EntryGroupsReturnType;
     getProject({ id }: {
-        id: string;
+        id: number;
     }): ProjectReturnType;
     getSearchTexts(options?: object): SearchTextsReturnType;
     getService({ id }: {
-        id: string;
+        id: number;
     }): ServiceReturnType;
     getServices(): ServicesReturnType;
     getSingleTargetHourSet({ id }: {
-        id: string;
+        id: number;
     }): TargetHourReturnType;
     getTargetHours(options?: object): TargetHoursReturnType;
     getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }: {
-        taskCustomerId: string;
-        taskProjectId: string;
-        taskServiceId: string;
+        taskCustomerId: number;
+        taskProjectId: number;
+        taskServiceId: number;
         taskText: string;
         taskBillable: Billable;
     }, options?: object): TaskDurationReturnType;
     getTasks(options?: object): TasksReturnType;
     getUser({ id }: {
-        id: string;
+        id: number;
     }): UserReturnType;
     getUsers(): UsersReturnType;
     getUserReport({ id, year }: {
-        id: string;
+        id: number;
         year: number;
     }, options?: object): UserReportReturnType;
     getUserReports({ year }: {
         year: number;
     }, options?: object): UserReportsReturnType;
     changeClockDuration({ entryId, durationBefore, duration }: {
-        entryId: string;
+        entryId: number;
         durationBefore: number;
         duration: number;
     }, options?: object): ClockEditReturnType;
     startClock({ customerId, serviceId, billable }: {
-        customerId: string;
-        serviceId: string;
+        customerId: number;
+        serviceId: number;
         billable: Billable;
     }, options?: object): ClockReturnType;
     addCustomer({ name }: {
@@ -108,7 +108,7 @@ export declare class Clockodo {
     }, options?: object): CustomerReturnType;
     addProject({ name, customerId }: {
         name: string;
-        customerId: string;
+        customerId: number;
     }, options?: object): ProjectReturnType;
     addService({ name }: {
         name: string;
@@ -120,8 +120,8 @@ export declare class Clockodo {
         role: string;
     }, options?: object): AddUserReturnType;
     addEntry({ customerId, serviceId, billable }: {
-        customerId: string;
-        serviceId: string;
+        customerId: number;
+        serviceId: number;
         billable: Billable;
     }, options?: object): EntryReturnType;
     addAbsence({ dateSince, dateUntil, type }: {
@@ -130,51 +130,51 @@ export declare class Clockodo {
         type: AbsenceType;
     }, options?: object): AbsenceReturnType;
     stopClock({ entryId }: {
-        entryId: string;
+        entryId: number;
     }, options?: object): ClockStopReturnType;
     deactivateCustomer({ customerId }: {
-        customerId: string;
+        customerId: number;
     }, options?: object): CustomerReturnType;
     deactivateProject({ projectId }: {
-        projectId: string;
+        projectId: number;
     }, options?: object): ProjectReturnType;
     deactivateService({ serviceId }: {
-        serviceId: string;
+        serviceId: number;
     }, options?: object): ServiceReturnType;
     deactivateUser({ userId }: {
-        userId: string;
+        userId: number;
     }, options?: object): UserReturnType;
     deleteEntry({ entryId }: {
-        entryId: string;
+        entryId: number;
     }, options?: object): DeleteReturnType;
     deleteEntryGroup({ timeSince, timeUntil }: {
         timeSince: string;
         timeUntil: string;
     }, options?: object): DeleteEntryGroupsReturnType;
     deleteAbsence({ absenceId }: {
-        absenceId: string;
+        absenceId: number;
     }, options?: object): DeleteReturnType;
     editCustomer({ customerId }: {
-        customerId: string;
+        customerId: number;
     }, options?: object): Promise<any>;
     editProject({ projectId }: {
-        projectId: string;
+        projectId: number;
     }, options?: object): ProjectReturnType;
     editService({ serviceId }: {
-        serviceId: string;
+        serviceId: number;
     }, options?: object): ServiceReturnType;
     editUser({ userId }: {
-        userId: string;
+        userId: number;
     }, options?: object): UserReturnType;
     editEntryGroup({ timeSince, timeUntil }: {
         timeSince: string;
         timeUntil: string;
     }, options?: object): EditEntryGroupsReturnType;
     editAbsence({ absenceId }: {
-        absenceId: string;
+        absenceId: number;
     }, options?: object): AbsenceReturnType;
     editEntry({ entryId }: {
-        entryId: string;
+        entryId: number;
     }, options?: object): EntryReturnType;
     getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }: {
         lumpSumEntryId: number;

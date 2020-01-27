@@ -143,7 +143,7 @@ Gets a selected absence by its ID.
 #### Example:
 
 ```js
-clockodo.getAbsence({ id: "007" }).then(console.log);
+clockodo.getAbsence({ id: 7 }).then(console.log);
 ```
 
 ---
@@ -191,7 +191,7 @@ Get specific customer by ID
 #### Example:
 
 ```js
-clockodo.getCustomer({ id: "777" }).then(console.log);
+clockodo.getCustomer({ id: 777 }).then(console.log);
 ```
 
 ---
@@ -215,7 +215,7 @@ Get an entry by its ID.
 #### Example:
 
 ```js
-clockodo.getEntry({ id: "04" }).then(console.log);
+clockodo.getEntry({ id: 4 }).then(console.log);
 ```
 
 ---
@@ -270,7 +270,7 @@ Get a project by its ID. For a list of projects, use getCustomers().
 #### Example:
 
 ```js
-clockodo.getProject({ id: "1985" }).then(console.log);
+clockodo.getProject({ id: 1985 }).then(console.log);
 ```
 
 ---
@@ -284,7 +284,7 @@ Get the description(s) of the requested entries.
 ```js
 clockodo
     .getSearchTexts({
-        projectId: "300"
+        projectId: 300
     })
     .then(console.log);
 ```
@@ -298,7 +298,7 @@ Get a service by its ID.
 #### Example:
 
 ```js
-clockodo.getService({ id: "10" }).then(console.log);
+clockodo.getService({ id: 10 }).then(console.log);
 ```
 
 ---
@@ -322,7 +322,7 @@ Get a specific target hour period for a specific user by its ID (not the ID of t
 #### Example:
 
 ```js
-clockodo.getSingleTargetHourSet({ id: "1234" }).then(console.log);
+clockodo.getSingleTargetHourSet({ id: 1234 }).then(console.log);
 ```
 
 ---
@@ -367,13 +367,13 @@ Get individual Clockodo Task by its ID.
 clockodo
     .getTaskDuration(
         {
-            taskCustomerId: "23",
-            taskProjectId: "25",
-            taskServiceId: "42",
+            taskCustomerId: 23,
+            taskProjectId: 25,
+            taskServiceId: 42,
             taskText: "clean the dishes",
             taskBillable: 1
         },
-        { excludeIds: ["217", "450"] }
+        { excludeIds: [217, 450] }
     )
     .then(console.log);
 ```
@@ -387,7 +387,7 @@ Get a co-worker by their ID.
 #### Example:
 
 ```js
-clockodo.getUser({ id: "1263" }).then(console.log);
+clockodo.getUser({ id: 1263 }).then(console.log);
 ```
 
 ---
@@ -411,7 +411,7 @@ Get a co-worker by their ID.
 #### Example:
 
 ```js
-clockodo.getUserReport({ id: "1263", year: 2017 }).then(console.log);
+clockodo.getUserReport({ id: 1263, year: 2017 }).then(console.log);
 ```
 
 ---
@@ -446,7 +446,7 @@ clockodo
         },
         {
             note: "elternzeit",
-            userId: "12321"
+            userId: 12321
         }
     )
     .then(console.log);
@@ -475,7 +475,7 @@ Creates an entry for either the user attached to the Clockodo instance or the pa
 ```js
 clockodo
     .addEntry(
-        { customerId: "01", serviceId: "02", billable: ENTRY_BILLABLE },
+        { customerId: 1, serviceId: 2, billable: ENTRY_BILLABLE },
         options
     )
     .then(console.log);
@@ -491,7 +491,7 @@ Creates a project for an existing customer.
 
 ```js
 clockodo
-    .addProject({ name: "Clockodo Api Wrapper", customerId: "01" }, params)
+    .addProject({ name: "Clockodo Api Wrapper", customerId: 1 }, params)
     .then(console.log);
 ```
 
@@ -537,9 +537,9 @@ Get Clockodo Tasks (grouped entries).
 ```js
 clockodo
     .startClock(
-        { customerId: "24", serviceId: "7", billable: ENTRY_BILLABLE },
+        { customerId: 24, serviceId: 7, billable: ENTRY_BILLABLE },
         {
-            projectId: "365"
+            projectId: 365
         }
     )
     .then(console.log);
@@ -558,9 +558,9 @@ Changes the duration of an entry. Because the ID returned by clock methods is ju
 ```js
 clockodo
     .changeClockDuration(
-        { entryId: "7082", duration: "540", durationBefore: "300" },
+        { entryId: 7082, duration: 540, durationBefore: 300 },
         {
-            offsetBefore: "60"
+            offsetBefore: 60
         }
     )
     .then(console.log);
@@ -577,7 +577,7 @@ Edit existing Clockodo absence.
 ```js
 clockodo
     .editAbsence(
-        { absenceId: "74" },
+        { absenceId: 74 },
         { note: "I know what he did last summer" }
     )
     .then(console.log);
@@ -594,7 +594,7 @@ Edit existing Clockodo customer.
 ```js
 clockodo
     .editCustomer(
-        { customerId: "15" },
+        { customerId: 15 },
         {
             name: "The Mystery Gang"
         }
@@ -613,9 +613,9 @@ Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry(
 ```js
 clockodo
     .editEntry(
-        { entryId: "365" },
+        { entryId: 365 },
         {
-            duration: "540"
+            duration: 540
         }
     )
     .then(console.log);
@@ -650,7 +650,7 @@ Edit existing project.
 #### Example:
 
 ```js
-clockodo.editProject({ projectId: "20" }, options).then(console.log);
+clockodo.editProject({ projectId: 20 }, options).then(console.log);
 ```
 
 ---
@@ -663,7 +663,7 @@ Edit existing service.
 
 ```js
 clockodo
-    .editService({ serviceId: "23" }, { name: "Room Service" })
+    .editService({ serviceId: 23 }, { name: "Room Service" })
     .then(console.log);
 ```
 
@@ -678,7 +678,7 @@ Edit existing user.
 ```js
 clockodo
     .editUser(
-        { userId: "33" },
+        { userId: 33 },
         {
             name: "Moalo Loco"
         }
@@ -697,7 +697,7 @@ Deactivates (not deletes) customer.
 #### Example:
 
 ```js
-clockodo.deactivateCustomer({ customerId: "343" }).then(console.log);
+clockodo.deactivateCustomer({ customerId: 343 }).then(console.log);
 ```
 
 ---
@@ -709,7 +709,7 @@ Deactivates (not deletes) project.
 #### Example:
 
 ```js
-clockodo.deactivateProject({ projectId: "08" }).then(console.log);
+clockodo.deactivateProject({ projectId: 8 }).then(console.log);
 ```
 
 ---
@@ -721,7 +721,7 @@ Deactivates (not deletes) service.
 #### Example:
 
 ```js
-clockodo.deactivateService({ serviceId: "94" }).then(console.log);
+clockodo.deactivateService({ serviceId: 94 }).then(console.log);
 ```
 
 ---
@@ -733,7 +733,7 @@ Deactivates (not deletes) user.
 #### Example:
 
 ```js
-clockodo.deactivateUser({ userId: "007" }).then(console.log);
+clockodo.deactivateUser({ userId: 7 }).then(console.log);
 ```
 
 ---
@@ -745,7 +745,7 @@ Deletes absence (go figure).
 #### Example:
 
 ```js
-clockodo.deleteAbsence({ absenceId: "31" }).then(console.log);
+clockodo.deleteAbsence({ absenceId: 31 }).then(console.log);
 ```
 
 ---
@@ -776,7 +776,7 @@ Stops a running clock/entry.
 #### Example:
 
 ```js
-clockodo.stopClock({ entryId: "7082" }).then(console.log);
+clockodo.stopClock({ entryId: 7082 }).then(console.log);
 ```
 
 ---

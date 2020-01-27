@@ -143,7 +143,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                 });
 
                 await clockodo.deleteEntry({
-                    entryId: JSON.stringify(data.entry.id),
+                    entryId: data.entry.id,
                 });
             },
             10000
