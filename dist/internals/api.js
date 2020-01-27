@@ -45,10 +45,10 @@ class Clockodo {
         if (typeof apiKey !== "string") {
             throw new Error("Clockodo apikey expected to be a string, is typeof: " + typeof apiKey);
         }
-        if (Boolean(cacheTime) && typeof cacheTime !== "number") {
+        if (cacheTime !== undefined && typeof cacheTime !== "number") {
             throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
         }
-        this[clockodoApi] = new lib_1.ClockodoLib(user, apiKey, cacheTime);
+        this[clockodoApi] = new lib_1.ClockodoLib({ user, apiKey, cacheTime });
     }
     getAbsence({ id }) {
         return __awaiter(this, void 0, void 0, function* () {

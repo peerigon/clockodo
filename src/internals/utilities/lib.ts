@@ -23,26 +23,24 @@ const transformRequestOptions = params => {
 };
 
 export class ClockodoLib {
-    constructor(user, apiKey, cacheTime) {
+    constructor({user, apiKey, cacheTime}: { user: string; apiKey: string; cacheTime?: number }) {
+        const baseConfig = {
+            baseURL: ENDPOINT,
+            headers: {
+                "X-ClockodoApiUser": user,
+                "X-ClockodoApiKey": apiKey,
+            },
+        };
+
         typeof cacheTime === "number" ?
             this[axiosClient] = setup({
-                baseURL: ENDPOINT,
-                headers: {
-                    "X-ClockodoApiUser": user,
-                    "X-ClockodoApiKey": apiKey,
-                },
+                ...baseConfig,
                 cache: {
                     maxAge: cacheTime,
                     exclude: {query: false},
                 },
             }) :
-            this[axiosClient] = axios.create({
-                baseURL: ENDPOINT,
-                headers: {
-                    "X-ClockodoApiUser": user,
-                    "X-ClockodoApiKey": apiKey,
-                },
-            });
+            this[axiosClient] = axios.create(baseConfig);
     }
 
     async get(resource, params = {}) {

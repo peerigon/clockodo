@@ -33,26 +33,20 @@ const transformRequestOptions = params => {
     return urlParams.join("&");
 };
 class ClockodoLib {
-    constructor(user, apiKey, cacheTime) {
+    constructor({ user, apiKey, cacheTime }) {
+        const baseConfig = {
+            baseURL: ENDPOINT,
+            headers: {
+                "X-ClockodoApiUser": user,
+                "X-ClockodoApiKey": apiKey,
+            },
+        };
         typeof cacheTime === "number" ?
-            this[axiosClient] = axios_cache_adapter_1.setup({
-                baseURL: ENDPOINT,
-                headers: {
-                    "X-ClockodoApiUser": user,
-                    "X-ClockodoApiKey": apiKey,
-                },
-                cache: {
+            this[axiosClient] = axios_cache_adapter_1.setup(Object.assign(Object.assign({}, baseConfig), { cache: {
                     maxAge: cacheTime,
                     exclude: { query: false },
-                },
-            }) :
-            this[axiosClient] = axios_1.default.create({
-                baseURL: ENDPOINT,
-                headers: {
-                    "X-ClockodoApiUser": user,
-                    "X-ClockodoApiKey": apiKey,
-                },
-            });
+                } })) :
+            this[axiosClient] = axios_1.default.create(baseConfig);
     }
     get(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {

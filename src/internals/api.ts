@@ -80,11 +80,11 @@ export class Clockodo {
             throw new Error("Clockodo apikey expected to be a string, is typeof: " + typeof apiKey);
         }
 
-        if (Boolean(cacheTime) && typeof cacheTime !== "number") {
+        if (cacheTime !== undefined && typeof cacheTime !== "number") {
             throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
         }
 
-        this[clockodoApi] = new ClockodoLib(user, apiKey, cacheTime);
+        this[clockodoApi] = new ClockodoLib({user, apiKey, cacheTime});
     }
 
     async getAbsence({id}: { id: number }): AbsenceReturnType {

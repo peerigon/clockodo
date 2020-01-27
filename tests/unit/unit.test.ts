@@ -59,10 +59,10 @@ describe("Clockodo (instance)", () => {
             const clockodoWithCache = new Clockodo({
                 user: "test",
                 apiKey: "test",
-                cacheTime: 2000,
+                cacheTime: 50,
             });
 
-            const userId = "007";
+            const userId = 7;
             let requestCounter = 0;
 
             const nockScope = nock(CLOCKODO_API)
@@ -73,8 +73,8 @@ describe("Clockodo (instance)", () => {
             await clockodoWithCache.getUser({
                 id: userId,
             });
-            expect(requestCounter).toBe(1);
             // If cache is not working this would fail
+            expect(requestCounter).toBe(1);
             await clockodoWithCache.getUser({
                 id: userId,
             });
