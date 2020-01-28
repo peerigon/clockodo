@@ -32,15 +32,15 @@ export class ClockodoLib {
             },
         };
 
-        typeof cacheTime === "number" ?
-            this[axiosClient] = setup({
+        this[axiosClient] = typeof cacheTime === "number" ?
+            setup({
                 ...baseConfig,
                 cache: {
                     maxAge: cacheTime,
                     exclude: {query: false},
                 },
             }) :
-            this[axiosClient] = axios.create(baseConfig);
+            axios.create(baseConfig);
     }
 
     async get(resource, params = {}) {

@@ -73,14 +73,14 @@ describe("Clockodo (instance)", () => {
             await clockodoWithCache.getUser({
                 id: userId,
             });
-            // If cache is not working this would fail
             expect(requestCounter).toBe(1);
             await clockodoWithCache.getUser({
                 id: userId,
             });
+            // If cache is not working this would fail
             expect(requestCounter).toBe(1);
 
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await new Promise((resolve) => setTimeout(resolve, 50));
 
             await clockodoWithCache.getUser({
                 id: userId,
@@ -180,8 +180,8 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const expectedParameters = {
-                    time_since: "217-8-18 00:00:00",
-                    time_until: "218-2-9 00:00:00",
+                    time_since: "2017-08-18 00:00:00",
+                    time_until: "2018-02-09 00:00:00",
                     "filter[billable]": ENTRY_BILLED,
                 };
 
@@ -191,8 +191,8 @@ describe("Clockodo (instance)", () => {
 
                 await clockodo.getEntries(
                     {
-                        timeSince: "217-8-18 00:00:00",
-                        timeUntil: "218-2-9 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
+                        timeUntil: "2018-02-09 00:00:00",
                     },
                     parameters
                 );
@@ -204,7 +204,7 @@ describe("Clockodo (instance)", () => {
 
                 return expect(
                     clockodo.getEntries({
-                        timeSince: "217-8-18 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
                     } as any)
                 ).rejects.toThrowError(
                     'Missing required parameter "timeUntil"'
@@ -214,8 +214,8 @@ describe("Clockodo (instance)", () => {
         describe("getEntryGroups()", () => {
             it("correctly builds getEntryGroups() request", async () => {
                 const timeRangeParameters = {
-                    time_since: "217-8-18 00:00:00",
-                    time_until: "218-2-9 00:00:00",
+                    time_since: "2017-08-18 00:00:00",
+                    time_until: "2018-02-09 00:00:00",
                 };
 
                 const groupingParameters = {
@@ -241,8 +241,8 @@ describe("Clockodo (instance)", () => {
 
                 await clockodo.getEntryGroups(
                     {
-                        timeSince: "217-8-18 00:00:00",
-                        timeUntil: "218-2-9 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
+                        timeUntil: "2018-02-09 00:00:00",
                         grouping: ["customers_id", "projects_id"],
                     },
                     {roundBy: 15}
@@ -255,8 +255,8 @@ describe("Clockodo (instance)", () => {
 
                 return expect(
                     clockodo.getEntryGroups({
-                        timeSince: "217-8-18 00:00:00",
-                        timeUntil: "218-2-9 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
+                        timeUntil: "2018-02-09 00:00:00",
                     } as any)
                 ).rejects.toThrowError('Missing required parameter "grouping"');
             });
@@ -643,8 +643,8 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const expectedParameters = {
-                    date_since: "217-8-18 00:00:00",
-                    date_until: "218-2-9 00:00:00",
+                    date_since: "2017-08-18 00:00:00",
+                    date_until: "2018-02-09 00:00:00",
                     type: ABSENCE_TYPE_SPECIAL_LEAVE,
                     note: "elternzeit",
                 };
@@ -655,8 +655,8 @@ describe("Clockodo (instance)", () => {
 
                 await clockodo.addAbsence(
                     {
-                        dateSince: "217-8-18 00:00:00",
-                        dateUntil: "218-2-9 00:00:00",
+                        dateSince: "2017-08-18 00:00:00",
+                        dateUntil: "2018-02-09 00:00:00",
                         type: ABSENCE_TYPE_SPECIAL_LEAVE,
                     },
                     params
@@ -670,8 +670,8 @@ describe("Clockodo (instance)", () => {
                 return expect(
                     clockodo.addAbsence(
                         {
-                            dateSince: "217-8-18 00:00:00",
-                            dateUntil: "218-2-9 00:00:00",
+                            dateSince: "2017-08-18 00:00:00",
+                            dateUntil: "2018-02-09 00:00:00",
                         } as any
                     )
                 ).rejects.toThrowError('Missing required parameter "type"');
@@ -794,8 +794,8 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const expectedParameters = {
-                    time_since: "217-8-18 00:00:00",
-                    time_until: "218-2-9 00:00:00",
+                    time_since: "2017-08-18 00:00:00",
+                    time_until: "2018-02-09 00:00:00",
                     text: "chillin everyday",
                 };
 
@@ -805,8 +805,8 @@ describe("Clockodo (instance)", () => {
 
                 await clockodo.editEntryGroup(
                     {
-                        timeSince: "217-8-18 00:00:00",
-                        timeUntil: "218-2-9 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
+                        timeUntil: "2018-02-09 00:00:00",
                     },
                     params
                 );
@@ -932,8 +932,8 @@ describe("Clockodo (instance)", () => {
 
                 const expectedParameters = {
                     text: "chilin everyday",
-                    time_since: "217-8-18 00:00:00",
-                    time_until: "218-2-9 00:00:00",
+                    time_since: "2017-08-18 00:00:00",
+                    time_until: "2018-02-09 00:00:00",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
@@ -942,8 +942,8 @@ describe("Clockodo (instance)", () => {
 
                 await clockodo.deleteEntryGroup(
                     {
-                        timeSince: "217-8-18 00:00:00",
-                        timeUntil: "218-2-9 00:00:00",
+                        timeSince: "2017-08-18 00:00:00",
+                        timeUntil: "2018-02-09 00:00:00",
                     },
                     params
                 );

@@ -41,12 +41,12 @@ class ClockodoLib {
                 "X-ClockodoApiKey": apiKey,
             },
         };
-        typeof cacheTime === "number" ?
-            this[axiosClient] = axios_cache_adapter_1.setup(Object.assign(Object.assign({}, baseConfig), { cache: {
+        this[axiosClient] = typeof cacheTime === "number" ?
+            axios_cache_adapter_1.setup(Object.assign(Object.assign({}, baseConfig), { cache: {
                     maxAge: cacheTime,
                     exclude: { query: false },
                 } })) :
-            this[axiosClient] = axios_1.default.create(baseConfig);
+            axios_1.default.create(baseConfig);
     }
     get(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
