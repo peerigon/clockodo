@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -15,6 +16,7 @@ const axios_1 = __importDefault(require("axios"));
 const camelcase_1 = __importDefault(require("camelcase"));
 const deep_map_keys_1 = __importDefault(require("deep-map-keys"));
 const qs_1 = __importDefault(require("qs"));
+const axios_cache_adapter_1 = require("axios-cache-adapter");
 const mapKeys_1 = __importDefault(require("./mapKeys"));
 const ENDPOINT = "https://my.clockodo.com/api";
 const axiosClient = Symbol("axiosClient");
@@ -31,14 +33,20 @@ const transformRequestOptions = params => {
     return urlParams.join("&");
 };
 class ClockodoLib {
-    constructor(user, apiKey) {
-        this[axiosClient] = axios_1.default.create({
+    constructor({ user, apiKey, cacheTime }) {
+        const baseConfig = {
             baseURL: ENDPOINT,
             headers: {
                 "X-ClockodoApiUser": user,
                 "X-ClockodoApiKey": apiKey,
             },
-        });
+        };
+        this[axiosClient] = typeof cacheTime === "number" ?
+            axios_cache_adapter_1.setup(Object.assign(Object.assign({}, baseConfig), { cache: {
+                    maxAge: cacheTime,
+                    exclude: { query: false },
+                } })) :
+            axios_1.default.create(baseConfig);
     }
     get(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {

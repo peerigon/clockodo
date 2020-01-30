@@ -14,7 +14,11 @@ In general, the first argument for these functions is an object consisting of re
 
 Please feel free to submit an issue or pull request.
 
-## Installation
+## Development
+
+To run integration tests you need to create an `.env` by copying the `.env.example` and entering credentials of a dev-user, as you don't want to mess up your real clockodo data.
+
+## Installation and usage
 
 ```
 npm install clockodo --save
@@ -28,6 +32,18 @@ const { Clockodo } = require("clockodo");
 const clockodoApi = new Clockodo({
     user: "test-user@example.com",
     apiKey: "kjfdskj643fgnlksf343kdslm"
+});
+```
+
+It is also possible to create a Clockodo instance with caching. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the caching time is over. The `cacheTime` is given in milliseconds.
+
+```js
+const { Clockodo } = require("clockodo");
+
+const clockodoApi = new Clockodo({
+    user: "test-user@example.com",
+    apiKey: "kjfdskj643fgnlksf343kdslm"
+    cacheTime: 15 * 60 * 1000      // cache of 15 minutes
 });
 ```
 
@@ -48,7 +64,7 @@ ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
 ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 ```
 
-## Example
+### Example
 
 ```js
 const { Clockodo } = require("clockodo");

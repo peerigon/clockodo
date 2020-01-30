@@ -5,12 +5,13 @@ const TIME_SINCE = "2018-10-01 00:00:00";
 const TIME_UNTIL = "2018-12-30 00:00:00";
 // These tests depend on our real Clockodo account.
 // They should only be executed by our clockodo-dev user or Travis CI.
-// We need to disable all the tests until the clockodo-dev user has permissions again. Therefore hasCredentials is now false.
-// const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof process.env.CLOCKODO_API_KEY === "string";
-const hasCredentials = false;
+const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof process.env.CLOCKODO_API_KEY === "string";
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
-    const clockodo = new Clockodo({user: process.env.CLOCKODO_USER, apiKey: process.env.CLOCKODO_API_KEY});
+    const clockodo = new Clockodo({
+        user: process.env.CLOCKODO_USER,
+        apiKey: process.env.CLOCKODO_API_KEY,
+    });
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
@@ -34,7 +35,10 @@ const hasCredentials = false;
 
                 expect.assertions(3);
 
-                const data = await clockodo.getEntries({timeSince: TIME_SINCE, timeUntil: TIME_UNTIL}, parameters);
+                const data = await clockodo.getEntries({
+                    timeSince: TIME_SINCE,
+                    timeUntil: TIME_UNTIL,
+                }, parameters);
 
                 expect(data.entries[0]).toHaveProperty("id");
                 expect(data.entries[0]).toHaveProperty("duration");

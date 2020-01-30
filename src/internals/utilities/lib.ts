@@ -1,8 +1,8 @@
-
 import axios from "axios";
 import camelCase from "camelcase";
 import deepMapKeys from "deep-map-keys";
 import qs from "qs";
+import {setup} from "axios-cache-adapter";
 import mapKeys from "./mapKeys";
 
 const ENDPOINT = "https://my.clockodo.com/api";
@@ -23,14 +23,24 @@ const transformRequestOptions = params => {
 };
 
 export class ClockodoLib {
-    constructor(user, apiKey) {
-        this[axiosClient] = axios.create({
+    constructor({user, apiKey, cacheTime}: { user: string; apiKey: string; cacheTime?: number }) {
+        const baseConfig = {
             baseURL: ENDPOINT,
             headers: {
                 "X-ClockodoApiUser": user,
                 "X-ClockodoApiKey": apiKey,
             },
-        });
+        };
+
+        this[axiosClient] = typeof cacheTime === "number" ?
+            setup({
+                ...baseConfig,
+                cache: {
+                    maxAge: cacheTime,
+                    exclude: {query: false},
+                },
+            }) :
+            axios.create(baseConfig);
     }
 
     async get(resource, params = {}) {
