@@ -35,7 +35,7 @@ const clockodoApi = new Clockodo({
 });
 ```
 
-It is also possible to create a Clockodo instance with caching. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the caching time is over. The `cacheTime` is given in milliseconds.
+It is also possible to create a Clockodo instance with **caching**. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the caching time is over. The `cacheTime` is given in milliseconds.
 
 ```js
 const { Clockodo } = require("clockodo");
