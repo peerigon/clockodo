@@ -2,7 +2,7 @@ name: Release
 on:
     push:
         branches:
-            - master
+            - setup-publish-action
 jobs:
     prepare:
         runs-on: ubuntu-latest
