@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/peerigon/clockodo/compare/v4.0.0...v4.0.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* **readme:** adjust readme ([b8bf135](https://github.com/peerigon/clockodo/commit/b8bf135))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
