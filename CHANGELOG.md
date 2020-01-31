@@ -1,3 +1,11 @@
+# [4.1.0](https://github.com/peerigon/clockodo/compare/v4.0.1...v4.1.0) (2020-01-31)
+
+
+### Features
+
+* **api:** introduce optional request caching ([a13ca28](https://github.com/peerigon/clockodo/commit/a13ca28))
+* **api:** introduce optional request caching ([71d6d09](https://github.com/peerigon/clockodo/commit/71d6d09))
+
 ## [4.0.1](https://github.com/peerigon/clockodo/compare/v4.0.0...v4.0.1) (2020-01-31)
 
 
