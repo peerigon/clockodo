@@ -1,8 +1,7 @@
 {
     "branches": [
         "master",
-        "next",
-        "setup-publish-action"
+        "next"
     ],
     "plugins": [
         "@semantic-release/commit-analyzer",
