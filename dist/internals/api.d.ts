@@ -75,10 +75,10 @@ export declare class Clockodo {
         id: number;
     }): TargetHourReturnType;
     getTargetHours(options?: object): TargetHoursReturnType;
-    getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }: {
-        taskCustomerId: number;
-        taskProjectId: number;
-        taskServiceId: number;
+    getTaskDuration({ taskCustomersId, taskProjectsId, taskServicesId, taskText, taskBillable, }: {
+        taskCustomersId: number;
+        taskProjectsId: number;
+        taskServicesId: number;
         taskText: string;
         taskBillable: Billable;
     }, options?: object): TaskDurationReturnType;
@@ -99,17 +99,17 @@ export declare class Clockodo {
         durationBefore: number;
         duration: number;
     }, options?: object): ClockEditReturnType;
-    startClock({ customerId, serviceId, billable }: {
-        customerId: number;
-        serviceId: number;
+    startClock({ customersId, servicesId, billable }: {
+        customersId: number;
+        servicesId: number;
         billable: Billable;
     }, options?: object): ClockReturnType;
     addCustomer({ name }: {
         name: string;
     }, options?: object): CustomerReturnType;
-    addProject({ name, customerId }: {
+    addProject({ name, customersId }: {
         name: string;
-        customerId: number;
+        customersId: number;
     }, options?: object): ProjectReturnType;
     addService({ name }: {
         name: string;
@@ -120,9 +120,9 @@ export declare class Clockodo {
         email: string;
         role: string;
     }, options?: object): AddUserReturnType;
-    addEntry({ customerId, serviceId, billable }: {
-        customerId: number;
-        serviceId: number;
+    addEntry({ customersId, servicesId, billable }: {
+        customersId: number;
+        servicesId: number;
         billable: Billable;
     }, options?: object): EntryReturnType;
     addAbsence({ dateSince, dateUntil, type }: {
@@ -133,17 +133,17 @@ export declare class Clockodo {
     stopClock({ entryId }: {
         entryId: number;
     }, options?: object): ClockStopReturnType;
-    deactivateCustomer({ customerId }: {
-        customerId: number;
+    deactivateCustomer({ customersId }: {
+        customersId: number;
     }, options?: object): CustomerReturnType;
-    deactivateProject({ projectId }: {
-        projectId: number;
+    deactivateProject({ projectsId }: {
+        projectsId: number;
     }, options?: object): ProjectReturnType;
-    deactivateService({ serviceId }: {
-        serviceId: number;
+    deactivateService({ servicesId }: {
+        servicesId: number;
     }, options?: object): ServiceReturnType;
-    deactivateUser({ userId }: {
-        userId: number;
+    deactivateUser({ usersId }: {
+        usersId: number;
     }, options?: object): UserReturnType;
     deleteEntry({ entryId }: {
         entryId: number;
@@ -155,17 +155,17 @@ export declare class Clockodo {
     deleteAbsence({ absenceId }: {
         absenceId: number;
     }, options?: object): DeleteReturnType;
-    editCustomer({ customerId }: {
-        customerId: number;
+    editCustomer({ customersId }: {
+        customersId: number;
     }, options?: object): Promise<any>;
-    editProject({ projectId }: {
-        projectId: number;
+    editProject({ projectsId }: {
+        projectsId: number;
     }, options?: object): ProjectReturnType;
-    editService({ serviceId }: {
-        serviceId: number;
+    editService({ servicesId }: {
+        servicesId: number;
     }, options?: object): ServiceReturnType;
-    editUser({ userId }: {
-        userId: number;
+    editUser({ usersId }: {
+        usersId: number;
     }, options?: object): UserReturnType;
     editEntryGroup({ timeSince, timeUntil }: {
         timeSince: string;
@@ -177,20 +177,20 @@ export declare class Clockodo {
     editEntry({ entryId }: {
         entryId: number;
     }, options?: object): EntryReturnType;
-    getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }: {
+    getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, usersId, }: {
         lumpSumEntryId: number;
-        userId: number;
+        usersId: number;
         timeUntil: string;
         timeSince: string;
     }, options?: object): EntriesReturnType;
-    addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, userId, }: {
-        customerId: number;
-        projectId?: number;
-        lumpSumId: number;
-        lumpSumAmount: number;
+    addLumpSumEntry({ customersId, projectsId, lumpSumsAmount, lumpSumsId, text, timeSince, usersId, }: {
+        customersId: number;
+        projectsId?: number;
+        lumpSumsId: number;
+        lumpSumsAmount: number;
         timeSince: string;
         text: string;
-        userId?: number;
+        usersId?: number;
     }, options?: object): EntryReturnType;
 }
 export {};

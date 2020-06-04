@@ -139,9 +139,9 @@ class Clockodo {
             return this[clockodoApi].get("/targethours", options);
         });
     }
-    getTaskDuration({ taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable, }, options) {
+    getTaskDuration({ taskCustomersId, taskProjectsId, taskServicesId, taskText, taskBillable, }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const requiredArguments = { taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable };
+            const requiredArguments = { taskCustomersId, taskProjectsId, taskServicesId, taskText, taskBillable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
             return this[clockodoApi].get("/tasks/duration", Object.assign(Object.assign({}, requiredArguments), options));
         });
@@ -181,9 +181,9 @@ class Clockodo {
             return this[clockodoApi].put("/clock/" + entryId, Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
-    startClock({ customerId, serviceId, billable }, options) {
+    startClock({ customersId, servicesId, billable }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const requiredArguments = { customerId, serviceId, billable };
+            const requiredArguments = { customersId, servicesId, billable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
             return this[clockodoApi].post("/clock", Object.assign(Object.assign({}, requiredArguments), options));
         });
@@ -194,10 +194,10 @@ class Clockodo {
             return this[clockodoApi].post("/customers", Object.assign({ name }, options));
         });
     }
-    addProject({ name, customerId }, options) {
+    addProject({ name, customersId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ name, customerId }, REQUIRED.ADD_PROJECT);
-            return this[clockodoApi].post("/projects", Object.assign({ name, customerId }, options));
+            REQUIRED.checkRequired({ name, customersId }, REQUIRED.ADD_PROJECT);
+            return this[clockodoApi].post("/projects", Object.assign({ name, customersId }, options));
         });
     }
     addService({ name }, options) {
@@ -213,9 +213,9 @@ class Clockodo {
             return this[clockodoApi].post("/users", Object.assign(Object.assign({}, requiredArguments), options));
         });
     }
-    addEntry({ customerId, serviceId, billable }, options) {
+    addEntry({ customersId, servicesId, billable }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const requiredArguments = { customerId, serviceId, billable };
+            const requiredArguments = { customersId, servicesId, billable };
             REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY);
             return this[clockodoApi].post("/entries", Object.assign(Object.assign({}, requiredArguments), options));
         });
@@ -233,28 +233,28 @@ class Clockodo {
             return this[clockodoApi].delete("/clock/" + entryId, options);
         });
     }
-    deactivateCustomer({ customerId }, options) {
+    deactivateCustomer({ customersId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ customerId }, REQUIRED.DEACTIVATE_CUSTOMER);
-            return this[clockodoApi].delete("/customers/" + customerId, options);
+            REQUIRED.checkRequired({ customersId }, REQUIRED.DEACTIVATE_CUSTOMER);
+            return this[clockodoApi].delete("/customers/" + customersId, options);
         });
     }
-    deactivateProject({ projectId }, options) {
+    deactivateProject({ projectsId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ projectId }, REQUIRED.DEACTIVATE_PROJECT);
-            return this[clockodoApi].delete("/projects/" + projectId, options);
+            REQUIRED.checkRequired({ projectsId }, REQUIRED.DEACTIVATE_PROJECT);
+            return this[clockodoApi].delete("/projects/" + projectsId, options);
         });
     }
-    deactivateService({ serviceId }, options) {
+    deactivateService({ servicesId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ serviceId }, REQUIRED.DEACTIVATE_SERVICE);
-            return this[clockodoApi].delete("/services/" + serviceId, options);
+            REQUIRED.checkRequired({ servicesId }, REQUIRED.DEACTIVATE_SERVICE);
+            return this[clockodoApi].delete("/services/" + servicesId, options);
         });
     }
-    deactivateUser({ userId }, options) {
+    deactivateUser({ usersId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ userId }, REQUIRED.DEACTIVATE_USER);
-            return this[clockodoApi].delete("/users/" + userId, options);
+            REQUIRED.checkRequired({ usersId }, REQUIRED.DEACTIVATE_USER);
+            return this[clockodoApi].delete("/users/" + usersId, options);
         });
     }
     deleteEntry({ entryId }, options) {
@@ -276,28 +276,28 @@ class Clockodo {
             return this[clockodoApi].delete("/absences/" + absenceId, options);
         });
     }
-    editCustomer({ customerId }, options) {
+    editCustomer({ customersId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ customerId }, REQUIRED.EDIT_CUSTOMER);
-            return this[clockodoApi].put("/customers/" + customerId, options);
+            REQUIRED.checkRequired({ customersId }, REQUIRED.EDIT_CUSTOMER);
+            return this[clockodoApi].put("/customers/" + customersId, options);
         });
     }
-    editProject({ projectId }, options) {
+    editProject({ projectsId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ projectId }, REQUIRED.EDIT_PROJECT);
-            return this[clockodoApi].put("/projects/" + projectId, options);
+            REQUIRED.checkRequired({ projectsId }, REQUIRED.EDIT_PROJECT);
+            return this[clockodoApi].put("/projects/" + projectsId, options);
         });
     }
-    editService({ serviceId }, options) {
+    editService({ servicesId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ serviceId }, REQUIRED.EDIT_SERVICE);
-            return this[clockodoApi].put("/services/" + serviceId, options);
+            REQUIRED.checkRequired({ servicesId }, REQUIRED.EDIT_SERVICE);
+            return this[clockodoApi].put("/services/" + servicesId, options);
         });
     }
-    editUser({ userId }, options) {
+    editUser({ usersId }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ userId }, REQUIRED.EDIT_USER);
-            return this[clockodoApi].put("/users/" + userId, options);
+            REQUIRED.checkRequired({ usersId }, REQUIRED.EDIT_USER);
+            return this[clockodoApi].put("/users/" + usersId, options);
         });
     }
     editEntryGroup({ timeSince, timeUntil }, options) {
@@ -319,29 +319,29 @@ class Clockodo {
             return this[clockodoApi].put("/entries/" + entryId, options);
         });
     }
-    getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, userId, }, options) {
+    getLumpSumEntriesByUserId({ lumpSumEntryId, timeUntil, timeSince, usersId, }, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            REQUIRED.checkRequired({ lumpSumEntryId, timeUntil, timeSince, userId }, REQUIRED.GET_LUMP_SUM);
-            return this[clockodoApi].get("/entries/", Object.assign({ filterLumpSumId: lumpSumEntryId, timeSince,
-                timeUntil, filterUserId: userId }, options));
+            REQUIRED.checkRequired({ lumpSumEntryId, timeUntil, timeSince, usersId }, REQUIRED.GET_LUMP_SUM);
+            return this[clockodoApi].get("/entries/", Object.assign({ filterLumpSumsId: lumpSumEntryId, timeSince,
+                timeUntil, filterUsersId: usersId }, options));
         });
     }
-    addLumpSumEntry({ customerId, projectId, lumpSumAmount, lumpSumId, text, timeSince, userId, }, options) {
+    addLumpSumEntry({ customersId, projectsId, lumpSumsAmount, lumpSumsId, text, timeSince, usersId, }, options) {
         return __awaiter(this, void 0, void 0, function* () {
             REQUIRED.checkRequired({
-                customerId,
-                lumpSumId,
-                lumpSumAmount,
+                customersId,
+                lumpSumsId,
+                lumpSumsAmount,
                 text,
                 timeSince,
             }, REQUIRED.ADD_LUMP_SUM);
-            return this[clockodoApi].post("/entries/", Object.assign({ billable: 1, customerId,
-                lumpSumAmount,
-                lumpSumId,
+            return this[clockodoApi].post("/entries/", Object.assign({ billable: 1, customersId,
+                lumpSumsAmount,
+                lumpSumsId,
                 text,
                 timeSince,
-                projectId,
-                userId }, options));
+                projectsId,
+                usersId }, options));
         });
     }
 }

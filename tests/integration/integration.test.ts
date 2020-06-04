@@ -104,10 +104,10 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
             "adds and retrieves lump sum entries",
             async () => {
                 const lumpSum = {
-                    customerId: 619336,
-                    lumpSumId: 4966,
+                    customersId: 619336,
+                    lumpSumsId: 4966,
                     billable: 1,
-                    lumpSumAmount: 6.8,
+                    lumpSumsAmount: 6.8,
                     timeSince: "2019-12-16 14:59:00",
                     text: "desc",
                 };
@@ -118,10 +118,10 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                 });
 
                 expect(data.entry).toMatchObject({
-                    customersId: lumpSum.customerId,
-                    lumpSumsId: lumpSum.lumpSumId,
+                    customersId: lumpSum.customersId,
+                    lumpSumsId: lumpSum.lumpSumsId,
                     billable: lumpSum.billable,
-                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    lumpSumsAmount: lumpSum.lumpSumsAmount,
                     timeSince: lumpSum.timeSince,
                     text: lumpSum.text,
                 });
@@ -130,14 +130,14 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                     lumpSumEntryId: 4966,
                     timeSince: "2019-12-16 00:01:00",
                     timeUntil: "2019-12-16 23:59:00",
-                    userId: 62488,
+                    usersId: 62488,
                 });
 
                 expect(result.entries[0]).toMatchObject({
-                    customersId: lumpSum.customerId,
-                    lumpSumsId: lumpSum.lumpSumId,
+                    customersId: lumpSum.customersId,
+                    lumpSumsId: lumpSum.lumpSumsId,
                     billable: lumpSum.billable,
-                    lumpSumsAmount: lumpSum.lumpSumAmount,
+                    lumpSumsAmount: lumpSum.lumpSumsAmount,
                     timeSince: lumpSum.timeSince,
                     text: lumpSum.text,
                 });
