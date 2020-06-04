@@ -52,6 +52,16 @@ describe("Clockodo (instance)", () => {
                 expect(error.message).toEqual("Clockodo cacheTime expected to be a number, is typeof: string");
             }
         });
+        it("throws an error when constructor has baseUrl with type other than string", () => {
+            try {
+                void new Clockodo({
+                    user: "test@gmail.com", apiKey: "dfdsg34t643", baseUrl: 5678,
+                } as any
+                );
+            } catch (error) {
+                expect(error.message).toEqual("Clockodo baseUrl expected to be a string, is typeof: number");
+            }
+        });
     });
 
     describe("Cache", () => {

@@ -33,9 +33,9 @@ const transformRequestOptions = params => {
     return urlParams.join("&");
 };
 class ClockodoLib {
-    constructor({ user, apiKey, cacheTime }) {
+    constructor({ user, apiKey, cacheTime, baseUrl = ENDPOINT }) {
         const baseConfig = {
-            baseURL: ENDPOINT,
+            baseURL: baseUrl,
             headers: {
                 "X-ClockodoApiUser": user,
                 "X-ClockodoApiKey": apiKey,

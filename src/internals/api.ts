@@ -70,8 +70,9 @@ const enum AbsenceType {
 }
 
 /* eslint-disable max-len */
+
 export class Clockodo {
-    constructor({user, apiKey, cacheTime}: { user: string; apiKey: string; cacheTime?: number }) {
+    constructor({user, apiKey, cacheTime, baseUrl}: { user: string; apiKey: string; cacheTime?: number; baseUrl?: string}) {
         if (typeof user !== "string") {
             throw new Error("Clockodo user expected to be a string, is typeof: " + typeof user);
         }
@@ -84,7 +85,11 @@ export class Clockodo {
             throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
         }
 
-        this[clockodoApi] = new ClockodoLib({user, apiKey, cacheTime});
+        if (baseUrl !== undefined && typeof baseUrl !== "string") {
+            throw new Error("Clockodo baseUrl expected to be a string, is typeof: " + typeof baseUrl);
+        }
+
+        this[clockodoApi] = new ClockodoLib({user, apiKey, cacheTime, baseUrl});
     }
 
     async getAbsence({id}: { id: number }): AbsenceReturnType {

@@ -38,7 +38,7 @@ exports.ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
 exports.ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 /* eslint-disable max-len */
 class Clockodo {
-    constructor({ user, apiKey, cacheTime }) {
+    constructor({ user, apiKey, cacheTime, baseUrl }) {
         if (typeof user !== "string") {
             throw new Error("Clockodo user expected to be a string, is typeof: " + typeof user);
         }
@@ -48,7 +48,10 @@ class Clockodo {
         if (cacheTime !== undefined && typeof cacheTime !== "number") {
             throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
         }
-        this[clockodoApi] = new lib_1.ClockodoLib({ user, apiKey, cacheTime });
+        if (baseUrl !== undefined && typeof baseUrl !== "string") {
+            throw new Error("Clockodo baseUrl expected to be a string, is typeof: " + typeof baseUrl);
+        }
+        this[clockodoApi] = new lib_1.ClockodoLib({ user, apiKey, cacheTime, baseUrl });
     }
     getAbsence({ id }) {
         return __awaiter(this, void 0, void 0, function* () {
