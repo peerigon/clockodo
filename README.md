@@ -105,7 +105,7 @@ What a function call looks like for each of the defined endpoint methods. For an
     -   [getEntry()](#getEntry)
     -   [getEntries()](#getentries)
     -   [getEntryGroups()](#getentrygroups)
-    -   [getProject()](#getprojectsid)
+    -   [getProject()](#getproject)
     -   [getSearchTexts()](#getsearchtexts)
     -   [getService()](#getservice)
     -   [getServices()](#getservices)
