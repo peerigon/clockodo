@@ -13,8 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
-const camelcase_1 = __importDefault(require("camelcase"));
-const deep_map_keys_1 = __importDefault(require("deep-map-keys"));
+const camelcase_keys_1 = __importDefault(require("camelcase-keys"));
 const qs_1 = __importDefault(require("qs"));
 const axios_cache_adapter_1 = require("axios-cache-adapter");
 const mapKeys_1 = __importDefault(require("./mapKeys"));
@@ -54,14 +53,14 @@ class ClockodoLib {
                 params: mapKeys_1.default(params),
                 paramsSerializer: transformRequestOptions,
             });
-            return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+            return camelcase_keys_1.default(response.data, { deep: true });
         });
     }
     post(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const mappedObj = mapKeys_1.default(params);
             const response = yield this[axiosClient].post(resource, mappedObj);
-            return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+            return camelcase_keys_1.default(response.data, { deep: true });
         });
     }
     put(resource, params = {}) {
@@ -70,14 +69,14 @@ class ClockodoLib {
             const response = yield this[axiosClient].put(resource, qs_1.default.stringify(mappedObj), {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
             });
-            return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+            return camelcase_keys_1.default(response.data, { deep: true });
         });
     }
     delete(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const mappedObj = mapKeys_1.default(params);
             const response = yield this[axiosClient].delete(resource, { data: mappedObj });
-            return deep_map_keys_1.default(response.data, key => camelcase_1.default(key));
+            return camelcase_keys_1.default(response.data, { deep: true });
         });
     }
 }

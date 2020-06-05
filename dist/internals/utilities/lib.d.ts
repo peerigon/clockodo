@@ -4,8 +4,8 @@ export declare class ClockodoLib {
         apiKey: string;
         cacheTime?: number;
     });
-    get(resource: any, params?: {}): Promise<unknown>;
-    post(resource: any, params?: {}): Promise<unknown>;
-    put(resource: any, params?: {}): Promise<unknown>;
-    delete(resource: any, params?: {}): Promise<unknown>;
+    get(resource: any, params?: {}): Promise<any>;
+    post(resource: any, params?: {}): Promise<any>;
+    put(resource: any, params?: {}): Promise<any>;
+    delete(resource: any, params?: {}): Promise<any>;
 }
