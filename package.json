@@ -9,6 +9,7 @@
     "dev": "npm run build -- -w",
     "lint": "eslint src tests --ext js,ts",
     "test": "jest",
+    "test:unit": "jest tests/unit/unit.test.ts",
     "test:types": "tsc --noEmit",
     "posttest": "run-p lint test:types",
     "prepublishOnly": "npm run build",

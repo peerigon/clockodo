@@ -15,10 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const camelcase_keys_1 = __importDefault(require("camelcase-keys"));
 const qs_1 = __importDefault(require("qs"));
-const axios_cache_adapter_1 = require("axios-cache-adapter");
+const symbols_1 = require("./symbols");
 const mapKeys_1 = __importDefault(require("./mapKeys"));
 const ENDPOINT = "https://my.clockodo.com/api";
-const axiosClient = Symbol("axiosClient");
 const transformRequestOptions = params => {
     const urlParams = [];
     for (const [key, value] of Object.entries(params)) {
@@ -32,7 +31,7 @@ const transformRequestOptions = params => {
     return urlParams.join("&");
 };
 class ClockodoLib {
-    constructor({ user, apiKey, cacheTime }) {
+    constructor({ user, apiKey }) {
         const baseConfig = {
             baseURL: ENDPOINT,
             headers: {
@@ -40,16 +39,11 @@ class ClockodoLib {
                 "X-ClockodoApiKey": apiKey,
             },
         };
-        this[axiosClient] = typeof cacheTime === "number" ?
-            axios_cache_adapter_1.setup(Object.assign(Object.assign({}, baseConfig), { cache: {
-                    maxAge: cacheTime,
-                    exclude: { query: false },
-                } })) :
-            axios_1.default.create(baseConfig);
+        this[symbols_1.axiosClient] = axios_1.default.create(baseConfig);
     }
     get(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this[axiosClient].get(resource, {
+            const response = yield this[symbols_1.axiosClient].get(resource, {
                 params: mapKeys_1.default(params),
                 paramsSerializer: transformRequestOptions,
             });
@@ -59,14 +53,14 @@ class ClockodoLib {
     post(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const mappedObj = mapKeys_1.default(params);
-            const response = yield this[axiosClient].post(resource, mappedObj);
+            const response = yield this[symbols_1.axiosClient].post(resource, mappedObj);
             return camelcase_keys_1.default(response.data, { deep: true });
         });
     }
     put(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const mappedObj = mapKeys_1.default(params);
-            const response = yield this[axiosClient].put(resource, qs_1.default.stringify(mappedObj), {
+            const response = yield this[symbols_1.axiosClient].put(resource, qs_1.default.stringify(mappedObj), {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
             });
             return camelcase_keys_1.default(response.data, { deep: true });
@@ -75,7 +69,7 @@ class ClockodoLib {
     delete(resource, params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const mappedObj = mapKeys_1.default(params);
-            const response = yield this[axiosClient].delete(resource, { data: mappedObj });
+            const response = yield this[symbols_1.axiosClient].delete(resource, { data: mappedObj });
             return camelcase_keys_1.default(response.data, { deep: true });
         });
     }

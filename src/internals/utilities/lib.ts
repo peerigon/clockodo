@@ -1,11 +1,10 @@
 import axios from "axios";
 import camelCaseKeys from "camelcase-keys";
 import qs from "qs";
-import {setup} from "axios-cache-adapter";
+import {axiosClient} from "./symbols";
 import mapKeys from "./mapKeys";
 
 const ENDPOINT = "https://my.clockodo.com/api";
-const axiosClient = Symbol("axiosClient");
 
 const transformRequestOptions = params => {
     const urlParams = [];
@@ -22,7 +21,7 @@ const transformRequestOptions = params => {
 };
 
 export class ClockodoLib {
-    constructor({user, apiKey, cacheTime}: { user: string; apiKey: string; cacheTime?: number }) {
+    constructor({user, apiKey}: { user: string; apiKey: string}) {
         const baseConfig = {
             baseURL: ENDPOINT,
             headers: {
@@ -31,15 +30,7 @@ export class ClockodoLib {
             },
         };
 
-        this[axiosClient] = typeof cacheTime === "number" ?
-            setup({
-                ...baseConfig,
-                cache: {
-                    maxAge: cacheTime,
-                    exclude: {query: false},
-                },
-            }) :
-            axios.create(baseConfig);
+        this[axiosClient] = axios.create(baseConfig);
     }
 
     async get(resource, params = {}) {

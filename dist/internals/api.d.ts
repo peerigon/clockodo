@@ -33,11 +33,11 @@ declare const enum AbsenceType {
     ABSENCE_TYPE_WORK_OUT_OF_OFFICE = 9
 }
 export declare class Clockodo {
-    constructor({ user, apiKey, cacheTime }: {
+    constructor({ user, apiKey }: {
         user: string;
         apiKey: string;
-        cacheTime?: number;
     });
+    use(plugin: (clockodo: Clockodo) => void): void;
     getAbsence({ id }: {
         id: number;
     }): AbsenceReturnType;
