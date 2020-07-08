@@ -85,7 +85,7 @@ export class Clockodo {
             throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
         }
 
-        if (baseUrl !== undefined && typeof baseUrl !== "string") {
+        if (typeof baseUrl !== "string") {
             throw new Error("Clockodo baseUrl expected to be a string, is typeof: " + typeof baseUrl);
         }
 
