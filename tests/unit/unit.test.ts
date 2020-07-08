@@ -43,18 +43,6 @@ describe("Clockodo (instance)", () => {
                 );
             }
         });
-        it("throws an error when constructor has cacheTime with type other than number", () => {
-            try {
-                void new Clockodo({
-                    user: "test@gmail.com",
-                    apiKey: "dfdsg34t643",
-                    cacheTime: "blub",
-                } as any
-                );
-            } catch (error) {
-                expect(error.message).toEqual("Clockodo cacheTime expected to be a number, is typeof: string");
-            }
-        });
     });
 
     describe("Cache", () => {
