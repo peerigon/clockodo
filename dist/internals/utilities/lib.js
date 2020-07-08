@@ -18,7 +18,7 @@ const deep_map_keys_1 = __importDefault(require("deep-map-keys"));
 const qs_1 = __importDefault(require("qs"));
 const axios_cache_adapter_1 = require("axios-cache-adapter");
 const mapKeys_1 = __importDefault(require("./mapKeys"));
-const ENDPOINT = "https://my.clockodo.com/api";
+const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 const axiosClient = Symbol("axiosClient");
 const transformRequestOptions = params => {
     const urlParams = [];
@@ -33,7 +33,7 @@ const transformRequestOptions = params => {
     return urlParams.join("&");
 };
 class ClockodoLib {
-    constructor({ user, apiKey, cacheTime, baseUrl = ENDPOINT }) {
+    constructor({ user, apiKey, cacheTime, baseUrl = DEFAULT_BASE_URL }) {
         const baseConfig = {
             baseURL: baseUrl,
             headers: {
