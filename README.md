@@ -380,7 +380,7 @@ clockodo
     .getTaskDuration(
         {
             taskCustomersId: 23,
-            : 25,
+            taskProjectsId: 25,
             taskServicesId: 42,
             taskText: "clean the dishes",
             taskBillable: 1
