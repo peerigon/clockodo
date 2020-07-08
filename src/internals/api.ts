@@ -83,7 +83,7 @@ export class Clockodo {
     }
 
     use(plugin: (clockodo: Clockodo) => void) {
-        plugin(this[clockodoApi]);
+        plugin(this);
     }
 
     async getAbsence({id}: { id: number }): AbsenceReturnType {
