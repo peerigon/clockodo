@@ -39,12 +39,15 @@ It is also possible to create a Clockodo instance with **caching**. This means t
 
 ```js
 const { Clockodo } = require("clockodo");
+const { cachePlugin } = require("clockodo/plugins/cache");
+
 
 const clockodoApi = new Clockodo({
     user: "test-user@example.com",
     apiKey: "kjfdskj643fgnlksf343kdslm"
-    cacheTime: 15 * 60 * 1000      // cache of 15 minutes
 });
+
+clockodoApi.use(cachePlugin({cacheTime:  15 * 60 * 1000}))   // cache of 15 minutes
 ```
 
 Some constants are also available for import:

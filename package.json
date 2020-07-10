@@ -9,6 +9,7 @@
     "dev": "npm run build -- -w",
     "lint": "eslint src tests --ext js,ts",
     "test": "jest",
+    "test:unit": "jest tests/unit/unit.test.ts",
     "test:types": "tsc --noEmit",
     "posttest": "run-p lint test:types",
     "prepublishOnly": "npm run build",
@@ -32,8 +33,7 @@
   "dependencies": {
     "axios": "0.19.0",
     "axios-cache-adapter": "^2.5.0",
-    "camelcase": "^5.3.1",
-    "deep-map-keys": "^2.0.1",
+    "camelcase-keys": "^6.2.2",
     "moment": "^2.24.0",
     "qs": "^6.7.0"
   },
@@ -47,7 +47,6 @@
     "eslint-config-peerigon": "^25.1.1",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-prefer-arrow": "^1.1.7",
-    "husky": "^3.0.1",
     "jest": "^24.8.0",
     "nock": "^10.0.6",
     "npm-run-all": "^4.1.5",
