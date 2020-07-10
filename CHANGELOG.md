@@ -1,3 +1,15 @@
+# [6.0.0](https://github.com/peerigon/clockodo/compare/v5.0.0...v6.0.0) (2020-07-10)
+
+
+### Features
+
+* API improvements ([1549b51](https://github.com/peerigon/clockodo/commit/1549b51f57a274e384b55e90ca134e02702e158a))
+
+
+### BREAKING CHANGES
+
+* Adjust all keys to match clockodos rest-api
+
 # [5.0.0](https://github.com/peerigon/clockodo/compare/v4.1.0...v5.0.0) (2020-07-10)
 
 
