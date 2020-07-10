@@ -9,6 +9,7 @@ import {
     ENTRY_BILLED,
     ABSENCE_TYPE_SPECIAL_LEAVE,
 } from "../../src/internals/api";
+import cachePlugin from "../../src/plugins/cache";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 
@@ -42,16 +43,6 @@ describe("Clockodo (instance)", () => {
                 );
             }
         });
-        it("throws an error when constructor has cacheTime with type other than number", () => {
-            try {
-                void new Clockodo({
-                    user: "test@gmail.com", apiKey: "dfdsg34t643", cacheTime: "blub",
-                } as any
-                );
-            } catch (error) {
-                expect(error.message).toEqual("Clockodo cacheTime expected to be a number, is typeof: string");
-            }
-        });
     });
 
     describe("Cache", () => {
@@ -59,8 +50,9 @@ describe("Clockodo (instance)", () => {
             const clockodoWithCache = new Clockodo({
                 user: "test",
                 apiKey: "test",
-                cacheTime: 50,
             });
+
+            clockodoWithCache.use(cachePlugin({cacheTime: 50}));
 
             const userId = 7;
             let requestCounter = 0;

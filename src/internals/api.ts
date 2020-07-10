@@ -1,3 +1,4 @@
+import {clockodoApi} from "./utilities/symbols";
 import {ClockodoLib} from "./utilities/lib";
 import * as REQUIRED from "./utilities/requiredParams";
 import {
@@ -29,8 +30,6 @@ import {
     SearchTextsReturnType,
     EntryGroupsReturnType,
 } from "./returnTypes";
-
-const clockodoApi = Symbol("api");
 
 export const ENTRY_UNBILLABLE = 0;
 export const ENTRY_BILLABLE = 1;
@@ -71,7 +70,7 @@ const enum AbsenceType {
 
 /* eslint-disable max-len */
 export class Clockodo {
-    constructor({user, apiKey, cacheTime}: { user: string; apiKey: string; cacheTime?: number }) {
+    constructor({user, apiKey}: { user: string; apiKey: string }) {
         if (typeof user !== "string") {
             throw new Error("Clockodo user expected to be a string, is typeof: " + typeof user);
         }
@@ -80,11 +79,11 @@ export class Clockodo {
             throw new Error("Clockodo apikey expected to be a string, is typeof: " + typeof apiKey);
         }
 
-        if (cacheTime !== undefined && typeof cacheTime !== "number") {
-            throw new Error("Clockodo cacheTime expected to be a number, is typeof: " + typeof cacheTime);
-        }
+        this[clockodoApi] = new ClockodoLib({user, apiKey});
+    }
 
-        this[clockodoApi] = new ClockodoLib({user, apiKey, cacheTime});
+    use(plugin: (clockodo: Clockodo) => void) {
+        plugin(this);
     }
 
     async getAbsence({id}: { id: number }): AbsenceReturnType {
