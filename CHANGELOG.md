@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/peerigon/clockodo/compare/v4.1.0...v5.0.0) (2020-07-10)
+
+
+### Features
+
+* Reduce bundle size by making caching optional ([b307bec](https://github.com/peerigon/clockodo/commit/b307bec0104daf4e2f0a4978e69cf73b3e812690))
+
+
+### BREAKING CHANGES
+
+* The `cacheTime` option has been removed and replaced by a plugin interface. See README for more details.
+
 # [4.1.0](https://github.com/peerigon/clockodo/compare/v4.0.1...v4.1.0) (2020-01-31)
 
 
