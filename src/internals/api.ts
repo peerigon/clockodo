@@ -69,8 +69,9 @@ const enum AbsenceType {
 }
 
 /* eslint-disable max-len */
+
 export class Clockodo {
-    constructor({user, apiKey}: { user: string; apiKey: string }) {
+    constructor({user, apiKey, baseUrl}: { user: string; apiKey: string; baseUrl?: string}) {
         if (typeof user !== "string") {
             throw new Error("Clockodo user expected to be a string, is typeof: " + typeof user);
         }
@@ -79,7 +80,11 @@ export class Clockodo {
             throw new Error("Clockodo apikey expected to be a string, is typeof: " + typeof apiKey);
         }
 
-        this[clockodoApi] = new ClockodoLib({user, apiKey});
+        if (baseUrl !== undefined && typeof baseUrl !== "string") {
+            throw new Error("Clockodo baseUrl expected to be a string, is typeof: " + typeof baseUrl);
+        }
+
+        this[clockodoApi] = new ClockodoLib({user, apiKey, baseUrl});
     }
 
     use(plugin: (clockodo: Clockodo) => void) {
@@ -173,21 +178,21 @@ export class Clockodo {
 
     async getTaskDuration(
         {
-            taskCustomerId,
-            taskProjectId,
-            taskServiceId,
+            taskCustomersId,
+            taskProjectsId,
+            taskServicesId,
             taskText,
             taskBillable,
         }: {
-            taskCustomerId: number;
-            taskProjectId: number;
-            taskServiceId: number;
+            taskCustomersId: number;
+            taskProjectsId: number;
+            taskServicesId: number;
             taskText: string;
             taskBillable: Billable;
         },
         options?: object
     ): TaskDurationReturnType {
-        const requiredArguments = {taskCustomerId, taskProjectId, taskServiceId, taskText, taskBillable};
+        const requiredArguments = {taskCustomersId, taskProjectsId, taskServicesId, taskText, taskBillable};
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
 
@@ -232,10 +237,10 @@ export class Clockodo {
     }
 
     async startClock(
-        {customerId, serviceId, billable}: { customerId: number; serviceId: number; billable: Billable },
+        {customersId, servicesId, billable}: { customersId: number; servicesId: number; billable: Billable },
         options?: object
     ): ClockReturnType {
-        const requiredArguments = {customerId, serviceId, billable};
+        const requiredArguments = {customersId, servicesId, billable};
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
 
@@ -248,10 +253,10 @@ export class Clockodo {
         return this[clockodoApi].post("/customers", {name, ...options});
     }
 
-    async addProject({name, customerId}: { name: string; customerId: number }, options?: object): ProjectReturnType {
-        REQUIRED.checkRequired({name, customerId}, REQUIRED.ADD_PROJECT);
+    async addProject({name, customersId}: { name: string; customersId: number }, options?: object): ProjectReturnType {
+        REQUIRED.checkRequired({name, customersId}, REQUIRED.ADD_PROJECT);
 
-        return this[clockodoApi].post("/projects", {name, customerId, ...options});
+        return this[clockodoApi].post("/projects", {name, customersId, ...options});
     }
 
     async addService({name}: { name: string }, options?: object): ServiceReturnType {
@@ -272,10 +277,10 @@ export class Clockodo {
     }
 
     async addEntry(
-        {customerId, serviceId, billable}: { customerId: number; serviceId: number; billable: Billable },
+        {customersId, servicesId, billable}: { customersId: number; servicesId: number; billable: Billable },
         options?: object
     ): EntryReturnType {
-        const requiredArguments = {customerId, serviceId, billable};
+        const requiredArguments = {customersId, servicesId, billable};
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY);
 
@@ -299,28 +304,28 @@ export class Clockodo {
         return this[clockodoApi].delete("/clock/" + entryId, options);
     }
 
-    async deactivateCustomer({customerId}: { customerId: number }, options?: object): CustomerReturnType {
-        REQUIRED.checkRequired({customerId}, REQUIRED.DEACTIVATE_CUSTOMER);
+    async deactivateCustomer({customersId}: { customersId: number }, options?: object): CustomerReturnType {
+        REQUIRED.checkRequired({customersId}, REQUIRED.DEACTIVATE_CUSTOMER);
 
-        return this[clockodoApi].delete("/customers/" + customerId, options);
+        return this[clockodoApi].delete("/customers/" + customersId, options);
     }
 
-    async deactivateProject({projectId}: { projectId: number }, options?: object): ProjectReturnType {
-        REQUIRED.checkRequired({projectId}, REQUIRED.DEACTIVATE_PROJECT);
+    async deactivateProject({projectsId}: { projectsId: number }, options?: object): ProjectReturnType {
+        REQUIRED.checkRequired({projectsId}, REQUIRED.DEACTIVATE_PROJECT);
 
-        return this[clockodoApi].delete("/projects/" + projectId, options);
+        return this[clockodoApi].delete("/projects/" + projectsId, options);
     }
 
-    async deactivateService({serviceId}: { serviceId: number }, options?: object): ServiceReturnType {
-        REQUIRED.checkRequired({serviceId}, REQUIRED.DEACTIVATE_SERVICE);
+    async deactivateService({servicesId}: { servicesId: number }, options?: object): ServiceReturnType {
+        REQUIRED.checkRequired({servicesId}, REQUIRED.DEACTIVATE_SERVICE);
 
-        return this[clockodoApi].delete("/services/" + serviceId, options);
+        return this[clockodoApi].delete("/services/" + servicesId, options);
     }
 
-    async deactivateUser({userId}: { userId: number }, options?: object): UserReturnType {
-        REQUIRED.checkRequired({userId}, REQUIRED.DEACTIVATE_USER);
+    async deactivateUser({usersId}: { usersId: number }, options?: object): UserReturnType {
+        REQUIRED.checkRequired({usersId}, REQUIRED.DEACTIVATE_USER);
 
-        return this[clockodoApi].delete("/users/" + userId, options);
+        return this[clockodoApi].delete("/users/" + usersId, options);
     }
 
     async deleteEntry({entryId}: { entryId: number }, options?: object): DeleteReturnType {
@@ -343,28 +348,28 @@ export class Clockodo {
         return this[clockodoApi].delete("/absences/" + absenceId, options);
     }
 
-    async editCustomer({customerId}: { customerId: number }, options?: object) {
-        REQUIRED.checkRequired({customerId}, REQUIRED.EDIT_CUSTOMER);
+    async editCustomer({customersId}: { customersId: number }, options?: object) {
+        REQUIRED.checkRequired({customersId}, REQUIRED.EDIT_CUSTOMER);
 
-        return this[clockodoApi].put("/customers/" + customerId, options);
+        return this[clockodoApi].put("/customers/" + customersId, options);
     }
 
-    async editProject({projectId}: { projectId: number }, options?: object): ProjectReturnType {
-        REQUIRED.checkRequired({projectId}, REQUIRED.EDIT_PROJECT);
+    async editProject({projectsId}: { projectsId: number }, options?: object): ProjectReturnType {
+        REQUIRED.checkRequired({projectsId}, REQUIRED.EDIT_PROJECT);
 
-        return this[clockodoApi].put("/projects/" + projectId, options);
+        return this[clockodoApi].put("/projects/" + projectsId, options);
     }
 
-    async editService({serviceId}: { serviceId: number }, options?: object): ServiceReturnType {
-        REQUIRED.checkRequired({serviceId}, REQUIRED.EDIT_SERVICE);
+    async editService({servicesId}: { servicesId: number }, options?: object): ServiceReturnType {
+        REQUIRED.checkRequired({servicesId}, REQUIRED.EDIT_SERVICE);
 
-        return this[clockodoApi].put("/services/" + serviceId, options);
+        return this[clockodoApi].put("/services/" + servicesId, options);
     }
 
-    async editUser({userId}: { userId: number }, options?: object): UserReturnType {
-        REQUIRED.checkRequired({userId}, REQUIRED.EDIT_USER);
+    async editUser({usersId}: { usersId: number }, options?: object): UserReturnType {
+        REQUIRED.checkRequired({usersId}, REQUIRED.EDIT_USER);
 
-        return this[clockodoApi].put("/users/" + userId, options);
+        return this[clockodoApi].put("/users/" + usersId, options);
     }
 
     async editEntryGroup({timeSince, timeUntil}: { timeSince: string; timeUntil: string }, options?: object): EditEntryGroupsReturnType {
@@ -391,58 +396,58 @@ export class Clockodo {
         lumpSumEntryId,
         timeUntil,
         timeSince,
-        userId,
+        usersId,
     }: {
         lumpSumEntryId: number;
-        userId: number;
+        usersId: number;
         timeUntil: string;
         timeSince: string;
     }, options?: object): EntriesReturnType {
-        REQUIRED.checkRequired({lumpSumEntryId, timeUntil, timeSince, userId}, REQUIRED.GET_LUMP_SUM);
+        REQUIRED.checkRequired({lumpSumEntryId, timeUntil, timeSince, usersId}, REQUIRED.GET_LUMP_SUM);
 
         return this[clockodoApi].get("/entries/", {
-            filterLumpSumId: lumpSumEntryId,
+            filterLumpSumsId: lumpSumEntryId,
             timeSince,
             timeUntil,
-            filterUserId: userId,
+            filterUsersId: usersId,
             ...options,
         });
     }
 
     async addLumpSumEntry({
-        customerId,
-        projectId,
-        lumpSumAmount,
-        lumpSumId,
+        customersId,
+        projectsId,
+        lumpSumsAmount,
+        lumpSumsId,
         text,
         timeSince,
-        userId,
+        usersId,
     }: {
-        customerId: number;
-        projectId?: number;
-        lumpSumId: number;
-        lumpSumAmount: number;
+        customersId: number;
+        projectsId?: number;
+        lumpSumsId: number;
+        lumpSumsAmount: number;
         timeSince: string;
         text: string;
-        userId?: number;
+        usersId?: number;
     }, options?: object): EntryReturnType {
         REQUIRED.checkRequired({
-            customerId,
-            lumpSumId,
-            lumpSumAmount,
+            customersId,
+            lumpSumsId,
+            lumpSumsAmount,
             text,
             timeSince,
         }, REQUIRED.ADD_LUMP_SUM);
 
         return this[clockodoApi].post("/entries/", {
             billable: 1,
-            customerId,
-            lumpSumAmount,
-            lumpSumId,
+            customersId,
+            lumpSumsAmount,
+            lumpSumsId,
             text,
             timeSince,
-            projectId,
-            userId,
+            projectsId,
+            usersId,
             ...options,
         });
     }

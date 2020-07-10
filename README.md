@@ -108,7 +108,7 @@ What a function call looks like for each of the defined endpoint methods. For an
     -   [getEntry()](#getEntry)
     -   [getEntries()](#getentries)
     -   [getEntryGroups()](#getentrygroups)
-    -   [getProject()](#getprojectid)
+    -   [getProject()](#getproject)
     -   [getSearchTexts()](#getsearchtexts)
     -   [getService()](#getservice)
     -   [getServices()](#getservices)
@@ -271,7 +271,7 @@ clockodo
             timeUntil: "2018-02-09 00:00:00",
             grouping: ["customers_id", "projects_id"]
         },
-        { roundBy: 15 }
+        { roundToMinutes: 15 }
     )
     .then(console.log);
 ```
@@ -299,7 +299,7 @@ Get the description(s) of the requested entries.
 ```js
 clockodo
     .getSearchTexts({
-        projectId: 300
+        projectsId: 300
     })
     .then(console.log);
 ```
@@ -344,14 +344,14 @@ clockodo.getSingleTargetHourSet({ id: 1234 }).then(console.log);
 
 ### getTargetHours()
 
-Get list of target hours for all users, with option to pass an object with an `userId` to filter the history of target hours to a specific user.
+Get list of target hours for all users, with option to pass an object with an `usersId` to filter the history of target hours to a specific user.
 
 #### Example:
 
 ```js
 clockodo.getTargetHours().then(console.log);
 // or
-clockodo.getTargetHours({ userId: 346923 }).then(console.log);
+clockodo.getTargetHours({ usersId: 346923 }).then(console.log);
 ```
 
 ---
@@ -382,9 +382,9 @@ Get individual Clockodo Task by its ID.
 clockodo
     .getTaskDuration(
         {
-            taskCustomerId: 23,
-            taskProjectId: 25,
-            taskServiceId: 42,
+            taskCustomersId: 23,
+            taskProjectsId: 25,
+            taskServicesId: 42,
             taskText: "clean the dishes",
             taskBillable: 1
         },
@@ -447,7 +447,7 @@ clockodo.getUserReports({ year: 2017 }, { type: 1 }).then(console.log);
 
 ### addAbsence()
 
-Default behavior adds an absence for the user attached to the credentials given to the clockodo object. To add the absence for another user you can use the `userId` option if you have the permissions.
+Default behavior adds an absence for the user attached to the credentials given to the clockodo object. To add the absence for another user you can use the `usersId` option if you have the permissions.
 
 #### Example:
 
@@ -461,7 +461,7 @@ clockodo
         },
         {
             note: "elternzeit",
-            userId: 12321
+            usersId: 12321
         }
     )
     .then(console.log);
@@ -483,14 +483,14 @@ clockodo.addCustomer({ name: "Weyland-Yutani" }, options).then(console.log);
 
 ### addEntry()
 
-Creates an entry for either the user attached to the Clockodo instance or the passed in `userId`. Arguments `duration`, `timeSince`, and `timeUntil` are listed as optional (when using their website you can have the duration modify the start or end times).
+Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Arguments `duration`, `timeSince`, and `timeUntil` are listed as optional (when using their website you can have the duration modify the start or end times).
 
 #### Example:
 
 ```js
 clockodo
     .addEntry(
-        { customerId: 1, serviceId: 2, billable: ENTRY_BILLABLE },
+        { customersId: 1, servicesId: 2, billable: ENTRY_BILLABLE },
         options
     )
     .then(console.log);
@@ -506,7 +506,7 @@ Creates a project for an existing customer.
 
 ```js
 clockodo
-    .addProject({ name: "Clockodo Api Wrapper", customerId: 1 }, params)
+    .addProject({ name: "Clockodo Api Wrapper", customersId: 1 }, params)
     .then(console.log);
 ```
 
@@ -552,9 +552,9 @@ Get Clockodo Tasks (grouped entries).
 ```js
 clockodo
     .startClock(
-        { customerId: 24, serviceId: 7, billable: ENTRY_BILLABLE },
+        { customersId: 24, servicesId: 7, billable: ENTRY_BILLABLE },
         {
-            projectId: 365
+            projectsId: 365
         }
     )
     .then(console.log);
@@ -609,7 +609,7 @@ Edit existing Clockodo customer.
 ```js
 clockodo
     .editCustomer(
-        { customerId: 15 },
+        { customersId: 15 },
         {
             name: "The Mystery Gang"
         }
@@ -665,7 +665,7 @@ Edit existing project.
 #### Example:
 
 ```js
-clockodo.editProject({ projectId: 20 }, options).then(console.log);
+clockodo.editProject({ projectsId: 20 }, options).then(console.log);
 ```
 
 ---
@@ -678,7 +678,7 @@ Edit existing service.
 
 ```js
 clockodo
-    .editService({ serviceId: 23 }, { name: "Room Service" })
+    .editService({ servicesId: 23 }, { name: "Room Service" })
     .then(console.log);
 ```
 
@@ -693,7 +693,7 @@ Edit existing user.
 ```js
 clockodo
     .editUser(
-        { userId: 33 },
+        { usersId: 33 },
         {
             name: "Moalo Loco"
         }
@@ -712,7 +712,7 @@ Deactivates (not deletes) customer.
 #### Example:
 
 ```js
-clockodo.deactivateCustomer({ customerId: 343 }).then(console.log);
+clockodo.deactivateCustomer({ customersId: 343 }).then(console.log);
 ```
 
 ---
@@ -724,7 +724,7 @@ Deactivates (not deletes) project.
 #### Example:
 
 ```js
-clockodo.deactivateProject({ projectId: 8 }).then(console.log);
+clockodo.deactivateProject({ projectsId: 8 }).then(console.log);
 ```
 
 ---
@@ -736,7 +736,7 @@ Deactivates (not deletes) service.
 #### Example:
 
 ```js
-clockodo.deactivateService({ serviceId: 94 }).then(console.log);
+clockodo.deactivateService({ servicesId: 94 }).then(console.log);
 ```
 
 ---
@@ -748,7 +748,7 @@ Deactivates (not deletes) user.
 #### Example:
 
 ```js
-clockodo.deactivateUser({ userId: 7 }).then(console.log);
+clockodo.deactivateUser({ usersId: 7 }).then(console.log);
 ```
 
 ---

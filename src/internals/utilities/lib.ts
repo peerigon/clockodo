@@ -4,7 +4,7 @@ import qs from "qs";
 import {axiosClient} from "./symbols";
 import mapKeys from "./mapKeys";
 
-const ENDPOINT = "https://my.clockodo.com/api";
+const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 
 const transformRequestOptions = params => {
     const urlParams = [];
@@ -21,9 +21,9 @@ const transformRequestOptions = params => {
 };
 
 export class ClockodoLib {
-    constructor({user, apiKey}: { user: string; apiKey: string}) {
+    constructor({user, apiKey, baseUrl = DEFAULT_BASE_URL}: { user: string; apiKey: string; baseUrl: string }) {
         const baseConfig = {
-            baseURL: ENDPOINT,
+            baseURL: baseUrl,
             headers: {
                 "X-ClockodoApiUser": user,
                 "X-ClockodoApiKey": apiKey,
