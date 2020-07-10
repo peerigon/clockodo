@@ -55,7 +55,8 @@
     "typescript": "^3.5.3"
   },
   "files": [
-    "dist"
+    "dist",
+    "plugins"
   ],
   "jest": {
     "collectCoverage": true,
