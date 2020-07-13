@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/peerigon/clockodo/compare/v6.0.0...v6.0.1) (2020-07-13)
+
+
+### Bug Fixes
+
+* Add plugins to npm package ([65a14ad](https://github.com/peerigon/clockodo/commit/65a14ad8e9d51c9f473dbd8e1f0dae8760e11aa8))
+
 # [6.0.0](https://github.com/peerigon/clockodo/compare/v5.0.0...v6.0.0) (2020-07-10)
 
 
