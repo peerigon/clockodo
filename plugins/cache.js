@@ -1,1 +1,1 @@
-module.exports = require("./dist/plugins/cache");
+module.exports = require("../dist/plugins/cache");
