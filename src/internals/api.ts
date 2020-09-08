@@ -49,14 +49,14 @@ export const ABSENCE_STATUS_DECLINED = 2;
 export const ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
 export const ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 
-const enum Billable {
+export enum Billable {
     ENTRY_UNBILLABLE,
     ENTRY_BILLABLE,
     ENTRY_BILLED,
 }
 
 // Cannot set the variables to the enum like ABSENCE_TYPE_REGULAR_HOLIDAY = ABSENCE_TYPE_REGULAR_HOLIDAY due to the error "Computed values are not permitted in an enum with string valued members."
-const enum AbsenceType {
+export enum AbsenceType {
     ABSENCE_TYPE_REGULAR_HOLIDAY = 1,
     ABSENCE_TYPE_SPECIAL_LEAVE,
     ABSENCE_TYPE_REDUCTION_OF_OVERTIME,
