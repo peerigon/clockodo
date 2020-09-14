@@ -1,3 +1,15 @@
+# [7.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.1...v7.0.0-beta.2) (2020-09-14)
+
+
+### Bug Fixes
+
+* Incorrect addEntry() params ([1603410](https://github.com/peerigon/clockodo/commit/1603410eb6be6cbb85693ed08874f2541d91b225))
+
+
+### BREAKING CHANGES
+
+* addEntry() actually requires different params based on what type of entry you want to create. If you want to create a time entry, you need to pass timeUntil. If you want to create a lump sum entry, you need to pass a lumpSum.
+
 # [7.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v6.0.2...v7.0.0-beta.1) (2020-09-14)
 
 
