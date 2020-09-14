@@ -1,3 +1,17 @@
+## [6.0.2](https://github.com/peerigon/clockodo/compare/v6.0.1...v6.0.2) (2020-09-14)
+
+
+### Bug Fixes
+
+* Remove const enums ([dfda203](https://github.com/peerigon/clockodo/commit/dfda203decd3c4a03b7cfa6ccd2276704fcc6ef7))
+
+## [6.0.2-beta.1](https://github.com/peerigon/clockodo/compare/v6.0.1...v6.0.2-beta.1) (2020-09-08)
+
+
+### Bug Fixes
+
+* Remove const enums ([dfda203](https://github.com/peerigon/clockodo/commit/dfda203decd3c4a03b7cfa6ccd2276704fcc6ef7))
+
 ## [6.0.1](https://github.com/peerigon/clockodo/compare/v6.0.0...v6.0.1) (2020-07-13)
 
 

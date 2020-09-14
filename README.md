@@ -8,7 +8,7 @@
 
 ## Note
 
-We have provided methods for each of the endpoints available by the Clockodo API. We also renamed the request and response object keys from what you will see in the Clockodo docs by removing symbols, converting to camel casing, and in some instances shortening their names. If you are interested, you can find the mappings in the mapKeys.ts file.
+We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mapKeys.ts file](https://github.com/peerigon/clockodo/blob/master/src/internals/utilities/mapKeys.ts).
 
 In general, the first argument for these functions is an object consisting of required parameters. The second is an "options" object for optional parameters.
 
