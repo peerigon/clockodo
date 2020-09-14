@@ -23,15 +23,21 @@ export type TasksReturnType = Promise<{
     }>;
 }>;
 export type EntryGroupsReturnType = Promise<{ groups: Array<EntryGroup> }>;
-export type EditEntryGroupsReturnType = Promise<{ confirmKey: string; affectedEntries: number } | { success: true; editedEntries: number }>;
-export type DeleteEntryGroupsReturnType = Promise<{ confirmKey: string; affectedEntries: number } | { success: true; deletedEntries: number }>;
+export type EditEntryGroupsReturnType = Promise<
+| { confirmKey: string; affectedEntries: number }
+| { success: true; editedEntries: number }
+>;
+export type DeleteEntryGroupsReturnType = Promise<
+| { confirmKey: string; affectedEntries: number }
+| { success: true; deletedEntries: number }
+>;
 export type UserReportReturnType = Promise<{ userreport: UserReport }>;
 export type UserReportsReturnType = Promise<{ userreports: Array<UserReport> }>;
-export type ClockReturnType = Promise<{ running: Entry }>;
-export type ClockStopReturnType = Promise<{ stopped: Entry; running: Entry }>;
-export type ClockEditReturnType = Promise<{ updated: Entry; running: Entry }>;
+export type ClockReturnType = Promise<{ running: null | Entry }>;
+export type ClockStopReturnType = Promise<{ stopped: Entry; running: null | Entry }>;
+export type ClockEditReturnType = Promise<{ updated: Entry; running: null | Entry }>;
 export type ClockUpdateReturnType = Promise<{
-    running: Entry;
+    running: null | Entry;
     services: Array<Service>;
     projects: Array<{ id: number; name: string; access: { add: boolean; edit: boolean } }>;
     billable: { [key: string]: number };
