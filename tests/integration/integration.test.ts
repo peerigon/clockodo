@@ -184,9 +184,9 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                     customersId: lumpSum.customersId,
                     lumpSumsId: lumpSum.lumpSumsId,
                     lumpSumsAmount: lumpSum.lumpSumsAmount,
+                    billable: 2,
                     timeSince: lumpSum.timeSince,
                 }, {
-                    billable: 2,
                     text: lumpSum.text,
                 });
 
