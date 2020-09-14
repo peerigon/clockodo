@@ -1,3 +1,15 @@
+# [7.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.2...v7.0.0-beta.3) (2020-09-14)
+
+
+### Features
+
+* Merge addLumpEntry with addEntry() ([825b72e](https://github.com/peerigon/clockodo/commit/825b72ea6245108fe0e67586503f6edaebf954f2))
+
+
+### BREAKING CHANGES
+
+* addLumpEntry() has been removed. You can use addEntry() to create a recurring lump sum entry.
+
 # [7.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.1...v7.0.0-beta.2) (2020-09-14)
 
 
