@@ -1,3 +1,15 @@
+# [7.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v6.0.2...v7.0.0-beta.1) (2020-09-14)
+
+
+### Bug Fixes
+
+* Required params in addLumpSumEntry ([fae42f8](https://github.com/peerigon/clockodo/commit/fae42f84afbaedb13dac56afa380d2d468753cc2))
+
+
+### BREAKING CHANGES
+
+* The required params of addLumpSumEntry() where not correct. The actual required params are: "customersId", "lumpSumsAmount", "lumpSumsId", "billable", "timeSince". These need to be passed as first argument. All additional params need to be passed as second argument.
+
 ## [6.0.2](https://github.com/peerigon/clockodo/compare/v6.0.1...v6.0.2) (2020-09-14)
 
 
