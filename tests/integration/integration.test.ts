@@ -55,7 +55,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
     });
 
     describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
-        it.only(
+        it(
             "returns expected data format and throws no error",
             async () => {
                 const addEntryResponse = await clockodo.addEntry(
@@ -165,21 +165,21 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
         );
     });
 
-    describe("addLumpSumEntry() and getLumpSumEntriesByUserId()", () => {
+    describe("addEntry() and getLumpSumEntriesByUserId()", () => {
         it(
             "adds and retrieves lump sum entries",
             async () => {
                 const lumpSum = {
                     customersId: 619336,
                     lumpSumsId: 4966,
-                    billable: 1,
                     lumpSumsAmount: 6.8,
+                    billable: 1,
                     timeSince: "2019-12-16 14:59:00",
                     text: "desc",
                 };
 
                 expect.assertions(2);
-                const data = await clockodo.addLumpSumEntry({
+                const data = await clockodo.addEntry({
                     customersId: lumpSum.customersId,
                     lumpSumsId: lumpSum.lumpSumsId,
                     lumpSumsAmount: lumpSum.lumpSumsAmount,

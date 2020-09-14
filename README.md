@@ -483,14 +483,21 @@ clockodo.addCustomer({ name: "Weyland-Yutani" }, options).then(console.log);
 
 ### addEntry()
 
-Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Arguments `duration`, `timeSince`, and `timeUntil` are listed as optional (when using their website you can have the duration modify the start or end times).
+Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Depending on the type of entry different properties are required:
+
+Type of entry | Required properties
+:-------------|:-------------------
+Time entry | `customersId`, `servicesId`, `billable`, `timeSince`, `timeUntil`
+Lump sum entry | `customersId`, `servicesId`, `billable`, `timeSince`, `lumpSum`
+Recurring lump sum entry | `customersId`, `lumpSumsAmount`, `lumpSumsId`, `billable`, `timeSince`
 
 #### Example:
 
 ```js
 clockodo
     .addEntry(
-        { customersId: 1, servicesId: 2, billable: ENTRY_BILLABLE },
+        { customersId: 1, servicesId: 2, billable: ENTRY_BILLABLE,
+        timeSince: "2018-10-01 00:00:00", timeUntil: "2018-10-01 03:00:00" },
         options
     )
     .then(console.log);

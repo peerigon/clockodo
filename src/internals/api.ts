@@ -289,13 +289,21 @@ export class Clockodo {
             billable: Billable;
             timeSince: string;
             lumpSum: number;
+        } | {
+            customersId: number;
+            lumpSumsId: number;
+            lumpSumsAmount: number;
+            billable: Billable;
+            timeSince: string;
         },
         options?: object
     ): EntryReturnType {
         if ("timeUntil" in requiredArguments) {
-            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY_TIME);
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
+        } else if ("lumpSum" in requiredArguments) {
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_LUMP_SUM_ENTRY);
         } else {
-            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY_LUMP_SUM);
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_RECURRING_LUMP_SUM_ENTRY);
         }
 
         return this[clockodoApi].post("/entries", {
@@ -427,37 +435,6 @@ export class Clockodo {
             timeSince,
             timeUntil,
             filterUsersId: usersId,
-            ...options,
-        });
-    }
-
-    async addLumpSumEntry({
-        customersId,
-        lumpSumsAmount,
-        lumpSumsId,
-        billable,
-        timeSince,
-    }: {
-        customersId: number;
-        lumpSumsId: number;
-        lumpSumsAmount: number;
-        billable: Billable;
-        timeSince: string;
-    }, options?: object): EntryReturnType {
-        REQUIRED.checkRequired({
-            customersId,
-            lumpSumsId,
-            lumpSumsAmount,
-            billable,
-            timeSince,
-        }, REQUIRED.ADD_LUMP_SUM);
-
-        return this[clockodoApi].post("/entries/", {
-            billable,
-            customersId,
-            lumpSumsAmount,
-            lumpSumsId,
-            timeSince,
             ...options,
         });
     }

@@ -637,7 +637,12 @@ describe("Clockodo (instance)", () => {
 
                 return expect(
                     clockodo.addEntry(
-                        {customersId: 1, servicesId: 2} as any
+                        {
+                            customersId: 1,
+                            servicesId: 2,
+                            timeSince: "2020-06-02 00:00:00",
+                            timeUntil: "2020-06-02 00:00:01",
+                        } as any
                     )
                 ).rejects.toThrowError('Missing required parameter "billable"');
             });
