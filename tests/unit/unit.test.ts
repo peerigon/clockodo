@@ -610,6 +610,8 @@ describe("Clockodo (instance)", () => {
                     customers_id: 1,
                     services_id: 2,
                     billable: ENTRY_BILLABLE,
+                    time_since: "2020-06-02 00:00:00",
+                    time_until: "2020-06-02 00:00:01",
                     text: "this is an optional description",
                 };
 
@@ -622,6 +624,8 @@ describe("Clockodo (instance)", () => {
                         customersId: 1,
                         servicesId: 2,
                         billable: ENTRY_BILLABLE,
+                        timeSince: "2020-06-02 00:00:00",
+                        timeUntil: "2020-06-02 00:00:01",
                     },
                     params
                 );

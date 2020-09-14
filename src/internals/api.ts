@@ -277,14 +277,31 @@ export class Clockodo {
     }
 
     async addEntry(
-        {customersId, servicesId, billable}: { customersId: number; servicesId: number; billable: Billable },
+        requiredArguments: {
+            customersId: number;
+            servicesId: number;
+            billable: Billable;
+            timeSince: string;
+            timeUntil: string;
+        } | {
+            customersId: number;
+            servicesId: number;
+            billable: Billable;
+            timeSince: string;
+            lumpSum: number;
+        },
         options?: object
     ): EntryReturnType {
-        const requiredArguments = {customersId, servicesId, billable};
+        if ("timeUntil" in requiredArguments) {
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY_TIME);
+        } else {
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY_LUMP_SUM);
+        }
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ENTRY);
-
-        return this[clockodoApi].post("/entries", {...requiredArguments, ...options});
+        return this[clockodoApi].post("/entries", {
+            ...requiredArguments,
+            ...options,
+        });
     }
 
     async addAbsence(

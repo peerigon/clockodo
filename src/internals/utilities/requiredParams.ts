@@ -1,6 +1,7 @@
 export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"];
 export const ADD_CUSTOMER = ["name"];
-export const ADD_ENTRY = ["customersId", "servicesId", "billable"];
+export const ADD_ENTRY_TIME = ["customersId", "servicesId", "billable", "timeSince", "timeUntil"];
+export const ADD_ENTRY_LUMP_SUM = ["customersId", "servicesId", "billable", "timeSince", "lumpSum"];
 export const ADD_PROJECT = ["name", "customersId"];
 export const ADD_SERVICE = ["name"];
 export const ADD_USER = ["name", "number", "email", "role"];

@@ -13,6 +13,12 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
         apiKey: process.env.CLOCKODO_API_KEY,
     });
 
+    const entryShape = {
+        id: expect.any(Number),
+        usersId: expect.any(Number),
+        timeSince: expect.stringMatching(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/),
+    };
+
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
             const expectedKeys = ["id", "name", "number", "email", "role", "active", "editLock", "editLockDyn"];
@@ -43,6 +49,66 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                 expect(data.entries[0]).toHaveProperty("id");
                 expect(data.entries[0]).toHaveProperty("duration");
                 expect(data.entries[0]).toHaveProperty("budget");
+            },
+            10000
+        );
+    });
+
+    describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
+        it.only(
+            "returns expected data format and throws no error",
+            async () => {
+                const addEntryResponse = await clockodo.addEntry(
+                    {
+                        customersId: 619336,
+                        servicesId: 288646,
+                        billable: 1,
+                        timeSince: "2020-06-02 00:00:00",
+                        timeUntil: "2020-06-02 00:00:01",
+                    },
+                    {
+                        text: "Time entry",
+                    },
+                );
+
+                await clockodo.addEntry(
+                    {
+                        customersId: 619336,
+                        servicesId: 288646,
+                        billable: 2,
+                        timeSince: "2020-06-02 00:00:00",
+                        lumpSum: 123,
+                    },
+                    {
+                        text: "Lumpsum entry",
+                    },
+                );
+
+                expect(addEntryResponse).toMatchObject({
+                    entry: entryShape,
+                });
+
+                const getEntryResponse = await clockodo.getEntry({
+                    id: addEntryResponse.entry.id,
+                });
+
+                expect(getEntryResponse).toMatchObject(addEntryResponse);
+
+                const editEntryResponse = await clockodo.editEntry({entryId: addEntryResponse.entry.id}, {billable: 2});
+
+                expect(editEntryResponse).toMatchObject({
+                    entry: {
+                        ...entryShape,
+                        billable: 1,
+                        billed: true,
+                    },
+                });
+
+                const deleteEntryResponse = await clockodo.deleteEntry({entryId: addEntryResponse.entry.id});
+
+                expect(deleteEntryResponse).toMatchObject({
+                    success: true,
+                });
             },
             10000
         );
