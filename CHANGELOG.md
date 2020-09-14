@@ -1,3 +1,11 @@
+# [7.0.0-beta.4](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.3...v7.0.0-beta.4) (2020-09-14)
+
+
+### Bug Fixes
+
+* billable not required when calling addEntry() with a lumpsum entry ([f422119](https://github.com/peerigon/clockodo/commit/f422119df88cc976c41103dea11400b4549211fb))
+* **Types:** Make running-propety in return types optional ([7b83d14](https://github.com/peerigon/clockodo/commit/7b83d1465625a803aeabad5376f575dd2297a799))
+
 # [7.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.2...v7.0.0-beta.3) (2020-09-14)
 
 
