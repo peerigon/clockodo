@@ -416,38 +416,31 @@ export class Clockodo {
 
     async addLumpSumEntry({
         customersId,
-        projectsId,
         lumpSumsAmount,
         lumpSumsId,
-        text,
+        billable,
         timeSince,
-        usersId,
     }: {
         customersId: number;
-        projectsId?: number;
         lumpSumsId: number;
         lumpSumsAmount: number;
+        billable: Billable;
         timeSince: string;
-        text: string;
-        usersId?: number;
     }, options?: object): EntryReturnType {
         REQUIRED.checkRequired({
             customersId,
             lumpSumsId,
             lumpSumsAmount,
-            text,
+            billable,
             timeSince,
         }, REQUIRED.ADD_LUMP_SUM);
 
         return this[clockodoApi].post("/entries/", {
-            billable: 1,
+            billable,
             customersId,
             lumpSumsAmount,
             lumpSumsId,
-            text,
             timeSince,
-            projectsId,
-            usersId,
             ...options,
         });
     }

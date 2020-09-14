@@ -99,7 +99,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
         );
     });
 
-    describe("lump sum entry methods", () => {
+    describe("addLumpSumEntry() and getLumpSumEntriesByUserId()", () => {
         it(
             "adds and retrieves lump sum entries",
             async () => {
@@ -114,7 +114,13 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
 
                 expect.assertions(2);
                 const data = await clockodo.addLumpSumEntry({
-                    ...lumpSum,
+                    customersId: lumpSum.customersId,
+                    lumpSumsId: lumpSum.lumpSumsId,
+                    lumpSumsAmount: lumpSum.lumpSumsAmount,
+                    billable: lumpSum.billable,
+                    timeSince: lumpSum.timeSince,
+                }, {
+                    text: lumpSum.text,
                 });
 
                 expect(data.entry).toMatchObject({
