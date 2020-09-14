@@ -165,7 +165,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
         );
     });
 
-    describe("addEntry() and getLumpSumEntriesByUserId()", () => {
+    describe("addEntry() and getEntry()", () => {
         it(
             "adds and retrieves lump sum entries",
             async () => {
@@ -174,6 +174,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                     lumpSumsId: 4966,
                     lumpSumsAmount: 6.8,
                     billable: 1,
+                    billed: true,
                     timeSince: "2019-12-16 14:59:00",
                     text: "desc",
                 };
@@ -183,20 +184,13 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                     customersId: lumpSum.customersId,
                     lumpSumsId: lumpSum.lumpSumsId,
                     lumpSumsAmount: lumpSum.lumpSumsAmount,
-                    billable: lumpSum.billable,
                     timeSince: lumpSum.timeSince,
                 }, {
+                    billable: 2,
                     text: lumpSum.text,
                 });
 
-                expect(data.entry).toMatchObject({
-                    customersId: lumpSum.customersId,
-                    lumpSumsId: lumpSum.lumpSumsId,
-                    billable: lumpSum.billable,
-                    lumpSumsAmount: lumpSum.lumpSumsAmount,
-                    timeSince: lumpSum.timeSince,
-                    text: lumpSum.text,
-                });
+                expect(data.entry).toMatchObject(lumpSum);
 
                 const result = await clockodo.getLumpSumEntriesByUserId({
                     lumpSumEntryId: 4966,
@@ -205,14 +199,7 @@ const hasCredentials = typeof process.env.CLOCKODO_USER === "string" && typeof p
                     usersId: 62488,
                 });
 
-                expect(result.entries[0]).toMatchObject({
-                    customersId: lumpSum.customersId,
-                    lumpSumsId: lumpSum.lumpSumsId,
-                    billable: lumpSum.billable,
-                    lumpSumsAmount: lumpSum.lumpSumsAmount,
-                    timeSince: lumpSum.timeSince,
-                    text: lumpSum.text,
-                });
+                expect(result.entries[0]).toMatchObject(lumpSum);
 
                 await clockodo.deleteEntry({
                     entryId: data.entry.id,

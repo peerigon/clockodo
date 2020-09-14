@@ -286,14 +286,12 @@ export class Clockodo {
         } | {
             customersId: number;
             servicesId: number;
-            billable: Billable;
             timeSince: string;
             lumpSum: number;
         } | {
             customersId: number;
             lumpSumsId: number;
             lumpSumsAmount: number;
-            billable: Billable;
             timeSince: string;
         },
         options?: object
