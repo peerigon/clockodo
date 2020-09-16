@@ -1,3 +1,10 @@
+# [7.0.0-beta.5](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.4...v7.0.0-beta.5) (2020-09-14)
+
+
+### Bug Fixes
+
+* Make billable required again for addEntry() ([dda2bc8](https://github.com/peerigon/clockodo/commit/dda2bc8a004ba5966fa329952475d4ba96717cfb))
+
 # [7.0.0-beta.4](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.3...v7.0.0-beta.4) (2020-09-14)
 
 
