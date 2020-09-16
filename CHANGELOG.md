@@ -1,3 +1,13 @@
+# [7.0.0-beta.6](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.5...v7.0.0-beta.6) (2020-09-16)
+
+
+* Update esLint and use lint-staged + prettier ([74abf23](https://github.com/peerigon/clockodo/commit/74abf23a2210590d9e14287962f9bce76f656797))
+
+
+### BREAKING CHANGES
+
+* The Clockodo class uses arrow functions as methods.
+
 # [7.0.0-beta.5](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.4...v7.0.0-beta.5) (2020-09-14)
 
 
