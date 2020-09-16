@@ -1,6 +1,5 @@
-
 // ? API for Absences says countDays twice. I am guessing the second time should be their countHours
-const paramMapping = {
+const paramMapping: Record<string, string> = {
     timeSince: "time_since",
     timeUntil: "time_until",
     filterUsersId: "filter[users_id]",
@@ -18,7 +17,8 @@ const paramMapping = {
     taskText: "task[text]",
     roundToMinutes: "round_to_minutes",
     prependCustomerToProjectName: "prepend_customer_to_project_name",
-    calcAlsoRevenuesForProjectsWithHardBudget: "calc_also_revenues_for_projects_with_hard_budget",
+    calcAlsoRevenuesForProjectsWithHardBudget:
+        "calc_also_revenues_for_projects_with_hard_budget",
     customersId: "customers_id",
     projectsId: "projects_id",
     servicesId: "services_id",
@@ -46,11 +46,14 @@ const paramMapping = {
     lumpSumsId: "lumpSums_id",
 };
 
-const mapKeys = (userParams) => {
-    const apiParams = {};
+const mapKeys = (userParams: Record<string, string>) => {
+    const apiParams: Record<string, string> = {};
 
     for (const [userParamName, value] of Object.entries(userParams)) {
-        const apiParamName = userParamName in paramMapping ? paramMapping[userParamName] : userParamName;
+        const apiParamName =
+            userParamName in paramMapping
+                ? paramMapping[userParamName]
+                : userParamName;
 
         apiParams[apiParamName] = value;
     }
