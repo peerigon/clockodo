@@ -1,3 +1,15 @@
+# [7.0.0-beta.8](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.7...v7.0.0-beta.8) (2020-12-01)
+
+
+### Features
+
+* Improve query and property mapping ([6dadcd0](https://github.com/peerigon/clockodo/commit/6dadcd0e9d9f80900a9f83dacfbd20cd949d08cd)), closes [#52](https://github.com/peerigon/clockodo/issues/52) [#60](https://github.com/peerigon/clockodo/issues/60)
+
+
+### BREAKING CHANGES
+
+* The mapping between camelCase and snake_case has been streamlined and improved. You might observe different behavior if you relied on the previous (buggy) implementation.
+
 # [7.0.0-beta.7](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.6...v7.0.0-beta.7) (2020-09-16)
 
 
