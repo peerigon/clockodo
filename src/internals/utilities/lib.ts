@@ -1,12 +1,11 @@
 import axios from "axios";
-import camelCaseKeys from "camelcase-keys";
 import qs from "qs";
 import { axiosClient } from "./symbols";
-import mapKeys from "./mapKeys";
+import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings";
 
 const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 
-const transformRequestOptions = (params: Record<string, string>) => {
+const paramsSerializer = (params: Record<string, string>) => {
     const urlParams = [];
 
     for (const [key, value] of Object.entries(params)) {
@@ -45,58 +44,47 @@ export class ClockodoLib {
         };
 
         this[axiosClient] = axios.create(baseConfig);
+
+        // this[axiosClient].interceptors.request.use(function (config) {
+        //     // Do something before request is sent
+        //     console.log(config);
+
+        //     return config;
+        // });
     }
 
     get = async <Result = any>(
-        resource: string,
-        params = {}
+        url: string,
+        queryParams = {}
     ): Promise<Result> => {
-        const response = await this[axiosClient].get(resource, {
-            params: mapKeys(params),
-            paramsSerializer: transformRequestOptions,
+        const response = await this[axiosClient].get(url, {
+            params: mapQueryParams(queryParams),
+            paramsSerializer,
         });
 
-        return camelCaseKeys(response.data, { deep: true }) as Result;
+        return mapResponseBody(response.data) as Result;
     };
 
-    post = async <Result = any>(
-        resource: string,
-        params = {}
-    ): Promise<Result> => {
-        const mappedObj = mapKeys(params);
-        const response = await this[axiosClient].post(resource, mappedObj);
-
-        return camelCaseKeys(response.data, { deep: true }) as Result;
-    };
-
-    put = async <Result = any>(
-        resource: string,
-        params = {}
-    ): Promise<Result> => {
-        const mappedObj = mapKeys(params);
-
-        const response = await this[axiosClient].put(
-            resource,
-            qs.stringify(mappedObj),
-            {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            }
+    post = async <Result = any>(url: string, body = {}): Promise<Result> => {
+        const response = await this[axiosClient].post(
+            url,
+            mapRequestBody(body)
         );
 
-        return camelCaseKeys(response.data, { deep: true }) as Result;
+        return mapResponseBody(response.data) as Result;
     };
 
-    delete = async <Result = any>(
-        resource: string,
-        params = {}
-    ): Promise<Result> => {
-        const mappedObj = mapKeys(params);
-        const response = await this[axiosClient].delete(resource, {
-            data: mappedObj,
+    put = async <Result = any>(url: string, body = {}): Promise<Result> => {
+        const response = await this[axiosClient].put(url, mapRequestBody(body));
+
+        return mapResponseBody(response.data) as Result;
+    };
+
+    delete = async <Result = any>(url: string, body = {}): Promise<Result> => {
+        const response = await this[axiosClient].delete(url, {
+            data: mapRequestBody(body),
         });
 
-        return camelCaseKeys(response.data, { deep: true }) as Result;
+        return mapResponseBody(response.data) as Result;
     };
 }

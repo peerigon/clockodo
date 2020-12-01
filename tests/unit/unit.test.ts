@@ -687,13 +687,13 @@ describe("Clockodo (instance)", () => {
         describe("changeClockDuration()", () => {
             it("correctly builds changeClockDuration() request", async () => {
                 const params = {
-                    offsetBefore: "60",
+                    offsetBefore: 60,
                 };
 
                 const expectedParameters = {
-                    duration_before: "300",
-                    duration: "540",
-                    offset_before: "60",
+                    duration_before: 300,
+                    duration: 540,
+                    offset_before: 60,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
