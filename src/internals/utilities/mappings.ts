@@ -21,8 +21,10 @@ const queryParamMapping: Record<string, string> = {
     excludeIds: "excludeIds",
 };
 
-export const mapQueryParams = <Value>(userParams: Record<string, Value>) => {
-    const apiParams: Record<string, Value> = {};
+export const mapQueryParams = <Result = any>(
+    userParams: Record<string, any>
+) => {
+    const apiParams: Record<string, any> = {};
 
     for (const [userParamName, value] of Object.entries(userParams)) {
         const apiParamName =
@@ -33,13 +35,16 @@ export const mapQueryParams = <Value>(userParams: Record<string, Value>) => {
         apiParams[apiParamName] = value;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return snakecaseKeys(apiParams, {
         deep: true,
         exclude: Object.values(queryParamMapping),
-    });
+    }) as Result;
 };
 
-export const mapRequestBody = <Value>(requestBody: Record<string, Value>) => {
+export const mapRequestBody = <Result = any>(
+    requestBody: Record<string, any>
+) => {
     /* eslint-disable @typescript-eslint/naming-convention */
     const {
         // The following keys are a mixture between camelCase and snake_case.
@@ -50,16 +55,17 @@ export const mapRequestBody = <Value>(requestBody: Record<string, Value>) => {
         ...entryWithoutLumpSums
     } = snakecaseKeys(requestBody, { deep: true });
 
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    return {
+    return ({
         ...entryWithoutLumpSums,
         lumpSum: lump_sum,
         lumpSums_amount: lump_sums_amount,
         lumpSums_id: lump_sums_id,
-    } as Record<string, Value>;
+    } as any) as Result;
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
-export const mapResponseBody = <Value>(responseBody: Record<string, Value>) => {
-    return camelcaseKeys(responseBody, { deep: true });
+export const mapResponseBody = <Result = any>(
+    responseBody: Record<string, any>
+) => {
+    return camelcaseKeys(responseBody, { deep: true }) as Result;
 };

@@ -44,13 +44,6 @@ export class ClockodoLib {
         };
 
         this[axiosClient] = axios.create(baseConfig);
-
-        // this[axiosClient].interceptors.request.use(function (config) {
-        //     // Do something before request is sent
-        //     console.log(config);
-
-        //     return config;
-        // });
     }
 
     get = async <Result = any>(
@@ -62,7 +55,7 @@ export class ClockodoLib {
             paramsSerializer,
         });
 
-        return mapResponseBody(response.data) as Result;
+        return mapResponseBody<Result>(response.data);
     };
 
     post = async <Result = any>(url: string, body = {}): Promise<Result> => {
@@ -71,13 +64,13 @@ export class ClockodoLib {
             mapRequestBody(body)
         );
 
-        return mapResponseBody(response.data) as Result;
+        return mapResponseBody<Result>(response.data);
     };
 
     put = async <Result = any>(url: string, body = {}): Promise<Result> => {
         const response = await this[axiosClient].put(url, mapRequestBody(body));
 
-        return mapResponseBody(response.data) as Result;
+        return mapResponseBody<Result>(response.data);
     };
 
     delete = async <Result = any>(url: string, body = {}): Promise<Result> => {
@@ -85,6 +78,6 @@ export class ClockodoLib {
             data: mapRequestBody(body),
         });
 
-        return mapResponseBody(response.data) as Result;
+        return mapResponseBody<Result>(response.data);
     };
 }
