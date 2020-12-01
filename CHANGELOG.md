@@ -1,3 +1,15 @@
+# [7.0.0-beta.7](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.6...v7.0.0-beta.7) (2020-09-16)
+
+
+### chore
+
+* Drop official support for Node 8 ([668decf](https://github.com/peerigon/clockodo/commit/668decf7ceedb6f628338e024e564d9f0d35b992))
+
+
+### BREAKING CHANGES
+
+* Our test pipeline does not execute our tests for Node 8 anymore. There is no breaking change we know of but we don't guarantee that it will work on Node 8.
+
 # [7.0.0-beta.6](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.5...v7.0.0-beta.6) (2020-09-16)
 
 
