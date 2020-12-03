@@ -173,7 +173,7 @@ export type UserReportDay = {
     countSick: number;
     countRegularHolidays: number;
     countSpecialLeaves: number;
-    countHolidas: number;
+    countHolidays: number;
     countOtReductionUsed: number;
     target: number;
     targetRaw: number;
