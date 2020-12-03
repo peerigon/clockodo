@@ -1,3 +1,39 @@
+# [7.0.0](https://github.com/peerigon/clockodo/compare/v6.0.2...v7.0.0) (2020-12-03)
+
+
+### Bug Fixes
+
+* billable not required when calling addEntry() with a lumpsum entry ([f422119](https://github.com/peerigon/clockodo/commit/f422119df88cc976c41103dea11400b4549211fb))
+* Incorrect addEntry() params ([1603410](https://github.com/peerigon/clockodo/commit/1603410eb6be6cbb85693ed08874f2541d91b225))
+* Make billable required again for addEntry() ([dda2bc8](https://github.com/peerigon/clockodo/commit/dda2bc8a004ba5966fa329952475d4ba96717cfb))
+* typo ([6c4810c](https://github.com/peerigon/clockodo/commit/6c4810c7b95d9272876eac2c2c5b1617c885f03e))
+* **Types:** Make running-propety in return types optional ([7b83d14](https://github.com/peerigon/clockodo/commit/7b83d1465625a803aeabad5376f575dd2297a799))
+* Required params in addLumpSumEntry ([fae42f8](https://github.com/peerigon/clockodo/commit/fae42f84afbaedb13dac56afa380d2d468753cc2))
+
+
+### chore
+
+* Drop official support for Node 8 ([668decf](https://github.com/peerigon/clockodo/commit/668decf7ceedb6f628338e024e564d9f0d35b992))
+
+
+### Features
+
+* Improve query and property mapping ([6dadcd0](https://github.com/peerigon/clockodo/commit/6dadcd0e9d9f80900a9f83dacfbd20cd949d08cd)), closes [#52](https://github.com/peerigon/clockodo/issues/52) [#60](https://github.com/peerigon/clockodo/issues/60)
+* Merge addLumpEntry with addEntry() ([825b72e](https://github.com/peerigon/clockodo/commit/825b72ea6245108fe0e67586503f6edaebf954f2))
+
+
+* Update esLint and use lint-staged + prettier ([74abf23](https://github.com/peerigon/clockodo/commit/74abf23a2210590d9e14287962f9bce76f656797))
+
+
+### BREAKING CHANGES
+
+* The mapping between camelCase and snake_case has been streamlined and improved. You might observe different behavior if you relied on the previous (buggy) implementation.
+* Our test pipeline does not execute our tests for Node 8 anymore. There is no breaking change we know of but we don't guarantee that it will work on Node 8.
+* The Clockodo class uses arrow functions as methods.
+* addLumpEntry() has been removed. You can use addEntry() to create a recurring lump sum entry.
+* addEntry() actually requires different params based on what type of entry you want to create. If you want to create a time entry, you need to pass timeUntil. If you want to create a lump sum entry, you need to pass a lumpSum.
+* The required params of addLumpSumEntry() where not correct. The actual required params are: "customersId", "lumpSumsAmount", "lumpSumsId", "billable", "timeSince". These need to be passed as first argument. All additional params need to be passed as second argument.
+
 # [7.0.0-beta.8](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.7...v7.0.0-beta.8) (2020-12-01)
 
 ### Features
