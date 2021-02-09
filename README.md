@@ -30,8 +30,10 @@ Then require the package. For the constructor arguments, you must get the user (
 const { Clockodo } = require("clockodo");
 
 const clockodoApi = new Clockodo({
-    user: "test-user@example.com",
-    apiKey: "kjfdskj643fgnlksf343kdslm"
+    authentication: {
+        user: "test-user@example.com",
+        apiKey: "kjfdskj643fgnlksf343kdslm",
+    },
 });
 ```
 
@@ -41,13 +43,14 @@ It is also possible to create a Clockodo instance with **caching**. This means t
 const { Clockodo } = require("clockodo");
 const { cachePlugin } = require("clockodo/plugins/cache");
 
-
 const clockodoApi = new Clockodo({
-    user: "test-user@example.com",
-    apiKey: "kjfdskj643fgnlksf343kdslm"
+    authentication: {
+        user: "test-user@example.com",
+        apiKey: "kjfdskj643fgnlksf343kdslm",
+    },
 });
 
-clockodoApi.use(cachePlugin({cacheTime:  15 * 60 * 1000}))   // cache of 15 minutes
+clockodoApi.use(cachePlugin({ cacheTime: 15 * 60 * 1000 })); // cache of 15 minutes
 ```
 
 Some constants are also available for import:
@@ -73,8 +76,10 @@ ABSENCE_STATUS_REQUEST_CANCELLED = 4;
 const { Clockodo } = require("clockodo");
 
 const clockodoApi = new Clockodo({
-    user: "test-user@example.com",
-    apiKey: "kjfdskj643fgnlksf343kdslm"
+    authentication: {
+        user: "test-user@example.com",
+        apiKey: "kjfdskj643fgnlksf343kdslm"
+    },
 });
 
 // Find the ID of your employee named Hagrid
@@ -244,7 +249,7 @@ Gets list of Clockodo activity entries.
 ```js
 // "object passed in" approach for options (also using one of the exported constants)!
 const options = {
-    filterBillable: ENTRY_BILLED
+    filterBillable: ENTRY_BILLED,
 };
 clockodo
     .getEntries(
@@ -269,7 +274,7 @@ clockodo
         {
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
-            grouping: ["customers_id", "projects_id"]
+            grouping: ["customers_id", "projects_id"],
         },
         { roundToMinutes: 15 }
     )
@@ -299,7 +304,7 @@ Get the description(s) of the requested entries.
 ```js
 clockodo
     .getSearchTexts({
-        projectsId: 300
+        projectsId: 300,
     })
     .then(console.log);
 ```
@@ -365,7 +370,7 @@ Get Clockodo Tasks (grouped entries).
 ```js
 clockodo
     .getTasks({
-        count: 6
+        count: 6,
     })
     .then(console.log);
 ```
@@ -386,7 +391,7 @@ clockodo
             taskProjectsId: 25,
             taskServicesId: 42,
             taskText: "clean the dishes",
-            taskBillable: 1
+            taskBillable: 1,
         },
         { excludeIds: [217, 450] }
     )
@@ -457,11 +462,11 @@ clockodo
         {
             dateSince: "2017-08-18 00:00:00",
             dateUntil: "2018-02-09 00:00:00",
-            type: ABSENCE_TYPE_SPECIAL_LEAVE
+            type: ABSENCE_TYPE_SPECIAL_LEAVE,
         },
         {
             note: "elternzeit",
-            usersId: 12321
+            usersId: 12321,
         }
     )
     .then(console.log);
@@ -485,19 +490,24 @@ clockodo.addCustomer({ name: "Weyland-Yutani" }, options).then(console.log);
 
 Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Depending on the type of entry different properties are required:
 
-Type of entry | Required properties
-:-------------|:-------------------
-Time entry | `customersId`, `servicesId`, `billable`, `timeSince`, `timeUntil`
-Lump sum entry | `customersId`, `servicesId`, `billable`, `timeSince`, `lumpSum`
-Recurring lump sum entry | `customersId`, `lumpSumsAmount`, `lumpSumsId`, `billable`, `timeSince`
+| Type of entry            | Required properties                                                    |
+| :----------------------- | :--------------------------------------------------------------------- |
+| Time entry               | `customersId`, `servicesId`, `billable`, `timeSince`, `timeUntil`      |
+| Lump sum entry           | `customersId`, `servicesId`, `billable`, `timeSince`, `lumpSum`        |
+| Recurring lump sum entry | `customersId`, `lumpSumsAmount`, `lumpSumsId`, `billable`, `timeSince` |
 
 #### Example:
 
 ```js
 clockodo
     .addEntry(
-        { customersId: 1, servicesId: 2, billable: ENTRY_BILLABLE,
-        timeSince: "2018-10-01 00:00:00", timeUntil: "2018-10-01 03:00:00" },
+        {
+            customersId: 1,
+            servicesId: 2,
+            billable: ENTRY_BILLABLE,
+            timeSince: "2018-10-01 00:00:00",
+            timeUntil: "2018-10-01 03:00:00",
+        },
         options
     )
     .then(console.log);
@@ -543,7 +553,7 @@ clockodo
         name: "Merkel",
         number: "08",
         email: "angela@eu.eu",
-        role: "Chancellor"
+        role: "Chancellor",
     })
     .then(console.log);
 ```
@@ -561,7 +571,7 @@ clockodo
     .startClock(
         { customersId: 24, servicesId: 7, billable: ENTRY_BILLABLE },
         {
-            projectsId: 365
+            projectsId: 365,
         }
     )
     .then(console.log);
@@ -582,7 +592,7 @@ clockodo
     .changeClockDuration(
         { entryId: 7082, duration: 540, durationBefore: 300 },
         {
-            offsetBefore: 60
+            offsetBefore: 60,
         }
     )
     .then(console.log);
@@ -598,10 +608,7 @@ Edit existing Clockodo absence.
 
 ```js
 clockodo
-    .editAbsence(
-        { absenceId: 74 },
-        { note: "I know what he did last summer" }
-    )
+    .editAbsence({ absenceId: 74 }, { note: "I know what he did last summer" })
     .then(console.log);
 ```
 
@@ -618,7 +625,7 @@ clockodo
     .editCustomer(
         { customersId: 15 },
         {
-            name: "The Mystery Gang"
+            name: "The Mystery Gang",
         }
     )
     .then(console.log);
@@ -637,7 +644,7 @@ clockodo
     .editEntry(
         { entryId: 365 },
         {
-            duration: 540
+            duration: 540,
         }
     )
     .then(console.log);
@@ -657,7 +664,7 @@ clockodo
         { timeSince: "2017-08-18 00:00:00", timeUntil: "2018-02-09 00:00:00" },
         {
             filterText: "Browsing Reddit",
-            billable: ENTRY_UNBILLABLE
+            billable: ENTRY_UNBILLABLE,
         }
     )
     .then(console.log);
@@ -702,7 +709,7 @@ clockodo
     .editUser(
         { usersId: 33 },
         {
-            name: "Moalo Loco"
+            name: "Moalo Loco",
         }
     )
     .then(console.log);
@@ -783,7 +790,7 @@ clockodo
     .deleteEntryGroup(
         { timeSince: "2017-08-18 00:00:00", timeUntil: "2018-02-09 00:00:00" },
         {
-            text: "chilin everyday"
+            text: "chilin everyday",
         }
     )
     .then(console.log);
