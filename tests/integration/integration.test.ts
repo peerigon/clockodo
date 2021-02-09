@@ -14,7 +14,9 @@ const hasCredentials =
     const entryShape = {
         id: expect.any(Number),
         usersId: expect.any(Number),
-        timeSince: expect.stringMatching(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/),
+        timeSince: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
+        ),
     };
 
     beforeAll(() => {
@@ -41,8 +43,6 @@ const hasCredentials =
                 "editLockDyn",
             ];
 
-            expect.assertions(1);
-
             const data = await clockodo.getUsers();
 
             expect(Object.keys(data.users[0]).sort()).toEqual(
@@ -57,8 +57,6 @@ const hasCredentials =
                 filterBillable: ENTRY_BILLABLE,
             };
 
-            expect.assertions(3);
-
             const data = await clockodo.getEntries(
                 {
                     timeSince: TIME_SINCE,
@@ -71,24 +69,6 @@ const hasCredentials =
             expect(data.entries[0]).toHaveProperty("duration");
             expect(data.entries[0]).toHaveProperty("budget");
         });
-        it("returns the entries with ISO UTC date times", async () => {
-            clockodo.api.config({ enableIsoUtcDateTimes: true });
-
-            const data = await clockodo.getEntries({
-                timeSince: TIME_SINCE,
-                timeUntil: TIME_UNTIL,
-            });
-
-            expect(data.entries.length).toBeGreaterThan(0);
-
-            data.entries.forEach((entry) => {
-                expect(entry.timeSince).toMatch(
-                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
-                );
-            });
-
-            clockodo.api.config({ enableIsoUtcDateTimes: false });
-        });
     });
 
     describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
@@ -98,8 +78,8 @@ const hasCredentials =
                     customersId: 619336,
                     servicesId: 288646,
                     billable: 1,
-                    timeSince: "2020-06-02 00:00:00",
-                    timeUntil: "2020-06-02 00:00:01",
+                    timeSince: "2020-06-02T00:00:00Z",
+                    timeUntil: "2020-06-02T00:00:01Z",
                 },
                 {
                     text: "Time entry",
@@ -111,7 +91,7 @@ const hasCredentials =
                     customersId: 619336,
                     servicesId: 288646,
                     billable: 2,
-                    timeSince: "2020-06-02 00:00:00",
+                    timeSince: "2020-06-02T00:00:00Z",
                     lumpSum: 123,
                 },
                 {
@@ -154,8 +134,6 @@ const hasCredentials =
 
     describe("getEntryGroups()", () => {
         it("returns expected data format with one group passed", async () => {
-            expect.assertions(3);
-
             const data = await clockodo.getEntryGroups({
                 timeSince: TIME_SINCE,
                 timeUntil: TIME_UNTIL,
@@ -167,8 +145,6 @@ const hasCredentials =
             expect(data.groups[0]).toHaveProperty("name");
         });
         it("returns expected data format with multiple groups passed", async () => {
-            expect.assertions(3);
-
             const data = await clockodo.getEntryGroups({
                 timeSince: TIME_SINCE,
                 timeUntil: TIME_UNTIL,
@@ -183,8 +159,6 @@ const hasCredentials =
 
     describe("getClock()", () => {
         it("returns expected data format", async () => {
-            expect.assertions(1);
-
             const data = await clockodo.getClock();
 
             expect(data).toHaveProperty("running");
@@ -199,11 +173,10 @@ const hasCredentials =
                 lumpSumsAmount: 6.8,
                 billable: 1,
                 billed: true,
-                timeSince: "2019-12-16 14:59:00",
+                timeSince: "2020-12-16T14:59:00Z",
                 text: "desc",
             };
 
-            expect.assertions(2);
             const data = await clockodo.addEntry(
                 {
                     customersId: lumpSum.customersId,
@@ -221,8 +194,8 @@ const hasCredentials =
 
             const result = await clockodo.getLumpSumEntriesByUserId({
                 lumpSumEntryId: 4966,
-                timeSince: "2019-12-16 00:01:00",
-                timeUntil: "2019-12-16 23:59:00",
+                timeSince: "2020-12-16T00:01:00Z",
+                timeUntil: "2020-12-16T23:59:00Z",
                 usersId: 62488,
             });
 

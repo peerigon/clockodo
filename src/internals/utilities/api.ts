@@ -31,18 +31,21 @@ export type Authentication = {
 export type Config = {
     authentication?: Authentication;
     baseUrl?: string;
-    enableIsoUtcDateTimes?: boolean;
 };
 
 export class Api {
-    [axiosClient] = axios.create();
+    [axiosClient] = axios.create({
+        headers: {
+            "X-ClockodoEnableIsoUtcDateTimes": "1",
+        },
+    });
 
     constructor({ baseUrl = DEFAULT_BASE_URL, ...config }: Config) {
         this.config({ ...config, baseUrl });
     }
 
     config = (config: Config) => {
-        const { authentication, baseUrl, enableIsoUtcDateTimes } = config;
+        const { authentication, baseUrl } = config;
         const defaults = this[axiosClient].defaults;
 
         if (baseUrl) {
@@ -75,17 +78,6 @@ export class Api {
                 defaults.headers["X-ClockodoApiUser"] = user;
                 defaults.headers["X-ClockodoApiKey"] = apiKey;
             }
-        }
-        if (enableIsoUtcDateTimes !== undefined) {
-            if (typeof enableIsoUtcDateTimes !== "boolean") {
-                throw new Error(
-                    `enableIsoUtcDateTimes should be boolean but is typeof: ${typeof enableIsoUtcDateTimes}`
-                );
-            }
-
-            defaults.headers["X-ClockodoEnableIsoUtcDateTimes"] = Number(
-                enableIsoUtcDateTimes
-            );
         }
     };
 
