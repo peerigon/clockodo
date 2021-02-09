@@ -1,6 +1,6 @@
 import { setup } from "axios-cache-adapter";
-import { Clockodo } from "../internals/api";
-import { axiosClient, clockodoApi } from "../internals/utilities/symbols";
+import { Clockodo } from "../internals/clockodo";
+import { axiosClient } from "../internals/utilities/symbols";
 
 const cachePlugin = (config: { cacheTime: number }) => (clockodo: Clockodo) => {
     if (typeof config.cacheTime !== "number") {
@@ -9,9 +9,9 @@ const cachePlugin = (config: { cacheTime: number }) => (clockodo: Clockodo) => {
                 typeof config.cacheTime
         );
     }
-    clockodo[clockodoApi][axiosClient] = setup({
-        baseURL: clockodo[clockodoApi][axiosClient].defaults.baseURL,
-        headers: clockodo[clockodoApi][axiosClient].defaults.headers,
+    clockodo.api[axiosClient] = setup({
+        baseURL: clockodo.api[axiosClient].defaults.baseURL,
+        headers: clockodo.api[axiosClient].defaults.headers,
         cache: {
             maxAge: config.cacheTime,
             exclude: { query: false },

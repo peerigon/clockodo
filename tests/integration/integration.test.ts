@@ -1,4 +1,4 @@
-import { Clockodo, ENTRY_BILLABLE } from "../../src/internals/api";
+import { Clockodo, ENTRY_BILLABLE } from "../../src";
 
 const TIME_SINCE = "2018-10-01 00:00:00";
 const TIME_UNTIL = "2018-12-30 00:00:00";
@@ -9,16 +9,24 @@ const hasCredentials =
     typeof process.env.CLOCKODO_API_KEY === "string";
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
-    const clockodo = new Clockodo({
-        user: process.env.CLOCKODO_USER!,
-        apiKey: process.env.CLOCKODO_API_KEY!,
-    });
+    const clockodo = new Clockodo();
 
     const entryShape = {
         id: expect.any(Number),
         usersId: expect.any(Number),
         timeSince: expect.stringMatching(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/),
     };
+
+    beforeAll(() => {
+        jest.setTimeout(10000);
+
+        clockodo.api.config({
+            authentication: {
+                user: process.env.CLOCKODO_USER!,
+                apiKey: process.env.CLOCKODO_API_KEY!,
+            },
+        });
+    });
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
@@ -62,7 +70,25 @@ const hasCredentials =
             expect(data.entries[0]).toHaveProperty("id");
             expect(data.entries[0]).toHaveProperty("duration");
             expect(data.entries[0]).toHaveProperty("budget");
-        }, 10000);
+        });
+        it("returns the entries with ISO UTC date times", async () => {
+            clockodo.api.config({ enableIsoUtcDateTimes: true });
+
+            const data = await clockodo.getEntries({
+                timeSince: TIME_SINCE,
+                timeUntil: TIME_UNTIL,
+            });
+
+            expect(data.entries.length).toBeGreaterThan(0);
+
+            data.entries.forEach((entry) => {
+                expect(entry.timeSince).toMatch(
+                    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
+                );
+            });
+
+            clockodo.api.config({ enableIsoUtcDateTimes: false });
+        });
     });
 
     describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
@@ -123,7 +149,7 @@ const hasCredentials =
             expect(deleteEntryResponse).toMatchObject({
                 success: true,
             });
-        }, 10000);
+        });
     });
 
     describe("getEntryGroups()", () => {
@@ -139,7 +165,7 @@ const hasCredentials =
             expect(data.groups[0]).toHaveProperty("group");
             expect(data.groups[0]).toHaveProperty("groupedBy");
             expect(data.groups[0]).toHaveProperty("name");
-        }, 10000);
+        });
         it("returns expected data format with multiple groups passed", async () => {
             expect.assertions(3);
 
@@ -152,7 +178,7 @@ const hasCredentials =
             expect(data.groups[0]).toHaveProperty("group");
             expect(data.groups[0]).toHaveProperty("groupedBy");
             expect(data.groups[0]).toHaveProperty("name");
-        }, 10000);
+        });
     });
 
     describe("getClock()", () => {
@@ -162,7 +188,7 @@ const hasCredentials =
             const data = await clockodo.getClock();
 
             expect(data).toHaveProperty("running");
-        }, 10000);
+        });
     });
 
     describe("addEntry() and getEntry()", () => {
@@ -205,6 +231,6 @@ const hasCredentials =
             await clockodo.deleteEntry({
                 entryId: data.entry.id,
             });
-        }, 10000);
+        });
     });
 });

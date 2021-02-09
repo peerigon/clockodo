@@ -24,6 +24,11 @@ export type ServicesReturnType = Promise<{ services: Array<Service> }>;
 export type UserReturnType = Promise<{ user: User }>;
 export type UsersReturnType = Promise<{ users: Array<User> }>;
 export type EntryReturnType = Promise<{ entry: Entry }>;
+export type AddEntryReturnType = Promise<{ entry: Entry; stopped?: Entry }>;
+export type EditEntryReturnType = Promise<{
+    entry: Entry;
+    running: null | Entry;
+}>;
 export type EntriesReturnType = Promise<{
     paging: Paging;
     filter: Filter | null;
@@ -51,6 +56,10 @@ export type DeleteEntryGroupsReturnType = Promise<
 export type UserReportReturnType = Promise<{ userreport: UserReport }>;
 export type UserReportsReturnType = Promise<{ userreports: Array<UserReport> }>;
 export type ClockReturnType = Promise<{ running: null | Entry }>;
+export type ClockStartReturnType = Promise<{
+    running: Entry;
+    stopped?: Entry;
+}>;
 export type ClockStopReturnType = Promise<{
     stopped: Entry;
     running: null | Entry;

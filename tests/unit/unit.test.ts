@@ -7,13 +7,13 @@ import {
     ENTRY_BILLABLE,
     ENTRY_BILLED,
     ABSENCE_TYPE_SPECIAL_LEAVE,
-} from "../../src/internals/api";
+} from "../../src";
 import cachePlugin from "../../src/plugins/cache";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 
 describe("Clockodo (instance)", () => {
-    const clockodo = new Clockodo({ user: "test", apiKey: "test" });
+    const clockodo = new Clockodo();
 
     afterAll(() => {
         nock.cleanAll();
@@ -22,49 +22,49 @@ describe("Clockodo (instance)", () => {
 
     describe("Clockodo Constructor", () => {
         it("throws an error when constructor is missing user email", () => {
-            try {
-                // @ts-expect-error 2322
-                void new Clockodo({ user: undefined, apiKey: "dfdsg34t643" });
-            } catch (error) {
-                expect(error.message).toEqual(
-                    "Clockodo user expected to be a string, is typeof: undefined"
-                );
-            }
+            expect(
+                () =>
+                    new Clockodo({
+                        authentication: {
+                            // @ts-expect-error 2322
+                            user: undefined,
+                            apiKey: "dfdsg34t643",
+                        },
+                    })
+            ).toThrowErrorMatchingInlineSnapshot(
+                `"user should be a string but is typeof: undefined"`
+            );
         });
         it("throws an error when constructor is missing API key", () => {
-            try {
-                void new Clockodo({
-                    user: "test@gmail.com",
-                    // @ts-expect-error 2322
-                    apiKey: undefined,
-                });
-            } catch (error) {
-                expect(error.message).toEqual(
-                    "Clockodo apikey expected to be a string, is typeof: undefined"
-                );
-            }
+            expect(
+                () =>
+                    new Clockodo({
+                        authentication: {
+                            user: "test@gmail.com",
+                            // @ts-expect-error 2322
+                            apiKey: undefined,
+                        },
+                    })
+            ).toThrowErrorMatchingInlineSnapshot(
+                `"apiKey should be a string but is typeof: undefined"`
+            );
         });
         it("throws an error when constructor has baseUrl with type other than string", () => {
-            try {
-                void new Clockodo({
-                    user: "test@gmail.com",
-                    apiKey: "dfdsg34t643",
-                    baseUrl: 5678,
-                } as any);
-            } catch (error) {
-                expect(error.message).toEqual(
-                    "Clockodo baseUrl expected to be a string, is typeof: number"
-                );
-            }
+            expect(
+                () =>
+                    new Clockodo({
+                        // @ts-expect-error 2322
+                        baseUrl: 5678,
+                    })
+            ).toThrowErrorMatchingInlineSnapshot(
+                `"baseUrl should be a string but is typeof: number"`
+            );
         });
     });
 
     describe("Cache", () => {
         it("should cache the first request for cacheTime", async () => {
-            const clockodoWithCache = new Clockodo({
-                user: "test",
-                apiKey: "test",
-            });
+            const clockodoWithCache = new Clockodo();
 
             clockodoWithCache.use(cachePlugin({ cacheTime: 50 }));
 

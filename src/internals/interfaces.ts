@@ -50,35 +50,42 @@ export type User = {
 
 export type Entry = {
     id: number;
-    customersId: number;
-    projectsId: number;
+    projectsId: number | 0;
+    customersId: number | 0;
     usersId: number;
-    servicesId: number;
+    servicesId: number | null;
+    lumpSumsId: number | null;
+    lumpSum: number | null;
+    lumpSumsAmount: number | null;
     billable: 0 | 1;
     billed: boolean;
-    textsId: number;
-    text: string;
+    textsId: number | null;
+    text: string | null;
     duration: number;
     durationTime: string;
     offset: number;
     offsetTime: string;
     timeSince: string;
-    timeUntil: string;
+    timeClockedSince?: string;
+    timeUntil: string | null;
     timeInsert: string;
     timeLastChange: string;
-    timeLastChangeWorktime: string;
+    timeLastChangeWorkTime: string;
     clocked: boolean;
     isClocking: boolean;
-    lumpSum: number;
+    offline: boolean;
     hourlyRate?: number;
     revenue?: number;
     budget?: number;
     budgetIsHours?: boolean;
     budgetIsNotStrict?: boolean;
     customersName?: string;
-    projectsName?: string;
-    servicesName?: string;
+    projectsName?: string | null;
+    servicesName?: string | null;
     usersName?: string;
+    lumpSumsPrice?: number | null;
+    lumpSumsUnit?: string | null;
+    lumpSumsName?: string | null;
 };
 
 export type Task = {
