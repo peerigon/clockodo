@@ -1,3 +1,10 @@
+## [8.0.2](https://github.com/peerigon/clockodo/compare/v8.0.1...v8.0.2) (2021-02-10)
+
+
+### Bug Fixes
+
+* Update dependencies ([da2dfbe](https://github.com/peerigon/clockodo/commit/da2dfbe39d3ec4d271f1be899b40c11bae41b5eb))
+
 ## [8.0.1](https://github.com/peerigon/clockodo/compare/v8.0.0...v8.0.1) (2021-02-10)
 
 
