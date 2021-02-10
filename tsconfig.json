@@ -2,12 +2,10 @@
     "compilerOptions": {
         "outDir": "dist",
         "lib": ["es2017"],
-        "target": "ES2015",
-        "module": "commonjs",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "declaration": true,
         "strict": true,
         "moduleResolution": "node"
-    }
+    },
+    "include": ["./**/*.ts"]
 }
