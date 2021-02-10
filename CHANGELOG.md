@@ -1,3 +1,10 @@
+## [8.0.1](https://github.com/peerigon/clockodo/compare/v8.0.0...v8.0.1) (2021-02-10)
+
+
+### Bug Fixes
+
+* Broken plugin import statements ([b0fa5ac](https://github.com/peerigon/clockodo/commit/b0fa5ac3fef8e12825add5a7a2870f2bbed25d40))
+
 # [8.0.0](https://github.com/peerigon/clockodo/compare/v7.0.0...v8.0.0) (2021-02-10)
 
 
