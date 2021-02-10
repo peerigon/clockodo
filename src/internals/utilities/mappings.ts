@@ -35,11 +35,10 @@ export const mapQueryParams = <Result = any>(
         apiParams[apiParamName] = value;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    return snakecaseKeys(apiParams, {
+    return snakecaseKeys<Result>(apiParams, {
         deep: true,
         exclude: Object.values(queryParamMapping),
-    }) as Result;
+    });
 };
 
 export const mapRequestBody = <Result = any>(
