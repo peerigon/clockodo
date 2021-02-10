@@ -22,8 +22,7 @@
     "test:unit": "jest tests/unit/unit.test.ts",
     "test:types": "tsc --noEmit",
     "posttest": "run-p lint test:types",
-    "format": "prettier --write",
-    "prepublishOnly": "npm run build"
+    "format": "prettier --write"
   },
   "repository": {
     "type": "git",
