@@ -2,7 +2,9 @@ import { setup } from "axios-cache-adapter";
 import { Clockodo } from "../internals/clockodo";
 import { axiosClient } from "../internals/utilities/symbols";
 
-const cachePlugin = (config: { cacheTime: number }) => (clockodo: Clockodo) => {
+export const cachePlugin = (config: { cacheTime: number }) => (
+    clockodo: Clockodo
+) => {
     if (typeof config.cacheTime !== "number") {
         throw new Error(
             "Clockodo cacheTime expected to be a number, is typeof: " +
@@ -18,5 +20,3 @@ const cachePlugin = (config: { cacheTime: number }) => (clockodo: Clockodo) => {
         },
     });
 };
-
-export default cachePlugin;

@@ -8,7 +8,7 @@ import {
     ENTRY_BILLED,
     ABSENCE_TYPE_SPECIAL_LEAVE,
 } from "../../src";
-import cachePlugin from "../../src/plugins/cache";
+import { cachePlugin } from "../../src/plugins/cache";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 

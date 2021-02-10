@@ -16,13 +16,9 @@
     "build:tsc": "run-p build:tsc:*",
     "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
-    "dev": "npm run build -- -w",
-    "lint": "eslint src tests --ext js,ts",
     "test": "jest",
-    "test:unit": "jest tests/unit/unit.test.ts",
-    "test:types": "tsc --noEmit",
-    "posttest": "run-p lint test:types",
-    "format": "prettier --write"
+    "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore .",
+    "posttest": "run-s build test:lint"
   },
   "repository": {
     "type": "git",
@@ -76,7 +72,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix",
-    "*.--write": "prettier --write"
+    "*.{js,ts}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ],
+    "*.{json,yml,md}": "prettier --write"
   }
 }
