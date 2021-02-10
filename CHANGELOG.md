@@ -1,3 +1,28 @@
+# [8.0.0](https://github.com/peerigon/clockodo/compare/v7.0.0...v8.0.0) (2021-02-10)
+
+
+### Bug Fixes
+
+* Improve types ([102655a](https://github.com/peerigon/clockodo/commit/102655a85690a8b5ce93e1bd5714bb30bc9e1fe5))
+* typo ([817d3e5](https://github.com/peerigon/clockodo/commit/817d3e527d55f55f8d0fcc5b2f011420cd2d5bd4))
+
+
+### Features
+
+* Add cookie authentication support ([9fc6276](https://github.com/peerigon/clockodo/commit/9fc6276c021605b64dad35525cbbde8ec47365a6))
+* Add ESM support ([c09e86c](https://github.com/peerigon/clockodo/commit/c09e86c6f4f017b5d54db9c6ca7386d24fc6f8e1))
+* Add getLumpSumServices() ([cc344e0](https://github.com/peerigon/clockodo/commit/cc344e05969bcc7f40c103ff17e83690df96e5d2))
+* Enable ISO UTC date times for all requests ([6905d6b](https://github.com/peerigon/clockodo/commit/6905d6b251fe27dfd5ef92ad8f46401f96c2b337))
+* Refactor public interface ([2c23de4](https://github.com/peerigon/clockodo/commit/2c23de48d8f0532061d785ce64444afff5dd94f0)), closes [#50](https://github.com/peerigon/clockodo/issues/50) [#50](https://github.com/peerigon/clockodo/issues/50)
+
+
+### BREAKING CHANGES
+
+* clockodo is now available as CommonJS and ECMAScript module. Although very unlikely, this might cause issues depending on your specific setup.
+* All timestamps are now returned as ISO UTC. You don't need the user's time zone to interpret the times correctly now.
+* Some return types have been updated and corrected. This might result in TypeScript errors.
+* The Clockodo constructor arguments have changed a little bit. Check out the documentation for correct usage.
+
 # [7.0.0](https://github.com/peerigon/clockodo/compare/v6.0.2...v7.0.0) (2020-12-03)
 
 ### Bug Fixes
