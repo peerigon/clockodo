@@ -1,3 +1,29 @@
+# [7.0.0-beta.8](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.7...v7.0.0-beta.8) (2021-02-10)
+
+
+### Bug Fixes
+
+* Improve types ([102655a](https://github.com/peerigon/clockodo/commit/102655a85690a8b5ce93e1bd5714bb30bc9e1fe5))
+
+
+### Features
+
+* Add cookie authentication support ([9fc6276](https://github.com/peerigon/clockodo/commit/9fc6276c021605b64dad35525cbbde8ec47365a6))
+* Add ESM support ([c09e86c](https://github.com/peerigon/clockodo/commit/c09e86c6f4f017b5d54db9c6ca7386d24fc6f8e1))
+* Add getLumpSumServices() ([cc344e0](https://github.com/peerigon/clockodo/commit/cc344e05969bcc7f40c103ff17e83690df96e5d2))
+* Enable ISO UTC date times for all requests ([6905d6b](https://github.com/peerigon/clockodo/commit/6905d6b251fe27dfd5ef92ad8f46401f96c2b337))
+* Improve query and property mapping ([6dadcd0](https://github.com/peerigon/clockodo/commit/6dadcd0e9d9f80900a9f83dacfbd20cd949d08cd)), closes [#52](https://github.com/peerigon/clockodo/issues/52) [#60](https://github.com/peerigon/clockodo/issues/60)
+* Refactor public interface ([2c23de4](https://github.com/peerigon/clockodo/commit/2c23de48d8f0532061d785ce64444afff5dd94f0)), closes [#50](https://github.com/peerigon/clockodo/issues/50) [#50](https://github.com/peerigon/clockodo/issues/50)
+
+
+### BREAKING CHANGES
+
+* clockodo is now available as CommonJS and ECMAScript module. Although very unlikely, this might cause issues depending on your specific setup.
+* All timestamps are now returned as ISO UTC. You don't need the user's time zone to interpret the times correctly now.
+* Some return types have been updated and corrected. This might result in TypeScript errors.
+* The Clockodo constructor arguments have changed a little bit. Check out the documentation for correct usage.
+* The mapping between camelCase and snake_case has been streamlined and improved. You might observe different behavior if you relied on the previous (buggy) implementation.
+
 # [7.0.0-beta.7](https://github.com/peerigon/clockodo/compare/v7.0.0-beta.6...v7.0.0-beta.7) (2020-09-16)
 
 
