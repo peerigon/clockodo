@@ -2,9 +2,16 @@
 
 **Unofficial JavaScript SDK for the [Clockodo API](https://www.clockodo.com/de/api/).** Written in Typescript.
 
-[![](https://img.shields.io/npm/v/clockodo.svg)](https://www.npmjs.com/package/clockodo)
-[![Dependency Status](https://david-dm.org/peerigon/clockodo.svg)](https://david-dm.org/peerigon/clockodo)
-[![Build Status](https://travis-ci.org/peerigon/clockodo.svg?branch=main)](https://travis-ci.org/peerigon/clockodo)
+[![Version on NPM](https://img.shields.io/npm/v/clockodo?style=for-the-badge)](https://www.npmjs.com/package/clockodo)
+[![Semantically released](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge)](https://github.com/semantic-release/semantic-release)
+[![Monthly downloads on NPM](https://img.shields.io/npm/dm/clockodo?style=for-the-badge)](https://www.npmjs.com/package/clockodo)<br>
+[![NPM Bundle size minified](https://img.shields.io/bundlephobia/min/clockodo?style=for-the-badge)](https://bundlephobia.com/result?p=clockodo)
+[![NPM Bundle size minified and gzipped](https://img.shields.io/bundlephobia/minzip/clockodo?style=for-the-badge)](https://bundlephobia.com/result?p=clockodo)<br>
+[![Dependencies status](https://img.shields.io/david/peerigon/clockodo?style=for-the-badge)](https://david-dm.org/peerigon/clockodo)
+[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/clockodo?style=for-the-badge)](https://snyk.io/test/github/peerigon/clockodo)<br>
+![Written in TypeScript](https://img.shields.io/npm/types/clockodo?style=for-the-badge)
+[![Coverage Status](https://img.shields.io/coveralls/github/peerigon/clockodo?style=for-the-badge)](https://coveralls.io/github/peerigon/clockodo?branch=main)
+[![License](https://img.shields.io/npm/l/clockodo?style=for-the-badge)](https://unlicense.org/)
 
 ## Installation and usage
 
