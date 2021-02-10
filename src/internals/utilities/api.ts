@@ -37,7 +37,11 @@ export class Api {
     [axiosClient] = axios.create({
         headers: {
             "X-ClockodoEnableIsoUtcDateTimes": "1",
+            "X-Requested-With": "XMLHttpRequest",
         },
+        // Rely on the browser to send the appropiate cookies by default.
+        // This will be turned off once we have auth headers.
+        withCredentials: true,
     });
 
     constructor({ baseUrl = DEFAULT_BASE_URL, ...config }: Config) {
@@ -60,6 +64,7 @@ export class Api {
             if (authentication === undefined) {
                 delete defaults.headers["X-ClockodoApiUser"];
                 delete defaults.headers["X-ClockodoApiKey"];
+                defaults.withCredentials = true;
             } else {
                 const { user, apiKey } = authentication;
 
@@ -77,6 +82,8 @@ export class Api {
 
                 defaults.headers["X-ClockodoApiUser"] = user;
                 defaults.headers["X-ClockodoApiKey"] = apiKey;
+                // Since we're sending auth headers now, it's not required to also send cookies.
+                defaults.withCredentials = false;
             }
         }
     };
