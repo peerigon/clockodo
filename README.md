@@ -98,6 +98,7 @@ For any questions about the different properties please consult the official [Cl
     -   [getSearchTexts()](#getsearchtexts)
     -   [getService()](#getservice)
     -   [getServices()](#getservices)
+    -   [getLumpSumServices()](#getlumpsumservices)
     -   [getSingleTargetHourSet()](#getsingletargethourset)
     -   [getTargetHours()](#gettargethours)
     -   [getTasks()](#gettasks)
@@ -319,12 +320,24 @@ await clockodo.getService({ id: 10 });
 
 ### getServices()
 
-Get list of services
+Get list of all services
 
 #### Example:
 
 ```js
 await clockodo.getServices();
+```
+
+---
+
+### getLumpSumServices()
+
+Get a list of all lump sum services
+
+#### Example:
+
+```js
+await clockodo.getLumpSumServices();
 ```
 
 ---

@@ -31,6 +31,7 @@ import {
     ClockStartReturnType,
     AddEntryReturnType,
     EditEntryReturnType,
+    LumpSumServicesReturnType,
 } from "./returnTypes";
 
 // TODO: Change naming convention of exported constants and enums
@@ -174,6 +175,10 @@ export class Clockodo {
 
     getServices = async (): ServicesReturnType => {
         return this.api.get("/services");
+    };
+
+    getLumpSumServices = async (): LumpSumServicesReturnType => {
+        return this.api.get("/lumpSumServices");
     };
 
     getSingleTargetHourSet = async ({

@@ -1,35 +1,46 @@
 export type Customer = {
     id: number;
     name: string;
-    number: string;
+    number: string | null;
     active: boolean;
     billableDefault: boolean;
-    note: string;
-    projects: Array<Project>;
+    note: string | null;
+    projects?: Array<Project> | null;
 };
 
 export type Project = {
     id: number;
-    customersId: number;
     name: string;
+    customersId: number;
+    number: string | null;
     active: boolean;
     billableDefault: boolean;
-    note: string;
-    budgetMoney: number;
+    note: string | null;
+    budgetMoney: number | null;
     budgetIsHours: boolean;
     budgetIsNotStrict: boolean;
     completed: boolean;
-    billedMoney: number;
-    billedCompletely: boolean;
+    billedMoney: number | null;
+    billedCompletely: boolean | null;
     revenueFactor: number;
 };
 
 export type Service = {
     id: number;
     name: string;
-    number: string;
+    number: string | null;
     active: boolean;
-    note: string;
+    note: string | null;
+};
+
+export type LumpSumService = {
+    id: number;
+    name: string;
+    price: number;
+    unit: string | null;
+    active: boolean;
+    number: string | null;
+    note: string | null;
 };
 
 export type User = {
@@ -92,13 +103,20 @@ export type Task = {
     day: string;
     customersId: number;
     customersName: string;
-    projectsId: number;
-    projectsName: string;
-    servicesId: number;
-    servicesName: string;
-    billable: number;
-    textsId: number;
-    text: string;
+    projectsId: number | 0;
+    projectsName: string | null;
+    servicesId: number | null;
+    servicesName: string | null;
+    lumpSumsId: number | null;
+    lumpSumsAmount: number | null;
+    lumpSumsName: string | null;
+    lumpSumsPrice: number | null;
+    lumpSumsUnit: string | null;
+    billable: 0 | 1;
+    textsId: number | 0;
+    text: string | null;
+    timeSince: string;
+    timeUntil: string;
     duration: number;
     durationTime: string;
     durationText: string;

@@ -11,6 +11,7 @@ import {
     EntryGroup,
     UserReport,
     TargetHoursRow,
+    LumpSumService,
 } from "./interfaces";
 
 export type AbsenceReturnType = Promise<{ absence: Absence }>;
@@ -21,6 +22,9 @@ export type CustomersReturnType = Promise<{ customers: Array<Customer> }>;
 export type ProjectReturnType = Promise<{ project: Project }>;
 export type ServiceReturnType = Promise<{ service: Service }>;
 export type ServicesReturnType = Promise<{ services: Array<Service> }>;
+export type LumpSumServicesReturnType = Promise<{
+    lumpSumServices: Array<LumpSumService>;
+}>;
 export type UserReturnType = Promise<{ user: User }>;
 export type UsersReturnType = Promise<{ users: Array<User> }>;
 export type EntryReturnType = Promise<{ entry: Entry }>;
