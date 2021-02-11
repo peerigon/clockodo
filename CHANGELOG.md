@@ -1,3 +1,10 @@
+## [8.0.3](https://github.com/peerigon/clockodo/compare/v8.0.2...v8.0.3) (2021-02-11)
+
+
+### Bug Fixes
+
+* Enable CORS for login requests ([8e6859e](https://github.com/peerigon/clockodo/commit/8e6859e4d39f90cfc7dfd49f41f37fd0a5cd744c))
+
 ## [8.0.2](https://github.com/peerigon/clockodo/compare/v8.0.1...v8.0.2) (2021-02-10)
 
 
