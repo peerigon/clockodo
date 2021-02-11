@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
 import { axiosClient } from "./symbols";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings";
@@ -37,15 +37,11 @@ export class Api {
     [axiosClient] = axios.create({
         headers: {
             "X-ClockodoEnableIsoUtcDateTimes": "1",
-            "X-Requested-With": "XMLHttpRequest",
         },
-        // Rely on the browser to send the appropiate cookies by default.
-        // This will be turned off once we have auth headers.
-        withCredentials: true,
     });
 
-    constructor({ baseUrl = DEFAULT_BASE_URL, ...config }: Config) {
-        this.config({ ...config, baseUrl });
+    constructor({ baseUrl = DEFAULT_BASE_URL, authentication }: Config) {
+        this.config({ authentication, baseUrl });
     }
 
     config = (config: Config) => {
@@ -64,6 +60,7 @@ export class Api {
             if (authentication === undefined) {
                 delete defaults.headers["X-ClockodoApiUser"];
                 delete defaults.headers["X-ClockodoApiKey"];
+                defaults.headers["X-Requested-With"] = "XMLHttpRequest";
                 defaults.withCredentials = true;
             } else {
                 const { user, apiKey } = authentication;
@@ -82,6 +79,7 @@ export class Api {
 
                 defaults.headers["X-ClockodoApiUser"] = user;
                 defaults.headers["X-ClockodoApiKey"] = apiKey;
+                delete defaults.headers["X-Requested-With"];
                 // Since we're sending auth headers now, it's not required to also send cookies.
                 defaults.withCredentials = false;
             }
@@ -90,34 +88,54 @@ export class Api {
 
     get = async <Result = any>(
         url: string,
-        queryParams = {}
+        queryParams = {},
+        options?: AxiosRequestConfig
     ): Promise<Result> => {
         const response = await this[axiosClient].get(url, {
             params: mapQueryParams(queryParams),
             paramsSerializer,
+            ...options,
         });
 
         return mapResponseBody<Result>(response.data);
     };
 
-    post = async <Result = any>(url: string, body = {}): Promise<Result> => {
+    post = async <Result = any>(
+        url: string,
+        body = {},
+        options?: AxiosRequestConfig
+    ): Promise<Result> => {
         const response = await this[axiosClient].post(
             url,
-            mapRequestBody(body)
+            mapRequestBody(body),
+            options
         );
 
         return mapResponseBody<Result>(response.data);
     };
 
-    put = async <Result = any>(url: string, body = {}): Promise<Result> => {
-        const response = await this[axiosClient].put(url, mapRequestBody(body));
+    put = async <Result = any>(
+        url: string,
+        body = {},
+        options?: AxiosRequestConfig
+    ): Promise<Result> => {
+        const response = await this[axiosClient].put(
+            url,
+            mapRequestBody(body),
+            options
+        );
 
         return mapResponseBody<Result>(response.data);
     };
 
-    delete = async <Result = any>(url: string, body = {}): Promise<Result> => {
+    delete = async <Result = any>(
+        url: string,
+        body = {},
+        options?: AxiosRequestConfig
+    ): Promise<Result> => {
         const response = await this[axiosClient].delete(url, {
             data: mapRequestBody(body),
+            ...options,
         });
 
         return mapResponseBody<Result>(response.data);
