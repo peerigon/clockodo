@@ -1,3 +1,10 @@
+## [8.0.4](https://github.com/peerigon/clockodo/compare/v8.0.3...v8.0.4) (2021-02-12)
+
+
+### Bug Fixes
+
+* exports-fields in package.json ([cbb45ab](https://github.com/peerigon/clockodo/commit/cbb45ab895cfc52afd1f0fe6b2c3f89855e9fa49))
+
 ## [8.0.3](https://github.com/peerigon/clockodo/compare/v8.0.2...v8.0.3) (2021-02-11)
 
 
