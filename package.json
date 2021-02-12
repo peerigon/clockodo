@@ -6,9 +6,21 @@
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "exports": {
-    "require": "./dist/cjs/index.js",
-    "node": "./dist/cjs/index.mjs",
-    "import": "./dist/esm/index.js"
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    },
+    "./mappings": {
+      "require": "./dist/cjs/internals/utilities/mappings.js",
+      "default": "./dist/esm/internals/utilities/mappings.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "mappings": [
+        "./dist/esm/internals/utilities/mappings"
+      ]
+    }
   },
   "scripts": {
     "build": "run-s build:*",
