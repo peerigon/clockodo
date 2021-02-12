@@ -1,3 +1,1 @@
-import cachePlugin from "../dist/esm/plugins/cache.js";
-
-export default cachePlugin;
+export { cachePlugin } from "../dist/esm/plugins/cache.js";
