@@ -1,3 +1,10 @@
+## [8.0.5](https://github.com/peerigon/clockodo/compare/v8.0.4...v8.0.5) (2021-02-12)
+
+
+### Bug Fixes
+
+* Wrong package configuration ([f696320](https://github.com/peerigon/clockodo/commit/f6963206fdf7cc620e9b62c7eca7fe9c54fa8fa2))
+
 ## [8.0.4](https://github.com/peerigon/clockodo/compare/v8.0.3...v8.0.4) (2021-02-12)
 
 
