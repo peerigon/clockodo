@@ -289,7 +289,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/searchtexts?" + qs.stringify(expectedParameters))
+                    .get("/clock/searchtexts?" + qs.stringify(expectedParameters))
                     .reply(200);
 
                 await clockodo.getSearchTexts(givenParameters);

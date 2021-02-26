@@ -164,7 +164,7 @@ export class Clockodo {
     getSearchTexts = async (
         options?: Record<string, unknown>
     ): SearchTextsReturnType => {
-        return this.api.get("/searchtexts", options);
+        return this.api.get("/clock/searchtexts", options);
     };
 
     getService = async ({ id }: { id: number }): ServiceReturnType => {
