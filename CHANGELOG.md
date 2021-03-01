@@ -1,3 +1,10 @@
+## [8.0.6](https://github.com/peerigon/clockodo/compare/v8.0.5...v8.0.6) (2021-03-01)
+
+
+### Bug Fixes
+
+* Wrong URL being used in getSearchTexts() ([#64](https://github.com/peerigon/clockodo/issues/64)) ([32931b7](https://github.com/peerigon/clockodo/commit/32931b7275859dbbbc667e6c3c26612d27bb6a6c))
+
 ## [8.0.5](https://github.com/peerigon/clockodo/compare/v8.0.4...v8.0.5) (2021-02-12)
 
 
