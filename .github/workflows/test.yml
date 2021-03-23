@@ -29,8 +29,3 @@ jobs:
                   npm test
               env:
                   CI: true
-            - shell: bash
-              env:
-                SUPER_SECRET: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                echo "$SUPER_SECRET"
