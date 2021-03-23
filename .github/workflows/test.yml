@@ -33,6 +33,6 @@ jobs:
                   CI: true
             - name: Test
               run: |
-                  echo ${{ secrets.GITHUB_TOKEN }} ${{ secrets.NPM_TOKEN }}
+                  echo ${{ secrets.NPM_TOKEN }}
               env:
                   CI: true
