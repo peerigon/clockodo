@@ -10,19 +10,19 @@ export type Customer = {
 
 export type Project = {
     id: number;
-    name: string;
     customersId: number;
+    name: string;
     number: string | null;
     active: boolean;
     billableDefault: boolean;
-    note: string | null;
-    budgetMoney: number | null;
-    budgetIsHours: boolean;
-    budgetIsNotStrict: boolean;
-    completed: boolean;
-    billedMoney: number | null;
-    billedCompletely: boolean | null;
-    revenueFactor: number | null;
+    note?: string | null;
+    budgetMoney?: number | null;
+    budgetIsHours?: boolean;
+    budgetIsNotStrict?: boolean;
+    completed?: boolean;
+    billedMoney?: number | null;
+    billedCompletely?: boolean | null;
+    revenueFactor?: number | null;
 };
 
 export type Service = {
