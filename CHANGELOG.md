@@ -1,3 +1,11 @@
+## [8.0.7](https://github.com/peerigon/clockodo/compare/v8.0.6...v8.0.7) (2021-04-16)
+
+
+### Bug Fixes
+
+* **typescript:** Make restricted project properties optional ([936f134](https://github.com/peerigon/clockodo/commit/936f1340391fc6135c879b55c425d4a200983322))
+* **typescript:** revenueFactor can be null ([d0f8965](https://github.com/peerigon/clockodo/commit/d0f896507550bdd81e8c9db90adf53d315c7f360))
+
 ## [8.0.6](https://github.com/peerigon/clockodo/compare/v8.0.5...v8.0.6) (2021-03-01)
 
 
