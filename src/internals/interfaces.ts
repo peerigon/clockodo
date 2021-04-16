@@ -22,7 +22,7 @@ export type Project = {
     completed: boolean;
     billedMoney: number | null;
     billedCompletely: boolean | null;
-    revenueFactor: number;
+    revenueFactor: number | null;
 };
 
 export type Service = {
