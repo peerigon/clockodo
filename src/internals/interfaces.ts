@@ -1,4 +1,4 @@
-import { IsoUtcDateTime } from "utilities/symbols";
+import { IsoUtcDateTime } from "./utilities/symbols";
 
 export type Customer = {
     id: number;

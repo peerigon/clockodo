@@ -20,13 +20,11 @@ import {
     UserReportReturnType,
     UserReportsReturnType,
     ClockReturnType,
-    ClockUpdateReturnType,
     ClockEditReturnType,
     ClockStopReturnType,
     TargetHoursReturnType,
     TargetHourReturnType,
     AddUserReturnType,
-    SearchTextsReturnType,
     EntryGroupsReturnType,
     ClockStartReturnType,
     AddEntryReturnType,
@@ -100,11 +98,7 @@ export class Clockodo {
     };
 
     getClock = async (): ClockReturnType => {
-        return this.api.get("/clock");
-    };
-
-    getClockUpdate = async (): ClockUpdateReturnType => {
-        return this.api.get("/clock/update");
+        return this.api.get("v2/clock");
     };
 
     getCustomer = async ({ id }: { id: number }): CustomerReturnType => {
@@ -131,7 +125,7 @@ export class Clockodo {
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRIES);
 
-        return this.api.get("/entries", {
+        return this.api.get("v2/entries", {
             ...requiredArguments,
             ...options,
         });
@@ -159,12 +153,6 @@ export class Clockodo {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_PROJECT);
 
         return this.api.get("/projects/" + id);
-    };
-
-    getSearchTexts = async (
-        options?: Record<string, unknown>
-    ): SearchTextsReturnType => {
-        return this.api.get("/clock/searchtexts", options);
     };
 
     getService = async ({ id }: { id: number }): ServiceReturnType => {
@@ -279,7 +267,7 @@ export class Clockodo {
             REQUIRED.CHANGE_CLOCK_DURATION
         );
 
-        return this.api.put("/clock/" + entryId, {
+        return this.api.put("v2/clock/" + entryId, {
             ...requiredArguments,
             ...options,
         });
@@ -297,7 +285,7 @@ export class Clockodo {
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
 
-        return this.api.post("/clock", {
+        return this.api.post("v2/clock", {
             ...requiredArguments,
             ...options,
         });
@@ -422,7 +410,7 @@ export class Clockodo {
     ): ClockStopReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
 
-        return this.api.delete("/clock/" + entryId, options);
+        return this.api.delete("v2/clock/" + entryId, options);
     };
 
     deactivateCustomer = async (
