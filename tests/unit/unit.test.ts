@@ -128,20 +128,9 @@ describe("Clockodo (instance)", () => {
         });
         describe("getClock()", () => {
             it("correctly builds getClock() request", async () => {
-                const nockScope = nock(CLOCKODO_API).get("/clock").reply(200);
+                const nockScope = nock(CLOCKODO_API).get("/v2/clock").reply(200);
 
                 await clockodo.getClock();
-
-                nockScope.done();
-            });
-        });
-        describe("getClockUpdate()", () => {
-            it("correctly builds getClockUpdate() request", async () => {
-                const nockScope = nock(CLOCKODO_API)
-                    .get("/clock/update")
-                    .reply(200);
-
-                await clockodo.getClockUpdate();
 
                 nockScope.done();
             });
@@ -171,7 +160,7 @@ describe("Clockodo (instance)", () => {
         describe("getEntry()", () => {
             it("correctly builds getEntry() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/entries/4")
+                    .get("/v2/entries/4")
                     .reply(200);
 
                 await clockodo.getEntry({ id: 4 });
@@ -192,7 +181,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .get("/entries?" + qs.stringify(expectedParameters))
+                    .get("/v2/entries?" + qs.stringify(expectedParameters))
                     .reply(200);
 
                 await clockodo.getEntries(
@@ -274,25 +263,6 @@ describe("Clockodo (instance)", () => {
                     .reply(200);
 
                 await clockodo.getProject({ id: 1985 });
-
-                nockScope.done();
-            });
-        });
-        describe("getSearchTexts()", () => {
-            it("correctly builds getSearchTexts() request", async () => {
-                const givenParameters = {
-                    projectsId: 300,
-                };
-
-                const expectedParameters = {
-                    projects_id: 300,
-                };
-
-                const nockScope = nock(CLOCKODO_API)
-                    .get("/clock/searchtexts?" + qs.stringify(expectedParameters))
-                    .reply(200);
-
-                await clockodo.getSearchTexts(givenParameters);
 
                 nockScope.done();
             });
@@ -474,7 +444,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .post("/clock", expectedParameters)
+                    .post("/v2/clock", expectedParameters)
                     .reply(200);
 
                 await clockodo.startClock(
@@ -697,7 +667,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/clock/782", expectedParameters)
+                    .put("/v2/clock/782", expectedParameters)
                     .reply(200);
 
                 await clockodo.changeClockDuration(
@@ -858,7 +828,7 @@ describe("Clockodo (instance)", () => {
         describe("stopClock()", () => {
             it("correctly builds stopClock() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
-                    .delete("/clock/782")
+                    .delete("/v2/clock/782")
                     .reply(200);
 
                 await clockodo.stopClock({ entryId: 782 });
