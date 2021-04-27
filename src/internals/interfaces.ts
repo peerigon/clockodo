@@ -1,3 +1,5 @@
+import {IsoUtcDateTime} from 'utilities/symbols';
+
 export type Customer = {
     id: number;
     name: string;
@@ -59,45 +61,60 @@ export type User = {
     timezone: string;
 };
 
-export type Entry = {
+export enum EntryType {
+    TimeEntry = 1,
+    UnitLumpSumEntry = 2,
+    LumpSumEntry = 3,
+}
+
+type BaseEntry = {
     id: number;
-    projectsId: number | 0;
     customersId: number | 0;
+    projectsId: number | 0;
     usersId: number;
-    servicesId: number | null;
-    lumpSumsId: number | null;
-    lumpSum: number | null;
-    lumpSumsAmount: number | null;
-    billable: 0 | 1;
-    billed: boolean;
+    billable: 0 | 1 | 2;
     textsId: number | null;
     text: string | null;
-    duration: number;
-    durationTime: string;
-    offset: number;
-    offsetTime: string;
-    timeSince: string;
-    timeClockedSince?: string;
-    timeUntil: string | null;
-    timeInsert: string;
-    timeLastChange: string;
-    timeLastChangeWorkTime: string;
-    clocked: boolean;
-    isClocking: boolean;
-    offline: boolean;
-    hourlyRate?: number;
-    revenue?: number;
-    budget?: number;
-    budgetIsHours?: boolean;
-    budgetIsNotStrict?: boolean;
-    customersName?: string;
-    projectsName?: string | null;
-    servicesName?: string | null;
-    usersName?: string;
-    lumpSumsPrice?: number | null;
-    lumpSumsUnit?: string | null;
-    lumpSumsName?: string | null;
+    timeSince: IsoUtcDateTime;
+    timeUntil: IsoUtcDateTime | null;
+    timeInsert: IsoUtcDateTime;
+    timeLastChange: IsoUtcDateTime;
+    customersName?: string; // deprecated
+    projectsName?: string | null; // deprecated
+    usersName?: string; // deprecated
+    revenue?: number; // deprecated
 };
+
+export type TimeEntry = BaseEntry & {
+    type: EntryType.TimeEntry;
+    servicesId: number;
+    servicesName?: string; // deprecated
+    duration: number;
+    offset: number;
+    timeLastChangeWorkTime: IsoUtcDateTime;
+    timeClockedSince?: string;
+    clocked: boolean;
+    clockedOffline: boolean;
+    hourlyRate?: number;
+};
+
+export type LumpSumEntry = BaseEntry & {
+    type: EntryType.LumpSumEntry,
+    servicesId: number;
+    servicesName?: string; // deprecated
+    lumpsum: number;
+}
+
+export type UnitLumpSumEntry = BaseEntry & {
+    type: EntryType.UnitLumpSumEntry,
+    lumpsumsId: number;
+    lumpsumsAmount: number;
+    lumpsumsPrice?: number;
+    lumpsumsUnit?: string;
+    lumpsumsName?: string;
+}
+
+export type Entry = TimeEntry | LumpSumEntry | UnitLumpSumEntry;
 
 export type Task = {
     day: string;
