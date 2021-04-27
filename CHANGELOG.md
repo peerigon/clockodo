@@ -1,3 +1,15 @@
+# [8.1.0-beta.1](https://github.com/peerigon/clockodo/compare/v8.0.7...v8.1.0-beta.1) (2021-04-27)
+
+
+### Bug Fixes
+
+* Repair Unit Tests ([8da6020](https://github.com/peerigon/clockodo/commit/8da60206924a24c6827a59f2f0c50a0055cd8c6e))
+
+
+### Features
+
+* Use new endpoints in code, remove old ones ([d3495f4](https://github.com/peerigon/clockodo/commit/d3495f4053c864c2736adaad6e01407b55c30177))
+
 ## [8.0.7](https://github.com/peerigon/clockodo/compare/v8.0.6...v8.0.7) (2021-04-16)
 
 
