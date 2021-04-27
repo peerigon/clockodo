@@ -583,7 +583,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .post("/entries", expectedParameters)
+                    .post("/v2/entries", expectedParameters)
                     .reply(200);
 
                 await clockodo.addEntry(
@@ -814,7 +814,7 @@ describe("Clockodo (instance)", () => {
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/entries/365", params)
+                    .put("/v2/entries/365", params)
                     .reply(200);
 
                 await clockodo.editEntry({ entryId: 365 }, params);
@@ -887,7 +887,7 @@ describe("Clockodo (instance)", () => {
         describe("deleteEntry()", () => {
             it("correctly builds deleteEntry() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
-                    .delete("/entries/45")
+                    .delete("/v2/entries/45")
                     .reply(200);
 
                 await clockodo.deleteEntry({ entryId: 45 });

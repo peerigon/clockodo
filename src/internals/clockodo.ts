@@ -29,7 +29,7 @@ import {
     ClockStartReturnType,
     AddEntryReturnType,
     EditEntryReturnType,
-    LumpSumServicesReturnType,
+    LumpsumServicesReturnType,
 } from "./returnTypes";
 
 // TODO: Change naming convention of exported constants and enums
@@ -165,7 +165,7 @@ export class Clockodo {
         return this.api.get("/services");
     };
 
-    getLumpSumServices = async (): LumpSumServicesReturnType => {
+    getLumpSumServices = async (): LumpsumServicesReturnType => {
         return this.api.get("/lumpSumServices");
     };
 
@@ -355,12 +355,12 @@ export class Clockodo {
                   servicesId: number;
                   billable: Billable;
                   timeSince: string;
-                  lumpSum: number;
+                  lumpsum: number;
               }
             | {
                   customersId: number;
-                  lumpSumsId: number;
-                  lumpSumsAmount: number;
+                  lumpsumsId: number;
+                  lumpsumsAmount: number;
                   billable: Billable;
                   timeSince: string;
               },
@@ -368,7 +368,7 @@ export class Clockodo {
     ): AddEntryReturnType => {
         if ("timeUntil" in requiredArguments) {
             REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
-        } else if ("lumpSum" in requiredArguments) {
+        } else if ("lumpsum" in requiredArguments) {
             REQUIRED.checkRequired(
                 requiredArguments,
                 REQUIRED.ADD_LUMP_SUM_ENTRY
@@ -380,7 +380,7 @@ export class Clockodo {
             );
         }
 
-        return this.api.post("/entries", {
+        return this.api.post("/v2/entries", {
             ...requiredArguments,
             ...options,
         });
@@ -455,7 +455,7 @@ export class Clockodo {
     ): DeleteReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.DELETE_ENTRY);
 
-        return this.api.delete("/entries/" + entryId, options);
+        return this.api.delete("/v2/entries/" + entryId, options);
     };
 
     deleteEntryGroup = async (
@@ -546,17 +546,17 @@ export class Clockodo {
     ): EditEntryReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
 
-        return this.api.put("/entries/" + entryId, options);
+        return this.api.put("/v2/entries/" + entryId, options);
     };
 
     getLumpSumEntriesByUserId = async (
         {
-            lumpSumEntryId,
+            lumpsumEntryId,
             timeUntil,
             timeSince,
             usersId,
         }: {
-            lumpSumEntryId: number;
+            lumpsumEntryId: number;
             usersId: number;
             timeUntil: string;
             timeSince: string;
@@ -564,12 +564,12 @@ export class Clockodo {
         options?: Record<string, unknown>
     ): EntriesReturnType => {
         REQUIRED.checkRequired(
-            { lumpSumEntryId, timeUntil, timeSince, usersId },
+            { lumpsumEntryId, timeUntil, timeSince, usersId },
             REQUIRED.GET_LUMP_SUM
         );
 
-        return this.api.get("/entries/", {
-            filterLumpSumsId: lumpSumEntryId,
+        return this.api.get("/v2/entries/", {
+            filterLumpSumsId: lumpsumEntryId,
             timeSince,
             timeUntil,
             filterUsersId: usersId,

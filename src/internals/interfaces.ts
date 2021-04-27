@@ -1,5 +1,3 @@
-import { IsoUtcDateTime } from "./utilities/symbols";
-
 export type Customer = {
     id: number;
     name: string;
@@ -35,7 +33,7 @@ export type Service = {
     note: string | null;
 };
 
-export type LumpSumService = {
+export type LumpsumService = {
     id: number;
     name: string;
     price: number;
@@ -63,8 +61,8 @@ export type User = {
 
 export enum EntryType {
     TimeEntry = 1,
-    UnitLumpSumEntry = 2,
-    LumpSumEntry = 3,
+    UnitLumpsumEntry = 2,
+    LumpsumEntry = 3,
 }
 
 type BaseEntry = {
@@ -75,10 +73,10 @@ type BaseEntry = {
     billable: 0 | 1 | 2;
     textsId: number | null;
     text: string | null;
-    timeSince: IsoUtcDateTime;
-    timeUntil: IsoUtcDateTime | null;
-    timeInsert: IsoUtcDateTime;
-    timeLastChange: IsoUtcDateTime;
+    timeSince: string;
+    timeUntil: string | null;
+    timeInsert: string;
+    timeLastChange: string;
     customersName?: string; // deprecated
     projectsName?: string | null; // deprecated
     usersName?: string; // deprecated
@@ -91,22 +89,22 @@ export type TimeEntry = BaseEntry & {
     servicesName?: string; // deprecated
     duration: number;
     offset: number;
-    timeLastChangeWorkTime: IsoUtcDateTime;
+    timeLastChangeWorkTime: string;
     timeClockedSince?: string;
     clocked: boolean;
     clockedOffline: boolean;
     hourlyRate?: number;
 };
 
-export type LumpSumEntry = BaseEntry & {
-    type: EntryType.LumpSumEntry;
+export type LumpsumEntry = BaseEntry & {
+    type: EntryType.LumpsumEntry;
     servicesId: number;
     servicesName?: string; // deprecated
     lumpsum: number;
 };
 
-export type UnitLumpSumEntry = BaseEntry & {
-    type: EntryType.UnitLumpSumEntry;
+export type UnitLumpsumEntry = BaseEntry & {
+    type: EntryType.UnitLumpsumEntry;
     lumpsumsId: number;
     lumpsumsAmount: number;
     lumpsumsPrice?: number;
@@ -114,7 +112,7 @@ export type UnitLumpSumEntry = BaseEntry & {
     lumpsumsName?: string;
 };
 
-export type Entry = TimeEntry | LumpSumEntry | UnitLumpSumEntry;
+export type Entry = TimeEntry | LumpsumEntry | UnitLumpsumEntry;
 
 export type Task = {
     day: string;
@@ -124,11 +122,11 @@ export type Task = {
     projectsName: string | null;
     servicesId: number | null;
     servicesName: string | null;
-    lumpSumsId: number | null;
-    lumpSumsAmount: number | null;
-    lumpSumsName: string | null;
-    lumpSumsPrice: number | null;
-    lumpSumsUnit: string | null;
+    lumpsumsId: number | null;
+    lumpsumsAmount: number | null;
+    lumpsumsName: string | null;
+    lumpsumsPrice: number | null;
+    lumpsumsUnit: string | null;
     billable: 0 | 1;
     textsId: number | 0;
     text: string | null;
@@ -138,7 +136,7 @@ export type Task = {
     durationTime: string;
     durationText: string;
     isClocking: boolean;
-    hasJustLumpSums: boolean;
+    hasJustLumpsums: boolean;
     revenue?: number;
 };
 
@@ -157,7 +155,7 @@ export type EntryGroup = {
     hasNonBudgetRevenuesBilled?: boolean;
     hasNonBudgetRevenuesNotBilled?: boolean;
     hourlyRate?: number;
-    hourlyRateIsEqualAndHasNoLumpSums?: boolean;
+    hourlyRateIsEqualAndHasNoLumpsums?: boolean;
     durationWithoutRounding?: number;
     revenueWithoutRounding?: number;
     roundingSuccess?: boolean;

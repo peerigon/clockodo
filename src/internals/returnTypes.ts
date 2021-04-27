@@ -12,9 +12,8 @@ import {
     EntryGroup,
     UserReport,
     TargetHoursRow,
-    LumpSumService,
+    LumpsumService,
 } from "./interfaces";
-import { IsoUtcDateTime } from "./utilities/symbols";
 
 export type AbsenceReturnType = Promise<{ absence: Absence }>;
 export type AbsencesReturnType = Promise<{ absences: Array<Absence> }>;
@@ -24,8 +23,8 @@ export type CustomersReturnType = Promise<{ customers: Array<Customer> }>;
 export type ProjectReturnType = Promise<{ project: Project }>;
 export type ServiceReturnType = Promise<{ service: Service }>;
 export type ServicesReturnType = Promise<{ services: Array<Service> }>;
-export type LumpSumServicesReturnType = Promise<{
-    lumpSumServices: Array<LumpSumService>;
+export type LumpsumServicesReturnType = Promise<{
+    lumpsumServices: Array<LumpsumService>;
 }>;
 export type UserReturnType = Promise<{ user: User }>;
 export type UsersReturnType = Promise<{ users: Array<User> }>;
@@ -63,7 +62,7 @@ export type UserReportReturnType = Promise<{ userreport: UserReport }>;
 export type UserReportsReturnType = Promise<{ userreports: Array<UserReport> }>;
 export type ClockReturnType = Promise<{
     running: null | TimeEntry;
-    currentTime: IsoUtcDateTime;
+    currentTime: string;
 }>;
 export type ClockStartReturnType = Promise<{
     running: TimeEntry;
