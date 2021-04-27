@@ -4,6 +4,7 @@ import {
     Project,
     Service,
     User,
+    TimeEntry,
     Entry,
     Paging,
     Filter,
@@ -31,7 +32,7 @@ export type EntryReturnType = Promise<{ entry: Entry }>;
 export type AddEntryReturnType = Promise<{ entry: Entry; stopped?: Entry }>;
 export type EditEntryReturnType = Promise<{
     entry: Entry;
-    running: null | Entry;
+    running: null | TimeEntry;
 }>;
 export type EntriesReturnType = Promise<{
     paging: Paging;
@@ -59,21 +60,21 @@ export type DeleteEntryGroupsReturnType = Promise<
 >;
 export type UserReportReturnType = Promise<{ userreport: UserReport }>;
 export type UserReportsReturnType = Promise<{ userreports: Array<UserReport> }>;
-export type ClockReturnType = Promise<{ running: null | Entry }>;
+export type ClockReturnType = Promise<{ running: null | TimeEntry }>;
 export type ClockStartReturnType = Promise<{
-    running: Entry;
-    stopped?: Entry;
+    running: TimeEntry;
+    stopped?: TimeEntry;
 }>;
 export type ClockStopReturnType = Promise<{
-    stopped: Entry;
-    running: null | Entry;
+    stopped: TimeEntry;
+    running: null | TimeEntry;
 }>;
 export type ClockEditReturnType = Promise<{
-    updated: Entry;
-    running: null | Entry;
+    updated: TimeEntry;
+    running: null | TimeEntry;
 }>;
 export type ClockUpdateReturnType = Promise<{
-    running: null | Entry;
+    running: null | TimeEntry;
     services: Array<Service>;
     projects: Array<{
         id: number;

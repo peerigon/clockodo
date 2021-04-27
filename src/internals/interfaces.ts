@@ -1,4 +1,4 @@
-import {IsoUtcDateTime} from 'utilities/symbols';
+import { IsoUtcDateTime } from "utilities/symbols";
 
 export type Customer = {
     id: number;
@@ -99,20 +99,20 @@ export type TimeEntry = BaseEntry & {
 };
 
 export type LumpSumEntry = BaseEntry & {
-    type: EntryType.LumpSumEntry,
+    type: EntryType.LumpSumEntry;
     servicesId: number;
     servicesName?: string; // deprecated
     lumpsum: number;
-}
+};
 
 export type UnitLumpSumEntry = BaseEntry & {
-    type: EntryType.UnitLumpSumEntry,
+    type: EntryType.UnitLumpSumEntry;
     lumpsumsId: number;
     lumpsumsAmount: number;
     lumpsumsPrice?: number;
     lumpsumsUnit?: string;
     lumpsumsName?: string;
-}
+};
 
 export type Entry = TimeEntry | LumpSumEntry | UnitLumpSumEntry;
 

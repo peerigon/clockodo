@@ -11,7 +11,6 @@ export type IsoUtcDateTime = string & {
 };
 declare const IsoUtcDateTimeSymbol: unique symbol;
 
-
 export const isIsoUtcDateTime = (input: unknown): input is IsoUtcDateTime => {
     return (
         typeof input === "string" &&
