@@ -59,16 +59,14 @@ export type User = {
     timezone: string;
 };
 
-export enum EntryType {
-    TimeEntry = 1,
-    UnitLumpsumEntry = 2,
-    LumpsumEntry = 3,
-}
+const timeEntryType = 1;
+const unitLumpsumEntryType = 2;
+const lumpSumEntryType = 3;
 
 type BaseEntry = {
     id: number;
     customersId: number | 0;
-    projectsId: number | 0;
+    projectsId: number | null;
     usersId: number;
     billable: 0 | 1 | 2;
     textsId: number | null;
@@ -84,7 +82,7 @@ type BaseEntry = {
 };
 
 export type TimeEntry = BaseEntry & {
-    type: EntryType.TimeEntry;
+    type: typeof timeEntryType;
     servicesId: number;
     servicesName?: string; // deprecated
     duration: number;
@@ -97,14 +95,14 @@ export type TimeEntry = BaseEntry & {
 };
 
 export type LumpsumEntry = BaseEntry & {
-    type: EntryType.LumpsumEntry;
+    type: typeof lumpSumEntryType;
     servicesId: number;
     servicesName?: string; // deprecated
     lumpsum: number;
 };
 
 export type UnitLumpsumEntry = BaseEntry & {
-    type: EntryType.UnitLumpsumEntry;
+    type: typeof unitLumpsumEntryType;
     lumpsumsId: number;
     lumpsumsAmount: number;
     lumpsumsPrice?: number;
@@ -264,21 +262,6 @@ export type TargetHoursRow = {
     workdayFriday: boolean;
     workdaySaturday: boolean;
     workdaySunday: boolean;
-};
-
-export type HolidayQuotasRow = {
-    id: number;
-    usersId: number;
-    yearSince: number;
-    yearUntil: number;
-    count: number;
-};
-
-export type HolidaysCarryRow = {
-    usersId: number;
-    year: number;
-    count: number;
-    note: string;
 };
 
 export type Paging = {
