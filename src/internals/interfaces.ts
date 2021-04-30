@@ -60,8 +60,8 @@ export type User = {
 };
 
 const timeEntryType = 1;
-const unitLumpsumEntryType = 2;
-const lumpSumEntryType = 3;
+const lumpsumEntryType = 2;
+const unitLumpsumEntryType = 3;
 
 type BaseEntry = {
     id: number;
@@ -95,7 +95,7 @@ export type TimeEntry = BaseEntry & {
 };
 
 export type LumpsumEntry = BaseEntry & {
-    type: typeof lumpSumEntryType;
+    type: typeof lumpsumEntryType;
     servicesId: number;
     servicesName?: string; // deprecated
     lumpsum: number;
