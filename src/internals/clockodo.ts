@@ -549,7 +549,7 @@ export class Clockodo {
         return this.api.put("/v2/entries/" + entryId, options);
     };
 
-    getLumpSumEntriesByUserId = async (
+    getLumpsumEntriesByUserId = async (
         {
             lumpsumEntryId,
             timeUntil,
@@ -569,7 +569,7 @@ export class Clockodo {
         );
 
         return this.api.get("/v2/entries/", {
-            filterLumpSumsId: lumpsumEntryId,
+            filterLumpsumsId: lumpsumEntryId,
             timeSince,
             timeUntil,
             filterUsersId: usersId,

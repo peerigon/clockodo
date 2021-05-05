@@ -10,7 +10,7 @@ const queryParamMapping: Record<string, string> = {
     filterText: "filter[text]",
     filterTextsId: "filter[texts_id]",
     filterBudgetType: "filter[budget_type]",
-    filterLumpSumsId: "filter[lumpSums_id]",
+    filterLumpsumsId: "filter[lumpsums_id]",
     taskCustomersId: "task[customers_id]",
     taskProjectsId: "task[projects_id]",
     taskServicesId: "task[services_id]",
@@ -44,23 +44,7 @@ export const mapQueryParams = <Result = any>(
 export const mapRequestBody = <Result = any>(
     requestBody: Record<string, any>
 ) => {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    const {
-        // The following keys are a mixture between camelCase and snake_case.
-        // Hence, we need to transform them manually.
-        lump_sum,
-        lump_sums_amount,
-        lump_sums_id,
-        ...entryWithoutLumpSums
-    } = snakecaseKeys(requestBody, { deep: true });
-
-    return ({
-        ...entryWithoutLumpSums,
-        lumpSum: lump_sum,
-        lumpSums_amount: lump_sums_amount,
-        lumpSums_id: lump_sums_id,
-    } as any) as Result;
-    /* eslint-enable @typescript-eslint/naming-convention */
+    return snakecaseKeys<Result>(requestBody, { deep: true });
 };
 
 export const mapResponseBody = <Result = any>(
