@@ -1,3 +1,10 @@
+# [8.1.0-beta.5](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.4...v8.1.0-beta.5) (2021-05-05)
+
+
+### Bug Fixes
+
+* Correct more types ([323bed5](https://github.com/peerigon/clockodo/commit/323bed55e50f6bf62cb793cdf47d904c87f8f2de))
+
 # [8.1.0-beta.4](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.3...v8.1.0-beta.4) (2021-04-30)
 
 
