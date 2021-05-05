@@ -1,3 +1,10 @@
+# [8.1.0-beta.4](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.3...v8.1.0-beta.4) (2021-04-30)
+
+
+### Bug Fixes
+
+* Correct type attribution ([f895fa9](https://github.com/peerigon/clockodo/commit/f895fa925c63a1dbec6800452e2074930dc69b46))
+
 # [8.1.0-beta.3](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.2...v8.1.0-beta.3) (2021-04-29)
 
 
