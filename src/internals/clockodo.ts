@@ -77,7 +77,7 @@ export enum AbsenceType {
 export class Clockodo {
     api: Api;
 
-    constructor(config: Config = {}) {
+    constructor(config: Config = { appIdentifier: "Clockodo-SDK User" }) {
         this.api = new Api(config);
     }
 

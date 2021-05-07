@@ -9,6 +9,7 @@ import {
     ABSENCE_TYPE_SPECIAL_LEAVE,
 } from "../../src";
 import { cachePlugin } from "../../src/plugins/cache";
+import { Config } from "../../src/internals/utilities/api";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 
@@ -25,12 +26,13 @@ describe("Clockodo (instance)", () => {
             expect(
                 () =>
                     new Clockodo({
+                        appIdentifier: "Clockodo-SDK Unit Test",
                         authentication: {
                             // @ts-expect-error 2322
                             user: undefined,
                             apiKey: "dfdsg34t643",
                         },
-                    })
+                    } as Config)
             ).toThrowErrorMatchingInlineSnapshot(
                 `"user should be a string but is typeof: undefined"`
             );
@@ -39,12 +41,13 @@ describe("Clockodo (instance)", () => {
             expect(
                 () =>
                     new Clockodo({
+                        appIdentifier: "Clockodo-SDK Unit Test",
                         authentication: {
                             user: "test@gmail.com",
                             // @ts-expect-error 2322
                             apiKey: undefined,
                         },
-                    })
+                    } as Config)
             ).toThrowErrorMatchingInlineSnapshot(
                 `"apiKey should be a string but is typeof: undefined"`
             );
@@ -53,9 +56,10 @@ describe("Clockodo (instance)", () => {
             expect(
                 () =>
                     new Clockodo({
+                        appIdentifier: "Clockodo-SDK Unit Test",
                         // @ts-expect-error 2322
                         baseUrl: 5678,
-                    })
+                    } as Config)
             ).toThrowErrorMatchingInlineSnapshot(
                 `"baseUrl should be a string but is typeof: number"`
             );
@@ -128,7 +132,9 @@ describe("Clockodo (instance)", () => {
         });
         describe("getClock()", () => {
             it("correctly builds getClock() request", async () => {
-                const nockScope = nock(CLOCKODO_API).get("/v2/clock").reply(200);
+                const nockScope = nock(CLOCKODO_API)
+                    .get("/v2/clock")
+                    .reply(200);
 
                 await clockodo.getClock();
 
