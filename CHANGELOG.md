@@ -1,3 +1,11 @@
+# [8.1.0-beta.6](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.5...v8.1.0-beta.6) (2021-05-07)
+
+
+### Bug Fixes
+
+* Make header required and use it in integration tests ([a028311](https://github.com/peerigon/clockodo/commit/a02831172a4a9438726c114daa715bab559a74d7))
+* Repair Tests ([865aede](https://github.com/peerigon/clockodo/commit/865aede39eb96cb2001d9caa1938b0660fd161f0))
+
 # [8.1.0-beta.5](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.4...v8.1.0-beta.5) (2021-05-05)
 
 
