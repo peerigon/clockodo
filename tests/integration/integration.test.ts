@@ -27,6 +27,7 @@ const hasCredentials =
                 user: process.env.CLOCKODO_USER!,
                 apiKey: process.env.CLOCKODO_API_KEY!,
             },
+            appIdentifier: "Clockodo-SDK Integration Test"
         });
     });
 

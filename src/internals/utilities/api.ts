@@ -29,7 +29,7 @@ export type Authentication = {
 };
 
 export type Config = {
-    appIdentifier?: string;
+    appIdentifier: string;
     authentication?: Authentication;
     baseUrl?: string;
 };
@@ -41,8 +41,12 @@ export class Api {
         },
     });
 
-    constructor({ baseUrl = DEFAULT_BASE_URL, authentication }: Config) {
-        this.config({ authentication, baseUrl });
+    constructor({
+        baseUrl = DEFAULT_BASE_URL,
+        authentication,
+        appIdentifier,
+    }: Config) {
+        this.config({ appIdentifier, authentication, baseUrl });
     }
 
     config = (config: Config) => {
