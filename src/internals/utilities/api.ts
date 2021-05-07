@@ -29,6 +29,7 @@ export type Authentication = {
 };
 
 export type Config = {
+    appIdentifier?: string;
     authentication?: Authentication;
     baseUrl?: string;
 };
@@ -45,7 +46,7 @@ export class Api {
     }
 
     config = (config: Config) => {
-        const { authentication, baseUrl } = config;
+        const { authentication, baseUrl, appIdentifier } = config;
         const defaults = this[axiosClient].defaults;
 
         if (baseUrl) {
@@ -55,6 +56,9 @@ export class Api {
                 );
             }
             defaults.baseURL = baseUrl;
+        }
+        if ("appIdentifier" in config) {
+            defaults.headers["X-Clockodo-External-Application"] = appIdentifier;
         }
         if ("authentication" in config) {
             if (authentication === undefined) {
