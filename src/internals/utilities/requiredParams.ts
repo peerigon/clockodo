@@ -12,12 +12,12 @@ export const ADD_LUMP_SUM_ENTRY = [
     "servicesId",
     "billable",
     "timeSince",
-    "lumpSum",
+    "lumpsum",
 ];
 export const ADD_RECURRING_LUMP_SUM_ENTRY = [
     "customersId",
-    "lumpSumsAmount",
-    "lumpSumsId",
+    "lumpsumsAmount",
+    "lumpsumsId",
     "billable",
     "timeSince",
 ];
@@ -40,7 +40,7 @@ export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"];
 export const EDIT_ABSENCE = ["absenceId"];
 export const EDIT_ENTRY = ["entryId"];
 export const GET_LUMP_SUM = [
-    "lumpSumEntryId",
+    "lumpsumEntryId",
     "timeUntil",
     "timeSince",
     "usersId",

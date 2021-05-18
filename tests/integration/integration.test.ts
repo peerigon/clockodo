@@ -1,15 +1,21 @@
-import { Clockodo, ENTRY_BILLABLE } from "../../src";
+import { Clockodo, Config, ENTRY_BILLABLE } from "../../src";
 
-const TIME_SINCE = "2018-10-01 00:00:00";
-const TIME_UNTIL = "2018-12-30 00:00:00";
+const TIME_SINCE = "2018-10-01T00:00:00Z";
+const TIME_UNTIL = "2018-12-30T00:00:00Z";
 // These tests depend on our real Clockodo account.
 // They should only be executed by our clockodo-dev user or Travis CI.
 const hasCredentials =
     typeof process.env.CLOCKODO_USER === "string" &&
     typeof process.env.CLOCKODO_API_KEY === "string";
+const config: Config = {
+    client: {
+        name: "Clockodo SDK Integration Test",
+        email: "johannes.ewald@peerigon.com",
+    },
+};
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
-    const clockodo = new Clockodo();
+    const clockodo = new Clockodo(config);
 
     const entryShape = {
         id: expect.any(Number),
@@ -27,27 +33,37 @@ const hasCredentials =
                 user: process.env.CLOCKODO_USER!,
                 apiKey: process.env.CLOCKODO_API_KEY!,
             },
-            appIdentifier: "Clockodo-SDK Integration Test"
         });
     });
 
     describe("getUsers()", () => {
         it("returns expected data format", async () => {
             const expectedKeys = [
-                "id",
-                "name",
-                "number",
-                "email",
-                "role",
                 "active",
+                "canAddCustomers",
+                "canGenerallyManageAbsences",
+                "canGenerallySeeAbsences",
                 "editLock",
                 "editLockDyn",
+                "editLockSync",
+                "email",
+                "id",
+                "language",
+                "name",
+                "number",
+                "role",
+                "timeformat12H",
+                "timezone",
+                "wageType",
+                "weekendFriday",
+                "weekstartMonday",
+                "worktimeRegulationId",
             ];
 
             const data = await clockodo.getUsers();
 
-            expect(Object.keys(data.users[0]).sort()).toEqual(
-                expectedKeys.sort()
+            expect(Object.keys(data.users[0]).sort()).toMatchObject(
+                expectedKeys
             );
         });
     });
@@ -67,8 +83,8 @@ const hasCredentials =
             );
 
             expect(data.entries[0]).toHaveProperty("id");
-            expect(data.entries[0]).toHaveProperty("duration");
-            expect(data.entries[0]).toHaveProperty("budget");
+            expect(data.entries[0]).toHaveProperty("type");
+            expect(data.entries[0]).toHaveProperty("timeSince");
         });
     });
 
@@ -93,7 +109,7 @@ const hasCredentials =
                     servicesId: 288646,
                     billable: 2,
                     timeSince: "2020-06-02T00:00:00Z",
-                    lumpSum: 123,
+                    lumpsum: 123,
                 },
                 {
                     text: "Lumpsum entry",
@@ -118,8 +134,7 @@ const hasCredentials =
             expect(editEntryResponse).toMatchObject({
                 entry: {
                     ...entryShape,
-                    billable: 1,
-                    billed: true,
+                    billable: 2,
                 },
             });
 
@@ -168,39 +183,38 @@ const hasCredentials =
 
     describe("addEntry() and getEntry()", () => {
         it("adds and retrieves lump sum entries", async () => {
-            const lumpSum = {
+            const lumpsum = {
                 customersId: 619336,
-                lumpSumsId: 4966,
-                lumpSumsAmount: 6.8,
-                billable: 1,
-                billed: true,
+                lumpsumsId: 4966,
+                lumpsumsAmount: 6.8,
+                billable: 2,
                 timeSince: "2020-12-16T14:59:00Z",
                 text: "desc",
             };
 
             const data = await clockodo.addEntry(
                 {
-                    customersId: lumpSum.customersId,
-                    lumpSumsId: lumpSum.lumpSumsId,
-                    lumpSumsAmount: lumpSum.lumpSumsAmount,
-                    billable: 2,
-                    timeSince: lumpSum.timeSince,
+                    customersId: lumpsum.customersId,
+                    lumpsumsId: lumpsum.lumpsumsId,
+                    lumpsumsAmount: lumpsum.lumpsumsAmount,
+                    billable: lumpsum.billable,
+                    timeSince: lumpsum.timeSince,
                 },
                 {
-                    text: lumpSum.text,
+                    text: lumpsum.text,
                 }
             );
 
-            expect(data.entry).toMatchObject(lumpSum);
+            expect(data.entry).toMatchObject(lumpsum);
 
-            const result = await clockodo.getLumpSumEntriesByUserId({
-                lumpSumEntryId: 4966,
+            const result = await clockodo.getLumpsumEntriesByUserId({
+                lumpsumEntryId: 4966,
                 timeSince: "2020-12-16T00:01:00Z",
                 timeUntil: "2020-12-16T23:59:00Z",
                 usersId: 62488,
             });
 
-            expect(result.entries[0]).toMatchObject(lumpSum);
+            expect(result.entries[0]).toMatchObject(lumpsum);
 
             await clockodo.deleteEntry({
                 entryId: data.entry.id,

@@ -30,6 +30,7 @@ import {
     AddEntryReturnType,
     EditEntryReturnType,
     LumpsumServicesReturnType,
+    SearchTextsReturnType,
 } from "./returnTypes";
 
 // TODO: Change naming convention of exported constants and enums
@@ -77,7 +78,7 @@ export enum AbsenceType {
 export class Clockodo {
     api: Api;
 
-    constructor(config: Config = { appIdentifier: "Clockodo-SDK User" }) {
+    constructor(config: Config) {
         this.api = new Api(config);
     }
 
@@ -153,6 +154,12 @@ export class Clockodo {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_PROJECT);
 
         return this.api.get("/projects/" + id);
+    };
+
+    getSearchTexts = async (
+        options?: Record<string, unknown>
+    ): SearchTextsReturnType => {
+        return this.api.get("/clock/searchtexts", options);
     };
 
     getService = async ({ id }: { id: number }): ServiceReturnType => {
@@ -549,6 +556,7 @@ export class Clockodo {
         return this.api.put("/v2/entries/" + entryId, options);
     };
 
+    // TODO: Remove
     getLumpsumEntriesByUserId = async (
         {
             lumpsumEntryId,

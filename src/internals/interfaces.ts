@@ -59,13 +59,14 @@ export type User = {
     timezone: string;
 };
 
+// TODO: Enums!
 const timeEntryType = 1;
 const lumpsumEntryType = 2;
 const unitLumpsumEntryType = 3;
 
 type BaseEntry = {
     id: number;
-    customersId: number | 0;
+    customersId: number;
     projectsId: number | null;
     usersId: number;
     billable: 0 | 1 | 2;
@@ -75,29 +76,35 @@ type BaseEntry = {
     timeUntil: string | null;
     timeInsert: string;
     timeLastChange: string;
-    customersName?: string; // deprecated
-    projectsName?: string | null; // deprecated
-    usersName?: string; // deprecated
-    revenue?: number; // deprecated
+    /** @deprecated */
+    customersName?: string;
+    /** @deprecated */
+    projectsName?: string | null;
+    /** @deprecated */
+    usersName?: string;
+    /** @deprecated */
+    revenue?: number;
 };
 
 export type TimeEntry = BaseEntry & {
     type: typeof timeEntryType;
     servicesId: number;
-    servicesName?: string; // deprecated
+    /** @deprecated */
+    servicesName?: string;
     duration: number;
     offset: number;
     timeLastChangeWorkTime: string;
-    timeClockedSince?: string;
+    timeClockedSince: string | null;
     clocked: boolean;
     clockedOffline: boolean;
-    hourlyRate?: number;
+    hourlyRate: number | null;
 };
 
 export type LumpsumEntry = BaseEntry & {
     type: typeof lumpsumEntryType;
     servicesId: number;
-    servicesName?: string; // deprecated
+    /** @deprecated */
+    servicesName?: string;
     lumpsum: number;
 };
 
@@ -105,8 +112,11 @@ export type UnitLumpsumEntry = BaseEntry & {
     type: typeof unitLumpsumEntryType;
     lumpsumsId: number;
     lumpsumsAmount: number;
+    /** @deprecated */
     lumpsumsPrice?: number;
+    /** @deprecated */
     lumpsumsUnit?: string;
+    /** @deprecated */
     lumpsumsName?: string;
 };
 

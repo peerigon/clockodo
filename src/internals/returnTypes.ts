@@ -67,15 +67,19 @@ export type ClockReturnType = Promise<{
 export type ClockStartReturnType = Promise<{
     running: TimeEntry;
     stopped?: TimeEntry;
+    currentTime: string;
 }>;
 export type ClockStopReturnType = Promise<{
     stopped: TimeEntry;
     running: null | TimeEntry;
+    currentTime: string;
 }>;
 export type ClockEditReturnType = Promise<{
     updated: TimeEntry;
     running: null | TimeEntry;
+    currentTime: string;
 }>;
+export type SearchTextsReturnType = Promise<{ texts: Array<string> }>;
 export type TargetHourReturnType = Promise<{ targethours: TargetHoursRow }>;
 export type TargetHoursReturnType = Promise<{
     targethours: Array<TargetHoursRow>;

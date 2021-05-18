@@ -29,7 +29,24 @@ export type Authentication = {
 };
 
 export type Config = {
-    appIdentifier: string;
+    /**
+     * Information about the client that is going to do the requests.
+     * Will be sent as X-Clockodo-External-Application.
+     */
+    client: {
+        /**
+         * Name of the application or your company
+         */
+        name: string;
+        /**
+         * E-mail address of a technical contact person
+         */
+        email: string;
+    };
+    /**
+     * Authentication for all requests.
+     * Uses cookie authentication if undefined.
+     */
     authentication?: Authentication;
     baseUrl?: string;
 };
@@ -44,13 +61,13 @@ export class Api {
     constructor({
         baseUrl = DEFAULT_BASE_URL,
         authentication,
-        appIdentifier,
+        client,
     }: Config) {
-        this.config({ appIdentifier, authentication, baseUrl });
+        this.config({ client, authentication, baseUrl });
     }
 
-    config = (config: Config) => {
-        const { authentication, baseUrl, appIdentifier } = config;
+    config = (config: Partial<Config>) => {
+        const { authentication, baseUrl, client } = config;
         const defaults = this[axiosClient].defaults;
 
         if (baseUrl) {
@@ -61,8 +78,24 @@ export class Api {
             }
             defaults.baseURL = baseUrl;
         }
-        if ("appIdentifier" in config) {
-            defaults.headers["X-Clockodo-External-Application"] = appIdentifier;
+        if ("client" in config) {
+            const { name, email } = config.client!;
+
+            if (typeof name !== "string") {
+                throw new Error(
+                    `name should be a string but is typeof: ${typeof name}`
+                );
+            }
+
+            if (typeof email !== "string") {
+                throw new Error(
+                    `email should be a string but is typeof: ${typeof email}`
+                );
+            }
+
+            defaults.headers["X-Clockodo-External-Application"] = `${
+                client!.name
+            };${client!.email}`;
         }
         if ("authentication" in config) {
             if (authentication === undefined) {
