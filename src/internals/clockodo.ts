@@ -32,48 +32,7 @@ import {
     LumpsumServicesReturnType,
     SearchTextsReturnType,
 } from "./returnTypes";
-
-// TODO: Change naming convention of exported constants and enums
-export const ENTRY_UNBILLABLE = 0;
-export const ENTRY_BILLABLE = 1;
-export const ENTRY_BILLED = 2;
-export const ABSENCE_TYPE_REGULAR_HOLIDAY = 1;
-export const ABSENCE_TYPE_SPECIAL_LEAVE = 2;
-export const ABSENCE_TYPE_REDUCTION_OF_OVERTIME = 3;
-export const ABSENCE_TYPE_SICK_DAY = 4;
-export const ABSENCE_TYPE_SICK_DAY_OF_CHILD = 5;
-export const ABSENCE_TYPE_SCHOOL_FURTHER_EDUCATION = 6;
-export const ABSENCE_TYPE_MATERNITY_PROTECTION = 7;
-export const ABSENCE_TYPE_HOME_OFFICE = 8;
-export const ABSENCE_TYPE_WORK_OUT_OF_OFFICE = 9;
-export const ABSENCE_STATUS_REPORTED = 0;
-export const ABSENCE_STATUS_APPROVED = 1;
-export const ABSENCE_STATUS_DECLINED = 2;
-export const ABSENCE_STATUS_APPROVAL_CANCELLED = 3;
-export const ABSENCE_STATUS_REQUEST_CANCELLED = 4;
-
-export enum Billable {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    ENTRY_UNBILLABLE,
-    ENTRY_BILLABLE,
-    ENTRY_BILLED,
-    /* eslint-enable @typescript-eslint/naming-convention */
-}
-
-// Cannot set the variables to the enum like ABSENCE_TYPE_REGULAR_HOLIDAY = ABSENCE_TYPE_REGULAR_HOLIDAY due to the error "Computed values are not permitted in an enum with string valued members."
-export enum AbsenceType {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    ABSENCE_TYPE_REGULAR_HOLIDAY = 1,
-    ABSENCE_TYPE_SPECIAL_LEAVE,
-    ABSENCE_TYPE_REDUCTION_OF_OVERTIME,
-    ABSENCE_TYPE_SICK_DAY,
-    ABSENCE_TYPE_SICK_DAY_OF_CHILD,
-    ABSENCE_TYPE_SCHOOL_FURTHER_EDUCATION,
-    ABSENCE_TYPE_MATERNITY_PROTECTION,
-    ABSENCE_TYPE_HOME_OFFICE,
-    ABSENCE_TYPE_WORK_OUT_OF_OFFICE,
-    /* eslint-enable @typescript-eslint/naming-convention */
-}
+import { AbsenceType, Billability, BillabilityOfLumpSumEntry } from "./enums";
 
 export class Clockodo {
     api: Api;
@@ -204,7 +163,7 @@ export class Clockodo {
             taskProjectsId: number;
             taskServicesId: number;
             taskText: string;
-            taskBillable: Billable;
+            taskBillable: Billability;
         },
         options?: Record<string, unknown>
     ): TaskDurationReturnType => {
@@ -285,7 +244,7 @@ export class Clockodo {
             customersId,
             servicesId,
             billable,
-        }: { customersId: number; servicesId: number; billable: Billable },
+        }: { customersId: number; servicesId: number; billable: Billability },
         options?: Record<string, unknown>
     ): ClockStartReturnType => {
         const requiredArguments = { customersId, servicesId, billable };
@@ -353,14 +312,14 @@ export class Clockodo {
             | {
                   customersId: number;
                   servicesId: number;
-                  billable: Billable;
+                  billable: Billability;
                   timeSince: string;
                   timeUntil: string;
               }
             | {
                   customersId: number;
                   servicesId: number;
-                  billable: Billable;
+                  billable: BillabilityOfLumpSumEntry;
                   timeSince: string;
                   lumpsum: number;
               }
@@ -368,7 +327,7 @@ export class Clockodo {
                   customersId: number;
                   lumpsumsId: number;
                   lumpsumsAmount: number;
-                  billable: Billable;
+                  billable: BillabilityOfLumpSumEntry;
                   timeSince: string;
               },
         options?: Record<string, unknown>

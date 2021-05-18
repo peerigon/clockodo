@@ -1,4 +1,5 @@
-import { Clockodo, Config, ENTRY_BILLABLE } from "../../src";
+import { Clockodo, Config } from "../../src";
+import { Billability } from "../../src/internals/enums";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
@@ -71,7 +72,7 @@ const config: Config = {
     describe("getEntries()", () => {
         it("returns expected data format", async () => {
             const parameters = {
-                filterBillable: ENTRY_BILLABLE,
+                filterBillable: Billability.Billable,
             };
 
             const data = await clockodo.getEntries(

@@ -2,14 +2,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import qs from "qs";
 import nock from "nock";
-import {
-    Clockodo,
-    ENTRY_BILLABLE,
-    ENTRY_BILLED,
-    ABSENCE_TYPE_SPECIAL_LEAVE,
-    Config,
-} from "../../src";
+import { Clockodo, Config } from "../../src";
 import { cachePlugin } from "../../src/plugins/cache";
+import { AbsenceType, Billability } from "../../src/internals/enums";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
@@ -207,13 +202,13 @@ describe("Clockodo (instance)", () => {
         describe("getEntries()", () => {
             it("correctly builds getEntries() request", async () => {
                 const parameters = {
-                    filterBillable: ENTRY_BILLED,
+                    filterBillable: Billability.Billed,
                 };
 
                 const expectedParameters = {
                     time_since: "2017-08-18 00:00:00",
                     time_until: "2018-02-09 00:00:00",
-                    "filter[billable]": ENTRY_BILLED,
+                    "filter[billable]": Billability.Billed,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
@@ -476,7 +471,7 @@ describe("Clockodo (instance)", () => {
                     customers_id: 24,
                     services_id: 7,
                     projects_id: 365,
-                    billable: ENTRY_BILLABLE,
+                    billable: Billability.Billable,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
@@ -487,7 +482,7 @@ describe("Clockodo (instance)", () => {
                     {
                         customersId: 24,
                         servicesId: 7,
-                        billable: ENTRY_BILLABLE,
+                        billable: Billability.Billable,
                     },
                     params
                 );
@@ -508,12 +503,12 @@ describe("Clockodo (instance)", () => {
         describe("addCustomer()", () => {
             it("correctly builds addCustomer() request", async () => {
                 const params = {
-                    billableDefault: ENTRY_BILLABLE,
+                    billableDefault: Billability.Billable,
                 };
 
                 const expectedParameters = {
                     name: "Weyland-Yutani",
-                    billable_default: ENTRY_BILLABLE,
+                    billable_default: Billability.Billable,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
@@ -612,7 +607,7 @@ describe("Clockodo (instance)", () => {
                 const expectedParameters = {
                     customers_id: 1,
                     services_id: 2,
-                    billable: ENTRY_BILLABLE,
+                    billable: Billability.Billable,
                     time_since: "2020-06-02 00:00:00",
                     time_until: "2020-06-02 00:00:01",
                     text: "this is an optional description",
@@ -626,7 +621,7 @@ describe("Clockodo (instance)", () => {
                     {
                         customersId: 1,
                         servicesId: 2,
-                        billable: ENTRY_BILLABLE,
+                        billable: Billability.Billable,
                         timeSince: "2020-06-02 00:00:00",
                         timeUntil: "2020-06-02 00:00:01",
                     },
@@ -657,7 +652,7 @@ describe("Clockodo (instance)", () => {
                 const expectedParameters = {
                     date_since: "2017-08-18 00:00:00",
                     date_until: "2018-02-09 00:00:00",
-                    type: ABSENCE_TYPE_SPECIAL_LEAVE,
+                    type: AbsenceType.SpecialLeave,
                     note: "elternzeit",
                 };
 
@@ -669,7 +664,7 @@ describe("Clockodo (instance)", () => {
                     {
                         dateSince: "2017-08-18 00:00:00",
                         dateUntil: "2018-02-09 00:00:00",
-                        type: ABSENCE_TYPE_SPECIAL_LEAVE,
+                        type: AbsenceType.SpecialLeave,
                     },
                     params
                 );
