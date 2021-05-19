@@ -41,7 +41,6 @@ import {
     LumpsumServiceEntry,
     LumpsumValueEntry,
     ManualTimeEntry,
-    TimeEntry,
 } from "./interfaces";
 
 export class Clockodo {
@@ -517,34 +516,5 @@ export class Clockodo {
         REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
 
         return this.api.put("/v2/entries/" + entryId, options);
-    };
-
-    // TODO: Remove
-    getLumpsumEntriesByUserId = async (
-        {
-            lumpsumEntryId,
-            timeUntil,
-            timeSince,
-            usersId,
-        }: {
-            lumpsumEntryId: number;
-            usersId: number;
-            timeUntil: string;
-            timeSince: string;
-        },
-        options?: Record<string, unknown>
-    ): EntriesReturnType => {
-        REQUIRED.checkRequired(
-            { lumpsumEntryId, timeUntil, timeSince, usersId },
-            REQUIRED.GET_LUMP_SUM
-        );
-
-        return this.api.get("/v2/entries/", {
-            filterLumpsumsId: lumpsumEntryId,
-            timeSince,
-            timeUntil,
-            filterUsersId: usersId,
-            ...options,
-        });
     };
 }

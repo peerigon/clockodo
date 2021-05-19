@@ -180,45 +180,4 @@ const config: Config = {
             expect(data).toHaveProperty("running");
         });
     });
-
-    describe("addEntry() and getEntry()", () => {
-        it("adds and retrieves lump sum entries", async () => {
-            const lumpsum = {
-                customersId: 619336,
-                lumpsumsId: 4966,
-                lumpsumsAmount: 6.8,
-                billable: 2,
-                timeSince: "2020-12-16T14:59:00Z",
-                text: "desc",
-            };
-
-            const data = await clockodo.addEntry(
-                {
-                    customersId: lumpsum.customersId,
-                    lumpsumsId: lumpsum.lumpsumsId,
-                    lumpsumsAmount: lumpsum.lumpsumsAmount,
-                    billable: lumpsum.billable,
-                    timeSince: lumpsum.timeSince,
-                },
-                {
-                    text: lumpsum.text,
-                }
-            );
-
-            expect(data.entry).toMatchObject(lumpsum);
-
-            const result = await clockodo.getLumpsumEntriesByUserId({
-                lumpsumEntryId: 4966,
-                timeSince: "2020-12-16T00:01:00Z",
-                timeUntil: "2020-12-16T23:59:00Z",
-                usersId: 62488,
-            });
-
-            expect(result.entries[0]).toMatchObject(lumpsum);
-
-            await clockodo.deleteEntry({
-                entryId: data.entry.id,
-            });
-        });
-    });
 });
