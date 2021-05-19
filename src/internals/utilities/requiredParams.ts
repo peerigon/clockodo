@@ -52,7 +52,7 @@ export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"] as const;
 export const GET_PROJECT = ["id"] as const;
 export const GET_SERVICE = ["id"] as const;
 export const GET_LUMPSUM_SERVICE = ["id"] as const;
-export const GET_SINGLE_TARGET_HOUR_SET = ["id"] as const;
+export const GET_TARGETHOURS_ROW = ["id"] as const;
 export const GET_TASK_DURATION = [
     "taskCustomersId",
     "taskProjectsId",

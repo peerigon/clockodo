@@ -175,7 +175,7 @@ export class Clockodo {
     getTargethoursRow = async ({
         id,
     }: Pick<TargethoursRow, "id">): TargethoursRowReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_SINGLE_TARGET_HOUR_SET);
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_TARGETHOURS_ROW);
 
         return this.api.get("/targethours/" + id);
     };
@@ -255,40 +255,19 @@ export class Clockodo {
         return this.api.get("/userreports", { year, ...options });
     };
 
-    changeClockDuration = async (
+    addAbsence = async (
         {
-            entryId,
-            durationBefore,
-            duration,
-        }: { entryId: Entry["id"]; durationBefore: number; duration: number },
+            dateSince,
+            dateUntil,
+            type,
+        }: Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>,
         options?: Record<string, unknown>
-    ): ClockEditReturnType => {
-        const requiredArguments = { durationBefore, duration };
+    ): AbsenceReturnType => {
+        const requiredArguments = { dateSince, dateUntil, type };
 
-        REQUIRED.checkRequired(
-            { entryId, ...requiredArguments },
-            REQUIRED.CHANGE_CLOCK_DURATION
-        );
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ABSENCE);
 
-        return this.api.put("/v2/clock/" + entryId, {
-            ...requiredArguments,
-            ...options,
-        });
-    };
-
-    startClock = async (
-        {
-            customersId,
-            servicesId,
-            billable,
-        }: Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>,
-        options?: Record<string, unknown>
-    ): ClockStartReturnType => {
-        const requiredArguments = { customersId, servicesId, billable };
-
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
-
-        return this.api.post("/v2/clock", {
+        return this.api.post("/absences", {
             ...requiredArguments,
             ...options,
         });
@@ -301,6 +280,39 @@ export class Clockodo {
         REQUIRED.checkRequired({ name }, REQUIRED.ADD_CUSTOMER);
 
         return this.api.post("/customers", { name, ...options });
+    };
+
+    addEntry = async (
+        requiredArguments:
+            | Pick<ManualTimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
+            | Pick<
+                  LumpsumValueEntry,
+                  typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY[number]
+              >
+            | Pick<
+                  LumpsumServiceEntry,
+                  typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
+              >,
+        options?: Record<string, unknown>
+    ): AddEntryReturnType => {
+        if ("lumpsumsId" in requiredArguments) {
+            REQUIRED.checkRequired(
+                requiredArguments,
+                REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY
+            );
+        } else if ("lumpsum" in requiredArguments) {
+            REQUIRED.checkRequired(
+                requiredArguments,
+                REQUIRED.ADD_LUMPSUM_VALUE_ENTRY
+            );
+        } else {
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
+        }
+
+        return this.api.post("/v2/entries", {
+            ...requiredArguments,
+            ...options,
+        });
     };
 
     addProject = async (
@@ -347,64 +359,111 @@ export class Clockodo {
         });
     };
 
-    addEntry = async (
-        requiredArguments:
-            | Pick<ManualTimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
-            | Pick<
-                  LumpsumValueEntry,
-                  typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY[number]
-              >
-            | Pick<
-                  LumpsumServiceEntry,
-                  typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
-              >,
+    startClock = async (
+        {
+            customersId,
+            servicesId,
+            billable,
+        }: Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>,
         options?: Record<string, unknown>
-    ): AddEntryReturnType => {
-        if ("lumpsumsId" in requiredArguments) {
-            REQUIRED.checkRequired(
-                requiredArguments,
-                REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY
-            );
-        } else if ("lumpsum" in requiredArguments) {
-            REQUIRED.checkRequired(
-                requiredArguments,
-                REQUIRED.ADD_LUMPSUM_VALUE_ENTRY
-            );
-        } else {
-            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
-        }
+    ): ClockStartReturnType => {
+        const requiredArguments = { customersId, servicesId, billable };
 
-        return this.api.post("/v2/entries", {
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
+
+        return this.api.post("/v2/clock", {
             ...requiredArguments,
             ...options,
         });
     };
 
-    addAbsence = async (
+    changeClockDuration = async (
         {
-            dateSince,
-            dateUntil,
-            type,
-        }: Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>,
+            entryId,
+            durationBefore,
+            duration,
+        }: { entryId: Entry["id"]; durationBefore: number; duration: number },
+        options?: Record<string, unknown>
+    ): ClockEditReturnType => {
+        const requiredArguments = { durationBefore, duration };
+
+        REQUIRED.checkRequired(
+            { entryId, ...requiredArguments },
+            REQUIRED.CHANGE_CLOCK_DURATION
+        );
+
+        return this.api.put("/v2/clock/" + entryId, {
+            ...requiredArguments,
+            ...options,
+        });
+    };
+
+    editAbsence = async (
+        { absenceId }: { absenceId: Absence["id"] },
         options?: Record<string, unknown>
     ): AbsenceReturnType => {
-        const requiredArguments = { dateSince, dateUntil, type };
+        REQUIRED.checkRequired({ absenceId }, REQUIRED.EDIT_ABSENCE);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ABSENCE);
+        return this.api.put("/absences/" + absenceId, options);
+    };
 
-        return this.api.post("/absences", {
+    editCustomer = async (
+        { customersId }: { customersId: Customer["id"] },
+        options?: Record<string, unknown>
+    ) => {
+        REQUIRED.checkRequired({ customersId }, REQUIRED.EDIT_CUSTOMER);
+
+        return this.api.put("/customers/" + customersId, options);
+    };
+
+    editEntry = async (
+        { entryId }: { entryId: Entry["id"] },
+        options?: Record<string, unknown>
+    ): EditEntryReturnType => {
+        REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
+
+        return this.api.put("/v2/entries/" + entryId, options);
+    };
+
+    editEntryGroup = async (
+        { timeSince, timeUntil }: { timeSince: string; timeUntil: string },
+        options?: Record<string, unknown>
+    ): EditEntryGroupsReturnType => {
+        const requiredArguments = { timeSince, timeUntil };
+
+        REQUIRED.checkRequired(requiredArguments, REQUIRED.EDIT_ENTRY_GROUP);
+
+        return this.api.put("/entrygroups", {
             ...requiredArguments,
             ...options,
         });
     };
 
-    stopClock = async (
-        { entryId }: { entryId: Entry["id"] },
+    editProject = async (
+        { projectsId }: { projectsId: Project["id"] },
         options?: Record<string, unknown>
-    ): ClockStopReturnType => {
-        REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
+    ): ProjectReturnType => {
+        REQUIRED.checkRequired({ projectsId }, REQUIRED.EDIT_PROJECT);
 
-        return this.api.delete("/v2/clock/" + entryId, options);
+        return this.api.put("/projects/" + projectsId, options);
+    };
+
+    editService = async (
+        { servicesId }: { servicesId: Service["id"] },
+        options?: Record<string, unknown>
+    ): ServiceReturnType => {
+        REQUIRED.checkRequired({ servicesId }, REQUIRED.EDIT_SERVICE);
+
+        return this.api.put("/services/" + servicesId, options);
+    };
+
+    editUser = async (
+        { usersId }: { usersId: User["id"] },
+        options?: Record<string, unknown>
+    ): UserReturnType => {
+        REQUIRED.checkRequired({ usersId }, REQUIRED.EDIT_USER);
+
+        return this.api.put("/users/" + usersId, options);
     };
 
     deactivateCustomer = async (
@@ -443,6 +502,15 @@ export class Clockodo {
         return this.api.delete("/users/" + usersId, options);
     };
 
+    deleteAbsence = async (
+        { absenceId }: { absenceId: Absence["id"] },
+        options?: Record<string, unknown>
+    ): DeleteReturnType => {
+        REQUIRED.checkRequired({ absenceId }, REQUIRED.DELETE_ABSENCE);
+
+        return this.api.delete("/absences/" + absenceId, options);
+    };
+
     deleteEntry = async (
         { entryId }: { entryId: Entry["id"] },
         options?: Record<string, unknown>
@@ -466,80 +534,12 @@ export class Clockodo {
         });
     };
 
-    deleteAbsence = async (
-        { absenceId }: { absenceId: Absence["id"] },
-        options?: Record<string, unknown>
-    ): DeleteReturnType => {
-        REQUIRED.checkRequired({ absenceId }, REQUIRED.DELETE_ABSENCE);
-
-        return this.api.delete("/absences/" + absenceId, options);
-    };
-
-    editCustomer = async (
-        { customersId }: { customersId: Customer["id"] },
-        options?: Record<string, unknown>
-    ) => {
-        REQUIRED.checkRequired({ customersId }, REQUIRED.EDIT_CUSTOMER);
-
-        return this.api.put("/customers/" + customersId, options);
-    };
-
-    editProject = async (
-        { projectsId }: { projectsId: Project["id"] },
-        options?: Record<string, unknown>
-    ): ProjectReturnType => {
-        REQUIRED.checkRequired({ projectsId }, REQUIRED.EDIT_PROJECT);
-
-        return this.api.put("/projects/" + projectsId, options);
-    };
-
-    editService = async (
-        { servicesId }: { servicesId: Service["id"] },
-        options?: Record<string, unknown>
-    ): ServiceReturnType => {
-        REQUIRED.checkRequired({ servicesId }, REQUIRED.EDIT_SERVICE);
-
-        return this.api.put("/services/" + servicesId, options);
-    };
-
-    editUser = async (
-        { usersId }: { usersId: User["id"] },
-        options?: Record<string, unknown>
-    ): UserReturnType => {
-        REQUIRED.checkRequired({ usersId }, REQUIRED.EDIT_USER);
-
-        return this.api.put("/users/" + usersId, options);
-    };
-
-    editEntryGroup = async (
-        { timeSince, timeUntil }: { timeSince: string; timeUntil: string },
-        options?: Record<string, unknown>
-    ): EditEntryGroupsReturnType => {
-        const requiredArguments = { timeSince, timeUntil };
-
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.EDIT_ENTRY_GROUP);
-
-        return this.api.put("/entrygroups", {
-            ...requiredArguments,
-            ...options,
-        });
-    };
-
-    editAbsence = async (
-        { absenceId }: { absenceId: Absence["id"] },
-        options?: Record<string, unknown>
-    ): AbsenceReturnType => {
-        REQUIRED.checkRequired({ absenceId }, REQUIRED.EDIT_ABSENCE);
-
-        return this.api.put("/absences/" + absenceId, options);
-    };
-
-    editEntry = async (
+    stopClock = async (
         { entryId }: { entryId: Entry["id"] },
         options?: Record<string, unknown>
-    ): EditEntryReturnType => {
-        REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
+    ): ClockStopReturnType => {
+        REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
 
-        return this.api.put("/v2/entries/" + entryId, options);
+        return this.api.delete("/v2/clock/" + entryId, options);
     };
 }
