@@ -235,12 +235,12 @@ export class Clockodo {
     };
 
     getUserReport = async (
-        { id, year }: { id: User["id"]; year: number },
+        { usersId, year }: { usersId: User["id"]; year: number },
         options?: Record<string, unknown>
     ): UserReportReturnType => {
-        REQUIRED.checkRequired({ id, year }, REQUIRED.GET_USER_REPORTS);
+        REQUIRED.checkRequired({ usersId, year }, REQUIRED.GET_USER_REPORT);
 
-        return this.api.get("/userreports/" + id, {
+        return this.api.get("/userreports/" + usersId, {
             year,
             ...options,
         });
