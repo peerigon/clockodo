@@ -1,3 +1,10 @@
+# [8.1.0-beta.7](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.6...v8.1.0-beta.7) (2021-05-19)
+
+
+### Features
+
+* Introduce enums ([0515034](https://github.com/peerigon/clockodo/commit/0515034de054d1aeceb888ba3c59bef4812ae373))
+
 # [8.1.0-beta.6](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.5...v8.1.0-beta.6) (2021-05-07)
 
 
