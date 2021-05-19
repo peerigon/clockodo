@@ -326,7 +326,7 @@ describe("Clockodo (instance)", () => {
                     .get("/targethours/1234")
                     .reply(200);
 
-                await clockodo.getSingleTargetHourSet({ id: 1234 });
+                await clockodo.getTargethoursRow({ id: 1234 });
 
                 nockScope.done();
             });
@@ -337,7 +337,7 @@ describe("Clockodo (instance)", () => {
                     .get("/targethours")
                     .reply(200);
 
-                await clockodo.getTargetHours();
+                await clockodo.getTargethours();
 
                 nockScope.done();
             });

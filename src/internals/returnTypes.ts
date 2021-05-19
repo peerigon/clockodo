@@ -11,7 +11,7 @@ import {
     Task,
     EntryGroup,
     UserReport,
-    TargetHoursRow,
+    TargethoursRow,
     LumpsumService,
 } from "./interfaces";
 
@@ -86,9 +86,11 @@ export type ClockEditReturnType = Promise<{
 }>;
 export type SearchTextsReturnType = Promise<{ texts: Array<string> }>;
 
-export type TargetHourReturnType = Promise<{ targethoursRow: TargetHoursRow }>;
-export type TargetHoursReturnType = Promise<{
-    targethours: Array<TargetHoursRow>;
+export type TargethoursRowReturnType = Promise<{
+    targethoursRow: TargethoursRow;
+}>;
+export type TargethoursReturnType = Promise<{
+    targethours: Array<TargethoursRow>;
 }>;
 export type AddUserReturnType = Promise<{
     success: "true";

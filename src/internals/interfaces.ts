@@ -277,7 +277,7 @@ export type Absence = {
     approvedBy: number;
 };
 
-export type TargetHoursRow = {
+export type TargethoursRow = {
     id: number;
     usersId: number;
     type: string;

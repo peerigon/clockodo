@@ -23,8 +23,8 @@ import {
     ClockReturnType,
     ClockEditReturnType,
     ClockStopReturnType,
-    TargetHoursReturnType,
-    TargetHourReturnType,
+    TargethoursReturnType,
+    TargethoursRowReturnType,
     AddUserReturnType,
     EntryGroupsReturnType,
     ClockStartReturnType,
@@ -46,7 +46,7 @@ import {
     ManualTimeEntry,
     Project,
     Service,
-    TargetHoursRow,
+    TargethoursRow,
     User,
 } from "./interfaces";
 
@@ -172,18 +172,17 @@ export class Clockodo {
         return this.api.get("/lumpsumservices");
     };
 
-    // TODO: targethoursRow
-    getSingleTargetHourSet = async ({
+    getTargethoursRow = async ({
         id,
-    }: Pick<TargetHoursRow, "id">): TargetHourReturnType => {
+    }: Pick<TargethoursRow, "id">): TargethoursRowReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_SINGLE_TARGET_HOUR_SET);
 
         return this.api.get("/targethours/" + id);
     };
 
-    getTargetHours = async (
+    getTargethours = async (
         options?: Record<string, unknown>
-    ): TargetHoursReturnType => {
+    ): TargethoursReturnType => {
         return this.api.get("/targethours", options);
     };
 
