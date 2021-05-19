@@ -186,7 +186,7 @@ export class Clockodo {
         return this.api.get("/targethours", options);
     };
 
-    // TODO: Deprecated
+    /** @deprecated */
     getTaskDuration = async (
         {
             taskCustomersId,
@@ -219,7 +219,7 @@ export class Clockodo {
         });
     };
 
-    // TODO: Deprecated
+    /** @deprecated */
     getTasks = async (options?: Record<string, unknown>): TasksReturnType => {
         return this.api.get("/tasks", options);
     };
