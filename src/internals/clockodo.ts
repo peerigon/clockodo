@@ -32,7 +32,17 @@ import {
     LumpsumServicesReturnType,
     SearchTextsReturnType,
 } from "./returnTypes";
-import { AbsenceType, Billability, BillabilityOfLumpSumEntry } from "./enums";
+import {
+    AbsenceType,
+    ClockingTimeEntryBillability,
+    TimeEntryBillability,
+} from "./enums";
+import {
+    LumpsumServiceEntry,
+    LumpsumValueEntry,
+    ManualTimeEntry,
+    TimeEntry,
+} from "./interfaces";
 
 export class Clockodo {
     api: Api;
@@ -103,6 +113,7 @@ export class Clockodo {
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRY_GROUPS);
 
+        // TODO: v2 + tests
         return this.api.get("/entrygroups", {
             ...requiredArguments,
             ...options,
@@ -163,7 +174,7 @@ export class Clockodo {
             taskProjectsId: number;
             taskServicesId: number;
             taskText: string;
-            taskBillable: Billability;
+            taskBillable: TimeEntryBillability;
         },
         options?: Record<string, unknown>
     ): TaskDurationReturnType => {
@@ -244,7 +255,11 @@ export class Clockodo {
             customersId,
             servicesId,
             billable,
-        }: { customersId: number; servicesId: number; billable: Billability },
+        }: {
+            customersId: number;
+            servicesId: number;
+            billable: ClockingTimeEntryBillability;
+        },
         options?: Record<string, unknown>
     ): ClockStartReturnType => {
         const requiredArguments = { customersId, servicesId, billable };
@@ -294,7 +309,8 @@ export class Clockodo {
             number,
             email,
             role,
-        }: { name: string; number: string; email: string; role: string },
+        }: // TODO: Pick?
+        { name: string; number: string; email: string; role: string },
         options?: Record<string, unknown>
     ): AddUserReturnType => {
         const requiredArguments = { name, number, email, role };
@@ -309,41 +325,29 @@ export class Clockodo {
 
     addEntry = async (
         requiredArguments:
-            | {
-                  customersId: number;
-                  servicesId: number;
-                  billable: Billability;
-                  timeSince: string;
-                  timeUntil: string;
-              }
-            | {
-                  customersId: number;
-                  servicesId: number;
-                  billable: BillabilityOfLumpSumEntry;
-                  timeSince: string;
-                  lumpsum: number;
-              }
-            | {
-                  customersId: number;
-                  lumpsumsId: number;
-                  lumpsumsAmount: number;
-                  billable: BillabilityOfLumpSumEntry;
-                  timeSince: string;
-              },
+            | Pick<ManualTimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
+            | Pick<
+                  LumpsumValueEntry,
+                  typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY[number]
+              >
+            | Pick<
+                  LumpsumServiceEntry,
+                  typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
+              >,
         options?: Record<string, unknown>
     ): AddEntryReturnType => {
-        if ("timeUntil" in requiredArguments) {
-            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
+        if ("lumpsumsId" in requiredArguments) {
+            REQUIRED.checkRequired(
+                requiredArguments,
+                REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY
+            );
         } else if ("lumpsum" in requiredArguments) {
             REQUIRED.checkRequired(
                 requiredArguments,
-                REQUIRED.ADD_LUMP_SUM_ENTRY
+                REQUIRED.ADD_LUMPSUM_VALUE_ENTRY
             );
         } else {
-            REQUIRED.checkRequired(
-                requiredArguments,
-                REQUIRED.ADD_RECURRING_LUMP_SUM_ENTRY
-            );
+            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
         }
 
         return this.api.post("/v2/entries", {

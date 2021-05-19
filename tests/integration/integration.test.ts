@@ -1,5 +1,4 @@
-import { Clockodo, Config } from "../../src";
-import { Billability } from "../../src/internals/enums";
+import { Billability, Clockodo, Config } from "../../src/index";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";

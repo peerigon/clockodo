@@ -1,10 +1,19 @@
+import {
+    ClockingTimeEntryBillability,
+    EntryType,
+    LumpsumEntryBillability,
+    TimeEntryBillability,
+} from "./enums";
+
+// TODO: Interfaces?
+
 export type Customer = {
     id: number;
     name: string;
     number: string | null;
     active: boolean;
     billableDefault: boolean;
-    note: string | null;
+    note?: string | null;
     projects?: Array<Project> | null;
 };
 
@@ -59,17 +68,11 @@ export type User = {
     timezone: string;
 };
 
-// TODO: Enums!
-const timeEntryType = 1;
-const lumpsumEntryType = 2;
-const unitLumpsumEntryType = 3;
-
-type BaseEntry = {
+type CommonEntry = {
     id: number;
     customersId: number;
     projectsId: number | null;
     usersId: number;
-    billable: 0 | 1 | 2;
     textsId: number | null;
     text: string | null;
     timeSince: string;
@@ -86,30 +89,56 @@ type BaseEntry = {
     revenue?: number;
 };
 
-export type TimeEntry = BaseEntry & {
-    type: typeof timeEntryType;
+type CommonTimeEntry = CommonEntry & {
+    type: EntryType.Time;
     servicesId: number;
     /** @deprecated */
     servicesName?: string;
-    duration: number;
-    offset: number;
     timeLastChangeWorkTime: string;
-    timeClockedSince: string | null;
-    clocked: boolean;
-    clockedOffline: boolean;
     hourlyRate: number | null;
 };
 
-export type LumpsumEntry = BaseEntry & {
-    type: typeof lumpsumEntryType;
+type CommonClockTimeEntry = CommonTimeEntry & {
+    timeClockedSince: string | null;
+    clocked: true;
+    clockedOffline: boolean;
+};
+
+export type ClockingTimeEntry = CommonClockTimeEntry & {
+    billable: ClockingTimeEntryBillability;
+    duration: null;
+    offset: 0;
+};
+
+export type ClockedTimeEntry = CommonClockTimeEntry & {
+    billable: TimeEntryBillability;
+    duration: number;
+    offset: number;
+};
+
+export type ManualTimeEntry = CommonTimeEntry & {
+    billable: TimeEntryBillability;
+    duration: number;
+    offset: number;
+    timeClockedSince: null;
+    clocked: false;
+    clockedOffline: false;
+};
+
+export type TimeEntry = ClockingTimeEntry | ClockedTimeEntry | ManualTimeEntry;
+
+export type LumpsumValueEntry = CommonEntry & {
+    type: EntryType.LumpsumValue;
+    billable: LumpsumEntryBillability;
     servicesId: number;
     /** @deprecated */
     servicesName?: string;
     lumpsum: number;
 };
 
-export type UnitLumpsumEntry = BaseEntry & {
-    type: typeof unitLumpsumEntryType;
+export type LumpsumServiceEntry = CommonEntry & {
+    type: EntryType.LumpsumService;
+    billable: LumpsumEntryBillability;
     lumpsumsId: number;
     lumpsumsAmount: number;
     /** @deprecated */
@@ -120,7 +149,7 @@ export type UnitLumpsumEntry = BaseEntry & {
     lumpsumsName?: string;
 };
 
-export type Entry = TimeEntry | LumpsumEntry | UnitLumpsumEntry;
+export type Entry = TimeEntry | LumpsumValueEntry | LumpsumServiceEntry;
 
 export type Task = {
     day: string;

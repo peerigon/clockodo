@@ -1,13 +1,25 @@
+export enum EntryType {
+    Time = 1,
+    LumpsumValue = 2,
+    LumpsumService = 3,
+}
+
 export enum Billability {
     NotBillable = 0,
     Billable = 1,
     Billed = 2,
 }
 
-export type BillabilityOfLumpSumEntry = Exclude<
-    Billability,
-    Billability.NotBillable
->;
+export type TimeEntryBillability =
+    | Billability.NotBillable
+    | Billability.Billable
+    | Billability.Billed;
+
+export type ClockingTimeEntryBillability =
+    | Billability.NotBillable
+    | Billability.Billable;
+
+export type LumpsumEntryBillability = Billability.Billable | Billability.Billed;
 
 export enum AbsenceStatus {
     Reported = 0,

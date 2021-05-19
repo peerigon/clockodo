@@ -6,69 +6,73 @@ export const ADD_TIME_ENTRY = [
     "billable",
     "timeSince",
     "timeUntil",
-];
-export const ADD_LUMP_SUM_ENTRY = [
+] as const;
+export const ADD_LUMPSUM_VALUE_ENTRY = [
     "customersId",
     "servicesId",
     "billable",
     "timeSince",
     "lumpsum",
-];
-export const ADD_RECURRING_LUMP_SUM_ENTRY = [
+] as const;
+export const ADD_LUMPSUM_SERVICE_ENTRY = [
     "customersId",
     "lumpsumsAmount",
     "lumpsumsId",
     "billable",
     "timeSince",
-];
-export const ADD_PROJECT = ["name", "customersId"];
-export const ADD_SERVICE = ["name"];
-export const ADD_USER = ["name", "number", "email", "role"];
-export const CHANGE_CLOCK_DURATION = ["entryId", "durationBefore", "duration"];
-export const DEACTIVATE_CUSTOMER = ["customersId"];
-export const DEACTIVATE_PROJECT = ["projectsId"];
-export const DEACTIVATE_SERVICE = ["servicesId"];
-export const DEACTIVATE_USER = ["usersId"];
-export const DELETE_ENTRY = ["entryId"];
-export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"];
-export const DELETE_ABSENCE = ["absenceId"];
-export const EDIT_CUSTOMER = ["customersId"];
-export const EDIT_PROJECT = ["projectsId"];
-export const EDIT_SERVICE = ["servicesId"];
-export const EDIT_USER = ["usersId"];
-export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"];
-export const EDIT_ABSENCE = ["absenceId"];
-export const EDIT_ENTRY = ["entryId"];
+] as const;
+export const ADD_PROJECT = ["name", "customersId"] as const;
+export const ADD_SERVICE = ["name"] as const;
+export const ADD_USER = ["name", "number", "email", "role"] as const;
+export const CHANGE_CLOCK_DURATION = [
+    "entryId",
+    "durationBefore",
+    "duration",
+] as const;
+export const DEACTIVATE_CUSTOMER = ["customersId"] as const;
+export const DEACTIVATE_PROJECT = ["projectsId"] as const;
+export const DEACTIVATE_SERVICE = ["servicesId"] as const;
+export const DEACTIVATE_USER = ["usersId"] as const;
+export const DELETE_ENTRY = ["entryId"] as const;
+export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
+export const DELETE_ABSENCE = ["absenceId"] as const;
+export const EDIT_CUSTOMER = ["customersId"] as const;
+export const EDIT_PROJECT = ["projectsId"] as const;
+export const EDIT_SERVICE = ["servicesId"] as const;
+export const EDIT_USER = ["usersId"] as const;
+export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
+export const EDIT_ABSENCE = ["absenceId"] as const;
+export const EDIT_ENTRY = ["entryId"] as const;
 export const GET_LUMP_SUM = [
     "lumpsumEntryId",
     "timeUntil",
     "timeSince",
     "usersId",
-];
-export const GET_ABSENCE = ["id"];
-export const GET_ABSENCES = ["year"];
-export const GET_CUSTOMER = ["id"];
-export const GET_ENTRIES = ["timeSince", "timeUntil"];
-export const GET_ENTRY = ["id"];
-export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"];
-export const GET_PROJECT = ["id"];
-export const GET_SERVICE = ["id"];
-export const GET_SINGLE_TARGET_HOUR_SET = ["id"];
+] as const;
+export const GET_ABSENCE = ["id"] as const;
+export const GET_ABSENCES = ["year"] as const;
+export const GET_CUSTOMER = ["id"] as const;
+export const GET_ENTRIES = ["timeSince", "timeUntil"] as const;
+export const GET_ENTRY = ["id"] as const;
+export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"] as const;
+export const GET_PROJECT = ["id"] as const;
+export const GET_SERVICE = ["id"] as const;
+export const GET_SINGLE_TARGET_HOUR_SET = ["id"] as const;
 export const GET_TASK_DURATION = [
     "taskCustomersId",
     "taskProjectsId",
     "taskServicesId",
     "taskText",
     "taskBillable",
-];
-export const GET_USER = ["id"];
-export const GET_USER_REPORTS = ["year"];
-export const START_CLOCK = ["customersId", "servicesId", "billable"];
-export const STOP_CLOCK = ["entryId"];
+] as const;
+export const GET_USER = ["id"] as const;
+export const GET_USER_REPORTS = ["year"] as const;
+export const START_CLOCK = ["customersId", "servicesId", "billable"] as const;
+export const STOP_CLOCK = ["entryId"] as const;
 
 export const checkRequired = (
     params: Record<string, unknown> = {},
-    requiredList: Array<string>
+    requiredList: ReadonlyArray<string>
 ) => {
     const missingParamName = requiredList.find(
         (paramName) => paramName in params === false
