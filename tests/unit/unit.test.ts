@@ -435,7 +435,7 @@ describe("Clockodo (instance)", () => {
                     .get("/userreports/1263?" + qs.stringify({ year: 217 }))
                     .reply(200);
 
-                await clockodo.getUserReport({ id: 1263, year: 217 });
+                await clockodo.getUserReport({ usersId: 1263, year: 217 });
 
                 nockScope.done();
             });
@@ -443,7 +443,10 @@ describe("Clockodo (instance)", () => {
                 expect.assertions(1);
 
                 return expect(
-                    clockodo.getUserReport({ id: 200 } as any)
+                    clockodo.getUserReport(
+                        // @ts-expect-error Year is missing
+                        { usersId: 200 }
+                    )
                 ).rejects.toThrowError('Missing required parameter "year"');
             });
         });

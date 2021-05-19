@@ -5,8 +5,6 @@ import {
     TimeEntryBillability,
 } from "./enums";
 
-// TODO: Interfaces?
-
 export type Customer = {
     id: number;
     name: string;
