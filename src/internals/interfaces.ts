@@ -301,6 +301,21 @@ export type TargethoursRow = {
     workdaySunday: boolean;
 };
 
+export type HolidayquotaRow = {
+    id: number;
+    usersId: number;
+    yearSince: number;
+    yearUntil: number | null;
+    count: number;
+};
+
+export type HolidayscarryRow = {
+    usersId: number;
+    year: number;
+    count: number;
+    note: string;
+};
+
 export type Paging = {
     itemsPerPage: number;
     currentPage: number;
