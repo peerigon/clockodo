@@ -23,8 +23,13 @@ export type CustomersReturnType = Promise<{ customers: Array<Customer> }>;
 export type ProjectReturnType = Promise<{ project: Project }>;
 export type ServiceReturnType = Promise<{ service: Service }>;
 export type ServicesReturnType = Promise<{ services: Array<Service> }>;
+export type LumpsumServiceReturnType = Promise<{
+    // This endpoint still uses the old lumpSum casing
+    lumpSumService: LumpsumService;
+}>;
 export type LumpsumServicesReturnType = Promise<{
-    lumpsumServices: Array<LumpsumService>;
+    // This endpoint still uses the old lumpSum casing
+    lumpSumServices: Array<LumpsumService>;
 }>;
 export type UserReturnType = Promise<{ user: User }>;
 export type UsersReturnType = Promise<{ users: Array<User> }>;
@@ -81,8 +86,7 @@ export type ClockEditReturnType = Promise<{
 }>;
 export type SearchTextsReturnType = Promise<{ texts: Array<string> }>;
 
-// TODO: targethoursRow
-export type TargetHourReturnType = Promise<{ targethours: TargetHoursRow }>;
+export type TargetHourReturnType = Promise<{ targethoursRow: TargetHoursRow }>;
 export type TargetHoursReturnType = Promise<{
     targethours: Array<TargetHoursRow>;
 }>;

@@ -200,4 +200,33 @@ const config: Config = {
             expect(data).toHaveProperty("running");
         });
     });
+
+    describe("getLumpSumServices() and getLumpSumService()", () => {
+        const expectedKeys = [
+            "id",
+            "name",
+            "price",
+            "unit",
+            "active",
+            "number",
+            "note",
+        ];
+
+        it("returns expected data format", async () => {
+            const { lumpSumServices } = await clockodo.getLumpSumServices();
+            const [lumpSumService] = lumpSumServices;
+
+            expect(Object.keys(lumpSumService).sort()).toMatchObject(
+                expectedKeys.concat([]).sort()
+            );
+
+            const getLumpSumServiceResponse = await clockodo.getLumpSumService({
+                id: lumpSumService.id,
+            });
+
+            expect(
+                Object.keys(getLumpSumServiceResponse.lumpSumService).sort()
+            ).toMatchObject(expectedKeys.concat([]).sort());
+        });
+    });
 });

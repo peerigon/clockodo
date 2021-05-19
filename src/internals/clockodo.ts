@@ -32,6 +32,7 @@ import {
     EditEntryReturnType,
     LumpsumServicesReturnType,
     SearchTextsReturnType,
+    LumpsumServiceReturnType,
 } from "./returnTypes";
 import { TimeEntryBillability } from "./enums";
 import {
@@ -39,6 +40,7 @@ import {
     ClockingTimeEntry,
     Customer,
     Entry,
+    LumpsumService,
     LumpsumServiceEntry,
     LumpsumValueEntry,
     ManualTimeEntry,
@@ -156,10 +158,18 @@ export class Clockodo {
         return this.api.get("/services");
     };
 
-    // TODO: Get LumpSumService
+    // This endpoint still uses the old lumpSum casing
+    getLumpSumService = async ({
+        id,
+    }: Pick<LumpsumService, "id">): LumpsumServiceReturnType => {
+        REQUIRED.checkRequired({ id }, REQUIRED.GET_LUMPSUM_SERVICE);
 
+        return this.api.get("/lumpsumservices/" + id);
+    };
+
+    // This endpoint still uses the old lumpSum casing
     getLumpSumServices = async (): LumpsumServicesReturnType => {
-        return this.api.get("/lumpSumServices");
+        return this.api.get("/lumpsumservices");
     };
 
     // TODO: targethoursRow

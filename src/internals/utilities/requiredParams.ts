@@ -43,12 +43,6 @@ export const EDIT_USER = ["usersId"] as const;
 export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const EDIT_ABSENCE = ["absenceId"] as const;
 export const EDIT_ENTRY = ["entryId"] as const;
-export const GET_LUMP_SUM = [
-    "lumpsumEntryId",
-    "timeUntil",
-    "timeSince",
-    "usersId",
-] as const;
 export const GET_ABSENCE = ["id"] as const;
 export const GET_ABSENCES = ["year"] as const;
 export const GET_CUSTOMER = ["id"] as const;
@@ -57,6 +51,7 @@ export const GET_ENTRY = ["id"] as const;
 export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"] as const;
 export const GET_PROJECT = ["id"] as const;
 export const GET_SERVICE = ["id"] as const;
+export const GET_LUMPSUM_SERVICE = ["id"] as const;
 export const GET_SINGLE_TARGET_HOUR_SET = ["id"] as const;
 export const GET_TASK_DURATION = [
     "taskCustomersId",
