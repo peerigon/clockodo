@@ -178,7 +178,7 @@ export type Task = {
 };
 
 export type EntryGroup = {
-    groupeyby: string;
+    groupedBy: string;
     group: string | number;
     name: string;
     number: string;
@@ -196,7 +196,7 @@ export type EntryGroup = {
     durationWithoutRounding?: number;
     revenueWithoutRounding?: number;
     roundingSuccess?: boolean;
-    subGroups: Array<EntryGroup>;
+    subGroups?: Array<EntryGroup>;
 };
 
 export type UserReport = {

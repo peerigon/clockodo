@@ -1,3 +1,4 @@
+import snakecaseKeys from "snakecase-keys";
 import { Api, Config } from "./utilities/api";
 import * as REQUIRED from "./utilities/requiredParams";
 import {
@@ -112,8 +113,18 @@ export class Clockodo {
 
         REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRY_GROUPS);
 
-        // TODO: v2 + tests
-        return this.api.get("/entrygroups", {
+        // Could be replaced with Object.fromEntries() once it's supported everywhere
+        const camelCaseGrouping: Record<string, boolean> = {};
+
+        grouping.forEach((key) => {
+            camelCaseGrouping[key] = true;
+        });
+
+        requiredArguments.grouping = Object.keys(
+            snakecaseKeys(camelCaseGrouping)
+        );
+
+        return this.api.get("/v2/entrygroups", {
             ...requiredArguments,
             ...options,
         });

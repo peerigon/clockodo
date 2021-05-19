@@ -149,6 +149,24 @@ const config: Config = {
     });
 
     describe("getEntryGroups()", () => {
+        const expectedKeys = [
+            "budgetUsed",
+            "duration",
+            "group",
+            "groupedBy",
+            "hasBudgetRevenuesBilled",
+            "hasBudgetRevenuesNotBilled",
+            "hasNonBudgetRevenuesBilled",
+            "hasNonBudgetRevenuesNotBilled",
+            "hourlyRate",
+            "hourlyRateIsEqualAndHasNoLumpsums",
+            "name",
+            "note",
+            "number",
+            "restrictions",
+            "revenue",
+        ];
+
         it("returns expected data format with one group passed", async () => {
             const data = await clockodo.getEntryGroups({
                 timeSince: TIME_SINCE,
@@ -156,20 +174,22 @@ const config: Config = {
                 grouping: ["customers_id"],
             });
 
-            expect(data.groups[0]).toHaveProperty("group");
-            expect(data.groups[0]).toHaveProperty("groupedBy");
-            expect(data.groups[0]).toHaveProperty("name");
+            expect(Object.keys(data.groups[0]).sort()).toMatchObject(
+                expectedKeys.concat([]).sort()
+            );
         });
+
         it("returns expected data format with multiple groups passed", async () => {
             const data = await clockodo.getEntryGroups({
                 timeSince: TIME_SINCE,
                 timeUntil: TIME_UNTIL,
-                grouping: ["projects_id", "services_id"],
+                // Should both support camelCase and snake_case
+                grouping: ["projectsId", "services_id"],
             });
 
-            expect(data.groups[0]).toHaveProperty("group");
-            expect(data.groups[0]).toHaveProperty("groupedBy");
-            expect(data.groups[0]).toHaveProperty("name");
+            expect(Object.keys(data.groups[0]).sort()).toMatchObject(
+                expectedKeys.concat(["subGroups"]).sort()
+            );
         });
     });
 

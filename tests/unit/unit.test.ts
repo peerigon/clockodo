@@ -254,7 +254,7 @@ describe("Clockodo (instance)", () => {
 
                 const nockScope = nock(CLOCKODO_API)
                     .get(
-                        "/entrygroups?" +
+                        "/v2/entrygroups?" +
                             qs.stringify(timeRangeParameters) +
                             "&" +
                             qs.stringify(groupingParameters, {
