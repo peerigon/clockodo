@@ -80,6 +80,8 @@ export type ClockEditReturnType = Promise<{
     currentTime: string;
 }>;
 export type SearchTextsReturnType = Promise<{ texts: Array<string> }>;
+
+// TODO: targethoursRow
 export type TargetHourReturnType = Promise<{ targethours: TargetHoursRow }>;
 export type TargetHoursReturnType = Promise<{
     targethours: Array<TargetHoursRow>;

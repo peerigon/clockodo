@@ -33,15 +33,19 @@ import {
     LumpsumServicesReturnType,
     SearchTextsReturnType,
 } from "./returnTypes";
+import { TimeEntryBillability } from "./enums";
 import {
-    AbsenceType,
-    ClockingTimeEntryBillability,
-    TimeEntryBillability,
-} from "./enums";
-import {
+    Absence,
+    ClockingTimeEntry,
+    Customer,
+    Entry,
     LumpsumServiceEntry,
     LumpsumValueEntry,
     ManualTimeEntry,
+    Project,
+    Service,
+    TargetHoursRow,
+    User,
 } from "./interfaces";
 
 export class Clockodo {
@@ -55,7 +59,7 @@ export class Clockodo {
         plugin(this);
     };
 
-    getAbsence = async ({ id }: { id: number }): AbsenceReturnType => {
+    getAbsence = async ({ id }: Pick<Absence, "id">): AbsenceReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_ABSENCE);
 
         return this.api.get("/absences/" + id);
@@ -71,7 +75,7 @@ export class Clockodo {
         return this.api.get("/v2/clock");
     };
 
-    getCustomer = async ({ id }: { id: number }): CustomerReturnType => {
+    getCustomer = async ({ id }: Pick<Customer, "id">): CustomerReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_CUSTOMER);
 
         return this.api.get("/customers/" + id);
@@ -81,7 +85,7 @@ export class Clockodo {
         return this.api.get("/customers");
     };
 
-    getEntry = async ({ id }: { id: number }): EntryReturnType => {
+    getEntry = async ({ id }: Pick<Entry, "id">): EntryReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_ENTRY);
 
         return this.api.get("/v2/entries/" + id);
@@ -130,7 +134,7 @@ export class Clockodo {
         });
     };
 
-    getProject = async ({ id }: { id: number }): ProjectReturnType => {
+    getProject = async ({ id }: Pick<Project, "id">): ProjectReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_PROJECT);
 
         return this.api.get("/projects/" + id);
@@ -142,7 +146,7 @@ export class Clockodo {
         return this.api.get("/clock/searchtexts", options);
     };
 
-    getService = async ({ id }: { id: number }): ServiceReturnType => {
+    getService = async ({ id }: Pick<Service, "id">): ServiceReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_SERVICE);
 
         return this.api.get("/services/" + id);
@@ -152,15 +156,16 @@ export class Clockodo {
         return this.api.get("/services");
     };
 
+    // TODO: Get LumpSumService
+
     getLumpSumServices = async (): LumpsumServicesReturnType => {
         return this.api.get("/lumpSumServices");
     };
 
+    // TODO: targethoursRow
     getSingleTargetHourSet = async ({
         id,
-    }: {
-        id: number;
-    }): TargetHourReturnType => {
+    }: Pick<TargetHoursRow, "id">): TargetHourReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_SINGLE_TARGET_HOUR_SET);
 
         return this.api.get("/targethours/" + id);
@@ -172,6 +177,7 @@ export class Clockodo {
         return this.api.get("/targethours", options);
     };
 
+    // TODO: Deprecated
     getTaskDuration = async (
         {
             taskCustomersId,
@@ -204,11 +210,12 @@ export class Clockodo {
         });
     };
 
+    // TODO: Deprecated
     getTasks = async (options?: Record<string, unknown>): TasksReturnType => {
         return this.api.get("/tasks", options);
     };
 
-    getUser = async ({ id }: { id: number }): UserReturnType => {
+    getUser = async ({ id }: Pick<User, "id">): UserReturnType => {
         REQUIRED.checkRequired({ id }, REQUIRED.GET_USER);
 
         return this.api.get("/users/" + id);
@@ -219,7 +226,7 @@ export class Clockodo {
     };
 
     getUserReport = async (
-        { id, year }: { id: number; year: number },
+        { id, year }: { id: User["id"]; year: number },
         options?: Record<string, unknown>
     ): UserReportReturnType => {
         REQUIRED.checkRequired({ id, year }, REQUIRED.GET_USER_REPORTS);
@@ -244,7 +251,7 @@ export class Clockodo {
             entryId,
             durationBefore,
             duration,
-        }: { entryId: number; durationBefore: number; duration: number },
+        }: { entryId: Entry["id"]; durationBefore: number; duration: number },
         options?: Record<string, unknown>
     ): ClockEditReturnType => {
         const requiredArguments = { durationBefore, duration };
@@ -265,11 +272,7 @@ export class Clockodo {
             customersId,
             servicesId,
             billable,
-        }: {
-            customersId: number;
-            servicesId: number;
-            billable: ClockingTimeEntryBillability;
-        },
+        }: Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>,
         options?: Record<string, unknown>
     ): ClockStartReturnType => {
         const requiredArguments = { customersId, servicesId, billable };
@@ -283,7 +286,7 @@ export class Clockodo {
     };
 
     addCustomer = async (
-        { name }: { name: string },
+        { name }: Pick<Customer, typeof REQUIRED.ADD_CUSTOMER[number]>,
         options?: Record<string, unknown>
     ): CustomerReturnType => {
         REQUIRED.checkRequired({ name }, REQUIRED.ADD_CUSTOMER);
@@ -292,7 +295,10 @@ export class Clockodo {
     };
 
     addProject = async (
-        { name, customersId }: { name: string; customersId: number },
+        {
+            name,
+            customersId,
+        }: Pick<Project, typeof REQUIRED.ADD_PROJECT[number]>,
         options?: Record<string, unknown>
     ): ProjectReturnType => {
         REQUIRED.checkRequired({ name, customersId }, REQUIRED.ADD_PROJECT);
@@ -305,7 +311,7 @@ export class Clockodo {
     };
 
     addService = async (
-        { name }: { name: string },
+        { name }: Pick<Service, typeof REQUIRED.ADD_SERVICE[number]>,
         options?: Record<string, unknown>
     ): ServiceReturnType => {
         REQUIRED.checkRequired({ name }, REQUIRED.ADD_SERVICE);
@@ -319,8 +325,7 @@ export class Clockodo {
             number,
             email,
             role,
-        }: // TODO: Pick?
-        { name: string; number: string; email: string; role: string },
+        }: Pick<User, typeof REQUIRED.ADD_USER[number]>,
         options?: Record<string, unknown>
     ): AddUserReturnType => {
         const requiredArguments = { name, number, email, role };
@@ -371,7 +376,7 @@ export class Clockodo {
             dateSince,
             dateUntil,
             type,
-        }: { dateSince: string; dateUntil: string; type: AbsenceType },
+        }: Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>,
         options?: Record<string, unknown>
     ): AbsenceReturnType => {
         const requiredArguments = { dateSince, dateUntil, type };
@@ -385,7 +390,7 @@ export class Clockodo {
     };
 
     stopClock = async (
-        { entryId }: { entryId: number },
+        { entryId }: { entryId: Entry["id"] },
         options?: Record<string, unknown>
     ): ClockStopReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
@@ -394,7 +399,7 @@ export class Clockodo {
     };
 
     deactivateCustomer = async (
-        { customersId }: { customersId: number },
+        { customersId }: { customersId: Customer["id"] },
         options?: Record<string, unknown>
     ): CustomerReturnType => {
         REQUIRED.checkRequired({ customersId }, REQUIRED.DEACTIVATE_CUSTOMER);
@@ -403,7 +408,7 @@ export class Clockodo {
     };
 
     deactivateProject = async (
-        { projectsId }: { projectsId: number },
+        { projectsId }: { projectsId: Project["id"] },
         options?: Record<string, unknown>
     ): ProjectReturnType => {
         REQUIRED.checkRequired({ projectsId }, REQUIRED.DEACTIVATE_PROJECT);
@@ -412,7 +417,7 @@ export class Clockodo {
     };
 
     deactivateService = async (
-        { servicesId }: { servicesId: number },
+        { servicesId }: { servicesId: Service["id"] },
         options?: Record<string, unknown>
     ): ServiceReturnType => {
         REQUIRED.checkRequired({ servicesId }, REQUIRED.DEACTIVATE_SERVICE);
@@ -421,7 +426,7 @@ export class Clockodo {
     };
 
     deactivateUser = async (
-        { usersId }: { usersId: number },
+        { usersId }: { usersId: User["id"] },
         options?: Record<string, unknown>
     ): UserReturnType => {
         REQUIRED.checkRequired({ usersId }, REQUIRED.DEACTIVATE_USER);
@@ -430,7 +435,7 @@ export class Clockodo {
     };
 
     deleteEntry = async (
-        { entryId }: { entryId: number },
+        { entryId }: { entryId: Entry["id"] },
         options?: Record<string, unknown>
     ): DeleteReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.DELETE_ENTRY);
@@ -453,7 +458,7 @@ export class Clockodo {
     };
 
     deleteAbsence = async (
-        { absenceId }: { absenceId: number },
+        { absenceId }: { absenceId: Absence["id"] },
         options?: Record<string, unknown>
     ): DeleteReturnType => {
         REQUIRED.checkRequired({ absenceId }, REQUIRED.DELETE_ABSENCE);
@@ -462,7 +467,7 @@ export class Clockodo {
     };
 
     editCustomer = async (
-        { customersId }: { customersId: number },
+        { customersId }: { customersId: Customer["id"] },
         options?: Record<string, unknown>
     ) => {
         REQUIRED.checkRequired({ customersId }, REQUIRED.EDIT_CUSTOMER);
@@ -471,7 +476,7 @@ export class Clockodo {
     };
 
     editProject = async (
-        { projectsId }: { projectsId: number },
+        { projectsId }: { projectsId: Project["id"] },
         options?: Record<string, unknown>
     ): ProjectReturnType => {
         REQUIRED.checkRequired({ projectsId }, REQUIRED.EDIT_PROJECT);
@@ -480,7 +485,7 @@ export class Clockodo {
     };
 
     editService = async (
-        { servicesId }: { servicesId: number },
+        { servicesId }: { servicesId: Service["id"] },
         options?: Record<string, unknown>
     ): ServiceReturnType => {
         REQUIRED.checkRequired({ servicesId }, REQUIRED.EDIT_SERVICE);
@@ -489,7 +494,7 @@ export class Clockodo {
     };
 
     editUser = async (
-        { usersId }: { usersId: number },
+        { usersId }: { usersId: User["id"] },
         options?: Record<string, unknown>
     ): UserReturnType => {
         REQUIRED.checkRequired({ usersId }, REQUIRED.EDIT_USER);
@@ -512,7 +517,7 @@ export class Clockodo {
     };
 
     editAbsence = async (
-        { absenceId }: { absenceId: number },
+        { absenceId }: { absenceId: Absence["id"] },
         options?: Record<string, unknown>
     ): AbsenceReturnType => {
         REQUIRED.checkRequired({ absenceId }, REQUIRED.EDIT_ABSENCE);
@@ -521,7 +526,7 @@ export class Clockodo {
     };
 
     editEntry = async (
-        { entryId }: { entryId: number },
+        { entryId }: { entryId: Entry["id"] },
         options?: Record<string, unknown>
     ): EditEntryReturnType => {
         REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
