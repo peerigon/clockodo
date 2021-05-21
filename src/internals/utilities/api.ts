@@ -85,8 +85,8 @@ export class Api {
             }
             defaults.baseURL = baseUrl;
         }
-        if ("client" in config) {
-            const { name, email } = config.client!;
+        if (client) {
+            const { name, email } = client;
 
             if (typeof name !== "string") {
                 throw new Error(
@@ -100,9 +100,9 @@ export class Api {
                 );
             }
 
-            defaults.headers["X-Clockodo-External-Application"] = `${
-                client!.name
-            };${client!.email}`;
+            defaults.headers[
+                "X-Clockodo-External-Application"
+            ] = `${name};${email}`;
         }
         if ("authentication" in config) {
             if (authentication === undefined) {
