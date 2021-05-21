@@ -63,6 +63,13 @@ export class Api {
         authentication,
         client,
     }: Config) {
+        // This check is for non-TypeScript users only
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        if (!client) {
+            throw new Error(
+                `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
+            );
+        }
         this.config({ client, authentication, baseUrl });
     }
 

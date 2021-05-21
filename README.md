@@ -28,8 +28,8 @@ const clockodo = new Clockodo({
     client: {
         // You need to add some information about yourself that will be
         // sent along every request,
-        // see "Client identification" on https://www.clockodo.com/en/api/
-        name: "The name of your application or your",
+        // see https://www.clockodo.com/en/api/ "Client identification"
+        name: "The name of your application or your company",
         email: "technical-contact@your-company.com",
     },
     authentication: {
