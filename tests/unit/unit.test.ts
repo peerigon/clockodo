@@ -2,9 +2,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import qs from "qs";
 import nock from "nock";
+import snakecaseKeys from "snakecase-keys";
 import { Clockodo, Config } from "../../src";
 import { cachePlugin } from "../../src/plugins/cache";
-import { AbsenceType, Billability } from "../../src/internals/enums";
+import {
+    AbsenceStatus,
+    AbsenceType,
+    Billability,
+} from "../../src/internals/enums";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
@@ -140,6 +145,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getAbsences()", () => {
             it("correctly builds getAbsences() request", async () => {
                 const expectedParameters = {
@@ -155,6 +161,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getClock()", () => {
             it("correctly builds getClock() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -166,6 +173,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getCustomer()", () => {
             it("correctly builds getCustomer() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -177,6 +185,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getCustomers()", () => {
             it("correctly builds getCustomers() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -188,6 +197,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getEntry()", () => {
             it("correctly builds getEntry() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -199,12 +209,9 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getEntries()", () => {
             it("correctly builds getEntries() request", async () => {
-                const parameters = {
-                    filterBillable: Billability.Billed,
-                };
-
                 const expectedParameters = {
                     time_since: "2017-08-18 00:00:00",
                     time_until: "2018-02-09 00:00:00",
@@ -215,13 +222,11 @@ describe("Clockodo (instance)", () => {
                     .get("/v2/entries?" + qs.stringify(expectedParameters))
                     .reply(200);
 
-                await clockodo.getEntries(
-                    {
-                        timeSince: "2017-08-18 00:00:00",
-                        timeUntil: "2018-02-09 00:00:00",
-                    },
-                    parameters
-                );
+                await clockodo.getEntries({
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2018-02-09 00:00:00",
+                    filterBillable: Billability.Billed,
+                });
 
                 nockScope.done();
             });
@@ -237,6 +242,7 @@ describe("Clockodo (instance)", () => {
                 );
             });
         });
+
         describe("getEntryGroups()", () => {
             it("correctly builds getEntryGroups() request", async () => {
                 const timeRangeParameters = {
@@ -265,14 +271,12 @@ describe("Clockodo (instance)", () => {
                     )
                     .reply(200);
 
-                await clockodo.getEntryGroups(
-                    {
-                        timeSince: "2017-08-18 00:00:00",
-                        timeUntil: "2018-02-09 00:00:00",
-                        grouping: ["customers_id", "projects_id"],
-                    },
-                    { roundToMinutes: 15 }
-                );
+                await clockodo.getEntryGroups({
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2018-02-09 00:00:00",
+                    grouping: ["customers_id", "projects_id"],
+                    roundToMinutes: 15,
+                });
 
                 nockScope.done();
             });
@@ -287,6 +291,7 @@ describe("Clockodo (instance)", () => {
                 ).rejects.toThrowError('Missing required parameter "grouping"');
             });
         });
+
         describe("getProject()", () => {
             it("correctly builds getProject() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -298,6 +303,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getService()", () => {
             it("correctly builds getService() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -309,6 +315,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getServices()", () => {
             it("correctly builds getServices() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -320,6 +327,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getSingleTargetHourSet", () => {
             it("correctly builds getSingleTargetHourSet() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -331,6 +339,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getTargetHours", () => {
             it("correctly builds getTargetHours() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -342,6 +351,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getUser()", () => {
             it("correctly builds getUser() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -353,6 +363,7 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getUsers()", () => {
             it("correctly builds getUsers() request", async () => {
                 const nockScope = nock(CLOCKODO_API).get("/users").reply(200);
@@ -362,13 +373,14 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("getUserReport()", () => {
             it("correctly builds getUserReport() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
                     .get("/userreports/1263?" + qs.stringify({ year: 217 }))
                     .reply(200);
 
-                await clockodo.getUserReport({ usersId: 1263, year: 217 });
+                await clockodo.getUserReport({ userId: 1263, year: 217 });
 
                 nockScope.done();
             });
@@ -378,11 +390,12 @@ describe("Clockodo (instance)", () => {
                 return expect(
                     clockodo.getUserReport(
                         // @ts-expect-error Year is missing
-                        { usersId: 200 }
+                        { userId: 200 }
                     )
                 ).rejects.toThrowError('Missing required parameter "year"');
             });
         });
+
         describe("getUserReports()", () => {
             it("correctly builds getUserReports() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
@@ -399,10 +412,6 @@ describe("Clockodo (instance)", () => {
     describe("POST", () => {
         describe("startClock()", () => {
             it("correctly builds startClock() request", async () => {
-                const params = {
-                    projectsId: 365,
-                };
-
                 const expectedParameters = {
                     customers_id: 24,
                     services_id: 7,
@@ -414,14 +423,12 @@ describe("Clockodo (instance)", () => {
                     .post("/v2/clock", expectedParameters)
                     .reply(200);
 
-                await clockodo.startClock(
-                    {
-                        customersId: 24,
-                        servicesId: 7,
-                        billable: Billability.Billable,
-                    },
-                    params
-                );
+                await clockodo.startClock({
+                    customersId: 24,
+                    servicesId: 7,
+                    projectsId: 365,
+                    billable: Billability.Billable,
+                });
 
                 nockScope.done();
             });
@@ -436,12 +443,9 @@ describe("Clockodo (instance)", () => {
                 ).rejects.toThrowError('Missing required parameter "billable"');
             });
         });
+
         describe("addCustomer()", () => {
             it("correctly builds addCustomer() request", async () => {
-                const params = {
-                    billableDefault: Billability.Billable,
-                };
-
                 const expectedParameters = {
                     name: "Weyland-Yutani",
                     billable_default: Billability.Billable,
@@ -451,17 +455,17 @@ describe("Clockodo (instance)", () => {
                     .post("/customers", expectedParameters)
                     .reply(200);
 
-                await clockodo.addCustomer({ name: "Weyland-Yutani" }, params);
+                await clockodo.addCustomer({
+                    name: "Weyland-Yutani",
+                    billableDefault: Billability.Billable,
+                });
 
                 nockScope.done();
             });
         });
+
         describe("addProject()", () => {
             it("correctly builds addProject() request", async () => {
-                const params = {
-                    active: true,
-                };
-
                 const expectedParameters = {
                     name: "Clockodo Api Wrapper",
                     customers_id: 1,
@@ -472,20 +476,18 @@ describe("Clockodo (instance)", () => {
                     .post("/projects", expectedParameters)
                     .reply(200);
 
-                await clockodo.addProject(
-                    { name: "Clockodo Api Wrapper", customersId: 1 },
-                    params
-                );
+                await clockodo.addProject({
+                    name: "Clockodo Api Wrapper",
+                    customersId: 1,
+                    active: true,
+                });
 
                 nockScope.done();
             });
         });
+
         describe("addService()", () => {
             it("correctly builds addService() request", async () => {
-                const params = {
-                    active: true,
-                };
-
                 const expectedParameters = {
                     name: "Thinking",
                     active: true,
@@ -495,11 +497,12 @@ describe("Clockodo (instance)", () => {
                     .post("/services", expectedParameters)
                     .reply(200);
 
-                await clockodo.addService({ name: "Thinking" }, params);
+                await clockodo.addService({ name: "Thinking", active: true });
 
                 nockScope.done();
             });
         });
+
         describe("addUser()", () => {
             it("correctly builds addUser() request", async () => {
                 const expectedParameters = {
@@ -534,12 +537,9 @@ describe("Clockodo (instance)", () => {
                 ).rejects.toThrowError('Missing required parameter "role"');
             });
         });
+
         describe("addEntry()", () => {
             it("correctly builds addEntry() request", async () => {
-                const params = {
-                    text: "this is an optional description",
-                };
-
                 const expectedParameters = {
                     customers_id: 1,
                     services_id: 2,
@@ -553,16 +553,14 @@ describe("Clockodo (instance)", () => {
                     .post("/v2/entries", expectedParameters)
                     .reply(200);
 
-                await clockodo.addEntry(
-                    {
-                        customersId: 1,
-                        servicesId: 2,
-                        billable: Billability.Billable,
-                        timeSince: "2020-06-02 00:00:00",
-                        timeUntil: "2020-06-02 00:00:01",
-                    },
-                    params
-                );
+                await clockodo.addEntry({
+                    customersId: 1,
+                    servicesId: 2,
+                    billable: Billability.Billable,
+                    timeSince: "2020-06-02 00:00:00",
+                    timeUntil: "2020-06-02 00:00:01",
+                    text: "this is an optional description",
+                });
 
                 nockScope.done();
             });
@@ -579,12 +577,9 @@ describe("Clockodo (instance)", () => {
                 ).rejects.toThrowError('Missing required parameter "billable"');
             });
         });
+
         describe("addAbsence()", () => {
             it("correctly builds addAbsence() request", async () => {
-                const params = {
-                    note: "elternzeit",
-                };
-
                 const expectedParameters = {
                     date_since: "2017-08-18 00:00:00",
                     date_until: "2018-02-09 00:00:00",
@@ -596,14 +591,12 @@ describe("Clockodo (instance)", () => {
                     .post("/absences", expectedParameters)
                     .reply(200);
 
-                await clockodo.addAbsence(
-                    {
-                        dateSince: "2017-08-18 00:00:00",
-                        dateUntil: "2018-02-09 00:00:00",
-                        type: AbsenceType.SpecialLeave,
-                    },
-                    params
-                );
+                await clockodo.addAbsence({
+                    dateSince: "2017-08-18 00:00:00",
+                    dateUntil: "2018-02-09 00:00:00",
+                    type: AbsenceType.SpecialLeave,
+                    note: "elternzeit",
+                });
 
                 nockScope.done();
             });
@@ -623,10 +616,6 @@ describe("Clockodo (instance)", () => {
     describe("PUT", () => {
         describe("changeClockDuration()", () => {
             it("correctly builds changeClockDuration() request", async () => {
-                const params = {
-                    offsetBefore: 60,
-                };
-
                 const expectedParameters = {
                     duration_before: 300,
                     duration: 540,
@@ -637,10 +626,12 @@ describe("Clockodo (instance)", () => {
                     .put("/v2/clock/782", expectedParameters)
                     .reply(200);
 
-                await clockodo.changeClockDuration(
-                    { entryId: 782, duration: 540, durationBefore: 300 },
-                    params
-                );
+                await clockodo.changeClockDuration({
+                    entryId: 782,
+                    duration: 540,
+                    durationBefore: 300,
+                    offsetBefore: 60,
+                });
 
                 nockScope.done();
             });
@@ -658,15 +649,16 @@ describe("Clockodo (instance)", () => {
 
         describe("editCustomer()", () => {
             it("correctly builds editCustomer() request", async () => {
-                const params = {
+                const customer = {
+                    id: 15,
                     name: "Mystery Gang",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/customers/15", params)
+                    .put("/customers/15", snakecaseKeys(customer))
                     .reply(200);
 
-                await clockodo.editCustomer({ customersId: 15 }, params);
+                await clockodo.editCustomer(customer);
 
                 nockScope.done();
             });
@@ -674,21 +666,17 @@ describe("Clockodo (instance)", () => {
 
         describe("editProject()", () => {
             it("correctly builds editProject() request", async () => {
-                const params = {
+                const project = {
+                    id: 20,
                     name: "power level",
-                    hourlyRate: "91",
-                };
-
-                const expectedParameters = {
-                    name: "power level",
-                    hourly_rate: "91",
+                    hourlyRate: 91,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/projects/20", expectedParameters)
+                    .put("/projects/20", snakecaseKeys(project))
                     .reply(200);
 
-                await clockodo.editProject({ projectsId: 20 }, params);
+                await clockodo.editProject(project);
 
                 nockScope.done();
             });
@@ -696,15 +684,16 @@ describe("Clockodo (instance)", () => {
 
         describe("editService()", () => {
             it("correctly builds editService() request", async () => {
-                const params = {
+                const service = {
+                    id: 23,
                     name: "room service",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/services/23", params)
+                    .put("/services/23", snakecaseKeys(service))
                     .reply(200);
 
-                await clockodo.editService({ servicesId: 23 }, params);
+                await clockodo.editService(service);
 
                 nockScope.done();
             });
@@ -712,15 +701,16 @@ describe("Clockodo (instance)", () => {
 
         describe("editUser()", () => {
             it("correctly builds editUser() request", async () => {
-                const params = {
+                const user = {
+                    id: 33,
                     name: "Moalo Loco",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/users/33", params)
+                    .put("/users/33", snakecaseKeys(user))
                     .reply(200);
 
-                await clockodo.editUser({ usersId: 33 }, params);
+                await clockodo.editUser(user);
 
                 nockScope.done();
             });
@@ -728,47 +718,35 @@ describe("Clockodo (instance)", () => {
 
         describe("editEntryGroup()", () => {
             it("correctly builds editEntryGroup() request", async () => {
-                const params = {
-                    text: "chillin everyday",
-                };
-
-                const expectedParameters = {
-                    time_since: "2017-08-18 00:00:00",
-                    time_until: "2018-02-09 00:00:00",
+                const entryGroup = {
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2018-02-09 00:00:00",
                     text: "chillin everyday",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/entrygroups", expectedParameters)
+                    .put("/entrygroups", snakecaseKeys(entryGroup))
                     .reply(200);
 
-                await clockodo.editEntryGroup(
-                    {
-                        timeSince: "2017-08-18 00:00:00",
-                        timeUntil: "2018-02-09 00:00:00",
-                    },
-                    params
-                );
+                await clockodo.editEntryGroup(entryGroup);
 
                 nockScope.done();
             });
         });
 
-        /**
-         * ? Why does nock not match the requests when there is a value other than a string in my param object?
-         * ? If I put 'status: Clockodo.ABSENCE_STATUS_APPROVED', it treats the params object like it isn't an object
-         */
         describe("editAbsence()", () => {
             it("correctly builds editAbsence() request", async () => {
-                const params = {
+                const absence = {
+                    id: 74,
                     note: "seems fishy to me",
+                    status: AbsenceStatus.Approved,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/absences/74", params)
+                    .put("/absences/74", snakecaseKeys(absence))
                     .reply(200);
 
-                await clockodo.editAbsence({ absenceId: 74 }, params);
+                await clockodo.editAbsence(absence);
 
                 nockScope.done();
             });
@@ -776,15 +754,16 @@ describe("Clockodo (instance)", () => {
 
         describe("editEntry()", () => {
             it("correctly builds editEntry() request", async () => {
-                const params = {
-                    duration: "540",
+                const entry = {
+                    id: 365,
+                    duration: 540,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .put("/v2/entries/365", params)
+                    .put("/v2/entries/365", snakecaseKeys(entry))
                     .reply(200);
 
-                await clockodo.editEntry({ entryId: 365 }, params);
+                await clockodo.editEntry(entry);
 
                 nockScope.done();
             });
@@ -803,13 +782,14 @@ describe("Clockodo (instance)", () => {
                 nockScope.done();
             });
         });
+
         describe("deactivateCustomer()", () => {
             it("correctly builds deactivateCustomer() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
                     .delete("/customers/343")
                     .reply(200);
 
-                await clockodo.deactivateCustomer({ customersId: 343 });
+                await clockodo.deactivateCustomer({ id: 343 });
 
                 nockScope.done();
             });
@@ -821,7 +801,7 @@ describe("Clockodo (instance)", () => {
                     .delete("/projects/8")
                     .reply(200);
 
-                await clockodo.deactivateProject({ projectsId: 8 });
+                await clockodo.deactivateProject({ id: 8 });
 
                 nockScope.done();
             });
@@ -833,7 +813,7 @@ describe("Clockodo (instance)", () => {
                     .delete("/services/94")
                     .reply(200);
 
-                await clockodo.deactivateService({ servicesId: 94 });
+                await clockodo.deactivateService({ id: 94 });
 
                 nockScope.done();
             });
@@ -845,7 +825,7 @@ describe("Clockodo (instance)", () => {
                     .delete("/users/7")
                     .reply(200);
 
-                await clockodo.deactivateUser({ usersId: 7 });
+                await clockodo.deactivateUser({ id: 7 });
 
                 nockScope.done();
             });
@@ -857,7 +837,7 @@ describe("Clockodo (instance)", () => {
                     .delete("/v2/entries/45")
                     .reply(200);
 
-                await clockodo.deleteEntry({ entryId: 45 });
+                await clockodo.deleteEntry({ id: 45 });
 
                 nockScope.done();
             });
@@ -865,38 +845,29 @@ describe("Clockodo (instance)", () => {
 
         describe("deleteEntryGroup()", () => {
             it("correctly builds deleteEntryGroup() request", async () => {
-                const params = {
+                const entryGroup = {
+                    timeSince: "2017-08-18 00:00:00",
+                    timeUntil: "2018-02-09 00:00:00",
                     text: "chilin everyday",
-                };
-
-                const expectedParameters = {
-                    text: "chilin everyday",
-                    time_since: "2017-08-18 00:00:00",
-                    time_until: "2018-02-09 00:00:00",
                 };
 
                 const nockScope = nock(CLOCKODO_API)
-                    .delete("/entrygroups", expectedParameters)
+                    .delete("/entrygroups", snakecaseKeys(entryGroup))
                     .reply(200);
 
-                await clockodo.deleteEntryGroup(
-                    {
-                        timeSince: "2017-08-18 00:00:00",
-                        timeUntil: "2018-02-09 00:00:00",
-                    },
-                    params
-                );
+                await clockodo.deleteEntryGroup(entryGroup);
 
                 nockScope.done();
             });
         });
+
         describe("deleteAbsence()", () => {
             it("correctly builds deleteAbsence() request", async () => {
                 const nockScope = nock(CLOCKODO_API)
                     .delete("/absences/31")
                     .reply(200);
 
-                await clockodo.deleteAbsence({ absenceId: 31 });
+                await clockodo.deleteAbsence({ id: 31 });
 
                 nockScope.done();
             });

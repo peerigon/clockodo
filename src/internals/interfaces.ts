@@ -5,6 +5,7 @@ import {
     TimeEntryBillability,
 } from "./enums";
 
+// TODO: Remove deprecated?
 export type Customer = {
     id: number;
     name: string;
@@ -74,7 +75,6 @@ type CommonEntry = {
     textsId: number | null;
     text: string | null;
     timeSince: string;
-    timeUntil: string | null;
     timeInsert: string;
     timeLastChange: string;
     /** @deprecated */
@@ -103,18 +103,21 @@ type CommonClockTimeEntry = CommonTimeEntry & {
 };
 
 export type ClockingTimeEntry = CommonClockTimeEntry & {
+    timeUntil: null;
     billable: ClockingTimeEntryBillability;
     duration: null;
     offset: 0;
 };
 
 export type ClockedTimeEntry = CommonClockTimeEntry & {
+    timeUntil: string;
     billable: TimeEntryBillability;
     duration: number;
     offset: number;
 };
 
 export type ManualTimeEntry = CommonTimeEntry & {
+    timeUntil: string;
     billable: TimeEntryBillability;
     duration: number;
     offset: number;
@@ -127,6 +130,7 @@ export type TimeEntry = ClockingTimeEntry | ClockedTimeEntry | ManualTimeEntry;
 
 export type LumpsumValueEntry = CommonEntry & {
     type: EntryType.LumpsumValue;
+    timeUntil: string;
     billable: LumpsumEntryBillability;
     servicesId: number;
     /** @deprecated */
@@ -136,6 +140,7 @@ export type LumpsumValueEntry = CommonEntry & {
 
 export type LumpsumServiceEntry = CommonEntry & {
     type: EntryType.LumpsumService;
+    timeUntil: string;
     billable: LumpsumEntryBillability;
     lumpsumsId: number;
     lumpsumsAmount: number;

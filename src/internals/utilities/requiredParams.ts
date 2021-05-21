@@ -29,20 +29,20 @@ export const CHANGE_CLOCK_DURATION = [
     "durationBefore",
     "duration",
 ] as const;
-export const DEACTIVATE_CUSTOMER = ["customersId"] as const;
-export const DEACTIVATE_PROJECT = ["projectsId"] as const;
-export const DEACTIVATE_SERVICE = ["servicesId"] as const;
-export const DEACTIVATE_USER = ["usersId"] as const;
-export const DELETE_ENTRY = ["entryId"] as const;
+export const DEACTIVATE_CUSTOMER = ["id"] as const;
+export const DEACTIVATE_PROJECT = ["id"] as const;
+export const DEACTIVATE_SERVICE = ["id"] as const;
+export const DEACTIVATE_USER = ["id"] as const;
+export const DELETE_ENTRY = ["id"] as const;
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
-export const DELETE_ABSENCE = ["absenceId"] as const;
-export const EDIT_CUSTOMER = ["customersId"] as const;
-export const EDIT_PROJECT = ["projectsId"] as const;
-export const EDIT_SERVICE = ["servicesId"] as const;
-export const EDIT_USER = ["usersId"] as const;
+export const DELETE_ABSENCE = ["id"] as const;
+export const EDIT_CUSTOMER = ["id"] as const;
+export const EDIT_PROJECT = ["id"] as const;
+export const EDIT_SERVICE = ["id"] as const;
+export const EDIT_USER = ["id"] as const;
 export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
-export const EDIT_ABSENCE = ["absenceId"] as const;
-export const EDIT_ENTRY = ["entryId"] as const;
+export const EDIT_ABSENCE = ["id"] as const;
+export const EDIT_ENTRY = ["id"] as const;
 export const GET_ABSENCE = ["id"] as const;
 export const GET_ABSENCES = ["year"] as const;
 export const GET_CUSTOMER = ["id"] as const;
@@ -61,7 +61,7 @@ export const GET_TASK_DURATION = [
     "taskBillable",
 ] as const;
 export const GET_USER = ["id"] as const;
-export const GET_USER_REPORT = ["usersId", "year"] as const;
+export const GET_USER_REPORT = ["userId", "year"] as const;
 export const GET_USER_REPORTS = ["year"] as const;
 export const START_CLOCK = ["customersId", "servicesId", "billable"] as const;
 export const STOP_CLOCK = ["entryId"] as const;

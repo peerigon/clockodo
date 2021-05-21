@@ -50,6 +50,10 @@ import {
     User,
 } from "./interfaces";
 
+type Params<
+    RequiredParams extends Record<string, unknown> = Record<string, unknown>
+> = RequiredParams & Record<string, unknown>;
+
 export class Clockodo {
     api: Api;
 
@@ -61,229 +65,209 @@ export class Clockodo {
         plugin(this);
     };
 
-    getAbsence = async ({ id }: Pick<Absence, "id">): AbsenceReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_ABSENCE);
+    getAbsence = async (
+        params: Params<{ id: Absence["id"] }>
+    ): AbsenceReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCE);
 
-        return this.api.get("/absences/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/absences/" + id, rest);
     };
 
-    getAbsences = async ({ year }: { year: number }): AbsencesReturnType => {
-        REQUIRED.checkRequired({ year }, REQUIRED.GET_ABSENCES);
+    getAbsences = async (
+        params: Params<{ year: number }>
+    ): AbsencesReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
-        return this.api.get("/absences", { year });
+        return this.api.get("/absences", params);
     };
 
-    getClock = async (): ClockReturnType => {
-        return this.api.get("/v2/clock");
+    getClock = async (params?: Params): ClockReturnType => {
+        return this.api.get("/v2/clock", params);
     };
 
-    getCustomer = async ({ id }: Pick<Customer, "id">): CustomerReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_CUSTOMER);
+    getCustomer = async (
+        params: Params<{ id: Customer["id"] }>
+    ): CustomerReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_CUSTOMER);
 
-        return this.api.get("/customers/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/customers/" + id, rest);
     };
 
-    getCustomers = async (): CustomersReturnType => {
-        return this.api.get("/customers");
+    getCustomers = async (params?: Params): CustomersReturnType => {
+        return this.api.get("/customers", params);
     };
 
-    getEntry = async ({ id }: Pick<Entry, "id">): EntryReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_ENTRY);
+    getEntry = async (params: Params<{ id: Entry["id"] }>): EntryReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY);
 
-        return this.api.get("/v2/entries/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/v2/entries/" + id, rest);
     };
 
     getEntries = async (
-        { timeSince, timeUntil }: { timeSince: string; timeUntil: string },
-        options?: Record<string, unknown>
+        params: Params<{
+            timeSince: string;
+            timeUntil: string;
+        }>
     ): EntriesReturnType => {
-        const requiredArguments = { timeSince, timeUntil };
+        REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRIES);
-
-        return this.api.get("/v2/entries", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.get("/v2/entries", params);
     };
 
     getEntryGroups = async (
-        {
-            timeSince,
-            timeUntil,
-            grouping,
-        }: { timeSince: string; timeUntil: string; grouping: Array<string> },
-        options?: Record<string, unknown>
+        params: Params<{
+            timeSince: string;
+            timeUntil: string;
+            grouping: Array<string>;
+        }>
     ): EntryGroupsReturnType => {
-        const requiredArguments = { timeSince, timeUntil, grouping };
-
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_ENTRY_GROUPS);
+        REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY_GROUPS);
 
         // Could be replaced with Object.fromEntries() once it's supported everywhere
         const camelCaseGrouping: Record<string, boolean> = {};
 
-        grouping.forEach((key) => {
+        params.grouping.forEach((key) => {
             camelCaseGrouping[key] = true;
         });
 
-        requiredArguments.grouping = Object.keys(
-            snakecaseKeys(camelCaseGrouping)
-        );
-
         return this.api.get("/v2/entrygroups", {
-            ...requiredArguments,
-            ...options,
+            ...params,
+            grouping: Object.keys(snakecaseKeys(camelCaseGrouping)),
         });
     };
 
-    getProject = async ({ id }: Pick<Project, "id">): ProjectReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_PROJECT);
+    getProject = async (
+        params: Params<{ id: Project["id"] }>
+    ): ProjectReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
 
-        return this.api.get("/projects/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/projects/" + id, rest);
     };
 
-    getSearchTexts = async (
-        options?: Record<string, unknown>
-    ): SearchTextsReturnType => {
-        return this.api.get("/clock/searchtexts", options);
+    getSearchTexts = async (params?: Params): SearchTextsReturnType => {
+        return this.api.get("/clock/searchtexts", params);
     };
 
-    getService = async ({ id }: Pick<Service, "id">): ServiceReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_SERVICE);
+    getService = async (
+        params: Params<{ id: Service["id"] }>
+    ): ServiceReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_SERVICE);
 
-        return this.api.get("/services/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/services/" + id, rest);
     };
 
-    getServices = async (): ServicesReturnType => {
-        return this.api.get("/services");
-    };
-
-    // This endpoint still uses the old lumpSum casing
-    getLumpSumService = async ({
-        id,
-    }: Pick<LumpsumService, "id">): LumpsumServiceReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_LUMPSUM_SERVICE);
-
-        return this.api.get("/lumpsumservices/" + id);
+    getServices = async (params?: Params): ServicesReturnType => {
+        return this.api.get("/services", params);
     };
 
     // This endpoint still uses the old lumpSum casing
-    getLumpSumServices = async (): LumpsumServicesReturnType => {
-        return this.api.get("/lumpsumservices");
+    getLumpSumService = async (
+        params: Params<{ id: LumpsumService["id"] }>
+    ): LumpsumServiceReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_LUMPSUM_SERVICE);
+
+        const { id, ...rest } = params;
+
+        return this.api.get("/lumpsumservices/" + id, rest);
     };
 
-    getTargethoursRow = async ({
-        id,
-    }: Pick<TargethoursRow, "id">): TargethoursRowReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_TARGETHOURS_ROW);
-
-        return this.api.get("/targethours/" + id);
+    // This endpoint still uses the old lumpSum casing
+    getLumpSumServices = async (params?: Params): LumpsumServicesReturnType => {
+        return this.api.get("/lumpsumservices", params);
     };
 
-    getTargethours = async (
-        options?: Record<string, unknown>
-    ): TargethoursReturnType => {
-        return this.api.get("/targethours", options);
+    getTargethoursRow = async (
+        params: Params<{ id: TargethoursRow["id"] }>
+    ): TargethoursRowReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_TARGETHOURS_ROW);
+
+        const { id, ...rest } = params;
+
+        return this.api.get("/targethours/" + id, rest);
+    };
+
+    getTargethours = async (params?: Params): TargethoursReturnType => {
+        return this.api.get("/targethours", params);
     };
 
     /** @deprecated */
     getTaskDuration = async (
-        {
-            taskCustomersId,
-            taskProjectsId,
-            taskServicesId,
-            taskText,
-            taskBillable,
-        }: {
+        params: Params<{
             taskCustomersId: number;
             taskProjectsId: number;
             taskServicesId: number;
             taskText: string;
             taskBillable: TimeEntryBillability;
-        },
-        options?: Record<string, unknown>
+        }>
     ): TaskDurationReturnType => {
-        const requiredArguments = {
-            taskCustomersId,
-            taskProjectsId,
-            taskServicesId,
-            taskText,
-            taskBillable,
-        };
+        REQUIRED.checkRequired(params, REQUIRED.GET_TASK_DURATION);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.GET_TASK_DURATION);
-
-        return this.api.get("/tasks/duration", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.get("/tasks/duration", params);
     };
 
     /** @deprecated */
-    getTasks = async (options?: Record<string, unknown>): TasksReturnType => {
-        return this.api.get("/tasks", options);
+    getTasks = async (params?: Params): TasksReturnType => {
+        return this.api.get("/tasks", params);
     };
 
-    getUser = async ({ id }: Pick<User, "id">): UserReturnType => {
-        REQUIRED.checkRequired({ id }, REQUIRED.GET_USER);
+    getUser = async (params: Params<{ id: User["id"] }>): UserReturnType => {
+        REQUIRED.checkRequired(params, REQUIRED.GET_USER);
 
-        return this.api.get("/users/" + id);
+        const { id, ...rest } = params;
+
+        return this.api.get("/users/" + id, rest);
     };
 
-    getUsers = async (): UsersReturnType => {
-        return this.api.get("/users");
+    getUsers = async (params?: Params): UsersReturnType => {
+        return this.api.get("/users", params);
     };
 
     getUserReport = async (
-        { usersId, year }: { usersId: User["id"]; year: number },
-        options?: Record<string, unknown>
+        params: Params<{ userId: User["id"]; year: number }>
     ): UserReportReturnType => {
-        REQUIRED.checkRequired({ usersId, year }, REQUIRED.GET_USER_REPORT);
+        REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
-        return this.api.get("/userreports/" + usersId, {
-            year,
-            ...options,
-        });
+        const { userId, ...rest } = params;
+
+        return this.api.get("/userreports/" + userId, rest);
     };
 
     getUserReports = async (
-        { year }: { year: number },
-        options?: Record<string, unknown>
+        params: Params<{ year: number }>
     ): UserReportsReturnType => {
-        REQUIRED.checkRequired({ year }, REQUIRED.GET_USER_REPORTS);
+        REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
-        return this.api.get("/userreports", { year, ...options });
+        return this.api.get("/userreports", params);
     };
 
     addAbsence = async (
-        {
-            dateSince,
-            dateUntil,
-            type,
-        }: Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>,
-        options?: Record<string, unknown>
+        params: Params<Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>>
     ): AbsenceReturnType => {
-        const requiredArguments = { dateSince, dateUntil, type };
+        REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_ABSENCE);
-
-        return this.api.post("/absences", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.post("/absences", params);
     };
 
     addCustomer = async (
-        { name }: Pick<Customer, typeof REQUIRED.ADD_CUSTOMER[number]>,
-        options?: Record<string, unknown>
+        params: Params<Pick<Customer, typeof REQUIRED.ADD_CUSTOMER[number]>>
     ): CustomerReturnType => {
-        REQUIRED.checkRequired({ name }, REQUIRED.ADD_CUSTOMER);
+        REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
-        return this.api.post("/customers", { name, ...options });
+        return this.api.post("/customers", params);
     };
 
     addEntry = async (
-        requiredArguments:
+        params: Params<
             | Pick<ManualTimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
             | Pick<
                   LumpsumValueEntry,
@@ -292,254 +276,217 @@ export class Clockodo {
             | Pick<
                   LumpsumServiceEntry,
                   typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
-              >,
-        options?: Record<string, unknown>
+              >
+        >
     ): AddEntryReturnType => {
-        if ("lumpsumsId" in requiredArguments) {
-            REQUIRED.checkRequired(
-                requiredArguments,
-                REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY
-            );
-        } else if ("lumpsum" in requiredArguments) {
-            REQUIRED.checkRequired(
-                requiredArguments,
-                REQUIRED.ADD_LUMPSUM_VALUE_ENTRY
-            );
+        if ("lumpsumsId" in params) {
+            REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY);
+        } else if ("lumpsum" in params) {
+            REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_VALUE_ENTRY);
         } else {
-            REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_TIME_ENTRY);
+            REQUIRED.checkRequired(params, REQUIRED.ADD_TIME_ENTRY);
         }
 
-        return this.api.post("/v2/entries", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.post("/v2/entries", params);
     };
 
     addProject = async (
-        {
-            name,
-            customersId,
-        }: Pick<Project, typeof REQUIRED.ADD_PROJECT[number]>,
-        options?: Record<string, unknown>
+        params: Params<Pick<Project, typeof REQUIRED.ADD_PROJECT[number]>>
     ): ProjectReturnType => {
-        REQUIRED.checkRequired({ name, customersId }, REQUIRED.ADD_PROJECT);
+        REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
-        return this.api.post("/projects", {
-            name,
-            customersId,
-            ...options,
-        });
+        return this.api.post("/projects", params);
     };
 
     addService = async (
-        { name }: Pick<Service, typeof REQUIRED.ADD_SERVICE[number]>,
-        options?: Record<string, unknown>
+        params: Params<Pick<Service, typeof REQUIRED.ADD_SERVICE[number]>>
     ): ServiceReturnType => {
-        REQUIRED.checkRequired({ name }, REQUIRED.ADD_SERVICE);
+        REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
-        return this.api.post("/services", { name, ...options });
+        return this.api.post("/services", params);
     };
 
     addUser = async (
-        {
-            name,
-            number,
-            email,
-            role,
-        }: Pick<User, typeof REQUIRED.ADD_USER[number]>,
-        options?: Record<string, unknown>
+        params: Params<Pick<User, typeof REQUIRED.ADD_USER[number]>>
     ): AddUserReturnType => {
-        const requiredArguments = { name, number, email, role };
+        REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.ADD_USER);
-
-        return this.api.post("/users", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.post("/users", params);
     };
 
     startClock = async (
-        {
-            customersId,
-            servicesId,
-            billable,
-        }: Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>,
-        options?: Record<string, unknown>
+        params: Params<
+            Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>
+        >
     ): ClockStartReturnType => {
-        const requiredArguments = { customersId, servicesId, billable };
+        REQUIRED.checkRequired(params, REQUIRED.START_CLOCK);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.START_CLOCK);
-
-        return this.api.post("/v2/clock", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.post("/v2/clock", params);
     };
 
     changeClockDuration = async (
-        {
-            entryId,
-            durationBefore,
-            duration,
-        }: { entryId: Entry["id"]; durationBefore: number; duration: number },
-        options?: Record<string, unknown>
+        params: Params<{
+            entryId: Entry["id"];
+            durationBefore: number;
+            duration: number;
+        }>
     ): ClockEditReturnType => {
-        const requiredArguments = { durationBefore, duration };
+        REQUIRED.checkRequired(params, REQUIRED.CHANGE_CLOCK_DURATION);
 
-        REQUIRED.checkRequired(
-            { entryId, ...requiredArguments },
-            REQUIRED.CHANGE_CLOCK_DURATION
-        );
+        const { entryId, ...rest } = params;
 
-        return this.api.put("/v2/clock/" + entryId, {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.put("/v2/clock/" + entryId, rest);
     };
 
     editAbsence = async (
-        { absenceId }: { absenceId: Absence["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Absence, typeof REQUIRED.EDIT_ABSENCE[number]>>
     ): AbsenceReturnType => {
-        REQUIRED.checkRequired({ absenceId }, REQUIRED.EDIT_ABSENCE);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_ABSENCE);
 
-        return this.api.put("/absences/" + absenceId, options);
+        const { id } = params;
+
+        return this.api.put("/absences/" + id, params);
     };
 
     editCustomer = async (
-        { customersId }: { customersId: Customer["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Customer, typeof REQUIRED.EDIT_CUSTOMER[number]>>
     ) => {
-        REQUIRED.checkRequired({ customersId }, REQUIRED.EDIT_CUSTOMER);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_CUSTOMER);
 
-        return this.api.put("/customers/" + customersId, options);
+        const { id } = params;
+
+        return this.api.put("/customers/" + id, params);
     };
 
     editEntry = async (
-        { entryId }: { entryId: Entry["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Entry, typeof REQUIRED.EDIT_ENTRY[number]>>
     ): EditEntryReturnType => {
-        REQUIRED.checkRequired({ entryId }, REQUIRED.EDIT_ENTRY);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY);
 
-        return this.api.put("/v2/entries/" + entryId, options);
+        const { id } = params;
+
+        return this.api.put("/v2/entries/" + id, params);
     };
 
     editEntryGroup = async (
-        { timeSince, timeUntil }: { timeSince: string; timeUntil: string },
-        options?: Record<string, unknown>
+        params: Params<{ timeSince: string; timeUntil: string }>
     ): EditEntryGroupsReturnType => {
-        const requiredArguments = { timeSince, timeUntil };
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY_GROUP);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.EDIT_ENTRY_GROUP);
-
-        return this.api.put("/entrygroups", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.put("/entrygroups", params);
     };
 
     editProject = async (
-        { projectsId }: { projectsId: Project["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Project, typeof REQUIRED.EDIT_PROJECT[number]>>
     ): ProjectReturnType => {
-        REQUIRED.checkRequired({ projectsId }, REQUIRED.EDIT_PROJECT);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_PROJECT);
 
-        return this.api.put("/projects/" + projectsId, options);
+        const { id } = params;
+
+        return this.api.put("/projects/" + id, params);
     };
 
     editService = async (
-        { servicesId }: { servicesId: Service["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Service, typeof REQUIRED.EDIT_SERVICE[number]>>
     ): ServiceReturnType => {
-        REQUIRED.checkRequired({ servicesId }, REQUIRED.EDIT_SERVICE);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_SERVICE);
 
-        return this.api.put("/services/" + servicesId, options);
+        const { id } = params;
+
+        return this.api.put("/services/" + id, params);
     };
 
     editUser = async (
-        { usersId }: { usersId: User["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<User, typeof REQUIRED.EDIT_USER[number]>>
     ): UserReturnType => {
-        REQUIRED.checkRequired({ usersId }, REQUIRED.EDIT_USER);
+        REQUIRED.checkRequired(params, REQUIRED.EDIT_USER);
 
-        return this.api.put("/users/" + usersId, options);
+        const { id } = params;
+
+        return this.api.put("/users/" + id, params);
     };
 
     deactivateCustomer = async (
-        { customersId }: { customersId: Customer["id"] },
-        options?: Record<string, unknown>
+        params: Params<
+            Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>
+        >
     ): CustomerReturnType => {
-        REQUIRED.checkRequired({ customersId }, REQUIRED.DEACTIVATE_CUSTOMER);
+        REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
 
-        return this.api.delete("/customers/" + customersId, options);
+        const { id } = params;
+
+        return this.api.delete("/customers/" + id, params);
     };
 
     deactivateProject = async (
-        { projectsId }: { projectsId: Project["id"] },
-        options?: Record<string, unknown>
+        params: Params<
+            Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>
+        >
     ): ProjectReturnType => {
-        REQUIRED.checkRequired({ projectsId }, REQUIRED.DEACTIVATE_PROJECT);
+        REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
 
-        return this.api.delete("/projects/" + projectsId, options);
+        const { id } = params;
+
+        return this.api.delete("/projects/" + id, params);
     };
 
     deactivateService = async (
-        { servicesId }: { servicesId: Service["id"] },
-        options?: Record<string, unknown>
+        params: Params<
+            Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>
+        >
     ): ServiceReturnType => {
-        REQUIRED.checkRequired({ servicesId }, REQUIRED.DEACTIVATE_SERVICE);
+        REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
 
-        return this.api.delete("/services/" + servicesId, options);
+        const { id } = params;
+
+        return this.api.delete("/services/" + id, params);
     };
 
     deactivateUser = async (
-        { usersId }: { usersId: User["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
     ): UserReturnType => {
-        REQUIRED.checkRequired({ usersId }, REQUIRED.DEACTIVATE_USER);
+        REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
 
-        return this.api.delete("/users/" + usersId, options);
+        const { id } = params;
+
+        return this.api.delete("/users/" + id, params);
     };
 
     deleteAbsence = async (
-        { absenceId }: { absenceId: Absence["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Absence, typeof REQUIRED.DELETE_ABSENCE[number]>>
     ): DeleteReturnType => {
-        REQUIRED.checkRequired({ absenceId }, REQUIRED.DELETE_ABSENCE);
+        REQUIRED.checkRequired(params, REQUIRED.DELETE_ABSENCE);
 
-        return this.api.delete("/absences/" + absenceId, options);
+        const { id } = params;
+
+        return this.api.delete("/absences/" + id, params);
     };
 
     deleteEntry = async (
-        { entryId }: { entryId: Entry["id"] },
-        options?: Record<string, unknown>
+        params: Params<Pick<Entry, typeof REQUIRED.DELETE_ENTRY[number]>>
     ): DeleteReturnType => {
-        REQUIRED.checkRequired({ entryId }, REQUIRED.DELETE_ENTRY);
+        REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY);
 
-        return this.api.delete("/v2/entries/" + entryId, options);
+        const { id } = params;
+
+        return this.api.delete("/v2/entries/" + id, params);
     };
 
     deleteEntryGroup = async (
-        { timeSince, timeUntil }: { timeSince: string; timeUntil: string },
-        options?: Record<string, unknown>
+        params: Params<{ timeSince: string; timeUntil: string }>
     ): DeleteEntryGroupsReturnType => {
-        const requiredArguments = { timeSince, timeUntil };
+        REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY_GROUP);
 
-        REQUIRED.checkRequired(requiredArguments, REQUIRED.DELETE_ENTRY_GROUP);
-
-        return this.api.delete("/entrygroups", {
-            ...requiredArguments,
-            ...options,
-        });
+        return this.api.delete("/entrygroups", params);
     };
 
     stopClock = async (
-        { entryId }: { entryId: Entry["id"] },
-        options?: Record<string, unknown>
+        params: Params<{ entryId: Entry["id"] }>
     ): ClockStopReturnType => {
-        REQUIRED.checkRequired({ entryId }, REQUIRED.STOP_CLOCK);
+        REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
-        return this.api.delete("/v2/clock/" + entryId, options);
+        const { entryId, ...rest } = params;
+
+        return this.api.delete("/v2/clock/" + entryId, rest);
     };
 }
