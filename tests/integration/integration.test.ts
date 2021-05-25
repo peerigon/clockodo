@@ -87,7 +87,7 @@ const config: Config = {
             const addEntryResponse = await clockodo.addEntry({
                 customersId: 619336,
                 servicesId: 288646,
-                billable: 1,
+                billable: Billability.Billable,
                 timeSince: "2020-06-02T00:00:00Z",
                 timeUntil: "2020-06-02T00:00:01Z",
                 text: "Time entry",
@@ -96,7 +96,7 @@ const config: Config = {
             await clockodo.addEntry({
                 customersId: 619336,
                 servicesId: 288646,
-                billable: 2,
+                billable: Billability.Billed,
                 timeSince: "2020-06-02T00:00:00Z",
                 lumpsum: 123,
                 text: "Lumpsum entry",
@@ -120,7 +120,7 @@ const config: Config = {
             expect(editEntryResponse).toMatchObject({
                 entry: {
                     ...entryShape,
-                    billable: 2,
+                    billable: Billability.Billed,
                 },
             });
 

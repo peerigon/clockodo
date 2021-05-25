@@ -102,22 +102,22 @@ describe("Clockodo (instance)", () => {
 
             clockodoWithCache.use(cachePlugin({ cacheTime: 50 }));
 
-            const userId = 7;
+            const usersId = 7;
             let requestCounter = 0;
 
             const nockScope = nock(CLOCKODO_API)
-                .get(`/users/${userId}`)
+                .get(`/users/${usersId}`)
                 .twice()
                 .reply(200, () => {
                     requestCounter++;
                 });
 
             await clockodoWithCache.getUser({
-                id: userId,
+                id: usersId,
             });
             expect(requestCounter).toBe(1);
             await clockodoWithCache.getUser({
-                id: userId,
+                id: usersId,
             });
             // If cache is not working this would fail
             expect(requestCounter).toBe(1);
@@ -125,7 +125,7 @@ describe("Clockodo (instance)", () => {
             await new Promise((resolve) => setTimeout(resolve, 50));
 
             await clockodoWithCache.getUser({
-                id: userId,
+                id: usersId,
             });
             expect(requestCounter).toBe(2);
 
@@ -380,7 +380,7 @@ describe("Clockodo (instance)", () => {
                     .get("/userreports/1263?" + qs.stringify({ year: 217 }))
                     .reply(200);
 
-                await clockodo.getUserReport({ userId: 1263, year: 217 });
+                await clockodo.getUserReport({ usersId: 1263, year: 217 });
 
                 nockScope.done();
             });
@@ -390,7 +390,7 @@ describe("Clockodo (instance)", () => {
                 return expect(
                     clockodo.getUserReport(
                         // @ts-expect-error Year is missing
-                        { userId: 200 }
+                        { usersId: 200 }
                     )
                 ).rejects.toThrowError('Missing required parameter "year"');
             });
@@ -627,7 +627,7 @@ describe("Clockodo (instance)", () => {
                     .reply(200);
 
                 await clockodo.changeClockDuration({
-                    entryId: 782,
+                    entriesId: 782,
                     duration: 540,
                     durationBefore: 300,
                     offsetBefore: 60,
@@ -640,7 +640,7 @@ describe("Clockodo (instance)", () => {
 
                 return expect(
                     clockodo.changeClockDuration({
-                        entryId: 782,
+                        entriesId: 782,
                         durationBefore: 540,
                     } as any)
                 ).rejects.toThrowError('Missing required parameter "duration"');
@@ -777,7 +777,7 @@ describe("Clockodo (instance)", () => {
                     .delete("/v2/clock/782")
                     .reply(200);
 
-                await clockodo.stopClock({ entryId: 782 });
+                await clockodo.stopClock({ entriesId: 782 });
 
                 nockScope.done();
             });
