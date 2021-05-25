@@ -1,5 +1,4 @@
 import {
-    ClockingTimeEntryBillability,
     EntryType,
     LumpsumEntryBillability,
     TimeEntryBillability,
@@ -86,46 +85,24 @@ type CommonEntry = {
     revenue?: number;
 };
 
-type CommonTimeEntry = CommonEntry & {
+// Initially we've split up TimeEntry here into ClockingTimeEntry | ClockedTimeEntry | ManualTimeEntry
+// We had to revert this because the shared 'type' tag property does not differentiate between
+// these types. Without a shared tag property, it's impossible for TypeScript to infer the correct type.
+export type TimeEntry = CommonEntry & {
     type: EntryType.Time;
     servicesId: number;
     /** @deprecated */
     servicesName?: string;
+    timeClockedSince: string | null;
+    timeUntil: string | null;
     timeLastChangeWorkTime: string;
+    billable: TimeEntryBillability;
+    duration: number | null;
+    offset: number;
+    clocked: boolean;
+    clockedOffline: boolean;
     hourlyRate: number | null;
 };
-
-type CommonClockTimeEntry = CommonTimeEntry & {
-    timeClockedSince: string | null;
-    clocked: true;
-    clockedOffline: boolean;
-};
-
-export type ClockingTimeEntry = CommonClockTimeEntry & {
-    timeUntil: null;
-    billable: ClockingTimeEntryBillability;
-    duration: null;
-    offset: 0;
-};
-
-export type ClockedTimeEntry = CommonClockTimeEntry & {
-    timeUntil: string;
-    billable: TimeEntryBillability;
-    duration: number;
-    offset: number;
-};
-
-export type ManualTimeEntry = CommonTimeEntry & {
-    timeUntil: string;
-    billable: TimeEntryBillability;
-    duration: number;
-    offset: number;
-    timeClockedSince: null;
-    clocked: false;
-    clockedOffline: false;
-};
-
-export type TimeEntry = ClockingTimeEntry | ClockedTimeEntry | ManualTimeEntry;
 
 export type LumpsumValueEntry = CommonEntry & {
     type: EntryType.LumpsumValue;

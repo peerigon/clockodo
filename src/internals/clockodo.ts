@@ -34,19 +34,18 @@ import {
     SearchTextsReturnType,
     LumpsumServiceReturnType,
 } from "./returnTypes";
-import { TimeEntryBillability } from "./enums";
+import { ClockingTimeEntryBillability, TimeEntryBillability } from "./enums";
 import {
     Absence,
-    ClockingTimeEntry,
     Customer,
     Entry,
     LumpsumService,
     LumpsumServiceEntry,
     LumpsumValueEntry,
-    ManualTimeEntry,
     Project,
     Service,
     TargethoursRow,
+    TimeEntry,
     User,
 } from "./interfaces";
 
@@ -268,7 +267,7 @@ export class Clockodo {
 
     addEntry = async (
         params: Params<
-            | Pick<ManualTimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
+            | Pick<TimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
             | Pick<
                   LumpsumValueEntry,
                   typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY[number]
@@ -316,7 +315,9 @@ export class Clockodo {
 
     startClock = async (
         params: Params<
-            Pick<ClockingTimeEntry, typeof REQUIRED.START_CLOCK[number]>
+            Pick<TimeEntry, typeof REQUIRED.START_CLOCK[number]> & {
+                billable: ClockingTimeEntryBillability;
+            }
         >
     ): ClockStartReturnType => {
         REQUIRED.checkRequired(params, REQUIRED.START_CLOCK);
