@@ -158,7 +158,7 @@ console.log(Billability.Billable); // 1
 console.log(Billability.Billed); // 2
 ```
 
-Checkout the [enums.ts](https://github.com/peerigon/clockodo/blob/main/src/internals/enums.ts) and [interfaces.ts file](https://github.com/peerigon/clockodo/blob/main/src/internals/interfaces.ts) for more constants and TypeScript types.
+Checkout [enums.ts](https://github.com/peerigon/clockodo/blob/main/src/internals/enums.ts) and [interfaces.ts](https://github.com/peerigon/clockodo/blob/main/src/internals/interfaces.ts) for more constants and TypeScript types.
 
 ---
 
@@ -245,10 +245,11 @@ Gets list of Clockodo activity entries.
 ```js
 import { Billability } from "clockodo";
 
-await clockodo.getEntries(
-    { timeSince: "2017-08-18T00:00:00Z", timeUntil: "2018-02-09T00:00:00Z" },
-    { filterBillable: Billability.Billed }
-);
+await clockodo.getEntries({
+    timeSince: "2017-08-18T00:00:00Z",
+    timeUntil: "2018-02-09T00:00:00Z",
+    filterBillable: Billability.Billed,
+});
 ```
 
 ---
@@ -260,14 +261,12 @@ Get a group of entries defined by your criteria.
 #### Example:
 
 ```js
-await clockodo.getEntryGroups(
-    {
-        timeSince: "2017-08-18T00:00:00Z",
-        timeUntil: "2018-02-09T00:00:00Z",
-        grouping: ["customersId", "projectsId"],
-    },
-    { roundToMinutes: 15 }
-);
+await clockodo.getEntryGroups({
+    timeSince: "2017-08-18T00:00:00Z",
+    timeUntil: "2018-02-09T00:00:00Z",
+    grouping: ["customersId", "projectsId"],
+    roundToMinutes: 15,
+});
 ```
 
 ---
@@ -403,7 +402,7 @@ Get a co-worker by their ID.
 #### Example:
 
 ```js
-await clockodo.getUserReport({ id: 1263, year: 2017 });
+await clockodo.getUserReport({ usersId: 1263, year: 2017 });
 ```
 
 ---
@@ -415,7 +414,7 @@ Get an employee/user's report, which contains data such as hours worked and holi
 #### Example:
 
 ```js
-await clockodo.getUserReports({ year: 2017 }, { type: 1 });
+await clockodo.getUserReports({ year: 2017, type: 1 });
 ```
 
 ---
@@ -431,17 +430,13 @@ Default behavior adds an absence for the user attached to the credentials given 
 ```js
 import { AbsenceType } from "clockodo";
 
-await clockodo.addAbsence(
-    {
-        dateSince: "2017-08-18T00:00:00Z",
-        dateUntil: "2018-02-09T00:00:00Z",
-        type: AbsenceType.SpecialLeave,
-    },
-    {
-        note: "elternzeit",
-        usersId: 12321,
-    }
-);
+await clockodo.addAbsence({
+    dateSince: "2017-08-18T00:00:00Z",
+    dateUntil: "2018-02-09T00:00:00Z",
+    type: AbsenceType.SpecialLeave,
+    note: "elternzeit",
+    usersId: 12321,
+});
 ```
 
 ---
@@ -534,10 +529,12 @@ Get Clockodo Tasks (grouped entries).
 ```js
 import { Billability } from "clockodo";
 
-await clockodo.startClock(
-    { customersId: 24, servicesId: 7, billable: Billability.Billable },
-    { projectsId: 365 }
-);
+await clockodo.startClock({
+    customersId: 24,
+    servicesId: 7,
+    projectsId: 365,
+    billable: Billability.Billable,
+});
 ```
 
 ---
@@ -551,10 +548,11 @@ Changes the duration of an entry. Because the ID returned by clock methods is ju
 #### Example:
 
 ```js
-await clockodo.changeClockDuration(
-    { entryId: 7082, duration: 540, durationBefore: 300 },
-    { offsetBefore: 60 }
-);
+await clockodo.changeClockDuration({
+    entriesId: 7082,
+    duration: 540,
+    durationBefore: 300,
+});
 ```
 
 ---
@@ -566,10 +564,7 @@ Edit existing Clockodo absence.
 #### Example:
 
 ```js
-await clockodo.editAbsence(
-    { absenceId: 74 },
-    { note: "I know what he did last summer" }
-);
+await clockodo.editAbsence({ id: 74, note: "I know what he did last summer" });
 ```
 
 ---
@@ -581,7 +576,7 @@ Edit existing Clockodo customer.
 #### Example:
 
 ```js
-await clockodo.editCustomer({ customersId: 15 }, { name: "The Mystery Gang" });
+await clockodo.editCustomer({ id: 15, name: "The Mystery Gang" });
 ```
 
 ---
@@ -593,7 +588,7 @@ Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry(
 #### Example:
 
 ```js
-await clockodo.editEntry({ entryId: 365 }, { duration: 540 });
+await clockodo.editEntry({ entriesId: 365, duration: 540 });
 ```
 
 ---
@@ -607,10 +602,12 @@ Allows for mass edit of entries based on a set of filters.
 ```js
 import { Billability } from "clockodo";
 
-await clockodo.editEntryGroup(
-    { timeSince: "2017-08-18T00:00:00Z", timeUntil: "2018-02-09T00:00:00Z" },
-    { filterText: "Browsing Reddit", billable: Billability.NotBillable }
-);
+await clockodo.editEntryGroup({
+    timeSince: "2017-08-18T00:00:00Z",
+    timeUntil: "2018-02-09T00:00:00Z",
+    filterText: "Browsing Reddit",
+    billable: Billability.NotBillable,
+});
 ```
 
 ---
@@ -622,7 +619,7 @@ Edit existing project.
 #### Example:
 
 ```js
-await clockodo.editProject({ projectsId: 20 }, options);
+await clockodo.editProject({ id: 20, name: "Awesome new project" });
 ```
 
 ---
@@ -634,7 +631,7 @@ Edit existing service.
 #### Example:
 
 ```js
-await clockodo.editService({ servicesId: 23 }, { name: "Room Service" });
+await clockodo.editService({ id: 23, name: "Room Service" });
 ```
 
 ---
@@ -646,7 +643,7 @@ Edit existing user.
 #### Example:
 
 ```js
-await clockodo.editUser({ usersId: 33 }, { name: "Moalo Loco" });
+await clockodo.editUser({ id: 33, name: "Moalo Loco" });
 ```
 
 ---
@@ -660,7 +657,7 @@ Deactivates (not deletes) customer.
 #### Example:
 
 ```js
-await clockodo.deactivateCustomer({ customersId: 343 });
+await clockodo.deactivateCustomer({ id: 343 });
 ```
 
 ---
@@ -672,7 +669,7 @@ Deactivates (not deletes) project.
 #### Example:
 
 ```js
-await clockodo.deactivateProject({ projectsId: 8 });
+await clockodo.deactivateProject({ id: 8 });
 ```
 
 ---
@@ -684,7 +681,7 @@ Deactivates (not deletes) service.
 #### Example:
 
 ```js
-await clockodo.deactivateService({ servicesId: 94 });
+await clockodo.deactivateService({ id: 94 });
 ```
 
 ---
@@ -696,7 +693,7 @@ Deactivates (not deletes) user.
 #### Example:
 
 ```js
-await clockodo.deactivateUser({ usersId: 7 });
+await clockodo.deactivateUser({ id: 7 });
 ```
 
 ---
@@ -708,7 +705,7 @@ Deletes absence (go figure).
 #### Example:
 
 ```js
-await clockodo.deleteAbsence({ absenceId: 31 });
+await clockodo.deleteAbsence({ id: 31 });
 ```
 
 ---
@@ -720,7 +717,7 @@ Deletes a single entry by ID
 #### Example:
 
 ```js
-await clockodo.deleteEntry({ entryId: 543512 });
+await clockodo.deleteEntry({ id: 543512 });
 ```
 
 ---
@@ -732,10 +729,11 @@ Deletes one or more entries based on a series of filters that builds an "entry g
 #### Example:
 
 ```js
-await clockodo.deleteEntryGroup(
-    { timeSince: "2017-08-18T00:00:00Z", timeUntil: "2018-02-09T00:00:00Z" },
-    { text: "chilin everyday" }
-);
+await clockodo.deleteEntryGroup({
+    timeSince: "2017-08-18T00:00:00Z",
+    timeUntil: "2018-02-09T00:00:00Z",
+    text: "chilin everyday",
+});
 ```
 
 ---
@@ -747,7 +745,7 @@ Stops a running clock/entry.
 #### Example:
 
 ```js
-await clockodo.stopClock({ entryId: 7082 });
+await clockodo.stopClock({ entriesId: 7082 });
 ```
 
 ---

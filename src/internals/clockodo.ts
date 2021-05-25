@@ -233,13 +233,13 @@ export class Clockodo {
     };
 
     getUserReport = async (
-        params: Params<{ userId: User["id"]; year: number }>
+        params: Params<{ usersId: User["id"]; year: number }>
     ): UserReportReturnType => {
         REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
-        const { userId, ...rest } = params;
+        const { usersId, ...rest } = params;
 
-        return this.api.get("/userreports/" + userId, rest);
+        return this.api.get("/userreports/" + usersId, rest);
     };
 
     getUserReports = async (
@@ -326,16 +326,16 @@ export class Clockodo {
 
     changeClockDuration = async (
         params: Params<{
-            entryId: Entry["id"];
+            entriesId: Entry["id"];
             durationBefore: number;
             duration: number;
         }>
     ): ClockEditReturnType => {
         REQUIRED.checkRequired(params, REQUIRED.CHANGE_CLOCK_DURATION);
 
-        const { entryId, ...rest } = params;
+        const { entriesId, ...rest } = params;
 
-        return this.api.put("/v2/clock/" + entryId, rest);
+        return this.api.put("/v2/clock/" + entriesId, rest);
     };
 
     editAbsence = async (
@@ -481,12 +481,12 @@ export class Clockodo {
     };
 
     stopClock = async (
-        params: Params<{ entryId: Entry["id"] }>
+        params: Params<{ entriesId: Entry["id"] }>
     ): ClockStopReturnType => {
         REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
-        const { entryId, ...rest } = params;
+        const { entriesId, ...rest } = params;
 
-        return this.api.delete("/v2/clock/" + entryId, rest);
+        return this.api.delete("/v2/clock/" + entriesId, rest);
     };
 }

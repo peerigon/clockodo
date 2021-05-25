@@ -25,7 +25,7 @@ export const ADD_PROJECT = ["name", "customersId"] as const;
 export const ADD_SERVICE = ["name"] as const;
 export const ADD_USER = ["name", "number", "email", "role"] as const;
 export const CHANGE_CLOCK_DURATION = [
-    "entryId",
+    "entriesId",
     "durationBefore",
     "duration",
 ] as const;
@@ -61,10 +61,10 @@ export const GET_TASK_DURATION = [
     "taskBillable",
 ] as const;
 export const GET_USER = ["id"] as const;
-export const GET_USER_REPORT = ["userId", "year"] as const;
+export const GET_USER_REPORT = ["usersId", "year"] as const;
 export const GET_USER_REPORTS = ["year"] as const;
 export const START_CLOCK = ["customersId", "servicesId", "billable"] as const;
-export const STOP_CLOCK = ["entryId"] as const;
+export const STOP_CLOCK = ["entriesId"] as const;
 
 export const checkRequired = (
     params: Record<string, unknown> = {},
