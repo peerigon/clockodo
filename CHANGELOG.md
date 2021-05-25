@@ -1,3 +1,10 @@
+# [8.1.0-beta.8](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.7...v8.1.0-beta.8) (2021-05-25)
+
+
+### Features
+
+* Publish beta version ([2018711](https://github.com/peerigon/clockodo/commit/201871129cc94772b4920c59bad55912e9675391))
+
 # [8.1.0-beta.7](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.6...v8.1.0-beta.7) (2021-05-19)
 
 
