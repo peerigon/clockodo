@@ -619,7 +619,6 @@ describe("Clockodo (instance)", () => {
                 const expectedParameters = {
                     duration_before: 300,
                     duration: 540,
-                    offset_before: 60,
                 };
 
                 const nockScope = nock(CLOCKODO_API)
@@ -630,7 +629,6 @@ describe("Clockodo (instance)", () => {
                     entriesId: 782,
                     duration: 540,
                     durationBefore: 300,
-                    offsetBefore: 60,
                 });
 
                 nockScope.done();

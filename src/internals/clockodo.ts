@@ -278,7 +278,7 @@ export class Clockodo {
               >
         >
     ): AddEntryReturnType => {
-        if ("lumpsumsId" in params) {
+        if ("lumpsumServicesId" in params) {
             REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY);
         } else if ("lumpsum" in params) {
             REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_VALUE_ENTRY);

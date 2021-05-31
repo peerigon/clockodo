@@ -16,8 +16,8 @@ export const ADD_LUMPSUM_VALUE_ENTRY = [
 ] as const;
 export const ADD_LUMPSUM_SERVICE_ENTRY = [
     "customersId",
-    "lumpsumsAmount",
-    "lumpsumsId",
+    "lumpsumServicesAmount",
+    "lumpsumServicesId",
     "billable",
     "timeSince",
 ] as const;

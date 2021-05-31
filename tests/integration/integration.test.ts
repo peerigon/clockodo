@@ -84,7 +84,7 @@ const config: Config = {
 
     describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
         it("returns expected data format and throws no error", async () => {
-            const addEntryResponse = await clockodo.addEntry({
+            const addTimeEntryResponse = await clockodo.addEntry({
                 customersId: 619336,
                 servicesId: 288646,
                 billable: Billability.Billable,
@@ -93,27 +93,65 @@ const config: Config = {
                 text: "Time entry",
             });
 
-            await clockodo.addEntry({
+            expect(addTimeEntryResponse).toMatchObject({
+                entry: {
+                    customersId: 619336,
+                    servicesId: 288646,
+                    billable: Billability.Billable,
+                    timeSince: "2020-06-02T00:00:00Z",
+                    timeUntil: "2020-06-02T00:00:01Z",
+                    text: "Time entry",
+                },
+            });
+
+            const addLumpsumValueEntryResponse = await clockodo.addEntry({
                 customersId: 619336,
                 servicesId: 288646,
                 billable: Billability.Billed,
                 timeSince: "2020-06-02T00:00:00Z",
                 lumpsum: 123,
-                text: "Lumpsum entry",
+                text: "Lumpsum value entry",
             });
 
-            expect(addEntryResponse).toMatchObject({
-                entry: entryShape,
+            expect(addLumpsumValueEntryResponse).toMatchObject({
+                entry: {
+                    customersId: 619336,
+                    servicesId: 288646,
+                    billable: Billability.Billed,
+                    timeSince: "2020-06-02T00:00:00Z",
+                    lumpsum: 123,
+                    text: "Lumpsum value entry",
+                },
+            });
+
+            const addLumpsumServiceEntryResponse = await clockodo.addEntry({
+                customersId: 619336,
+                billable: Billability.Billed,
+                timeSince: "2020-06-02T00:00:00Z",
+                lumpsumServicesId: 4966,
+                lumpsumServicesAmount: 100,
+                text: "Lumpsum service entry",
+            });
+
+            expect(addLumpsumServiceEntryResponse).toMatchObject({
+                entry: {
+                    customersId: 619336,
+                    billable: Billability.Billed,
+                    timeSince: "2020-06-02T00:00:00Z",
+                    lumpsumServicesId: 4966,
+                    lumpsumServicesAmount: 100,
+                    text: "Lumpsum service entry",
+                },
             });
 
             const getEntryResponse = await clockodo.getEntry({
-                id: addEntryResponse.entry.id,
+                id: addTimeEntryResponse.entry.id,
             });
 
-            expect(getEntryResponse).toMatchObject(addEntryResponse);
+            expect(getEntryResponse).toMatchObject(addTimeEntryResponse);
 
             const editEntryResponse = await clockodo.editEntry({
-                id: addEntryResponse.entry.id,
+                id: addTimeEntryResponse.entry.id,
                 billable: Billability.Billed,
             });
 
@@ -124,13 +162,23 @@ const config: Config = {
                 },
             });
 
-            const deleteEntryResponse = await clockodo.deleteEntry(
-                addEntryResponse.entry
-            );
+            const deleteEntryResponse = await Promise.all([
+                clockodo.deleteEntry(addTimeEntryResponse.entry),
+                clockodo.deleteEntry(addLumpsumValueEntryResponse.entry),
+                clockodo.deleteEntry(addLumpsumServiceEntryResponse.entry),
+            ]);
 
-            expect(deleteEntryResponse).toMatchObject({
-                success: true,
-            });
+            expect(deleteEntryResponse).toMatchObject([
+                {
+                    success: true,
+                },
+                {
+                    success: true,
+                },
+                {
+                    success: true,
+                },
+            ]);
         });
     });
 

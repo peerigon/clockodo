@@ -75,14 +75,6 @@ type CommonEntry = {
     timeSince: string;
     timeInsert: string;
     timeLastChange: string;
-    /** @deprecated */
-    customersName?: string;
-    /** @deprecated */
-    projectsName?: string | null;
-    /** @deprecated */
-    usersName?: string;
-    /** @deprecated */
-    revenue?: number;
 };
 
 // Initially we've split up TimeEntry here into ClockingTimeEntry | ClockedTimeEntry | ManualTimeEntry
@@ -91,8 +83,6 @@ type CommonEntry = {
 export type TimeEntry = CommonEntry & {
     type: EntryType.Time;
     servicesId: number;
-    /** @deprecated */
-    servicesName?: string;
     timeClockedSince: string | null;
     timeUntil: string | null;
     timeLastChangeWorkTime: string;
@@ -100,7 +90,8 @@ export type TimeEntry = CommonEntry & {
     duration: number | null;
     clocked: boolean;
     clockedOffline: boolean;
-    hourlyRate?: number | null;
+    /** Only present with sufficient access rights */
+    hourlyRate?: number;
 };
 
 export type LumpsumValueEntry = CommonEntry & {
@@ -108,8 +99,6 @@ export type LumpsumValueEntry = CommonEntry & {
     timeUntil: string;
     billable: LumpsumEntryBillability;
     servicesId: number;
-    /** @deprecated */
-    servicesName?: string;
     lumpsum: number;
 };
 
@@ -117,14 +106,8 @@ export type LumpsumServiceEntry = CommonEntry & {
     type: EntryType.LumpsumService;
     timeUntil: string;
     billable: LumpsumEntryBillability;
-    lumpsumsId: number;
-    lumpsumsAmount: number;
-    /** @deprecated */
-    lumpsumsPrice?: number;
-    /** @deprecated */
-    lumpsumsUnit?: string;
-    /** @deprecated */
-    lumpsumsName?: string;
+    lumpsumServicesId: number;
+    lumpsumServicesAmount: number;
 };
 
 export type Entry = TimeEntry | LumpsumValueEntry | LumpsumServiceEntry;

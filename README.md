@@ -457,11 +457,11 @@ await clockodo.addCustomer({ name: "Weyland-Yutani" });
 
 Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Depending on the type of entry different properties are required:
 
-| Type of entry         | Required properties                                                    |
-| :-------------------- | :--------------------------------------------------------------------- |
-| Manual time entry     | `customersId`, `servicesId`, `billable`, `timeSince`, `timeUntil`      |
-| Lumpsum value entry   | `customersId`, `servicesId`, `billable`, `timeSince`, `lumpsum`        |
-| Lumpsum service entry | `customersId`, `lumpsumsAmount`, `lumpsumsId`, `billable`, `timeSince` |
+| Type of entry         | Required properties                                                                  |
+| :-------------------- | :----------------------------------------------------------------------------------- |
+| Manual time entry     | `customersId`, `servicesId`, `billable`, `timeSince`, `timeUntil`                    |
+| Lumpsum value entry   | `customersId`, `servicesId`, `billable`, `timeSince`, `lumpsum`                      |
+| Lumpsum service entry | `customersId`, `lumpsumServicesAmount`, `lumpsumServicesId`, `billable`, `timeSince` |
 
 #### Example:
 
