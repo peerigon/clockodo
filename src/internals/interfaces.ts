@@ -98,7 +98,6 @@ export type TimeEntry = CommonEntry & {
     timeLastChangeWorkTime: string;
     billable: TimeEntryBillability;
     duration: number | null;
-    offset: number;
     clocked: boolean;
     clockedOffline: boolean;
     hourlyRate?: number | null;
