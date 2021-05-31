@@ -1,3 +1,10 @@
+# [8.1.0-beta.11](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.10...v8.1.0-beta.11) (2021-05-31)
+
+
+### Features
+
+* remove offset property ([bbf047b](https://github.com/peerigon/clockodo/commit/bbf047b08c6a3da7647128f747fe7e85d66c5cbf))
+
 # [8.1.0-beta.10](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.9...v8.1.0-beta.10) (2021-05-31)
 
 
