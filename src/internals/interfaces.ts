@@ -101,7 +101,7 @@ export type TimeEntry = CommonEntry & {
     offset: number;
     clocked: boolean;
     clockedOffline: boolean;
-    hourlyRate: number | null;
+    hourlyRate?: number | null;
 };
 
 export type LumpsumValueEntry = CommonEntry & {
@@ -194,7 +194,7 @@ export type EntryGroup = {
     hasBudgetRevenuesNotBilled?: boolean;
     hasNonBudgetRevenuesBilled?: boolean;
     hasNonBudgetRevenuesNotBilled?: boolean;
-    hourlyRate?: number;
+    hourlyRate?: number | null;
     hourlyRateIsEqualAndHasNoLumpsums?: boolean;
     durationWithoutRounding?: number;
     revenueWithoutRounding?: number;
