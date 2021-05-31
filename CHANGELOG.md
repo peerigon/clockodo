@@ -1,3 +1,10 @@
+# [8.1.0-beta.12](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.11...v8.1.0-beta.12) (2021-05-31)
+
+
+### Features
+
+* Add API v2 changes ([0f8bc56](https://github.com/peerigon/clockodo/commit/0f8bc5637911b9ceea4c53a973c7bd7fff5068d0))
+
 # [8.1.0-beta.11](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.10...v8.1.0-beta.11) (2021-05-31)
 
 
