@@ -1,3 +1,10 @@
+# [8.1.0-beta.13](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.12...v8.1.0-beta.13) (2021-06-02)
+
+
+### Bug Fixes
+
+* TimeEntry typing of timeClockedSince property ([770f47a](https://github.com/peerigon/clockodo/commit/770f47ad292ae29371e3fa567523cda3354b1b94))
+
 # [8.1.0-beta.12](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.11...v8.1.0-beta.12) (2021-05-31)
 
 
