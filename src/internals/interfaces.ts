@@ -83,7 +83,8 @@ type CommonEntry = {
 export type TimeEntry = CommonEntry & {
     type: EntryType.Time;
     servicesId: number;
-    timeClockedSince: string | null;
+    /** Only present when clocked: true */
+    timeClockedSince?: string | null;
     timeUntil: string | null;
     timeLastChangeWorkTime: string;
     billable: TimeEntryBillability;
