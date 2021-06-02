@@ -1,3 +1,10 @@
+# [8.1.0-beta.14](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.13...v8.1.0-beta.14) (2021-06-02)
+
+
+### Bug Fixes
+
+* Revert incorrect typing of timeClockedSince ([cc4d797](https://github.com/peerigon/clockodo/commit/cc4d79739a028d5765efae0957fc75dafa7bd895))
+
 # [8.1.0-beta.13](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.12...v8.1.0-beta.13) (2021-06-02)
 
 
