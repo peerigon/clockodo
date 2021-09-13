@@ -23,7 +23,8 @@
     "test:integration": "jest tests/integration/**",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore .",
     "posttest": "run-s build test:lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,8 @@
     "snakecase-keys": "^4.0.2"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.1",
     "@types/qs": "^6.9.7",
@@ -62,6 +65,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
+    "semantic-release": "^17.4.7",
     "ts-jest": "^27.0.5",
     "ts-jest-resolver": "^1.1.0",
     "typescript": "^4.4.3"
