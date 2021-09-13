@@ -1,6 +1,6 @@
 import { setup } from "axios-cache-adapter";
-import { Clockodo } from "../internals/clockodo.js";
-import { axiosClient } from "../internals/utilities/symbols.js";
+import { Clockodo } from "../clockodo.js";
+import { axiosClient } from "../utilities/symbols.js";
 
 export const cachePlugin =
     (config: { cacheTime: number }) => (clockodo: Clockodo) => {

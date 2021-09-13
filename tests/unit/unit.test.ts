@@ -5,11 +5,7 @@ import nock from "nock";
 import snakecaseKeys from "snakecase-keys";
 import { Clockodo, Config } from "../../src/index.js";
 import { cachePlugin } from "../../src/plugins/cache.js";
-import {
-    AbsenceStatus,
-    AbsenceType,
-    Billability,
-} from "../../src/internals/enums.js";
+import { AbsenceStatus, AbsenceType, Billability } from "../../src/enums.js";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {

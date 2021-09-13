@@ -90,7 +90,7 @@ clockodo.api.config({
 
 ## API
 
-We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mappings.ts file](https://github.com/peerigon/clockodo/blob/main/src/internals/utilities/mappings.ts).
+We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mappings.ts file](https://github.com/peerigon/clockodo/blob/main/src/utilities/mappings.ts).
 
 In general, the first argument for these functions is an object consisting of required parameters. The second is an "options" object for optional parameters.
 
@@ -158,7 +158,7 @@ console.log(Billability.Billable); // 1
 console.log(Billability.Billed); // 2
 ```
 
-Checkout [enums.ts](https://github.com/peerigon/clockodo/blob/main/src/internals/enums.ts) and [interfaces.ts](https://github.com/peerigon/clockodo/blob/main/src/internals/interfaces.ts) for more constants and TypeScript types.
+Checkout [enums.ts](https://github.com/peerigon/clockodo/blob/main/src/enums.ts) and [interfaces.ts](https://github.com/peerigon/clockodo/blob/main/src/interfaces.ts) for more constants and TypeScript types.
 
 ---
 
