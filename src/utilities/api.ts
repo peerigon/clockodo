@@ -73,7 +73,7 @@ export class Api {
         this.config({ client, authentication, baseUrl });
     }
 
-    config = (config: Partial<Config>) => {
+    config(config: Partial<Config>) {
         const { authentication, baseUrl, client } = config;
         const defaults = this[axiosClient].defaults;
 
@@ -132,13 +132,13 @@ export class Api {
                 defaults.withCredentials = false;
             }
         }
-    };
+    }
 
-    get = async <Result = any>(
+    async get<Result = any>(
         url: string,
         queryParams = {},
         options?: AxiosRequestConfig
-    ): Promise<Result> => {
+    ): Promise<Result> {
         const response = await this[axiosClient].get(url, {
             params: mapQueryParams(queryParams),
             paramsSerializer,
@@ -146,13 +146,13 @@ export class Api {
         });
 
         return mapResponseBody<Result>(response.data);
-    };
+    }
 
-    post = async <Result = any>(
+    async post<Result = any>(
         url: string,
         body = {},
         options?: AxiosRequestConfig
-    ): Promise<Result> => {
+    ): Promise<Result> {
         const response = await this[axiosClient].post(
             url,
             mapRequestBody(body),
@@ -160,13 +160,13 @@ export class Api {
         );
 
         return mapResponseBody<Result>(response.data);
-    };
+    }
 
-    put = async <Result = any>(
+    async put<Result = any>(
         url: string,
         body = {},
         options?: AxiosRequestConfig
-    ): Promise<Result> => {
+    ): Promise<Result> {
         const response = await this[axiosClient].put(
             url,
             mapRequestBody(body),
@@ -174,18 +174,18 @@ export class Api {
         );
 
         return mapResponseBody<Result>(response.data);
-    };
+    }
 
-    delete = async <Result = any>(
+    async delete<Result = any>(
         url: string,
         body = {},
         options?: AxiosRequestConfig
-    ): Promise<Result> => {
+    ): Promise<Result> {
         const response = await this[axiosClient].delete(url, {
             data: mapRequestBody(body),
             ...options,
         });
 
         return mapResponseBody<Result>(response.data);
-    };
+    }
 }

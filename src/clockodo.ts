@@ -60,72 +60,74 @@ export class Clockodo {
         this.api = new Api(config);
     }
 
-    use = (plugin: (clockodo: Clockodo) => void) => {
+    use(plugin: (clockodo: Clockodo) => void) {
         plugin(this);
-    };
+    }
 
-    getAbsence = async (
+    async getAbsence(
         params: Params<{ id: Absence["id"] }>
-    ): AbsenceReturnType => {
+    ): Promise<AbsenceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCE);
 
         const { id, ...rest } = params;
 
         return this.api.get("/absences/" + id, rest);
-    };
+    }
 
-    getAbsences = async (
+    async getAbsences(
         params: Params<{ year: number }>
-    ): AbsencesReturnType => {
+    ): Promise<AbsencesReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
         return this.api.get("/absences", params);
-    };
+    }
 
-    getClock = async (params?: Params): ClockReturnType => {
+    async getClock(params?: Params): Promise<ClockReturnType> {
         return this.api.get("/v2/clock", params);
-    };
+    }
 
-    getCustomer = async (
+    async getCustomer(
         params: Params<{ id: Customer["id"] }>
-    ): CustomerReturnType => {
+    ): Promise<CustomerReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_CUSTOMER);
 
         const { id, ...rest } = params;
 
         return this.api.get("/customers/" + id, rest);
-    };
+    }
 
-    getCustomers = async (params?: Params): CustomersReturnType => {
+    async getCustomers(params?: Params): Promise<CustomersReturnType> {
         return this.api.get("/customers", params);
-    };
+    }
 
-    getEntry = async (params: Params<{ id: Entry["id"] }>): EntryReturnType => {
+    async getEntry(
+        params: Params<{ id: Entry["id"] }>
+    ): Promise<EntryReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY);
 
         const { id, ...rest } = params;
 
         return this.api.get("/v2/entries/" + id, rest);
-    };
+    }
 
-    getEntries = async (
+    async getEntries(
         params: Params<{
             timeSince: string;
             timeUntil: string;
         }>
-    ): EntriesReturnType => {
+    ): Promise<EntriesReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
         return this.api.get("/v2/entries", params);
-    };
+    }
 
-    getEntryGroups = async (
+    async getEntryGroups(
         params: Params<{
             timeSince: string;
             timeUntil: string;
             grouping: Array<string>;
         }>
-    ): EntryGroupsReturnType => {
+    ): Promise<EntryGroupsReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY_GROUPS);
 
         // Could be replaced with Object.fromEntries() once it's supported everywhere
@@ -139,68 +141,70 @@ export class Clockodo {
             ...params,
             grouping: Object.keys(snakecaseKeys(camelCaseGrouping)),
         });
-    };
+    }
 
-    getProject = async (
+    async getProject(
         params: Params<{ id: Project["id"] }>
-    ): ProjectReturnType => {
+    ): Promise<ProjectReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
 
         const { id, ...rest } = params;
 
         return this.api.get("/projects/" + id, rest);
-    };
+    }
 
-    getSearchTexts = async (params?: Params): SearchTextsReturnType => {
+    async getSearchTexts(params?: Params): Promise<SearchTextsReturnType> {
         return this.api.get("/clock/searchtexts", params);
-    };
+    }
 
-    getService = async (
+    async getService(
         params: Params<{ id: Service["id"] }>
-    ): ServiceReturnType => {
+    ): Promise<ServiceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_SERVICE);
 
         const { id, ...rest } = params;
 
         return this.api.get("/services/" + id, rest);
-    };
+    }
 
-    getServices = async (params?: Params): ServicesReturnType => {
+    async getServices(params?: Params): Promise<ServicesReturnType> {
         return this.api.get("/services", params);
-    };
+    }
 
     // This endpoint still uses the old lumpSum casing
-    getLumpSumService = async (
+    async getLumpSumService(
         params: Params<{ id: LumpsumService["id"] }>
-    ): LumpsumServiceReturnType => {
+    ): Promise<LumpsumServiceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_LUMPSUM_SERVICE);
 
         const { id, ...rest } = params;
 
         return this.api.get("/lumpsumservices/" + id, rest);
-    };
+    }
 
     // This endpoint still uses the old lumpSum casing
-    getLumpSumServices = async (params?: Params): LumpsumServicesReturnType => {
+    async getLumpSumServices(
+        params?: Params
+    ): Promise<LumpsumServicesReturnType> {
         return this.api.get("/lumpsumservices", params);
-    };
+    }
 
-    getTargethoursRow = async (
+    async getTargethoursRow(
         params: Params<{ id: TargethoursRow["id"] }>
-    ): TargethoursRowReturnType => {
+    ): Promise<TargethoursRowReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_TARGETHOURS_ROW);
 
         const { id, ...rest } = params;
 
         return this.api.get("/targethours/" + id, rest);
-    };
+    }
 
-    getTargethours = async (params?: Params): TargethoursReturnType => {
+    async getTargethours(params?: Params): Promise<TargethoursReturnType> {
         return this.api.get("/targethours", params);
-    };
+    }
 
     /** @deprecated */
-    getTaskDuration = async (
+    async getTaskDuration(
         params: Params<{
             taskCustomersId: number;
             taskProjectsId: number;
@@ -208,64 +212,64 @@ export class Clockodo {
             taskText: string;
             taskBillable: TimeEntryBillability;
         }>
-    ): TaskDurationReturnType => {
+    ): Promise<TaskDurationReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_TASK_DURATION);
 
         return this.api.get("/tasks/duration", params);
-    };
+    }
 
     /** @deprecated */
-    getTasks = async (params?: Params): TasksReturnType => {
+    async getTasks(params?: Params): Promise<TasksReturnType> {
         return this.api.get("/tasks", params);
-    };
+    }
 
-    getUser = async (params: Params<{ id: User["id"] }>): UserReturnType => {
+    async getUser(params: Params<{ id: User["id"] }>): Promise<UserReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_USER);
 
         const { id, ...rest } = params;
 
         return this.api.get("/users/" + id, rest);
-    };
+    }
 
-    getUsers = async (params?: Params): UsersReturnType => {
+    async getUsers(params?: Params): Promise<UsersReturnType> {
         return this.api.get("/users", params);
-    };
+    }
 
-    getUserReport = async (
+    async getUserReport(
         params: Params<{ usersId: User["id"]; year: number }>
-    ): UserReportReturnType => {
+    ): Promise<UserReportReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
         const { usersId, ...rest } = params;
 
         return this.api.get("/userreports/" + usersId, rest);
-    };
+    }
 
-    getUserReports = async (
+    async getUserReports(
         params: Params<{ year: number }>
-    ): UserReportsReturnType => {
+    ): Promise<UserReportsReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
         return this.api.get("/userreports", params);
-    };
+    }
 
-    addAbsence = async (
+    async addAbsence(
         params: Params<Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>>
-    ): AbsenceReturnType => {
+    ): Promise<AbsenceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 
         return this.api.post("/absences", params);
-    };
+    }
 
-    addCustomer = async (
+    async addCustomer(
         params: Params<Pick<Customer, typeof REQUIRED.ADD_CUSTOMER[number]>>
-    ): CustomerReturnType => {
+    ): Promise<CustomerReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
         return this.api.post("/customers", params);
-    };
+    }
 
-    addEntry = async (
+    async addEntry(
         params: Params<
             | Pick<TimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
             | Pick<
@@ -277,7 +281,7 @@ export class Clockodo {
                   typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
               >
         >
-    ): AddEntryReturnType => {
+    ): Promise<AddEntryReturnType> {
         if ("lumpsumServicesId" in params) {
             REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY);
         } else if ("lumpsum" in params) {
@@ -287,207 +291,207 @@ export class Clockodo {
         }
 
         return this.api.post("/v2/entries", params);
-    };
+    }
 
-    addProject = async (
+    async addProject(
         params: Params<Pick<Project, typeof REQUIRED.ADD_PROJECT[number]>>
-    ): ProjectReturnType => {
+    ): Promise<ProjectReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
         return this.api.post("/projects", params);
-    };
+    }
 
-    addService = async (
+    async addService(
         params: Params<Pick<Service, typeof REQUIRED.ADD_SERVICE[number]>>
-    ): ServiceReturnType => {
+    ): Promise<ServiceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
         return this.api.post("/services", params);
-    };
+    }
 
-    addUser = async (
+    async addUser(
         params: Params<Pick<User, typeof REQUIRED.ADD_USER[number]>>
-    ): AddUserReturnType => {
+    ): Promise<AddUserReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
         return this.api.post("/users", params);
-    };
+    }
 
-    startClock = async (
+    async startClock(
         params: Params<
             Pick<TimeEntry, typeof REQUIRED.START_CLOCK[number]> & {
                 billable: ClockingTimeEntryBillability;
             }
         >
-    ): ClockStartReturnType => {
+    ): Promise<ClockStartReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.START_CLOCK);
 
         return this.api.post("/v2/clock", params);
-    };
+    }
 
-    changeClockDuration = async (
+    async changeClockDuration(
         params: Params<{
             entriesId: Entry["id"];
             durationBefore: number;
             duration: number;
         }>
-    ): ClockEditReturnType => {
+    ): Promise<ClockEditReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.CHANGE_CLOCK_DURATION);
 
         const { entriesId, ...rest } = params;
 
         return this.api.put("/v2/clock/" + entriesId, rest);
-    };
+    }
 
-    editAbsence = async (
+    async editAbsence(
         params: Params<Pick<Absence, typeof REQUIRED.EDIT_ABSENCE[number]>>
-    ): AbsenceReturnType => {
+    ): Promise<AbsenceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_ABSENCE);
 
         const { id } = params;
 
         return this.api.put("/absences/" + id, params);
-    };
+    }
 
-    editCustomer = async (
+    async editCustomer(
         params: Params<Pick<Customer, typeof REQUIRED.EDIT_CUSTOMER[number]>>
-    ) => {
+    ) {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_CUSTOMER);
 
         const { id } = params;
 
         return this.api.put("/customers/" + id, params);
-    };
+    }
 
-    editEntry = async (
+    async editEntry(
         params: Params<Pick<Entry, typeof REQUIRED.EDIT_ENTRY[number]>>
-    ): EditEntryReturnType => {
+    ): Promise<EditEntryReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY);
 
         const { id } = params;
 
         return this.api.put("/v2/entries/" + id, params);
-    };
+    }
 
-    editEntryGroup = async (
+    async editEntryGroup(
         params: Params<{ timeSince: string; timeUntil: string }>
-    ): EditEntryGroupsReturnType => {
+    ): Promise<EditEntryGroupsReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY_GROUP);
 
         return this.api.put("/entrygroups", params);
-    };
+    }
 
-    editProject = async (
+    async editProject(
         params: Params<Pick<Project, typeof REQUIRED.EDIT_PROJECT[number]>>
-    ): ProjectReturnType => {
+    ): Promise<ProjectReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_PROJECT);
 
         const { id } = params;
 
         return this.api.put("/projects/" + id, params);
-    };
+    }
 
-    editService = async (
+    async editService(
         params: Params<Pick<Service, typeof REQUIRED.EDIT_SERVICE[number]>>
-    ): ServiceReturnType => {
+    ): Promise<ServiceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_SERVICE);
 
         const { id } = params;
 
         return this.api.put("/services/" + id, params);
-    };
+    }
 
-    editUser = async (
+    async editUser(
         params: Params<Pick<User, typeof REQUIRED.EDIT_USER[number]>>
-    ): UserReturnType => {
+    ): Promise<UserReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.EDIT_USER);
 
         const { id } = params;
 
         return this.api.put("/users/" + id, params);
-    };
+    }
 
-    deactivateCustomer = async (
+    async deactivateCustomer(
         params: Params<
             Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>
         >
-    ): CustomerReturnType => {
+    ): Promise<CustomerReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
 
         const { id } = params;
 
         return this.api.delete("/customers/" + id, params);
-    };
+    }
 
-    deactivateProject = async (
+    async deactivateProject(
         params: Params<
             Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>
         >
-    ): ProjectReturnType => {
+    ): Promise<ProjectReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
 
         const { id } = params;
 
         return this.api.delete("/projects/" + id, params);
-    };
+    }
 
-    deactivateService = async (
+    async deactivateService(
         params: Params<
             Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>
         >
-    ): ServiceReturnType => {
+    ): Promise<ServiceReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
 
         const { id } = params;
 
         return this.api.delete("/services/" + id, params);
-    };
+    }
 
-    deactivateUser = async (
+    async deactivateUser(
         params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
-    ): UserReturnType => {
+    ): Promise<UserReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
 
         const { id } = params;
 
         return this.api.delete("/users/" + id, params);
-    };
+    }
 
-    deleteAbsence = async (
+    async deleteAbsence(
         params: Params<Pick<Absence, typeof REQUIRED.DELETE_ABSENCE[number]>>
-    ): DeleteReturnType => {
+    ): Promise<DeleteReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DELETE_ABSENCE);
 
         const { id } = params;
 
         return this.api.delete("/absences/" + id, params);
-    };
+    }
 
-    deleteEntry = async (
+    async deleteEntry(
         params: Params<Pick<Entry, typeof REQUIRED.DELETE_ENTRY[number]>>
-    ): DeleteReturnType => {
+    ): Promise<DeleteReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY);
 
         const { id } = params;
 
         return this.api.delete("/v2/entries/" + id, params);
-    };
+    }
 
-    deleteEntryGroup = async (
+    async deleteEntryGroup(
         params: Params<{ timeSince: string; timeUntil: string }>
-    ): DeleteEntryGroupsReturnType => {
+    ): Promise<DeleteEntryGroupsReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY_GROUP);
 
         return this.api.delete("/entrygroups", params);
-    };
+    }
 
-    stopClock = async (
+    async stopClock(
         params: Params<{ entriesId: Entry["id"] }>
-    ): ClockStopReturnType => {
+    ): Promise<ClockStopReturnType> {
         REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
         const { entriesId, ...rest } = params;
 
         return this.api.delete("/v2/clock/" + entriesId, rest);
-    };
+    }
 }
