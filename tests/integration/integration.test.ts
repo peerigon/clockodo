@@ -52,6 +52,7 @@ const config: Config = {
                 "name",
                 "number",
                 "role",
+                "teamsId",
                 "timeformat12H",
                 "timezone",
                 "wageType",
