@@ -7,6 +7,7 @@
   "types": "./dist/esm/index.d.ts",
   "exports": {
     "require": "./dist/cjs/index.js",
+    "node": "./dist/cjs/index.mjs",
     "default": "./dist/esm/index.js"
   },
   "sideEffects": false,
@@ -16,6 +17,7 @@
     "build:tsc": "run-p build:tsc:*",
     "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
+    "build:copy": "copyfiles -f ./src/index.mjs ./dist/cjs/",
     "test": "run-p test:unit test:integration",
     "test:unit": "jest --env node tests/unit/**",
     "test:integration": "jest tests/integration/**",
@@ -50,6 +52,7 @@
     "@types/qs": "^6.9.6",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "copyfiles": "^2.4.1",
     "dotenv": "^9.0.2",
     "eslint": "^7.26.0",
     "eslint-config-peerigon": "^30.1.0",
@@ -62,6 +65,7 @@
     "prettier": "^2.3.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.5.6",
+    "ts-jest-resolver": "^1.1.0",
     "typescript": "^4.2.4"
   },
   "files": [

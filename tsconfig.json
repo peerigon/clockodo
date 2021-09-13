@@ -3,7 +3,6 @@
         "outDir": "dist",
         "target": "es2015",
         "lib": ["es2017"],
-        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "strict": true,
         "moduleResolution": "node"

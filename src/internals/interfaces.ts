@@ -2,7 +2,7 @@ import {
     EntryType,
     LumpsumEntryBillability,
     TimeEntryBillability,
-} from "./enums";
+} from "./enums.js";
 
 export type Customer = {
     id: number;

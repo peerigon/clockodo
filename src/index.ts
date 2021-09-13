@@ -1,6 +1,6 @@
-export * from "./internals/utilities/mappings";
-export type { Config } from "./internals/utilities/api";
-export * from "./internals/clockodo";
-export * from "./internals/enums";
-export * from "./internals/interfaces";
-export * from "./internals/returnTypes";
+export * from "./internals/utilities/mappings.js";
+export type { Config } from "./internals/utilities/api.js";
+export * from "./internals/clockodo.js";
+export * from "./internals/enums.js";
+export * from "./internals/interfaces.js";
+export * from "./internals/returnTypes.js";

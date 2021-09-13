@@ -1,6 +1,6 @@
 import snakecaseKeys from "snakecase-keys";
-import { Api, Config } from "./utilities/api";
-import * as REQUIRED from "./utilities/requiredParams";
+import { Api, Config } from "./utilities/api.js";
+import * as REQUIRED from "./utilities/requiredParams.js";
 import {
     AbsenceReturnType,
     AbsencesReturnType,
@@ -33,8 +33,8 @@ import {
     LumpsumServicesReturnType,
     SearchTextsReturnType,
     LumpsumServiceReturnType,
-} from "./returnTypes";
-import { ClockingTimeEntryBillability, TimeEntryBillability } from "./enums";
+} from "./returnTypes.js";
+import { ClockingTimeEntryBillability, TimeEntryBillability } from "./enums.js";
 import {
     Absence,
     Customer,
@@ -47,7 +47,7 @@ import {
     TargethoursRow,
     TimeEntry,
     User,
-} from "./interfaces";
+} from "./interfaces.js";
 
 type Params<
     RequiredParams extends Record<string, unknown> = Record<string, unknown>

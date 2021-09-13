@@ -2,7 +2,8 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "dist/cjs",
-        "module": "commonjs"
+        "module": "commonjs",
+        "sourceMap": true
     },
     "include": ["src"]
 }

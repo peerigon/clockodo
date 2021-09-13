@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
-import { axiosClient } from "./symbols";
-import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings";
+import { axiosClient } from "./symbols.js";
+import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
 
 const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 

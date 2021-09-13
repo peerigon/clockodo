@@ -13,7 +13,7 @@ import {
     UserReport,
     TargethoursRow,
     LumpsumService,
-} from "./interfaces";
+} from "./interfaces.js";
 
 export type AbsenceReturnType = Promise<{ absence: Absence }>;
 export type AbsencesReturnType = Promise<{ absences: Array<Absence> }>;
