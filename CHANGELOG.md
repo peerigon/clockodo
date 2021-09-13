@@ -1,3 +1,47 @@
+# [9.0.0](https://github.com/peerigon/clockodo/compare/v8.0.7...v9.0.0) (2021-09-13)
+
+
+### Bug Fixes
+
+* Correct more types ([323bed5](https://github.com/peerigon/clockodo/commit/323bed55e50f6bf62cb793cdf47d904c87f8f2de))
+* Correct type attribution ([f895fa9](https://github.com/peerigon/clockodo/commit/f895fa925c63a1dbec6800452e2074930dc69b46))
+* Improve types ([9266392](https://github.com/peerigon/clockodo/commit/9266392df6660268837cd656e134f58b2cdf0340))
+* Improve types and wording ([3f79891](https://github.com/peerigon/clockodo/commit/3f798911a6d93fb3929638ec09dc237b58b184ff))
+* Make header required and use it in integration tests ([a028311](https://github.com/peerigon/clockodo/commit/a02831172a4a9438726c114daa715bab559a74d7))
+* Repair Tests ([865aede](https://github.com/peerigon/clockodo/commit/865aede39eb96cb2001d9caa1938b0660fd161f0))
+* Repair Unit Tests ([8da6020](https://github.com/peerigon/clockodo/commit/8da60206924a24c6827a59f2f0c50a0055cd8c6e))
+* Revert incorrect typing of timeClockedSince ([cc4d797](https://github.com/peerigon/clockodo/commit/cc4d79739a028d5765efae0957fc75dafa7bd895))
+* TimeEntry typing of timeClockedSince property ([770f47a](https://github.com/peerigon/clockodo/commit/770f47ad292ae29371e3fa567523cda3354b1b94))
+
+
+### chore
+
+* Remove internals folder ([994550a](https://github.com/peerigon/clockodo/commit/994550a096056c07c0e86f3ac9f392e78205c301))
+
+
+### Features
+
+* Add API v2 changes ([0f8bc56](https://github.com/peerigon/clockodo/commit/0f8bc5637911b9ceea4c53a973c7bd7fff5068d0))
+* Add proper native ESM support ([2846a94](https://github.com/peerigon/clockodo/commit/2846a9409e8e1974a4a1a7807eecdb9dadaf12f8))
+* Do not use class properties as methods anymore ([a0d04c3](https://github.com/peerigon/clockodo/commit/a0d04c34efd131c6fe4d4ca3e5bfd2a6c8934501))
+* Introduce enums ([0515034](https://github.com/peerigon/clockodo/commit/0515034de054d1aeceb888ba3c59bef4812ae373))
+* Publish beta version ([1446e55](https://github.com/peerigon/clockodo/commit/1446e557c0e934dbefac2b666ee29f7c5cd8933b))
+* Publish beta version ([000369a](https://github.com/peerigon/clockodo/commit/000369a40bb3995c1926dfab53a2f3a12e526a3d))
+* Publish beta version ([2018711](https://github.com/peerigon/clockodo/commit/201871129cc94772b4920c59bad55912e9675391))
+* remove offset property ([bbf047b](https://github.com/peerigon/clockodo/commit/bbf047b08c6a3da7647128f747fe7e85d66c5cbf))
+* Remove Promise<> type from returnTypes ([d6f4c15](https://github.com/peerigon/clockodo/commit/d6f4c15d8aff7f0187f99086fb338cc2fa8c1463))
+* Switch to MIT license ([dd07fb1](https://github.com/peerigon/clockodo/commit/dd07fb172e63ab093b5bdcf8ba61658e49095b59))
+* Use new endpoints in code, remove old ones ([d3495f4](https://github.com/peerigon/clockodo/commit/d3495f4053c864c2736adaad6e01407b55c30177))
+
+
+### BREAKING CHANGES
+
+* Methods on Clockodo and Api instances won't be bound to the instance anymore.
+* The return types are not wrapped in Promise<> types anymore. You may need to update your types.
+* Switch to MIT license
+* All files inside internals have been moved up to the src directory. This change might break your app in case you've used deep package imports.
+* Depending on your build and runtime configuration, this change might break your path resolution.
+
 # [9.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v9.0.0-beta.1...v9.0.0-beta.2) (2021-09-13)
 
 
