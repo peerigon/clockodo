@@ -7,11 +7,7 @@
 [![Monthly downloads on NPM](https://img.shields.io/npm/dm/clockodo?style=for-the-badge)](https://www.npmjs.com/package/clockodo)<br>
 [![NPM Bundle size minified](https://img.shields.io/bundlephobia/min/clockodo?style=for-the-badge)](https://bundlephobia.com/result?p=clockodo)
 [![NPM Bundle size minified and gzipped](https://img.shields.io/bundlephobia/minzip/clockodo?style=for-the-badge)](https://bundlephobia.com/result?p=clockodo)<br>
-[![Dependencies status](https://img.shields.io/david/peerigon/clockodo?style=for-the-badge)](https://david-dm.org/peerigon/clockodo)
-[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/clockodo?style=for-the-badge)](https://snyk.io/test/github/peerigon/clockodo)<br>
-![Written in TypeScript](https://img.shields.io/npm/types/clockodo?style=for-the-badge)
-[![Coverage Status](https://img.shields.io/coveralls/github/peerigon/clockodo?style=for-the-badge)](https://coveralls.io/github/peerigon/clockodo?branch=main)
-[![License](https://img.shields.io/npm/l/@peerigon/sevdesk?style=for-the-badge)](./LICENSE)
+[![License](https://img.shields.io/npm/l/clockodo?style=for-the-badge)](./LICENSE)
 
 ## Installation and usage
 
@@ -25,18 +21,18 @@ For the constructor arguments, you must get the user (email) and clockodo api ke
 import { Clockodo } from "clockodo";
 
 const clockodo = new Clockodo({
-    client: {
-        // You need to add some information about yourself that will be
-        // sent along every request,
-        // see https://www.clockodo.com/en/api/ "Client identification"
-        name: "The name of your application or your company",
-        email: "technical-contact@your-company.com",
-    },
-    authentication: {
-        user: "test-user@example.com",
-        // You can get your API key from https://my.clockodo.com/en/users/editself
-        apiKey: "kjfdskj643fgnlksf343kdslm",
-    },
+  client: {
+    // You need to add some information about yourself that will be
+    // sent along every request,
+    // see https://www.clockodo.com/en/api/ "Client identification"
+    name: "The name of your application or your company",
+    email: "technical-contact@your-company.com",
+  },
+  authentication: {
+    user: "test-user@example.com",
+    // You can get your API key from https://my.clockodo.com/en/users/editself
+    apiKey: "kjfdskj643fgnlksf343kdslm",
+  },
 });
 ```
 
@@ -54,14 +50,14 @@ clockodo.use(cachePlugin({ cacheTime: 15 * 60 * 1000 })); // cache of 15 minutes
 import { Clockodo } from "clockodo";
 
 const clockodo = new Clockodo({
-    client: {
-        name: "The name of your application or your",
-        email: "technical-contact@your-company.com",
-    },
-    authentication: {
-        user: "test-user@example.com",
-        apiKey: "kjfdskj643fgnlksf343kdslm",
-    },
+  client: {
+    name: "The name of your application or your",
+    email: "technical-contact@your-company.com",
+  },
+  authentication: {
+    user: "test-user@example.com",
+    apiKey: "kjfdskj643fgnlksf343kdslm",
+  },
 });
 
 // Find the ID of your employee named Hagrid
@@ -74,17 +70,17 @@ console.log(matches[0].id); // 98070
 
 ## Config
 
--   `client`: Specify a `name` and an `email` for the `X-Clockodo-External-Application` header
--   `authentication`: Specify a `user` and an `apiKey` to authenticate every request
--   `baseUrl`: Points to the Clockodo API. Defaults to `https://my.clockodo.com/api`
+- `client`: Specify a `name` and an `email` for the `X-Clockodo-External-Application` header
+- `authentication`: Specify a `user` and an `apiKey` to authenticate every request
+- `baseUrl`: Points to the Clockodo API. Defaults to `https://my.clockodo.com/api`
 
 You can update the configuration later like this:
 
 ```js
 clockodo.api.config({
-    authentication: {
-        /* ... */
-    },
+  authentication: {
+    /* ... */
+  },
 });
 ```
 
@@ -96,53 +92,53 @@ In general, the first argument for these functions is an object consisting of re
 
 For any questions about the different properties please consult the official [Clockodo-API](https://www.clockodo.com/en/api/).
 
--   Get methods
-    -   [getAbsence()](#getAbsence)
-    -   [getAbsences()](#getAbsences)
-    -   [getClock()](#getClock)
-    -   [getCustomer()](#getCustomer)
-    -   [getCustomers()](#getCustomers)
-    -   [getEntry()](#getEntry)
-    -   [getEntries()](#getEntries)
-    -   [getEntryGroups()](#getEntryGroups)
-    -   [getProject()](#getProject)
-    -   [getSearchTexts()](#getSearchTexts)
-    -   [getService()](#getService)
-    -   [getServices()](#getServices)
-    -   [getLumpSumService()](#getLumpSumService)
-    -   [getLumpSumServices()](#getLumpSumServices)
-    -   [getTargethoursRow()](#getTargethoursRow)
-    -   [getTargethours()](#getTargethours)
-    -   [getUser()](#getUser)
-    -   [getUsers()](#getUsers)
-    -   [getUserReport()](#getUserReport)
-    -   [getUserReports()](#getUserReports)
--   Post methods
-    -   [addAbsence()](#addAbsence)
-    -   [addCustomer()](#addCustomer)
-    -   [addEntry()](#addEntry)
-    -   [addProject()](#addProject)
-    -   [addService()](#addService)
-    -   [addUser()](#addUser)
-    -   [startClock()](#startClock)
--   Put methods
-    -   [changeClockDuration()](#changeClockDuration)
-    -   [editAbsence()](#editAbsence)
-    -   [editCustomer()](#editCustomer)
-    -   [editEntry()](#editEntry)
-    -   [editEntryGroup()](#editEntryGroup)
-    -   [editProject()](#editProject)
-    -   [editService()](#editService)
-    -   [editUser()](#editUser)
--   Delete methods
-    -   [deactivateCustomer()](#deactivateCustomer)
-    -   [deactivateProject()](#deactivateProject)
-    -   [deactivateService()](#deactivateService)
-    -   [deactivateUser()](#deactivateUser)
-    -   [deleteAbsence()](#deleteAbsence)
-    -   [deleteEntry()](#deleteEntry)
-    -   [deleteEntryGroup()](#deleteEntryGroup)
-    -   [stopClock()](#stopClock)
+- Get methods
+  - [getAbsence()](#getAbsence)
+  - [getAbsences()](#getAbsences)
+  - [getClock()](#getClock)
+  - [getCustomer()](#getCustomer)
+  - [getCustomers()](#getCustomers)
+  - [getEntry()](#getEntry)
+  - [getEntries()](#getEntries)
+  - [getEntryGroups()](#getEntryGroups)
+  - [getProject()](#getProject)
+  - [getSearchTexts()](#getSearchTexts)
+  - [getService()](#getService)
+  - [getServices()](#getServices)
+  - [getLumpSumService()](#getLumpSumService)
+  - [getLumpSumServices()](#getLumpSumServices)
+  - [getTargethoursRow()](#getTargethoursRow)
+  - [getTargethours()](#getTargethours)
+  - [getUser()](#getUser)
+  - [getUsers()](#getUsers)
+  - [getUserReport()](#getUserReport)
+  - [getUserReports()](#getUserReports)
+- Post methods
+  - [addAbsence()](#addAbsence)
+  - [addCustomer()](#addCustomer)
+  - [addEntry()](#addEntry)
+  - [addProject()](#addProject)
+  - [addService()](#addService)
+  - [addUser()](#addUser)
+  - [startClock()](#startClock)
+- Put methods
+  - [changeClockDuration()](#changeClockDuration)
+  - [editAbsence()](#editAbsence)
+  - [editCustomer()](#editCustomer)
+  - [editEntry()](#editEntry)
+  - [editEntryGroup()](#editEntryGroup)
+  - [editProject()](#editProject)
+  - [editService()](#editService)
+  - [editUser()](#editUser)
+- Delete methods
+  - [deactivateCustomer()](#deactivateCustomer)
+  - [deactivateProject()](#deactivateProject)
+  - [deactivateService()](#deactivateService)
+  - [deactivateUser()](#deactivateUser)
+  - [deleteAbsence()](#deleteAbsence)
+  - [deleteEntry()](#deleteEntry)
+  - [deleteEntryGroup()](#deleteEntryGroup)
+  - [stopClock()](#stopClock)
 
 Some constants are also available for import:
 
@@ -246,9 +242,9 @@ Gets list of Clockodo activity entries.
 import { Billability } from "clockodo";
 
 await clockodo.getEntries({
-    timeSince: "2017-08-18T00:00:00Z",
-    timeUntil: "2018-02-09T00:00:00Z",
-    filterBillable: Billability.Billed,
+  timeSince: "2017-08-18T00:00:00Z",
+  timeUntil: "2018-02-09T00:00:00Z",
+  filterBillable: Billability.Billed,
 });
 ```
 
@@ -262,10 +258,10 @@ Get a group of entries defined by your criteria.
 
 ```js
 await clockodo.getEntryGroups({
-    timeSince: "2017-08-18T00:00:00Z",
-    timeUntil: "2018-02-09T00:00:00Z",
-    grouping: ["customersId", "projectsId"],
-    roundToMinutes: 15,
+  timeSince: "2017-08-18T00:00:00Z",
+  timeUntil: "2018-02-09T00:00:00Z",
+  grouping: ["customersId", "projectsId"],
+  roundToMinutes: 15,
 });
 ```
 
@@ -291,7 +287,7 @@ Get the description(s) of the requested entries.
 
 ```js
 await clockodo.getSearchTexts({
-    projectsId: 300,
+  projectsId: 300,
 });
 ```
 
@@ -431,11 +427,11 @@ Default behavior adds an absence for the user attached to the credentials given 
 import { AbsenceType } from "clockodo";
 
 await clockodo.addAbsence({
-    dateSince: "2017-08-18T00:00:00Z",
-    dateUntil: "2018-02-09T00:00:00Z",
-    type: AbsenceType.SpecialLeave,
-    note: "elternzeit",
-    usersId: 12321,
+  dateSince: "2017-08-18T00:00:00Z",
+  dateUntil: "2018-02-09T00:00:00Z",
+  type: AbsenceType.SpecialLeave,
+  note: "elternzeit",
+  usersId: 12321,
 });
 ```
 
@@ -469,11 +465,11 @@ Creates an entry for either the user attached to the Clockodo instance or the pa
 import { Billability } from "clockodo";
 
 await clockodo.addEntry({
-    customersId: 1,
-    servicesId: 2,
-    billable: Billability.Billable,
-    timeSince: "2018-10-01T00:00:00Z",
-    timeUntil: "2018-10-01T03:00:00Z",
+  customersId: 1,
+  servicesId: 2,
+  billable: Billability.Billable,
+  timeSince: "2018-10-01T00:00:00Z",
+  timeUntil: "2018-10-01T03:00:00Z",
 });
 ```
 
@@ -511,10 +507,10 @@ Creates new user in organization.
 
 ```js
 await clockodo.addUser({
-    name: "Merkel",
-    number: "08",
-    email: "angela@eu.eu",
-    role: "Chancellor",
+  name: "Merkel",
+  number: "08",
+  email: "angela@eu.eu",
+  role: "Chancellor",
 });
 ```
 
@@ -530,10 +526,10 @@ Get Clockodo Tasks (grouped entries).
 import { Billability } from "clockodo";
 
 await clockodo.startClock({
-    customersId: 24,
-    servicesId: 7,
-    projectsId: 365,
-    billable: Billability.Billable,
+  customersId: 24,
+  servicesId: 7,
+  projectsId: 365,
+  billable: Billability.Billable,
 });
 ```
 
@@ -549,9 +545,9 @@ Changes the duration of an entry. Because the ID returned by clock methods is ju
 
 ```js
 await clockodo.changeClockDuration({
-    entriesId: 7082,
-    duration: 540,
-    durationBefore: 300,
+  entriesId: 7082,
+  duration: 540,
+  durationBefore: 300,
 });
 ```
 
@@ -603,10 +599,10 @@ Allows for mass edit of entries based on a set of filters.
 import { Billability } from "clockodo";
 
 await clockodo.editEntryGroup({
-    timeSince: "2017-08-18T00:00:00Z",
-    timeUntil: "2018-02-09T00:00:00Z",
-    filterText: "Browsing Reddit",
-    billable: Billability.NotBillable,
+  timeSince: "2017-08-18T00:00:00Z",
+  timeUntil: "2018-02-09T00:00:00Z",
+  filterText: "Browsing Reddit",
+  billable: Billability.NotBillable,
 });
 ```
 
@@ -730,9 +726,9 @@ Deletes one or more entries based on a series of filters that builds an "entry g
 
 ```js
 await clockodo.deleteEntryGroup({
-    timeSince: "2017-08-18T00:00:00Z",
-    timeUntil: "2018-02-09T00:00:00Z",
-    text: "chilin everyday",
+  timeSince: "2017-08-18T00:00:00Z",
+  timeUntil: "2018-02-09T00:00:00Z",
+  text: "chilin everyday",
 });
 ```
 
