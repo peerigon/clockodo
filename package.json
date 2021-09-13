@@ -22,7 +22,8 @@
     "test:unit": "jest --env node tests/unit/**",
     "test:integration": "jest tests/integration/**",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore .",
-    "posttest": "run-s build test:lint"
+    "posttest": "run-s build test:lint",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -69,11 +70,6 @@
     "dist",
     "plugins"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,ts}": [
       "prettier --write",
