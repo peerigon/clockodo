@@ -1,3 +1,25 @@
+# [9.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v9.0.0-beta.1...v9.0.0-beta.2) (2021-09-13)
+
+
+### chore
+
+* Remove internals folder ([994550a](https://github.com/peerigon/clockodo/commit/994550a096056c07c0e86f3ac9f392e78205c301))
+
+
+### Features
+
+* Do not use class properties as methods anymore ([a0d04c3](https://github.com/peerigon/clockodo/commit/a0d04c34efd131c6fe4d4ca3e5bfd2a6c8934501))
+* Remove Promise<> type from returnTypes ([d6f4c15](https://github.com/peerigon/clockodo/commit/d6f4c15d8aff7f0187f99086fb338cc2fa8c1463))
+* Switch to MIT license ([dd07fb1](https://github.com/peerigon/clockodo/commit/dd07fb172e63ab093b5bdcf8ba61658e49095b59))
+
+
+### BREAKING CHANGES
+
+* Methods on Clockodo and Api instances won't be bound to the instance anymore.
+* The return types are not wrapped in Promise<> types anymore. You may need to update your types.
+* Switch to MIT license
+* All files inside internals have been moved up to the src directory. This change might break your app in case you've used deep package imports.
+
 # [9.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.14...v9.0.0-beta.1) (2021-09-13)
 
 
