@@ -34,7 +34,7 @@
     "sdk"
   ],
   "author": "developers@peerigon.com",
-  "license": "Unlicense",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/peerigon/clockodo/issues"
   },

@@ -11,7 +11,7 @@
 [![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/clockodo?style=for-the-badge)](https://snyk.io/test/github/peerigon/clockodo)<br>
 ![Written in TypeScript](https://img.shields.io/npm/types/clockodo?style=for-the-badge)
 [![Coverage Status](https://img.shields.io/coveralls/github/peerigon/clockodo?style=for-the-badge)](https://coveralls.io/github/peerigon/clockodo?branch=main)
-[![License](https://img.shields.io/npm/l/clockodo?style=for-the-badge)](https://unlicense.org/)
+[![License](https://img.shields.io/npm/l/@peerigon/sevdesk?style=for-the-badge)](./LICENSE)
 
 ## Installation and usage
 
@@ -756,7 +756,7 @@ To run integration tests you need to create an `.env` by copying the `.env.examp
 
 ## License
 
-Unlicense
+MIT
 
 ## Sponsors
 
