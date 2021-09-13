@@ -1,3 +1,15 @@
+# [9.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.14...v9.0.0-beta.1) (2021-09-13)
+
+
+### Features
+
+* Add proper native ESM support ([2846a94](https://github.com/peerigon/clockodo/commit/2846a9409e8e1974a4a1a7807eecdb9dadaf12f8))
+
+
+### BREAKING CHANGES
+
+* Depending on your build and runtime configuration, this change might break your path resolution.
+
 # [8.1.0-beta.14](https://github.com/peerigon/clockodo/compare/v8.1.0-beta.13...v8.1.0-beta.14) (2021-06-02)
 
 
