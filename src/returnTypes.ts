@@ -15,37 +15,37 @@ import {
     LumpsumService,
 } from "./interfaces.js";
 
-export type AbsenceReturnType = Promise<{ absence: Absence }>;
-export type AbsencesReturnType = Promise<{ absences: Array<Absence> }>;
-export type DeleteReturnType = Promise<{ success: true }>;
-export type CustomerReturnType = Promise<{ customer: Customer }>;
-export type CustomersReturnType = Promise<{ customers: Array<Customer> }>;
-export type ProjectReturnType = Promise<{ project: Project }>;
-export type ServiceReturnType = Promise<{ service: Service }>;
-export type ServicesReturnType = Promise<{ services: Array<Service> }>;
-export type LumpsumServiceReturnType = Promise<{
+export type AbsenceReturnType = { absence: Absence };
+export type AbsencesReturnType = { absences: Array<Absence> };
+export type DeleteReturnType = { success: true };
+export type CustomerReturnType = { customer: Customer };
+export type CustomersReturnType = { customers: Array<Customer> };
+export type ProjectReturnType = { project: Project };
+export type ServiceReturnType = { service: Service };
+export type ServicesReturnType = { services: Array<Service> };
+export type LumpsumServiceReturnType = {
     // This endpoint still uses the old lumpSum casing
     lumpSumService: LumpsumService;
-}>;
-export type LumpsumServicesReturnType = Promise<{
+};
+export type LumpsumServicesReturnType = {
     // This endpoint still uses the old lumpSum casing
     lumpSumServices: Array<LumpsumService>;
-}>;
-export type UserReturnType = Promise<{ user: User }>;
-export type UsersReturnType = Promise<{ users: Array<User> }>;
-export type EntryReturnType = Promise<{ entry: Entry }>;
-export type AddEntryReturnType = Promise<{ entry: Entry; stopped?: Entry }>;
-export type EditEntryReturnType = Promise<{
+};
+export type UserReturnType = { user: User };
+export type UsersReturnType = { users: Array<User> };
+export type EntryReturnType = { entry: Entry };
+export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
+export type EditEntryReturnType = {
     entry: Entry;
     running: null | TimeEntry;
-}>;
-export type EntriesReturnType = Promise<{
+};
+export type EntriesReturnType = {
     paging: Paging;
     filter: Filter | null;
     entries: Array<Entry>;
-}>;
-export type TaskDurationReturnType = Promise<{ task: { duration: number } }>;
-export type TasksReturnType = Promise<{
+};
+export type TaskDurationReturnType = { task: { duration: number } };
+export type TasksReturnType = {
     days: Array<{
         date: string;
         dateText: string;
@@ -53,47 +53,45 @@ export type TasksReturnType = Promise<{
         durationText: string;
         tasks: Array<Task>;
     }>;
-}>;
-export type EntryGroupsReturnType = Promise<{ groups: Array<EntryGroup> }>;
-export type EditEntryGroupsReturnType = Promise<
+};
+export type EntryGroupsReturnType = { groups: Array<EntryGroup> };
+export type EditEntryGroupsReturnType =
     | { confirmKey: string; affectedEntries: number }
-    | { success: true; editedEntries: number }
->;
-export type DeleteEntryGroupsReturnType = Promise<
+    | { success: true; editedEntries: number };
+export type DeleteEntryGroupsReturnType =
     | { confirmKey: string; affectedEntries: number }
-    | { success: true; deletedEntries: number }
->;
-export type UserReportReturnType = Promise<{ userreport: UserReport }>;
-export type UserReportsReturnType = Promise<{ userreports: Array<UserReport> }>;
-export type ClockReturnType = Promise<{
+    | { success: true; deletedEntries: number };
+export type UserReportReturnType = { userreport: UserReport };
+export type UserReportsReturnType = { userreports: Array<UserReport> };
+export type ClockReturnType = {
     running: null | TimeEntry;
     currentTime: string;
-}>;
-export type ClockStartReturnType = Promise<{
+};
+export type ClockStartReturnType = {
     running: TimeEntry;
     stopped?: TimeEntry;
     currentTime: string;
-}>;
-export type ClockStopReturnType = Promise<{
+};
+export type ClockStopReturnType = {
     stopped: TimeEntry;
     running: null | TimeEntry;
     currentTime: string;
-}>;
-export type ClockEditReturnType = Promise<{
+};
+export type ClockEditReturnType = {
     updated: TimeEntry;
     running: null | TimeEntry;
     currentTime: string;
-}>;
-export type SearchTextsReturnType = Promise<{ texts: Array<string> }>;
+};
+export type SearchTextsReturnType = { texts: Array<string> };
 
-export type TargethoursRowReturnType = Promise<{
+export type TargethoursRowReturnType = {
     targethoursRow: TargethoursRow;
-}>;
-export type TargethoursReturnType = Promise<{
+};
+export type TargethoursReturnType = {
     targethours: Array<TargethoursRow>;
-}>;
-export type AddUserReturnType = Promise<{
+};
+export type AddUserReturnType = {
     success: "true";
     user: User;
     apikey: string;
-}>;
+};
