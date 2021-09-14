@@ -1,3 +1,10 @@
+# [9.1.0](https://github.com/peerigon/clockodo/compare/v9.0.0...v9.1.0) (2021-09-14)
+
+
+### Features
+
+* Add getProjects() ([a44785f](https://github.com/peerigon/clockodo/commit/a44785f833974ad82d038d7a9a6148a910790e59))
+
 # [9.0.0](https://github.com/peerigon/clockodo/compare/v8.0.7...v9.0.0) (2021-09-13)
 
 
