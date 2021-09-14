@@ -20,6 +20,7 @@ export type AbsencesReturnType = { absences: Array<Absence> };
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
 export type CustomersReturnType = { customers: Array<Customer> };
+export type ProjectsReturnType = { projects: Array<Project> };
 export type ProjectReturnType = { project: Project };
 export type ServiceReturnType = { service: Service };
 export type ServicesReturnType = { services: Array<Service> };

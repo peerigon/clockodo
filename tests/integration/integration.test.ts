@@ -65,6 +65,26 @@ const config: Config = {
     });
   });
 
+  describe("getProjects()", () => {
+    it("returns expected data format", async () => {
+      const {
+        projects: [project],
+      } = await clockodo.getProjects();
+
+      expect(project).toHaveProperty("id");
+      expect(project).toHaveProperty("customersId");
+      expect(project).toHaveProperty("billableDefault");
+      expect(project).toHaveProperty("completed");
+
+      // Check if the filter is working as expected
+      const { projects } = await clockodo.getProjects({
+        filterCustomersId: -1,
+      });
+
+      expect(projects).toHaveLength(0);
+    });
+  });
+
   describe("getEntries()", () => {
     it("returns expected data format", async () => {
       const data = await clockodo.getEntries({

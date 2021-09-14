@@ -98,10 +98,11 @@ For any questions about the different properties please consult the official [Cl
   - [getClock()](#getClock)
   - [getCustomer()](#getCustomer)
   - [getCustomers()](#getCustomers)
+  - [getProject()](#getProject)
+  - [getProjects()](#getProjects)
   - [getEntry()](#getEntry)
   - [getEntries()](#getEntries)
   - [getEntryGroups()](#getEntryGroups)
-  - [getProject()](#getProject)
   - [getSearchTexts()](#getSearchTexts)
   - [getService()](#getService)
   - [getServices()](#getServices)
@@ -275,6 +276,22 @@ Get a project by its ID. For a list of projects, use getCustomers().
 
 ```js
 await clockodo.getProject({ id: 1985 });
+```
+
+---
+
+### getProjects()
+
+Returns all projects.
+
+#### Example:
+
+```js
+await clockodo.getProjects();
+// or filter by a specific customer id
+await clockodo.getProjects({
+  filterCustomersId: 123,
+});
 ```
 
 ---

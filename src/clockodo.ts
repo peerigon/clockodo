@@ -33,6 +33,7 @@ import {
   LumpsumServicesReturnType,
   SearchTextsReturnType,
   LumpsumServiceReturnType,
+  ProjectsReturnType,
 } from "./returnTypes.js";
 import { ClockingTimeEntryBillability, TimeEntryBillability } from "./enums.js";
 import {
@@ -100,6 +101,20 @@ export class Clockodo {
     return this.api.get("/customers", params);
   }
 
+  async getProject(
+    params: Params<{ id: Project["id"] }>
+  ): Promise<ProjectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
+
+    const { id, ...rest } = params;
+
+    return this.api.get("/projects/" + id, rest);
+  }
+
+  async getProjects(params?: Params): Promise<ProjectsReturnType> {
+    return this.api.get("/projects", params);
+  }
+
   async getEntry(
     params: Params<{ id: Entry["id"] }>
   ): Promise<EntryReturnType> {
@@ -141,16 +156,6 @@ export class Clockodo {
       ...params,
       grouping: Object.keys(snakecaseKeys(camelCaseGrouping)),
     });
-  }
-
-  async getProject(
-    params: Params<{ id: Project["id"] }>
-  ): Promise<ProjectReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
-
-    const { id, ...rest } = params;
-
-    return this.api.get("/projects/" + id, rest);
   }
 
   async getSearchTexts(params?: Params): Promise<SearchTextsReturnType> {
