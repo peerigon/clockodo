@@ -45,3 +45,31 @@ export enum AbsenceType {
   Quarantine = 13,
   MilitaryService = 14,
 }
+
+export enum UserRole {
+  Owner = "owner",
+  Manager = "manager",
+  Worker = "worker",
+}
+
+export enum UserLanguage {
+  De = "de",
+  En = "en",
+  Fr = "fr",
+}
+
+export enum UserWageType {
+  Salary = 1,
+  HourlyWage = 2,
+}
+
+export enum UserEditLockTimeframe {
+  Today = 1,
+  TodayAndYesterday = 2,
+  TodayAnd2DaysBefore = 3,
+  TodayAnd4DaysBefore = 5,
+  TodayAnd1WeekBefore = 8,
+  TodayAnd2WeeksBefore = 15,
+  TodayAnd30DaysBefore = 31,
+  TodayAnd90DaysBefore = 91,
+}

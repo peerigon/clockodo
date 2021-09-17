@@ -523,11 +523,13 @@ Creates new user in organization.
 #### Example:
 
 ```js
+import { UserRole } from "clockodo";
+
 await clockodo.addUser({
   name: "Merkel",
   number: "08",
   email: "angela@eu.eu",
-  role: "Chancellor",
+  role: UserRole.Owner,
 });
 ```
 

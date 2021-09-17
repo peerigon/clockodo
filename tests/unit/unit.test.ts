@@ -3,6 +3,7 @@
 import qs from "qs";
 import nock from "nock";
 import snakecaseKeys from "snakecase-keys";
+import { UserRole } from "../../src/enums";
 import { Clockodo, Config } from "../../src/index.js";
 import { cachePlugin } from "../../src/plugins/cache.js";
 import { AbsenceStatus, AbsenceType, Billability } from "../../src/enums.js";
@@ -483,7 +484,7 @@ describe("Clockodo (instance)", () => {
           name: "Merkel",
           number: "8",
           email: "angela@eu.eu",
-          role: "Chancellor",
+          role: UserRole.Owner,
         };
 
         const nockScope = nock(CLOCKODO_API)
@@ -494,7 +495,7 @@ describe("Clockodo (instance)", () => {
           name: "Merkel",
           number: "8",
           email: "angela@eu.eu",
-          role: "Chancellor",
+          role: UserRole.Owner,
         });
 
         nockScope.done();
