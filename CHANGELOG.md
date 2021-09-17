@@ -1,3 +1,10 @@
+## [9.1.1](https://github.com/peerigon/clockodo/compare/v9.1.0...v9.1.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* Update user types ([c9c8652](https://github.com/peerigon/clockodo/commit/c9c865265901fa10e772296c8d26a858682ef737))
+
 # [9.1.0](https://github.com/peerigon/clockodo/compare/v9.0.0...v9.1.0) (2021-09-14)
 
 
