@@ -17,6 +17,7 @@ export type Customer = {
   billableDefault: boolean;
   note?: string | null;
   projects?: Array<Project> | null;
+  color: number;
 };
 
 export type Project = {
