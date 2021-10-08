@@ -12,10 +12,10 @@
 ## Installation and usage
 
 ```
-npm install clockodo --save
+npm install clockodo
 ```
 
-For the constructor arguments, you must get the user (email) and clockodo api key from the "[My area](https://my.clockodo.com/en/users/editself)" section of Clockodo's website.
+For the constructor arguments, you must get the user (email) and clockodo API key from the "[My area](https://my.clockodo.com/en/users/editself)" section of Clockodo's website.
 
 ```js
 import { Clockodo } from "clockodo";
@@ -34,38 +34,6 @@ const clockodo = new Clockodo({
     apiKey: "kjfdskj643fgnlksf343kdslm",
   },
 });
-```
-
-It is also possible to create a Clockodo instance with **caching**. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the cache time is over.
-
-```js
-import { cachePlugin } from "clockodo/plugins/cache";
-
-clockodo.use(cachePlugin({ cacheTime: 15 * 60 * 1000 })); // cache of 15 minutes
-```
-
-### Example
-
-```js
-import { Clockodo } from "clockodo";
-
-const clockodo = new Clockodo({
-  client: {
-    name: "The name of your application or your",
-    email: "technical-contact@your-company.com",
-  },
-  authentication: {
-    user: "test-user@example.com",
-    apiKey: "kjfdskj643fgnlksf343kdslm",
-  },
-});
-
-// Find the ID of your employee named Hagrid
-const { users } = await clockodo.getUsers();
-
-const matches = users.filter((user) => user.name === "Hagrid");
-
-console.log(matches[0].id); // 98070
 ```
 
 ## Config
@@ -88,58 +56,7 @@ clockodo.api.config({
 
 We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mappings.ts file](https://github.com/peerigon/clockodo/blob/main/src/utilities/mappings.ts).
 
-In general, the first argument for these functions is an object consisting of required parameters. The second is an "options" object for optional parameters.
-
 For any questions about the different properties please consult the official [Clockodo-API](https://www.clockodo.com/en/api/).
-
-- Get methods
-  - [getAbsence()](#getAbsence)
-  - [getAbsences()](#getAbsences)
-  - [getClock()](#getClock)
-  - [getCustomer()](#getCustomer)
-  - [getCustomers()](#getCustomers)
-  - [getProject()](#getProject)
-  - [getProjects()](#getProjects)
-  - [getEntry()](#getEntry)
-  - [getEntries()](#getEntries)
-  - [getEntryGroups()](#getEntryGroups)
-  - [getSearchTexts()](#getSearchTexts)
-  - [getService()](#getService)
-  - [getServices()](#getServices)
-  - [getLumpSumService()](#getLumpSumService)
-  - [getLumpSumServices()](#getLumpSumServices)
-  - [getTargethoursRow()](#getTargethoursRow)
-  - [getTargethours()](#getTargethours)
-  - [getUser()](#getUser)
-  - [getUsers()](#getUsers)
-  - [getUserReport()](#getUserReport)
-  - [getUserReports()](#getUserReports)
-- Post methods
-  - [addAbsence()](#addAbsence)
-  - [addCustomer()](#addCustomer)
-  - [addEntry()](#addEntry)
-  - [addProject()](#addProject)
-  - [addService()](#addService)
-  - [addUser()](#addUser)
-  - [startClock()](#startClock)
-- Put methods
-  - [changeClockDuration()](#changeClockDuration)
-  - [editAbsence()](#editAbsence)
-  - [editCustomer()](#editCustomer)
-  - [editEntry()](#editEntry)
-  - [editEntryGroup()](#editEntryGroup)
-  - [editProject()](#editProject)
-  - [editService()](#editService)
-  - [editUser()](#editUser)
-- Delete methods
-  - [deactivateCustomer()](#deactivateCustomer)
-  - [deactivateProject()](#deactivateProject)
-  - [deactivateService()](#deactivateService)
-  - [deactivateUser()](#deactivateUser)
-  - [deleteAbsence()](#deleteAbsence)
-  - [deleteEntry()](#deleteEntry)
-  - [deleteEntryGroup()](#deleteEntryGroup)
-  - [stopClock()](#stopClock)
 
 Some constants are also available for import:
 
@@ -764,6 +681,18 @@ await clockodo.stopClock({ entriesId: 7082 });
 ```
 
 ---
+
+## ⚠️ Deprecated: Caching
+
+> ⚠️ This feature relies on an axios plugin and will be removed as soon as we move from axios to fetch(). It is only listed for documentation purposes.
+
+It is also possible to create a Clockodo instance with **caching**. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the cache time is over.
+
+```js
+import { cachePlugin } from "clockodo/plugins/cache";
+
+clockodo.use(cachePlugin({ cacheTime: 15 * 60 * 1000 })); // cache of 15 minutes
+```
 
 ## Development
 

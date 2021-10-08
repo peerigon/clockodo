@@ -31,6 +31,9 @@ export class Clockodo {
     this.api = new Api(config);
   }
 
+  /**
+   * @deprecated We will remove plugins because we're planing to move away from axios to fetch()
+   */
   use(plugin: (clockodo: Clockodo) => void) {
     plugin(this);
   }

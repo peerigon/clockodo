@@ -2,6 +2,9 @@ import { setup } from "axios-cache-adapter";
 import { Clockodo } from "../clockodo.js";
 import { axiosClient } from "../utilities/symbols.js";
 
+/**
+ * @deprecated We're planing to move away from axios to fetch()
+ */
 export const cachePlugin =
   (config: { cacheTime: number }) => (clockodo: Clockodo) => {
     if (typeof config.cacheTime !== "number") {
