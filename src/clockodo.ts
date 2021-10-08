@@ -17,8 +17,8 @@ import { TargethoursRow } from "./models/targethours.js";
 import { Task } from "./models/task.js";
 import { User } from "./models/user.js";
 import { UserReport } from "./models/userReport.js";
-import { Api, Config, Filter, Paging } from "./utilities/api.js";
-import * as REQUIRED from "./utilities/requiredParams.js";
+import { Api, Config, Filter, Paging } from "./lib/api.js";
+import * as REQUIRED from "./lib/requiredParams.js";
 
 type Params<
   RequiredParams extends Record<string, unknown> = Record<string, unknown>
