@@ -10,8 +10,8 @@ import {
   UserRole,
   AbsenceType,
   AbsenceStatus,
-} from "../../src/index.js";
-import { cachePlugin } from "../../src/plugins/cache.js";
+} from "./index.js";
+import { cachePlugin } from "./plugins/cache.js";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
