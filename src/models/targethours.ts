@@ -1,0 +1,25 @@
+export type TargethoursRow = {
+  id: number;
+  usersId: number;
+  type: string;
+  dateSince: string;
+  dateUntil: string | null;
+  monday: number;
+  tuesday: number;
+  wednesday: number;
+  thursday: number;
+  friday: number;
+  saturday: number;
+  sunday: number;
+  absenceFixedCredit: boolean;
+  compensationDaily: number;
+  compensationMonthly: number;
+  monthlyTarget: number;
+  workdayMonday: boolean;
+  workdayTuesday: boolean;
+  workdayWednesday: boolean;
+  workdayThursday: boolean;
+  workdayFriday: boolean;
+  workdaySaturday: boolean;
+  workdaySunday: boolean;
+};

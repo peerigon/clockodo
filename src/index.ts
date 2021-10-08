@@ -1,7 +1,4 @@
+export * from "./models/index.js";
 export * from "./utilities/mappings.js";
-export type { Config } from "./utilities/api.js";
+export type { Config, Paging, Filter } from "./utilities/api.js";
 export * from "./clockodo.js";
-export * from "./enums.js";
-export * from "./ids.js";
-export * from "./interfaces.js";
-export * from "./returnTypes.js";

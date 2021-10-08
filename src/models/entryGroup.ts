@@ -1,0 +1,21 @@
+export type EntryGroup = {
+  groupedBy: string;
+  group: string | number;
+  name: string;
+  number: string;
+  note: string;
+  restrictions: Array<string>;
+  duration: number;
+  revenue?: number;
+  budgetUsed?: boolean;
+  hasBudgetRevenuesBilled?: boolean;
+  hasBudgetRevenuesNotBilled?: boolean;
+  hasNonBudgetRevenuesBilled?: boolean;
+  hasNonBudgetRevenuesNotBilled?: boolean;
+  hourlyRate?: number | null;
+  hourlyRateIsEqualAndHasNoLumpsums?: boolean;
+  durationWithoutRounding?: number;
+  revenueWithoutRounding?: number;
+  roundingSuccess?: boolean;
+  subGroups?: Array<EntryGroup>;
+};

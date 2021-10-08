@@ -21,6 +21,24 @@ const paramsSerializer = (params: Record<string, string>) => {
   return urlParams.join("&");
 };
 
+export type Paging = {
+  itemsPerPage: number;
+  currentPage: number;
+  countPages: number;
+  countItems: number;
+};
+
+export type Filter = {
+  usersId?: number;
+  customersId?: number;
+  projectsId?: number;
+  servicesId?: number;
+  billable?: number;
+  text?: string;
+  textsId?: number;
+  budgetType?: string;
+};
+
 export type Authentication = {
   user: string;
   apiKey: string;

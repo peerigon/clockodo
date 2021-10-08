@@ -155,7 +155,7 @@ console.log(Billability.Billable); // 1
 console.log(Billability.Billed); // 2
 ```
 
-Checkout [enums.ts](https://github.com/peerigon/clockodo/blob/main/src/enums.ts) and [interfaces.ts](https://github.com/peerigon/clockodo/blob/main/src/interfaces.ts) for more constants and TypeScript types.
+Checkout [models](https://github.com/peerigon/clockodo/blob/main/src/models) for more constants and TypeScript types.
 
 ---
 
