@@ -46,6 +46,7 @@ const config: Config = {
         "editLockSync",
         "email",
         "id",
+        "initials",
         "language",
         "name",
         "number",
