@@ -62,5 +62,4 @@ typings/
 
 .DS_Store
 .vscode
-lib/
 dist
