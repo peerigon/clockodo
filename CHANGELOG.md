@@ -1,3 +1,10 @@
+# [9.2.0](https://github.com/peerigon/clockodo/compare/v9.1.1...v9.2.0) (2021-10-08)
+
+
+### Features
+
+* Add customer color property ([#73](https://github.com/peerigon/clockodo/issues/73)) ([0150677](https://github.com/peerigon/clockodo/commit/0150677653c45948172bf729241ca635e1631d3a))
+
 ## [9.1.1](https://github.com/peerigon/clockodo/compare/v9.1.0...v9.1.1) (2021-09-17)
 
 
