@@ -1,3 +1,12 @@
+# [9.3.0](https://github.com/peerigon/clockodo/compare/v9.2.0...v9.3.0) (2021-10-09)
+
+
+### Features
+
+* Add entry utility functions ([047deb7](https://github.com/peerigon/clockodo/commit/047deb7c3da02a8aa0177cb3b77697030dfa60b8))
+* Add entry utils ([d566218](https://github.com/peerigon/clockodo/commit/d566218ee243c6efa0886a9240c78907d4a1019d))
+* Introduce subpackage mocks ([f8a8d5f](https://github.com/peerigon/clockodo/commit/f8a8d5f2ae3fd358845cd10bfdfa910b29e9d325))
+
 # [9.2.0](https://github.com/peerigon/clockodo/compare/v9.1.1...v9.2.0) (2021-10-08)
 
 
