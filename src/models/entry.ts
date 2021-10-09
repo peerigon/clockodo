@@ -67,6 +67,8 @@ export type ClockedTimeEntry = TimeEntry & {
 
 export type ClockTimeEntry = ClockingTimeEntry | ClockedTimeEntry;
 
+export type FinishedTimeEntry = ClockedTimeEntry | ManualTimeEntry;
+
 export type ManualTimeEntry = TimeEntry & {
   timeUntil: string;
   timeClockedSince: null;
@@ -112,8 +114,14 @@ export const isClockTimeEntry = (entry: Entry): entry is ClockTimeEntry => {
   return isClockedTimeEntry(entry) || isClockingTimeEntry(entry);
 };
 
-export const isManualTimeEntry = (entry: Entry): entry is ClockTimeEntry => {
+export const isManualTimeEntry = (entry: Entry): entry is ManualTimeEntry => {
   return entry.type === EntryType.Time && entry.clocked === false;
+};
+
+export const isFinishedTimeEntry = (
+  entry: Entry
+): entry is FinishedTimeEntry => {
+  return isClockedTimeEntry(entry) || isManualTimeEntry(entry);
 };
 
 export const isTimeEntry = (entry: Entry): entry is TimeEntry => {
