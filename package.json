@@ -1,7 +1,7 @@
 {
   "name": "clockodo",
   "version": "0.0.0-semantically-released",
-  "description": "Unofficial Node.js SDK for the Clockodo API",
+  "description": "Unofficial JavaScript/TypeScript SDK for Clockodo",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
