@@ -46,6 +46,7 @@ export type TimeEntry = CommonEntry & {
   timeLastChangeWorkTime: string;
   billable: TimeEntryBillability;
   duration: number | null;
+  offset: number | null;
   clocked: boolean;
   clockedOffline: boolean;
   /** Only present with sufficient access rights */
@@ -140,22 +141,18 @@ export const getEntryTimeUntilNow = (entry: Entry) => {
  * clocking, the duration will be from timeSince until now.
  */
 export const getEntryDurationUntilNow = (entry: Entry) => {
-  if (entry.type !== EntryType.Time) {
-    // We allow passing non-time entries so that you don't need to filter
-    // the entries before summing up their durations.
-    // This seems to be reasonable since non-time entries have a timeUntil
-    // property anyway.
-    return 0;
-  }
-  if (entry.duration === null) {
-    const timeUntil = getEntryTimeUntilNow(entry);
-    const durationInMillis =
-      new Date(timeUntil).getTime() - new Date(entry.timeSince).getTime();
+  // We allow passing non-time entries so that you don't need to filter
+  // the entries before summing up their durations.
+  // This seems to be reasonable since non-time entries have a timeUntil
+  // property anyway.
+  if (entry.type !== EntryType.Time) return 0;
+  if (entry.duration !== null) return entry.duration + (entry.offset ?? 0);
 
-    return Math.floor(durationInMillis / 1000);
-  }
+  const timeUntil = getEntryTimeUntilNow(entry);
+  const durationInMillis =
+    new Date(timeUntil).getTime() - new Date(entry.timeSince).getTime();
 
-  return entry.duration;
+  return Math.floor(durationInMillis / 1000);
 };
 
 export const getEntryRevenue = ({

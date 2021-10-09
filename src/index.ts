@@ -1,4 +1,18 @@
-export * from "./models/index.js";
+export * from "./models/absence.js";
+export * from "./models/customer.js";
+export * from "./models/entry.js";
+export * from "./models/entryGroup.js";
+export * from "./models/holidayscarry.js";
+export * from "./models/holidaysquota.js";
+export * from "./models/lumpsumService.js";
+export * from "./models/project.js";
+export * from "./models/service.js";
+export * from "./models/targethours.js";
+export * from "./models/task.js";
+export * from "./models/user.js";
+export * from "./models/userReport.js";
+export * from "./models/worktimeRegulation.js";
+
 export * from "./lib/mappings.js";
 export type { Config, Paging, Filter } from "./lib/api.js";
 export * from "./clockodo.js";
