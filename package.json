@@ -27,7 +27,7 @@
     "build:copy": "copyfiles -f ./src/*.mjs ./dist/cjs/",
     "test": "run-p test:*",
     "test:suite": "jest",
-    "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore .",
+    "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore src",
     "posttest": "run-s build",
     "prepare": "husky install",
     "release": "semantic-release"
