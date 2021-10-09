@@ -1,5 +1,5 @@
-import faker from "faker";
 import { advanceTo } from "jest-date-mock";
+import { setFakerSeed } from "../mocks.js";
 import { createProjectMocks } from "./project.mocks.js";
 import {
   Billability,
@@ -14,7 +14,7 @@ import {
 import { createLumpsumServiceMocks } from "./lumpsumService.mocks.js";
 
 beforeEach(() => {
-  faker.seed(123);
+  setFakerSeed(123);
   advanceTo("2020-01-01T01:00:00Z");
 });
 
