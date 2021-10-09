@@ -155,25 +155,41 @@ export const getEntryDurationUntilNow = (entry: Entry) => {
   return Math.floor(durationInMillis / 1000);
 };
 
+/**
+ * Calculates the entry's revenue based on the hourly rate and the project's
+ * revenue factor or the amount and lumpsum service price.
+ *
+ * Throws an error if the provided project or lumpsum service does not match the entry.
+ */
 export const getEntryRevenue = ({
   entry,
   project,
   lumpsumService,
 }: {
   entry: Entry;
-  project: Project;
+  project?: Project;
   lumpsumService?: LumpsumService;
 }) => {
-  const { revenueFactor } = project;
-
-  if (revenueFactor === undefined) return undefined;
   if (entry.billable === Billability.NotBillable) return 0;
 
   switch (entry.type) {
     case EntryType.Time: {
+      let revenueFactor: Project["revenueFactor"];
+
+      if (entry.projectsId === null) {
+        revenueFactor = 1;
+      } else {
+        if (entry.projectsId !== project?.id) {
+          throw new Error(
+            `The entries projects id (${entry.projectsId}) does not match the project's id (${project?.id})`
+          );
+        }
+        revenueFactor = project.revenueFactor;
+      }
       const { hourlyRate } = entry;
 
-      if (hourlyRate === undefined) return undefined;
+      if (hourlyRate === undefined || revenueFactor === undefined)
+        return undefined;
       if (revenueFactor === null) return 0;
 
       const durationInHours = getEntryDurationUntilNow(entry) / (60 * 60);
@@ -181,11 +197,17 @@ export const getEntryRevenue = ({
       return hourlyRate * durationInHours * revenueFactor;
     }
     case EntryType.LumpsumValue: {
+      // LumpsumValue entries are not affected by the revenueFactor
       return entry.lumpsum;
     }
     case EntryType.LumpsumService: {
-      if (lumpsumService === undefined) return undefined;
+      if (entry.lumpsumServicesId !== lumpsumService?.id) {
+        throw new Error(
+          `The entries lumpsum services id (${entry.lumpsumServicesId}) does not match the lumpsum service's id (${lumpsumService?.id})`
+        );
+      }
 
+      // LumpsumService entries are not affected by the revenueFactor
       return entry.lumpsumServicesAmount * lumpsumService.price;
     }
     default:

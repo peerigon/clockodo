@@ -1,12 +1,8 @@
 import faker from "faker";
 import { Project } from "./project.js";
 
-export const createProjectMocks = ({
-  count,
-}: {
-  count: number;
-}): Array<Required<Project>> =>
-  Array.from({ length: count }, (_, index) => {
+export const createProjectMocks = ({ count = 1 }: { count?: number } = {}) =>
+  Array.from({ length: count }, (_, index): Project => {
     const projectId = index;
     const budget =
       faker.datatype.number({ min: 0, max: 10 }) > 2
@@ -18,7 +14,7 @@ export const createProjectMocks = ({
       id: projectId,
       customersId: faker.datatype.number(),
       name: faker.commerce.productName(),
-      number: null,
+      number: faker.datatype.hexaDecimal(),
       active: faker.datatype.boolean(),
       billableDefault: faker.datatype.boolean(),
       note: faker.lorem.sentences(faker.datatype.number({ min: 1, max: 3 })),
