@@ -1,7 +1,11 @@
 import faker from "faker";
 import { advanceTo } from "jest-date-mock";
 import { createProjectMocks } from "./project.mocks.js";
-import { getEntryDurationUntilNow, getEntryRevenue } from "./entry.js";
+import {
+  Billability,
+  getEntryDurationUntilNow,
+  getEntryRevenue,
+} from "./entry.js";
 import {
   createTimeEntryMocks,
   createLumpsumValueEntryMocks,
@@ -81,6 +85,16 @@ describe("getEntryRevenue()", () => {
     project.revenueFactor = null;
 
     expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(0);
+  });
+
+  test("It returns 0 if the time entry is not billable", () => {
+    const { clockedTimeEntry } = createMocks();
+
+    clockedTimeEntry.billable = Billability.NotBillable;
+    clockedTimeEntry.hourlyRate = 100;
+    clockedTimeEntry.duration = 1.5 * 60 * 60;
+
+    expect(getEntryRevenue({ entry: clockedTimeEntry })).toBe(0);
   });
 
   // If the user has not enough access rights, entries do not contain enough information

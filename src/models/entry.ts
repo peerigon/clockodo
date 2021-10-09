@@ -210,7 +210,7 @@ export const getEntryRevenue = ({
       // LumpsumService entries are not affected by the revenueFactor
       return entry.lumpsumServicesAmount * lumpsumService.price;
     }
-    default:
-      return undefined;
   }
+  // @ts-expect-error JS-only safety check
+  throw new Error(`Unsupported entry type ${entry.type}`);
 };
