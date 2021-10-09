@@ -1,3 +1,15 @@
+# [9.4.0](https://github.com/peerigon/clockodo/compare/v9.3.0...v9.4.0) (2021-10-09)
+
+
+### Bug Fixes
+
+* Unrecognized package exports in TypeScript ([1d41301](https://github.com/peerigon/clockodo/commit/1d41301071bc125d5db72119b15b6792d55fd089))
+
+
+### Features
+
+* Expose a way to set the faker seed ([726f8e5](https://github.com/peerigon/clockodo/commit/726f8e5c5b13cad8403f8d09b3e3cf31019e2021))
+
 # [9.3.0](https://github.com/peerigon/clockodo/compare/v9.2.0...v9.3.0) (2021-10-09)
 
 
