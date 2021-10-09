@@ -159,6 +159,9 @@ export const getEntryDurationUntilNow = (entry: Entry) => {
  * Calculates the entry's revenue based on the hourly rate and the project's
  * revenue factor or the amount and lumpsum service price.
  *
+ * Returns undefined if the entry or project did not contain enough information
+ * to calculate the revenue (because of insufficient access rights).
+ *
  * Throws an error if the provided project or lumpsum service does not match the entry.
  */
 export const getEntryRevenue = ({
