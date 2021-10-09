@@ -1,3 +1,10 @@
+# [9.5.0](https://github.com/peerigon/clockodo/compare/v9.4.0...v9.5.0) (2021-10-09)
+
+
+### Features
+
+* Improve entry filters ([613fa00](https://github.com/peerigon/clockodo/commit/613fa006b0e5d27c2a30718bb9788a46b780ec7b))
+
 # [9.4.0](https://github.com/peerigon/clockodo/compare/v9.3.0...v9.4.0) (2021-10-09)
 
 
