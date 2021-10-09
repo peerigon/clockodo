@@ -17,6 +17,16 @@
       "default": "./dist/esm/mocks.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/esm/index.d.ts"
+      ],
+      "mocks": [
+        "./dist/esm/mocks.d.ts"
+      ]
+    }
+  },
   "sideEffects": false,
   "scripts": {
     "build": "run-s build:*",
