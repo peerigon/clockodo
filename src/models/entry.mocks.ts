@@ -19,10 +19,6 @@ const DEFAULT_TO = new Date("2021");
 const createCommonEntryMock = (from: Date, to: Date) => {
   const hasText = faker.datatype.number({ min: 0, max: 10 }) > 2;
   const timeSince = faker.date.between(from, to);
-  const timeUntil = new Date(
-    timeSince.getTime() +
-      faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000
-  );
   const timeSinceAsIsoString = dateToClockodoIsoString(timeSince);
 
   return {
@@ -35,7 +31,7 @@ const createCommonEntryMock = (from: Date, to: Date) => {
       ? faker.lorem.words(faker.datatype.number({ min: 2, max: 10 }))
       : null,
     timeSince: timeSinceAsIsoString,
-    timeUntil: dateToClockodoIsoString(timeUntil),
+    timeUntil: timeSinceAsIsoString,
     timeInsert: timeSinceAsIsoString,
     timeLastChange: timeSinceAsIsoString,
   };
@@ -57,13 +53,22 @@ export const createTimeEntryMocks = ({
           max: timeEntryTypes.length - 1,
         })
       ] ?? "clocked";
+    const timeUntil =
+      timeEntryType === "clocking"
+        ? null
+        : dateToClockodoIsoString(
+            new Date(
+              new Date(commonEntry.timeSince).getTime() +
+                faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000
+            )
+          );
 
     return {
       ...commonEntry,
-      timeUntil: timeEntryType === "clocking" ? null : commonEntry.timeUntil,
       id: index,
       type: 1,
       servicesId: 0,
+      timeUntil,
       timeClockedSince:
         timeEntryType === "manual" ? null : commonEntry.timeSince,
       timeLastChangeWorkTime: commonEntry.timeSince,
@@ -73,15 +78,15 @@ export const createTimeEntryMocks = ({
         Billability.Billed,
       ][faker.datatype.number({ min: 0, max: 2 })],
       duration:
-        timeEntryType === "clocking"
+        timeUntil === null
           ? null
           : Math.floor(
-              (new Date(commonEntry.timeUntil).getTime() -
+              (new Date(timeUntil).getTime() -
                 new Date(commonEntry.timeSince).getTime()) /
                 1000
             ),
       offset: null,
-      clocked: timeEntryType === "manual",
+      clocked: timeEntryType !== "manual",
       clockedOffline:
         timeEntryType === "manual"
           ? false

@@ -3,7 +3,7 @@ import { Customer } from "./customer.js";
 import { createProjectMocks } from "./project.mocks.js";
 
 export const createCustomerMocks = ({ count = 1 }: { count?: number } = {}) => {
-  let projectIds = 0;
+  let nextProjectId = 0;
 
   return Array.from({ length: count }, (_, index): Customer => {
     const customerId = index;
@@ -19,7 +19,7 @@ export const createCustomerMocks = ({ count = 1 }: { count?: number } = {}) => {
         count: faker.datatype.number({ min: 0, max: 5 }),
       }).map((project) => ({
         ...project,
-        id: projectIds++,
+        id: nextProjectId++,
         customersId: customerId,
       })),
       color: faker.datatype.number({ min: 1, max: 9 }),
