@@ -1,3 +1,10 @@
+## [9.5.1](https://github.com/peerigon/clockodo/compare/v9.5.0...v9.5.1) (2021-10-11)
+
+
+### Bug Fixes
+
+* Incorrect Entry and LumpsumService mocks ([12cc74a](https://github.com/peerigon/clockodo/commit/12cc74a778f8242c5e086a9c9c3eebfbf8ac1df9))
+
 # [9.5.0](https://github.com/peerigon/clockodo/compare/v9.4.0...v9.5.0) (2021-10-09)
 
 
