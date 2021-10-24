@@ -1,3 +1,10 @@
+## [9.5.2](https://github.com/peerigon/clockodo/compare/v9.5.1...v9.5.2) (2021-10-24)
+
+
+### Bug Fixes
+
+* **TypeScript:** Incorrect absence types ([e0f2136](https://github.com/peerigon/clockodo/commit/e0f21365872e5efaabad3264281c8ed2fc899711))
+
 ## [9.5.1](https://github.com/peerigon/clockodo/compare/v9.5.0...v9.5.1) (2021-10-11)
 
 
