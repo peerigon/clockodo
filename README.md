@@ -349,6 +349,18 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ---
 
+### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/aggregates/users/me/)
+
+With this resource you can read user and company seetings for the logged in user. Editing is currently not possible.
+
+#### Example:
+
+```js
+await clockodo.getAggregatesUsersMe();
+```
+
+---
+
 ## Post Methods
 
 ### addAbsence()

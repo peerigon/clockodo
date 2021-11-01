@@ -281,4 +281,15 @@ const config: Config = {
       ).toMatchObject(expectedKeys.concat([]).sort());
     });
   });
+
+  describe("getAggregatesUsersMe()", () => {
+    it("returns expected data format", async () => {
+      const { user, company, worktimeRegulation } =
+        await clockodo.getAggregatesUsersMe();
+
+      expect(user).toHaveProperty("id");
+      expect(company).toHaveProperty("id");
+      expect(worktimeRegulation).toHaveProperty("id");
+    });
+  });
 });

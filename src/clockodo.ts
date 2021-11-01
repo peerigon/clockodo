@@ -1,4 +1,5 @@
 import snakecaseKeys from "snakecase-keys";
+import { WorktimeRegulation } from "./models/worktimeRegulation";
 import { Absence } from "./models/absence.js";
 import { Customer } from "./models/customer.js";
 import {
@@ -19,6 +20,7 @@ import { User } from "./models/user.js";
 import { UserReport } from "./models/userReport.js";
 import { Api, Config, Filter, Paging } from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
+import { Company } from "./models/company.js";
 
 type Params<
   RequiredParams extends Record<string, unknown> = Record<string, unknown>
@@ -229,6 +231,12 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
     return this.api.get("/userreports", params);
+  }
+
+  async getAggregatesUsersMe(
+    params?: Params
+  ): Promise<AggregatesUsersMeReturnType> {
+    return this.api.get("/v2/aggregates/users/me", params);
   }
 
   async addAbsence(
@@ -514,6 +522,11 @@ export type DeleteEntryGroupsReturnType =
   | { success: true; deletedEntries: number };
 export type UserReportReturnType = { userreport: UserReport };
 export type UserReportsReturnType = { userreports: Array<UserReport> };
+export type AggregatesUsersMeReturnType = {
+  user: User;
+  company: Company;
+  worktimeRegulation: WorktimeRegulation;
+};
 export type ClockReturnType = {
   running: null | TimeEntry;
   currentTime: string;
