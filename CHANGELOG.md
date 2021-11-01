@@ -1,3 +1,11 @@
+# [9.6.0](https://github.com/peerigon/clockodo/compare/v9.5.2...v9.6.0) (2021-11-01)
+
+
+### Features
+
+* Add getAggregatesUsersMe() ([c6385e1](https://github.com/peerigon/clockodo/commit/c6385e180a250b6b88fc1120a840b7296915834f))
+* Improve targethours typings ([3b063ab](https://github.com/peerigon/clockodo/commit/3b063ab520ffae4be3c050eba87e376bb13b29ef))
+
 ## [9.5.2](https://github.com/peerigon/clockodo/compare/v9.5.1...v9.5.2) (2021-10-24)
 
 
