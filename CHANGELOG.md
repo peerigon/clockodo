@@ -1,3 +1,10 @@
+## [9.6.1](https://github.com/peerigon/clockodo/compare/v9.6.0...v9.6.1) (2021-11-12)
+
+
+### Bug Fixes
+
+* Incorrect TypeScript typings of addAbsence() ([ded0d1d](https://github.com/peerigon/clockodo/commit/ded0d1d1f3ae66614df79de48b6dae1d7e922a39))
+
 # [9.6.0](https://github.com/peerigon/clockodo/compare/v9.5.2...v9.6.0) (2021-11-01)
 
 
