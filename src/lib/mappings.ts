@@ -1,3 +1,7 @@
+// On first sight, you might think that the typings in this module could be improved.
+// However, we don't have typings for the snake_case models which is why we don't
+// gain much more confidence by removing 'any' here
+
 import camelcaseKeys from "camelcase-keys";
 import snakecaseKeys from "snakecase-keys";
 
@@ -35,20 +39,20 @@ export const mapQueryParams = <Result = any>(
     apiParams[apiParamName] = value;
   }
 
-  return snakecaseKeys<Result>(apiParams, {
+  return snakecaseKeys(apiParams as any, {
     deep: true,
     exclude: Object.values(queryParamMapping),
-  });
+  }) as Result;
 };
 
 export const mapRequestBody = <Result = any>(
   requestBody: Record<string, any>
 ) => {
-  return snakecaseKeys<Result>(requestBody, { deep: true });
+  return snakecaseKeys(requestBody as any, { deep: true }) as Result;
 };
 
 export const mapResponseBody = <Result = any>(
   responseBody: Record<string, any>
 ) => {
-  return camelcaseKeys(responseBody, { deep: true }) as Result;
+  return camelcaseKeys(responseBody as any, { deep: true }) as Result;
 };
