@@ -240,7 +240,7 @@ export class Clockodo {
   }
 
   async addAbsence(
-    params: Params<Pick<Absence, typeof REQUIRED.ADD_ABSENCE[number]>>
+    params: Params<Pick<Required<Absence>, typeof REQUIRED.ADD_ABSENCE[number]>>
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 

@@ -9,33 +9,42 @@ export type Absence = {
   dateUntil: string | null;
   /**
    * Status of the absence.
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   status?: AbsenceStatus;
   /**
    * Type of the absence.
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   type?: AbsenceType;
-  /** Only with access rights for absence administration or in case of own absences */
+  /** Only with access rights for absence administration or in case of own absences
+   
+   */
   note?: string | null;
   /**
    * Amount of absence days (null for overtime reduction).
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   countDays?: number | null;
   /**
    * Amount of hours of overtime reduction (null in other cases).
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   countHours?: number | null;
   /**
    * Date at which the absence request has been enquired in YYYY-MM-DD format.
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   dateEnquired?: string | null;
   /**
    * Date at which the absence request has been approved, declined or cancelled in format YYYY-MM-DD.
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   dateApproved?: string | null;
   /**
    * The ID of the co-worker who has approved, declined or cancelled the request.
-   * Only with access rights for absence administration or in case of own absences */
+   * Only with access rights for absence administration or in case of own absences
+   */
   approvedBy?: number | null;
 };
 
