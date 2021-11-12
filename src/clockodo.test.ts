@@ -226,9 +226,10 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.getEntries({
             timeSince: "2017-08-18 00:00:00",
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
       });
     });
@@ -274,10 +275,11 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.getEntryGroups({
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "grouping"');
       });
     });
@@ -416,10 +418,11 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.startClock({
             customersId: 24,
             servicesId: 7,
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "billable"');
       });
     });
@@ -509,11 +512,12 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.addUser({
             name: "Merkel",
             number: "8",
             email: "angela@eu.eu",
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "role"');
       });
     });
@@ -548,12 +552,13 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.addEntry({
             customersId: 1,
             servicesId: 2,
             timeSince: "2020-06-02 00:00:00",
             timeUntil: "2020-06-02 00:00:01",
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "billable"');
       });
     });
@@ -584,10 +589,11 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.addAbsence({
             dateSince: "2017-08-18 00:00:00",
             dateUntil: "2018-02-09 00:00:00",
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "type"');
       });
     });
@@ -617,10 +623,11 @@ describe("Clockodo (instance)", () => {
         expect.assertions(1);
 
         return expect(
+          // @ts-expect-error Intentional error just for the test
           clockodo.changeClockDuration({
             entriesId: 782,
             durationBefore: 540,
-          } as any)
+          })
         ).rejects.toThrowError('Missing required parameter "duration"');
       });
     });

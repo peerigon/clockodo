@@ -155,6 +155,7 @@ export class Api {
       ...options,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(response.data);
   }
 
@@ -169,6 +170,7 @@ export class Api {
       options
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(response.data);
   }
 
@@ -183,6 +185,7 @@ export class Api {
       options
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(response.data);
   }
 
@@ -196,6 +199,7 @@ export class Api {
       ...options,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(response.data);
   }
 }
