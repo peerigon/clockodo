@@ -349,6 +349,33 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ---
 
+### [getNonbusinessGroups()](https://www.clockodo.com/en/api/nonbusinessgroups/)
+
+With this resource you can read all nonbusiness groups. The editing and adding of nonbusiness groups is currently not possible.
+
+#### Example:
+
+```js
+await clockodo.getNonbusinessGroups();
+```
+
+---
+
+### [getNonbusinessDays()](https://www.clockodo.com/en/api/nonbusinessdays/)
+
+With this resource you can read all nonbusiness days. The editing and adding of nonbusiness days is currently not possible.
+
+#### Example:
+
+```js
+await clockodo.getNonbusinessDays({
+  nonbusinessgroupsId: 123,
+  year: 2021,
+});
+```
+
+---
+
 ### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/aggregates/users/me/)
 
 With this resource you can read user and company seetings for the logged in user. Editing is currently not possible.

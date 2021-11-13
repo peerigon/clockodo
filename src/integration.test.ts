@@ -282,6 +282,35 @@ const config: Config = {
     });
   });
 
+  describe("getNonbusinessGroups() / getNonbusinessDays()", () => {
+    it("returns expected data format", async () => {
+      const { nonbusinessgroups: nonbusinessGroups } =
+        await clockodo.getNonbusinessGroups();
+
+      expect(nonbusinessGroups.length).toBeGreaterThan(0);
+      nonbusinessGroups.forEach((nonbusinessGroup) => {
+        expect(nonbusinessGroup).toHaveProperty("id");
+        expect(nonbusinessGroup).toHaveProperty("name");
+      });
+
+      const [firstNonbusinessGroup] = nonbusinessGroups;
+
+      const { nonbusinessdays: nonbusinessDays } =
+        await clockodo.getNonbusinessDays({
+          nonbusinessgroupsId: firstNonbusinessGroup.id,
+          year: 2021,
+        });
+
+      expect(nonbusinessDays.length).toBeGreaterThan(0);
+      nonbusinessDays.forEach((nonbusinessDay) => {
+        expect(nonbusinessDay).toHaveProperty("date");
+        expect(nonbusinessDay).toHaveProperty("id");
+        expect(nonbusinessDay).toHaveProperty("name");
+        expect(nonbusinessDay).toHaveProperty("halfDay");
+      });
+    });
+  });
+
   describe("getAggregatesUsersMe()", () => {
     it("returns expected data format", async () => {
       const { user, company, worktimeRegulation } =

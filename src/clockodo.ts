@@ -1,4 +1,5 @@
 import snakecaseKeys from "snakecase-keys";
+import { NonbusinessGroup } from "./models/nonbusinessGroup";
 import { WorktimeRegulation } from "./models/worktimeRegulation";
 import { Absence } from "./models/absence.js";
 import { Customer } from "./models/customer.js";
@@ -21,6 +22,7 @@ import { UserReport } from "./models/userReport.js";
 import { Api, Config, Filter, Paging } from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
+import { NonbusinessDay } from "./models/nonbusinessDay.js";
 
 type Params<
   RequiredParams extends Record<string, unknown> = Record<string, unknown>
@@ -231,6 +233,20 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
     return this.api.get("/userreports", params);
+  }
+
+  async getNonbusinessGroups(
+    params?: Params
+  ): Promise<NonbusinessGroupsReturnType> {
+    return this.api.get("/nonbusinessgroups", params);
+  }
+
+  async getNonbusinessDays(
+    params: Params<{ nonbusinessgroupsId: number; year: number }>
+  ): Promise<NonbusinessDaysReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
+
+    return this.api.get("/nonbusinessdays", params);
   }
 
   async getAggregatesUsersMe(
@@ -522,6 +538,12 @@ export type DeleteEntryGroupsReturnType =
   | { success: true; deletedEntries: number };
 export type UserReportReturnType = { userreport: UserReport };
 export type UserReportsReturnType = { userreports: Array<UserReport> };
+export type NonbusinessGroupsReturnType = {
+  nonbusinessgroups: Array<NonbusinessGroup>;
+};
+export type NonbusinessDaysReturnType = {
+  nonbusinessdays: Array<NonbusinessDay>;
+};
 export type AggregatesUsersMeReturnType = {
   user: User;
   company: Company;

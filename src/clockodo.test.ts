@@ -389,6 +389,47 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getNonbusinessGroups()", () => {
+      it("correctly builds getNonbusinessGroups() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/nonbusinessgroups")
+          .reply(200);
+
+        await clockodo.getNonbusinessGroups();
+
+        nockScope.done();
+      });
+    });
+
+    describe("getNonbusinessDays()", () => {
+      it("correctly builds getNonbusinessDays() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get(
+            "/nonbusinessdays?" +
+              qs.stringify({ nonbusinessgroups_id: 123, year: 2021 })
+          )
+          .reply(200);
+
+        await clockodo.getNonbusinessDays({
+          nonbusinessgroupsId: 123,
+          year: 2021,
+        });
+
+        nockScope.done();
+      });
+
+      it("throws an error when getNonbusinessDays() is missing param", async () => {
+        expect.assertions(1);
+
+        return expect(
+          clockodo.getNonbusinessDays(
+            // @ts-expect-error Year is missing
+            { nonbusinessgroupsId: 123 }
+          )
+        ).rejects.toThrowError('Missing required parameter "year"');
+      });
+    });
   });
 
   describe("POST", () => {
