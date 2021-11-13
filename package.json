@@ -100,8 +100,7 @@
       "eslint --cache --fix"
     ],
     ".github/workflows/*.{yml,yaml}": [
-      "pin-github-action --allow-empty",
-      "prettier --write"
+      "pin-github-action --allow-empty"
     ],
     "*.{json,yml,md}": "prettier --write"
   }
