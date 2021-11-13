@@ -1,3 +1,10 @@
+# [9.7.0](https://github.com/peerigon/clockodo/compare/v9.6.1...v9.7.0) (2021-11-13)
+
+
+### Features
+
+* Add getNonbusinessGroups() and getNonbusinessDays() ([ba034ef](https://github.com/peerigon/clockodo/commit/ba034ef00362e1afeecd175a8153e694a66e16ce))
+
 ## [9.6.1](https://github.com/peerigon/clockodo/compare/v9.6.0...v9.6.1) (2021-11-12)
 
 
