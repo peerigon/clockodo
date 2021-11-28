@@ -1,3 +1,10 @@
+## [9.7.1](https://github.com/peerigon/clockodo/compare/v9.7.0...v9.7.1) (2021-11-28)
+
+
+### Bug Fixes
+
+* Improve UserReport typings ([f3c7c56](https://github.com/peerigon/clockodo/commit/f3c7c56103d9202d4d5fa1e3c30e2a4ed51b699d))
+
 # [9.7.0](https://github.com/peerigon/clockodo/compare/v9.6.1...v9.7.0) (2021-11-13)
 
 
