@@ -1,4 +1,4 @@
-import { Billability, Clockodo, Config } from "./index.js";
+import { Billability, Clockodo, Config, UserReportType } from "./index.js";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
@@ -279,6 +279,50 @@ const config: Config = {
       expect(
         Object.keys(getLumpSumServiceResponse.lumpSumService).sort()
       ).toMatchObject(expectedKeys.concat([]).sort());
+    });
+  });
+
+  describe("getUserReports() / getUserReport()", () => {
+    it("returns expected data format", async () => {
+      const { userreports } = await clockodo.getUserReports({
+        year: 2019,
+        type: UserReportType.YearAndMonths,
+      });
+
+      expect(userreports.length).toBeGreaterThan(0);
+      userreports.forEach((userreport) => {
+        expect(userreport).toHaveProperty("usersId");
+        expect(userreport).toHaveProperty("sumTarget");
+        expect(userreport.monthDetails.length).toBeGreaterThan(0);
+        userreport.monthDetails.forEach((monthDetails) => {
+          expect(monthDetails).toHaveProperty("nr");
+          expect(monthDetails).toHaveProperty("sumTarget");
+        });
+      });
+
+      const { userreport } = await clockodo.getUserReport({
+        year: 2019,
+        usersId: userreports[0].usersId,
+        type: UserReportType.YearMonthsWeeksAndDays,
+      });
+
+      expect(userreport).toHaveProperty("usersId");
+      expect(userreport).toHaveProperty("sumTarget");
+      expect(userreport.monthDetails.length).toBeGreaterThan(0);
+      userreport.monthDetails.forEach((monthDetails) => {
+        expect(monthDetails).toHaveProperty("nr");
+        expect(monthDetails).toHaveProperty("sumTarget");
+        expect(monthDetails.weekDetails.length).toBeGreaterThan(0);
+        monthDetails.weekDetails.forEach((weekDetails) => {
+          expect(weekDetails).toHaveProperty("nr");
+          expect(weekDetails).toHaveProperty("sumTarget");
+          expect(weekDetails.dayDetails.length).toBeGreaterThan(0);
+          weekDetails.dayDetails.forEach((dayDetails) => {
+            expect(dayDetails).toHaveProperty("date");
+            expect(dayDetails).toHaveProperty("weekday");
+          });
+        });
+      });
     });
   });
 

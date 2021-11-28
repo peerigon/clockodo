@@ -18,15 +18,15 @@ import { Service } from "./models/service.js";
 import { TargethoursRow } from "./models/targethours.js";
 import { Task } from "./models/task.js";
 import { User } from "./models/user.js";
-import { UserReport } from "./models/userReport.js";
+import { UserReport, UserReportType } from "./models/userReport.js";
 import { Api, Config, Filter, Paging } from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
 
 type Params<
-  RequiredParams extends Record<string, unknown> = Record<string, unknown>
-> = RequiredParams & Record<string, unknown>;
+  KnownParams extends Record<string, unknown> = Record<string, unknown>
+> = KnownParams & Record<string, unknown>;
 
 export class Clockodo {
   api: Api;
@@ -217,9 +217,15 @@ export class Clockodo {
     return this.api.get("/users", params);
   }
 
-  async getUserReport(
-    params: Params<{ usersId: User["id"]; year: number }>
-  ): Promise<UserReportReturnType> {
+  async getUserReport<
+    GivenUserReportType extends UserReportType = UserReportType.Year
+  >(
+    params: Params<{
+      usersId: User["id"];
+      year: number;
+      type?: GivenUserReportType;
+    }>
+  ): Promise<UserReportReturnType<GivenUserReportType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
     const { usersId, ...rest } = params;
@@ -227,9 +233,11 @@ export class Clockodo {
     return this.api.get("/userreports/" + usersId, rest);
   }
 
-  async getUserReports(
-    params: Params<{ year: number }>
-  ): Promise<UserReportsReturnType> {
+  async getUserReports<
+    GivenUserReportType extends UserReportType = UserReportType.Year
+  >(
+    params: Params<{ year: number; type?: GivenUserReportType }>
+  ): Promise<UserReportsReturnType<GivenUserReportType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
     return this.api.get("/userreports", params);
@@ -536,8 +544,16 @@ export type EditEntryGroupsReturnType =
 export type DeleteEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
   | { success: true; deletedEntries: number };
-export type UserReportReturnType = { userreport: UserReport };
-export type UserReportsReturnType = { userreports: Array<UserReport> };
+export type UserReportReturnType<
+  GivenUserReportType extends UserReportType = UserReportType.Year
+> = {
+  userreport: UserReport<GivenUserReportType>;
+};
+export type UserReportsReturnType<
+  GivenUserReportType extends UserReportType = UserReportType.Year
+> = {
+  userreports: Array<UserReport<GivenUserReportType>>;
+};
 export type NonbusinessGroupsReturnType = {
   nonbusinessgroups: Array<NonbusinessGroup>;
 };
