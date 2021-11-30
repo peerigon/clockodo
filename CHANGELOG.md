@@ -1,3 +1,10 @@
+## [9.7.2](https://github.com/peerigon/clockodo/compare/v9.7.1...v9.7.2) (2021-11-30)
+
+
+### Bug Fixes
+
+* Incorrect typing of countReductionUsed ([6671c9f](https://github.com/peerigon/clockodo/commit/6671c9f417be0815d55c05bd3cababae5dddfdc0))
+
 ## [9.7.1](https://github.com/peerigon/clockodo/compare/v9.7.0...v9.7.1) (2021-11-28)
 
 
