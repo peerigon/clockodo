@@ -191,7 +191,7 @@ export type UserReportDayDetails = {
     militaryService: number;
   };
   /** Overtime reduction on this day (in seconds) */
-  countReductionUsed: number;
+  countReductionUsed: number | null;
 };
 
 export type UserReportDayWorkTimes = {
