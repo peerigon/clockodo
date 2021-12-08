@@ -1,3 +1,15 @@
+# [10.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v9.7.2...v10.0.0-beta.1) (2021-12-08)
+
+
+### Bug Fixes
+
+* Issues with Turkish locale ([5831bbc](https://github.com/peerigon/clockodo/commit/5831bbc0174e03f20e1225911e08e892f6ef3f03))
+
+
+### BREAKING CHANGES
+
+* The mapping algorithm to map camelCase to snake_case and vice versa has been changed. There is a slight chance that some keys might be mapped differently (although our tests did not reveal anything like that).
+
 ## [9.7.2](https://github.com/peerigon/clockodo/compare/v9.7.1...v9.7.2) (2021-11-30)
 
 
