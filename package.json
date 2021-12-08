@@ -37,7 +37,7 @@
     "build:copy": "copyfiles -f ./src/*.mjs ./dist/cjs/",
     "test": "run-p test:*",
     "test:suite": "jest",
-    "test:suite:turkish": "cross-env LC_ALL=tr jest 'integration' -t 'using a Turkish locale'",
+    "test:turkish": "cross-env LC_ALL=tr jest 'integration' -t 'using a Turkish locale'",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore src",
     "posttest": "run-s build",
     "prepare": "husky install",
