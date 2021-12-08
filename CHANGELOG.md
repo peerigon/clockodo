@@ -1,3 +1,10 @@
+# [10.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v10.0.0-beta.1...v10.0.0-beta.2) (2021-12-08)
+
+
+### Bug Fixes
+
+* Incorrect typing of "offset" ([a8f5752](https://github.com/peerigon/clockodo/commit/a8f5752e9c1f5495c3ef0d85d576e27bf0bdc980))
+
 # [10.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v9.7.2...v10.0.0-beta.1) (2021-12-08)
 
 
