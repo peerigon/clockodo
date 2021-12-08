@@ -46,7 +46,8 @@ export type TimeEntry = CommonEntry & {
   timeLastChangeWorkTime: string;
   billable: TimeEntryBillability;
   duration: number | null;
-  offset: number | null;
+  /** Only present if the duration is not linked to timeSince and timeUntil */
+  offset?: number;
   clocked: boolean;
   clockedOffline: boolean;
   /** Only present with sufficient access rights */
