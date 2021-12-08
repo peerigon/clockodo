@@ -2,10 +2,9 @@
 // However, we don't have typings for the snake_case models which is why we don't
 // gain much more confidence by removing 'any' here
 
-import camelcaseKeys from "camelcase-keys";
-import snakecaseKeys from "snakecase-keys";
+import mapObject from "map-obj";
 
-const queryParamMapping: Record<string, string> = {
+export const queryParamMapping: Record<string, string> = {
   filterUsersId: "filter[users_id]",
   filterCustomersId: "filter[customers_id]",
   filterProjectsId: "filter[projects_id]",
@@ -25,34 +24,65 @@ const queryParamMapping: Record<string, string> = {
   excludeIds: "excludeIds",
 };
 
-export const mapQueryParams = <Result = any>(
-  userParams: Record<string, any>
+export const mapQueryParams = <Result = Record<string, unknown>>(
+  queryParams: Record<string, any>
 ) => {
-  const apiParams: Record<string, any> = {};
+  return mapObject(
+    queryParams,
+    (key, value) => {
+      const mappedKey =
+        key in queryParamMapping
+          ? queryParamMapping[key]
+          : camelCaseToSnakeCase(key);
 
-  for (const [userParamName, value] of Object.entries(userParams)) {
-    const apiParamName =
-      userParamName in queryParamMapping
-        ? queryParamMapping[userParamName]
-        : userParamName;
-
-    apiParams[apiParamName] = value;
-  }
-
-  return snakecaseKeys(apiParams as any, {
-    deep: true,
-    exclude: Object.values(queryParamMapping),
-  }) as Result;
+      return [mappedKey, value];
+    },
+    {
+      deep: true,
+    }
+  ) as Result;
 };
 
-export const mapRequestBody = <Result = any>(
+export const mapRequestBody = <Result = Record<string, unknown>>(
   requestBody: Record<string, any>
 ) => {
-  return snakecaseKeys(requestBody as any, { deep: true }) as Result;
+  return mapObject(
+    requestBody,
+    (key, value) => {
+      const mappedKey = camelCaseToSnakeCase(key);
+
+      return [mappedKey, value];
+    },
+    {
+      deep: true,
+    }
+  ) as Result;
 };
 
-export const mapResponseBody = <Result = any>(
+export const mapResponseBody = <Result = Record<string, unknown>>(
   responseBody: Record<string, any>
 ) => {
-  return camelcaseKeys(responseBody as any, { deep: true }) as Result;
+  return mapObject(
+    responseBody,
+    (key, value) => {
+      const mappedKey = snakeCaseToCamelCase(key);
+
+      return [mappedKey, value];
+    },
+    {
+      deep: true,
+    }
+  ) as Result;
+};
+
+export const snakeCaseToCamelCase = (key: string) => {
+  return key.replace(/_+(\d*)([a-z])/gi, (_, $1, $2) => {
+    return ($1 + $2.toUpperCase()) as string;
+  });
+};
+
+export const camelCaseToSnakeCase = (key: string) => {
+  return key.replace(/(\d*)([A-Z])/g, (_, $1, $2) => {
+    return "_" + $1 + $2.toLowerCase();
+  });
 };

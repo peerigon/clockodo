@@ -13,6 +13,11 @@ export * from "./models/user.js";
 export * from "./models/userReport.js";
 export * from "./models/worktimeRegulation.js";
 
-export * from "./lib/mappings.js";
+export {
+  mapQueryParams,
+  mapRequestBody,
+  mapResponseBody,
+} from "./lib/mappings.js";
+
 export type { Config, Paging, Filter } from "./lib/api.js";
 export * from "./clockodo.js";
