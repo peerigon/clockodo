@@ -85,7 +85,6 @@ export const createTimeEntryMocks = ({
                 new Date(commonEntry.timeSince).getTime()) /
                 1000
             ),
-      offset: null,
       clocked: timeEntryType !== "manual",
       clockedOffline:
         timeEntryType === "manual"
