@@ -62,7 +62,7 @@
     "axios": "^0.21.4",
     "axios-cache-adapter": "^2.7.3",
     "faker": "^5.5.3",
-    "map-obj": "^5.0.0",
+    "map-obj": "^4.3.0",
     "qs": "^6.10.1"
   },
   "devDependencies": {

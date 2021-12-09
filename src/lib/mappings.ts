@@ -40,7 +40,7 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
     {
       deep: true,
     }
-  ) as Result;
+  ) as unknown as Result;
 };
 
 export const mapRequestBody = <Result = Record<string, unknown>>(
@@ -56,7 +56,7 @@ export const mapRequestBody = <Result = Record<string, unknown>>(
     {
       deep: true,
     }
-  ) as Result;
+  ) as unknown as Result;
 };
 
 export const mapResponseBody = <Result = Record<string, unknown>>(
@@ -72,7 +72,7 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
     {
       deep: true,
     }
-  ) as Result;
+  ) as unknown as Result;
 };
 
 export const snakeCaseToCamelCase = (key: string) => {
