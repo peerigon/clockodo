@@ -1,3 +1,10 @@
+# [10.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v10.0.0-beta.2...v10.0.0-beta.3) (2021-12-09)
+
+
+### Bug Fixes
+
+* Downgrade map-obj to CJS version ([8cd26ae](https://github.com/peerigon/clockodo/commit/8cd26aeb358f0bc7a8886c989598dcbe20b3e668))
+
 # [10.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v10.0.0-beta.1...v10.0.0-beta.2) (2021-12-08)
 
 
