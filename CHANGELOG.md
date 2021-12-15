@@ -1,3 +1,29 @@
+# [10.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v10.0.0-beta.2...v10.0.0-beta.3) (2021-12-09)
+
+
+### Bug Fixes
+
+* Downgrade map-obj to CJS version ([8cd26ae](https://github.com/peerigon/clockodo/commit/8cd26aeb358f0bc7a8886c989598dcbe20b3e668))
+
+# [10.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v10.0.0-beta.1...v10.0.0-beta.2) (2021-12-08)
+
+
+### Bug Fixes
+
+* Incorrect typing of "offset" ([a8f5752](https://github.com/peerigon/clockodo/commit/a8f5752e9c1f5495c3ef0d85d576e27bf0bdc980))
+
+# [10.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v9.7.2...v10.0.0-beta.1) (2021-12-08)
+
+
+### Bug Fixes
+
+* Issues with Turkish locale ([5831bbc](https://github.com/peerigon/clockodo/commit/5831bbc0174e03f20e1225911e08e892f6ef3f03))
+
+
+### BREAKING CHANGES
+
+* The mapping algorithm to map camelCase to snake_case and vice versa has been changed. There is a slight chance that some keys might be mapped differently (although our tests did not reveal anything like that).
+
 ## [9.7.2](https://github.com/peerigon/clockodo/compare/v9.7.1...v9.7.2) (2021-11-30)
 
 

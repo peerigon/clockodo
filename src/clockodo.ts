@@ -1,4 +1,3 @@
-import snakecaseKeys from "snakecase-keys";
 import { NonbusinessGroup } from "./models/nonbusinessGroup";
 import { WorktimeRegulation } from "./models/worktimeRegulation";
 import { Absence } from "./models/absence.js";
@@ -23,6 +22,7 @@ import { Api, Config, Filter, Paging } from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
+import { camelCaseToSnakeCase } from "./lib/mappings.js";
 
 type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>
@@ -122,16 +122,9 @@ export class Clockodo {
   ): Promise<EntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY_GROUPS);
 
-    // Could be replaced with Object.fromEntries() once it's supported everywhere
-    const camelCaseGrouping: Record<string, boolean> = {};
-
-    params.grouping.forEach((key) => {
-      camelCaseGrouping[key] = true;
-    });
-
     return this.api.get("/v2/entrygroups", {
       ...params,
-      grouping: Object.keys(snakecaseKeys(camelCaseGrouping)),
+      grouping: params.grouping.map((key) => camelCaseToSnakeCase(key)),
     });
   }
 

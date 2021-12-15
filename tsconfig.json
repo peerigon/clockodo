@@ -5,7 +5,9 @@
     "lib": ["es2017"],
     "esModuleInterop": true,
     "strict": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    // "allowJs" is currently necessary because we need to transform node_modules, like "map-obj"
+    "allowJs": true
   },
   "include": ["./**/*.ts"]
 }
