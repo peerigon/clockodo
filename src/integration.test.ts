@@ -362,7 +362,7 @@ const config: Config = {
 
       expect(user).toHaveProperty("id");
       expect(company).toHaveProperty("id");
-      expect(worktimeRegulation).toHaveProperty("id");
+      expect(worktimeRegulation).toBe(null);
     });
   });
 
