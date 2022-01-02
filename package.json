@@ -11,6 +11,11 @@
       "node": "./dist/cjs/index.mjs",
       "default": "./dist/esm/index.js"
     },
+    "./csv": {
+      "require": "./dist/cjs/csv.js",
+      "node": "./dist/cjs/csv.mjs",
+      "default": "./dist/esm/csv.js"
+    },
     "./mocks": {
       "require": "./dist/cjs/mocks.js",
       "node": "./dist/cjs/mocks.mjs",
@@ -21,6 +26,9 @@
     "*": {
       ".": [
         "./dist/esm/index.d.ts"
+      ],
+      "csv": [
+        "./dist/esm/csv.d.ts"
       ],
       "mocks": [
         "./dist/esm/mocks.d.ts"
