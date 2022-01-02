@@ -1,3 +1,10 @@
+# [10.1.0](https://github.com/peerigon/clockodo/compare/v10.0.0...v10.1.0) (2022-01-02)
+
+
+### Features
+
+* Add functions for parsing csv entries ([21c7176](https://github.com/peerigon/clockodo/commit/21c7176066679a0af5df38742b69869ab2008a50))
+
 # [10.0.0](https://github.com/peerigon/clockodo/compare/v9.7.2...v10.0.0) (2021-12-15)
 
 
