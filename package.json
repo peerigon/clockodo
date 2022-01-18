@@ -24,9 +24,6 @@
   },
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist/esm/index.d.ts"
-      ],
       "csv": [
         "./dist/esm/csv.d.ts"
       ],
