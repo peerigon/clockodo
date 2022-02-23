@@ -158,11 +158,11 @@ export type UserReportDayDetails = {
      */
     regularHolidays: number;
     /**
-     * Absence because of sickness (0 or 1)
+     * Absence because of sickness (0, 0.5 or 1)
      */
     sickSelf: number;
     /**
-     * Absence because of sickness of a child (0 or 1)
+     * Absence because of sickness of a child (0, 0.5 or 1)
      */
     sickChild: number;
     /**
