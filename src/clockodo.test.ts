@@ -11,7 +11,6 @@ import {
   AbsenceStatus,
   mapRequestBody,
 } from "./index.js";
-import { cachePlugin } from "./plugins/cache.js";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
@@ -95,45 +94,6 @@ describe("Clockodo (instance)", () => {
       ).toThrowErrorMatchingInlineSnapshot(
         `"baseUrl should be a string but is typeof: number"`
       );
-    });
-  });
-
-  describe("Cache", () => {
-    it("should cache the first request for cacheTime", async () => {
-      const clockodoWithCache = new Clockodo(config);
-
-      clockodoWithCache.use(cachePlugin({ cacheTime: 50 }));
-
-      const usersId = 7;
-      let requestCounter = 0;
-
-      const nockScope = nock(CLOCKODO_API)
-        .get(`/users/${usersId}`)
-        .twice()
-        .reply(200, () => {
-          requestCounter++;
-
-          return {};
-        });
-
-      await clockodoWithCache.getUser({
-        id: usersId,
-      });
-      expect(requestCounter).toBe(1);
-      await clockodoWithCache.getUser({
-        id: usersId,
-      });
-      // If cache is not working this would fail
-      expect(requestCounter).toBe(1);
-
-      await new Promise((resolve) => setTimeout(resolve, 50));
-
-      await clockodoWithCache.getUser({
-        id: usersId,
-      });
-      expect(requestCounter).toBe(2);
-
-      nockScope.done();
     });
   });
 
