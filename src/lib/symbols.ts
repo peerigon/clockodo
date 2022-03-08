@@ -1,1 +1,1 @@
-export const axiosClient = Symbol("axiosClient");
+export const requestConfig = Symbol("requestConfig");

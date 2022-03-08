@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig } from "axios";
+import fetch, { Request, RequestInit, RequestInfo } from "node-fetch";
 import qs from "qs";
-import { axiosClient } from "./symbols.js";
+import { requestConfig } from "./symbols.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
 
 const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
@@ -19,6 +19,20 @@ const paramsSerializer = (params: Record<string, string>) => {
   }
 
   return urlParams.join("&");
+};
+
+// HeadersInit = Headers | string[][] | { [key: string]: string };
+// type FetchConfig = {
+//   baseUrl: RequestInfo | undefined
+// } & RequestInit;
+type FetchConfig = {
+  baseUrl: RequestInfo | undefined;
+  headers: any;
+};
+
+export type FailedResponse = {
+  status: number;
+  body: any;
 };
 
 export type Paging = {
@@ -68,11 +82,10 @@ export type Config = {
 };
 
 export class Api {
-  [axiosClient] = axios.create({
-    headers: {
-      "X-ClockodoEnableIsoUtcDateTimes": "1",
-    },
-  });
+  [requestConfig]: FetchConfig = {
+    baseUrl: undefined,
+    headers: {},
+  };
 
   constructor({ baseUrl = DEFAULT_BASE_URL, authentication, client }: Config) {
     // This check is for non-TypeScript users only
@@ -85,9 +98,13 @@ export class Api {
     this.config({ client, authentication, baseUrl });
   }
 
+  // The fact that this can be called again was a source of great confusion. I had changed the if below to throw if (!baseUrl || typeof baseUrl !== "string"), but turns out sometimes we don't need it
   config(config: Partial<Config>) {
     const { authentication, baseUrl, client } = config;
-    const defaults = this[axiosClient].defaults;
+
+    const request = this[requestConfig];
+
+    request.headers["X-ClockodoEnableIsoUtcDateTimes"] = "1";
 
     if (baseUrl) {
       if (typeof baseUrl !== "string") {
@@ -95,8 +112,10 @@ export class Api {
           `baseUrl should be a string but is typeof: ${typeof baseUrl}`
         );
       }
-      defaults.baseURL = baseUrl;
+
+      request.baseUrl = baseUrl;
     }
+
     if (client) {
       const { name, email } = client;
 
@@ -112,14 +131,21 @@ export class Api {
         );
       }
 
-      defaults.headers["X-Clockodo-External-Application"] = `${name};${email}`;
+      request.headers["X-Clockodo-External-Application"] = `${name};${email}`;
     }
+
     if ("authentication" in config) {
       if (authentication === undefined) {
-        delete defaults.headers["X-ClockodoApiUser"];
-        delete defaults.headers["X-ClockodoApiKey"];
-        defaults.headers["X-Requested-With"] = "XMLHttpRequest";
-        defaults.withCredentials = true;
+        if (request.headers["X-ClockodoApiUser"]) {
+          delete request.headers["X-ClockodoApiUser"];
+        }
+
+        if (request.headers["X-ClockodoApiKey"]) {
+          delete request.headers["X-ClockodoApiKey"];
+        }
+
+        request.headers["X-Requested-With"] = "XMLHttpRequest";
+        // defaults.withCredentials = true;
       } else {
         const { user, apiKey } = authentication;
 
@@ -135,71 +161,137 @@ export class Api {
           );
         }
 
-        defaults.headers["X-ClockodoApiUser"] = user;
-        defaults.headers["X-ClockodoApiKey"] = apiKey;
-        delete defaults.headers["X-Requested-With"];
+        request.headers["X-ClockodoApiUser"] = user;
+        request.headers["X-ClockodoApiKey"] = apiKey;
+
+        if (request.headers["X-Requested-With"]) {
+          delete request.headers["X-Requested-With"];
+        }
+
         // Since we're sending auth headers now, it's not required to also send cookies.
-        defaults.withCredentials = false;
+        // defaults.withCredentials = false;
       }
     }
   }
 
   async get<Result = any>(
     url: string,
-    queryParams = {},
-    options?: AxiosRequestConfig
-  ): Promise<Result> {
-    const response = await this[axiosClient].get(url, {
-      params: mapQueryParams(queryParams),
-      paramsSerializer,
-      ...options,
+    queryParams = {}
+  ): Promise<Result | FailedResponse> {
+    const params = paramsSerializer(mapQueryParams(queryParams));
+    const baseUrl = this[requestConfig].baseUrl;
+    const request = new Request(`${baseUrl}${url}?${params}`);
+
+    const response = await fetch(request, {
+      method: "GET",
+      headers: this[requestConfig].headers,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return mapResponseBody<Result>(response.data);
+    const data = (await response.json());
+
+    if (response.ok) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return mapResponseBody<Result>(data);
+    }
+
+    return {
+      status: response.status,
+      body: {
+        ...data,
+      },
+    };
   }
 
   async post<Result = any>(
     url: string,
-    body = {},
-    options?: AxiosRequestConfig
-  ): Promise<Result> {
-    const response = await this[axiosClient].post(
-      url,
-      mapRequestBody(body),
-      options
-    );
+    body = {}
+  ): Promise<Result | FailedResponse> {
+    const baseUrl = this[requestConfig].baseUrl;
+    const request = new Request(`${baseUrl}${url}`);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return mapResponseBody<Result>(response.data);
+    const response = await fetch(request, {
+      method: "POST",
+      headers: {
+        ...this[requestConfig].headers,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mapRequestBody(body)),
+    });
+
+    const data = (await response.json());
+
+    if (response.ok) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return mapResponseBody<Result>(data);
+    }
+
+    return {
+      status: response.status,
+      body: {
+        ...data,
+      },
+    };
   }
 
   async put<Result = any>(
     url: string,
-    body = {},
-    options?: AxiosRequestConfig
-  ): Promise<Result> {
-    const response = await this[axiosClient].put(
-      url,
-      mapRequestBody(body),
-      options
-    );
+    body = {}
+  ): Promise<Result | FailedResponse> {
+    const baseUrl = this[requestConfig].baseUrl;
+    const request = new Request(`${baseUrl}${url}`);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return mapResponseBody<Result>(response.data);
+    const response = await fetch(request, {
+      method: "PUT",
+      headers: {
+        ...this[requestConfig].headers,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mapRequestBody(body)),
+    });
+
+    const data = (await response.json());
+
+    if (response.ok) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return mapResponseBody<Result>(data);
+    }
+
+    return {
+      status: response.status,
+      body: {
+        ...data,
+      },
+    };
   }
 
   async delete<Result = any>(
     url: string,
-    body = {},
-    options?: AxiosRequestConfig
-  ): Promise<Result> {
-    const response = await this[axiosClient].delete(url, {
-      data: mapRequestBody(body),
-      ...options,
+    body = {}
+  ): Promise<Result | FailedResponse> {
+    const baseUrl = this[requestConfig].baseUrl;
+    const request = new Request(`${baseUrl}${url}`);
+
+    const response = await fetch(request, {
+      method: "DELETE",
+      headers: {
+        ...this[requestConfig].headers,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mapRequestBody(body)),
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return mapResponseBody<Result>(response.data);
+    const data = (await response.json());
+
+    if (response.ok) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return mapResponseBody<Result>(data);
+    }
+
+    return {
+      status: response.status,
+      body: {
+        ...data,
+      },
+    };
   }
 }
