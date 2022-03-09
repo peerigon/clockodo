@@ -18,7 +18,7 @@ import { TargethoursRow } from "./models/targethours.js";
 import { Task } from "./models/task.js";
 import { User } from "./models/user.js";
 import { UserReport, UserReportType } from "./models/userReport.js";
-import { Api, Config, ErrorResponse, Filter, Paging } from "./lib/api.js";
+import { Api, Config, Filter, Paging } from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
@@ -490,37 +490,37 @@ export class Clockodo {
   }
 }
 
-export type AbsenceReturnType = { absence: Absence } | ErrorResponse;
-export type AbsencesReturnType = { absences: Array<Absence> } | ErrorResponse;
-export type DeleteReturnType = { success: true } | ErrorResponse;
-export type CustomerReturnType = { customer: Customer } | ErrorResponse;
-export type CustomersReturnType = { customers: Array<Customer> } | ErrorResponse;
-export type ProjectsReturnType = { projects: Array<Project> } | ErrorResponse;
-export type ProjectReturnType = { project: Project } | ErrorResponse;
-export type ServiceReturnType = { service: Service } | ErrorResponse;
-export type ServicesReturnType = { services: Array<Service> } | ErrorResponse;
+export type AbsenceReturnType = { absence: Absence };
+export type AbsencesReturnType = { absences: Array<Absence> };
+export type DeleteReturnType = { success: true };
+export type CustomerReturnType = { customer: Customer };
+export type CustomersReturnType = { customers: Array<Customer> };
+export type ProjectsReturnType = { projects: Array<Project> };
+export type ProjectReturnType = { project: Project };
+export type ServiceReturnType = { service: Service };
+export type ServicesReturnType = { services: Array<Service> };
 export type LumpsumServiceReturnType = {
   // This endpoint still uses the old lumpSum casing
   lumpSumService: LumpsumService;
-} | ErrorResponse;
+};
 export type LumpsumServicesReturnType = {
   // This endpoint still uses the old lumpSum casing
   lumpSumServices: Array<LumpsumService>;
-} | ErrorResponse;
-export type UserReturnType = { user: User } | ErrorResponse;
-export type UsersReturnType = { users: Array<User> } | ErrorResponse;
-export type EntryReturnType = { entry: Entry } | ErrorResponse;
-export type AddEntryReturnType = { entry: Entry; stopped?: Entry } | ErrorResponse;
+};
+export type UserReturnType = { user: User };
+export type UsersReturnType = { users: Array<User> };
+export type EntryReturnType = { entry: Entry };
+export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {
   entry: Entry;
   running: null | TimeEntry;
-} | ErrorResponse;
+};
 export type EntriesReturnType = {
   paging: Paging;
   filter: Filter | null;
   entries: Array<Entry>;
-} | ErrorResponse;
-export type TaskDurationReturnType = { task: { duration: number } } | ErrorResponse;
+};
+export type TaskDurationReturnType = { task: { duration: number } };
 export type TasksReturnType = {
   days: Array<{
     date: string;
@@ -529,66 +529,64 @@ export type TasksReturnType = {
     durationText: string;
     tasks: Array<Task>;
   }>;
-} | ErrorResponse;
-export type EntryGroupsReturnType = { groups: Array<EntryGroup> } | ErrorResponse;
+};
+export type EntryGroupsReturnType = { groups: Array<EntryGroup> };
 export type EditEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
-  | { success: true; editedEntries: number }
-  | ErrorResponse;
+  | { success: true; editedEntries: number };
 export type DeleteEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
-  | { success: true; deletedEntries: number }
-  | ErrorResponse;
+  | { success: true; deletedEntries: number };
 export type UserReportReturnType<
   GivenUserReportType extends UserReportType = UserReportType.Year
 > = {
   userreport: UserReport<GivenUserReportType>;
-} | ErrorResponse;
+};
 export type UserReportsReturnType<
   GivenUserReportType extends UserReportType = UserReportType.Year
 > = {
   userreports: Array<UserReport<GivenUserReportType>>;
-} | ErrorResponse;
+};
 export type NonbusinessGroupsReturnType = {
   nonbusinessgroups: Array<NonbusinessGroup>;
-} | ErrorResponse;
+};
 export type NonbusinessDaysReturnType = {
   nonbusinessdays: Array<NonbusinessDay>;
-} | ErrorResponse;
+};
 export type AggregatesUsersMeReturnType = {
   user: User;
   company: Company;
   worktimeRegulation: WorktimeRegulation;
-} | ErrorResponse;
+};
 export type ClockReturnType = {
   running: null | TimeEntry;
   currentTime: string;
-} | ErrorResponse;
+};
 export type ClockStartReturnType = {
   running: TimeEntry;
   stopped?: TimeEntry;
   currentTime: string;
-} | ErrorResponse;
+};
 export type ClockStopReturnType = {
   stopped: TimeEntry;
   running: null | TimeEntry;
   currentTime: string;
-} | ErrorResponse;
+};
 export type ClockEditReturnType = {
   updated: TimeEntry;
   running: null | TimeEntry;
   currentTime: string;
-} | ErrorResponse;
-export type SearchTextsReturnType = { texts: Array<string> } | ErrorResponse;
+};
+export type SearchTextsReturnType = { texts: Array<string> };
 
 export type TargethoursRowReturnType = {
   targethoursRow: TargethoursRow;
-} | ErrorResponse;
+};
 export type TargethoursReturnType = {
   targethours: Array<TargethoursRow>;
-} | ErrorResponse;
+};
 export type AddUserReturnType = {
   success: "true";
   user: User;
   apikey: string;
-} | ErrorResponse;
+};
