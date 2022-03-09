@@ -30,7 +30,7 @@ type FetchConfig = {
   headers: any;
 };
 
-export type FailedResponse = {
+export type ErrorResponse = {
   status: number;
   body: any;
 };
@@ -177,7 +177,7 @@ export class Api {
   async get<Result = any>(
     url: string,
     queryParams = {}
-  ): Promise<Result | FailedResponse> {
+  ): Promise<Result | ErrorResponse> {
     const params = paramsSerializer(mapQueryParams(queryParams));
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}?${params}`);
@@ -205,7 +205,7 @@ export class Api {
   async post<Result = any>(
     url: string,
     body = {}
-  ): Promise<Result | FailedResponse> {
+  ): Promise<Result | ErrorResponse> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
@@ -236,7 +236,7 @@ export class Api {
   async put<Result = any>(
     url: string,
     body = {}
-  ): Promise<Result | FailedResponse> {
+  ): Promise<Result | ErrorResponse> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
@@ -267,7 +267,7 @@ export class Api {
   async delete<Result = any>(
     url: string,
     body = {}
-  ): Promise<Result | FailedResponse> {
+  ): Promise<Result | ErrorResponse> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
