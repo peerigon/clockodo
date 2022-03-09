@@ -1,5 +1,4 @@
 import { Billability, Clockodo, Config, UserReportType } from "./index.js";
-import { ErrorResponse } from "./lib/api";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
@@ -14,10 +13,6 @@ const config: Config = {
     email: "johannes.ewald@peerigon.com",
   },
 };
-
-const isErrorResponse = <T>(response: T | ErrorResponse): response is ErrorResponse => {
-  return "status" in response;
-}
 
 (hasCredentials ? describe : describe.skip)("Clockodo", () => {
   const clockodo = new Clockodo(config);
@@ -66,8 +61,6 @@ const isErrorResponse = <T>(response: T | ErrorResponse): response is ErrorRespo
       ];
 
       const data = await clockodo.getUsers();
-
-      if(isErrorResponse(data)) throw new Error("Request Failed");
 
       expect(Object.keys(data.users[0]).sort()).toMatchObject(expectedKeys);
     });
