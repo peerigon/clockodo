@@ -65,7 +65,6 @@
   },
   "homepage": "https://github.com/peerigon/clockodo#readme",
   "dependencies": {
-    "axios": "^0.21.4",
     "faker": "^5.5.3",
     "map-obj": "^4.3.0",
     "node-fetch": "^2.6.7",

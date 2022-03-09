@@ -49,6 +49,7 @@ const config: Config = {
         "initials",
         "language",
         "name",
+        "nonbusinessgroupsId",
         "number",
         "role",
         "teamsId",
