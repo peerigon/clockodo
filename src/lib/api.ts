@@ -2,6 +2,7 @@ import fetch, { Request } from "node-fetch";
 import qs from "qs";
 import { requestConfig } from "./symbols.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
+import { ApiResponseError } from "./errors.js";
 
 const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 
@@ -180,7 +181,7 @@ export class Api {
 
     const data = (await response.json());
 
-    // if(!response.ok) throw error
+    if(!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
@@ -203,6 +204,8 @@ export class Api {
     });
 
     const data = (await response.json());
+        
+    if(!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
@@ -225,6 +228,8 @@ export class Api {
     });
 
     const data = (await response.json());
+        
+    if(!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
@@ -247,6 +252,8 @@ export class Api {
     });
 
     const data = (await response.json());
+        
+    if(!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);

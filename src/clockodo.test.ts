@@ -11,6 +11,7 @@ import {
   AbsenceStatus,
   mapRequestBody,
 } from "./index.js";
+import { ApiResponseError } from "./lib/errors.js";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
@@ -94,6 +95,33 @@ describe("Clockodo (instance)", () => {
       ).toThrowErrorMatchingInlineSnapshot(
         `"baseUrl should be a string but is typeof: number"`
       );
+    });
+  });
+
+  describe("Custom Error Types", () => {
+    const obviouslyFakeId = 1000000000000001;
+
+    // TODO: make the assertions actually match error obj, not just error type 
+    it("returns an ApiResponseError on failed auth", async () => {
+      const apiError = new ApiResponseError(401, {
+        error:  { message: 'Authentication failed', fields: [] }
+      });
+       
+      expect(clockodo.getCustomer({id: obviouslyFakeId})).rejects.toThrowError(apiError);
+    });
+    it("returns an ApiResponseError on 404", async () => {
+      clockodo.api.config({
+        authentication: {
+          user: process.env.CLOCKODO_USER!,
+          apiKey: process.env.CLOCKODO_API_KEY!,
+        },
+      });
+
+      const apiError = new ApiResponseError(404, {
+        error: { message: 'The requested resource could not be found'}
+      })
+
+      expect(clockodo.getCustomer({id: obviouslyFakeId})).rejects.toThrowError(apiError);
     });
   });
 
