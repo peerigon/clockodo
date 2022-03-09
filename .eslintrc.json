@@ -1,5 +1,10 @@
 {
-  "extends": ["peerigon/presets/prettier-typescript.js"],
+  "extends": [
+    "peerigon",
+    "peerigon/typescript",
+    "peerigon/styles/prefer-arrow",
+    "prettier"
+  ],
   "env": {
     "node": true
   },
