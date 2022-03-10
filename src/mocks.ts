@@ -1,6 +1,6 @@
 import faker from "faker";
 
-// export * from "./models/absence.mocks.js";
+export * from "./models/absence.mocks.js";
 export * from "./models/customer.mocks.js";
 export * from "./models/entry.mocks.js";
 // export * from "./models/entryGroup.mocks.js";
