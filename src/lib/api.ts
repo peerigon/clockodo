@@ -38,8 +38,8 @@ export type Filter = {
   text?: string;
   textsId?: number;
   budgetType?: string;
-  filterTimeSince?: string;
-  filterTimeUntil?: string;
+  timeSince?: string;
+  timeUntil?: string;
 };
 
 export type Authentication = {

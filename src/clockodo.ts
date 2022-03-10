@@ -23,6 +23,7 @@ import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
 import { camelCaseToSnakeCase } from "./lib/mappings.js";
+import { EntriesText } from "./models/entriesText";
 
 type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>
@@ -111,6 +112,16 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
     return this.api.get("/v2/entries", params);
+  }
+
+  async getEntriesTexts(
+    params: Params<{
+      text: string;
+    }>
+  ): Promise<EntriesTextsReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
+
+    return this.api.get("/v2/entriesTexts", params);
   }
 
   async getEntryGroups(
@@ -530,6 +541,23 @@ export type EntriesReturnType = {
     | "usersId"
   > | null;
   entries: Array<Entry>;
+};
+export type EntriesTextsReturnType = {
+  paging: Paging;
+  filter: Pick<
+    Filter,
+    | "billable"
+    | "customersId"
+    | "lumpsumServicesId"
+    | "projectsId"
+    | "servicesId"
+    | "usersId"
+    | "timeSince"
+    | "timeUntil"
+  > | null;
+  texts: EntriesText;
+  mode: string;
+  sort: string;
 };
 export type TaskDurationReturnType = { task: { duration: number } };
 export type TasksReturnType = {
