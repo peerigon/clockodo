@@ -14,7 +14,16 @@ const config: Config = {
   },
 };
 
-(hasCredentials ? describe : describe.skip)("Clockodo", () => {
+describe("Clockodo", () => {
+  if (hasCredentials === false) {
+    if (process.env.CI)
+      throw new Error("Cannot run tests: Credentials are missing");
+
+    it("cannot run tests because credentials are missing", () => {});
+
+    return;
+  }
+
   const clockodo = new Clockodo(config);
 
   const entryShape = {
@@ -35,35 +44,36 @@ const config: Config = {
   });
 
   describe("getUsers()", () => {
-    it("returns expected data format", async () => {
-      const expectedKeys = [
-        "active",
-        "canAddCustomers",
-        "canGenerallyManageAbsences",
-        "canGenerallySeeAbsences",
-        "editLock",
-        "editLockDyn",
-        "editLockSync",
-        "email",
-        "id",
-        "initials",
-        "language",
-        "name",
-        "nonbusinessgroupsId",
-        "number",
-        "role",
-        "teamsId",
-        "timeformat12H",
-        "timezone",
-        "wageType",
-        "weekendFriday",
-        "weekstartMonday",
-        "worktimeRegulationId",
-      ];
+    const expectedKeys = [
+      "active",
+      "canAddCustomers",
+      "canGenerallyManageAbsences",
+      "canGenerallySeeAbsences",
+      "editLock",
+      "editLockDyn",
+      "editLockSync",
+      "email",
+      "id",
+      "initials",
+      "language",
+      "name",
+      "number",
+      "role",
+      "teamsId",
+      "timeformat12H",
+      "timezone",
+      "wageType",
+      "weekendFriday",
+      "weekstartMonday",
+      "worktimeRegulationId",
+    ];
 
+    it("returns expected data format", async () => {
       const data = await clockodo.getUsers();
 
-      expect(Object.keys(data.users[0]).sort()).toMatchObject(expectedKeys);
+      expect(Object.keys(data.users[0])).toEqual(
+        expect.arrayContaining(expectedKeys)
+      );
     });
   });
 
@@ -227,8 +237,8 @@ const config: Config = {
         grouping: ["customers_id"],
       });
 
-      expect(Object.keys(data.groups[0]).sort()).toMatchObject(
-        expectedKeys.concat([]).sort()
+      expect(Object.keys(data.groups[0])).toEqual(
+        expect.arrayContaining(expectedKeys)
       );
     });
 
@@ -240,8 +250,8 @@ const config: Config = {
         grouping: ["projectsId", "services_id"],
       });
 
-      expect(Object.keys(data.groups[0]).sort()).toMatchObject(
-        expectedKeys.concat(["subGroups"]).sort()
+      expect(Object.keys(data.groups[0])).toEqual(
+        expect.arrayContaining(expectedKeys.concat(["subGroups"]))
       );
     });
   });
@@ -269,17 +279,17 @@ const config: Config = {
       const { lumpSumServices } = await clockodo.getLumpSumServices();
       const [lumpSumService] = lumpSumServices;
 
-      expect(Object.keys(lumpSumService).sort()).toMatchObject(
-        expectedKeys.concat([]).sort()
+      expect(Object.keys(lumpSumService)).toEqual(
+        expect.arrayContaining(expectedKeys)
       );
 
       const getLumpSumServiceResponse = await clockodo.getLumpSumService({
         id: lumpSumService.id,
       });
 
-      expect(
-        Object.keys(getLumpSumServiceResponse.lumpSumService).sort()
-      ).toMatchObject(expectedKeys.concat([]).sort());
+      expect(Object.keys(getLumpSumServiceResponse.lumpSumService)).toEqual(
+        expect.arrayContaining(expectedKeys)
+      );
     });
   });
 
