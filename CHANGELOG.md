@@ -1,3 +1,10 @@
+## [10.1.2](https://github.com/peerigon/clockodo/compare/v10.1.1...v10.1.2) (2022-03-10)
+
+
+### Bug Fixes
+
+* Incorrect absence typings ([563c0c5](https://github.com/peerigon/clockodo/commit/563c0c5fd3428fd86ffd4feabc7ada0bb66821e8))
+
 ## [10.1.1](https://github.com/peerigon/clockodo/compare/v10.1.0...v10.1.1) (2022-03-05)
 
 
