@@ -517,7 +517,18 @@ export type EditEntryReturnType = {
 };
 export type EntriesReturnType = {
   paging: Paging;
-  filter: Filter | null;
+  filter: Pick<
+    Filter,
+    | "billable"
+    | "budgetType"
+    | "customersId"
+    | "lumpsumServicesId"
+    | "projectsId"
+    | "servicesId"
+    | "text"
+    | "textsId"
+    | "usersId"
+  > | null;
   entries: Array<Entry>;
 };
 export type TaskDurationReturnType = { task: { duration: number } };
