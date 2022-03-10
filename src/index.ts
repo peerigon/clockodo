@@ -13,7 +13,7 @@ export * from "./models/user.js";
 export * from "./models/userReport.js";
 export * from "./models/worktimeRegulation.js";
 
-export * from "./lib/errors";
+export * from "./lib/apiErrors.js";
 
 export {
   mapQueryParams,
