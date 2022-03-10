@@ -5,8 +5,11 @@ export type Absence = {
   usersId: number;
   /** Start date in YYYY-MM-DD format */
   dateSince: string;
-  /** End date in YYYY-MM-DD format */
-  dateUntil: string | null;
+  /**
+   * End date in YYYY-MM-DD format
+   * Is the same date as dateSince in case the absence is only one day long
+   **/
+  dateUntil: string; // | null (as stated in the docs) doesn't seem to be correct
   /**
    * Status of the absence.
    * Only with access rights for absence administration or in case of own absences
@@ -17,8 +20,8 @@ export type Absence = {
    * Only with access rights for absence administration or in case of own absences
    */
   type?: AbsenceType;
-  /** Only with access rights for absence administration or in case of own absences
-   
+  /**
+   * Only with access rights for absence administration or in case of own absences
    */
   note?: string | null;
   /**
