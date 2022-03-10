@@ -1,3 +1,10 @@
+## [10.1.1](https://github.com/peerigon/clockodo/compare/v10.1.0...v10.1.1) (2022-03-05)
+
+
+### Bug Fixes
+
+* Incorrect userReport typings ([5440658](https://github.com/peerigon/clockodo/commit/5440658f10982c74be95d9107e4c6727e46cb814))
+
 # [10.1.0](https://github.com/peerigon/clockodo/compare/v10.0.0...v10.1.0) (2022-01-02)
 
 

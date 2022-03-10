@@ -141,17 +141,17 @@ export type UserReportDayDetails = {
    * Worked time (in seconds).
    * Won't be added for future days
    */
-  hours: number | null;
+  hours?: number;
   /**
    * Worked time when ignoring the daily compensation (in seconds).
    * Won't be added for future days.
    **/
-  hoursWithoutCompensation: number | null;
+  hoursWithoutCompensation?: number;
   /**
    * Calculated difference of the time account (in seconds).
    * Won't be added for future days
    */
-  diff: number;
+  diff?: number;
   countAbsence: {
     /**
      * Absence because of a regular holiday or special leaves (0, 0.5 or 1)
