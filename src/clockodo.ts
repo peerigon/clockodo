@@ -61,6 +61,26 @@ export class Clockodo {
     return this.api.get("/absences", params);
   }
 
+  async getAccessCustomersProjects(
+    params: Params<{ id: User["id"] }>
+  ): Promise<AccessReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMER_PROJECTS);
+
+    const { id, ...rest } = params;
+
+    return this.api.get(`/v2/users/${id}/access/customers-projects`, rest);
+  }
+
+  async getAccessServices(
+    params: Params<{ id: User["id"] }>
+  ): Promise<AccessReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
+
+    const { id, ...rest } = params;
+
+    return this.api.get(`/v2/users/${id}/access/services`, rest);
+  }
+
   async getClock(params?: Params): Promise<ClockReturnType> {
     return this.api.get("/v2/clock", params);
   }
@@ -503,6 +523,10 @@ export class Clockodo {
 
 export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
+export type AccessReturnType = Record<
+  string,
+  boolean | Record<string, boolean>
+>;
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
 export type CustomersReturnType = { customers: Array<Customer> };
@@ -528,33 +552,37 @@ export type EditEntryReturnType = {
 };
 export type EntriesReturnType = {
   paging: Paging;
-  filter: Pick<
-    Filter,
-    | "billable"
-    | "budgetType"
-    | "customersId"
-    | "lumpsumServicesId"
-    | "projectsId"
-    | "servicesId"
-    | "text"
-    | "textsId"
-    | "usersId"
-  > | null;
+  filter: Array<
+    Pick<
+      Filter,
+      | "billable"
+      | "budgetType"
+      | "customersId"
+      | "lumpsumServicesId"
+      | "projectsId"
+      | "servicesId"
+      | "text"
+      | "textsId"
+      | "usersId"
+    >
+  >;
   entries: Array<Entry>;
 };
 export type EntriesTextsReturnType = {
   paging: Paging;
-  filter: Pick<
-    Filter,
-    | "billable"
-    | "customersId"
-    | "lumpsumServicesId"
-    | "projectsId"
-    | "servicesId"
-    | "usersId"
-    | "timeSince"
-    | "timeUntil"
-  > | null;
+  filter: Array<
+    Pick<
+      Filter,
+      | "billable"
+      | "customersId"
+      | "lumpsumServicesId"
+      | "projectsId"
+      | "servicesId"
+      | "usersId"
+      | "timeSince"
+      | "timeUntil"
+    >
+  >;
   texts: EntriesText;
   mode: string;
   sort: string;
