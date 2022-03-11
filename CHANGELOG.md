@@ -1,3 +1,10 @@
+## [10.1.5](https://github.com/peerigon/clockodo/compare/v10.1.4...v10.1.5) (2022-03-11)
+
+
+### Bug Fixes
+
+* Incorrect entry mocks implementation ([3840ab6](https://github.com/peerigon/clockodo/commit/3840ab645ad856a51e6c94573c127dbc4bcf21cc))
+
 ## [10.1.4](https://github.com/peerigon/clockodo/compare/v10.1.3...v10.1.4) (2022-03-11)
 
 
