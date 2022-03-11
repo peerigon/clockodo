@@ -106,7 +106,7 @@ export const createLumpsumValueEntryMocks = ({
       id: index,
       type: 2,
       billable: [Billability.Billable as const, Billability.Billed as const][
-        index % 1
+        index % 2
       ],
       servicesId: 0,
       lumpsum: faker.datatype.float({ min: 0.2, max: 150 }),
@@ -125,7 +125,7 @@ export const createLumpsumServiceEntryMocks = ({
       id: index,
       type: 3,
       billable: [Billability.Billable as const, Billability.Billed as const][
-        index % 1
+        index % 2
       ],
       lumpsumServicesId: 0,
       lumpsumServicesAmount: faker.datatype.float({ min: 0.2, max: 150 }),

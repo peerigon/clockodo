@@ -1,3 +1,24 @@
+## [10.1.4](https://github.com/peerigon/clockodo/compare/v10.1.3...v10.1.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* Improve mocks ([1b951e8](https://github.com/peerigon/clockodo/commit/1b951e84c3bdb08cea43d2ee312c7be95946b99b))
+
+## [10.1.3](https://github.com/peerigon/clockodo/compare/v10.1.2...v10.1.3) (2022-03-10)
+
+
+### Bug Fixes
+
+* Export absence mocks ([b07b102](https://github.com/peerigon/clockodo/commit/b07b1028e33a15b8776f01aea857b1babd6416cf))
+
+## [10.1.2](https://github.com/peerigon/clockodo/compare/v10.1.1...v10.1.2) (2022-03-10)
+
+
+### Bug Fixes
+
+* Incorrect absence typings ([563c0c5](https://github.com/peerigon/clockodo/commit/563c0c5fd3428fd86ffd4feabc7ada0bb66821e8))
+
 ## [10.1.1](https://github.com/peerigon/clockodo/compare/v10.1.0...v10.1.1) (2022-03-05)
 
 
