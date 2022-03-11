@@ -8,8 +8,9 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 const absenceStatuses = Object.values(AbsenceStatus).filter(
   (status): status is AbsenceStatus => typeof status === "number"
 );
-const absenceTypes = Object.values(AbsenceType).filter(
-  (status): status is AbsenceType => typeof status === "number"
+const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
+  (status): status is AbsenceType =>
+    typeof status === "number" && status !== AbsenceType.ReductionOfOvertime
 );
 
 export const createAbsencesMocks = ({
@@ -61,7 +62,9 @@ export const createAbsencesMocks = ({
         ? AbsenceType.ReductionOfOvertime
         : // Make sure that we get the most important absence types
           // also for lower mock counts.
-          absenceTypes[index % absenceTypes.length],
+          absenceTypesWithoutOvertimeReduction[
+            index % absenceTypesWithoutOvertimeReduction.length
+          ],
       note: hasNote
         ? faker.lorem.words(faker.datatype.number({ min: 2, max: 10 }))
         : null,
