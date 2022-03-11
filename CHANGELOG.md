@@ -1,3 +1,10 @@
+## [10.1.6](https://github.com/peerigon/clockodo/compare/v10.1.5...v10.1.6) (2022-03-11)
+
+
+### Bug Fixes
+
+* Incorrect absence mock ([979266d](https://github.com/peerigon/clockodo/commit/979266d2c26902f3e6dc561f4676f3e0a93b0af5))
+
 ## [10.1.5](https://github.com/peerigon/clockodo/compare/v10.1.4...v10.1.5) (2022-03-11)
 
 
