@@ -9,11 +9,12 @@ export const createLumpsumServiceMocks = ({
       id: index,
       name: faker.commerce.productName(),
       price: faker.datatype.float({ min: 0.01, max: 9999 }),
-      unit: faker.datatype.boolean() ? faker.lorem.word() : null,
+      unit: index % 2 === 0 ? faker.lorem.word() : null,
       number: faker.datatype.hexaDecimal(),
       active: faker.datatype.boolean(),
-      note: faker.datatype.boolean()
-        ? faker.lorem.sentences(faker.datatype.number({ min: 1, max: 3 }))
-        : null,
+      note:
+        index % 2 === 0
+          ? null
+          : faker.lorem.sentences(faker.datatype.number({ min: 1, max: 3 })),
     };
   });

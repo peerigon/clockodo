@@ -1,5 +1,5 @@
-import { NonbusinessGroup } from "./models/nonbusinessGroup";
-import { WorktimeRegulation } from "./models/worktimeRegulation";
+import { NonbusinessGroup } from "./models/nonbusinessGroup.js";
+import { WorktimeRegulation } from "./models/worktimeRegulation.js";
 import { Absence } from "./models/absence.js";
 import { Customer } from "./models/customer.js";
 import {
