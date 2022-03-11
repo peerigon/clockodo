@@ -1,3 +1,10 @@
+## [10.1.4](https://github.com/peerigon/clockodo/compare/v10.1.3...v10.1.4) (2022-03-11)
+
+
+### Bug Fixes
+
+* Improve mocks ([1b951e8](https://github.com/peerigon/clockodo/commit/1b951e84c3bdb08cea43d2ee312c7be95946b99b))
+
 ## [10.1.3](https://github.com/peerigon/clockodo/compare/v10.1.2...v10.1.3) (2022-03-10)
 
 
