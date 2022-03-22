@@ -65,6 +65,7 @@ export type Config = {
    */
   authentication?: Authentication;
   baseUrl?: string;
+  locale?: string;
 };
 
 export class Api {
@@ -74,7 +75,12 @@ export class Api {
     },
   });
 
-  constructor({ baseUrl = DEFAULT_BASE_URL, authentication, client }: Config) {
+  constructor({
+    baseUrl = DEFAULT_BASE_URL,
+    authentication,
+    client,
+    locale,
+  }: Config) {
     // This check is for non-TypeScript users only
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
@@ -82,12 +88,16 @@ export class Api {
         `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
       );
     }
-    this.config({ client, authentication, baseUrl });
+    this.config({ client, authentication, baseUrl, locale });
   }
 
   config(config: Partial<Config>) {
-    const { authentication, baseUrl, client } = config;
+    const { authentication, baseUrl, client, locale } = config;
     const defaults = this[axiosClient].defaults;
+
+    if (locale) {
+      defaults.headers["Accept-Language"] = locale;
+    }
 
     if (baseUrl) {
       if (typeof baseUrl !== "string") {
