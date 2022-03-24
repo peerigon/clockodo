@@ -646,6 +646,29 @@ describe("Clockodo (instance)", () => {
         ).rejects.toThrowError('Missing required parameter "type"');
       });
     });
+    describe("register()", () => {
+      it("correctly builds register() request", async () => {
+        const expectedParameters = {
+          companies_name: "Acme Corporation",
+          name: "Looney Tunes",
+          email: "looney@tunes.com",
+          gtc_agreed: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .post("/register", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.register({
+          companiesName: "Acme Corporation",
+          name: "Looney Tunes",
+          email: "looney@tunes.com",
+          gtcAgreed: true,
+        });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("PUT", () => {
@@ -900,30 +923,6 @@ describe("Clockodo (instance)", () => {
           .reply(200, {});
 
         await clockodo.deleteAbsence({ id: 31 });
-
-        nockScope.done();
-      });
-    });
-
-    describe("register()", () => {
-      it("correctly builds register() request", async () => {
-        const expectedParameters = {
-          companies_name: "Acme Corporation",
-          name: "Looney Tunes",
-          email: "looney@tunes.com",
-          gtc_agreed: true,
-        };
-
-        const nockScope = nock(CLOCKODO_API)
-          .post("/register", expectedParameters)
-          .reply(200, {});
-
-        await clockodo.register({
-          companiesName: "Acme Corporation",
-          name: "Looney Tunes",
-          email: "looney@tunes.com",
-          gtcAgreed: true,
-        });
 
         nockScope.done();
       });

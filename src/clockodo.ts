@@ -534,7 +534,7 @@ export class Clockodo {
   ): Promise<RegisterReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.REGISTER);
 
-    return this.api.post("/register/", params);
+    return this.api.post("/register", params);
   }
 
   async stopClock(
