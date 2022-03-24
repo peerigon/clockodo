@@ -23,6 +23,7 @@ export const ADD_LUMPSUM_SERVICE_ENTRY = [
 ] as const;
 export const ADD_PROJECT = ["name", "customersId"] as const;
 export const ADD_SERVICE = ["name"] as const;
+export const ADD_TEAM = ["name"] as const;
 export const ADD_USER = ["name", "number", "email", "role"] as const;
 export const CHANGE_CLOCK_DURATION = [
   "entriesId",
@@ -36,9 +37,11 @@ export const DEACTIVATE_USER = ["id"] as const;
 export const DELETE_ENTRY = ["id"] as const;
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const DELETE_ABSENCE = ["id"] as const;
+export const DELETE_TEAM = ["id"] as const;
 export const EDIT_CUSTOMER = ["id"] as const;
 export const EDIT_PROJECT = ["id"] as const;
 export const EDIT_SERVICE = ["id"] as const;
+export const EDIT_TEAM = ["id"] as const;
 export const EDIT_USER = ["id"] as const;
 export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const EDIT_ABSENCE = ["id"] as const;
@@ -63,6 +66,7 @@ export const GET_TASK_DURATION = [
   "taskText",
   "taskBillable",
 ] as const;
+export const GET_TEAM = ["id"] as const;
 export const GET_USER = ["id"] as const;
 export const GET_USER_REPORT = ["usersId", "year"] as const;
 export const GET_USER_REPORTS = ["year"] as const;

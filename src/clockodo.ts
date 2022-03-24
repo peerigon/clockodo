@@ -24,6 +24,7 @@ import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
 import { camelCaseToSnakeCase } from "./lib/mappings.js";
 import { EntriesText } from "./models/entriesText";
+import { Team } from "./models/team.js";
 
 type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>
@@ -175,6 +176,18 @@ export class Clockodo {
 
   async getServices(params?: Params): Promise<ServicesReturnType> {
     return this.api.get("/services", params);
+  }
+
+  async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_TEAM);
+
+    const { id, ...rest } = params;
+
+    return this.api.get("/v2/teams/" + id, rest);
+  }
+
+  async getTeams(params?: Params): Promise<TeamsReturnType> {
+    return this.api.get("/v2/teams", params);
   }
 
   // This endpoint still uses the old lumpSum casing
@@ -340,6 +353,14 @@ export class Clockodo {
     return this.api.post("/services", params);
   }
 
+  async addTeam(
+    params: Params<Pick<Team, typeof REQUIRED.ADD_TEAM[number]>>
+  ): Promise<TeamReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_TEAM);
+
+    return this.api.post("/v2/teams", params);
+  }
+
   async addUser(
     params: Params<Pick<User, typeof REQUIRED.ADD_USER[number]>>
   ): Promise<AddUserReturnType> {
@@ -432,6 +453,16 @@ export class Clockodo {
     return this.api.put("/services/" + id, params);
   }
 
+  async editTeam(
+    params: Params<Pick<Team, typeof REQUIRED.EDIT_TEAM[number]>>
+  ): Promise<TeamReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_TEAM);
+
+    const { id } = params;
+
+    return this.api.put("/v2/teams/" + id, params);
+  }
+
   async editUser(
     params: Params<Pick<User, typeof REQUIRED.EDIT_USER[number]>>
   ): Promise<UserReturnType> {
@@ -510,6 +541,16 @@ export class Clockodo {
     return this.api.delete("/entrygroups", params);
   }
 
+  async deleteTeam(
+    params: Params<Pick<Team, typeof REQUIRED.DELETE_TEAM[number]>>
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_TEAM);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/teams/" + id, params);
+  }
+
   async stopClock(
     params: Params<{ entriesId: Entry["id"] }>
   ): Promise<ClockStopReturnType> {
@@ -534,6 +575,8 @@ export type ProjectsReturnType = { projects: Array<Project> };
 export type ProjectReturnType = { project: Project };
 export type ServiceReturnType = { service: Service };
 export type ServicesReturnType = { services: Array<Service> };
+export type TeamReturnType = { team: Team };
+export type TeamsReturnType = { teams: Array<Team> };
 export type LumpsumServiceReturnType = {
   // This endpoint still uses the old lumpSum casing
   lumpSumService: LumpsumService;
