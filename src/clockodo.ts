@@ -220,6 +220,14 @@ export class Clockodo {
     return this.api.get("/targethours", params);
   }
 
+  async getUser(params: Params<{ id: User["id"] }>): Promise<UserReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_USER);
+
+    const { id, ...rest } = params;
+
+    return this.api.get("/users/" + id, rest);
+  }
+
   async getUsers(params?: Params): Promise<UsersReturnType> {
     return this.api.get("/users", params);
   }
