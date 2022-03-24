@@ -904,5 +904,29 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("register()", () => {
+      it("correctly builds register() request", async () => {
+        const expectedParameters = {
+          companies_name: "Acme Corporation",
+          name: "Looney Tunes",
+          email: "looney@tunes.com",
+          gtc_agreed: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .post("/register", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.register({
+          companiesName: "Acme Corporation",
+          name: "Looney Tunes",
+          email: "looney@tunes.com",
+          gtcAgreed: true,
+        });
+
+        nockScope.done();
+      });
+    });
   });
 });

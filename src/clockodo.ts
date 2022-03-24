@@ -551,6 +551,14 @@ export class Clockodo {
     return this.api.delete("/v2/teams/" + id, params);
   }
 
+  async register(
+    params: Params<{ companiesName: string; name: string; email: string }>
+  ): Promise<RegisterReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.REGISTER);
+
+    return this.api.post("/register/", params);
+  }
+
   async stopClock(
     params: Params<{ entriesId: Entry["id"] }>
   ): Promise<ClockStopReturnType> {
@@ -686,6 +694,11 @@ export type ClockEditReturnType = {
   updated: TimeEntry;
   running: null | TimeEntry;
   currentTime: string;
+};
+export type RegisterReturnType = {
+  success: "true";
+  user: User;
+  apiKey: string;
 };
 export type SearchTextsReturnType = { texts: Array<string> };
 
