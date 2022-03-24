@@ -4,7 +4,6 @@ import { Absence } from "./models/absence.js";
 import { Customer } from "./models/customer.js";
 import {
   Entry,
-  TimeEntryBillability,
   TimeEntry,
   LumpsumValueEntry,
   LumpsumServiceEntry,
@@ -15,7 +14,6 @@ import { LumpsumService } from "./models/lumpsumService.js";
 import { Project } from "./models/project.js";
 import { Service } from "./models/service.js";
 import { TargethoursRow } from "./models/targethours.js";
-import { Task } from "./models/task.js";
 import { User } from "./models/user.js";
 import { UserReport, UserReportType } from "./models/userReport.js";
 import { Api, Config, Filter, Paging } from "./lib/api.js";
@@ -220,34 +218,6 @@ export class Clockodo {
 
   async getTargethours(params?: Params): Promise<TargethoursReturnType> {
     return this.api.get("/targethours", params);
-  }
-
-  /** @deprecated */
-  async getTaskDuration(
-    params: Params<{
-      taskCustomersId: number;
-      taskProjectsId: number;
-      taskServicesId: number;
-      taskText: string;
-      taskBillable: TimeEntryBillability;
-    }>
-  ): Promise<TaskDurationReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_TASK_DURATION);
-
-    return this.api.get("/tasks/duration", params);
-  }
-
-  /** @deprecated */
-  async getTasks(params?: Params): Promise<TasksReturnType> {
-    return this.api.get("/tasks", params);
-  }
-
-  async getUser(params: Params<{ id: User["id"] }>): Promise<UserReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_USER);
-
-    const { id, ...rest } = params;
-
-    return this.api.get("/users/" + id, rest);
   }
 
   async getUsers(params?: Params): Promise<UsersReturnType> {
@@ -637,16 +607,6 @@ export type EntriesTextsReturnType = {
   texts: EntriesText;
   mode: string;
   sort: string;
-};
-export type TaskDurationReturnType = { task: { duration: number } };
-export type TasksReturnType = {
-  days: Array<{
-    date: string;
-    dateText: string;
-    duration: number;
-    durationText: string;
-    tasks: Array<Task>;
-  }>;
 };
 export type EntryGroupsReturnType = { groups: Array<EntryGroup> };
 export type EditEntryGroupsReturnType =

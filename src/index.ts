@@ -8,7 +8,6 @@ export * from "./models/lumpsumService.js";
 export * from "./models/project.js";
 export * from "./models/service.js";
 export * from "./models/targethours.js";
-export * from "./models/task.js";
 export * from "./models/user.js";
 export * from "./models/userReport.js";
 export * from "./models/worktimeRegulation.js";

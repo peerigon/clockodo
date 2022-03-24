@@ -569,7 +569,7 @@ await clockodo.addUser({
 
 ### startClock()
 
-Get Clockodo Tasks (grouped entries).
+Start a new running clockodo entry.
 
 #### Example:
 

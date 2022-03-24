@@ -59,13 +59,6 @@ export const GET_PROJECT = ["id"] as const;
 export const GET_SERVICE = ["id"] as const;
 export const GET_LUMPSUM_SERVICE = ["id"] as const;
 export const GET_TARGETHOURS_ROW = ["id"] as const;
-export const GET_TASK_DURATION = [
-  "taskCustomersId",
-  "taskProjectsId",
-  "taskServicesId",
-  "taskText",
-  "taskBillable",
-] as const;
 export const GET_TEAM = ["id"] as const;
 export const GET_USER = ["id"] as const;
 export const GET_USER_REPORT = ["usersId", "year"] as const;
