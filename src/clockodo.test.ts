@@ -38,7 +38,7 @@ describe("Clockodo (instance)", () => {
             client: {},
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"name should be a string but is typeof: undefined"`
+        `"name should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing client email", () => {
@@ -51,7 +51,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"email should be a string but is typeof: undefined"`
+        `"email should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing user email", () => {
@@ -66,7 +66,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"user should be a string but is typeof: undefined"`
+        `"user should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing API key", () => {
@@ -81,7 +81,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"apiKey should be a string but is typeof: undefined"`
+        `"apiKey should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor has baseUrl with type other than string", () => {
@@ -93,7 +93,7 @@ describe("Clockodo (instance)", () => {
             baseUrl: 5678,
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"baseUrl should be a string but is typeof: number"`
+        `"baseUrl should be undefined or a string but given value 5678 is typeof number"`
       );
     });
   });
