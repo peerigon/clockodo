@@ -63,8 +63,16 @@ export type Config = {
    * Authentication for all requests.
    * Uses cookie authentication if undefined.
    */
-  authentication?: Authentication;
-  baseUrl?: string;
+  authentication?: Authentication | undefined;
+  /**
+   * The API base url.
+   * Falls back to "https://my.clockodo.com/api" if undefined.
+   */
+  baseUrl?: string | undefined;
+  /**
+   * Will be sent as Accept-Language header.
+   */
+  locale?: string | undefined;
 };
 
 export class Api {
@@ -74,7 +82,12 @@ export class Api {
     },
   });
 
-  constructor({ baseUrl = DEFAULT_BASE_URL, authentication, client }: Config) {
+  constructor({
+    baseUrl = DEFAULT_BASE_URL,
+    authentication,
+    client,
+    locale,
+  }: Config) {
     // This check is for non-TypeScript users only
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
@@ -82,39 +95,67 @@ export class Api {
         `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
       );
     }
-    this.config({ client, authentication, baseUrl });
+    this.config({ client, authentication, baseUrl, locale });
   }
 
   config(config: Partial<Config>) {
-    const { authentication, baseUrl, client } = config;
     const defaults = this[axiosClient].defaults;
 
-    if (baseUrl) {
-      if (typeof baseUrl !== "string") {
-        throw new Error(
-          `baseUrl should be a string but is typeof: ${typeof baseUrl}`
-        );
+    if ("locale" in config) {
+      const { locale } = config;
+
+      if (locale === undefined) {
+        delete defaults.headers["Accept-Language"];
+      } else if (typeof locale === "string") {
+        defaults.headers["Accept-Language"] = locale;
+      } else {
+        throw createTypeError({
+          name: "locale",
+          expected: "undefined or a string",
+          actual: locale,
+        });
       }
-      defaults.baseURL = baseUrl;
     }
-    if (client) {
-      const { name, email } = client;
+
+    if ("baseUrl" in config) {
+      const { baseUrl } = config;
+
+      if (baseUrl === undefined) {
+        defaults.baseURL = DEFAULT_BASE_URL;
+      } else if (typeof baseUrl === "string") {
+        defaults.baseURL = baseUrl;
+      } else {
+        throw createTypeError({
+          name: "baseUrl",
+          expected: "undefined or a string",
+          actual: baseUrl,
+        });
+      }
+    }
+
+    if (config.client) {
+      const { name, email } = config.client;
 
       if (typeof name !== "string") {
-        throw new Error(
-          `name should be a string but is typeof: ${typeof name}`
-        );
+        throw createTypeError({
+          name: "name",
+          expected: "a string",
+          actual: name,
+        });
       }
-
       if (typeof email !== "string") {
-        throw new Error(
-          `email should be a string but is typeof: ${typeof email}`
-        );
+        throw createTypeError({
+          name: "email",
+          expected: "a string",
+          actual: email,
+        });
       }
 
       defaults.headers["X-Clockodo-External-Application"] = `${name};${email}`;
     }
     if ("authentication" in config) {
+      const { authentication } = config;
+
       if (authentication === undefined) {
         delete defaults.headers["X-ClockodoApiUser"];
         delete defaults.headers["X-ClockodoApiKey"];
@@ -124,15 +165,18 @@ export class Api {
         const { user, apiKey } = authentication;
 
         if (typeof user !== "string") {
-          throw new Error(
-            `user should be a string but is typeof: ${typeof user}`
-          );
+          throw createTypeError({
+            name: "user",
+            expected: "a string",
+            actual: user,
+          });
         }
-
         if (typeof apiKey !== "string") {
-          throw new Error(
-            `apiKey should be a string but is typeof: ${typeof apiKey}`
-          );
+          throw createTypeError({
+            name: "apiKey",
+            expected: "a string",
+            actual: apiKey,
+          });
         }
 
         defaults.headers["X-ClockodoApiUser"] = user;
@@ -203,3 +247,17 @@ export class Api {
     return mapResponseBody<Result>(response.data);
   }
 }
+
+const createTypeError = ({
+  name,
+  expected,
+  actual,
+}: {
+  name: string;
+  expected: string;
+  actual: any;
+}) => {
+  return new TypeError(
+    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`
+  );
+};
