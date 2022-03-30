@@ -137,6 +137,28 @@ describe("Clockodo (instance)", () => {
     });
   });
 
+  describe("Config", () => {
+    describe("locale", () => {
+      it("sends request with the given Accept-Language header", async () => {
+        const nockScope = nock(CLOCKODO_API, {
+          reqheaders: {
+            "Accept-Language": "de-DE",
+          },
+        })
+          .get("/anything")
+          .reply(200, {});
+
+        clockodo.api.config({
+          locale: "de-DE",
+        });
+
+        await clockodo.api.get("/anything");
+
+        nockScope.done();
+      });
+    });
+  });
+
   describe("GET", () => {
     describe("getAbsence()", () => {
       it("correctly builds getAbsence() request", async () => {
