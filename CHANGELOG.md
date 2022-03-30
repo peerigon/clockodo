@@ -1,3 +1,10 @@
+# [10.2.0](https://github.com/peerigon/clockodo/compare/v10.1.6...v10.2.0) (2022-03-30)
+
+
+### Features
+
+* Make locale providable ([e12c8ab](https://github.com/peerigon/clockodo/commit/e12c8abdfab2f25be82103c00b892d1a62902ea1))
+
 ## [10.1.6](https://github.com/peerigon/clockodo/compare/v10.1.5...v10.1.6) (2022-03-11)
 
 
