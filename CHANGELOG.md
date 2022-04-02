@@ -1,3 +1,10 @@
+# [10.3.0](https://github.com/peerigon/clockodo/compare/v10.2.0...v10.3.0) (2022-04-02)
+
+
+### Features
+
+* Update faker module ([787b4cd](https://github.com/peerigon/clockodo/commit/787b4cd778d255790bb6b0133756140e7b47ecb7))
+
 # [10.2.0](https://github.com/peerigon/clockodo/compare/v10.1.6...v10.2.0) (2022-03-30)
 
 
