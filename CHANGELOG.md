@@ -1,3 +1,10 @@
+## [10.3.1](https://github.com/peerigon/clockodo/compare/v10.3.0...v10.3.1) (2022-04-02)
+
+
+### Bug Fixes
+
+* Replace deprecated faker functions ([33d3ed6](https://github.com/peerigon/clockodo/commit/33d3ed67d068e41bff439e0e8e96e0fc8000e8be))
+
 # [10.3.0](https://github.com/peerigon/clockodo/compare/v10.2.0...v10.3.0) (2022-04-02)
 
 
