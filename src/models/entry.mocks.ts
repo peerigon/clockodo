@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { dateToClockodoIsoString } from "../lib/dateTime.js";
 import {
   Billability,

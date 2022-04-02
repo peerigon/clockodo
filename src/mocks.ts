@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 
 export * from "./models/absence.mocks.js";
 export * from "./models/customer.mocks.js";

@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date("2020");
