@@ -168,13 +168,8 @@ export class Api {
       const { authentication } = config;
 
       if (authentication === undefined) {
-        if (request.headers["X-ClockodoApiUser"]) {
-          delete request.headers["X-ClockodoApiUser"];
-        }
-
-        if (request.headers["X-ClockodoApiKey"]) {
-          delete request.headers["X-ClockodoApiKey"];
-        }
+        delete request.headers["X-ClockodoApiUser"];
+        delete request.headers["X-ClockodoApiKey"];
 
         request.headers["X-Requested-With"] = "XMLHttpRequest";
         // defaults.withCredentials = true;
@@ -199,9 +194,7 @@ export class Api {
         request.headers["X-ClockodoApiUser"] = user;
         request.headers["X-ClockodoApiKey"] = apiKey;
 
-        if (request.headers["X-Requested-With"]) {
-          delete request.headers["X-Requested-With"];
-        }
+        delete request.headers["X-Requested-With"];
 
         // Since we're sending auth headers now, it's not required to also send cookies.
         // defaults.withCredentials = false;
