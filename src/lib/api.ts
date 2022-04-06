@@ -212,7 +212,9 @@ export class Api {
   async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
     const params = paramsSerializer(mapQueryParams(queryParams));
     const baseUrl = this[requestConfig].baseUrl;
-    const request = new Request(`${baseUrl}${url}?${params}`);
+    const request = new Request(
+      `${baseUrl}${url}${params ? "?" + params : ""}`
+    );
 
     const response = await fetch(request, {
       method: "GET",
