@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { Customer } from "./customer.js";
 import { createProjectMocks } from "./project.mocks.js";
 

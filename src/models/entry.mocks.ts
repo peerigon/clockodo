@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { dateToClockodoIsoString } from "../lib/dateTime.js";
 import {
   Billability,
@@ -132,21 +132,24 @@ export const createLumpsumServiceEntryMocks = ({
     };
   });
 
-export const createEntryMocks = ({
-  count = 1,
-  ...options
-}: CommonOptions = {}) =>
-  Array.from({ length: count }, (_, index): Entry => {
+export const createEntryMocks = (options: CommonOptions = {}) => {
+  const { count = 1 } = options;
+  const timeEntryMocks = createTimeEntryMocks(options);
+  const lumpsumValueEntryMocks = createLumpsumValueEntryMocks(options);
+  const lumpsumServiceEntryMocks = createLumpsumServiceEntryMocks(options);
+
+  return Array.from({ length: count }, (_, index): Entry => {
     const typeSeed = faker.datatype.number({ min: 0, max: 10 });
-    const [entry] =
+    const entry =
       typeSeed > 2
-        ? createTimeEntryMocks(options)
+        ? timeEntryMocks[index]
         : typeSeed > 1
-        ? createLumpsumValueEntryMocks(options)
-        : createLumpsumServiceEntryMocks(options);
+        ? lumpsumValueEntryMocks[index]
+        : lumpsumServiceEntryMocks[index];
 
     return {
       ...entry,
       id: index,
     };
   });
+};

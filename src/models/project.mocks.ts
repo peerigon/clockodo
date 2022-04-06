@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { Project } from "./project.js";
 
 export const createProjectMocks = ({ count = 1 }: { count?: number } = {}) =>

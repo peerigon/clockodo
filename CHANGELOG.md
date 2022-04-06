@@ -1,3 +1,38 @@
+## [10.3.1](https://github.com/peerigon/clockodo/compare/v10.3.0...v10.3.1) (2022-04-02)
+
+
+### Bug Fixes
+
+* Replace deprecated faker functions ([33d3ed6](https://github.com/peerigon/clockodo/commit/33d3ed67d068e41bff439e0e8e96e0fc8000e8be))
+
+# [10.3.0](https://github.com/peerigon/clockodo/compare/v10.2.0...v10.3.0) (2022-04-02)
+
+
+### Features
+
+* Update faker module ([787b4cd](https://github.com/peerigon/clockodo/commit/787b4cd778d255790bb6b0133756140e7b47ecb7))
+
+# [10.2.0](https://github.com/peerigon/clockodo/compare/v10.1.6...v10.2.0) (2022-03-30)
+
+
+### Features
+
+* Make locale providable ([e12c8ab](https://github.com/peerigon/clockodo/commit/e12c8abdfab2f25be82103c00b892d1a62902ea1))
+
+## [10.1.6](https://github.com/peerigon/clockodo/compare/v10.1.5...v10.1.6) (2022-03-11)
+
+
+### Bug Fixes
+
+* Incorrect absence mock ([979266d](https://github.com/peerigon/clockodo/commit/979266d2c26902f3e6dc561f4676f3e0a93b0af5))
+
+## [10.1.5](https://github.com/peerigon/clockodo/compare/v10.1.4...v10.1.5) (2022-03-11)
+
+
+### Bug Fixes
+
+* Incorrect entry mocks implementation ([3840ab6](https://github.com/peerigon/clockodo/commit/3840ab645ad856a51e6c94573c127dbc4bcf21cc))
+
 ## [10.1.4](https://github.com/peerigon/clockodo/compare/v10.1.3...v10.1.4) (2022-03-11)
 
 

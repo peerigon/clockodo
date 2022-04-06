@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 import { LumpsumService } from "./lumpsumService.js";
 
 export const createLumpsumServiceMocks = ({
