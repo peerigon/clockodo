@@ -65,7 +65,7 @@
   },
   "homepage": "https://github.com/peerigon/clockodo#readme",
   "dependencies": {
-    "faker": "^5.5.3",
+    "@faker-js/faker": "^6.1.1",
     "map-obj": "^4.3.0",
     "node-fetch": "^2.6.7",
     "qs": "^6.10.1"
@@ -73,7 +73,6 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@types/faker": "^5.5.9",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.7",
     "@types/node-fetch": "^2.6.1",

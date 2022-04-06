@@ -69,8 +69,16 @@ export type Config = {
    * Authentication for all requests.
    * Uses cookie authentication if undefined.
    */
-  authentication?: Authentication;
-  baseUrl?: string;
+  authentication?: Authentication | undefined;
+  /**
+   * The API base url.
+   * Falls back to "https://my.clockodo.com/api" if undefined.
+   */
+  baseUrl?: string | undefined;
+  /**
+   * Will be sent as Accept-Language header.
+   */
+  locale?: string | undefined;
 };
 
 export class Api {
@@ -79,7 +87,12 @@ export class Api {
     headers: {},
   };
 
-  constructor({ baseUrl = DEFAULT_BASE_URL, authentication, client }: Config) {
+  constructor({
+    baseUrl = DEFAULT_BASE_URL,
+    authentication,
+    client,
+    locale,
+  }: Config) {
     // This check is for non-TypeScript users only
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
@@ -87,46 +100,73 @@ export class Api {
         `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
       );
     }
-    this.config({ client, authentication, baseUrl });
+    this.config({ client, authentication, baseUrl, locale });
   }
 
   // The fact that this can be called again was a source of great confusion. I had changed the if below to throw if (!baseUrl || typeof baseUrl !== "string"), but turns out sometimes we don't need it
   config(config: Partial<Config>) {
-    const { authentication, baseUrl, client } = config;
-
     const request = this[requestConfig];
 
     request.headers["X-ClockodoEnableIsoUtcDateTimes"] = "1";
 
-    if (baseUrl) {
-      if (typeof baseUrl !== "string") {
-        throw new Error(
-          `baseUrl should be a string but is typeof: ${typeof baseUrl}`
-        );
-      }
+    if ("locale" in config) {
+      const { locale } = config;
 
-      request.baseUrl = baseUrl;
+      if (locale === undefined) {
+        // * from merge
+        delete request.headers["Accept-Language"];
+      } else if (typeof locale === "string") {
+        // * from merge
+        request.headers["Accept-Language"] = locale;
+      } else {
+        throw createTypeError({
+          name: "locale",
+          expected: "undefined or a string",
+          actual: locale,
+        });
+      }
     }
 
-    if (client) {
-      const { name, email } = client;
+    if ("baseUrl" in config) {
+      const { baseUrl } = config;
+
+      if (baseUrl === undefined) {
+        request.baseUrl = DEFAULT_BASE_URL;
+      } else if (typeof baseUrl === "string") {
+        request.baseUrl = baseUrl;
+      } else {
+        throw createTypeError({
+          name: "baseUrl",
+          expected: "undefined or a string",
+          actual: baseUrl,
+        });
+      }
+    }
+
+    if (config.client) {
+      const { name, email } = config.client;
 
       if (typeof name !== "string") {
-        throw new Error(
-          `name should be a string but is typeof: ${typeof name}`
-        );
+        throw createTypeError({
+          name: "name",
+          expected: "a string",
+          actual: name,
+        });
       }
-
       if (typeof email !== "string") {
-        throw new Error(
-          `email should be a string but is typeof: ${typeof email}`
-        );
+        throw createTypeError({
+          name: "email",
+          expected: "a string",
+          actual: email,
+        });
       }
 
       request.headers["X-Clockodo-External-Application"] = `${name};${email}`;
     }
 
     if ("authentication" in config) {
+      const { authentication } = config;
+
       if (authentication === undefined) {
         if (request.headers["X-ClockodoApiUser"]) {
           delete request.headers["X-ClockodoApiUser"];
@@ -142,15 +182,18 @@ export class Api {
         const { user, apiKey } = authentication;
 
         if (typeof user !== "string") {
-          throw new Error(
-            `user should be a string but is typeof: ${typeof user}`
-          );
+          throw createTypeError({
+            name: "user",
+            expected: "a string",
+            actual: user,
+          });
         }
-
         if (typeof apiKey !== "string") {
-          throw new Error(
-            `apiKey should be a string but is typeof: ${typeof apiKey}`
-          );
+          throw createTypeError({
+            name: "apiKey",
+            expected: "a string",
+            actual: apiKey,
+          });
         }
 
         request.headers["X-ClockodoApiUser"] = user;
@@ -166,10 +209,7 @@ export class Api {
     }
   }
 
-  async get<Result = any>(
-    url: string,
-    queryParams = {}
-  ): Promise<Result> {
+  async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
     const params = paramsSerializer(mapQueryParams(queryParams));
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}?${params}`);
@@ -179,18 +219,15 @@ export class Api {
       headers: this[requestConfig].headers,
     });
 
-    const data = (await response.json());
+    const data = await response.json();
 
-    if(!response.ok) throw new ApiResponseError(response.status, data);
+    if (!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
   }
 
-  async post<Result = any>(
-    url: string,
-    body = {}
-  ): Promise<Result> {
+  async post<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
@@ -203,18 +240,15 @@ export class Api {
       body: JSON.stringify(mapRequestBody(body)),
     });
 
-    const data = (await response.json());
-        
-    if(!response.ok) throw new ApiResponseError(response.status, data);
+    const data = await response.json();
+
+    if (!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
   }
 
-  async put<Result = any>(
-    url: string,
-    body = {}
-  ): Promise<Result> {
+  async put<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
@@ -227,18 +261,15 @@ export class Api {
       body: JSON.stringify(mapRequestBody(body)),
     });
 
-    const data = (await response.json());
-        
-    if(!response.ok) throw new ApiResponseError(response.status, data);
+    const data = await response.json();
+
+    if (!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
   }
 
-  async delete<Result = any>(
-    url: string,
-    body = {}
-  ): Promise<Result> {
+  async delete<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
     const request = new Request(`${baseUrl}${url}`);
 
@@ -251,11 +282,25 @@ export class Api {
       body: JSON.stringify(mapRequestBody(body)),
     });
 
-    const data = (await response.json());
-        
-    if(!response.ok) throw new ApiResponseError(response.status, data);
+    const data = await response.json();
+
+    if (!response.ok) throw new ApiResponseError(response.status, data);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return mapResponseBody<Result>(data);
   }
 }
+
+const createTypeError = ({
+  name,
+  expected,
+  actual,
+}: {
+  name: string;
+  expected: string;
+  actual: any;
+}) => {
+  return new TypeError(
+    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`
+  );
+};

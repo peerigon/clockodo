@@ -38,7 +38,7 @@ describe("Clockodo (instance)", () => {
             client: {},
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"name should be a string but is typeof: undefined"`
+        `"name should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing client email", () => {
@@ -51,7 +51,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"email should be a string but is typeof: undefined"`
+        `"email should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing user email", () => {
@@ -66,7 +66,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"user should be a string but is typeof: undefined"`
+        `"user should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor is missing API key", () => {
@@ -81,7 +81,7 @@ describe("Clockodo (instance)", () => {
             },
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"apiKey should be a string but is typeof: undefined"`
+        `"apiKey should be a string but given value undefined is typeof undefined"`
       );
     });
     it("throws an error when constructor has baseUrl with type other than string", () => {
@@ -93,7 +93,7 @@ describe("Clockodo (instance)", () => {
             baseUrl: 5678,
           })
       ).toThrowErrorMatchingInlineSnapshot(
-        `"baseUrl should be a string but is typeof: number"`
+        `"baseUrl should be undefined or a string but given value 5678 is typeof number"`
       );
     });
   });
@@ -101,13 +101,15 @@ describe("Clockodo (instance)", () => {
   describe("Custom Error Types", () => {
     const obviouslyFakeId = 1000000000000001;
 
-    // TODO: make the assertions actually match error obj, not just error type 
+    // TODO: make the assertions actually match error obj, not just error type
     it("returns an ApiResponseError on failed auth", async () => {
       const apiError = new ApiResponseError(401, {
-        error:  { message: 'Authentication failed', fields: [] }
+        error: { message: "Authentication failed", fields: [] },
       });
-       
-      expect(clockodo.getCustomer({id: obviouslyFakeId})).rejects.toThrowError(apiError);
+
+      expect(
+        clockodo.getCustomer({ id: obviouslyFakeId })
+      ).rejects.toThrowError(apiError);
     });
     it("returns an ApiResponseError on 404", async () => {
       clockodo.api.config({
@@ -118,10 +120,34 @@ describe("Clockodo (instance)", () => {
       });
 
       const apiError = new ApiResponseError(404, {
-        error: { message: 'The requested resource could not be found'}
-      })
+        error: { message: "The requested resource could not be found" },
+      });
 
-      expect(clockodo.getCustomer({id: obviouslyFakeId})).rejects.toThrowError(apiError);
+      expect(
+        clockodo.getCustomer({ id: obviouslyFakeId })
+      ).rejects.toThrowError(apiError);
+    });
+  });
+
+  describe("Config", () => {
+    describe("locale", () => {
+      it("sends request with the given Accept-Language header", async () => {
+        const nockScope = nock(CLOCKODO_API, {
+          reqheaders: {
+            "Accept-Language": "de-DE",
+          },
+        })
+          .get("/anything")
+          .reply(200, {});
+
+        clockodo.api.config({
+          locale: "de-DE",
+        });
+
+        await clockodo.api.get("/anything");
+
+        nockScope.done();
+      });
     });
   });
 
