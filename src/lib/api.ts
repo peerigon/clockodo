@@ -1,4 +1,4 @@
-import fetch, { Request } from "node-fetch";
+import fetch from "node-fetch";
 import qs from "qs";
 import { requestConfig } from "./symbols.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
@@ -212,11 +212,10 @@ export class Api {
   async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
     const params = paramsSerializer(mapQueryParams(queryParams));
     const baseUrl = this[requestConfig].baseUrl;
-    const request = new Request(
-      `${baseUrl}${url}${params ? "?" + params : ""}`
-    );
 
-    const response = await fetch(request, {
+    const queryString = params ? `?${params}` : "";
+
+    const response = await fetch(`${baseUrl}${url}${queryString}`, {
       method: "GET",
       headers: this[requestConfig].headers,
     });
@@ -231,9 +230,8 @@ export class Api {
 
   async post<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
-    const request = new Request(`${baseUrl}${url}`);
 
-    const response = await fetch(request, {
+    const response = await fetch(`${baseUrl}${url}`, {
       method: "POST",
       headers: {
         ...this[requestConfig].headers,
@@ -252,9 +250,8 @@ export class Api {
 
   async put<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
-    const request = new Request(`${baseUrl}${url}`);
 
-    const response = await fetch(request, {
+    const response = await fetch(`${baseUrl}${url}`, {
       method: "PUT",
       headers: {
         ...this[requestConfig].headers,
@@ -273,9 +270,8 @@ export class Api {
 
   async delete<Result = any>(url: string, body = {}): Promise<Result> {
     const baseUrl = this[requestConfig].baseUrl;
-    const request = new Request(`${baseUrl}${url}`);
 
-    const response = await fetch(request, {
+    const response = await fetch(`${baseUrl}${url}`, {
       method: "DELETE",
       headers: {
         ...this[requestConfig].headers,
