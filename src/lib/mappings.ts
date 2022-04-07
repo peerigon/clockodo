@@ -14,11 +14,9 @@ export const queryParamMapping: Record<string, string> = {
   filterTextsId: "filter[texts_id]",
   filterBudgetType: "filter[budget_type]",
   filterLumpsumsId: "filter[lumpsums_id]",
-  taskCustomersId: "task[customers_id]",
-  taskProjectsId: "task[projects_id]",
-  taskServicesId: "task[services_id]",
-  taskBillable: "task[billable]",
-  taskText: "task[text]",
+  filterLumpsumsServicesId: "filter[lumpsum_services_id]",
+  filterTimeSince: "filter[time_since]",
+  filterTimeUntil: "filter[time_until]",
   // excludeIds needs to stay in camelCase.
   // This seems to be an inconsistency in the API.
   excludeIds: "excludeIds",

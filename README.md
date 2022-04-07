@@ -90,6 +90,30 @@ await clockodo.getAbsence({ id: 7 });
 
 ---
 
+### getUsersAccessCustomersProjects()
+
+Gets a user's (readonly) access rights for customers and projects.
+
+#### Example:
+
+```js
+await clockodo.getUsersAccessCustomersProjects({ usersId: 67325 });
+```
+
+---
+
+### getUsersAccessServices()
+
+Gets a user's (readonly) access rights for services.
+
+#### Example:
+
+```js
+await clockodo.getUsersAccessServices({ usersId: 67325 });
+```
+
+---
+
 ### getAbsences()
 
 Gets a list of absences in the provided year
@@ -185,6 +209,18 @@ await clockodo.getEntryGroups({
 
 ---
 
+### getEntriesTexts()
+
+Retreive descriptions (and no additional info) entered for time and lump sum entries. Seems to be a tight but case insensitive match.
+
+#### Example:
+
+```js
+await clockodo.getEntriesTexts({ text: "meeting with client" });
+```
+
+---
+
 ### getProject()
 
 Get a project by its ID. For a list of projects, use getCustomers().
@@ -213,20 +249,6 @@ await clockodo.getProjects({
 
 ---
 
-### getSearchTexts()
-
-Get the description(s) of the requested entries.
-
-#### Example:
-
-```js
-await clockodo.getSearchTexts({
-  projectsId: 300,
-});
-```
-
----
-
 ### getService()
 
 Get a service by its ID.
@@ -247,6 +269,30 @@ Get list of all services
 
 ```js
 await clockodo.getServices();
+```
+
+---
+
+### getTeam()
+
+Get team by id.
+
+#### Example:
+
+```js
+await clockodo.getTeam({ id: 10 });
+```
+
+---
+
+### getTeams()
+
+Get list of all teams.
+
+#### Example:
+
+```js
+await clockodo.getTeams();
 ```
 
 ---
@@ -472,6 +518,18 @@ await clockodo.addService({ name: "Thinking" });
 
 ---
 
+### addTeam()
+
+Creates a new team under your organization.
+
+#### Example:
+
+```js
+await clockodo.addTeam({ name: "Gold Team" });
+```
+
+---
+
 ### addUser()
 
 Creates new user in organization.
@@ -493,7 +551,7 @@ await clockodo.addUser({
 
 ### startClock()
 
-Get Clockodo Tasks (grouped entries).
+Start a new running clockodo entry.
 
 #### Example:
 
@@ -607,6 +665,18 @@ await clockodo.editService({ id: 23, name: "Room Service" });
 
 ---
 
+### editTeam()
+
+Edit existing team.
+
+#### Example:
+
+```js
+await clockodo.editTeam({ id: 6324, name: "New Team Name" });
+```
+
+---
+
 ### editUser()
 
 Edit existing user.
@@ -693,6 +763,18 @@ await clockodo.deleteEntry({ id: 543512 });
 
 ---
 
+### deleteTeam()
+
+Deletes a team by ID
+
+#### Example:
+
+```js
+await clockodo.deleteTeam({ id: 764 });
+```
+
+---
+
 ### deleteEntryGroup()
 
 Deletes one or more entries based on a series of filters that builds an "entry group".
@@ -704,6 +786,22 @@ await clockodo.deleteEntryGroup({
   timeSince: "2017-08-18T00:00:00Z",
   timeUntil: "2018-02-09T00:00:00Z",
   text: "chilin everyday",
+});
+```
+
+---
+
+### register()
+
+Creates a new clockodo account.
+
+#### Example:
+
+```js
+await clockodo.register({
+  companiesName: "Acme Corporation",
+  name: "Road Runner",
+  email: "runner@acme.com",
 });
 ```
 

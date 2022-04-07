@@ -33,10 +33,13 @@ export type Filter = {
   customersId?: number;
   projectsId?: number;
   servicesId?: number;
+  lumpsumServicesId?: number;
   billable?: number;
   text?: string;
   textsId?: number;
   budgetType?: string;
+  timeSince?: string;
+  timeUntil?: string;
 };
 
 export type Authentication = {
