@@ -664,9 +664,9 @@ export type ClockEditReturnType = {
   currentTime: string;
 };
 export type RegisterReturnType = {
-  success: "true";
+  success: true;
   user: User;
-  apiKey: string;
+  apikey: string;
 };
 export type SearchTextsReturnType = { texts: Array<string> };
 
@@ -677,7 +677,5 @@ export type TargethoursReturnType = {
   targethours: Array<TargethoursRow>;
 };
 export type AddUserReturnType = {
-  success: "true";
   user: User;
-  apikey: string;
 };
