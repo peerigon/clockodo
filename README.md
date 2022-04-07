@@ -249,20 +249,6 @@ await clockodo.getProjects({
 
 ---
 
-### getSearchTexts()
-
-Get the description(s) of the requested entries.
-
-#### Example:
-
-```js
-await clockodo.getSearchTexts({
-  projectsId: 300,
-});
-```
-
----
-
 ### getService()
 
 Get a service by its ID.

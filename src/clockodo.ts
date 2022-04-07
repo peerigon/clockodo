@@ -162,10 +162,6 @@ export class Clockodo {
     });
   }
 
-  async getSearchTexts(params?: Params): Promise<SearchTextsReturnType> {
-    return this.api.get("/clock/searchtexts", params);
-  }
-
   async getService(
     params: Params<{ id: Service["id"] }>
   ): Promise<ServiceReturnType> {
