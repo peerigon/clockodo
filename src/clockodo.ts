@@ -64,9 +64,9 @@ export class Clockodo {
     return this.api.get("/absences", params);
   }
 
-  async getAccessCustomersProjects(
+  async getUsersAccessCustomersProjects(
     params: Params<{ usersId: User["id"] }>
-  ): Promise<AccessCustomersProjectsReturnType> {
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
     const { usersId, ...rest } = params;
@@ -74,9 +74,9 @@ export class Clockodo {
     return this.api.get(`/v2/users/${usersId}/access/customers-projects`, rest);
   }
 
-  async getAccessServices(
+  async getUsersAccessServices(
     params: Params<{ usersId: User["id"] }>
-  ): Promise<AccessServicesReturnType> {
+  ): Promise<UsersAccessServicesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
 
     const { usersId, ...rest } = params;
@@ -554,12 +554,12 @@ export class Clockodo {
 
 export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
-export type AccessCustomersProjectsReturnType = {
+export type UsersAccessCustomersProjectsReturnType = {
   add: AccessToCustomersProjects;
   rep: AccessToCustomersProjects;
   edit: AccessToCustomersProjects;
 };
-export type AccessServicesReturnType = {
+export type UsersAccessServicesReturnType = {
   add: AccessToServices;
 };
 export type DeleteReturnType = { success: true };

@@ -90,26 +90,26 @@ await clockodo.getAbsence({ id: 7 });
 
 ---
 
-### getAccessCustomersProjects()
+### getUsersAccessCustomersProjects()
 
 Gets a user's (readonly) access rights for customers and projects.
 
 #### Example:
 
 ```js
-await clockodo.getAccessCustomersProjects({ usersId: 67325 });
+await clockodo.getUsersAccessCustomersProjects({ usersId: 67325 });
 ```
 
 ---
 
-### getAccessServices()
+### getUsersAccessServices()
 
 Gets a user's (readonly) access rights for services.
 
 #### Example:
 
 ```js
-await clockodo.getAccessServices({ usersId: 67325 });
+await clockodo.getUsersAccessServices({ usersId: 67325 });
 ```
 
 ---
