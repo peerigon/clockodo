@@ -589,36 +589,32 @@ export type EditEntryReturnType = {
 };
 export type EntriesReturnType = {
   paging: Paging;
-  filter: Array<
-    Pick<
-      Filter,
-      | "billable"
-      | "budgetType"
-      | "customersId"
-      | "lumpsumServicesId"
-      | "projectsId"
-      | "servicesId"
-      | "text"
-      | "textsId"
-      | "usersId"
-    >
+  filter: null | Pick<
+    Filter,
+    | "billable"
+    | "budgetType"
+    | "customersId"
+    | "lumpsumServicesId"
+    | "projectsId"
+    | "servicesId"
+    | "text"
+    | "textsId"
+    | "usersId"
   >;
   entries: Array<Entry>;
 };
 export type EntriesTextsReturnType = {
   paging: Paging;
-  filter: Array<
-    Pick<
-      Filter,
-      | "billable"
-      | "customersId"
-      | "lumpsumServicesId"
-      | "projectsId"
-      | "servicesId"
-      | "usersId"
-      | "timeSince"
-      | "timeUntil"
-    >
+  filter: null | Pick<
+    Filter,
+    | "billable"
+    | "customersId"
+    | "lumpsumServicesId"
+    | "projectsId"
+    | "servicesId"
+    | "usersId"
+    | "timeSince"
+    | "timeUntil"
   >;
   texts: EntriesText;
   mode: string;
