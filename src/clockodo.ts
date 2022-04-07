@@ -63,7 +63,7 @@ export class Clockodo {
   async getAccessCustomersProjects(
     params: Params<{ id: User["id"] }>
   ): Promise<AccessReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMER_PROJECTS);
+    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
     const { id, ...rest } = params;
 
