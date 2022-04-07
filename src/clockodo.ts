@@ -61,23 +61,23 @@ export class Clockodo {
   }
 
   async getAccessCustomersProjects(
-    params: Params<{ id: User["id"] }>
+    params: Params<{ usersId: User["id"] }>
   ): Promise<AccessReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
-    const { id, ...rest } = params;
+    const { usersId, ...rest } = params;
 
-    return this.api.get(`/v2/users/${id}/access/customers-projects`, rest);
+    return this.api.get(`/v2/users/${usersId}/access/customers-projects`, rest);
   }
 
   async getAccessServices(
-    params: Params<{ id: User["id"] }>
+    params: Params<{ usersId: User["id"] }>
   ): Promise<AccessReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
 
-    const { id, ...rest } = params;
+    const { usersId, ...rest } = params;
 
-    return this.api.get(`/v2/users/${id}/access/services`, rest);
+    return this.api.get(`/v2/users/${usersId}/access/services`, rest);
   }
 
   async getClock(params?: Params): Promise<ClockReturnType> {

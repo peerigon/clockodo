@@ -97,7 +97,7 @@ Gets a user's (readonly) access rights for customers and projects.
 #### Example:
 
 ```js
-await clockodo.getAccessCustomersProjects({ id: 67325 });
+await clockodo.getAccessCustomersProjects({ usersId: 67325 });
 ```
 
 ---
@@ -109,7 +109,7 @@ Gets a user's (readonly) access rights for services.
 #### Example:
 
 ```js
-await clockodo.getAccessServices({ id: 67325 });
+await clockodo.getAccessServices({ usersId: 67325 });
 ```
 
 ---
