@@ -23,6 +23,10 @@ import { NonbusinessDay } from "./models/nonbusinessDay.js";
 import { camelCaseToSnakeCase } from "./lib/mappings.js";
 import { EntriesText } from "./models/entriesText";
 import { Team } from "./models/team.js";
+import {
+  AccessToCustomersProjects,
+  AccessToServices,
+} from "./models/access.js";
 
 type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>
@@ -62,7 +66,7 @@ export class Clockodo {
 
   async getAccessCustomersProjects(
     params: Params<{ usersId: User["id"] }>
-  ): Promise<AccessReturnType> {
+  ): Promise<AccessCustomersProjectsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
     const { usersId, ...rest } = params;
@@ -72,7 +76,7 @@ export class Clockodo {
 
   async getAccessServices(
     params: Params<{ usersId: User["id"] }>
-  ): Promise<AccessReturnType> {
+  ): Promise<AccessServicesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
 
     const { usersId, ...rest } = params;
@@ -550,10 +554,14 @@ export class Clockodo {
 
 export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
-export type AccessReturnType = Record<
-  string,
-  boolean | Record<string, boolean>
->;
+export type AccessCustomersProjectsReturnType = {
+  add: AccessToCustomersProjects;
+  rep: AccessToCustomersProjects;
+  edit: AccessToCustomersProjects;
+};
+export type AccessServicesReturnType = {
+  add: AccessToServices;
+};
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
 export type CustomersReturnType = { customers: Array<Customer> };
