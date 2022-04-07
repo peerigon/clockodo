@@ -1,3 +1,14 @@
+# [11.0.0](https://github.com/peerigon/clockodo/compare/v10.3.1...v11.0.0) (2022-04-07)
+
+
+* Merge pull request #82 from peerigon/missing-api-endpoints ([1ba235b](https://github.com/peerigon/clockodo/commit/1ba235b80da3d3e70c60cfbcbf73fc5fe240f75f)), closes [#82](https://github.com/peerigon/clockodo/issues/82)
+
+
+### BREAKING CHANGES
+
+* We removed all task related endpoints and also `getSearchTexts()` since these were deprecated for quite a while now.
+* Fixed some incorrect return typings. You might see type errors in your TypeScript project.
+
 ## [10.3.1](https://github.com/peerigon/clockodo/compare/v10.3.0...v10.3.1) (2022-04-02)
 
 
