@@ -90,8 +90,6 @@ await clockodo.getAbsence({ id: 7 });
 
 ---
 
-## Get Methods
-
 ### getAccessCustomersProjects()
 
 Gets a user's (readonly) access rights for customers and projects.
@@ -103,8 +101,6 @@ await clockodo.getAccessCustomersProjects({ id: 67325 });
 ```
 
 ---
-
-## Get Methods
 
 ### getAccessServices()
 
