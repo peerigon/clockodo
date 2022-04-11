@@ -617,7 +617,7 @@ Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry(
 #### Example:
 
 ```js
-await clockodo.editEntry({ entriesId: 365, duration: 540 });
+await clockodo.editEntry({ id: 365, duration: 540 });
 ```
 
 ---
