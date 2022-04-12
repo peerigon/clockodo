@@ -95,11 +95,11 @@ export class Clockodo {
 
     const { id, ...rest } = params;
 
-    return this.api.get("/customers/" + id, rest);
+    return this.api.get("/v2/customers/" + id, rest);
   }
 
   async getCustomers(params?: Params): Promise<CustomersReturnType> {
-    return this.api.get("/customers", params);
+    return this.api.get("/v2/customers", params);
   }
 
   async getProject(
@@ -109,11 +109,11 @@ export class Clockodo {
 
     const { id, ...rest } = params;
 
-    return this.api.get("/projects/" + id, rest);
+    return this.api.get("/v2/projects/" + id, rest);
   }
 
   async getProjects(params?: Params): Promise<ProjectsReturnType> {
-    return this.api.get("/projects", params);
+    return this.api.get("/v2/projects", params);
   }
 
   async getEntry(
@@ -291,7 +291,7 @@ export class Clockodo {
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
-    return this.api.post("/customers", params);
+    return this.api.post("/v2/customers", params);
   }
 
   async addEntry(
@@ -320,7 +320,7 @@ export class Clockodo {
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
-    return this.api.post("/projects", params);
+    return this.api.post("/v2/projects", params);
   }
 
   async addService(
@@ -390,7 +390,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/customers/" + id, params);
+    return this.api.put("/v2/customers/" + id, params);
   }
 
   async editEntry(
@@ -418,7 +418,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/projects/" + id, params);
+    return this.api.put("/v2/projects/" + id, params);
   }
 
   async editService(
@@ -458,7 +458,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/customers/" + id, params);
+    return this.api.delete("/v2/customers/" + id, params);
   }
 
   async deactivateProject(
@@ -468,7 +468,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/projects/" + id, params);
+    return this.api.delete("/v2/projects/" + id, params);
   }
 
   async deactivateService(
