@@ -1,3 +1,15 @@
+# [12.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v11.0.0...v12.0.0-beta.1) (2022-04-12)
+
+
+### Features
+
+* Use v2 routes for customers and projects ([f5d8b43](https://github.com/peerigon/clockodo/commit/f5d8b43c358edac82de057512cc69c2eedb759d0))
+
+
+### BREAKING CHANGES
+
+* `projects` has been removed from the `Customer` type
+
 # [11.0.0](https://github.com/peerigon/clockodo/compare/v10.3.1...v11.0.0) (2022-04-07)
 
 
