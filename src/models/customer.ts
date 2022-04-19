@@ -1,5 +1,3 @@
-import { Project } from "./project.js";
-
 export type Customer = {
   /** ID of the customer */
   id: number;
@@ -16,11 +14,6 @@ export type Customer = {
    * Only for owners and managers
    **/
   note?: string | null;
-  /**
-   * List of all projects belonging to the customer
-   * Only in list mode; will not be delivered when a single customer is queried
-   */
-  projects?: Array<Project> | null;
   /**
    * Customer color
    */
