@@ -552,7 +552,7 @@ export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
 export type UsersAccessCustomersProjectsReturnType = {
   add: AccessToCustomersProjects;
-  rep: AccessToCustomersProjects;
+  report: AccessToCustomersProjects;
   edit: AccessToCustomersProjects;
 };
 export type UsersAccessServicesReturnType = {
