@@ -5,6 +5,7 @@ export * from "./models/entryGroup.js";
 export * from "./models/holidayscarry.js";
 export * from "./models/holidaysquota.js";
 export * from "./models/lumpsumService.js";
+export * from "./models/nonbusinessDay.js";
 export * from "./models/project.js";
 export * from "./models/service.js";
 export * from "./models/targethours.js";
