@@ -1,3 +1,10 @@
+# [12.1.0](https://github.com/peerigon/clockodo/compare/v12.0.0...v12.1.0) (2022-05-03)
+
+
+### Features
+
+* Expose access and nonbusinessday models ([e499f95](https://github.com/peerigon/clockodo/commit/e499f95b8cd9471a05f977f9fb482454388b3b33))
+
 # [12.0.0](https://github.com/peerigon/clockodo/compare/v11.0.0...v12.0.0) (2022-04-19)
 
 
