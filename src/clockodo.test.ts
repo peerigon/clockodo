@@ -11,7 +11,7 @@ import {
   AbsenceStatus,
   mapRequestBody,
 } from "./index.js";
-import { cachePlugin } from "./plugins/cache.js";
+import { ApiResponseError } from "./lib/errors.js";
 
 const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
@@ -98,42 +98,34 @@ describe("Clockodo (instance)", () => {
     });
   });
 
-  describe("Cache", () => {
-    it("should cache the first request for cacheTime", async () => {
-      const clockodoWithCache = new Clockodo(config);
+  describe("Custom Error Types", () => {
+    const obviouslyFakeId = 1000000000000001;
 
-      clockodoWithCache.use(cachePlugin({ cacheTime: 50 }));
-
-      const usersId = 7;
-      let requestCounter = 0;
-
-      const nockScope = nock(CLOCKODO_API)
-        .get(`/users/${usersId}`)
-        .twice()
-        .reply(200, () => {
-          requestCounter++;
-
-          return {};
-        });
-
-      await clockodoWithCache.getUser({
-        id: usersId,
+    // TODO: make the assertions actually match error obj, not just error type
+    it("returns an ApiResponseError on failed auth", async () => {
+      const apiError = new ApiResponseError(401, {
+        error: { message: "Authentication failed", fields: [] },
       });
-      expect(requestCounter).toBe(1);
-      await clockodoWithCache.getUser({
-        id: usersId,
+
+      expect(
+        clockodo.getCustomer({ id: obviouslyFakeId })
+      ).rejects.toThrowError(apiError);
+    });
+    it("returns an ApiResponseError on 404", async () => {
+      clockodo.api.config({
+        authentication: {
+          user: process.env.CLOCKODO_USER!,
+          apiKey: process.env.CLOCKODO_API_KEY!,
+        },
       });
-      // If cache is not working this would fail
-      expect(requestCounter).toBe(1);
 
-      await new Promise((resolve) => setTimeout(resolve, 50));
-
-      await clockodoWithCache.getUser({
-        id: usersId,
+      const apiError = new ApiResponseError(404, {
+        error: { message: "The requested resource could not be found" },
       });
-      expect(requestCounter).toBe(2);
 
-      nockScope.done();
+      expect(
+        clockodo.getCustomer({ id: obviouslyFakeId })
+      ).rejects.toThrowError(apiError);
     });
   });
 
