@@ -1,4 +1,4 @@
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import { User, UserRole, UserLanguage } from "./user.js";
 
 export const createUserMocks = ({ count }: { count: number }) =>
@@ -8,7 +8,7 @@ export const createUserMocks = ({ count }: { count: number }) =>
     return {
       id: userId,
       name: faker.name.findName(),
-      number: faker.datatype.hexaDecimal(),
+      number: faker.datatype.hexadecimal(),
       email: faker.internet.email(),
       role: [UserRole.Owner, UserRole.Manager, UserRole.Worker][index % 3],
       active: faker.datatype.number({ min: 0, max: 10 }) > 2,

@@ -1,4 +1,4 @@
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import { Project } from "./project.js";
 
 export const createProjectMocks = ({ count = 1 }: { count?: number } = {}) =>
@@ -14,7 +14,7 @@ export const createProjectMocks = ({ count = 1 }: { count?: number } = {}) =>
       id: projectId,
       customersId: faker.datatype.number(),
       name: faker.commerce.productName(),
-      number: faker.datatype.hexaDecimal(),
+      number: faker.datatype.hexadecimal(),
       active: faker.datatype.boolean(),
       billableDefault: faker.datatype.boolean(),
       note: faker.lorem.sentences(faker.datatype.number({ min: 1, max: 3 })),

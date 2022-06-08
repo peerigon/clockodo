@@ -1,5 +1,3 @@
-// We need to disable the camelcase rule since the Clockodo API is using snake_case
-/* eslint-disable @typescript-eslint/naming-convention */
 import qs from "qs";
 import nock from "nock";
 import {
