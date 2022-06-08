@@ -2,50 +2,37 @@
   "name": "clockodo",
   "version": "0.0.0-semantically-released",
   "description": "Unofficial JavaScript/TypeScript SDK for Clockodo",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
-    ".": {
-      "require": "./dist/cjs/index.js",
-      "node": "./dist/cjs/index.mjs",
-      "default": "./dist/esm/index.js"
-    },
-    "./csv": {
-      "require": "./dist/cjs/csv.js",
-      "node": "./dist/cjs/csv.mjs",
-      "default": "./dist/esm/csv.js"
-    },
-    "./mocks": {
-      "require": "./dist/cjs/mocks.js",
-      "node": "./dist/cjs/mocks.mjs",
-      "default": "./dist/esm/mocks.js"
-    }
+    ".": "./dist/index.js",
+    "./csv": "./dist/csv.js",
+    "./mocks": "./dist/mocks.js"
   },
   "typesVersions": {
     "*": {
       "csv": [
-        "./dist/esm/csv.d.ts"
+        "./dist/csv.d.ts"
       ],
       "mocks": [
-        "./dist/esm/mocks.d.ts"
+        "./dist/mocks.d.ts"
       ]
     }
   },
   "sideEffects": false,
   "scripts": {
+    "prepare": "husky install",
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
-    "build:tsc": "run-p build:tsc:*",
-    "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
-    "build:copy": "copyfiles -f ./src/*.mjs ./dist/cjs/",
+    "build:tsc": "tsc",
     "test": "run-p test:*",
-    "test:suite": "jest",
-    "test:turkish": "cross-env LC_ALL=tr jest 'integration' -t 'using a Turkish locale'",
+    "test:suite": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:turkish": "cross-env LC_ALL=tr npm run test:suite -- 'integration' -t 'using a Turkish locale'",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore src",
-    "posttest": "run-s build",
-    "prepare": "husky install",
+    "test:types": "tsc --noEmit",
+    "prepublishOnly": "run-s build",
     "release": "semantic-release"
   },
   "repository": {

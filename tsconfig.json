@@ -2,12 +2,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "es2015",
-    "lib": ["es2017"],
-    "esModuleInterop": true,
+    "module": "esnext",
     "strict": true,
-    "moduleResolution": "node",
-    // "allowJs" is currently necessary because we need to transform node_modules, like "map-obj"
-    "allowJs": true
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": ["es2017"],
+    "moduleResolution": "node"
   },
   "include": ["./**/*.ts"]
 }

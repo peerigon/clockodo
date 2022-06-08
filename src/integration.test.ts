@@ -1,3 +1,4 @@
+import { jest } from "@jest/globals";
 import { Billability, Clockodo, Config, UserReportType } from "./index.js";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
