@@ -1,4 +1,4 @@
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date("2020");
@@ -46,7 +46,7 @@ export const createAbsencesMocks = ({
     const status =
       faker.datatype.number({ min: 0, max: 10 }) > 4
         ? AbsenceStatus.Approved
-        : faker.random.arrayElement(absenceStatuses);
+        : faker.helpers.arrayElement(absenceStatuses);
     const dateEnquiredDateTime = new Date(
       dateSinceDateTime.getTime() -
         faker.datatype.number({ min: 5, max: 200 }) * ONE_DAY

@@ -819,18 +819,6 @@ await clockodo.stopClock({ entriesId: 7082 });
 
 ---
 
-## ⚠️ Deprecated: Caching
-
-> ⚠️ This feature relies on an axios plugin and will be removed as soon as we move from axios to fetch(). It is only listed for documentation purposes.
-
-It is also possible to create a Clockodo instance with **caching**. This means the request responses are cached until a `POST`, `PUT`, `DELETE` or `PATCH` is send to the very same url or the cache time is over.
-
-```js
-import { cachePlugin } from "clockodo/plugins/cache";
-
-clockodo.use(cachePlugin({ cacheTime: 15 * 60 * 1000 })); // cache of 15 minutes
-```
-
 ## Development
 
 To run integration tests you need to create an `.env` by copying the `.env.example` and entering credentials of a dev-user, as you don't want to mess up your real clockodo data.
