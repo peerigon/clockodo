@@ -1,3 +1,23 @@
+# [13.0.0](https://github.com/peerigon/clockodo/compare/v12.1.0...v13.0.0) (2022-06-09)
+
+
+### chore
+
+* Update dependencies ([645afaa](https://github.com/peerigon/clockodo/commit/645afaa2b39d26c3301998d735e483f64d067fed))
+
+
+* Drop CommonJS support ([2227583](https://github.com/peerigon/clockodo/commit/22275837c3c0468df1c8ca240c717236d4e3c5ce))
+* Drop official Node v12 support ([97381ac](https://github.com/peerigon/clockodo/commit/97381acb7bca025efa28e95eb970b6e37103654f))
+* Remove deprecated cache feature ([512d749](https://github.com/peerigon/clockodo/commit/512d749288ef062c546677dcf317d51b00d12bb7))
+
+
+### BREAKING CHANGES
+
+* Dropped CommonJS support. This module is now published as an ES Module. There will be no CJS build anymore.
+* Dropped official Node v12 support. It may still work, though.
+* The cache plugin has been removed. It has been deprecated for quite some time now and will be discontinued.
+* These updates include breaking changes of upstream dependencies. There's a low risk of a breaking change in one of these.
+
 # [13.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v12.1.0...v13.0.0-beta.1) (2022-06-08)
 
 
