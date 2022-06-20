@@ -26,5 +26,6 @@ export const createUserMocks = ({ count }: { count: number }) =>
       editLock: "2018-12-31",
       editLockDyn: null,
       editLockSync: faker.datatype.boolean(),
+      nonbusinessgroupsId: null,
     };
   });

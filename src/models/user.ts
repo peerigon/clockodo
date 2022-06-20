@@ -1,4 +1,8 @@
-import { NO_WORKTIME_REGULATIONS_ID } from "./worktimeRegulation.js";
+/** Special id that is used when no worktime regulation should be applied */
+export const NO_WORKTIME_REGULATIONS_ID_FOR_USER = 0 as const;
+
+/** Special id that is used when the user is has no nonbusiness group */
+export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0 as const;
 
 export type User = {
   /** ID of the co-worker  */
@@ -46,9 +50,18 @@ export type User = {
    * - "0" if the co-worker has no worktime regulation
    * - "null" if the company default is applicable
    **/
-  worktimeRegulationId: number | typeof NO_WORKTIME_REGULATIONS_ID | null;
+  worktimeRegulationId:
+    | number
+    | typeof NO_WORKTIME_REGULATIONS_ID_FOR_USER
+    | null;
   /** The co-worker's team id */
   teamsId: null;
+  /**
+   * ID of the co-worker's nonbusiness group
+   * - "0" if the co-worker has no nonbusiness group
+   * - "null" if the company default is applicable
+   */
+  nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
 };
 
 export enum UserRole {
