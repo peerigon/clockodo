@@ -1,3 +1,16 @@
+# [13.1.0](https://github.com/peerigon/clockodo/compare/v13.0.0...v13.1.0) (2022-06-20)
+
+
+### Bug Fixes
+
+* Deprecate `NO_WORKTIME_REGULATIONS_ID` ([4e3d487](https://github.com/peerigon/clockodo/commit/4e3d487025650eb59b75e978ff816ab982ce7653))
+
+
+### Features
+
+* Add `nonbusinessgroupsId` to user ([d794d26](https://github.com/peerigon/clockodo/commit/d794d2630a1a9f0b678211a6d23b61c0337f6dff))
+* Add createNonbusinessDaysMocks() ([167c080](https://github.com/peerigon/clockodo/commit/167c080f0ec70ef464603777c70d4c95a2c52618))
+
 # [13.0.0](https://github.com/peerigon/clockodo/compare/v12.1.0...v13.0.0) (2022-06-09)
 
 
