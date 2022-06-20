@@ -1,3 +1,7 @@
+/**
+ * Special id that is used when no worktime regulation should be applied
+ * @deprecated: This constant has been renamed to NO_WORKTIME_REGULATIONS_ID_FOR_USER
+ **/
 export const NO_WORKTIME_REGULATIONS_ID = 0 as const;
 
 export type WorktimeRegulation = {
