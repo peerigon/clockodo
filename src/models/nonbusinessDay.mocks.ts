@@ -7,8 +7,8 @@ const DEFAULT_TO = new Date("2021");
 
 export const createNonbusinessDaysMocks = ({
   count = 1,
-  between: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: { count?: number; between?: [Date, Date] } = {}) => {
+  dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+}: { count?: number; dateBetween?: [Date, Date] } = {}) => {
   const nextIdPerYear = new Map<number, number>();
 
   const getNextIdForYear = (year: number) => {
