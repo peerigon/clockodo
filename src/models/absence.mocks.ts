@@ -33,7 +33,9 @@ export const createAbsencesMocks = ({
           Math.min(
             dateSinceDateTime.getTime() +
               faker.datatype.number({ min: 0, max: 5 }) * ONE_DAY,
-            to.getTime()
+            to.getTime(),
+            // Clockodo makes sure that dateSince and dateUntil are always within the same year
+            endOfYear(dateSinceDateTime).getTime()
           )
         );
 
@@ -97,6 +99,10 @@ export const createAbsencesMocks = ({
       approvedBy: status === AbsenceStatus.Approved ? 1 : null,
     };
   });
+};
+
+const endOfYear = (dateTime: Date) => {
+  return new Date(`${dateTime.getFullYear()}-12-31T23:59:59.999Z`);
 };
 
 const isoDateFromDateTime = (dateTime: Date) => {
