@@ -1,5 +1,11 @@
 import { faker } from "@faker-js/faker";
-import { endOfYear, isoDateFromDateTime, ONE_DAY } from "../lib/mocks.js";
+import {
+  endOfYear,
+  generateDayRange,
+  isoDateFromDateTime,
+  ONE_DAY,
+  toPairs,
+} from "../lib/mocks.js";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date("2020");
@@ -17,7 +23,14 @@ export const createAbsencesMocks = ({
   count = 1,
   between: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: { count?: number; between?: [Date, Date] } = {}) => {
-  return Array.from({ length: count }, (_, index): Absence => {
+  const dayPairs = toPairs(
+    generateDayRange({
+      count: count * 2,
+      between: [from, to],
+    })
+  );
+
+  return dayPairs.map(([from, to], index): Absence => {
     const isOvertimeReduction = faker.datatype.number({ min: 0, max: 10 }) > 6;
     const isHalfDay =
       isOvertimeReduction === false &&
@@ -31,9 +44,10 @@ export const createAbsencesMocks = ({
       ? dateSinceDateTime
       : new Date(
           Math.min(
+            to,
+            // Make sure that we don't get absences that are too long
             dateSinceDateTime.getTime() +
-              faker.datatype.number({ min: 0, max: 5 }) * ONE_DAY,
-            to.getTime(),
+              faker.datatype.number({ min: 0, max: 30 }) * ONE_DAY,
             // Clockodo makes sure that dateSince and dateUntil are always within the same year
             endOfYear(dateSinceDateTime).getTime()
           )
