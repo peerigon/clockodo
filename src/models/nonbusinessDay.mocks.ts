@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { isoDateFromDateTime } from "../lib/mocks.js";
 import { NonbusinessDay } from "./nonbusinessDay.js";
 
 const DEFAULT_FROM = new Date("2020");
@@ -32,8 +33,4 @@ export const createNonbusinessDaysMocks = ({
       halfDay: isHalfDay,
     };
   });
-};
-
-const isoDateFromDateTime = (dateTime: Date) => {
-  return dateTime.toISOString().replace(/T.*/, "");
 };

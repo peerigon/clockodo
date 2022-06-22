@@ -37,6 +37,10 @@ export const endOfMonth = (date: Date) => {
   return new Date(isoDateFromDateTime(endOfMonth));
 };
 
+export const endOfYear = (dateTime: Date) => {
+  return new Date(`${dateTime.getFullYear()}-12-31T23:59:59.999Z`);
+};
+
 export const nextDay = (date: Date) => {
   return new Date(isoDateFromDateTime(new Date(date.getTime() + ONE_DAY)));
 };

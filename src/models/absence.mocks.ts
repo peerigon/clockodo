@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
+import { endOfYear, isoDateFromDateTime, ONE_DAY } from "../lib/mocks.js";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date("2020");
 const DEFAULT_TO = new Date("2021");
-const ONE_DAY = 24 * 60 * 60 * 1000;
 
 const absenceStatuses = Object.values(AbsenceStatus).filter(
   (status): status is AbsenceStatus => typeof status === "number"
@@ -99,12 +99,4 @@ export const createAbsencesMocks = ({
       approvedBy: status === AbsenceStatus.Approved ? 1 : null,
     };
   });
-};
-
-const endOfYear = (dateTime: Date) => {
-  return new Date(`${dateTime.getFullYear()}-12-31T23:59:59.999Z`);
-};
-
-const isoDateFromDateTime = (dateTime: Date) => {
-  return dateTime.toISOString().replace(/T.*/, "");
 };
