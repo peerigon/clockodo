@@ -24,8 +24,8 @@ export const isoDateFromTimestamp = (timestamp: number) => {
   return isoDateFromDateTime(new Date(timestamp));
 };
 
-export const timestampFromIsoDate = (isoDate: string) => {
-  return new Date(isoDate).getTime();
+export const startOfDay = (date: Date) => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
 
 export const endOfMonth = (date: Date) => {

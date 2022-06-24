@@ -4,6 +4,7 @@ import {
   generateRandomDates,
   isoDateFromDateTime,
   ONE_DAY,
+  startOfDay,
   toPairs,
 } from "../lib/mocks.js";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
@@ -39,40 +40,34 @@ export const createAbsencesMocks = ({
 
     const absencesId = index;
 
-    let dateSinceDateTime = faker.date.between(from, to);
-    let dateUntilDateTime = isHalfDay
-      ? dateSinceDateTime
+    const dateSince = startOfDay(faker.date.between(from, to));
+    const dateUntil = isHalfDay
+      ? dateSince
       : new Date(
           Math.min(
             to,
             // Make sure that we don't get absences that are too long
-            dateSinceDateTime.getTime() +
+            dateSince.getTime() +
               faker.datatype.number({ min: 0, max: 30 }) * ONE_DAY,
             // Clockodo makes sure that dateSince and dateUntil are always within the same year
-            endOfYear(dateSinceDateTime).getTime()
+            endOfYear(dateSince).getTime()
           )
         );
-
-    const dateSince = isoDateFromDateTime(dateSinceDateTime);
-    const dateUntil = isoDateFromDateTime(dateUntilDateTime);
-
-    dateSinceDateTime = new Date(dateSince);
-    dateUntilDateTime = new Date(dateUntil);
 
     const status =
       faker.datatype.number({ min: 0, max: 10 }) > 4
         ? AbsenceStatus.Approved
         : faker.helpers.arrayElement(absenceStatuses);
     const dateEnquiredDateTime = new Date(
-      dateSinceDateTime.getTime() -
+      dateSince.getTime() -
         faker.datatype.number({ min: 5, max: 200 }) * ONE_DAY
     );
 
     return {
       id: absencesId,
       usersId: 0,
-      dateSince,
-      dateUntil,
+      dateSince: isoDateFromDateTime(dateSince),
+      dateUntil: isoDateFromDateTime(dateUntil),
       status,
       type: isOvertimeReduction
         ? AbsenceType.ReductionOfOvertime
@@ -89,8 +84,7 @@ export const createAbsencesMocks = ({
         : isHalfDay
         ? 0.5
         : Math.max(
-            (dateUntilDateTime.getTime() - dateSinceDateTime.getTime()) /
-              ONE_DAY -
+            (dateUntil.getTime() - dateSince.getTime()) / ONE_DAY -
               faker.datatype.number({ min: 0, max: 3 }),
             1
           ),
