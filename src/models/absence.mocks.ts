@@ -1,15 +1,15 @@
 import { faker } from "@faker-js/faker";
 import {
   endOfYear,
-  generateDayRange,
+  generateRandomDates,
   isoDateFromDateTime,
   ONE_DAY,
   toPairs,
 } from "../lib/mocks.js";
 import { AbsenceStatus, AbsenceType, Absence } from "./absence.js";
 
-const DEFAULT_FROM = new Date("2020");
-const DEFAULT_TO = new Date("2021");
+const DEFAULT_FROM = new Date(2020, 0);
+const DEFAULT_TO = new Date(2021, 0);
 
 const absenceStatuses = Object.values(AbsenceStatus).filter(
   (status): status is AbsenceStatus => typeof status === "number"
@@ -24,7 +24,7 @@ export const createAbsencesMocks = ({
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: { count?: number; dateSinceBetween?: [Date, Date] } = {}) => {
   const dayPairs = toPairs(
-    generateDayRange({
+    generateRandomDates({
       count: count * 2,
       between: [from, to],
     })

@@ -13,8 +13,8 @@ type CommonOptions = {
   timeSinceBetween?: [Date, Date];
 };
 
-const DEFAULT_FROM = new Date("2020");
-const DEFAULT_TO = new Date("2021");
+const DEFAULT_FROM = new Date(2020, 0);
+const DEFAULT_TO = new Date(2021, 0);
 
 const createCommonEntryMock = (from: Date, to: Date) => {
   const hasText = faker.datatype.number({ min: 0, max: 10 }) > 2;

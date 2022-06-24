@@ -1,7 +1,9 @@
 import { faker } from "@faker-js/faker";
+import { ONE_DAY } from "../lib/mocks";
 import {
-  generateDayRange,
-  generateMonthRange,
+  ONE_YEAR,
+  generateRandomDates,
+  generateRandomMonths,
   isoDateFromDateTime,
   isoDateFromTimestamp,
   toPairs,
@@ -20,8 +22,8 @@ type CommonOptions = {
   dateSinceBetween?: [Date, Date];
 };
 
-const DEFAULT_FROM = new Date("2019");
-const DEFAULT_TO = new Date("2022");
+const DEFAULT_FROM = new Date(2019, 0);
+const DEFAULT_TO = new Date(2022, 0);
 
 const createCommonTargethoursRowMock = (dateSince: Date) => {
   return {
@@ -38,7 +40,7 @@ export const createTargethoursRowWeeklyMocks = ({
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: CommonOptions = {}) => {
   const dayPairs = toPairs(
-    generateDayRange({
+    generateRandomDates({
       count: count * 2,
       between: [from, to],
     })
@@ -90,7 +92,7 @@ export const createTargethoursRowMonthlyMocks = ({
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: CommonOptions = {}) => {
   const monthPairs = toPairs(
-    generateMonthRange({
+    generateRandomMonths({
       count: count * 2,
       between: [from, to],
     })
@@ -137,22 +139,25 @@ export const createTargethoursRowMocks = (
     count = 1,
     dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
   } = options;
-  const fromYear = from.getFullYear();
-  // If the date range is across several years, the first year will use monthly target hours
-  const monthlyTargethoursRows =
-    fromYear === to.getFullYear()
-      ? []
-      : createTargethoursRowMonthlyMocks({
-          ...options,
-          dateSinceBetween: [from, new Date(`${fromYear}-12-31`)],
-          count: Math.min(count, 3),
-        }).filter((targethoursRow) => targethoursRow.dateUntil !== null);
+  const dateRangeIsLongEnough = to.getTime() - from.getTime() > 1.5 * ONE_YEAR;
+
+  // If the date range is long enough, the first year will use monthly target hours
+  const monthlyTargethoursRows = dateRangeIsLongEnough
+    ? createTargethoursRowMonthlyMocks({
+        ...options,
+        dateSinceBetween: [from, new Date(from.getTime() + ONE_YEAR)],
+        count: Math.min(count, 3),
+      }).filter((targethoursRow) => targethoursRow.dateUntil !== null)
+    : [];
 
   const countOfWeeklyTargethoursRows = count - monthlyTargethoursRows.length;
 
   const weeklyTargethoursRows = createTargethoursRowWeeklyMocks({
     ...options,
-    dateSinceBetween: [new Date(`${fromYear + 1}-01-01`), new Date(to)],
+    dateSinceBetween: [
+      new Date(from.getTime() + ONE_YEAR + ONE_DAY),
+      new Date(to),
+    ],
     count: countOfWeeklyTargethoursRows,
   });
 

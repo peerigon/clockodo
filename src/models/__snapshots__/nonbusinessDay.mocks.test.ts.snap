@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createNonbusinessDaysMocks() It creates realistic mocks 1`] = `
+Array [
+  Object {
+    "date": "2020-02-21",
+    "halfDay": false,
+    "id": 0,
+    "name": "et qui quia",
+  },
+  Object {
+    "date": "2020-03-24",
+    "halfDay": false,
+    "id": 1,
+    "name": "et inventore eligendi",
+  },
+  Object {
+    "date": "2020-04-14",
+    "halfDay": false,
+    "id": 2,
+    "name": "deserunt id harum",
+  },
+  Object {
+    "date": "2020-05-05",
+    "halfDay": false,
+    "id": 3,
+    "name": "odio quia vitae",
+  },
+  Object {
+    "date": "2020-05-23",
+    "halfDay": false,
+    "id": 4,
+    "name": "quo provident molestiae",
+  },
+  Object {
+    "date": "2020-05-26",
+    "halfDay": false,
+    "id": 5,
+    "name": "ullam pariatur quos",
+  },
+  Object {
+    "date": "2020-05-30",
+    "halfDay": false,
+    "id": 6,
+    "name": "quod laborum ea",
+  },
+  Object {
+    "date": "2020-06-03",
+    "halfDay": false,
+    "id": 7,
+    "name": "esse quia expedita",
+  },
+  Object {
+    "date": "2020-06-05",
+    "halfDay": false,
+    "id": 8,
+    "name": "autem tempora ut",
+  },
+  Object {
+    "date": "2020-06-25",
+    "halfDay": false,
+    "id": 9,
+    "name": "doloribus harum voluptas",
+  },
+  Object {
+    "date": "2020-06-28",
+    "halfDay": false,
+    "id": 10,
+    "name": "omnis et accusantium",
+  },
+  Object {
+    "date": "2020-07-20",
+    "halfDay": false,
+    "id": 11,
+    "name": "quia quos sequi",
+  },
+  Object {
+    "date": "2020-07-31",
+    "halfDay": false,
+    "id": 12,
+    "name": "beatae enim necessitatibus",
+  },
+  Object {
+    "date": "2020-09-07",
+    "halfDay": true,
+    "id": 13,
+    "name": "placeat saepe eligendi",
+  },
+  Object {
+    "date": "2020-09-09",
+    "halfDay": false,
+    "id": 14,
+    "name": "excepturi et laudantium",
+  },
+  Object {
+    "date": "2020-09-11",
+    "halfDay": false,
+    "id": 15,
+    "name": "similique fugit corporis",
+  },
+  Object {
+    "date": "2020-09-17",
+    "halfDay": true,
+    "id": 16,
+    "name": "dolores esse nobis",
+  },
+  Object {
+    "date": "2020-09-20",
+    "halfDay": false,
+    "id": 17,
+    "name": "sint magnam aut",
+  },
+  Object {
+    "date": "2020-10-12",
+    "halfDay": false,
+    "id": 18,
+    "name": "dolores maiores incidunt",
+  },
+  Object {
+    "date": "2020-12-24",
+    "halfDay": false,
+    "id": 19,
+    "name": "iusto laborum facere",
+  },
+]
+`;

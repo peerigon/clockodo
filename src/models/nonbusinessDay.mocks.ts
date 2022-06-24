@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { isoDateFromDateTime } from "../lib/mocks.js";
+import { isoDateFromDateTime } from "../lib/mocks";
+import { generateRandomDates } from "../lib/mocks.js";
 import { NonbusinessDay } from "./nonbusinessDay.js";
 
-const DEFAULT_FROM = new Date("2020");
-const DEFAULT_TO = new Date("2021");
+const DEFAULT_FROM = new Date(2020, 0);
+const DEFAULT_TO = new Date(2021, 0);
 
 export const createNonbusinessDaysMocks = ({
   count = 1,
@@ -19,15 +20,17 @@ export const createNonbusinessDaysMocks = ({
     return nextId;
   };
 
-  return Array.from({ length: count }, (): NonbusinessDay => {
-    const date = faker.date.between(from, to);
-    const isoDate = isoDateFromDateTime(date);
-    const id = getNextIdForYear(date.getFullYear());
+  return generateRandomDates({
+    count,
+    between: [from, to],
+  }).map((timestamp): NonbusinessDay => {
+    const dateTime = new Date(timestamp);
+    const id = getNextIdForYear(dateTime.getFullYear());
     const name = faker.lorem.words();
     const isHalfDay = faker.datatype.number({ min: 0, max: 10 }) > 8;
 
     return {
-      date: isoDate,
+      date: isoDateFromDateTime(dateTime),
       id,
       name,
       halfDay: isHalfDay,

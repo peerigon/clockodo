@@ -1,14 +1,23 @@
 import { faker } from "@faker-js/faker";
 
 export const ONE_DAY = 24 * 60 * 60 * 1000;
+export const ONE_YEAR = 356 * ONE_DAY;
+
 const MAX_ITERATION_COUNT = 10000;
 
 export const isoDateFromDateTime = (dateTime: Date) => {
-  return dateTime.toISOString().replace(/T.*/, "");
+  return [
+    dateTime.getFullYear(),
+    String(dateTime.getMonth() + 1).padStart(2, "0"),
+    String(dateTime.getDate()).padStart(2, "0"),
+  ].join("-");
 };
 
 export const isoMonthFromDateTime = (dateTime: Date) => {
-  return dateTime.toISOString().replace(/-\d\dT.*/, "");
+  return [
+    dateTime.getFullYear(),
+    String(dateTime.getMonth() + 1).padStart(2, "0"),
+  ].join("-");
 };
 
 export const isoDateFromTimestamp = (timestamp: number) => {
@@ -20,29 +29,17 @@ export const timestampFromIsoDate = (isoDate: string) => {
 };
 
 export const endOfMonth = (date: Date) => {
-  let startOfNextMonth = new Date(date.getTime());
-
-  startOfNextMonth.setMonth(date.getMonth() + 1);
-
-  if (startOfNextMonth.getMonth() === 0) {
-    startOfNextMonth.setFullYear(date.getFullYear() + 1);
-  }
-
-  startOfNextMonth = new Date(isoMonthFromDateTime(startOfNextMonth));
-
-  const endOfMonth = new Date(startOfNextMonth);
-
-  endOfMonth.setTime(endOfMonth.getTime() - ONE_DAY / 2);
-
-  return new Date(isoDateFromDateTime(endOfMonth));
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999);
 };
 
 export const endOfYear = (dateTime: Date) => {
-  return new Date(`${dateTime.getFullYear()}-12-31T23:59:59.999Z`);
+  return new Date(dateTime.getFullYear() + 1, 0, 0, 23, 59, 59, 999);
 };
 
 export const nextDay = (date: Date) => {
-  return new Date(isoDateFromDateTime(new Date(date.getTime() + ONE_DAY)));
+  const nextDay = new Date(date.getTime() + ONE_DAY);
+
+  return new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
 };
 
 export const generateUnique = <Value>({
@@ -67,7 +64,7 @@ This usually happens when the generated values create too many conflicts (e.g. t
   return generated;
 };
 
-export const generateDayRange = ({
+export const generateRandomDates = ({
   count,
   between: [from, to],
 }: {
@@ -78,15 +75,19 @@ export const generateDayRange = ({
     generateUnique({
       count,
       generate: () => {
-        const randomDay = isoDateFromDateTime(faker.date.between(from, to));
+        const randomDate = faker.date.between(from, to);
 
-        return timestampFromIsoDate(randomDay);
+        return new Date(
+          randomDate.getFullYear(),
+          randomDate.getMonth(),
+          randomDate.getDate()
+        ).getTime();
       },
     })
   ).sort();
 };
 
-export const generateMonthRange = ({
+export const generateRandomMonths = ({
   count,
   between: [from, to],
 }: {
@@ -97,9 +98,12 @@ export const generateMonthRange = ({
     generateUnique({
       count,
       generate: () => {
-        const randomMonth = isoMonthFromDateTime(faker.date.between(from, to));
+        const randomDate = faker.date.between(from, to);
 
-        return timestampFromIsoDate(randomMonth);
+        return new Date(
+          randomDate.getFullYear(),
+          randomDate.getMonth()
+        ).getTime();
       },
     })
   ).sort();
