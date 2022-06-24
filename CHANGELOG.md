@@ -1,3 +1,27 @@
+# [14.0.0](https://github.com/peerigon/clockodo/compare/v13.1.0...v14.0.0) (2022-06-24)
+
+
+### Bug Fixes
+
+* Ensure that absences mocks don't overlap ([aba5a34](https://github.com/peerigon/clockodo/commit/aba5a3406416cbe950ebf433ef92c93c9b845e5f))
+* Improve absence mocks ([6373fe2](https://github.com/peerigon/clockodo/commit/6373fe240292d04efe3138c667edaf38615382d6))
+
+
+### chore
+
+* Refactor date handling in mocks ([6f7d28f](https://github.com/peerigon/clockodo/commit/6f7d28f89e49bd0b7becc66c38f4387d921dc68f))
+
+
+### Features
+
+* Implement targethours mocks ([e986bf0](https://github.com/peerigon/clockodo/commit/e986bf0c5c50f661454449c35bc8c79adbb01ff3))
+* Rename mock options ([9725483](https://github.com/peerigon/clockodo/commit/97254834b0988d7dc7407a31ad9e4fe22585bebe))
+
+
+### BREAKING CHANGES
+
+* We improved the way how dates are generated in our mocks. E.g. absences mocks and targethours mocks now won't have overlaps. However, due to these changes, you might see in your test snapshots (only if you're using our mock functions which aren't public anyway)
+
 # [13.1.0](https://github.com/peerigon/clockodo/compare/v13.0.0...v13.1.0) (2022-06-20)
 
 
