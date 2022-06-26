@@ -1,4 +1,4 @@
-export type Absence = {
+type CommonAbsence = {
   /** ID of the absence */
   id: number;
   /** ID of the corresponding co-worker  */
@@ -25,16 +25,6 @@ export type Absence = {
    */
   note?: string | null;
   /**
-   * Amount of absence days (null for overtime reduction).
-   * Only with access rights for absence administration or in case of own absences
-   */
-  countDays?: number | null;
-  /**
-   * Amount of hours of overtime reduction (null in other cases).
-   * Only with access rights for absence administration or in case of own absences
-   */
-  countHours?: number | null;
-  /**
    * Date at which the absence request has been enquired in YYYY-MM-DD format.
    * Only with access rights for absence administration or in case of own absences
    */
@@ -50,6 +40,44 @@ export type Absence = {
    */
   approvedBy?: number | null;
 };
+
+export type DaysAbsence = CommonAbsence & {
+  /**
+   * Type of the absence.
+   * Only with access rights for absence administration or in case of own absences
+   */
+  type?: Exclude<AbsenceType, AbsenceType.ReductionOfOvertime>;
+  /**
+   * Amount of absence days (null for overtime reduction).
+   * Only with access rights for absence administration or in case of own absences
+   */
+  countDays?: number;
+  /**
+   * Amount of hours of overtime reduction (null in other cases).
+   * Only with access rights for absence administration or in case of own absences
+   */
+  countHours?: null;
+};
+
+export type HoursAbsence = CommonAbsence & {
+  /**
+   * Type of the absence.
+   * Only with access rights for absence administration or in case of own absences
+   */
+  type?: AbsenceType.ReductionOfOvertime;
+  /**
+   * Amount of absence days (null for overtime reduction).
+   * Only with access rights for absence administration or in case of own absences
+   */
+  countDays?: null;
+  /**
+   * Amount of hours of overtime reduction (null in other cases).
+   * Only with access rights for absence administration or in case of own absences
+   */
+  countHours?: number;
+};
+
+export type Absence = DaysAbsence | HoursAbsence;
 
 export enum AbsenceStatus {
   Reported = 0,

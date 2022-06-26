@@ -16,7 +16,7 @@ const absenceStatuses = Object.values(AbsenceStatus).filter(
   (status): status is AbsenceStatus => typeof status === "number"
 );
 const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
-  (status): status is AbsenceType =>
+  (status): status is Exclude<AbsenceType, AbsenceType.ReductionOfOvertime> =>
     typeof status === "number" && status !== AbsenceType.ReductionOfOvertime
 );
 
@@ -63,33 +63,14 @@ export const createAbsencesMocks = ({
         faker.datatype.number({ min: 5, max: 200 }) * ONE_DAY
     );
 
-    return {
+    const commonAbsence = {
       id: absencesId,
       usersId: 0,
       dateSince: isoDateFromDateTime(dateSince),
       dateUntil: isoDateFromDateTime(dateUntil),
       status,
-      type: isOvertimeReduction
-        ? AbsenceType.ReductionOfOvertime
-        : // Make sure that we get the most important absence types
-          // also for lower mock counts.
-          absenceTypesWithoutOvertimeReduction[
-            index % absenceTypesWithoutOvertimeReduction.length
-          ],
       note: hasNote
         ? faker.lorem.words(faker.datatype.number({ min: 2, max: 10 }))
-        : null,
-      countDays: isOvertimeReduction
-        ? null
-        : isHalfDay
-        ? 0.5
-        : Math.max(
-            (dateUntil.getTime() - dateSince.getTime()) / ONE_DAY -
-              faker.datatype.number({ min: 0, max: 3 }),
-            1
-          ),
-      countHours: isOvertimeReduction
-        ? faker.datatype.float({ min: 0.1, max: 8 })
         : null,
       dateEnquired:
         faker.datatype.number({ min: 0, max: 10 }) > 6
@@ -105,6 +86,32 @@ export const createAbsencesMocks = ({
             )
           : null,
       approvedBy: status === AbsenceStatus.Approved ? 1 : null,
+    };
+
+    if (isOvertimeReduction) {
+      return {
+        ...commonAbsence,
+        type: AbsenceType.ReductionOfOvertime,
+        countDays: null,
+        countHours: faker.datatype.float({ min: 0.1, max: 8 }),
+      };
+    }
+
+    return {
+      ...commonAbsence,
+      // Make sure that we get the most important absence types
+      // also for lower mock counts.
+      type: absenceTypesWithoutOvertimeReduction[
+        index % absenceTypesWithoutOvertimeReduction.length
+      ],
+      countDays: isHalfDay
+        ? 0.5
+        : Math.max(
+            (dateUntil.getTime() - dateSince.getTime()) / ONE_DAY -
+              faker.datatype.number({ min: 0, max: 3 }),
+            1
+          ),
+      countHours: null,
     };
   });
 };
