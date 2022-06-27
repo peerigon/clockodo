@@ -1,3 +1,10 @@
+## [14.0.1](https://github.com/peerigon/clockodo/compare/v14.0.0...v14.0.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* Improve TypeScript abence types ([2a08354](https://github.com/peerigon/clockodo/commit/2a08354513d3d3caf5bee609b605380ff595206e))
+
 # [14.0.0](https://github.com/peerigon/clockodo/compare/v13.1.0...v14.0.0) (2022-06-24)
 
 
