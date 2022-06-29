@@ -1,3 +1,15 @@
+# [15.0.0](https://github.com/peerigon/clockodo/compare/v14.0.1...v15.0.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* Inconsistency in mock function naming ([4c1d34d](https://github.com/peerigon/clockodo/commit/4c1d34d5e47340c8123c92afd8be5f0cbfbe666f))
+
+
+### BREAKING CHANGES
+
+* createAbsencesMocks and createNonbusinessDaysMocks have been renamed (see commit)
+
 ## [14.0.1](https://github.com/peerigon/clockodo/compare/v14.0.0...v14.0.1) (2022-06-27)
 
 
