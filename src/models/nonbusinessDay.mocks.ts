@@ -6,7 +6,7 @@ import { NonbusinessDay } from "./nonbusinessDay.js";
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
-export const createNonbusinessDaysMocks = ({
+export const createNonbusinessDayMocks = ({
   count = 1,
   dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: { count?: number; dateBetween?: [Date, Date] } = {}) => {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createNonbusinessDaysMocks() It creates realistic mocks 1`] = `
+exports[`createNonbusinessDayMocks() It creates realistic mocks 1`] = `
 Array [
   Object {
     "date": "2020-02-21",

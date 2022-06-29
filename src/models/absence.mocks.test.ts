@@ -1,7 +1,7 @@
-import { createAbsencesMocks } from "./absence.mocks.js";
+import { createAbsenceMocks } from "./absence.mocks.js";
 
-describe("createAbsencesMocks()", () => {
+describe("createAbsenceMocks()", () => {
   test("It creates realistic mocks", () => {
-    expect(createAbsencesMocks({ count: 20 })).toMatchSnapshot();
+    expect(createAbsenceMocks({ count: 20 })).toMatchSnapshot();
   });
 });

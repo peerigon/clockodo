@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createAbsencesMocks() It creates realistic mocks 1`] = `
+exports[`createAbsenceMocks() It creates realistic mocks 1`] = `
 Array [
   Object {
     "approvedBy": 1,

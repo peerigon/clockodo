@@ -1,12 +1,12 @@
-import { createNonbusinessDaysMocks } from "./nonbusinessDay.mocks.js";
+import { createNonbusinessDayMocks } from "./nonbusinessDay.mocks.js";
 
-describe("createNonbusinessDaysMocks()", () => {
+describe("createNonbusinessDayMocks()", () => {
   test("It creates realistic mocks", () => {
-    expect(createNonbusinessDaysMocks({ count: 20 })).toMatchSnapshot();
+    expect(createNonbusinessDayMocks({ count: 20 })).toMatchSnapshot();
   });
 
   test("It re-uses ids for the next year", () => {
-    const [nonbusinessDay1, nonbusinessDay2] = createNonbusinessDaysMocks({
+    const [nonbusinessDay1, nonbusinessDay2] = createNonbusinessDayMocks({
       count: 2,
       dateBetween: [new Date(2020, 11, 31), new Date(2021, 0, 2)],
     });

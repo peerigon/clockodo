@@ -20,7 +20,7 @@ const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
     typeof status === "number" && status !== AbsenceType.ReductionOfOvertime
 );
 
-export const createAbsencesMocks = ({
+export const createAbsenceMocks = ({
   count = 1,
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: { count?: number; dateSinceBetween?: [Date, Date] } = {}) => {
