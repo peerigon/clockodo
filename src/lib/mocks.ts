@@ -42,71 +42,83 @@ export const nextDay = (date: Date) => {
   return new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
 };
 
-export const generateUnique = <Value>({
+const generateWithMaxDuplicates = <Value>({
   count,
+  maxDuplicates = 1,
   generate,
 }: {
   count: number;
+  maxDuplicates?: number;
   generate: () => Value;
 }) => {
-  const generated = new Set<Value>();
+  const accepted = new Map<Value, Array<Value>>();
+  let acceptedCount = 0;
 
-  for (let i = 0; generated.size < count; i++) {
+  for (let i = 0; acceptedCount < count; i++) {
     if (i === MAX_ITERATION_COUNT) {
       throw new Error(
         `Couldn't generate enough unique values before reaching the max iteration count.
 This usually happens when the generated values create too many conflicts (e.g. too many dates on a small date range).`
       );
     }
-    generated.add(generate());
+    const value = generate();
+    const duplicates = accepted.get(value) ?? [];
+
+    if (duplicates.length >= maxDuplicates) continue;
+
+    duplicates.push(value);
+    accepted.set(value, duplicates);
+    acceptedCount++;
   }
 
-  return generated;
+  return Array.from(accepted.values()).flatMap((values) => values);
 };
 
 export const generateRandomDates = ({
   count,
   between: [from, to],
+  maxDuplicates = 1,
 }: {
   count: number;
   between: [Date, Date];
+  maxDuplicates?: number;
 }) => {
-  return Array.from(
-    generateUnique({
-      count,
-      generate: () => {
-        const randomDate = faker.date.between(from, to);
+  return generateWithMaxDuplicates({
+    count,
+    maxDuplicates,
+    generate: () => {
+      const randomDate = faker.date.between(from, to);
 
-        return new Date(
-          randomDate.getFullYear(),
-          randomDate.getMonth(),
-          randomDate.getDate()
-        ).getTime();
-      },
-    })
-  ).sort();
+      return new Date(
+        randomDate.getFullYear(),
+        randomDate.getMonth(),
+        randomDate.getDate()
+      ).getTime();
+    },
+  }).sort();
 };
 
 export const generateRandomMonths = ({
   count,
   between: [from, to],
+  maxDuplicates = 1,
 }: {
   count: number;
   between: [Date, Date];
+  maxDuplicates?: number;
 }) => {
-  return Array.from(
-    generateUnique({
-      count,
-      generate: () => {
-        const randomDate = faker.date.between(from, to);
+  return generateWithMaxDuplicates({
+    count,
+    maxDuplicates,
+    generate: () => {
+      const randomDate = faker.date.between(from, to);
 
-        return new Date(
-          randomDate.getFullYear(),
-          randomDate.getMonth()
-        ).getTime();
-      },
-    })
-  ).sort();
+      return new Date(
+        randomDate.getFullYear(),
+        randomDate.getMonth()
+      ).getTime();
+    },
+  }).sort();
 };
 
 export const toPairs = <Item>(array: Array<Item>) => {

@@ -28,6 +28,7 @@ export const createAbsenceMocks = ({
     generateRandomDates({
       count: count * 2,
       between: [from, to],
+      maxDuplicates: 2,
     })
   );
 

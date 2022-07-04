@@ -43,6 +43,7 @@ export const createTargethoursRowWeeklyMocks = ({
     generateRandomDates({
       count: count * 2,
       between: [from, to],
+      maxDuplicates: 2,
     })
   );
   let previousTo: undefined | number;
@@ -155,8 +156,10 @@ export const createTargethoursRowMocks = (
   const weeklyTargethoursRows = createTargethoursRowWeeklyMocks({
     ...options,
     dateSinceBetween: [
-      new Date(from.getTime() + ONE_YEAR + ONE_DAY),
-      new Date(to),
+      dateRangeIsLongEnough
+        ? new Date(from.getTime() + ONE_YEAR + ONE_DAY)
+        : from,
+      to,
     ],
     count: countOfWeeklyTargethoursRows,
   });
