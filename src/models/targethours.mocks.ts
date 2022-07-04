@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { ONE_DAY } from "../lib/mocks";
 import {
   ONE_YEAR,
+  ONE_DAY,
   generateRandomDates,
   generateRandomMonths,
   isoDateFromDateTime,
