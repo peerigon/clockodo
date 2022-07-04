@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { User, UserRole, UserLanguage } from "./user.js";
 
-export const createUserMocks = ({ count }: { count: number }) =>
+export const createUserMocks = ({ count = 1 }: { count?: number }) =>
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
 
