@@ -10,7 +10,7 @@ import {
 
 type CommonOptions = {
   count?: number;
-  timeSinceBetween?: [Date, Date];
+  timeSinceBetween?: readonly [Date, Date];
 };
 
 const DEFAULT_FROM = new Date(2020, 0);

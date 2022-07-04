@@ -80,7 +80,7 @@ export const generateRandomDates = ({
   maxDuplicates = 1,
 }: {
   count: number;
-  between: [Date, Date];
+  between: readonly [Date, Date];
   maxDuplicates?: number;
 }) => {
   return generateWithMaxDuplicates({
@@ -104,7 +104,7 @@ export const generateRandomMonths = ({
   maxDuplicates = 1,
 }: {
   count: number;
-  between: [Date, Date];
+  between: readonly [Date, Date];
   maxDuplicates?: number;
 }) => {
   return generateWithMaxDuplicates({
