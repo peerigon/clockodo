@@ -1,4 +1,8 @@
-import { createTargethoursRowMocks } from "./targethours.mocks.js";
+import {
+  createTargethoursRowMocks,
+  createTargethoursRowMonthlyMocks,
+  createTargethoursRowWeeklyMocks,
+} from "./targethours.mocks.js";
 
 describe("createTargethoursRowMocks()", () => {
   test("It creates realistic mocks", () => {
@@ -7,7 +11,7 @@ describe("createTargethoursRowMocks()", () => {
 
   test("Creates targethours rows on a single day", () => {
     for (let i = 0; i < 20; i++) {
-      const [targethoursRow] = createTargethoursRowMocks({
+      const [targethoursRow] = createTargethoursRowMonthlyMocks({
         count: 1,
         dateSinceBetween: [new Date(2020, 0, 1), new Date(2020, 0, 1)],
       });
@@ -15,7 +19,17 @@ describe("createTargethoursRowMocks()", () => {
       expect(targethoursRow).toMatchObject({
         dateSince: "2020-01-01",
       });
-      expect(["2020-01-01", null]).toContain(targethoursRow.dateUntil);
     }
   });
+  for (let i = 0; i < 20; i++) {
+    const [targethoursRow] = createTargethoursRowWeeklyMocks({
+      count: 1,
+      dateSinceBetween: [new Date(2020, 0, 1), new Date(2020, 0, 1)],
+    });
+
+    expect(targethoursRow).toMatchObject({
+      dateSince: "2020-01-01",
+    });
+    expect(["2020-01-01", null]).toContain(targethoursRow.dateUntil);
+  }
 });

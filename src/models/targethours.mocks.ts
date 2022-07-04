@@ -96,6 +96,7 @@ export const createTargethoursRowMonthlyMocks = ({
     generateRandomMonths({
       count: count * 2,
       between: [from, to],
+      maxDuplicates: 2,
     })
   );
 
