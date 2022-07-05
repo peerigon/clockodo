@@ -1,3 +1,20 @@
+# [16.0.0](https://github.com/peerigon/clockodo/compare/v15.0.0...v16.0.0) (2022-07-05)
+
+
+### Bug Fixes
+
+* Broken imports in mock generators ([ef41b8f](https://github.com/peerigon/clockodo/commit/ef41b8feb99879a15ea8b81db3be84f303051c50))
+
+
+### Features
+
+* Add possibility to generate mocks on a single day ([7578654](https://github.com/peerigon/clockodo/commit/7578654d5deb190c6a139cd270b77e0f8954ec23))
+
+
+### BREAKING CHANGES
+
+* createAbsenceMocks() and createTargethoursRowMocks() may produce different mock data now.
+
 # [15.0.0](https://github.com/peerigon/clockodo/compare/v14.0.1...v15.0.0) (2022-06-29)
 
 
