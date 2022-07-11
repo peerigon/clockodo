@@ -10,11 +10,11 @@ export type WorktimeRegulation = {
   /** Do mandatory breaks count as worktime?  */
   addToWorktime: boolean;
   /** Maximum allowed worktime per week (in hours)  */
-  weeklyMax: number;
+  weeklyMax: number | null;
   /** Maximum allowed worktime per day (in hours)  */
-  dailyMax: number;
+  dailyMax: number | null;
   /** Maximum allowed worktime without a break (in hours) */
-  intervalMax: number;
+  intervalMax: number | null;
   /** Contains objects of the type "breakrule" */
   rules: Array<BreakRule>;
 };
