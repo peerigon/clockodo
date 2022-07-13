@@ -1,7 +1,7 @@
 import { WorktimeRegulation } from "./worktimeRegulation.js";
 
 export const worktimeRegulationCountryPresets: Record<
-  string,
+  "Germany" | "Austria" | "Switzerland" | "Netherlands" | "Greece" | "France",
   WorktimeRegulation
 > = {
   Germany: {
