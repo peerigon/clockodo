@@ -1,3 +1,26 @@
+# [17.0.0](https://github.com/peerigon/clockodo/compare/v16.0.0...v17.0.0) (2022-07-13)
+
+
+### Bug Fixes
+
+* Missing null types in WorktimeRegulation ([5c47cdd](https://github.com/peerigon/clockodo/commit/5c47cddab696665e827b5002215827bc5d5eb0ef))
+
+
+### chore
+
+* Remove deprecated NO_WORKTIME_REGULATIONS_ID ([62003cd](https://github.com/peerigon/clockodo/commit/62003cd0b9cb9e8f08b93aa09fc951538173f163))
+
+
+### Features
+
+* Add worktimeRegulationCountryPresets to mock package ([cad211f](https://github.com/peerigon/clockodo/commit/cad211f1789c1a2ba3044b5e0ced8478683d38b9))
+* Improve worktimeRegulation typing ([49c2662](https://github.com/peerigon/clockodo/commit/49c266225b5d0e73fa447606c799490f921502fb))
+
+
+### BREAKING CHANGES
+
+* NO_WORKTIME_REGULATIONS_ID has been renamed to NO_WORKTIME_REGULATIONS_ID_FOR_USER
+
 # [16.0.0](https://github.com/peerigon/clockodo/compare/v15.0.0...v16.0.0) (2022-07-05)
 
 
