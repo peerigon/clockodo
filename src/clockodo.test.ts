@@ -166,13 +166,29 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getCustomers()", () => {
-      it("correctly builds getCustomers() request", async () => {
+    describe("getCustomersPage()", () => {
+      it("correctly builds getCustomersPage() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get("/v2/customers")
           .reply(200, {});
 
-        await clockodo.getCustomers();
+        await clockodo.getCustomersPage();
+
+        nockScope.done();
+      });
+    });
+
+    describe("getCustomers()", () => {
+      it("requests all customer pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/customers?",
+          countPages: 3,
+          createPageResponse: (page) => ({ customers: [page] }),
+        });
+
+        const { customers } = await clockodo.getCustomers();
+
+        expect(customers).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -190,8 +206,8 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getEntries()", () => {
-      it("correctly builds getEntries() request", async () => {
+    describe("getEntriesPage()", () => {
+      it("correctly builds getEntriesPage() request", async () => {
         const expectedParameters = {
           time_since: "2017-08-18 00:00:00",
           time_until: "2018-02-09 00:00:00",
@@ -202,11 +218,44 @@ describe("Clockodo (instance)", () => {
           .get("/v2/entries?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
-        await clockodo.getEntries({
+        await clockodo.getEntriesPage({
           timeSince: "2017-08-18 00:00:00",
           timeUntil: "2018-02-09 00:00:00",
           filterBillable: Billability.Billed,
         });
+
+        nockScope.done();
+      });
+      it("throws an error when getEntriesPage() is missing param", async () => {
+        expect.assertions(1);
+
+        return expect(
+          // @ts-expect-error Intentional error just for the test
+          clockodo.getEntriesPage({
+            timeSince: "2017-08-18 00:00:00",
+          })
+        ).rejects.toThrowError('Missing required parameter "timeUntil"');
+      });
+    });
+
+    describe("getEntries()", () => {
+      it("requests all entries pages", async () => {
+        const expectedParameters = {
+          time_since: "2017-08-18 00:00:00",
+          time_until: "2018-02-09 00:00:00",
+        };
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: `/v2/entries?${qs.stringify(expectedParameters)}&`,
+          countPages: 3,
+          createPageResponse: (page) => ({ entries: [page] }),
+        });
+
+        const { entries } = await clockodo.getEntries({
+          timeSince: "2017-08-18 00:00:00",
+          timeUntil: "2018-02-09 00:00:00",
+        });
+
+        expect(entries).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -219,6 +268,35 @@ describe("Clockodo (instance)", () => {
             timeSince: "2017-08-18 00:00:00",
           })
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
+      });
+    });
+
+    describe("getEntriesTexts()", () => {
+      it("requests all entries texts pages", async () => {
+        const expectedParameters = {
+          text: "Some text",
+        };
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: `/v2/entriesTexts?${qs.stringify(expectedParameters)}&`,
+          countPages: 3,
+          createPageResponse: (page) => ({ texts: { [page]: true } }),
+        });
+
+        const { texts } = await clockodo.getEntriesTexts({
+          text: "Some text",
+        });
+
+        expect(texts).toMatchObject({ 1: true, 2: true, 3: true });
+
+        nockScope.done();
+      });
+      it("throws an error when getEntriesTexts() is missing param", async () => {
+        expect.assertions(1);
+
+        return expect(
+          // @ts-expect-error Intentional error just for the test
+          clockodo.getEntriesTexts({})
+        ).rejects.toThrowError('Missing required parameter "text"');
       });
     });
 
@@ -279,6 +357,32 @@ describe("Clockodo (instance)", () => {
           .reply(200, {});
 
         await clockodo.getProject({ id: 1985 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getProjectsPage()", () => {
+      it("correctly builds getProjectsPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API).get("/v2/projects").reply(200, {});
+
+        await clockodo.getProjectsPage();
+
+        nockScope.done();
+      });
+    });
+
+    describe("getProjects()", () => {
+      it("requests all projects pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/projects?",
+          countPages: 3,
+          createPageResponse: (page) => ({ projects: [page] }),
+        });
+
+        const { projects } = await clockodo.getProjects();
+
+        expect(projects).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -911,3 +1015,31 @@ describe("Clockodo (instance)", () => {
     });
   });
 });
+
+const setupPaginatedApiMock = ({
+  baseUrl,
+  countPages,
+  createPageResponse,
+}: {
+  baseUrl: string;
+  countPages: number;
+  createPageResponse: (page: number) => Record<string, unknown>;
+}) => {
+  let nockScope = nock(CLOCKODO_API);
+
+  Array.from({ length: countPages }).forEach((_, index) => {
+    const page = index + 1;
+
+    nockScope = nockScope.get(`${baseUrl}page=${page}`).reply(200, {
+      ...createPageResponse(page),
+      paging: {
+        items_per_page: 1,
+        current_page: 1,
+        count_pages: countPages,
+        count_items: countPages,
+      },
+    });
+  });
+
+  return nockScope;
+};

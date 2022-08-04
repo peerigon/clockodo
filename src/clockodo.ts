@@ -8,6 +8,7 @@ import {
   LumpsumValueEntry,
   LumpsumServiceEntry,
   ClockingTimeEntryBillability,
+  Billability,
 } from "./models/entry.js";
 import { EntryGroup } from "./models/entryGroup.js";
 import { LumpsumService } from "./models/lumpsumService.js";
@@ -16,7 +17,13 @@ import { Service } from "./models/service.js";
 import { TargethoursRow } from "./models/targethours.js";
 import { User } from "./models/user.js";
 import { UserReport, UserReportType } from "./models/userReport.js";
-import { Api, Config, Filter, Paging } from "./lib/api.js";
+import {
+  Api,
+  Config,
+  ResponseWithFilter,
+  ResponseWithoutPaging,
+  ResponseWithPaging,
+} from "./lib/api.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { Company } from "./models/company.js";
 import { NonbusinessDay } from "./models/nonbusinessDay.js";
@@ -98,8 +105,26 @@ export class Clockodo {
     return this.api.get("/v2/customers/" + id, rest);
   }
 
-  async getCustomers(params?: Params): Promise<CustomersReturnType> {
+  async getCustomersPage(
+    params?: Params<CustomersParams>
+  ): Promise<CustomersReturnType> {
     return this.api.get("/v2/customers", params);
+  }
+
+  async getCustomers(
+    params?: Params<CustomersParams>
+  ): Promise<ResponseWithoutPaging<CustomersReturnType>> {
+    const pages = await this.api.getAllPages<CustomersReturnType>(
+      "/v2/customers",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const customers = pages.flatMap(({ customers }) => customers);
+
+    return {
+      ...remainingResponse,
+      customers,
+    };
   }
 
   async getProject(
@@ -112,8 +137,26 @@ export class Clockodo {
     return this.api.get("/v2/projects/" + id, rest);
   }
 
-  async getProjects(params?: Params): Promise<ProjectsReturnType> {
+  async getProjectsPage(
+    params?: Params<ProjectsParams>
+  ): Promise<ProjectsReturnType> {
     return this.api.get("/v2/projects", params);
+  }
+
+  async getProjects(
+    params?: Params<ProjectsParams>
+  ): Promise<ResponseWithoutPaging<ProjectsReturnType>> {
+    const pages = await this.api.getAllPages<ProjectsReturnType>(
+      "/v2/projects",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const projects = pages.flatMap(({ projects }) => projects);
+
+    return {
+      ...remainingResponse,
+      projects,
+    };
   }
 
   async getEntry(
@@ -127,10 +170,25 @@ export class Clockodo {
   }
 
   async getEntries(
-    params: Params<{
-      timeSince: string;
-      timeUntil: string;
-    }>
+    params: Params<EntriesParams>
+  ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
+
+    const pages = await this.api.getAllPages<EntriesReturnType>(
+      "/v2/entries",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const entries = pages.flatMap(({ entries }) => entries);
+
+    return {
+      ...remainingResponse,
+      entries,
+    };
+  }
+
+  async getEntriesPage(
+    params: Params<EntriesParams>
   ): Promise<EntriesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
@@ -138,9 +196,27 @@ export class Clockodo {
   }
 
   async getEntriesTexts(
-    params: Params<{
-      text: string;
-    }>
+    params: Params<EntriesTextsParams>
+  ): Promise<ResponseWithoutPaging<EntriesTextsReturnType>> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
+
+    const pages = await this.api.getAllPages<EntriesTextsReturnType>(
+      "/v2/entriesTexts",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const texts = Object.fromEntries(
+      pages.flatMap(({ texts }) => Object.entries(texts))
+    );
+
+    return {
+      ...remainingResponse,
+      texts,
+    };
+  }
+
+  async getEntriesTextsPage(
+    params: Params<EntriesTextsParams>
   ): Promise<EntriesTextsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
 
@@ -560,8 +636,22 @@ export type UsersAccessServicesReturnType = {
 };
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
-export type CustomersReturnType = { customers: Array<Customer> };
-export type ProjectsReturnType = { projects: Array<Project> };
+export type CustomersParams = {
+  /** Filter customers by active flag */
+  filterActive?: boolean;
+};
+export type CustomersReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active"> & { customers: Array<Customer> };
+export type ProjectsParams = {
+  /** Filter projects by customers id */
+  filterCustomersId?: number;
+  /** Filter projects by active flag */
+  filterActive?: number;
+};
+export type ProjectsReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "customersId"> & {
+    projects: Array<Project>;
+  };
 export type ProjectReturnType = { project: Project };
 export type ServiceReturnType = { service: Service };
 export type ServicesReturnType = { services: Array<Service> };
@@ -583,10 +673,28 @@ export type EditEntryReturnType = {
   entry: Entry;
   running: null | TimeEntry;
 };
-export type EntriesReturnType = {
-  paging: Paging;
-  filter: null | Pick<
-    Filter,
+export type EntriesParams = {
+  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z"  */
+  timeSince: string;
+  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z"  */
+  timeUntil: string;
+  filterUsersId?: number;
+  filterCustomersId?: number;
+  filterProjectsId?: number;
+  filterServicesId?: number;
+  filterLumpsumServicesId?: number;
+  /**
+   * 0, 1 or 2
+   * With filterBillable: 2 you only receive
+   * entries which are billable AND already billed.
+   **/
+  filterBillable?: Billability;
+  filterText?: string;
+  filterTextsId?: number;
+  filterBudgetType?: string;
+};
+export type EntriesReturnType = ResponseWithPaging &
+  ResponseWithFilter<
     | "billable"
     | "budgetType"
     | "customersId"
@@ -596,13 +704,65 @@ export type EntriesReturnType = {
     | "text"
     | "textsId"
     | "usersId"
-  >;
-  entries: Array<Entry>;
+  > & {
+    entries: Array<Entry>;
+  };
+export type EntriesTextsParams = {
+  /** Text to search for */
+  text: string;
+  mode?: EntriesTextsMode;
+  sort?: EntriesTextsSort;
 };
-export type EntriesTextsReturnType = {
-  paging: Paging;
-  filter: null | Pick<
-    Filter,
+/**
+ * Can be specified when requesting entries texts
+ */
+export enum EntriesTextsMode {
+  /**
+   * Descriptions that exactly match the submitted text (default).
+   */
+  ExactMatch = "exact_match",
+
+  /**
+   * Descriptions that start with the submitted text fragment.
+   */
+  StartsWith = "starts_with",
+
+  /**
+   * Descriptions that end with the submitted text fragment.
+   */
+  EndsWith = "ends_with",
+
+  /**
+   * Descriptions that contain the submitted text fragment.
+   */
+  Contains = "contains",
+}
+/**
+ * Can be specified when requesting entries texts
+ */
+export enum EntriesTextsSort {
+  /**
+   * Alphabetically ascending (default).
+   */
+  TextAsc = "text_asc",
+
+  /**
+   * Alphabetically descending.
+   */
+  TextDesc = "text_desc",
+
+  /**
+   * Chronologically ascending.
+   */
+  TimeAsc = "time_asc",
+
+  /**
+   * Chronologically descending.
+   */
+  TimeDesc = "time_desc",
+}
+export type EntriesTextsReturnType = ResponseWithPaging &
+  ResponseWithFilter<
     | "billable"
     | "customersId"
     | "lumpsumServicesId"
@@ -611,11 +771,11 @@ export type EntriesTextsReturnType = {
     | "usersId"
     | "timeSince"
     | "timeUntil"
-  >;
-  texts: EntriesText;
-  mode: string;
-  sort: string;
-};
+  > & {
+    texts: EntriesText;
+    mode: EntriesTextsMode;
+    sort: EntriesTextsSort;
+  };
 export type EntryGroupsReturnType = { groups: Array<EntryGroup> };
 export type EditEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
