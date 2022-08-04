@@ -25,7 +25,8 @@ const clockodo = new Clockodo({
     // You need to add some information about yourself that will be
     // sent along every request,
     // see https://www.clockodo.com/en/api/ "Client identification"
-    name: "The name of your application or your company",
+    // PLEASE NOTE: name + ";" + email must not be longer than 50 characters.
+    name: "Your application/company",
     email: "technical-contact@your-company.com",
   },
   authentication: {
