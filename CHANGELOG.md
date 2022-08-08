@@ -1,3 +1,21 @@
+# [18.0.0](https://github.com/peerigon/clockodo/compare/v17.0.0...v18.0.0) (2022-08-08)
+
+
+### Features
+
+* Add max length for external application header ([733d59b](https://github.com/peerigon/clockodo/commit/733d59bd641544cb1f1cde715d8486607dd88bd5))
+* Refactor paginated endpoints ([3e29d27](https://github.com/peerigon/clockodo/commit/3e29d2757881b282c489cbaf3f95afc0bec0c733))
+
+
+### BREAKING CHANGES
+
+* The external application header now has a max length of 50 characters.
+* getCustomers(), getProjects(), getEntries(),
+getEntriesTexts() won't return a paging property anymore since pages
+are now requested automatically.
+* We've also improved some typings for these endpoints
+which might break your TypeScript build.
+
 # [18.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v17.0.0...v18.0.0-beta.1) (2022-08-04)
 
 
