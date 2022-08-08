@@ -52,7 +52,9 @@ describe("mapResponseBody()", () => {
 });
 
 const expectKeysToMatch = (keysA: Array<string>, keysB: Array<string>) => {
-  expect(keysA.sort()).toMatchObject(keysB.sort());
+  expect(Array.from(new Set(keysA)).sort()).toMatchObject(
+    Array.from(new Set(keysB)).sort()
+  );
 };
 
 const createObjectFromKeys = (keys: Array<string>) =>

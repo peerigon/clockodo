@@ -25,7 +25,8 @@ const clockodo = new Clockodo({
     // You need to add some information about yourself that will be
     // sent along every request,
     // see https://www.clockodo.com/en/api/ "Client identification"
-    name: "The name of your application or your company",
+    // PLEASE NOTE: name + ";" + email must not be longer than 50 characters.
+    name: "Your application/company",
     email: "technical-contact@your-company.com",
   },
   authentication: {
@@ -152,12 +153,29 @@ await clockodo.getCustomer({ id: 777 });
 
 ### getCustomers()
 
-Get list of customers
+Get all customers from all pages.
 
 #### Example:
 
 ```js
 await clockodo.getCustomers();
+// or
+await clockodo.getCustomers({
+  // Filter by active flag
+  filterActive: true,
+});
+```
+
+---
+
+### getCustomersPage()
+
+Get all customers from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getCustomersPage({ page: 2 });
 ```
 
 ---
@@ -176,7 +194,7 @@ await clockodo.getEntry({ id: 4 });
 
 ### getEntries()
 
-Gets list of Clockodo activity entries.
+Get all entries from all pages.
 
 #### Example:
 
@@ -184,9 +202,27 @@ Gets list of Clockodo activity entries.
 import { Billability } from "clockodo";
 
 await clockodo.getEntries({
+  // timeSince and timeUntil are required
   timeSince: "2017-08-18T00:00:00Z",
   timeUntil: "2018-02-09T00:00:00Z",
+  // You can also add additional filters here
   filterBillable: Billability.Billed,
+});
+```
+
+---
+
+### getEntriesPage()
+
+Get all entries from a specific page
+
+#### Example:
+
+```js
+await clockodo.getEntriesPage({
+  timeSince: "2017-08-18T00:00:00Z",
+  timeUntil: "2018-02-09T00:00:00Z",
+  page: 2,
 });
 ```
 
@@ -211,7 +247,7 @@ await clockodo.getEntryGroups({
 
 ### getEntriesTexts()
 
-Retreive descriptions (and no additional info) entered for time and lump sum entries. Seems to be a tight but case insensitive match.
+Retreive all descriptions (and no additional info) entered for time and lump sum entries from all pages.
 
 #### Example:
 
@@ -221,9 +257,21 @@ await clockodo.getEntriesTexts({ text: "meeting with client" });
 
 ---
 
+### getEntriesTextsPage()
+
+Retreive all descriptions from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getEntriesTextsPage({ text: "meeting with client", page: 2 });
+```
+
+---
+
 ### getProject()
 
-Get a project by its ID. For a list of projects, use getCustomers().
+Get a project by its ID.
 
 #### Example:
 
@@ -235,16 +283,31 @@ await clockodo.getProject({ id: 1985 });
 
 ### getProjects()
 
-Returns all projects.
+Get all projects from all pages.
 
 #### Example:
 
 ```js
 await clockodo.getProjects();
-// or filter by a specific customer id
+// or
 await clockodo.getProjects({
+  // Filter by a specific customer id
   filterCustomersId: 123,
+  // Filter by active flag
+  filterActive: true,
 });
+```
+
+---
+
+### getProjectsPage()
+
+Get all projects from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getProjectsPage({ page: 2 });
 ```
 
 ---

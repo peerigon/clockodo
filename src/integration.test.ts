@@ -10,7 +10,7 @@ const hasCredentials =
   typeof process.env.CLOCKODO_API_KEY === "string";
 const config: Config = {
   client: {
-    name: "Clockodo SDK Integration Test",
+    name: "SDK Integration Test",
     email: "johannes.ewald@peerigon.com",
   },
 };

@@ -1,9 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
+import pLimit from "p-limit";
 import { axiosClient } from "./symbols.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
+import { Billability } from "../models/entry.js";
 
 const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
+const MAX_PARALLEL_REQUESTS_WHEN_STREAMING = 3;
+const EXTERNAL_APPLICATION_HEADER_MAX_LENGTH = 50;
 
 const paramsSerializer = (params: Record<string, string>) => {
   const urlParams = [];
@@ -28,18 +32,31 @@ export type Paging = {
   countItems: number;
 };
 
+type BooleanAsNumber = 0 | 1;
+
 export type Filter = {
-  usersId?: number;
-  customersId?: number;
-  projectsId?: number;
-  servicesId?: number;
-  lumpsumServicesId?: number;
-  billable?: number;
-  text?: string;
-  textsId?: number;
-  budgetType?: string;
-  timeSince?: string;
-  timeUntil?: string;
+  usersId: number;
+  customersId: number;
+  projectsId: number;
+  servicesId: number;
+  lumpsumServicesId: number;
+  billable: Billability;
+  text: string;
+  textsId: number;
+  budgetType: string;
+  timeSince: string;
+  timeUntil: string;
+  active: BooleanAsNumber;
+};
+
+export type ResponseWithPaging = {
+  paging: Paging;
+};
+
+export type ResponseWithoutPaging<Response> = Omit<Response, "paging">;
+
+export type ResponseWithFilter<FilterProperty extends keyof Filter> = {
+  filter: null | Partial<Pick<Filter, FilterProperty>>;
 };
 
 export type Authentication = {
@@ -154,7 +171,15 @@ export class Api {
         });
       }
 
-      defaults.headers["X-Clockodo-External-Application"] = `${name};${email}`;
+      const externalApplication = `${name};${email}`;
+
+      if (externalApplication.length > EXTERNAL_APPLICATION_HEADER_MAX_LENGTH) {
+        throw new Error(
+          `External application header "${externalApplication}" is longer than ${EXTERNAL_APPLICATION_HEADER_MAX_LENGTH} characters (was ${externalApplication.length}). Please use a shorter name.`
+        );
+      }
+
+      defaults.headers["X-Clockodo-External-Application"] = externalApplication;
     }
     if ("authentication" in config) {
       const { authentication } = config;
@@ -203,6 +228,49 @@ export class Api {
     });
 
     return mapResponseBody<Result>(response.data);
+  }
+
+  async *getPagesStreaming<Result extends ResponseWithPaging>(
+    ...args: Parameters<Api["get"]>
+  ) {
+    const [url, queryParams = {}, options] = args;
+    const getPage = async (page: number) => {
+      return this.get<Result & ResponseWithPaging>(
+        url,
+        { ...queryParams, page },
+        options
+      );
+    };
+    const firstResponse = await getPage(1);
+
+    yield firstResponse;
+
+    const { paging } = firstResponse;
+    const limit = pLimit(MAX_PARALLEL_REQUESTS_WHEN_STREAMING);
+    const remainingPages = Array.from(
+      { length: paging.countPages - 1 },
+      (_, index) => index + 2
+    );
+
+    yield* yieldPagesAsap(
+      remainingPages.map(async (page) => limit(getPage, page))
+    );
+  }
+
+  async getAllPages<Result extends ResponseWithPaging>(
+    ...args: Parameters<Api["get"]>
+  ): Promise<Array<Result>> {
+    const pages: Array<Result> = [];
+
+    for await (const page of this.getPagesStreaming<Result>(...args)) {
+      pages.push(page);
+    }
+
+    pages.sort(
+      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage
+    );
+
+    return pages;
   }
 
   async post<Result = any>(
@@ -259,4 +327,24 @@ const createTypeError = ({
   return new TypeError(
     `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`
   );
+};
+
+const yieldPagesAsap = async function* <Result>(
+  pagePromises: Array<Promise<Result>>
+) {
+  const pending = new Map(
+    pagePromises.map((promise, index) => [
+      index,
+      promise.then((result) => [index, result] as const),
+    ])
+  );
+
+  while (pending.size > 0) {
+    // eslint-disable-next-line no-await-in-loop
+    const [index, result] = await Promise.race(pending.values());
+
+    pending.delete(index);
+
+    yield result;
+  }
 };
