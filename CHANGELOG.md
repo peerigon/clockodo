@@ -1,3 +1,10 @@
+# [18.1.0-beta.1](https://github.com/peerigon/clockodo/compare/v18.0.0...v18.1.0-beta.1) (2022-10-12)
+
+
+### Features
+
+* Improve typing of start/stop clock response ([ada7721](https://github.com/peerigon/clockodo/commit/ada7721ea29b9aaee8193dccd0d34674244010ff))
+
 # [18.0.0](https://github.com/peerigon/clockodo/compare/v17.0.0...v18.0.0) (2022-08-08)
 
 
