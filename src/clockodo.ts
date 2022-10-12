@@ -805,22 +805,39 @@ export type AggregatesUsersMeReturnType = {
   worktimeRegulation: WorktimeRegulation;
 };
 export type ClockReturnType = {
+  /** The currently running entry */
   running: null | TimeEntry;
+  /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
 };
 export type ClockStartReturnType = {
+  /** The entry that has been started by this call */
   running: TimeEntry;
-  stopped?: TimeEntry;
+  /** Returns the previously running entry that has been stopped by this call */
+  stopped: null | TimeEntry;
+  /** Whether the previously running entry has been truncated to the max length of 23:59:59h */
+  stoppedHasBeenTruncated: boolean;
+  /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
 };
 export type ClockStopReturnType = {
+  /** The entry that has been stopped by this call */
   stopped: TimeEntry;
+  /** Whether the stopped entry has been truncated to the max length of 23:59:59h */
+  stoppedHasBeenTruncated: boolean;
+  /**
+   * The entry that has been started implicitly by this call.
+   * Only relevant if the away parameter has been provided.
+   **/
   running: null | TimeEntry;
+  /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
 };
 export type ClockEditReturnType = {
   updated: TimeEntry;
+  /** The currently running entry */
   running: null | TimeEntry;
+  /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
 };
 export type RegisterReturnType = {
