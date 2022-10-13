@@ -646,7 +646,7 @@ export type ProjectsParams = {
   /** Filter projects by customers id */
   filterCustomersId?: number;
   /** Filter projects by active flag */
-  filterActive?: number;
+  filterActive?: boolean;
 };
 export type ProjectsReturnType = ResponseWithPaging &
   ResponseWithFilter<"active" | "customersId"> & {
