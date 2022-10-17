@@ -1,3 +1,11 @@
+# [18.1.0-beta.2](https://github.com/peerigon/clockodo/compare/v18.1.0-beta.1...v18.1.0-beta.2) (2022-10-17)
+
+
+### Bug Fixes
+
+* correct ProjectsParams - filter-active type ([47a2f13](https://github.com/peerigon/clockodo/commit/47a2f136e03ef677f188fac825e91ee0ef776202))
+* Incorrect `filterActive` type ([b4bd9f9](https://github.com/peerigon/clockodo/commit/b4bd9f9ed7cf33273bd590fd52b0296f4d24ad4a))
+
 # [18.1.0-beta.1](https://github.com/peerigon/clockodo/compare/v18.0.0...v18.1.0-beta.1) (2022-10-12)
 
 
