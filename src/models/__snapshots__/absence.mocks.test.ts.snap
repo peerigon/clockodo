@@ -195,7 +195,7 @@ Array [
     "id": 13,
     "note": null,
     "status": 1,
-    "type": 1,
+    "type": 15,
     "usersId": 0,
   },
   Object {
@@ -209,7 +209,7 @@ Array [
     "id": 14,
     "note": "porro error sint aut",
     "status": 4,
-    "type": 2,
+    "type": 1,
     "usersId": 0,
   },
   Object {
@@ -223,7 +223,7 @@ Array [
     "id": 15,
     "note": "et aliquid voluptatibus dolorem beatae et molestiae consequatur sed rerum",
     "status": 0,
-    "type": 4,
+    "type": 2,
     "usersId": 0,
   },
   Object {
@@ -251,7 +251,7 @@ Array [
     "id": 17,
     "note": null,
     "status": 1,
-    "type": 6,
+    "type": 5,
     "usersId": 0,
   },
   Object {
@@ -279,7 +279,7 @@ Array [
     "id": 19,
     "note": null,
     "status": 1,
-    "type": 8,
+    "type": 7,
     "usersId": 0,
   },
 ]
