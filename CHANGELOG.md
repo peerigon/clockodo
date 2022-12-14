@@ -1,3 +1,10 @@
+## [18.1.1-beta.1](https://github.com/peerigon/clockodo/compare/v18.1.0...v18.1.1-beta.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* refine access rights type ([8a51f3b](https://github.com/peerigon/clockodo/commit/8a51f3bb4021e2f81e92b25ee981f9e7a58b6261))
+
 # [18.1.0](https://github.com/peerigon/clockodo/compare/v18.0.0...v18.1.0) (2022-10-17)
 
 
