@@ -102,4 +102,5 @@ export enum AbsenceType {
   SickDayOfChildUnpaid = 12,
   Quarantine = 13,
   MilitaryService = 14,
+  SickSelfWithSicknessBenefit = 15,
 }
