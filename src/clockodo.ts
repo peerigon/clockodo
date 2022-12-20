@@ -169,6 +169,16 @@ export class Clockodo {
     return this.api.get("/v2/entries/" + id, rest);
   }
 
+  async splitAllEntriesAtMidnight(
+    params: Params<{ day: string; usersId: number }>
+  ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
+    REQUIRED.checkRequired(params, REQUIRED.SPLIT_ALL_ENTRIES_AT_MIDNIGHT);
+
+    const { day, usersId } = params;
+
+    return this.api.get("/v2/entries/splitAllAtMidnight", { usersId, day });
+  }
+
   async getEntries(
     params: Params<EntriesParams>
   ): Promise<ResponseWithoutPaging<EntriesReturnType>> {

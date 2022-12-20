@@ -54,6 +54,7 @@ export const GET_CUSTOMER = ["id"] as const;
 export const GET_ENTRIES = ["timeSince", "timeUntil"] as const;
 export const GET_ENTRIES_TEXTS = ["text"] as const;
 export const GET_ENTRY = ["id"] as const;
+export const SPLIT_ALL_ENTRIES_AT_MIDNIGHT = ["day", "usersId"] as const;
 export const GET_ENTRY_GROUPS = ["timeSince", "timeUntil", "grouping"] as const;
 export const GET_PROJECT = ["id"] as const;
 export const GET_SERVICE = ["id"] as const;

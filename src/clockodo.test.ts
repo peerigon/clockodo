@@ -206,6 +206,21 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("splitAllEntriesAtMidnight()", () => {
+      it("correctly builds splitAllEntriesAtMidnight() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/entries/splitAllAtMidnight")
+          .reply(200, {});
+
+        await clockodo.splitAllEntriesAtMidnight({
+          day: "2022-12-19",
+          usersId: 1,
+        });
+
+        nockScope.done();
+      });
+    });
+
     describe("getEntriesPage()", () => {
       it("correctly builds getEntriesPage() request", async () => {
         const expectedParameters = {
