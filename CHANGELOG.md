@@ -1,3 +1,10 @@
+# [18.3.0-beta.1](https://github.com/peerigon/clockodo/compare/v18.2.0...v18.3.0-beta.1) (2022-12-20)
+
+
+### Features
+
+* Add splitAllEntriesAtMidnight functionality ([58ae7be](https://github.com/peerigon/clockodo/commit/58ae7be3096245f65b9b05fb1b9f420bc7407246))
+
 # [18.2.0](https://github.com/peerigon/clockodo/compare/v18.1.0...v18.2.0) (2022-12-14)
 
 
