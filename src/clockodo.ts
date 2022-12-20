@@ -176,9 +176,7 @@ export class Clockodo {
 
     const { day, usersId } = params;
 
-    return this.api.get(
-      `/v2/entries/splitAllAtMidnight?usersId=${usersId}&day=${day}`
-    );
+    return this.api.get("/v2/entries/splitAllAtMidnight", { usersId, day });
   }
 
   async getEntries(
