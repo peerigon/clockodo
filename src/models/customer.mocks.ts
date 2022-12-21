@@ -7,7 +7,7 @@ export const createCustomerMocks = ({ count = 1 }: { count?: number } = {}) => {
 
     return {
       id: customerId,
-      name: faker.company.companyName(),
+      name: faker.company.name(),
       number: faker.datatype.hexadecimal(),
       active: faker.datatype.float({ min: 0, max: 10 }) > 1,
       billableDefault: faker.datatype.boolean(),
