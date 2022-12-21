@@ -1,3 +1,15 @@
+# [19.0.0](https://github.com/peerigon/clockodo/compare/v18.2.0...v19.0.0) (2022-12-21)
+
+
+### chore
+
+* Update faker dependency ([e89d79f](https://github.com/peerigon/clockodo/commit/e89d79fd155f008b620a18b394db167146ea98b7))
+
+
+### BREAKING CHANGES
+
+* Since faker has been updated, it might break your tests
+
 # [18.2.0](https://github.com/peerigon/clockodo/compare/v18.1.0...v18.2.0) (2022-12-14)
 
 
