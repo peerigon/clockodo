@@ -7,7 +7,7 @@ export const createUserMocks = ({ count = 1 }: { count?: number }) =>
 
     return {
       id: userId,
-      name: faker.name.findName(),
+      name: faker.name.fullName(),
       number: faker.datatype.hexadecimal(),
       email: faker.internet.email(),
       role: [UserRole.Owner, UserRole.Manager, UserRole.Worker][index % 3],
