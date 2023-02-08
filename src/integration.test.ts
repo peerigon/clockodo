@@ -369,12 +369,12 @@ describe("Clockodo", () => {
 
   describe("getAggregatesUsersMe()", () => {
     it("returns expected data format", async () => {
-      const { user, company, worktimeRegulation } =
-        await clockodo.getAggregatesUsersMe();
+      const me = await clockodo.getAggregatesUsersMe();
+      const { user, company } = me;
 
       expect(user).toHaveProperty("id");
       expect(company).toHaveProperty("id");
-      expect(worktimeRegulation).toBe(null);
+      expect(me).toHaveProperty("worktimeRegulation");
     });
   });
 
