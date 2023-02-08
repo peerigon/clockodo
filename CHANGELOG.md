@@ -1,3 +1,16 @@
+# [19.1.0](https://github.com/peerigon/clockodo/compare/v19.0.0...v19.1.0) (2023-02-08)
+
+
+### Bug Fixes
+
+* use PUT for splitting entries at midnight ([998e004](https://github.com/peerigon/clockodo/commit/998e0049343ea97296c924694f87b1a06a0839c0))
+* use PUT for splitting entries at midnight ([bc8ab24](https://github.com/peerigon/clockodo/commit/bc8ab24e63ddac305cbbfbab3ac411e6707d1170))
+
+
+### Features
+
+* Add splitAllEntriesAtMidnight functionality ([58ae7be](https://github.com/peerigon/clockodo/commit/58ae7be3096245f65b9b05fb1b9f420bc7407246))
+
 # [18.3.0-beta.1](https://github.com/peerigon/clockodo/compare/v18.2.0...v18.3.0-beta.1) (2022-12-20)
 
 ### Features
