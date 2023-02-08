@@ -209,7 +209,7 @@ describe("Clockodo (instance)", () => {
     describe.skip("splitAllEntriesAtMidnight()", () => {
       it("correctly builds splitAllEntriesAtMidnight() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/entries/splitAllAtMidnight")
+          .put("/v2/entries/splitAllAtMidnight")
           .reply(200, {});
 
         await clockodo.splitAllEntriesAtMidnight({
