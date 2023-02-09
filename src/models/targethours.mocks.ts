@@ -20,6 +20,7 @@ import {
 type CommonOptions = {
   count?: number;
   dateSinceBetween?: readonly [Date, Date];
+  absenceFixedCredit?: boolean;
 };
 
 const DEFAULT_FROM = new Date(2019, 0);
@@ -38,6 +39,7 @@ const createCommonTargethoursRowMock = (dateSince: Date) => {
 export const createTargethoursRowWeeklyMocks = ({
   count = 1,
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  absenceFixedCredit,
 }: CommonOptions = {}) => {
   const dayPairs = toPairs(
     generateRandomDates({
@@ -82,7 +84,7 @@ export const createTargethoursRowWeeklyMocks = ({
       friday: typicalHours[4 % typicalHours.length],
       saturday: typicalHours[5 % typicalHours.length],
       sunday: typicalHours[6 % typicalHours.length],
-      absenceFixedCredit: faker.datatype.boolean(),
+      absenceFixedCredit: absenceFixedCredit ?? faker.datatype.boolean(),
       compensationDaily: faker.datatype.number({ min: 0, max: 60 }),
     };
   });
