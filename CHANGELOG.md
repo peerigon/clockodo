@@ -1,3 +1,10 @@
+## [19.1.2](https://github.com/peerigon/clockodo/compare/v19.1.1...v19.1.2) (2023-02-10)
+
+
+### Bug Fixes
+
+* make absenceFixedCredit providable ([89f892f](https://github.com/peerigon/clockodo/commit/89f892fe0d7caa0668b1d94b9b59dda583d6240b))
+
 ## [19.1.1-beta.1](https://github.com/peerigon/clockodo/compare/v19.1.0...v19.1.1-beta.1) (2023-02-09)
 
 
