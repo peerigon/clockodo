@@ -1,3 +1,10 @@
+# [19.2.0-beta.1](https://github.com/peerigon/clockodo/compare/v19.1.2...v19.2.0-beta.1) (2023-02-16)
+
+
+### Features
+
+* add workTimes types ([4c8f6e4](https://github.com/peerigon/clockodo/commit/4c8f6e44649a8e3f26d3f723eade7d3c5e06eec5))
+
 ## [19.1.2](https://github.com/peerigon/clockodo/compare/v19.1.1...v19.1.2) (2023-02-10)
 
 
