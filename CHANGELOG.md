@@ -1,3 +1,10 @@
+# [19.2.0-beta.2](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.1...v19.2.0-beta.2) (2023-02-17)
+
+
+### Bug Fixes
+
+* add mocks for workTimes ([6752007](https://github.com/peerigon/clockodo/commit/675200770834008596a362afbbdc8e66794f571d))
+
 # [19.2.0-beta.1](https://github.com/peerigon/clockodo/compare/v19.1.2...v19.2.0-beta.1) (2023-02-16)
 
 
