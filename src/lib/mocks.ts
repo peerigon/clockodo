@@ -42,7 +42,7 @@ export const nextDay = (date: Date) => {
   return new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
 };
 
-const generateWithMaxDuplicates = <Value>({
+export const generateWithMaxDuplicates = <Value>({
   count,
   maxDuplicates = 1,
   generate,
