@@ -1,30 +1,20 @@
-import {
-  createWorkTimesMocks,
-  WorkTimeDayVariantStatusCombination,
-} from "./workTimes.mocks.js";
+import { WorkTimeDayVariantStatus } from "./workTimes.js";
+import { createWorkTimesMocks } from "./workTimes.mocks.js";
 
 describe("createWorkTimesMocks", () => {
-  test("Nur genehmigte", () => {
+  test("Genehmigte", () => {
     expect(
       createWorkTimesMocks({
         count: 5,
-        status: WorkTimeDayVariantStatusCombination.Approved,
+        status: WorkTimeDayVariantStatus.Approved,
       })
     ).toMatchSnapshot();
   });
-  test("Nur beantragte", () => {
+  test("Beantragte", () => {
     expect(
       createWorkTimesMocks({
         count: 5,
-        status: WorkTimeDayVariantStatusCombination.Requested,
-      })
-    ).toMatchSnapshot();
-  });
-  test("Genehmigte und beantragte", () => {
-    expect(
-      createWorkTimesMocks({
-        count: 5,
-        status: WorkTimeDayVariantStatusCombination.ApprovedAndRequested,
+        status: WorkTimeDayVariantStatus.Requested,
       })
     ).toMatchSnapshot();
   });

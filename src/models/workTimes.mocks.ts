@@ -14,15 +14,6 @@ import {
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
-export enum WorkTimeDayVariantStatusCombination {
-  // weil WorkTimeDayVariantStatus.Requested === 1
-  Requested = 1,
-  // weil WorkTimeDayVariantStatus.Approved === 2
-  Approved = 2,
-  // weil WorkTimeDayVariantStatus.Approved + WorkTimeDayVariantStatus.Requested === 3
-  ApprovedAndRequested = 3,
-}
-
 /**
  * Generiert auf Basis eines Datums (also eines Tages) ein oder mehrere
  * nicht-dublette Zeitstempel, die im nächsten Schritt als Start- bzw.
@@ -109,11 +100,11 @@ const createWorkTimeDayVariant = ({
 export const createWorkTimesMocks = ({
   count = 1,
   dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-  status = WorkTimeDayVariantStatusCombination.Approved,
+  status = WorkTimeDayVariantStatus.Approved,
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
-  status: WorkTimeDayVariantStatusCombination;
+  status: WorkTimeDayVariantStatus;
 }) => {
   let id = -1;
 
@@ -125,7 +116,7 @@ export const createWorkTimesMocks = ({
     const date = startOfDay(new Date(timestamp));
 
     switch (status) {
-      case WorkTimeDayVariantStatusCombination.Requested: {
+      case WorkTimeDayVariantStatus.Requested: {
         return [
           createWorkTimeDayVariant({
             date,
@@ -134,7 +125,7 @@ export const createWorkTimesMocks = ({
           }),
         ];
       }
-      case WorkTimeDayVariantStatusCombination.Approved: {
+      case WorkTimeDayVariantStatus.Approved: {
         return [
           createWorkTimeDayVariant({
             date,
@@ -142,25 +133,6 @@ export const createWorkTimesMocks = ({
             status: WorkTimeDayVariantStatus.Approved,
           }),
         ];
-      }
-      case WorkTimeDayVariantStatusCombination.ApprovedAndRequested: {
-        const approved = createWorkTimeDayVariant({
-          date,
-          id,
-          status: WorkTimeDayVariantStatus.Approved,
-        });
-
-        // Damit die beantragte und die genehmigte Variante
-        // nicht dieselbe ID bekommen
-        id = id + 1;
-
-        const requested = createWorkTimeDayVariant({
-          date,
-          id,
-          status: WorkTimeDayVariantStatus.Requested,
-        });
-
-        return [approved, requested];
       }
       default: {
         console.error("Unknown WorkTimeDayVariantStatusCombination value");
