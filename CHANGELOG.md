@@ -1,3 +1,10 @@
+# [19.2.0-beta.5](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.4...v19.2.0-beta.5) (2023-02-20)
+
+
+### Bug Fixes
+
+* return single mock instead of array ([fee1ff2](https://github.com/peerigon/clockodo/commit/fee1ff2a582e86e60c228385be5316bada150c32))
+
 # [19.2.0-beta.4](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.3...v19.2.0-beta.4) (2023-02-20)
 
 
