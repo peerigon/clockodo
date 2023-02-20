@@ -1,3 +1,10 @@
+# [19.2.0-beta.4](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.3...v19.2.0-beta.4) (2023-02-20)
+
+
+### Bug Fixes
+
+* change error message to have type correctly ([2f2c88e](https://github.com/peerigon/clockodo/commit/2f2c88e6a912a05704ddda9ded4e2b48482de207))
+
 # [19.2.0-beta.3](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.2...v19.2.0-beta.3) (2023-02-20)
 
 
