@@ -135,7 +135,7 @@ export const createWorkTimesMocks = ({
         ];
       }
       default: {
-        console.error("Unknown WorkTimeDayVariantStatusCombination value");
+        console.error("Unknown WorkTimeDayVariantStatus value");
 
         return [];
       }
