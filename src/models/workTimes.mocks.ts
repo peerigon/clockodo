@@ -111,33 +111,27 @@ export const createWorkTimesMocks = ({
   return generateRandomDates({
     count,
     between: [from, to],
-  }).map((timestamp): Array<WorkTimeDayVariant> => {
+  }).map((timestamp): WorkTimeDayVariant => {
     id = id + 1;
     const date = startOfDay(new Date(timestamp));
 
     switch (status) {
       case WorkTimeDayVariantStatus.Requested: {
-        return [
-          createWorkTimeDayVariant({
-            date,
-            id,
-            status: WorkTimeDayVariantStatus.Requested,
-          }),
-        ];
+        return createWorkTimeDayVariant({
+          date,
+          id,
+          status: WorkTimeDayVariantStatus.Requested,
+        });
       }
       case WorkTimeDayVariantStatus.Approved: {
-        return [
-          createWorkTimeDayVariant({
-            date,
-            id,
-            status: WorkTimeDayVariantStatus.Approved,
-          }),
-        ];
+        return createWorkTimeDayVariant({
+          date,
+          id,
+          status: WorkTimeDayVariantStatus.Approved,
+        });
       }
       default: {
-        console.error("Unknown WorkTimeDayVariantStatus value");
-
-        return [];
+        throw new Error("Unknown WorkTimeDayVariantStatus value");
       }
     }
   });
