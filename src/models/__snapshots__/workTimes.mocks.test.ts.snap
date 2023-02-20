@@ -1,111 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createWorkTimesMocks Beantragte 1`] = `
+exports[`workTimesMocks createChangeRequestMocks 1`] = `
 Array [
   Object {
-    "clocking": false,
-    "date": "2020-03-24",
-    "duration": 17903,
-    "id": 0,
-    "intervals": Array [
+    "changes": Array [
       Object {
         "timeSince": "2020-03-24T15:24:20.000Z",
         "timeUntil": "2020-03-24T16:25:46.000Z",
+        "type": 1,
       },
       Object {
         "timeSince": "2020-03-24T17:28:08.000Z",
         "timeUntil": "2020-03-24T17:43:43.000Z",
+        "type": 1,
       },
       Object {
         "timeSince": "2020-03-24T18:43:19.000Z",
         "timeUntil": "2020-03-24T22:24:41.000Z",
+        "type": 1,
       },
     ],
-    "status": 1,
+    "date": "2020-03-24",
+    "id": 0,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
-    "date": "2020-04-14",
-    "duration": 12772,
-    "id": 1,
-    "intervals": Array [
+    "changes": Array [
       Object {
         "timeSince": "2020-04-14T12:05:31.000Z",
-        "timeUntil": "2020-04-14T13:03:41.000Z",
+        "timeUntil": "2020-04-14T15:35:44.000Z",
+        "type": 0,
       },
       Object {
-        "timeSince": "2020-04-14T15:35:44.000Z",
+        "timeSince": "2020-04-14T16:43:44.000Z",
         "timeUntil": "2020-04-14T18:10:26.000Z",
+        "type": 1,
+      },
+      Object {
+        "timeSince": "2020-04-14T18:17:50.000Z",
+        "timeUntil": "2020-04-14T19:31:25.000Z",
+        "type": 0,
       },
     ],
-    "status": 1,
+    "date": "2020-04-14",
+    "id": 1,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
-    "date": "2020-06-05",
-    "duration": 13547,
-    "id": 2,
-    "intervals": Array [
+    "changes": Array [
       Object {
-        "timeSince": "2020-06-05T13:50:29.000Z",
+        "timeSince": "2020-06-05T13:59:37.000Z",
         "timeUntil": "2020-06-05T14:13:14.000Z",
+        "type": 1,
       },
       Object {
         "timeSince": "2020-06-05T14:39:21.000Z",
-        "timeUntil": "2020-06-05T14:43:25.000Z",
-      },
-      Object {
-        "timeSince": "2020-06-05T16:25:38.000Z",
-        "timeUntil": "2020-06-05T19:44:36.000Z",
+        "timeUntil": "2020-06-05T19:05:46.000Z",
+        "type": 1,
       },
     ],
-    "status": 1,
+    "date": "2020-06-05",
+    "id": 2,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
+    "changes": Array [
+      Object {
+        "timeSince": "2020-09-11T12:29:09.000Z",
+        "timeUntil": "2020-09-11T15:04:18.000Z",
+        "type": 0,
+      },
+      Object {
+        "timeSince": "2020-09-11T21:25:45.000Z",
+        "timeUntil": "2020-09-11T21:41:56.000Z",
+        "type": 0,
+      },
+    ],
     "date": "2020-09-11",
-    "duration": 28176,
     "id": 3,
-    "intervals": Array [
-      Object {
-        "timeSince": "2020-09-11T10:25:10.000Z",
-        "timeUntil": "2020-09-11T11:46:26.000Z",
-      },
-      Object {
-        "timeSince": "2020-09-11T16:09:25.000Z",
-        "timeUntil": "2020-09-11T22:37:45.000Z",
-      },
-    ],
-    "status": 1,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
-    "date": "2020-09-17",
-    "duration": 18016,
-    "id": 4,
-    "intervals": Array [
+    "changes": Array [
       Object {
-        "timeSince": "2020-09-17T14:53:25.000Z",
-        "timeUntil": "2020-09-17T19:53:41.000Z",
+        "timeSince": "2020-09-17T13:19:29.000Z",
+        "timeUntil": "2020-09-17T15:40:51.000Z",
+        "type": 1,
+      },
+      Object {
+        "timeSince": "2020-09-17T18:34:06.000Z",
+        "timeUntil": "2020-09-17T21:15:06.000Z",
+        "type": 1,
       },
     ],
-    "status": 1,
+    "date": "2020-09-17",
+    "id": 4,
     "usersId": 0,
   },
 ]
 `;
 
-exports[`createWorkTimesMocks Genehmigte 1`] = `
+exports[`workTimesMocks createWorkDayMocks 1`] = `
 Array [
   Object {
-    "clocking": false,
     "date": "2020-03-24",
-    "duration": 17903,
-    "id": 0,
     "intervals": Array [
       Object {
         "timeSince": "2020-03-24T15:24:20.000Z",
@@ -120,14 +118,11 @@ Array [
         "timeUntil": "2020-03-24T22:24:41.000Z",
       },
     ],
-    "status": 2,
+    "offset": 0,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
     "date": "2020-04-14",
-    "duration": 12772,
-    "id": 1,
     "intervals": Array [
       Object {
         "timeSince": "2020-04-14T12:05:31.000Z",
@@ -138,14 +133,11 @@ Array [
         "timeUntil": "2020-04-14T18:10:26.000Z",
       },
     ],
-    "status": 2,
+    "offset": 0,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
     "date": "2020-06-05",
-    "duration": 13547,
-    "id": 2,
     "intervals": Array [
       Object {
         "timeSince": "2020-06-05T13:50:29.000Z",
@@ -160,14 +152,11 @@ Array [
         "timeUntil": "2020-06-05T19:44:36.000Z",
       },
     ],
-    "status": 2,
+    "offset": 0,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
     "date": "2020-09-11",
-    "duration": 28176,
-    "id": 3,
     "intervals": Array [
       Object {
         "timeSince": "2020-09-11T10:25:10.000Z",
@@ -178,21 +167,18 @@ Array [
         "timeUntil": "2020-09-11T22:37:45.000Z",
       },
     ],
-    "status": 2,
+    "offset": 0,
     "usersId": 0,
   },
   Object {
-    "clocking": false,
     "date": "2020-09-17",
-    "duration": 18016,
-    "id": 4,
     "intervals": Array [
       Object {
         "timeSince": "2020-09-17T14:53:25.000Z",
         "timeUntil": "2020-09-17T19:53:41.000Z",
       },
     ],
-    "status": 2,
+    "offset": 0,
     "usersId": 0,
   },
 ]

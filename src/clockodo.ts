@@ -34,10 +34,7 @@ import {
   AccessToCustomersProjects,
   AccessToServices,
 } from "./models/access.js";
-import {
-  WorkTimeDayVariant,
-  WorkTimeDayVariantStatus,
-} from "./models/workTimes.js";
+import { ChangeRequest, WorkTimeDay } from "./models/workTimes.js";
 
 type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>
@@ -874,11 +871,19 @@ export type AddUserReturnType = {
 export type WorkTimesParams = {
   /** The user ID by which the work time day variants should be filtered */
   usersId?: number;
-  /** The status by which the work time day variants should be filtered */
-  status?: WorkTimeDayVariantStatus;
   dateSince: string;
   dateUntil: string;
 };
 export type WorkTimesReturnType = {
-  workTimeDayVariants: Array<WorkTimeDayVariant>;
+  workTimeDays: Array<WorkTimeDay>;
+};
+
+export type ChangeRequestsParams = {
+  /** The user ID by which the work time day variants should be filtered */
+  usersId?: number;
+  dateSince: string;
+  dateUntil: string;
+};
+export type ChangeRequestsReturnType = {
+  changeRequests: Array<ChangeRequest>;
 };
