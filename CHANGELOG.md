@@ -1,3 +1,10 @@
+# [19.2.0-beta.6](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.5...v19.2.0-beta.6) (2023-02-20)
+
+
+### Bug Fixes
+
+* reflect concept changes ([8ba8355](https://github.com/peerigon/clockodo/commit/8ba83554efdfcb53f9019ab43a5fe00160a12ee1))
+
 # [19.2.0-beta.5](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.4...v19.2.0-beta.5) (2023-02-20)
 
 
