@@ -1,3 +1,10 @@
+# [19.2.0-beta.3](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.2...v19.2.0-beta.3) (2023-02-20)
+
+
+### Bug Fixes
+
+* make mock generation slimmer ([09016c9](https://github.com/peerigon/clockodo/commit/09016c91a6e128844f3b69390c83f8f0eb1ef141))
+
 # [19.2.0-beta.2](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.1...v19.2.0-beta.2) (2023-02-17)
 
 
