@@ -14,13 +14,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14.x, 16.x, 18.x ]
+        node-version: [ 16.x, 18.x, 19.x ]
 
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@a40b8845c0683271d9f53dfcb887a7e181d3918b # pin@0.9.1
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@7884fcad6b5d53d10323aee724dc68d8b9096a2e # pin@v2
+        uses: actions/checkout@dc323e67f16fb5f7663d20ff7941f27f5809e9b6 # pin@v2
       - name: ⎔ Setup node ${{ matrix.node-version }}
         uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # pin@v2
         with:
@@ -58,7 +58,7 @@ jobs:
       # - RELEASE ---------------------------------------------------------------------------------------
       - name: 🚀 Release on npm
         if: "contains(' refs/heads/main refs/heads/beta ', github.ref) &&
-          matrix.node-version == '16.x'"
+          matrix.node-version == '18.x'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
