@@ -1,3 +1,18 @@
+# [20.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.6...v20.0.0-beta.1) (2023-02-21)
+
+
+### Features
+
+* Expose team types ([952f700](https://github.com/peerigon/clockodo/commit/952f70017ee7d037670ac6ee493e07eb7a59afe6))
+* Improve workTimes mocks ([3499590](https://github.com/peerigon/clockodo/commit/34995901a1a87054afd7592fd38eccfb772b6721))
+* Introduce special IsoDate and IsoUtcDateTime types ([6fe88e2](https://github.com/peerigon/clockodo/commit/6fe88e240c480466ae8a83748128d27dd8601609))
+* Update Node ([40f81b6](https://github.com/peerigon/clockodo/commit/40f81b66c53f9b8dd4afd2f2919a359615dceb13))
+
+
+### BREAKING CHANGES
+
+* Removed official Node 14 support. We don't know of an actual breaking change for Node 14, but it might happen in future releases.
+
 # [19.2.0-beta.6](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.5...v19.2.0-beta.6) (2023-02-20)
 
 
