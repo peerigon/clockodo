@@ -1,5 +1,5 @@
 import {
-  createChangeRequestMocks,
+  createWorkTimeChangeRequestMocks,
   createWorkTimeDayMocks,
 } from "./workTimes.mocks.js";
 
@@ -14,7 +14,7 @@ describe("workTimesMocks", () => {
 
   test("createChangeRequestMocks", () => {
     expect(
-      createChangeRequestMocks({
+      createWorkTimeChangeRequestMocks({
         count: 5,
       })
     ).toMatchSnapshot();

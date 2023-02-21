@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { IsoDate, IsoUtcDateTime } from "../models/dateTime.js";
 
 export const ONE_DAY = 24 * 60 * 60 * 1000;
 export const ONE_YEAR = 356 * ONE_DAY;
@@ -10,7 +11,11 @@ export const isoDateFromDateTime = (dateTime: Date) => {
     dateTime.getFullYear(),
     String(dateTime.getMonth() + 1).padStart(2, "0"),
     String(dateTime.getDate()).padStart(2, "0"),
-  ].join("-");
+  ].join("-") as IsoDate;
+};
+
+export const isoUtcDateTimeFromDateTime = (dateTime: Date) => {
+  return dateTime.toJSON().replace(/\.\d{3}Z$/, "Z") as IsoUtcDateTime;
 };
 
 export const isoMonthFromDateTime = (dateTime: Date) => {

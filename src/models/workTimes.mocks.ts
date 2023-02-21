@@ -3,14 +3,15 @@ import {
   generateRandomDates,
   generateWithMaxDuplicates,
   isoDateFromDateTime,
+  isoUtcDateTimeFromDateTime,
   startOfDay,
 } from "../lib/mocks.js";
 import {
-  ChangeRequest,
-  ChangeRequestTimeInterval,
-  ChangeRequestTimeIntervalType,
+  WorkTimeChangeRequest,
+  WorkTimeChangeRequestInterval,
+  WorkTimeChangeRequestIntervalType,
   WorkTimeDay,
-  WorkTimeDayTimeInterval,
+  WorkTimeDayInterval,
 } from "./workTimes.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
@@ -27,7 +28,7 @@ const generateIntervals = ({
 }: {
   count?: number;
   date: Date;
-}): Array<WorkTimeDayTimeInterval> => {
+}): Array<WorkTimeDayInterval> => {
   const pointsInTime = generateWithMaxDuplicates({
     // Wir stellen sicher, dass immer ein Start- und ein Endpunkt existieren
     count: count * 2,
@@ -50,15 +51,17 @@ const generateIntervals = ({
     },
   }).sort();
 
-  return pointsInTime.reduce<Array<WorkTimeDayTimeInterval>>(
+  return pointsInTime.reduce<Array<WorkTimeDayInterval>>(
     (acc, pointInTime, index) => {
       // Endpunkte werden nicht selbst verarbeitet, sondern wurden bereits
       // in der Iteration zuvor verwendet
       if (index % 2 === 1) return acc;
 
-      const interval: WorkTimeDayTimeInterval = {
-        timeSince: new Date(pointInTime).toISOString(),
-        timeUntil: new Date(pointsInTime[index + 1]).toISOString(),
+      const interval: WorkTimeDayInterval = {
+        timeSince: isoUtcDateTimeFromDateTime(new Date(pointInTime)),
+        timeUntil: isoUtcDateTimeFromDateTime(
+          new Date(pointsInTime[index + 1])
+        ),
       };
 
       return [...acc, interval];
@@ -106,14 +109,14 @@ export const createWorkTimeDayMocks = ({
 const generateChangeRequestChanges = ({
   count = 1,
   date = DEFAULT_FROM,
-}): Array<ChangeRequestTimeInterval> => {
+}): Array<WorkTimeChangeRequestInterval> => {
   return generateIntervals({ count, date }).map((interval, index) => {
     return {
       ...interval,
       timeUntil: interval.timeUntil!,
       type: faker.datatype.boolean()
-        ? ChangeRequestTimeIntervalType.Add
-        : ChangeRequestTimeIntervalType.Remove,
+        ? WorkTimeChangeRequestIntervalType.Add
+        : WorkTimeChangeRequestIntervalType.Remove,
     };
   });
 };
@@ -124,7 +127,7 @@ const createChangeRequest = ({
 }: {
   date: Date;
   id: number;
-}): ChangeRequest => {
+}): WorkTimeChangeRequest => {
   const changes = generateChangeRequestChanges({
     count: faker.datatype.number({ min: 1, max: 4 }),
     date,
@@ -138,7 +141,7 @@ const createChangeRequest = ({
   };
 };
 
-export const createChangeRequestMocks = ({
+export const createWorkTimeChangeRequestMocks = ({
   count = 1,
   dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
 }: {
@@ -150,7 +153,7 @@ export const createChangeRequestMocks = ({
   return generateRandomDates({
     count,
     between: [from, to],
-  }).map((timestamp): ChangeRequest => {
+  }).map((timestamp): WorkTimeChangeRequest => {
     id = id + 1;
     const date = startOfDay(new Date(timestamp));
 

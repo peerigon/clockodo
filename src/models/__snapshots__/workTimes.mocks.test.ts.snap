@@ -5,19 +5,19 @@ Array [
   Object {
     "changes": Array [
       Object {
-        "timeSince": "2020-03-24T15:24:20.000Z",
-        "timeUntil": "2020-03-24T16:25:46.000Z",
-        "type": 1,
+        "timeSince": "2020-03-24T15:24:20Z",
+        "timeUntil": "2020-03-24T16:25:46Z",
+        "type": 2,
       },
       Object {
-        "timeSince": "2020-03-24T17:28:08.000Z",
-        "timeUntil": "2020-03-24T17:43:43.000Z",
-        "type": 1,
+        "timeSince": "2020-03-24T17:28:08Z",
+        "timeUntil": "2020-03-24T17:43:43Z",
+        "type": 2,
       },
       Object {
-        "timeSince": "2020-03-24T18:43:19.000Z",
-        "timeUntil": "2020-03-24T22:24:41.000Z",
-        "type": 1,
+        "timeSince": "2020-03-24T18:43:19Z",
+        "timeUntil": "2020-03-24T22:24:41Z",
+        "type": 2,
       },
     ],
     "date": "2020-03-24",
@@ -27,19 +27,19 @@ Array [
   Object {
     "changes": Array [
       Object {
-        "timeSince": "2020-04-14T12:05:31.000Z",
-        "timeUntil": "2020-04-14T15:35:44.000Z",
-        "type": 0,
-      },
-      Object {
-        "timeSince": "2020-04-14T16:43:44.000Z",
-        "timeUntil": "2020-04-14T18:10:26.000Z",
+        "timeSince": "2020-04-14T12:05:31Z",
+        "timeUntil": "2020-04-14T15:35:44Z",
         "type": 1,
       },
       Object {
-        "timeSince": "2020-04-14T18:17:50.000Z",
-        "timeUntil": "2020-04-14T19:31:25.000Z",
-        "type": 0,
+        "timeSince": "2020-04-14T16:43:44Z",
+        "timeUntil": "2020-04-14T18:10:26Z",
+        "type": 2,
+      },
+      Object {
+        "timeSince": "2020-04-14T18:17:50Z",
+        "timeUntil": "2020-04-14T19:31:25Z",
+        "type": 1,
       },
     ],
     "date": "2020-04-14",
@@ -49,14 +49,14 @@ Array [
   Object {
     "changes": Array [
       Object {
-        "timeSince": "2020-06-05T13:59:37.000Z",
-        "timeUntil": "2020-06-05T14:13:14.000Z",
-        "type": 1,
+        "timeSince": "2020-06-05T13:59:37Z",
+        "timeUntil": "2020-06-05T14:13:14Z",
+        "type": 2,
       },
       Object {
-        "timeSince": "2020-06-05T14:39:21.000Z",
-        "timeUntil": "2020-06-05T19:05:46.000Z",
-        "type": 1,
+        "timeSince": "2020-06-05T14:39:21Z",
+        "timeUntil": "2020-06-05T19:05:46Z",
+        "type": 2,
       },
     ],
     "date": "2020-06-05",
@@ -66,14 +66,14 @@ Array [
   Object {
     "changes": Array [
       Object {
-        "timeSince": "2020-09-11T12:29:09.000Z",
-        "timeUntil": "2020-09-11T15:04:18.000Z",
-        "type": 0,
+        "timeSince": "2020-09-11T12:29:09Z",
+        "timeUntil": "2020-09-11T15:04:18Z",
+        "type": 1,
       },
       Object {
-        "timeSince": "2020-09-11T21:25:45.000Z",
-        "timeUntil": "2020-09-11T21:41:56.000Z",
-        "type": 0,
+        "timeSince": "2020-09-11T21:25:45Z",
+        "timeUntil": "2020-09-11T21:41:56Z",
+        "type": 1,
       },
     ],
     "date": "2020-09-11",
@@ -83,14 +83,14 @@ Array [
   Object {
     "changes": Array [
       Object {
-        "timeSince": "2020-09-17T13:19:29.000Z",
-        "timeUntil": "2020-09-17T15:40:51.000Z",
-        "type": 1,
+        "timeSince": "2020-09-17T13:19:29Z",
+        "timeUntil": "2020-09-17T15:40:51Z",
+        "type": 2,
       },
       Object {
-        "timeSince": "2020-09-17T18:34:06.000Z",
-        "timeUntil": "2020-09-17T21:15:06.000Z",
-        "type": 1,
+        "timeSince": "2020-09-17T18:34:06Z",
+        "timeUntil": "2020-09-17T21:15:06Z",
+        "type": 2,
       },
     ],
     "date": "2020-09-17",
@@ -106,16 +106,16 @@ Array [
     "date": "2020-03-24",
     "intervals": Array [
       Object {
-        "timeSince": "2020-03-24T15:24:20.000Z",
-        "timeUntil": "2020-03-24T16:25:46.000Z",
+        "timeSince": "2020-03-24T15:24:20Z",
+        "timeUntil": "2020-03-24T16:25:46Z",
       },
       Object {
-        "timeSince": "2020-03-24T17:28:08.000Z",
-        "timeUntil": "2020-03-24T17:43:43.000Z",
+        "timeSince": "2020-03-24T17:28:08Z",
+        "timeUntil": "2020-03-24T17:43:43Z",
       },
       Object {
-        "timeSince": "2020-03-24T18:43:19.000Z",
-        "timeUntil": "2020-03-24T22:24:41.000Z",
+        "timeSince": "2020-03-24T18:43:19Z",
+        "timeUntil": "2020-03-24T22:24:41Z",
       },
     ],
     "offset": 0,
@@ -125,12 +125,12 @@ Array [
     "date": "2020-04-14",
     "intervals": Array [
       Object {
-        "timeSince": "2020-04-14T12:05:31.000Z",
-        "timeUntil": "2020-04-14T13:03:41.000Z",
+        "timeSince": "2020-04-14T12:05:31Z",
+        "timeUntil": "2020-04-14T13:03:41Z",
       },
       Object {
-        "timeSince": "2020-04-14T15:35:44.000Z",
-        "timeUntil": "2020-04-14T18:10:26.000Z",
+        "timeSince": "2020-04-14T15:35:44Z",
+        "timeUntil": "2020-04-14T18:10:26Z",
       },
     ],
     "offset": 0,
@@ -140,16 +140,16 @@ Array [
     "date": "2020-06-05",
     "intervals": Array [
       Object {
-        "timeSince": "2020-06-05T13:50:29.000Z",
-        "timeUntil": "2020-06-05T14:13:14.000Z",
+        "timeSince": "2020-06-05T13:50:29Z",
+        "timeUntil": "2020-06-05T14:13:14Z",
       },
       Object {
-        "timeSince": "2020-06-05T14:39:21.000Z",
-        "timeUntil": "2020-06-05T14:43:25.000Z",
+        "timeSince": "2020-06-05T14:39:21Z",
+        "timeUntil": "2020-06-05T14:43:25Z",
       },
       Object {
-        "timeSince": "2020-06-05T16:25:38.000Z",
-        "timeUntil": "2020-06-05T19:44:36.000Z",
+        "timeSince": "2020-06-05T16:25:38Z",
+        "timeUntil": "2020-06-05T19:44:36Z",
       },
     ],
     "offset": 0,
@@ -159,12 +159,12 @@ Array [
     "date": "2020-09-11",
     "intervals": Array [
       Object {
-        "timeSince": "2020-09-11T10:25:10.000Z",
-        "timeUntil": "2020-09-11T11:46:26.000Z",
+        "timeSince": "2020-09-11T10:25:10Z",
+        "timeUntil": "2020-09-11T11:46:26Z",
       },
       Object {
-        "timeSince": "2020-09-11T16:09:25.000Z",
-        "timeUntil": "2020-09-11T22:37:45.000Z",
+        "timeSince": "2020-09-11T16:09:25Z",
+        "timeUntil": "2020-09-11T22:37:45Z",
       },
     ],
     "offset": 0,
@@ -174,8 +174,8 @@ Array [
     "date": "2020-09-17",
     "intervals": Array [
       Object {
-        "timeSince": "2020-09-17T14:53:25.000Z",
-        "timeUntil": "2020-09-17T19:53:41.000Z",
+        "timeSince": "2020-09-17T14:53:25Z",
+        "timeUntil": "2020-09-17T19:53:41Z",
       },
     ],
     "offset": 0,

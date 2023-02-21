@@ -1,29 +1,31 @@
+import { IsoDate, IsoUtcDateTime } from "./dateTime.js";
+
 export type WorkTimeDay = {
-  date: string;
+  date: IsoDate;
   usersId: number;
-  intervals: Array<WorkTimeDayTimeInterval>;
+  intervals: Array<WorkTimeDayInterval>;
   offset: number;
 };
 
-export type WorkTimeDayTimeInterval = {
-  timeSince: string;
-  timeUntil: null | string;
+export type WorkTimeDayInterval = {
+  timeSince: IsoUtcDateTime;
+  timeUntil: null | IsoUtcDateTime;
 };
 
-export type ChangeRequest = {
+export type WorkTimeChangeRequest = {
   id: number;
-  date: string;
+  date: IsoDate;
   usersId: number;
-  changes: Array<ChangeRequestTimeInterval>;
+  changes: Array<WorkTimeChangeRequestInterval>;
 };
 
-export type ChangeRequestTimeInterval = {
-  type: ChangeRequestTimeIntervalType;
-  timeSince: string;
-  timeUntil: string;
+export type WorkTimeChangeRequestInterval = {
+  type: WorkTimeChangeRequestIntervalType;
+  timeSince: IsoUtcDateTime;
+  timeUntil: IsoUtcDateTime;
 };
 
-export enum ChangeRequestTimeIntervalType {
-  Add,
-  Remove,
+export enum WorkTimeChangeRequestIntervalType {
+  Add = 1,
+  Remove = 2,
 }
