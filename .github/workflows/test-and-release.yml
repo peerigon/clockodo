@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
-    concurrency:
-      group: ${{ github.ref }}
-      cancel-in-progress: true
-
     strategy:
       matrix:
         node-version: [ 16.x, 18.x, 19.x ]
+
+    concurrency:
+      group: ${{ github.ref }}-node-${{ matrix.node-version }}
+      cancel-in-progress: true
 
     steps:
       - name: ⬇️ Checkout repo
