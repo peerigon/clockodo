@@ -1,9 +1,11 @@
 import { faker } from "@faker-js/faker";
 import {
+  isoUtcDateTimeFromTimestamp,
+  isoDateFromDateTime,
+} from "../lib/dateTime.js";
+import {
   generateRandomDates,
   generateWithMaxDuplicates,
-  isoDateFromDateTime,
-  isoUtcDateTimeFromDateTime,
   startOfDay,
 } from "../lib/mocks.js";
 import {
@@ -58,10 +60,8 @@ const generateIntervals = ({
       if (index % 2 === 1) return acc;
 
       const interval: WorkTimeDayInterval = {
-        timeSince: isoUtcDateTimeFromDateTime(new Date(pointInTime)),
-        timeUntil: isoUtcDateTimeFromDateTime(
-          new Date(pointsInTime[index + 1])
-        ),
+        timeSince: isoUtcDateTimeFromTimestamp(pointInTime),
+        timeUntil: isoUtcDateTimeFromTimestamp(pointsInTime[index + 1]),
       };
 
       return [...acc, interval];

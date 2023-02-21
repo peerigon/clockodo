@@ -1,33 +1,18 @@
 import { faker } from "@faker-js/faker";
-import { IsoDate, IsoUtcDateTime } from "../models/dateTime.js";
 
+/**
+ * The number of milliseconds in a typical day.
+ * Should only be used for calculating mock data.
+ */
 export const ONE_DAY = 24 * 60 * 60 * 1000;
+
+/**
+ * The number of milliseconds in a typical year.
+ * Should only be used for calculating mock data.
+ */
 export const ONE_YEAR = 356 * ONE_DAY;
 
 const MAX_ITERATION_COUNT = 10000;
-
-export const isoDateFromDateTime = (dateTime: Date) => {
-  return [
-    dateTime.getFullYear(),
-    String(dateTime.getMonth() + 1).padStart(2, "0"),
-    String(dateTime.getDate()).padStart(2, "0"),
-  ].join("-") as IsoDate;
-};
-
-export const isoUtcDateTimeFromDateTime = (dateTime: Date) => {
-  return dateTime.toJSON().replace(/\.\d{3}Z$/, "Z") as IsoUtcDateTime;
-};
-
-export const isoMonthFromDateTime = (dateTime: Date) => {
-  return [
-    dateTime.getFullYear(),
-    String(dateTime.getMonth() + 1).padStart(2, "0"),
-  ].join("-");
-};
-
-export const isoDateFromTimestamp = (timestamp: number) => {
-  return isoDateFromDateTime(new Date(timestamp));
-};
 
 export const startOfDay = (date: Date) => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
