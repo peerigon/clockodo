@@ -11,6 +11,7 @@ export * from "./models/nonbusinessDay.js";
 export * from "./models/project.js";
 export * from "./models/service.js";
 export * from "./models/targethours.js";
+export * from "./models/team.js";
 export * from "./models/user.js";
 export * from "./models/userReport.js";
 export * from "./models/worktimeRegulation.js";
