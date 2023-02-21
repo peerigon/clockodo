@@ -20,6 +20,8 @@ import { UserReport, UserReportType } from "./models/userReport.js";
 import {
   Api,
   Config,
+  Params,
+  ParamsWithPage,
   ResponseWithFilter,
   ResponseWithoutPaging,
   ResponseWithPaging,
@@ -34,11 +36,7 @@ import {
   AccessToCustomersProjects,
   AccessToServices,
 } from "./models/access.js";
-import { ChangeRequest, WorkTimeDay } from "./models/workTimes.js";
-
-type Params<
-  KnownParams extends Record<string, unknown> = Record<string, unknown>
-> = KnownParams & Record<string, unknown>;
+import { WorkTimeChangeRequest, WorkTimeDay } from "./models/workTimes.js";
 
 export class Clockodo {
   api: Api;
@@ -868,22 +866,22 @@ export type AddUserReturnType = {
   user: User;
 };
 
-export type WorkTimesParams = {
-  /** The user ID by which the work time day variants should be filtered */
+export type WorkTimesParams = ParamsWithPage & {
+  /** The user ID by which the work times should be filtered */
   usersId?: number;
   dateSince: string;
   dateUntil: string;
 };
-export type WorkTimesReturnType = {
+export type WorkTimesReturnType = ResponseWithPaging & {
   workTimeDays: Array<WorkTimeDay>;
 };
 
-export type ChangeRequestsParams = {
-  /** The user ID by which the work time day variants should be filtered */
+export type WorkTimesChangeRequestsParams = ParamsWithPage & {
+  /** The user ID by which the work time change requests should be filtered */
   usersId?: number;
-  dateSince: string;
-  dateUntil: string;
+  dateSince?: string;
+  dateUntil?: string;
 };
-export type ChangeRequestsReturnType = {
-  changeRequests: Array<ChangeRequest>;
+export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
+  changeRequests: Array<WorkTimeChangeRequest>;
 };

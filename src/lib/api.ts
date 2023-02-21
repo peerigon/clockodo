@@ -25,6 +25,18 @@ const paramsSerializer = (params: Record<string, string>) => {
   return urlParams.join("&");
 };
 
+/**
+ * Allows additional properties to be present on the params object.
+ * This is necessary so that the SDK doesn't disallow unknown params that we haven't implemented yet.
+ */
+export type Params<
+  KnownParams extends Record<string, unknown> = Record<string, unknown>
+> = KnownParams & Record<string, unknown>;
+
+export type ParamsWithPage = {
+  page?: number;
+};
+
 export type Paging = {
   itemsPerPage: number;
   currentPage: number;
