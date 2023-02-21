@@ -7,7 +7,7 @@ import {
   generateRandomMonths,
   toPairs,
   endOfMonth,
-  nextDay,
+  startOfNextDay,
 } from "../lib/mocks.js";
 import {
   TargethoursRow,
@@ -53,7 +53,7 @@ export const createTargethoursRowWeeklyMocks = ({
     const dateSince =
       // Make it more unlikely that there are "holes" between to and from
       previousTo !== undefined && faker.datatype.number({ min: 0, max: 10 }) < 7
-        ? nextDay(new Date(previousTo))
+        ? startOfNextDay(new Date(previousTo))
         : new Date(from);
     const commonTargethoursRow = createCommonTargethoursRowMock(dateSince);
     const isLastOne = index === count - 1;
