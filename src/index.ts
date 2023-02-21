@@ -1,6 +1,7 @@
 export * from "./models/absence.js";
 export * from "./models/access.js";
 export * from "./models/customer.js";
+export * from "./models/dateTime.js";
 export * from "./models/entry.js";
 export * from "./models/entryGroup.js";
 export * from "./models/holidayscarry.js";
