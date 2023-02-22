@@ -631,6 +631,92 @@ export class Clockodo {
 
     return this.api.delete("/v2/clock/" + entriesId, rest);
   }
+
+  async getWorkTimesPage(
+    params?: Params<WorkTimesParams>
+  ): Promise<WorkTimesReturnType> {
+    return this.api.get("/v2/workTimes", params);
+  }
+
+  async getWorkTimes(
+    params: Params<WorkTimesParams>
+  ): Promise<ResponseWithoutPaging<WorkTimesReturnType>> {
+    const pages = await this.api.getAllPages<WorkTimesReturnType>(
+      "/v2/workTimes",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const workTimeDays = pages.flatMap(({ workTimeDays }) => workTimeDays);
+
+    return {
+      ...remainingResponse,
+      workTimeDays,
+    };
+  }
+
+  async getWorkTimesChangeRequestsPage(
+    params: Params<WorkTimesChangeRequestsParams>
+  ): Promise<WorkTimesChangeRequestsReturnType> {
+    return this.api.get("/v2/workTimes/changeRequests", params);
+  }
+
+  async getWorkTimesChangeRequests(
+    params: Params<WorkTimesChangeRequestsParams>
+  ): Promise<ResponseWithoutPaging<WorkTimesChangeRequestsReturnType>> {
+    const pages = await this.api.getAllPages<WorkTimesChangeRequestsReturnType>(
+      "/v2/workTimes/changeRequests",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const changeRequests = pages.flatMap(
+      ({ changeRequests }) => changeRequests
+    );
+
+    return {
+      ...remainingResponse,
+      changeRequests,
+    };
+  }
+
+  async addWorkTimesChangeRequest(
+    params: Params<
+      Pick<WorkTimeChangeRequest, typeof REQUIRED.ADD_CHANGE_REQUEST[number]>
+    >
+  ): Promise<WorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_CHANGE_REQUEST);
+
+    return this.api.post("/v2/workTimes/changeRequests", params);
+  }
+
+  async approveWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        WorkTimeChangeRequest,
+        typeof REQUIRED.APPROVE_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<WorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.APPROVE_CHANGE_REQUEST);
+
+    const { id } = params;
+
+    return this.api.post(`/v2/workTimes/changeRequests/${id}/approve`, params);
+  }
+
+  async declineWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        WorkTimeChangeRequest,
+        typeof REQUIRED.DECLINE_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<WorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DECLINE_CHANGE_REQUEST);
+
+    const { id } = params;
+
+    return this.api.post(`/v2/workTimes/changeRequests/${id}/decline`, params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -884,4 +970,7 @@ export type WorkTimesChangeRequestsParams = ParamsWithPage & {
 };
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
+};
+export type WorkTimesChangeRequestReturnType = {
+  changeRequest: WorkTimeChangeRequest;
 };

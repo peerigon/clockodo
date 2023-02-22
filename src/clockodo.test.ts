@@ -539,6 +539,46 @@ describe("Clockodo (instance)", () => {
         ).rejects.toThrowError('Missing required parameter "year"');
       });
     });
+
+    describe("getWorkTimes()", () => {
+      it("requests all workTimes pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/workTimes?",
+          countPages: 3,
+          createPageResponse: (page) => ({ workTimeDays: [page] }),
+        });
+
+        const { workTimeDays } = await clockodo.getWorkTimes({
+          dateSince: "2023-01-01",
+          dateUntil: "2023-01-07",
+          usersId: 123,
+        });
+
+        expect(workTimeDays).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getWorkTimesChangeRequests()", () => {
+      it("requests all change request pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/workTimes/changeRequests?",
+          countPages: 3,
+          createPageResponse: (page) => ({ changeRequests: [page] }),
+        });
+
+        const { changeRequests } = await clockodo.getWorkTimesChangeRequests({
+          dateSince: "2023-01-01",
+          dateUntil: "2023-01-07",
+          usersId: 123,
+        });
+
+        expect(changeRequests).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
@@ -765,6 +805,55 @@ describe("Clockodo (instance)", () => {
           name: "Looney Tunes",
           email: "looney@tunes.com",
           gtcAgreed: true,
+        });
+
+        nockScope.done();
+      });
+    });
+
+    describe("addChangeRequest()", () => {
+      it("correctly builds addChangeRequest() request", async () => {
+        const expectedParameters = {
+          date: "2023-01-01",
+          users_id: 12,
+          changes: [],
+        };
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/workTimes/changeRequests", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.addWorkTimesChangeRequest({
+          date: "2023-01-01",
+          usersId: 12,
+          changes: [],
+        });
+
+        nockScope.done();
+      });
+    });
+
+    describe("approveWorkTimesChangeRequest()", () => {
+      it("correctly builds approveWorkTimesChangeRequest() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/workTimes/changeRequests/17/approve")
+          .reply(200, {});
+
+        await clockodo.approveWorkTimesChangeRequest({
+          id: 17,
+        });
+
+        nockScope.done();
+      });
+    });
+
+    describe("declineWorkTimesChangeRequest()", () => {
+      it("correctly builds declineWorkTimesChangeRequest() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/workTimes/changeRequests/17/decline")
+          .reply(200, {});
+
+        await clockodo.declineWorkTimesChangeRequest({
+          id: 17,
         });
 
         nockScope.done();
