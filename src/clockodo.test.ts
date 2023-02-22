@@ -542,8 +542,14 @@ describe("Clockodo (instance)", () => {
 
     describe("getWorkTimes()", () => {
       it("requests all workTimes pages", async () => {
+        const baseUrl = `/v2/workTimes?${qs.stringify({
+          date_since: "2023-01-01",
+          date_until: "2023-01-07",
+          users_id: 123,
+        })}&`;
+
         const nockScope = setupPaginatedApiMock({
-          baseUrl: "/v2/workTimes?",
+          baseUrl,
           countPages: 3,
           createPageResponse: (page) => ({ workTimeDays: [page] }),
         });
@@ -563,7 +569,11 @@ describe("Clockodo (instance)", () => {
     describe("getWorkTimesChangeRequests()", () => {
       it("requests all change request pages", async () => {
         const nockScope = setupPaginatedApiMock({
-          baseUrl: "/v2/workTimes/changeRequests?",
+          baseUrl: `/v2/workTimes/changeRequests?${qs.stringify({
+            date_since: "2023-01-01",
+            date_until: "2023-01-07",
+            users_id: 123,
+          })}&`,
           countPages: 3,
           createPageResponse: (page) => ({ changeRequests: [page] }),
         });
