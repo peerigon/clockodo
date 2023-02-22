@@ -1,3 +1,10 @@
+# [20.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.1...v20.0.0-beta.2) (2023-02-22)
+
+
+### Features
+
+* Add workTimes API methods ([#101](https://github.com/peerigon/clockodo/issues/101)) ([8bbca40](https://github.com/peerigon/clockodo/commit/8bbca40cd69a3ffc8ca6031e97fee9517c91b667))
+
 # [20.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v19.2.0-beta.6...v20.0.0-beta.1) (2023-02-21)
 
 
