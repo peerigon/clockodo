@@ -69,6 +69,14 @@ export const REGISTER = ["companiesName", "name", "email"] as const;
 export const START_CLOCK = ["customersId", "servicesId", "billable"] as const;
 export const STOP_CLOCK = ["entriesId"] as const;
 
+export const ADD_WORK_TIMES_CHANGE_REQUEST = [
+  "date",
+  "usersId",
+  "changes",
+] as const;
+export const APPROVE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
+export const DECLINE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
+
 export const checkRequired = (
   params: Record<string, unknown> = {},
   requiredList: ReadonlyArray<string>
