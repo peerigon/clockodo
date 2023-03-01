@@ -1,3 +1,10 @@
+# [20.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.2...v20.0.0-beta.3) (2023-03-01)
+
+
+### Bug Fixes
+
+* add mock functions export ([53c38a4](https://github.com/peerigon/clockodo/commit/53c38a46b515ec16cc398483667174d0f880421d))
+
 # [20.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.1...v20.0.0-beta.2) (2023-02-22)
 
 
