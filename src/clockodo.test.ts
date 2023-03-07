@@ -1029,12 +1029,22 @@ describe("Clockodo (instance)", () => {
 
   describe("DELETE", () => {
     describe("stopClock()", () => {
-      it("correctly builds stopClock() request", async () => {
+      it("correctly builds stopClock() request without optional usersId", async () => {
         const nockScope = nock(CLOCKODO_API)
           .delete("/v2/clock/782")
           .reply(200, {});
 
         await clockodo.stopClock({ entriesId: 782 });
+
+        nockScope.done();
+      });
+
+      it("correctly builds stopClock() request with optional usersId", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/clock/782", { users_id: 123 })
+          .reply(200, {});
+
+        await clockodo.stopClock({ entriesId: 782, usersId: 123 });
 
         nockScope.done();
       });

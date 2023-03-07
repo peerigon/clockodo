@@ -874,10 +874,16 @@ await clockodo.register({
 
 Stops a running clock/entry.
 
-#### Example:
+#### Example for self:
 
 ```js
 await clockodo.stopClock({ entriesId: 7082 });
+```
+
+#### Example for another user (needs requesting user to be owner):
+
+```js
+await clockodo.stopClock({ entriesId: 7082, usersId: 123 });
 ```
 
 ---

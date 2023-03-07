@@ -629,7 +629,7 @@ export class Clockodo {
   }
 
   async stopClock(
-    params: Params<{ entriesId: Entry["id"] }>
+    params: Params<{ entriesId: Entry["id"]; usersId?: number }>
   ): Promise<ClockStopReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
