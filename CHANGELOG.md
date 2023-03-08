@@ -1,3 +1,10 @@
+# [20.0.0-beta.5](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.4...v20.0.0-beta.5) (2023-03-08)
+
+
+### Bug Fixes
+
+* Improve AddWorkTimesChangeRequestReturnType type ([0620097](https://github.com/peerigon/clockodo/commit/06200974909f5b3ccdb9eae26def31f383bca5f5))
+
 # [20.0.0-beta.4](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.3...v20.0.0-beta.4) (2023-03-08)
 
 
