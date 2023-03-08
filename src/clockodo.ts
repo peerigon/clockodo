@@ -691,7 +691,7 @@ export class Clockodo {
         typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
-  ): Promise<WorkTimesChangeRequestReturnType> {
+  ): Promise<AddWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST);
 
     return this.api.post("/v2/workTimes/changeRequests", params);
@@ -704,7 +704,7 @@ export class Clockodo {
         typeof REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
-  ): Promise<WorkTimesChangeRequestReturnType> {
+  ): Promise<AddWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST);
 
     const { id, ...remainingParams } = params;
@@ -722,7 +722,7 @@ export class Clockodo {
         typeof REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
-  ): Promise<WorkTimesChangeRequestReturnType> {
+  ): Promise<AddWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST);
 
     const { id, ...remainingParams } = params;
@@ -986,6 +986,11 @@ export type WorkTimesChangeRequestsParams = ParamsWithPage & {
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
 };
-export type WorkTimesChangeRequestReturnType = {
+export type AddWorkTimesChangeRequestReturnType = {
   changeRequest: WorkTimeChangeRequest;
+  /**
+   * Will be set in case the given work time change request replaced a previous one.
+   * This is because on a certain day there can only be one change request per user.
+   **/
+  replacedChangeRequest: null | WorkTimeChangeRequest;
 };
