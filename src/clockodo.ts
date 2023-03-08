@@ -687,7 +687,7 @@ export class Clockodo {
   async addWorkTimesChangeRequest(
     params: Params<
       Pick<
-        WorkTimeChangeRequest,
+        Omit<WorkTimeChangeRequest, "id">,
         typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
