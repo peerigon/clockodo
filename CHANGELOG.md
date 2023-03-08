@@ -1,3 +1,10 @@
+# [20.0.0-beta.4](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.3...v20.0.0-beta.4) (2023-03-08)
+
+
+### Bug Fixes
+
+* Incorrect param type of addWorkTimesChangeRequest() ([18fddb1](https://github.com/peerigon/clockodo/commit/18fddb1ba5aadfb5ddb91cd8304ce77d92d16a12))
+
 # [20.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.2...v20.0.0-beta.3) (2023-03-01)
 
 
