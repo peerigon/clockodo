@@ -1,3 +1,10 @@
+# [20.0.0-beta.6](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.5...v20.0.0-beta.6) (2023-03-22)
+
+
+### Features
+
+* expand change request return type ([d337cc3](https://github.com/peerigon/clockodo/commit/d337cc30e512238ae9b2b0f75837fb13e29e7499))
+
 # [20.0.0-beta.5](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.4...v20.0.0-beta.5) (2023-03-08)
 
 
