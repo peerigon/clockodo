@@ -986,11 +986,26 @@ export type WorkTimesChangeRequestsParams = ParamsWithPage & {
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
 };
-export type AddWorkTimesChangeRequestReturnType = {
-  changeRequest: WorkTimeChangeRequest;
-  /**
-   * Will be set in case the given work time change request replaced a previous one.
-   * This is because on a certain day there can only be one change request per user.
-   **/
-  replacedChangeRequest: null | WorkTimeChangeRequest;
-};
+export type AddWorkTimesChangeRequestReturnType =
+  | {
+      changeRequest: WorkTimeChangeRequest;
+      /**
+       * Will be set in case the given work time change request replaced a previous one.
+       * This is because on a certain day there can only be one change request per user.
+       **/
+      replacedChangeRequest: null | WorkTimeChangeRequest;
+    }
+  | {
+      /**
+       * Is null if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      changeRequest: null;
+      /**
+       * Is true if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      approvedImmediately: true;
+      /**
+       * Is null if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      replacedChangeRequest: null;
+    };
