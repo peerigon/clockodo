@@ -1,3 +1,10 @@
+# [20.0.0-beta.11](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.10...v20.0.0-beta.11) (2023-03-23)
+
+
+### Bug Fixes
+
+* add comment ([781c6a1](https://github.com/peerigon/clockodo/commit/781c6a186b6603b983d7460960b34eb877f37a63))
+
 # [20.0.0-beta.10](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.9...v20.0.0-beta.10) (2023-03-23)
 
 
