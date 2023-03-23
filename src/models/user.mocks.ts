@@ -27,5 +27,6 @@ export const createUserMocks = ({ count = 1 }: { count?: number }) =>
       editLockDyn: null,
       editLockSync: faker.datatype.boolean(),
       nonbusinessgroupsId: null,
+      workTimeEditLock: null,
     };
   });
