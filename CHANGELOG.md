@@ -1,3 +1,10 @@
+# [20.0.0-beta.10](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.9...v20.0.0-beta.10) (2023-03-23)
+
+
+### Features
+
+* parametrize user mock's workTimeEditLock ([f976f7f](https://github.com/peerigon/clockodo/commit/f976f7f00f42e4c36c713cbb899640f56d1c59a8))
+
 # [20.0.0-beta.9](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.8...v20.0.0-beta.9) (2023-03-23)
 
 
