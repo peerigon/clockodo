@@ -8,6 +8,7 @@ export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0 as const;
 export const WORK_TIME_EDIT_LOCK_CLOCK_ONLY = 0 as const;
 export const WORK_TIME_EDIT_LOCK_DISABLED = null;
 
+/** Type for the user's work time edit lock setting */
 export type WorkTimeEditLock =
   | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
   | typeof WORK_TIME_EDIT_LOCK_DISABLED
