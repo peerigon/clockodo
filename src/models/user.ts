@@ -8,6 +8,11 @@ export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0 as const;
 export const WORK_TIME_EDIT_LOCK_CLOCK_ONLY = 0 as const;
 export const WORK_TIME_EDIT_LOCK_DISABLED = null;
 
+export type WorkTimeEditLock =
+  | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
+  | typeof WORK_TIME_EDIT_LOCK_DISABLED
+  | number;
+
 export type User = {
   /** ID of the co-worker  */
   id: number;
@@ -71,10 +76,7 @@ export type User = {
    * First day that requires a change request is at today - x
    * The values for "no edit lock" and "clock only" are explicitly modelled
    */
-  workTimeEditLock:
-    | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
-    | typeof WORK_TIME_EDIT_LOCK_DISABLED
-    | number;
+  workTimeEditLock: WorkTimeEditLock;
 };
 
 export enum UserRole {
