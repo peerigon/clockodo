@@ -1,3 +1,10 @@
+# [20.0.0-beta.8](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.7...v20.0.0-beta.8) (2023-03-23)
+
+
+### Bug Fixes
+
+* add approvedImmediately=false case ([2cb939b](https://github.com/peerigon/clockodo/commit/2cb939b0ab2d67f2525ddc9a856155f59885a7a1))
+
 # [20.0.0-beta.7](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.6...v20.0.0-beta.7) (2023-03-23)
 
 
