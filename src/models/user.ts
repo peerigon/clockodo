@@ -4,6 +4,10 @@ export const NO_WORKTIME_REGULATIONS_ID_FOR_USER = 0 as const;
 /** Special id that is used when the user is has no nonbusiness group */
 export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0 as const;
 
+/** Special cases for work time edit lock */
+export const WORK_TIME_EDIT_LOCK_CLOCK_ONLY = 0 as const;
+export const WORK_TIME_EDIT_LOCK_DISABLED = null;
+
 export type User = {
   /** ID of the co-worker  */
   id: number;
@@ -62,6 +66,15 @@ export type User = {
    * - "null" if the company default is applicable
    */
   nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
+  /**
+   * The number can be used to calculate the edit lock.
+   * First day that requires a change request is at today - x
+   * The values for "no edit lock" and "clock only" are explicitly modelled
+   */
+  workTimeEditLock:
+    | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
+    | typeof WORK_TIME_EDIT_LOCK_DISABLED
+    | number;
 };
 
 export enum UserRole {
