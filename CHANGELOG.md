@@ -1,3 +1,10 @@
+# [20.0.0-beta.9](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.8...v20.0.0-beta.9) (2023-03-23)
+
+
+### Bug Fixes
+
+* correct return type of approve/decline ([671d4c0](https://github.com/peerigon/clockodo/commit/671d4c096c2395add676d7f85fe20952f8995ec1))
+
 # [20.0.0-beta.8](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.7...v20.0.0-beta.8) (2023-03-23)
 
 
