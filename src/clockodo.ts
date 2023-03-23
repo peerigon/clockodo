@@ -704,7 +704,7 @@ export class Clockodo {
         typeof REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
-  ): Promise<AddWorkTimesChangeRequestReturnType> {
+  ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST);
 
     const { id, ...remainingParams } = params;
@@ -722,7 +722,7 @@ export class Clockodo {
         typeof REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST[number]
       >
     >
-  ): Promise<AddWorkTimesChangeRequestReturnType> {
+  ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST);
 
     const { id, ...remainingParams } = params;
@@ -986,6 +986,12 @@ export type WorkTimesChangeRequestsParams = ParamsWithPage & {
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
 };
+
+export type ApproveOrDeclineWorkTimesChangeRequestReturnType = Record<
+  string,
+  never
+>;
+
 export type AddWorkTimesChangeRequestReturnType =
   | {
       changeRequest: WorkTimeChangeRequest;
