@@ -1,3 +1,15 @@
+# [20.0.0-beta.7](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.6...v20.0.0-beta.7) (2023-03-23)
+
+
+### Bug Fixes
+
+* update user mock ([1a4864e](https://github.com/peerigon/clockodo/commit/1a4864e3d1fc78d1adf2cffb1968fcab604f66df))
+
+
+### Features
+
+* add workTimeEditLock prop to User ([89c3c86](https://github.com/peerigon/clockodo/commit/89c3c86bfe61953e94436ffbd00ef319d74c29fb))
+
 # [20.0.0-beta.6](https://github.com/peerigon/clockodo/compare/v20.0.0-beta.5...v20.0.0-beta.6) (2023-03-22)
 
 
