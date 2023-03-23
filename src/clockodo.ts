@@ -990,6 +990,10 @@ export type AddWorkTimesChangeRequestReturnType =
   | {
       changeRequest: WorkTimeChangeRequest;
       /**
+       * Is false if the change request is being returned
+       **/
+      approvedImmediately: false;
+      /**
        * Will be set in case the given work time change request replaced a previous one.
        * This is because on a certain day there can only be one change request per user.
        **/
