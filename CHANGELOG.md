@@ -1,3 +1,15 @@
+# [20.0.0](https://github.com/peerigon/clockodo/compare/v19.1.2...v20.0.0) (2023-04-06)
+
+
+### Bug Fixes
+
+* Update company model ([#102](https://github.com/peerigon/clockodo/issues/102)) ([c050777](https://github.com/peerigon/clockodo/commit/c050777d87fe497749ee2531cbd6cde07b7d1177))
+
+
+### BREAKING CHANGES
+
+* `moduleTargetHours` and `moduleUserReports` have been replaced by `moduleWorkTime`
+
 ## [19.1.2](https://github.com/peerigon/clockodo/compare/v19.1.1...v19.1.2) (2023-02-10)
 
 
