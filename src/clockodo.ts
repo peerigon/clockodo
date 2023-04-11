@@ -20,6 +20,8 @@ import { UserReport, UserReportType } from "./models/userReport.js";
 import {
   Api,
   Config,
+  Params,
+  ParamsWithPage,
   ResponseWithFilter,
   ResponseWithoutPaging,
   ResponseWithPaging,
@@ -34,10 +36,7 @@ import {
   AccessToCustomersProjects,
   AccessToServices,
 } from "./models/access.js";
-
-type Params<
-  KnownParams extends Record<string, unknown> = Record<string, unknown>
-> = KnownParams & Record<string, unknown>;
+import { WorkTimeChangeRequest, WorkTimeDay } from "./models/workTimes.js";
 
 export class Clockodo {
   api: Api;
@@ -58,9 +57,9 @@ export class Clockodo {
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCE);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/absences/" + id, rest);
+    return this.api.get("/absences/" + id, remainingParams);
   }
 
   async getAbsences(
@@ -76,9 +75,12 @@ export class Clockodo {
   ): Promise<UsersAccessCustomersProjectsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
-    const { usersId, ...rest } = params;
+    const { usersId, ...remainingParams } = params;
 
-    return this.api.get(`/v2/users/${usersId}/access/customers-projects`, rest);
+    return this.api.get(
+      `/v2/users/${usersId}/access/customers-projects`,
+      remainingParams
+    );
   }
 
   async getUsersAccessServices(
@@ -86,9 +88,12 @@ export class Clockodo {
   ): Promise<UsersAccessServicesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
 
-    const { usersId, ...rest } = params;
+    const { usersId, ...remainingParams } = params;
 
-    return this.api.get(`/v2/users/${usersId}/access/services`, rest);
+    return this.api.get(
+      `/v2/users/${usersId}/access/services`,
+      remainingParams
+    );
   }
 
   async getClock(params?: Params): Promise<ClockReturnType> {
@@ -100,9 +105,9 @@ export class Clockodo {
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_CUSTOMER);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/customers/" + id, rest);
+    return this.api.get("/v2/customers/" + id, remainingParams);
   }
 
   async getCustomersPage(
@@ -132,9 +137,9 @@ export class Clockodo {
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/projects/" + id, rest);
+    return this.api.get("/v2/projects/" + id, remainingParams);
   }
 
   async getProjectsPage(
@@ -164,9 +169,9 @@ export class Clockodo {
   ): Promise<EntryReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/entries/" + id, rest);
+    return this.api.get("/v2/entries/" + id, remainingParams);
   }
 
   async splitAllEntriesAtMidnight(
@@ -253,9 +258,9 @@ export class Clockodo {
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_SERVICE);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/services/" + id, rest);
+    return this.api.get("/services/" + id, remainingParams);
   }
 
   async getServices(params?: Params): Promise<ServicesReturnType> {
@@ -265,9 +270,9 @@ export class Clockodo {
   async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_TEAM);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/teams/" + id, rest);
+    return this.api.get("/v2/teams/" + id, remainingParams);
   }
 
   async getTeams(params?: Params): Promise<TeamsReturnType> {
@@ -280,9 +285,9 @@ export class Clockodo {
   ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_LUMPSUM_SERVICE);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/lumpsumservices/" + id, rest);
+    return this.api.get("/lumpsumservices/" + id, remainingParams);
   }
 
   // This endpoint still uses the old lumpSum casing
@@ -297,9 +302,9 @@ export class Clockodo {
   ): Promise<TargethoursRowReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_TARGETHOURS_ROW);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/targethours/" + id, rest);
+    return this.api.get("/targethours/" + id, remainingParams);
   }
 
   async getTargethours(params?: Params): Promise<TargethoursReturnType> {
@@ -309,9 +314,9 @@ export class Clockodo {
   async getUser(params: Params<{ id: User["id"] }>): Promise<UserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER);
 
-    const { id, ...rest } = params;
+    const { id, ...remainingParams } = params;
 
-    return this.api.get("/users/" + id, rest);
+    return this.api.get("/users/" + id, remainingParams);
   }
 
   async getUsers(params?: Params): Promise<UsersReturnType> {
@@ -329,9 +334,9 @@ export class Clockodo {
   ): Promise<UserReportReturnType<GivenUserReportType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
-    const { usersId, ...rest } = params;
+    const { usersId, ...remainingParams } = params;
 
-    return this.api.get("/userreports/" + usersId, rest);
+    return this.api.get("/userreports/" + usersId, remainingParams);
   }
 
   async getUserReports<
@@ -454,9 +459,9 @@ export class Clockodo {
   ): Promise<ClockEditReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.CHANGE_CLOCK_DURATION);
 
-    const { entriesId, ...rest } = params;
+    const { entriesId, ...remainingParams } = params;
 
-    return this.api.put("/v2/clock/" + entriesId, rest);
+    return this.api.put("/v2/clock/" + entriesId, remainingParams);
   }
 
   async editAbsence(
@@ -624,13 +629,108 @@ export class Clockodo {
   }
 
   async stopClock(
-    params: Params<{ entriesId: Entry["id"] }>
+    params: Params<{ entriesId: Entry["id"]; usersId?: number }>
   ): Promise<ClockStopReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
-    const { entriesId, ...rest } = params;
+    const { entriesId, ...remainingParams } = params;
 
-    return this.api.delete("/v2/clock/" + entriesId, rest);
+    return this.api.delete("/v2/clock/" + entriesId, remainingParams);
+  }
+
+  async getWorkTimesPage(
+    params?: Params<WorkTimesParams>
+  ): Promise<WorkTimesReturnType> {
+    return this.api.get("/v2/workTimes", params);
+  }
+
+  async getWorkTimes(
+    params: Params<WorkTimesParams>
+  ): Promise<ResponseWithoutPaging<WorkTimesReturnType>> {
+    const pages = await this.api.getAllPages<WorkTimesReturnType>(
+      "/v2/workTimes",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const workTimeDays = pages.flatMap(({ workTimeDays }) => workTimeDays);
+
+    return {
+      ...remainingResponse,
+      workTimeDays,
+    };
+  }
+
+  async getWorkTimesChangeRequestsPage(
+    params: Params<WorkTimesChangeRequestsParams>
+  ): Promise<WorkTimesChangeRequestsReturnType> {
+    return this.api.get("/v2/workTimes/changeRequests", params);
+  }
+
+  async getWorkTimesChangeRequests(
+    params: Params<WorkTimesChangeRequestsParams>
+  ): Promise<ResponseWithoutPaging<WorkTimesChangeRequestsReturnType>> {
+    const pages = await this.api.getAllPages<WorkTimesChangeRequestsReturnType>(
+      "/v2/workTimes/changeRequests",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const changeRequests = pages.flatMap(
+      ({ changeRequests }) => changeRequests
+    );
+
+    return {
+      ...remainingResponse,
+      changeRequests,
+    };
+  }
+
+  async addWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        Omit<WorkTimeChangeRequest, "id">,
+        typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<AddWorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST);
+
+    return this.api.post("/v2/workTimes/changeRequests", params);
+  }
+
+  async approveWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        WorkTimeChangeRequest,
+        typeof REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.post(
+      `/v2/workTimes/changeRequests/${id}/approve`,
+      remainingParams
+    );
+  }
+
+  async declineWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        WorkTimeChangeRequest,
+        typeof REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.post(
+      `/v2/workTimes/changeRequests/${id}/decline`,
+      remainingParams
+    );
   }
 }
 
@@ -866,3 +966,56 @@ export type TargethoursReturnType = {
 export type AddUserReturnType = {
   user: User;
 };
+
+export type WorkTimesParams = ParamsWithPage & {
+  /** The user ID by which the work times should be filtered */
+  usersId?: number;
+  dateSince: string;
+  dateUntil: string;
+};
+export type WorkTimesReturnType = ResponseWithPaging & {
+  workTimeDays: Array<WorkTimeDay>;
+};
+
+export type WorkTimesChangeRequestsParams = ParamsWithPage & {
+  /** The user ID by which the work time change requests should be filtered */
+  usersId?: number;
+  dateSince?: string;
+  dateUntil?: string;
+};
+export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
+  changeRequests: Array<WorkTimeChangeRequest>;
+};
+
+export type ApproveOrDeclineWorkTimesChangeRequestReturnType = Record<
+  string,
+  never
+>;
+
+export type AddWorkTimesChangeRequestReturnType =
+  | {
+      changeRequest: WorkTimeChangeRequest;
+      /**
+       * Is false if the change request is being returned
+       **/
+      approvedImmediately: false;
+      /**
+       * Will be set in case the given work time change request replaced a previous one.
+       * This is because on a certain day there can only be one change request per user.
+       **/
+      replacedChangeRequest: null | WorkTimeChangeRequest;
+    }
+  | {
+      /**
+       * Is null if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      changeRequest: null;
+      /**
+       * Is true if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      approvedImmediately: true;
+      /**
+       * Is null if the change request was immediately approved (because the rights imply no need for approval)
+       **/
+      replacedChangeRequest: null;
+    };

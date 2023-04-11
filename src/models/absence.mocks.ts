@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
+import { isoDateFromDateTime } from "../lib/dateTime.js";
 import {
   endOfYear,
   generateRandomDates,
-  isoDateFromDateTime,
   ONE_DAY,
   startOfDay,
   toPairs,

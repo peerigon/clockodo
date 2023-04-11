@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { dateToClockodoIsoString } from "../lib/dateTime.js";
+import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
   Billability,
   Entry,
@@ -19,7 +19,7 @@ const DEFAULT_TO = new Date(2021, 0);
 const createCommonEntryMock = (from: Date, to: Date) => {
   const hasText = faker.datatype.number({ min: 0, max: 10 }) > 2;
   const timeSince = faker.date.between(from, to);
-  const timeSinceAsIsoString = dateToClockodoIsoString(timeSince);
+  const timeSinceAsIsoString = isoUtcDateTimeFromDateTime(timeSince);
 
   return {
     id: 0,
@@ -56,7 +56,7 @@ export const createTimeEntryMocks = ({
     const timeUntil =
       timeEntryType === "clocking"
         ? null
-        : dateToClockodoIsoString(
+        : isoUtcDateTimeFromDateTime(
             new Date(
               new Date(commonEntry.timeSince).getTime() +
                 faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000

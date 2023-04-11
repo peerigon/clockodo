@@ -1,7 +1,13 @@
 import { faker } from "@faker-js/faker";
-import { User, UserRole, UserLanguage } from "./user.js";
+import { User, UserRole, UserLanguage, WorkTimeEditLock } from "./user.js";
 
-export const createUserMocks = ({ count = 1 }: { count?: number }) =>
+export const createUserMocks = ({
+  count = 1,
+  workTimeEditLock = 0,
+}: {
+  count?: number;
+  workTimeEditLock?: WorkTimeEditLock;
+}) =>
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
 
@@ -27,5 +33,6 @@ export const createUserMocks = ({ count = 1 }: { count?: number }) =>
       editLockDyn: null,
       editLockSync: faker.datatype.boolean(),
       nonbusinessgroupsId: null,
+      workTimeEditLock,
     };
   });

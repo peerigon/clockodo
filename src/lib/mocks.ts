@@ -1,28 +1,20 @@
+// These date helpers are not meant to replace an actual date library.
+// They are inaccurate and sometimes just wrong, see https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca
+// They should only be used for generating mock data.
+
 import { faker } from "@faker-js/faker";
 
+/**
+ * The number of milliseconds on a typical day.
+ */
 export const ONE_DAY = 24 * 60 * 60 * 1000;
+
+/**
+ * The number of milliseconds on a typical year.
+ */
 export const ONE_YEAR = 356 * ONE_DAY;
 
 const MAX_ITERATION_COUNT = 10000;
-
-export const isoDateFromDateTime = (dateTime: Date) => {
-  return [
-    dateTime.getFullYear(),
-    String(dateTime.getMonth() + 1).padStart(2, "0"),
-    String(dateTime.getDate()).padStart(2, "0"),
-  ].join("-");
-};
-
-export const isoMonthFromDateTime = (dateTime: Date) => {
-  return [
-    dateTime.getFullYear(),
-    String(dateTime.getMonth() + 1).padStart(2, "0"),
-  ].join("-");
-};
-
-export const isoDateFromTimestamp = (timestamp: number) => {
-  return isoDateFromDateTime(new Date(timestamp));
-};
 
 export const startOfDay = (date: Date) => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -36,8 +28,8 @@ export const endOfYear = (dateTime: Date) => {
   return new Date(dateTime.getFullYear() + 1, 0, 0, 23, 59, 59, 999);
 };
 
-export const nextDay = (date: Date) => {
-  const nextDay = new Date(date.getTime() + ONE_DAY);
+export const startOfNextDay = (date: Date) => {
+  const nextDay = new Date(startOfDay(date).getTime() + 1.5 * ONE_DAY);
 
   return new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
 };
@@ -71,7 +63,25 @@ This usually happens when the generated values create too many conflicts (e.g. t
     acceptedCount++;
   }
 
-  return Array.from(accepted.values()).flatMap((values) => values);
+  return Array.from(accepted.values()).flat();
+};
+
+export const generateRandomDateTimes = ({
+  count,
+  between: [from, to],
+  maxDuplicates = 1,
+}: {
+  count: number;
+  between: readonly [Date, Date];
+  maxDuplicates?: number;
+}) => {
+  return generateWithMaxDuplicates({
+    count,
+    maxDuplicates,
+    generate: () => {
+      return faker.date.between(from, to).getTime();
+    },
+  }).sort();
 };
 
 export const generateRandomDates = ({

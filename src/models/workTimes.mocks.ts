@@ -1,0 +1,144 @@
+import { faker } from "@faker-js/faker";
+import {
+  isoDateFromDateTime,
+  isoUtcDateTimeFromTimestamp,
+} from "../lib/dateTime.js";
+import {
+  generateRandomDates,
+  generateRandomDateTimes,
+  startOfNextDay,
+  startOfDay,
+  toPairs,
+} from "../lib/mocks.js";
+import {
+  WorkTimeChangeRequest,
+  WorkTimeChangeRequestInterval,
+  WorkTimeChangeRequestIntervalType,
+  WorkTimeDay,
+} from "./workTimes.js";
+
+const DEFAULT_FROM = new Date(2020, 0);
+const DEFAULT_TO = new Date(2021, 0);
+
+const generateIntervals = ({
+  count = 1,
+  date = DEFAULT_FROM,
+}: {
+  count?: number;
+  date: Date;
+}) => {
+  const dateTimes = generateRandomDateTimes({
+    count: count * 2,
+    between: [startOfDay(date), startOfNextDay(date)],
+  });
+
+  return toPairs(dateTimes).map(([start, end]) => ({
+    timeSince: isoUtcDateTimeFromTimestamp(start),
+    timeUntil: isoUtcDateTimeFromTimestamp(end),
+  }));
+};
+
+const createWorkTimeDayMock = ({ date }: { date: Date }): WorkTimeDay => {
+  const intervals = generateIntervals({
+    count: faker.datatype.number({ min: 1, max: 4 }),
+    date,
+  });
+
+  return {
+    date: isoDateFromDateTime(date),
+    usersId: 0,
+    intervals,
+    offset: 0,
+  };
+};
+
+export const createWorkTimeDayMocks = ({
+  count = 1,
+  dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+}: {
+  count?: number;
+  dateBetween?: readonly [Date, Date];
+}) => {
+  let id = -1;
+
+  const workTimeDays = generateRandomDates({
+    count,
+    between: [from, to],
+  }).map((timestamp) => {
+    id = id + 1;
+    const date = startOfDay(new Date(timestamp));
+
+    return createWorkTimeDayMock({
+      date,
+    });
+  });
+
+  const lastWorkTimeDay = workTimeDays.at(-1);
+
+  if (lastWorkTimeDay) {
+    const [firstInterval] = lastWorkTimeDay.intervals;
+
+    // Now let's simulate an unfinished WorkTimeDay
+    // We take the first interval on purpose because it's technically possible
+    // to have future work times.
+    firstInterval.timeUntil = null;
+  }
+
+  return workTimeDays;
+};
+
+const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
+  return generateIntervals({ count, date }).map(
+    (interval): WorkTimeChangeRequestInterval => {
+      return {
+        ...interval,
+        type: faker.datatype.boolean()
+          ? WorkTimeChangeRequestIntervalType.Add
+          : WorkTimeChangeRequestIntervalType.Remove,
+      };
+    }
+  );
+};
+
+const createChangeRequest = ({
+  date,
+  id,
+}: {
+  date: Date;
+  id: number;
+}): WorkTimeChangeRequest => {
+  const changes = generateChangeRequestChanges({
+    count: faker.datatype.number({ min: 1, max: 4 }),
+    date,
+  });
+
+  return {
+    id,
+    date: isoDateFromDateTime(date),
+    usersId: 0,
+    changes,
+  };
+};
+
+export const createWorkTimeChangeRequestMocks = ({
+  count = 1,
+  dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+}: {
+  count?: number;
+  dateBetween?: readonly [Date, Date];
+}) => {
+  let id = -1;
+
+  return generateRandomDates({
+    count,
+    between: [from, to],
+  }).map((timestamp) => {
+    id = id + 1;
+    const date = startOfDay(new Date(timestamp));
+
+    return createChangeRequest({
+      date,
+      id,
+    });
+  });
+};

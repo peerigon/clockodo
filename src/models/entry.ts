@@ -1,4 +1,4 @@
-import { dateToClockodoIsoString } from "../lib/dateTime.js";
+import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import { LumpsumService } from "./lumpsumService.js";
 import { Project } from "./project.js";
 
@@ -142,7 +142,7 @@ export const isLumpsumEntry = (entry: Entry): entry is LumpsumEntry => {
  * new Date().toISOString() without milliseconds precision.
  */
 export const getEntryTimeUntilNow = (entry: Entry) => {
-  return entry.timeUntil ?? dateToClockodoIsoString(new Date());
+  return entry.timeUntil ?? isoUtcDateTimeFromDateTime(new Date());
 };
 
 /**

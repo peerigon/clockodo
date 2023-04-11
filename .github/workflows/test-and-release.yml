@@ -14,27 +14,29 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14.x, 16.x, 18.x ]
+        node-version: [ 16.x, 18.x, 19.x ]
+
+    concurrency:
+      group: ${{ github.ref }}-node-${{ matrix.node-version }}
+      cancel-in-progress: true
 
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@a40b8845c0683271d9f53dfcb887a7e181d3918b # pin@0.9.1
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@7884fcad6b5d53d10323aee724dc68d8b9096a2e # pin@v2
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # pin@v3
       - name: ⎔ Setup node ${{ matrix.node-version }}
-        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # pin@v2
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # pin@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - name: 🗄 Cache node_modules
         id: cache-node_modules
-        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # pin@v2
+        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0 # pin@v3
         with:
           path: "**/node_modules"
           key: node_modules-${{ runner.os }}-node-${{ matrix.node-version }}-${{
             hashFiles('**/package-lock.json') }}
       - name: 🗄 Cache .eslintcache
-        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # pin@v2
+        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0 # pin@v3
         with:
           path: .eslintcache
           key: eslintcache-${{ runner.os }}-node-${{ matrix.node-version }}-${{
@@ -58,7 +60,7 @@ jobs:
       # - RELEASE ---------------------------------------------------------------------------------------
       - name: 🚀 Release on npm
         if: "contains(' refs/heads/main refs/heads/beta ', github.ref) &&
-          matrix.node-version == '16.x'"
+          matrix.node-version == '18.x'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
