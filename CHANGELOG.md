@@ -1,3 +1,10 @@
+## [21.0.1](https://github.com/peerigon/clockodo/compare/v21.0.0...v21.0.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* Missing README on NPM ([fcdb878](https://github.com/peerigon/clockodo/commit/fcdb878e23cb1fae5c72460ebaca12cf0c884db5))
+
 # [21.0.0](https://github.com/peerigon/clockodo/compare/v20.0.0...v21.0.0) (2023-04-11)
 
 
