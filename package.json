@@ -85,7 +85,9 @@
   },
   "files": [
     "dist",
-    "plugins"
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "lint-staged": {
     "*.{js,ts}": [
