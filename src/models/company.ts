@@ -19,10 +19,8 @@ export type Company = {
   defaultServicesId: number | null;
   /** Is the absence module active for the company? */
   moduleAbsence: boolean;
-  /** Is the target hours module active for the company? */
-  moduleTargetHours: boolean;
-  /** Is the user report module active for the company? */
-  moduleUserReports: boolean;
+  /** Is the work-time module active for the company? */
+  moduleWorkTime: boolean;
   /** ID of the default nonbusiness group  */
   nonbusinessGroupDefault: number | null;
   /** ID of the default worktime regulation  */
