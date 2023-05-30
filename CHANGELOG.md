@@ -1,3 +1,10 @@
+# [21.1.0-beta.1](https://github.com/peerigon/clockodo/compare/v21.0.1...v21.1.0-beta.1) (2023-05-30)
+
+
+### Features
+
+* add withdrawWorkTimeChangeRequest method ([b2d2ced](https://github.com/peerigon/clockodo/commit/b2d2cedd7471ab58ad12234d372036a6a31cdec4))
+
 ## [21.0.1](https://github.com/peerigon/clockodo/compare/v21.0.0...v21.0.1) (2023-04-11)
 
 
