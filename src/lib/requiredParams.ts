@@ -74,6 +74,7 @@ export const ADD_WORK_TIMES_CHANGE_REQUEST = [
   "usersId",
   "changes",
 ] as const;
+export const WITHDRAW_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 export const APPROVE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 export const DECLINE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 

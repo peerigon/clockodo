@@ -1137,6 +1137,20 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("withdrawWorkTimesChangeRequest()", () => {
+      it("correctly builds withdrawWorkTimesChangeRequest() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/workTimes/changeRequests/17")
+          .reply(200, {});
+
+        await clockodo.withdrawWorkTimesChangeRequest({
+          id: 17,
+        });
+
+        nockScope.done();
+      });
+    });
   });
 });
 

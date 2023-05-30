@@ -697,6 +697,24 @@ export class Clockodo {
     return this.api.post("/v2/workTimes/changeRequests", params);
   }
 
+  async withdrawWorkTimesChangeRequest(
+    params: Params<
+      Pick<
+        WorkTimeChangeRequest,
+        typeof REQUIRED.WITHDRAW_WORK_TIMES_CHANGE_REQUEST[number]
+      >
+    >
+  ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.WITHDRAW_WORK_TIMES_CHANGE_REQUEST);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.delete(
+      `/v2/workTimes/changeRequests/${id}`,
+      remainingParams
+    );
+  }
+
   async approveWorkTimesChangeRequest(
     params: Params<
       Pick<
