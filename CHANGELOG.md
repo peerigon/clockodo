@@ -1,3 +1,15 @@
+# [21.2.0](https://github.com/peerigon/clockodo/compare/v21.1.0...v21.2.0) (2023-06-07)
+
+
+### Bug Fixes
+
+* rename workTimeEditLock prop ([4d83f26](https://github.com/peerigon/clockodo/commit/4d83f26f0d2cc9a92b51340e785e2ce52bdcd2f5))
+
+
+### Features
+
+* add status prop to change request model ([315a4a0](https://github.com/peerigon/clockodo/commit/315a4a0db94c89de7665669db9846623d8a7a613))
+
 # [21.1.0](https://github.com/peerigon/clockodo/compare/v21.0.1...v21.1.0) (2023-06-01)
 
 
