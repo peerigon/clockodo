@@ -22,6 +22,7 @@ Array [
     ],
     "date": "2020-03-24",
     "id": 0,
+    "status": 1,
     "usersId": 0,
   },
   Object {
@@ -44,6 +45,7 @@ Array [
     ],
     "date": "2020-04-14",
     "id": 1,
+    "status": 1,
     "usersId": 0,
   },
   Object {
@@ -56,6 +58,7 @@ Array [
     ],
     "date": "2020-06-05",
     "id": 2,
+    "status": 1,
     "usersId": 0,
   },
   Object {
@@ -78,6 +81,7 @@ Array [
     ],
     "date": "2020-09-11",
     "id": 3,
+    "status": 1,
     "usersId": 0,
   },
   Object {
@@ -95,6 +99,7 @@ Array [
     ],
     "date": "2020-09-17",
     "id": 4,
+    "status": 1,
     "usersId": 0,
   },
 ]

@@ -12,10 +12,16 @@ export type WorkTimeDayInterval = {
   timeUntil: null | IsoUtcDateTime;
 };
 
+export enum WorkTimeChangeRequestStatus {
+  Requested = 1,
+  Declined = 2,
+}
+
 export type WorkTimeChangeRequest = {
   id: number;
   date: IsoDate;
   usersId: number;
+  status: WorkTimeChangeRequestStatus;
   changes: Array<WorkTimeChangeRequestInterval>;
 };
 

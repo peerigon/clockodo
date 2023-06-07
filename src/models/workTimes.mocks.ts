@@ -14,6 +14,7 @@ import {
   WorkTimeChangeRequest,
   WorkTimeChangeRequestInterval,
   WorkTimeChangeRequestIntervalType,
+  WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./workTimes.js";
 
@@ -103,9 +104,11 @@ const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
 const createChangeRequest = ({
   date,
   id,
+  status = WorkTimeChangeRequestStatus.Requested,
 }: {
   date: Date;
   id: number;
+  status?: WorkTimeChangeRequestStatus;
 }): WorkTimeChangeRequest => {
   const changes = generateChangeRequestChanges({
     count: faker.datatype.number({ min: 1, max: 4 }),
@@ -117,6 +120,7 @@ const createChangeRequest = ({
     date: isoDateFromDateTime(date),
     usersId: 0,
     changes,
+    status,
   };
 };
 
