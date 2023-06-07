@@ -3,10 +3,10 @@ import { User, UserRole, UserLanguage, WorkTimeEditLock } from "./user.js";
 
 export const createUserMocks = ({
   count = 1,
-  workTimeEditLock = 0,
+  workTimeEditLockDays = 0,
 }: {
   count?: number;
-  workTimeEditLock?: WorkTimeEditLock;
+  workTimeEditLockDays?: WorkTimeEditLock;
 }) =>
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
@@ -33,6 +33,6 @@ export const createUserMocks = ({
       editLockDyn: null,
       editLockSync: faker.datatype.boolean(),
       nonbusinessgroupsId: null,
-      workTimeEditLock,
+      workTimeEditLockDays,
     };
   });

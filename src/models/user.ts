@@ -73,11 +73,11 @@ export type User = {
    */
   nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
   /**
-   * The number can be used to calculate the edit lock.
+   * The number can be used to calculate the work time edit lock.
    * First day that requires a change request is at today - x
-   * The values for "no edit lock" and "clock only" are explicitly modelled
+   * The values for "no work time edit lock" and "clock only" are explicitly modelled
    */
-  workTimeEditLock: WorkTimeEditLock;
+  workTimeEditLockDays: WorkTimeEditLock;
 };
 
 export enum UserRole {
