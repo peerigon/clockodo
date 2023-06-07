@@ -36,7 +36,11 @@ import {
   AccessToCustomersProjects,
   AccessToServices,
 } from "./models/access.js";
-import { WorkTimeChangeRequest, WorkTimeDay } from "./models/workTimes.js";
+import {
+  WorkTimeChangeRequest,
+  WorkTimeChangeRequestStatus,
+  WorkTimeDay,
+} from "./models/workTimes.js";
 
 export class Clockodo {
   api: Api;
@@ -1000,6 +1004,7 @@ export type WorkTimesChangeRequestsParams = ParamsWithPage & {
   usersId?: number;
   dateSince?: string;
   dateUntil?: string;
+  status?: WorkTimeChangeRequestStatus;
 };
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
