@@ -1,9 +1,9 @@
 export type EntryGroup = {
   groupedBy: string;
-  group: string | number;
+  group: string;
   name: string;
-  number: string;
-  note: string;
+  number: string | null;
+  note: string | null;
   restrictions: Array<string>;
   duration: number;
   revenue?: number;

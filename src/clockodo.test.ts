@@ -982,7 +982,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/entrygroups", mapRequestBody(entryGroup))
+          .put("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
         await clockodo.editEntryGroup(entryGroup);
@@ -1117,7 +1117,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .delete("/entrygroups", mapRequestBody(entryGroup))
+          .delete("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
         await clockodo.deleteEntryGroup(entryGroup);

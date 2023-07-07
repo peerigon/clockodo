@@ -503,7 +503,7 @@ export class Clockodo {
   ): Promise<EditEntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY_GROUP);
 
-    return this.api.put("/entrygroups", params);
+    return this.api.put("/v2/entrygroups", params);
   }
 
   async editProject(
@@ -611,7 +611,7 @@ export class Clockodo {
   ): Promise<DeleteEntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY_GROUP);
 
-    return this.api.delete("/entrygroups", params);
+    return this.api.delete("/v2/entrygroups", params);
   }
 
   async deleteTeam(
