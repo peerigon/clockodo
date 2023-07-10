@@ -78,6 +78,10 @@ export type User = {
    * The values for "no work time edit lock" and "clock only" are explicitly modelled
    */
   workTimeEditLockDays: WorkTimeEditLock;
+  /**
+   * The user's team leader's / boss' id
+   */
+  boss: number | null;
 };
 
 export enum UserRole {
