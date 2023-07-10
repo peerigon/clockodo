@@ -1,3 +1,11 @@
+# [21.4.0](https://github.com/peerigon/clockodo/compare/v21.3.0...v21.4.0) (2023-07-10)
+
+
+### Features
+
+* add boss prop to user model ([dcc7e15](https://github.com/peerigon/clockodo/commit/dcc7e15ccf4de2af52d1c896aa315803ffddea71))
+* Add boss reference to user model ([aa66df7](https://github.com/peerigon/clockodo/commit/aa66df7838f60d4e27736c22a629f9f98aca41e1))
+
 # [21.3.0](https://github.com/peerigon/clockodo/compare/v21.2.0...v21.3.0) (2023-07-10)
 
 
