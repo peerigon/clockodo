@@ -1,3 +1,15 @@
+# [21.3.0](https://github.com/peerigon/clockodo/compare/v21.2.0...v21.3.0) (2023-07-10)
+
+
+### Bug Fixes
+
+* Use v2 endpoint for entrygroups (and adjust types) ([1647db4](https://github.com/peerigon/clockodo/commit/1647db4fe0e3f844be2afb54d4139d6c1a1a5dbb))
+
+
+### Features
+
+* update entrygroups endpoints ([82ff3b4](https://github.com/peerigon/clockodo/commit/82ff3b41152ea476afb1cae57c24bb1a6d3ec527))
+
 # [21.2.0](https://github.com/peerigon/clockodo/compare/v21.1.0...v21.2.0) (2023-06-07)
 
 
