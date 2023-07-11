@@ -1,3 +1,17 @@
+# [21.5.0](https://github.com/peerigon/clockodo/compare/v21.4.0...v21.5.0) (2023-07-11)
+
+
+### Bug Fixes
+
+* Remove status from required properties of addWorkTimesChangeRequest() ([40bd5cd](https://github.com/peerigon/clockodo/commit/40bd5cd15913f2579cb8c23110dde8d8992c39ca))
+* Remove status from required properties of addWorkTimesChangeRequest() ([65dbd8e](https://github.com/peerigon/clockodo/commit/65dbd8eb6a7815100291421569cabffbeb575a74))
+
+
+### Features
+
+* add optional param to type ([d4cb3c6](https://github.com/peerigon/clockodo/commit/d4cb3c604300406832d6192e52293a5ea88178c4))
+* Improve types of getTargethours() ([3ecfb8f](https://github.com/peerigon/clockodo/commit/3ecfb8ffd549dbf2fbb7faeb0006c9597854b492))
+
 # [21.4.0](https://github.com/peerigon/clockodo/compare/v21.3.0...v21.4.0) (2023-07-10)
 
 
