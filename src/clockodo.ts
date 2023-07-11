@@ -311,7 +311,9 @@ export class Clockodo {
     return this.api.get("/targethours/" + id, remainingParams);
   }
 
-  async getTargethours(params?: Params): Promise<TargethoursReturnType> {
+  async getTargethours(
+    params?: Params<{ usersId?: number }>
+  ): Promise<TargethoursReturnType> {
     return this.api.get("/targethours", params);
   }
 
