@@ -1,3 +1,10 @@
+## [21.5.1](https://github.com/peerigon/clockodo/compare/v21.5.0...v21.5.1) (2023-07-19)
+
+
+### Bug Fixes
+
+* Incorrect absence and user types ([91a00b8](https://github.com/peerigon/clockodo/commit/91a00b89d6e18d6cbe3fbee8625a54e9c1223ae9))
+
 # [21.5.0](https://github.com/peerigon/clockodo/compare/v21.4.0...v21.5.0) (2023-07-11)
 
 
