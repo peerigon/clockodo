@@ -1,12 +1,12 @@
-import qs from "qs";
 import nock from "nock";
+import qs from "qs";
 import {
+  AbsenceStatus,
+  AbsenceType,
+  Billability,
   Clockodo,
   Config,
-  Billability,
   UserRole,
-  AbsenceType,
-  AbsenceStatus,
   mapRequestBody,
 } from "./index.js";
 
@@ -780,6 +780,7 @@ describe("Clockodo (instance)", () => {
           dateSince: "2017-08-18 00:00:00",
           dateUntil: "2018-02-09 00:00:00",
           type: AbsenceType.SpecialLeave,
+          status: AbsenceStatus.Reported,
           note: "elternzeit",
         });
 
