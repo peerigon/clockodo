@@ -12,9 +12,8 @@ type CommonAbsence = {
   dateUntil: string; // | null (as stated in the docs) doesn't seem to be correct
   /**
    * Status of the absence.
-   * Only with access rights for absence administration or in case of own absences
    */
-  status?: AbsenceStatus;
+  status: AbsenceStatus;
   /**
    * Type of the absence.
    * Only with access rights for absence administration or in case of own absences
