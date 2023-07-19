@@ -1,9 +1,4 @@
-export const ADD_ABSENCE = [
-  "dateSince",
-  "dateUntil",
-  "type",
-  "status",
-] as const;
+export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"] as const;
 export const ADD_CUSTOMER = ["name"] as const;
 export const ADD_TIME_ENTRY = [
   "customersId",
