@@ -65,7 +65,7 @@ export type User = {
     | typeof NO_WORKTIME_REGULATIONS_ID_FOR_USER
     | null;
   /** The co-worker's team id */
-  teamsId: null;
+  teamsId: number | null;
   /**
    * ID of the co-worker's nonbusiness group
    * - "0" if the co-worker has no nonbusiness group
