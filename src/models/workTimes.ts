@@ -21,9 +21,17 @@ export type WorkTimeChangeRequest = {
   id: number;
   date: IsoDate;
   usersId: number;
-  status: WorkTimeChangeRequestStatus;
   changes: Array<WorkTimeChangeRequestInterval>;
-};
+} & (
+  | {
+      status: WorkTimeChangeRequestStatus.Declined;
+      declinedAt: IsoDate;
+      declinedBy: number;
+    }
+  | {
+      status: WorkTimeChangeRequestStatus.Requested;
+    }
+);
 
 export type WorkTimeChangeRequestInterval = {
   type: WorkTimeChangeRequestIntervalType;
