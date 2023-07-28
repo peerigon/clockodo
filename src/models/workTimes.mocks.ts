@@ -120,7 +120,15 @@ const createChangeRequest = ({
     date: isoDateFromDateTime(date),
     usersId: 0,
     changes,
-    status,
+    ...(status === WorkTimeChangeRequestStatus.Declined
+      ? {
+          status: WorkTimeChangeRequestStatus.Declined,
+          declinedAt: "2023-01-01",
+          declinedBy: faker.datatype.number(),
+        }
+      : {
+          status: WorkTimeChangeRequestStatus.Requested,
+        }),
   };
 };
 
