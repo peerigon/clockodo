@@ -1,3 +1,15 @@
+# [21.6.0](https://github.com/peerigon/clockodo/compare/v21.5.1...v21.6.0) (2023-07-28)
+
+
+### Bug Fixes
+
+* make mocks more consistent ([1fd9177](https://github.com/peerigon/clockodo/commit/1fd91773ab079bcfaccb47361807bc9f169bcda0))
+
+
+### Features
+
+* add declined props ([1d80925](https://github.com/peerigon/clockodo/commit/1d80925c2c6de61c4fb4f8da65fb60f89068560a))
+
 ## [21.5.1](https://github.com/peerigon/clockodo/compare/v21.5.0...v21.5.1) (2023-07-19)
 
 
