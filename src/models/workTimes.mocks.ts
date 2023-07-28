@@ -114,17 +114,18 @@ const createChangeRequest = ({
     count: faker.datatype.number({ min: 1, max: 4 }),
     date,
   });
+  const isoDate = isoDateFromDateTime(date);
 
   return {
     id,
-    date: isoDateFromDateTime(date),
+    date: isoDate,
     usersId: 0,
     changes,
     ...(status === WorkTimeChangeRequestStatus.Declined
       ? {
           status: WorkTimeChangeRequestStatus.Declined,
-          declinedAt: "2023-01-01",
-          declinedBy: faker.datatype.number(),
+          declinedAt: isoDate,
+          declinedBy: 0,
         }
       : {
           status: WorkTimeChangeRequestStatus.Requested,
