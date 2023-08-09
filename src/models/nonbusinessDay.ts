@@ -3,7 +3,7 @@ export type NonbusinessDay = {
   date: string;
   /** The ID of the nonbusiness day  */
   id: number;
-  /** The name of the nonbusiness group */
+  /** The name of the nonbusiness day */
   name: string;
   /** It is half a nonbusiness day */
   halfDay: boolean;
