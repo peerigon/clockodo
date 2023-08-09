@@ -1,3 +1,10 @@
+# [21.7.0](https://github.com/peerigon/clockodo/compare/v21.6.0...v21.7.0) (2023-08-09)
+
+
+### Features
+
+* expose nonbusiness group model ([eb4e568](https://github.com/peerigon/clockodo/commit/eb4e568dfa2aaec4401c8d8ef1a67f6bcfbe6ebb))
+
 # [21.6.0](https://github.com/peerigon/clockodo/compare/v21.5.1...v21.6.0) (2023-07-28)
 
 
