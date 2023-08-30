@@ -521,7 +521,7 @@ describe("Clockodo (instance)", () => {
           .reply(200, {});
 
         await clockodo.getNonbusinessDays({
-          nonbusinessgroupsId: 123,
+          nonbusinessgroupsId: [123],
           year: 2021,
         });
 

@@ -6,10 +6,17 @@ import { NonbusinessDay } from "./nonbusinessDay.js";
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
+type Args = {
+  nonbusinessgroupsId: number;
+  count?: number;
+  dateBetween?: readonly [Date, Date];
+};
+
 export const createNonbusinessDayMocks = ({
+  nonbusinessgroupsId,
   count = 1,
   dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: { count?: number; dateBetween?: readonly [Date, Date] } = {}) => {
+}: Args) => {
   const nextIdPerYear = new Map<number, number>();
 
   const getNextIdForYear = (year: number) => {
@@ -32,6 +39,7 @@ export const createNonbusinessDayMocks = ({
     return {
       date: isoDateFromDateTime(dateTime),
       id,
+      nonbusinessgroupsId,
       name,
       halfDay: isHalfDay,
     };

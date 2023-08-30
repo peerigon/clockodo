@@ -67,7 +67,7 @@ export class Clockodo {
   }
 
   async getAbsences(
-    params: Params<{ year: number }>
+    params: Params<{ year: number; usersId?: User["id"] | Array<User["id"]> }>
   ): Promise<AbsencesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
@@ -312,7 +312,7 @@ export class Clockodo {
   }
 
   async getTargethours(
-    params?: Params<{ usersId?: number }>
+    params?: Params<{ usersId?: User["id"] | Array<User["id"]> }>
   ): Promise<TargethoursReturnType> {
     return this.api.get("/targethours", params);
   }
@@ -362,7 +362,12 @@ export class Clockodo {
   }
 
   async getNonbusinessDays(
-    params: Params<{ nonbusinessgroupsId: number; year: number }>
+    params: Params<{
+      nonbusinessgroupsId:
+        | NonbusinessGroup["id"]
+        | Array<NonbusinessGroup["id"]>;
+      year: number;
+    }>
   ): Promise<NonbusinessDaysReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
 

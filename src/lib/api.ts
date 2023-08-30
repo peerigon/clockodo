@@ -13,13 +13,7 @@ const paramsSerializer = (params: Record<string, string>) => {
   const urlParams = [];
 
   for (const [key, value] of Object.entries(params)) {
-    if (key === "grouping") {
-      urlParams.push(
-        qs.stringify({ [key]: value }, { arrayFormat: "brackets" })
-      );
-    } else {
-      urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "repeat" }));
-    }
+    urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "brackets" }));
   }
 
   return urlParams.join("&");
