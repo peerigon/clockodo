@@ -1,5 +1,13 @@
 import { jest } from "@jest/globals";
-import { Billability, Clockodo, Config, UserReportType } from "./index.js";
+import {
+  Billability,
+  Clockodo,
+  Config,
+  UserReportType,
+  mapQueryParams,
+  mapRequestBody,
+  mapResponseBody,
+} from "./index.js";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
@@ -73,7 +81,7 @@ describe("Clockodo", () => {
       const data = await clockodo.getUsers();
 
       expect(Object.keys(data.users[0])).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
   });
@@ -239,7 +247,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(data.groups[0])).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
 
@@ -252,7 +260,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(data.groups[0])).toEqual(
-        expect.arrayContaining(expectedKeys.concat(["subGroups"]))
+        expect.arrayContaining(expectedKeys.concat(["subGroups"])),
       );
     });
   });
@@ -281,7 +289,7 @@ describe("Clockodo", () => {
       const [lumpSumService] = lumpSumServices;
 
       expect(Object.keys(lumpSumService)).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
 
       const getLumpSumServiceResponse = await clockodo.getLumpSumService({
@@ -289,7 +297,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(getLumpSumServiceResponse.lumpSumService)).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
   });
@@ -378,29 +386,24 @@ describe("Clockodo", () => {
     });
   });
 
-  (process.env.LC_ALL === "tr" ? describe : describe.skip)(
-    "using a Turkish locale",
-    () => {
-      // The Turkish language has uncommon capitalization rules that
-      // mess with some snake_case to camelCase libraries
-      // See https://github.com/peerigon/clockodo/issues/74
-      it("transforms snake_case to camelCase correctly", async () => {
-        // Safety assertion that we're using the Turkish locale
-        expect("i".toLocaleUpperCase()).toBe("İ");
+  // The Turkish language has uncommon capitalization rules that
+  // mess with some snake_case to camelCase libraries.
+  // This test makes sure that these locale dependent string functions are not called.
+  // See https://github.com/peerigon/clockodo/issues/74
+  test("Does not call locale dependent string functions when mapping object keys", async () => {
+    const functions = [
+      "toLocaleUpperCase",
+      "toLocaleLowerCase",
+    ] satisfies Array<keyof string>;
+    const spies = functions.map((fn) => jest.spyOn(String.prototype, fn));
 
-        const {
-          entries: [firstEntry],
-        } = await clockodo.getEntries({
-          timeSince: TIME_SINCE,
-          timeUntil: TIME_UNTIL,
-          filterBillable: Billability.Billable,
-        });
+    const example = { usersId: 1 };
 
-        expect(firstEntry).toMatchObject({
-          usersId: expect.any(Number),
-          customersId: expect.any(Number),
-        });
-      });
-    }
-  );
+    mapQueryParams(example);
+    mapRequestBody(example);
+    mapResponseBody(example);
+
+    expect(spies).not.toHaveLength(0);
+    spies.forEach((spy) => expect(spy).not.toHaveBeenCalled());
+  });
 });

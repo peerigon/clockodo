@@ -29,5 +29,19 @@
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "typescript.preferences.importModuleSpecifier": "shortest",
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": [
+    "Billability",
+    "clockodo",
+    "lumpsum",
+    "Lumpsums",
+    "Nonbusiness",
+    "nonbusinessdays",
+    "nonbusinessgroups",
+    "timeformat",
+    "userreport",
+    "userreports",
+    "weekstart",
+    "worktime"
+  ]
 }

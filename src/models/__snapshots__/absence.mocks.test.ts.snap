@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createAbsenceMocks() It creates realistic mocks 1`] = `
-Array [
-  Object {
+[
+  {
     "approvedBy": 1,
     "countDays": 5,
     "countHours": null,
@@ -16,7 +16,7 @@ Array [
     "type": 1,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 0.5,
     "countHours": null,
@@ -30,7 +30,7 @@ Array [
     "type": 2,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 9,
     "countHours": null,
@@ -44,7 +44,7 @@ Array [
     "type": 4,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": 3,
     "countHours": null,
@@ -58,7 +58,7 @@ Array [
     "type": 5,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 1,
     "countHours": null,
@@ -72,7 +72,7 @@ Array [
     "type": 6,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": null,
     "countHours": 6.76,
@@ -86,7 +86,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 1,
     "countHours": null,
@@ -100,7 +100,7 @@ Array [
     "type": 8,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": null,
     "countHours": 5.57,
@@ -114,7 +114,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": null,
     "countHours": 4.5,
@@ -128,7 +128,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": null,
     "countHours": 5.57,
@@ -142,7 +142,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": null,
     "countHours": 7,
@@ -156,7 +156,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 1,
     "countHours": null,
@@ -170,7 +170,7 @@ Array [
     "type": 13,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": null,
     "countHours": 4.69,
@@ -184,7 +184,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": 1,
     "countHours": null,
@@ -198,7 +198,7 @@ Array [
     "type": 15,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 1,
     "countHours": null,
@@ -212,7 +212,7 @@ Array [
     "type": 1,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": 0.5,
     "countHours": null,
@@ -226,7 +226,7 @@ Array [
     "type": 2,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": null,
     "countHours": 0.48,
@@ -240,7 +240,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": 0.5,
     "countHours": null,
@@ -254,7 +254,7 @@ Array [
     "type": 5,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": null,
     "countDays": null,
     "countHours": 5.6,
@@ -268,7 +268,7 @@ Array [
     "type": 3,
     "usersId": 0,
   },
-  Object {
+  {
     "approvedBy": 1,
     "countDays": 1,
     "countHours": null,
