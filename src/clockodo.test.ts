@@ -516,7 +516,10 @@ describe("Clockodo (instance)", () => {
         const nockScope = nock(CLOCKODO_API)
           .get(
             "/nonbusinessdays?" +
-              qs.stringify({ nonbusinessgroups_id: 123, year: 2021 })
+              qs.stringify(
+                { nonbusinessgroups_id: [123], year: 2021 },
+                { arrayFormat: "brackets" }
+              )
           )
           .reply(200, {});
 
