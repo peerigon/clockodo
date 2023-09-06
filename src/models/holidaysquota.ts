@@ -4,6 +4,7 @@ export type HolidaysquotaRow = {
   yearSince: number;
   yearUntil: number | null;
   count: number;
+  note: string | null;
 };
 
 /**

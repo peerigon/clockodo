@@ -9,7 +9,10 @@ const DEFAULT_TO = new Date(2021, 0);
 export const createNonbusinessDayMocks = ({
   count = 1,
   dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: { count?: number; dateBetween?: readonly [Date, Date] } = {}) => {
+}: {
+  count?: number;
+  dateBetween?: readonly [Date, Date];
+}) => {
   const nextIdPerYear = new Map<number, number>();
 
   const getNextIdForYear = (year: number) => {
@@ -32,6 +35,7 @@ export const createNonbusinessDayMocks = ({
     return {
       date: isoDateFromDateTime(dateTime),
       id,
+      nonbusinessgroupsId: 0,
       name,
       halfDay: isHalfDay,
     };
