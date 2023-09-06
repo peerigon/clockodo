@@ -447,7 +447,11 @@ export class Clockodo {
   async startClock(
     params: Params<
       Pick<TimeEntry, typeof REQUIRED.START_CLOCK[number]> & {
-        billable: ClockingTimeEntryBillability;
+        /**
+         * Billability of the time entry that is about to be created.
+         * Omit it if you want to use the project's default.
+         */
+        billable?: ClockingTimeEntryBillability;
       }
     >
   ): Promise<ClockStartReturnType> {

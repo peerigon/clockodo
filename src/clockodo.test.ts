@@ -621,9 +621,8 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.startClock({
             customersId: 24,
-            servicesId: 7,
           })
-        ).rejects.toThrowError('Missing required parameter "billable"');
+        ).rejects.toThrowError('Missing required parameter "servicesId"');
       });
     });
 
