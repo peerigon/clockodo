@@ -45,7 +45,7 @@ export const createTargethoursRowWeeklyMocks = ({
       count: count * 2,
       between: [from, to],
       maxDuplicates: 2,
-    })
+    }),
   );
   let previousTo: undefined | number;
 
@@ -98,7 +98,7 @@ export const createTargethoursRowMonthlyMocks = ({
       count: count * 2,
       between: [from, to],
       maxDuplicates: 2,
-    })
+    }),
   );
 
   return monthPairs.map(([from, to], index): TargethoursRowMonthly => {
@@ -136,7 +136,7 @@ export const createTargethoursRowMonthlyMocks = ({
 };
 
 export const createTargethoursRowMocks = (
-  options: CommonOptions = {}
+  options: CommonOptions = {},
 ): Array<TargethoursRow> => {
   const {
     count = 1,
@@ -170,6 +170,6 @@ export const createTargethoursRowMocks = (
     (targethoursRow, index) => ({
       ...targethoursRow,
       id: index,
-    })
+    }),
   );
 };

@@ -33,14 +33,12 @@ jobs:
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # pin@v3
         with:
           path: "**/node_modules"
-          key: node_modules-${{ runner.os }}-node-${{ matrix.node-version }}-${{
-            hashFiles('**/package-lock.json') }}
+          key: node_modules-${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
       - name: 🗄 Cache .eslintcache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # pin@v3
         with:
           path: .eslintcache
-          key: eslintcache-${{ runner.os }}-node-${{ matrix.node-version }}-${{
-            hashFiles('**/package-lock.json') }}
+          key: eslintcache-${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
       - name: 📥 Install dependencies
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: |
@@ -59,8 +57,7 @@ jobs:
 
       # - RELEASE ---------------------------------------------------------------------------------------
       - name: 🚀 Release on npm
-        if: "contains(' refs/heads/main refs/heads/beta ', github.ref) &&
-          matrix.node-version == '20.x'"
+        if: "contains(' refs/heads/main refs/heads/beta ', github.ref) && matrix.node-version == '20.x'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

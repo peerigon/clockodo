@@ -15,7 +15,7 @@ const paramsSerializer = (params: Record<string, string>) => {
   for (const [key, value] of Object.entries(params)) {
     if (key === "grouping") {
       urlParams.push(
-        qs.stringify({ [key]: value }, { arrayFormat: "brackets" })
+        qs.stringify({ [key]: value }, { arrayFormat: "brackets" }),
       );
     } else {
       urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "repeat" }));
@@ -30,7 +30,7 @@ const paramsSerializer = (params: Record<string, string>) => {
  * This is necessary so that the SDK doesn't disallow unknown params that we haven't implemented yet.
  */
 export type Params<
-  KnownParams extends Record<string, unknown> = Record<string, unknown>
+  KnownParams extends Record<string, unknown> = Record<string, unknown>,
 > = KnownParams & Record<string, unknown>;
 
 export type ParamsWithPage = {
@@ -124,7 +124,7 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
       throw new Error(
-        `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
+        `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`,
       );
     }
     this.config({ client, authentication, baseUrl, locale });
@@ -187,7 +187,7 @@ export class Api {
 
       if (externalApplication.length > EXTERNAL_APPLICATION_HEADER_MAX_LENGTH) {
         throw new Error(
-          `External application header "${externalApplication}" is longer than ${EXTERNAL_APPLICATION_HEADER_MAX_LENGTH} characters (was ${externalApplication.length}). Please use a shorter name.`
+          `External application header "${externalApplication}" is longer than ${EXTERNAL_APPLICATION_HEADER_MAX_LENGTH} characters (was ${externalApplication.length}). Please use a shorter name.`,
         );
       }
 
@@ -231,7 +231,7 @@ export class Api {
   async get<Result = any>(
     url: string,
     queryParams = {},
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): Promise<Result> {
     const response = await this[axiosClient].get(url, {
       params: mapQueryParams(queryParams),
@@ -250,7 +250,7 @@ export class Api {
       return this.get<Result & ResponseWithPaging>(
         url,
         { ...queryParams, page },
-        options
+        options,
       );
     };
     const firstResponse = await getPage(1);
@@ -261,11 +261,11 @@ export class Api {
     const limit = pLimit(MAX_PARALLEL_REQUESTS_WHEN_STREAMING);
     const remainingPages = Array.from(
       { length: paging.countPages - 1 },
-      (_, index) => index + 2
+      (_, index) => index + 2,
     );
 
     yield* yieldPagesAsap(
-      remainingPages.map(async (page) => limit(getPage, page))
+      remainingPages.map(async (page) => limit(getPage, page)),
     );
   }
 
@@ -279,7 +279,7 @@ export class Api {
     }
 
     pages.sort(
-      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage
+      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage,
     );
 
     return pages;
@@ -288,12 +288,12 @@ export class Api {
   async post<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): Promise<Result> {
     const response = await this[axiosClient].post(
       url,
       mapRequestBody(body),
-      options
+      options,
     );
 
     return mapResponseBody<Result>(response.data);
@@ -302,12 +302,12 @@ export class Api {
   async put<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): Promise<Result> {
     const response = await this[axiosClient].put(
       url,
       mapRequestBody(body),
-      options
+      options,
     );
 
     return mapResponseBody<Result>(response.data);
@@ -316,7 +316,7 @@ export class Api {
   async delete<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): Promise<Result> {
     const response = await this[axiosClient].delete(url, {
       data: mapRequestBody(body),
@@ -337,18 +337,18 @@ const createTypeError = ({
   actual: any;
 }) => {
   return new TypeError(
-    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`
+    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`,
   );
 };
 
 const yieldPagesAsap = async function* <Result>(
-  pagePromises: Array<Promise<Result>>
+  pagePromises: Array<Promise<Result>>,
 ) {
   const pending = new Map(
     pagePromises.map((promise, index) => [
       index,
       promise.then((result) => [index, result] as const),
-    ])
+    ]),
   );
 
   while (pending.size > 0) {

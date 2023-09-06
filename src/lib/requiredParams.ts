@@ -80,13 +80,13 @@ export const DECLINE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 
 export const checkRequired = (
   params: Record<string, unknown> = {},
-  requiredList: ReadonlyArray<string>
+  requiredList: ReadonlyArray<string>,
 ) => {
   const missingParamName = requiredList.find(
-    (paramName) => paramName in params === false
+    (paramName) => paramName in params === false,
   );
   const undefinedParam = requiredList.find(
-    (paramName) => typeof params[paramName] === "undefined"
+    (paramName) => typeof params[paramName] === "undefined",
   );
 
   if (typeof missingParamName !== "undefined") {

@@ -59,8 +59,8 @@ export const createTimeEntryMocks = ({
         : isoUtcDateTimeFromDateTime(
             new Date(
               new Date(commonEntry.timeSince).getTime() +
-                faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000
-            )
+                faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000,
+            ),
           );
 
     return {
@@ -83,7 +83,7 @@ export const createTimeEntryMocks = ({
           : Math.floor(
               (new Date(timeUntil).getTime() -
                 new Date(commonEntry.timeSince).getTime()) /
-                1000
+                1000,
             ),
       clocked: timeEntryType !== "manual",
       clockedOffline:

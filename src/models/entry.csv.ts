@@ -19,7 +19,7 @@ const EXPECTED_COLUMN_COUNT = 27;
 export const parseEntryFromCsv = (row: Array<string>): Entry => {
   if (row.length !== EXPECTED_COLUMN_COUNT) {
     throw new Error(
-      `Expected row to have ${EXPECTED_COLUMN_COUNT} columns instead of ${row.length}`
+      `Expected row to have ${EXPECTED_COLUMN_COUNT} columns instead of ${row.length}`,
     );
   }
 
@@ -75,12 +75,12 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
       lumpsumServicesId: parseNumber(
         "lumpsumServicesId",
         lumpsumServicesId,
-        "int"
+        "int",
       ),
       lumpsumServicesAmount: parseNumber(
         "lumpsumServicesAmount",
         lumpsumServicesAmount,
-        "float"
+        "float",
       ),
     };
   }
@@ -126,7 +126,7 @@ const parseBoolean = (columnName: string, columnValue: string) => {
       return true;
     default: {
       throw new Error(
-        `Could not parse ${columnName} "${columnValue}" as a boolean`
+        `Could not parse ${columnName} "${columnValue}" as a boolean`,
       );
     }
   }
@@ -137,7 +137,7 @@ type NumberType = "int" | "float";
 const parseNumber = (
   columnName: string,
   columnValue: string,
-  numberType: "int" | "float"
+  numberType: "int" | "float",
 ) => {
   const number =
     numberType === "int"
@@ -146,7 +146,7 @@ const parseNumber = (
 
   if (Number.isNaN(number)) {
     throw new Error(
-      `Could not parse ${columnName} "${columnValue}" as a number`
+      `Could not parse ${columnName} "${columnValue}" as a number`,
     );
   }
 
@@ -156,7 +156,7 @@ const parseNumber = (
 const parseOptionalNumber = (
   columnName: string,
   columnValue: string,
-  numberType: NumberType
+  numberType: NumberType,
 ) => {
   if (columnValue === "") return null;
 
@@ -171,7 +171,7 @@ const parseOptionalString = (columnName: string, columnValue: string) => {
 
 const parseTimeEntryBillability = (
   columnName: string,
-  columnValue: string
+  columnValue: string,
 ): TimeEntryBillability => {
   switch (columnValue) {
     case "0":
@@ -182,7 +182,7 @@ const parseTimeEntryBillability = (
       return Billability.Billed;
     default: {
       throw new Error(
-        `Could not parse ${columnName} "${columnValue}" as a valid TimeEntryBillability value`
+        `Could not parse ${columnName} "${columnValue}" as a valid TimeEntryBillability value`,
       );
     }
   }
@@ -190,7 +190,7 @@ const parseTimeEntryBillability = (
 
 const parseLumpsumEntryBillability = (
   columnName: string,
-  columnValue: string
+  columnValue: string,
 ): LumpsumEntryBillability => {
   switch (columnValue) {
     case "1":
@@ -199,7 +199,7 @@ const parseLumpsumEntryBillability = (
       return Billability.Billed;
     default: {
       throw new Error(
-        `Could not parse ${columnName} "${columnValue}" as a valid LumpsumEntryBillability value`
+        `Could not parse ${columnName} "${columnValue}" as a valid LumpsumEntryBillability value`,
       );
     }
   }

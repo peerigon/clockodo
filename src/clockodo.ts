@@ -57,7 +57,7 @@ export class Clockodo {
   }
 
   async getAbsence(
-    params: Params<{ id: Absence["id"] }>
+    params: Params<{ id: Absence["id"] }>,
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCE);
 
@@ -67,7 +67,7 @@ export class Clockodo {
   }
 
   async getAbsences(
-    params: Params<{ year: number }>
+    params: Params<{ year: number }>,
   ): Promise<AbsencesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
@@ -75,7 +75,7 @@ export class Clockodo {
   }
 
   async getUsersAccessCustomersProjects(
-    params: Params<{ usersId: User["id"] }>
+    params: Params<{ usersId: User["id"] }>,
   ): Promise<UsersAccessCustomersProjectsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_CUSTOMERS_PROJECTS);
 
@@ -83,12 +83,12 @@ export class Clockodo {
 
     return this.api.get(
       `/v2/users/${usersId}/access/customers-projects`,
-      remainingParams
+      remainingParams,
     );
   }
 
   async getUsersAccessServices(
-    params: Params<{ usersId: User["id"] }>
+    params: Params<{ usersId: User["id"] }>,
   ): Promise<UsersAccessServicesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_SERVICES);
 
@@ -96,7 +96,7 @@ export class Clockodo {
 
     return this.api.get(
       `/v2/users/${usersId}/access/services`,
-      remainingParams
+      remainingParams,
     );
   }
 
@@ -105,7 +105,7 @@ export class Clockodo {
   }
 
   async getCustomer(
-    params: Params<{ id: Customer["id"] }>
+    params: Params<{ id: Customer["id"] }>,
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_CUSTOMER);
 
@@ -115,17 +115,17 @@ export class Clockodo {
   }
 
   async getCustomersPage(
-    params?: Params<CustomersParams>
+    params?: Params<CustomersParams>,
   ): Promise<CustomersReturnType> {
     return this.api.get("/v2/customers", params);
   }
 
   async getCustomers(
-    params?: Params<CustomersParams>
+    params?: Params<CustomersParams>,
   ): Promise<ResponseWithoutPaging<CustomersReturnType>> {
     const pages = await this.api.getAllPages<CustomersReturnType>(
       "/v2/customers",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const customers = pages.flatMap(({ customers }) => customers);
@@ -137,7 +137,7 @@ export class Clockodo {
   }
 
   async getProject(
-    params: Params<{ id: Project["id"] }>
+    params: Params<{ id: Project["id"] }>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_PROJECT);
 
@@ -147,17 +147,17 @@ export class Clockodo {
   }
 
   async getProjectsPage(
-    params?: Params<ProjectsParams>
+    params?: Params<ProjectsParams>,
   ): Promise<ProjectsReturnType> {
     return this.api.get("/v2/projects", params);
   }
 
   async getProjects(
-    params?: Params<ProjectsParams>
+    params?: Params<ProjectsParams>,
   ): Promise<ResponseWithoutPaging<ProjectsReturnType>> {
     const pages = await this.api.getAllPages<ProjectsReturnType>(
       "/v2/projects",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const projects = pages.flatMap(({ projects }) => projects);
@@ -169,7 +169,7 @@ export class Clockodo {
   }
 
   async getEntry(
-    params: Params<{ id: Entry["id"] }>
+    params: Params<{ id: Entry["id"] }>,
   ): Promise<EntryReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY);
 
@@ -179,7 +179,7 @@ export class Clockodo {
   }
 
   async splitAllEntriesAtMidnight(
-    params: Params<{ day: string; usersId: number }>
+    params: Params<{ day: string; usersId: number }>,
   ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
     REQUIRED.checkRequired(params, REQUIRED.SPLIT_ALL_ENTRIES_AT_MIDNIGHT);
 
@@ -189,13 +189,13 @@ export class Clockodo {
   }
 
   async getEntries(
-    params: Params<EntriesParams>
+    params: Params<EntriesParams>,
   ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
     const pages = await this.api.getAllPages<EntriesReturnType>(
       "/v2/entries",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const entries = pages.flatMap(({ entries }) => entries);
@@ -207,7 +207,7 @@ export class Clockodo {
   }
 
   async getEntriesPage(
-    params: Params<EntriesParams>
+    params: Params<EntriesParams>,
   ): Promise<EntriesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
@@ -215,17 +215,17 @@ export class Clockodo {
   }
 
   async getEntriesTexts(
-    params: Params<EntriesTextsParams>
+    params: Params<EntriesTextsParams>,
   ): Promise<ResponseWithoutPaging<EntriesTextsReturnType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
 
     const pages = await this.api.getAllPages<EntriesTextsReturnType>(
       "/v2/entriesTexts",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const texts = Object.fromEntries(
-      pages.flatMap(({ texts }) => Object.entries(texts))
+      pages.flatMap(({ texts }) => Object.entries(texts)),
     );
 
     return {
@@ -235,7 +235,7 @@ export class Clockodo {
   }
 
   async getEntriesTextsPage(
-    params: Params<EntriesTextsParams>
+    params: Params<EntriesTextsParams>,
   ): Promise<EntriesTextsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
 
@@ -247,7 +247,7 @@ export class Clockodo {
       timeSince: string;
       timeUntil: string;
       grouping: Array<string>;
-    }>
+    }>,
   ): Promise<EntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRY_GROUPS);
 
@@ -258,7 +258,7 @@ export class Clockodo {
   }
 
   async getService(
-    params: Params<{ id: Service["id"] }>
+    params: Params<{ id: Service["id"] }>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_SERVICE);
 
@@ -285,7 +285,7 @@ export class Clockodo {
 
   // This endpoint still uses the old lumpSum casing
   async getLumpSumService(
-    params: Params<{ id: LumpsumService["id"] }>
+    params: Params<{ id: LumpsumService["id"] }>,
   ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_LUMPSUM_SERVICE);
 
@@ -296,13 +296,13 @@ export class Clockodo {
 
   // This endpoint still uses the old lumpSum casing
   async getLumpSumServices(
-    params?: Params
+    params?: Params,
   ): Promise<LumpsumServicesReturnType> {
     return this.api.get("/lumpsumservices", params);
   }
 
   async getTargethoursRow(
-    params: Params<{ id: TargethoursRow["id"] }>
+    params: Params<{ id: TargethoursRow["id"] }>,
   ): Promise<TargethoursRowReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_TARGETHOURS_ROW);
 
@@ -312,7 +312,7 @@ export class Clockodo {
   }
 
   async getTargethours(
-    params?: Params<{ usersId?: number }>
+    params?: Params<{ usersId?: number }>,
   ): Promise<TargethoursReturnType> {
     return this.api.get("/targethours", params);
   }
@@ -330,13 +330,13 @@ export class Clockodo {
   }
 
   async getUserReport<
-    GivenUserReportType extends UserReportType = UserReportType.Year
+    GivenUserReportType extends UserReportType = UserReportType.Year,
   >(
     params: Params<{
       usersId: User["id"];
       year: number;
       type?: GivenUserReportType;
-    }>
+    }>,
   ): Promise<UserReportReturnType<GivenUserReportType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORT);
 
@@ -346,9 +346,9 @@ export class Clockodo {
   }
 
   async getUserReports<
-    GivenUserReportType extends UserReportType = UserReportType.Year
+    GivenUserReportType extends UserReportType = UserReportType.Year,
   >(
-    params: Params<{ year: number; type?: GivenUserReportType }>
+    params: Params<{ year: number; type?: GivenUserReportType }>,
   ): Promise<UserReportsReturnType<GivenUserReportType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER_REPORTS);
 
@@ -356,13 +356,13 @@ export class Clockodo {
   }
 
   async getNonbusinessGroups(
-    params?: Params
+    params?: Params,
   ): Promise<NonbusinessGroupsReturnType> {
     return this.api.get("/nonbusinessgroups", params);
   }
 
   async getNonbusinessDays(
-    params: Params<{ nonbusinessgroupsId: number; year: number }>
+    params: Params<{ nonbusinessgroupsId: number; year: number }>,
   ): Promise<NonbusinessDaysReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
 
@@ -370,13 +370,15 @@ export class Clockodo {
   }
 
   async getAggregatesUsersMe(
-    params?: Params
+    params?: Params,
   ): Promise<AggregatesUsersMeReturnType> {
     return this.api.get("/v2/aggregates/users/me", params);
   }
 
   async addAbsence(
-    params: Params<Pick<Required<Absence>, typeof REQUIRED.ADD_ABSENCE[number]>>
+    params: Params<
+      Pick<Required<Absence>, (typeof REQUIRED.ADD_ABSENCE)[number]>
+    >,
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 
@@ -384,7 +386,7 @@ export class Clockodo {
   }
 
   async addCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.ADD_CUSTOMER[number]>>
+    params: Params<Pick<Customer, (typeof REQUIRED.ADD_CUSTOMER)[number]>>,
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
@@ -393,13 +395,16 @@ export class Clockodo {
 
   async addEntry(
     params: Params<
-      | Pick<TimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
-      | Pick<LumpsumValueEntry, typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY[number]>
+      | Pick<TimeEntry, (typeof REQUIRED.ADD_TIME_ENTRY)[number]>
+      | Pick<
+          LumpsumValueEntry,
+          (typeof REQUIRED.ADD_LUMPSUM_VALUE_ENTRY)[number]
+        >
       | Pick<
           LumpsumServiceEntry,
-          typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY[number]
+          (typeof REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY)[number]
         >
-    >
+    >,
   ): Promise<AddEntryReturnType> {
     if ("lumpsumServicesId" in params) {
       REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE_ENTRY);
@@ -413,7 +418,7 @@ export class Clockodo {
   }
 
   async addProject(
-    params: Params<Pick<Project, typeof REQUIRED.ADD_PROJECT[number]>>
+    params: Params<Pick<Project, (typeof REQUIRED.ADD_PROJECT)[number]>>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
@@ -421,7 +426,7 @@ export class Clockodo {
   }
 
   async addService(
-    params: Params<Pick<Service, typeof REQUIRED.ADD_SERVICE[number]>>
+    params: Params<Pick<Service, (typeof REQUIRED.ADD_SERVICE)[number]>>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
@@ -429,7 +434,7 @@ export class Clockodo {
   }
 
   async addTeam(
-    params: Params<Pick<Team, typeof REQUIRED.ADD_TEAM[number]>>
+    params: Params<Pick<Team, (typeof REQUIRED.ADD_TEAM)[number]>>,
   ): Promise<TeamReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_TEAM);
 
@@ -437,7 +442,7 @@ export class Clockodo {
   }
 
   async addUser(
-    params: Params<Pick<User, typeof REQUIRED.ADD_USER[number]>>
+    params: Params<Pick<User, (typeof REQUIRED.ADD_USER)[number]>>,
   ): Promise<AddUserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
@@ -446,10 +451,10 @@ export class Clockodo {
 
   async startClock(
     params: Params<
-      Pick<TimeEntry, typeof REQUIRED.START_CLOCK[number]> & {
+      Pick<TimeEntry, (typeof REQUIRED.START_CLOCK)[number]> & {
         billable: ClockingTimeEntryBillability;
       }
-    >
+    >,
   ): Promise<ClockStartReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.START_CLOCK);
 
@@ -461,7 +466,7 @@ export class Clockodo {
       entriesId: Entry["id"];
       durationBefore: number;
       duration: number;
-    }>
+    }>,
   ): Promise<ClockEditReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.CHANGE_CLOCK_DURATION);
 
@@ -471,7 +476,7 @@ export class Clockodo {
   }
 
   async editAbsence(
-    params: Params<Pick<Absence, typeof REQUIRED.EDIT_ABSENCE[number]>>
+    params: Params<Pick<Absence, (typeof REQUIRED.EDIT_ABSENCE)[number]>>,
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ABSENCE);
 
@@ -481,7 +486,7 @@ export class Clockodo {
   }
 
   async editCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.EDIT_CUSTOMER[number]>>
+    params: Params<Pick<Customer, (typeof REQUIRED.EDIT_CUSTOMER)[number]>>,
   ) {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_CUSTOMER);
 
@@ -491,7 +496,7 @@ export class Clockodo {
   }
 
   async editEntry(
-    params: Params<Pick<Entry, typeof REQUIRED.EDIT_ENTRY[number]>>
+    params: Params<Pick<Entry, (typeof REQUIRED.EDIT_ENTRY)[number]>>,
   ): Promise<EditEntryReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY);
 
@@ -501,7 +506,7 @@ export class Clockodo {
   }
 
   async editEntryGroup(
-    params: Params<{ timeSince: string; timeUntil: string }>
+    params: Params<{ timeSince: string; timeUntil: string }>,
   ): Promise<EditEntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY_GROUP);
 
@@ -509,7 +514,7 @@ export class Clockodo {
   }
 
   async editProject(
-    params: Params<Pick<Project, typeof REQUIRED.EDIT_PROJECT[number]>>
+    params: Params<Pick<Project, (typeof REQUIRED.EDIT_PROJECT)[number]>>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_PROJECT);
 
@@ -519,7 +524,7 @@ export class Clockodo {
   }
 
   async editService(
-    params: Params<Pick<Service, typeof REQUIRED.EDIT_SERVICE[number]>>
+    params: Params<Pick<Service, (typeof REQUIRED.EDIT_SERVICE)[number]>>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_SERVICE);
 
@@ -529,7 +534,7 @@ export class Clockodo {
   }
 
   async editTeam(
-    params: Params<Pick<Team, typeof REQUIRED.EDIT_TEAM[number]>>
+    params: Params<Pick<Team, (typeof REQUIRED.EDIT_TEAM)[number]>>,
   ): Promise<TeamReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_TEAM);
 
@@ -539,7 +544,7 @@ export class Clockodo {
   }
 
   async editUser(
-    params: Params<Pick<User, typeof REQUIRED.EDIT_USER[number]>>
+    params: Params<Pick<User, (typeof REQUIRED.EDIT_USER)[number]>>,
   ): Promise<UserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_USER);
 
@@ -549,7 +554,9 @@ export class Clockodo {
   }
 
   async deactivateCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
+    params: Params<
+      Pick<Customer, (typeof REQUIRED.DEACTIVATE_CUSTOMER)[number]>
+    >,
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
 
@@ -559,7 +566,7 @@ export class Clockodo {
   }
 
   async deactivateProject(
-    params: Params<Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>>
+    params: Params<Pick<Project, (typeof REQUIRED.DEACTIVATE_PROJECT)[number]>>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
 
@@ -569,7 +576,7 @@ export class Clockodo {
   }
 
   async deactivateService(
-    params: Params<Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>>
+    params: Params<Pick<Service, (typeof REQUIRED.DEACTIVATE_SERVICE)[number]>>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
 
@@ -579,7 +586,7 @@ export class Clockodo {
   }
 
   async deactivateUser(
-    params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
+    params: Params<Pick<User, (typeof REQUIRED.DEACTIVATE_USER)[number]>>,
   ): Promise<UserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
 
@@ -589,7 +596,7 @@ export class Clockodo {
   }
 
   async deleteAbsence(
-    params: Params<Pick<Absence, typeof REQUIRED.DELETE_ABSENCE[number]>>
+    params: Params<Pick<Absence, (typeof REQUIRED.DELETE_ABSENCE)[number]>>,
   ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_ABSENCE);
 
@@ -599,7 +606,7 @@ export class Clockodo {
   }
 
   async deleteEntry(
-    params: Params<Pick<Entry, typeof REQUIRED.DELETE_ENTRY[number]>>
+    params: Params<Pick<Entry, (typeof REQUIRED.DELETE_ENTRY)[number]>>,
   ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY);
 
@@ -609,7 +616,7 @@ export class Clockodo {
   }
 
   async deleteEntryGroup(
-    params: Params<{ timeSince: string; timeUntil: string }>
+    params: Params<{ timeSince: string; timeUntil: string }>,
   ): Promise<DeleteEntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_ENTRY_GROUP);
 
@@ -617,7 +624,7 @@ export class Clockodo {
   }
 
   async deleteTeam(
-    params: Params<Pick<Team, typeof REQUIRED.DELETE_TEAM[number]>>
+    params: Params<Pick<Team, (typeof REQUIRED.DELETE_TEAM)[number]>>,
   ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_TEAM);
 
@@ -627,7 +634,7 @@ export class Clockodo {
   }
 
   async register(
-    params: Params<{ companiesName: string; name: string; email: string }>
+    params: Params<{ companiesName: string; name: string; email: string }>,
   ): Promise<RegisterReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.REGISTER);
 
@@ -635,7 +642,7 @@ export class Clockodo {
   }
 
   async stopClock(
-    params: Params<{ entriesId: Entry["id"]; usersId?: number }>
+    params: Params<{ entriesId: Entry["id"]; usersId?: number }>,
   ): Promise<ClockStopReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.STOP_CLOCK);
 
@@ -645,17 +652,17 @@ export class Clockodo {
   }
 
   async getWorkTimesPage(
-    params?: Params<WorkTimesParams>
+    params?: Params<WorkTimesParams>,
   ): Promise<WorkTimesReturnType> {
     return this.api.get("/v2/workTimes", params);
   }
 
   async getWorkTimes(
-    params: Params<WorkTimesParams>
+    params: Params<WorkTimesParams>,
   ): Promise<ResponseWithoutPaging<WorkTimesReturnType>> {
     const pages = await this.api.getAllPages<WorkTimesReturnType>(
       "/v2/workTimes",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const workTimeDays = pages.flatMap(({ workTimeDays }) => workTimeDays);
@@ -667,21 +674,21 @@ export class Clockodo {
   }
 
   async getWorkTimesChangeRequestsPage(
-    params: Params<WorkTimesChangeRequestsParams>
+    params: Params<WorkTimesChangeRequestsParams>,
   ): Promise<WorkTimesChangeRequestsReturnType> {
     return this.api.get("/v2/workTimes/changeRequests", params);
   }
 
   async getWorkTimesChangeRequests(
-    params: Params<WorkTimesChangeRequestsParams>
+    params: Params<WorkTimesChangeRequestsParams>,
   ): Promise<ResponseWithoutPaging<WorkTimesChangeRequestsReturnType>> {
     const pages = await this.api.getAllPages<WorkTimesChangeRequestsReturnType>(
       "/v2/workTimes/changeRequests",
-      params
+      params,
     );
     const [{ paging, ...remainingResponse }] = pages;
     const changeRequests = pages.flatMap(
-      ({ changeRequests }) => changeRequests
+      ({ changeRequests }) => changeRequests,
     );
 
     return {
@@ -694,9 +701,9 @@ export class Clockodo {
     params: Params<
       Pick<
         Omit<WorkTimeChangeRequest, "id" | "status">,
-        typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST[number]
+        (typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST)[number]
       >
-    >
+    >,
   ): Promise<AddWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST);
 
@@ -707,9 +714,9 @@ export class Clockodo {
     params: Params<
       Pick<
         WorkTimeChangeRequest,
-        typeof REQUIRED.WITHDRAW_WORK_TIMES_CHANGE_REQUEST[number]
+        (typeof REQUIRED.WITHDRAW_WORK_TIMES_CHANGE_REQUEST)[number]
       >
-    >
+    >,
   ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.WITHDRAW_WORK_TIMES_CHANGE_REQUEST);
 
@@ -717,7 +724,7 @@ export class Clockodo {
 
     return this.api.delete(
       `/v2/workTimes/changeRequests/${id}`,
-      remainingParams
+      remainingParams,
     );
   }
 
@@ -725,9 +732,9 @@ export class Clockodo {
     params: Params<
       Pick<
         WorkTimeChangeRequest,
-        typeof REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST[number]
+        (typeof REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST)[number]
       >
-    >
+    >,
   ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.APPROVE_WORK_TIMES_CHANGE_REQUEST);
 
@@ -735,7 +742,7 @@ export class Clockodo {
 
     return this.api.post(
       `/v2/workTimes/changeRequests/${id}/approve`,
-      remainingParams
+      remainingParams,
     );
   }
 
@@ -743,9 +750,9 @@ export class Clockodo {
     params: Params<
       Pick<
         WorkTimeChangeRequest,
-        typeof REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST[number]
+        (typeof REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST)[number]
       >
-    >
+    >,
   ): Promise<ApproveOrDeclineWorkTimesChangeRequestReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DECLINE_WORK_TIMES_CHANGE_REQUEST);
 
@@ -753,7 +760,7 @@ export class Clockodo {
 
     return this.api.post(
       `/v2/workTimes/changeRequests/${id}/decline`,
-      remainingParams
+      remainingParams,
     );
   }
 }
@@ -918,12 +925,12 @@ export type DeleteEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
   | { success: true; deletedEntries: number };
 export type UserReportReturnType<
-  GivenUserReportType extends UserReportType = UserReportType.Year
+  GivenUserReportType extends UserReportType = UserReportType.Year,
 > = {
   userreport: UserReport<GivenUserReportType>;
 };
 export type UserReportsReturnType<
-  GivenUserReportType extends UserReportType = UserReportType.Year
+  GivenUserReportType extends UserReportType = UserReportType.Year,
 > = {
   userreports: Array<UserReport<GivenUserReportType>>;
 };

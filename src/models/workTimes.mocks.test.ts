@@ -8,7 +8,7 @@ describe("workTimesMocks", () => {
     expect(
       createWorkTimeDayMocks({
         count: 5,
-      })
+      }),
     ).toMatchSnapshot();
   });
 
@@ -16,7 +16,7 @@ describe("workTimesMocks", () => {
     expect(
       createWorkTimeChangeRequestMocks({
         count: 5,
-      })
+      }),
     ).toMatchSnapshot();
   });
 });

@@ -97,7 +97,7 @@ const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
           ? WorkTimeChangeRequestIntervalType.Add
           : WorkTimeChangeRequestIntervalType.Remove,
       };
-    }
+    },
   );
 };
 

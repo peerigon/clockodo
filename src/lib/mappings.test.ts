@@ -19,7 +19,7 @@ describe("mapQueryParams()", () => {
 
     expectKeysToMatch(
       Object.keys(mappedQueryParams),
-      Object.values(queryParamMapping)
+      Object.values(queryParamMapping),
     );
   });
 });
@@ -53,7 +53,7 @@ describe("mapResponseBody()", () => {
 
 const expectKeysToMatch = (keysA: Array<string>, keysB: Array<string>) => {
   expect(Array.from(new Set(keysA)).sort()).toMatchObject(
-    Array.from(new Set(keysB)).sort()
+    Array.from(new Set(keysB)).sort(),
   );
 };
 

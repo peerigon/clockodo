@@ -26,7 +26,7 @@ export const queryParamMapping: Record<string, string> = {
 };
 
 export const mapQueryParams = <Result = Record<string, unknown>>(
-  queryParams: Record<string, any>
+  queryParams: Record<string, any>,
 ) => {
   return mapObject(
     queryParams,
@@ -40,12 +40,12 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
 export const mapRequestBody = <Result = Record<string, unknown>>(
-  requestBody: Record<string, any>
+  requestBody: Record<string, any>,
 ) => {
   return mapObject(
     requestBody,
@@ -56,12 +56,12 @@ export const mapRequestBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
 export const mapResponseBody = <Result = Record<string, unknown>>(
-  responseBody: Record<string, any>
+  responseBody: Record<string, any>,
 ) => {
   return mapObject(
     responseBody,
@@ -72,7 +72,7 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 

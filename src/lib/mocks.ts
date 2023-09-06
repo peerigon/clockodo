@@ -50,7 +50,7 @@ const generateWithMaxDuplicates = <Value>({
     if (i === MAX_ITERATION_COUNT) {
       throw new Error(
         `Couldn't generate enough unique values before reaching the max iteration count.
-This usually happens when the generated values create too many conflicts (e.g. too many dates on a small date range).`
+This usually happens when the generated values create too many conflicts (e.g. too many dates on a small date range).`,
       );
     }
     const value = generate();
@@ -102,7 +102,7 @@ export const generateRandomDates = ({
       return new Date(
         randomDate.getFullYear(),
         randomDate.getMonth(),
-        randomDate.getDate()
+        randomDate.getDate(),
       ).getTime();
     },
   }).sort();
@@ -125,7 +125,7 @@ export const generateRandomMonths = ({
 
       return new Date(
         randomDate.getFullYear(),
-        randomDate.getMonth()
+        randomDate.getMonth(),
       ).getTime();
     },
   }).sort();

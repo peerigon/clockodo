@@ -61,7 +61,7 @@ describe("getEntryRevenue()", () => {
     project.revenueFactor = 0.25;
 
     expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      0.25 * 1.5 * 100
+      0.25 * 1.5 * 100,
     );
   });
 
@@ -110,7 +110,7 @@ describe("getEntryRevenue()", () => {
     project.revenueFactor = undefined;
 
     expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      undefined
+      undefined,
     );
   });
 
@@ -133,7 +133,7 @@ describe("getEntryRevenue()", () => {
     lumpsumService.price = 100;
 
     expect(
-      getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService })
+      getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService }),
     ).toBe(200);
   });
 
@@ -144,9 +144,9 @@ describe("getEntryRevenue()", () => {
     project.id = 2;
 
     expect(() =>
-      getEntryRevenue({ entry: clockedTimeEntry, project })
+      getEntryRevenue({ entry: clockedTimeEntry, project }),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"The entries projects id (1) does not match the project's id (2)"`
+      `"The entries projects id (1) does not match the project's id (2)"`,
     );
   });
 
@@ -157,9 +157,9 @@ describe("getEntryRevenue()", () => {
     lumpsumService.id = 2;
 
     expect(() =>
-      getEntryRevenue({ entry: lumpsumServiceEntry, lumpsumService })
+      getEntryRevenue({ entry: lumpsumServiceEntry, lumpsumService }),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"The entries lumpsum services id (1) does not match the lumpsum service's id (2)"`
+      `"The entries lumpsum services id (1) does not match the lumpsum service's id (2)"`,
     );
   });
 });

@@ -13,11 +13,11 @@ const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
 const absenceStatuses = Object.values(AbsenceStatus).filter(
-  (status): status is AbsenceStatus => typeof status === "number"
+  (status): status is AbsenceStatus => typeof status === "number",
 );
 const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
   (status): status is Exclude<AbsenceType, AbsenceType.ReductionOfOvertime> =>
-    typeof status === "number" && status !== AbsenceType.ReductionOfOvertime
+    typeof status === "number" && status !== AbsenceType.ReductionOfOvertime,
 );
 
 export const createAbsenceMocks = ({
@@ -29,7 +29,7 @@ export const createAbsenceMocks = ({
       count: count * 2,
       between: [from, to],
       maxDuplicates: 2,
-    })
+    }),
   );
 
   return dayPairs.map(([from, to], index): Absence => {
@@ -51,8 +51,8 @@ export const createAbsenceMocks = ({
             dateSince.getTime() +
               faker.datatype.number({ min: 0, max: 30 }) * ONE_DAY,
             // Clockodo makes sure that dateSince and dateUntil are always within the same year
-            endOfYear(dateSince).getTime()
-          )
+            endOfYear(dateSince).getTime(),
+          ),
         );
 
     const status =
@@ -61,7 +61,7 @@ export const createAbsenceMocks = ({
         : faker.helpers.arrayElement(absenceStatuses);
     const dateEnquiredDateTime = new Date(
       dateSince.getTime() -
-        faker.datatype.number({ min: 5, max: 200 }) * ONE_DAY
+        faker.datatype.number({ min: 5, max: 200 }) * ONE_DAY,
     );
 
     const commonAbsence = {
@@ -82,8 +82,8 @@ export const createAbsenceMocks = ({
           ? isoDateFromDateTime(
               new Date(
                 dateEnquiredDateTime.getTime() +
-                  faker.datatype.number({ min: 0, max: 4 }) * ONE_DAY
-              )
+                  faker.datatype.number({ min: 0, max: 4 }) * ONE_DAY,
+              ),
             )
           : null,
       approvedBy: status === AbsenceStatus.Approved ? 1 : null,
@@ -110,7 +110,7 @@ export const createAbsenceMocks = ({
         : Math.max(
             (dateUntil.getTime() - dateSince.getTime()) / ONE_DAY -
               faker.datatype.number({ min: 0, max: 3 }),
-            1
+            1,
           ),
       countHours: null,
     };
