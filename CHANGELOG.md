@@ -1,3 +1,11 @@
+# [21.9.0](https://github.com/peerigon/clockodo/compare/v21.8.0...v21.9.0) (2023-09-06)
+
+
+### Features
+
+* adjust absence, targethours and nonbusinessday APIs to handle multiple ids at once ([b571c21](https://github.com/peerigon/clockodo/commit/b571c214803df4c0c16ed4d601b039ec837310bc))
+* Support filtering by multiple ids ([567bb22](https://github.com/peerigon/clockodo/commit/567bb22a8ae4681e8c88028af24578f933360cba))
+
 # [21.8.0](https://github.com/peerigon/clockodo/compare/v21.7.0...v21.8.0) (2023-09-06)
 
 
