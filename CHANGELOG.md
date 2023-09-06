@@ -1,3 +1,12 @@
+# [21.8.0](https://github.com/peerigon/clockodo/compare/v21.7.0...v21.8.0) (2023-09-06)
+
+
+### Features
+
+* edit test for omitted billable feature ([d8689ad](https://github.com/peerigon/clockodo/commit/d8689adab8ecbd0b28bb7f2c8a5632d2ca4a4410))
+* support default configured billable ([da085fa](https://github.com/peerigon/clockodo/commit/da085faebfa9159d553824552ee604b6094237c3))
+* Support omitting billable from startClock() ([6b73818](https://github.com/peerigon/clockodo/commit/6b73818fdd9138223ee7d6bef5c467534ca431dd))
+
 # [21.7.0](https://github.com/peerigon/clockodo/compare/v21.6.0...v21.7.0) (2023-08-09)
 
 
