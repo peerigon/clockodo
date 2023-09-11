@@ -946,6 +946,7 @@ export type AggregatesUsersMeReturnType = {
   user: User;
   company: Company;
   worktimeRegulation: WorktimeRegulation;
+  allowEntryOverlaps: boolean;
 };
 export type ClockReturnType = {
   /** The currently running entry */
