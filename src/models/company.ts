@@ -11,7 +11,7 @@ export type Company = {
   allowEntriesTextMultiline: boolean;
   /** Can time and lump sum entries be directly assigned to customers (or only to projects)? */
   allowEntriesForCustomers: boolean;
-  /** Are entries of a single user allowed to overlap with each other */
+  /** Are entries of a single user allowed to overlap with each other? */
   allowEntryOverlaps: boolean;
   /** Does the duration of a time entry have to be equal to the difference between start and end?  */
   forceLinkedEntryTimes: boolean;
