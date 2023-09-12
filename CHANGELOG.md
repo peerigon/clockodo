@@ -1,3 +1,11 @@
+# [21.10.0](https://github.com/peerigon/clockodo/compare/v21.9.0...v21.10.0) (2023-09-12)
+
+
+### Features
+
+* Add upcoming `allowEntryOverlaps` to company type ([5b76f64](https://github.com/peerigon/clockodo/commit/5b76f64db5ad6f197c9957c92a6e25f55d87ca8c))
+* Add upcoming allowEntryOverlaps to company type ([73ee73c](https://github.com/peerigon/clockodo/commit/73ee73c369213c1d2f59d0926aa821b75a769d40))
+
 # [21.9.0](https://github.com/peerigon/clockodo/compare/v21.8.0...v21.9.0) (2023-09-06)
 
 
