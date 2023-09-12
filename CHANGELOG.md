@@ -1,3 +1,11 @@
+## [21.10.1](https://github.com/peerigon/clockodo/compare/v21.10.0...v21.10.1) (2023-09-12)
+
+
+### Bug Fixes
+
+* Add missing exports ([7ab415e](https://github.com/peerigon/clockodo/commit/7ab415e286f5371cdcb1007d542a4528af33b902))
+* Add missing exports ([2e1f654](https://github.com/peerigon/clockodo/commit/2e1f654be533116ed0350e5f2f1626dedb6f8f36))
+
 # [21.10.0](https://github.com/peerigon/clockodo/compare/v21.9.0...v21.10.0) (2023-09-12)
 
 
