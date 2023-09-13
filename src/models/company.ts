@@ -64,13 +64,17 @@ export type Company = {
   onboardingComplete: boolean;
 };
 
-/**
- * 0: no subtraction
- * 1: full subtraction
- * 2: full subtraction / floating subtraction as of 2022
- */
 export enum WorktimeForceBreaks {
+  /**
+   * 0: no subtraction
+   */
   Off = 0,
+  /**
+   * 1: full subtraction
+   */
   Full = 1,
+  /**
+   * 2: full subtraction / floating subtraction as of 2022
+   */
   Floating = 2,
 }
