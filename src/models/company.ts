@@ -31,8 +31,8 @@ export type Company = {
    * Date from which worktime regulations are evaluated for the company in YYYY-MM-DD format
    */
   worktimeEvaluateRegulationsSince: string | null;
-  /** Is missing break time subtracted from the tracked work time?  */
-  worktimeForceBreaks: boolean;
+  /** Subtraction of missing break time */
+  worktimeForceBreaks: WorktimeForceBreaks;
   /** Number of days in the default holiday quota of the company  */
   holidaysCountDefault: number;
   /**
@@ -63,3 +63,14 @@ export type Company = {
   /** Has the registration process been completed?  */
   onboardingComplete: boolean;
 };
+
+/**
+ * 0: no subtraction
+ * 1: full subtraction
+ * 2: full subtraction / floating subtraction as of 2022
+ */
+export enum WorktimeForceBreaks {
+  Off = 0,
+  Full = 1,
+  Floating = 2,
+}
