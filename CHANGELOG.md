@@ -1,3 +1,12 @@
+## [21.10.2](https://github.com/peerigon/clockodo/compare/v21.10.1...v21.10.2) (2023-09-13)
+
+
+### Bug Fixes
+
+* Incorrect type of company.worktimeForceBreaks ([2c699dd](https://github.com/peerigon/clockodo/commit/2c699dd32672a9d10887c8c266f437181767ebb2))
+* move comments ([f281997](https://github.com/peerigon/clockodo/commit/f28199714131d2b8ec187b94263d81b63e0c3f12))
+* use work time force breaks enum ([3a7b396](https://github.com/peerigon/clockodo/commit/3a7b3963aa149e977185eefd092dc8156df77e05))
+
 ## [21.10.1](https://github.com/peerigon/clockodo/compare/v21.10.0...v21.10.1) (2023-09-12)
 
 
