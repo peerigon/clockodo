@@ -25,7 +25,7 @@ export const ADD_PROJECT = ["name", "customersId"] as const;
 export const ADD_SERVICE = ["name"] as const;
 export const ADD_TEAM = ["name"] as const;
 export const ADD_USER = ["name", "number", "email", "role"] as const;
-export const ADD_SURCHARGE = ["name", 'accumulation'] as const;
+export const ADD_SURCHARGE = ["name", "accumulation"] as const;
 export const CHANGE_CLOCK_DURATION = [
   "entriesId",
   "durationBefore",
