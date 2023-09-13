@@ -115,7 +115,7 @@ export class Clockodo {
   }
 
   async getCustomersPage(
-    params?: Params<CustomersParams>
+    params?: Params<CustomersParams & ParamsWithPage>
   ): Promise<CustomersReturnType> {
     return this.api.get("/v2/customers", params);
   }
@@ -147,7 +147,7 @@ export class Clockodo {
   }
 
   async getProjectsPage(
-    params?: Params<ProjectsParams>
+    params?: Params<ProjectsParams & ParamsWithPage>
   ): Promise<ProjectsReturnType> {
     return this.api.get("/v2/projects", params);
   }
@@ -207,7 +207,7 @@ export class Clockodo {
   }
 
   async getEntriesPage(
-    params: Params<EntriesParams>
+    params: Params<EntriesParams & ParamsWithPage>
   ): Promise<EntriesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
@@ -235,7 +235,7 @@ export class Clockodo {
   }
 
   async getEntriesTextsPage(
-    params: Params<EntriesTextsParams>
+    params: Params<EntriesTextsParams & ParamsWithPage>
   ): Promise<EntriesTextsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
 
@@ -654,7 +654,7 @@ export class Clockodo {
   }
 
   async getWorkTimesPage(
-    params?: Params<WorkTimesParams>
+    params?: Params<WorkTimesParams & ParamsWithPage>
   ): Promise<WorkTimesReturnType> {
     return this.api.get("/v2/workTimes", params);
   }
@@ -676,7 +676,7 @@ export class Clockodo {
   }
 
   async getWorkTimesChangeRequestsPage(
-    params: Params<WorkTimesChangeRequestsParams>
+    params: Params<WorkTimesChangeRequestsParams & ParamsWithPage>
   ): Promise<WorkTimesChangeRequestsReturnType> {
     return this.api.get("/v2/workTimes/changeRequests", params);
   }
@@ -1000,7 +1000,7 @@ export type AddUserReturnType = {
   user: User;
 };
 
-export type WorkTimesParams = ParamsWithPage & {
+export type WorkTimesParams = {
   /** The user ID by which the work times should be filtered */
   usersId?: number;
   dateSince: string;
@@ -1010,7 +1010,7 @@ export type WorkTimesReturnType = ResponseWithPaging & {
   workTimeDays: Array<WorkTimeDay>;
 };
 
-export type WorkTimesChangeRequestsParams = ParamsWithPage & {
+export type WorkTimesChangeRequestsParams = {
   /** The user ID by which the work time change requests should be filtered */
   usersId?: number;
   dateSince?: string;
