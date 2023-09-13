@@ -1,3 +1,11 @@
+## [21.10.3](https://github.com/peerigon/clockodo/compare/v21.10.2...v21.10.3) (2023-09-13)
+
+
+### Bug Fixes
+
+* Incorrect AccessToCustomersProjects type ([a3c9574](https://github.com/peerigon/clockodo/commit/a3c957460e950be661a08a1987f4a75c07b7bebe))
+* make top-level props accept false ([3c31fa3](https://github.com/peerigon/clockodo/commit/3c31fa3b86b1aa11a372a9b51d8467872791325a))
+
 ## [21.10.2](https://github.com/peerigon/clockodo/compare/v21.10.1...v21.10.2) (2023-09-13)
 
 
