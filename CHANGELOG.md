@@ -1,3 +1,11 @@
+## [21.10.4](https://github.com/peerigon/clockodo/compare/v21.10.3...v21.10.4) (2023-09-13)
+
+
+### Bug Fixes
+
+* Incorrect pagination types ([d5ddd74](https://github.com/peerigon/clockodo/commit/d5ddd745ecff9449e5415891931aa671b54c9d9c))
+* Incorrect pagination types ([412d610](https://github.com/peerigon/clockodo/commit/412d610e7c2dd3eab8d9a75ae2d92c0c2bc98314))
+
 ## [21.10.3](https://github.com/peerigon/clockodo/compare/v21.10.2...v21.10.3) (2023-09-13)
 
 
