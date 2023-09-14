@@ -1,3 +1,10 @@
+# [21.11.0](https://github.com/peerigon/clockodo/compare/v21.10.4...v21.11.0) (2023-09-14)
+
+
+### Features
+
+* Company expansion ([065fc38](https://github.com/peerigon/clockodo/commit/065fc3802bfcf2e46c7d2dccb15b1c1c54a41f87))
+
 ## [21.10.4](https://github.com/peerigon/clockodo/compare/v21.10.3...v21.10.4) (2023-09-13)
 
 
