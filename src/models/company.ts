@@ -23,6 +23,14 @@ export type Company = {
   moduleAbsence: boolean;
   /** Is the work-time module active for the company? */
   moduleWorkTime: boolean;
+  /** Is the entries-texts module active for the company? */
+  moduleEntriesTexts: boolean;
+  /** Is the project-times module active for the company? */
+  moduleProjectTimes: boolean;
+  /** Is the target-hours module active for the company? */
+  moduleTargetHours: boolean;
+  /** Is the user-reports module active for the company? */
+  moduleUserReports: boolean;
   /** ID of the default nonbusiness group  */
   nonbusinessGroupDefault: number | null;
   /** ID of the default worktime regulation  */
