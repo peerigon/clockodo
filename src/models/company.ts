@@ -23,6 +23,14 @@ export type Company = {
   moduleAbsence: boolean;
   /** Is the work-time module active for the company? */
   moduleWorkTime: boolean;
+  /** Is the entries-texts module active for the company? */
+  moduleEntriesTexts: boolean;
+  /** Is the project-times module active for the company? */
+  moduleProjectTimes: boolean;
+  /** Is the target-hours module active for the company? */
+  moduleTargetHours: boolean;
+  /** Is the user-reports module active for the company? */
+  moduleUserReports: boolean;
   /** ID of the default nonbusiness group  */
   nonbusinessGroupDefault: number | null;
   /** ID of the default worktime regulation  */
@@ -31,8 +39,8 @@ export type Company = {
    * Date from which worktime regulations are evaluated for the company in YYYY-MM-DD format
    */
   worktimeEvaluateRegulationsSince: string | null;
-  /** Is missing break time subtracted from the tracked work time?  */
-  worktimeForceBreaks: boolean;
+  /** Subtraction of missing break time */
+  worktimeForceBreaks: WorktimeForceBreaks;
   /** Number of days in the default holiday quota of the company  */
   holidaysCountDefault: number;
   /**
@@ -63,3 +71,18 @@ export type Company = {
   /** Has the registration process been completed?  */
   onboardingComplete: boolean;
 };
+
+export enum WorktimeForceBreaks {
+  /**
+   * 0: no subtraction
+   */
+  Off = 0,
+  /**
+   * 1: full subtraction
+   */
+  Full = 1,
+  /**
+   * 2: full subtraction / floating subtraction as of 2022
+   */
+  Floating = 2,
+}
