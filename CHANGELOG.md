@@ -1,3 +1,11 @@
+# [21.12.0](https://github.com/peerigon/clockodo/compare/v21.11.0...v21.12.0) (2023-09-26)
+
+
+### Features
+
+* nonbusinessgroupsId is now optional for getNonbusinessDays ([fe6384a](https://github.com/peerigon/clockodo/commit/fe6384a93e528f3c8e18ff4acf529f1a109a8792))
+* nonbusinessgroupsId is now optional for the getNonbusinessDays API call ([cf98a8c](https://github.com/peerigon/clockodo/commit/cf98a8c4bf0ab099ac8840cb372aa24e01d79dd5))
+
 # [21.11.0](https://github.com/peerigon/clockodo/compare/v21.10.4...v21.11.0) (2023-09-14)
 
 
