@@ -363,7 +363,7 @@ export class Clockodo {
 
   async getNonbusinessDays(
     params: Params<{
-      nonbusinessgroupsId:
+      nonbusinessgroupsId?:
         | NonbusinessGroup["id"]
         | Array<NonbusinessGroup["id"]>;
       year: number;
