@@ -337,11 +337,11 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/surcharges/" + id, remainingParams);
+    return this.api.get("/v2/surcharges/" + id, remainingParams);
   }
 
   async getSurcharges(params?: Params): Promise<SurchargesReturnType> {
-    return this.api.get("/surcharges", params);
+    return this.api.get("/v2/surcharges", params);
   }
 
   async getUserReport<
@@ -469,7 +469,7 @@ export class Clockodo {
   ): Promise<AddSurchargeReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE);
 
-    return this.api.post("/surcharges", params);
+    return this.api.post("/v2/surcharges", params);
   }
 
   async startClock(
@@ -587,7 +587,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/surcharges/" + id, params);
+    return this.api.put("/v2/surcharges/" + id, params);
   }
 
   async deactivateCustomer(
@@ -637,7 +637,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/surcharges/" + id);
+    return this.api.delete("/v2/surcharges/" + id);
   }
 
   async deleteAbsence(
