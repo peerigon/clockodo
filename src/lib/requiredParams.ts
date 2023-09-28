@@ -1,5 +1,6 @@
 export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"] as const;
 export const ADD_CUSTOMER = ["name"] as const;
+export const ADD_LUMPSUM_SERVICE = ["name", "price"] as const;
 export const ADD_TIME_ENTRY = [
   "customersId",
   "servicesId",
@@ -35,10 +36,12 @@ export const DEACTIVATE_PROJECT = ["id"] as const;
 export const DEACTIVATE_SERVICE = ["id"] as const;
 export const DEACTIVATE_USER = ["id"] as const;
 export const DELETE_ENTRY = ["id"] as const;
+export const DELETE_LUMPSUM_SERVICE = ["id"] as const;
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const DELETE_ABSENCE = ["id"] as const;
 export const DELETE_TEAM = ["id"] as const;
 export const EDIT_CUSTOMER = ["id"] as const;
+export const EDIT_LUMPSUM_SERVICE = ["id"] as const;
 export const EDIT_PROJECT = ["id"] as const;
 export const EDIT_SERVICE = ["id"] as const;
 export const EDIT_TEAM = ["id"] as const;

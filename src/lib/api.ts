@@ -53,6 +53,7 @@ export type Filter = {
   timeSince: string;
   timeUntil: string;
   active: BooleanAsNumber;
+  fulltext: string;
 };
 
 export type ResponseWithPaging = {
