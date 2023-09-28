@@ -581,7 +581,7 @@ export class Clockodo {
   }
 
   async editSurcharge(
-    params: Params<Pick<User, typeof REQUIRED.EDIT_SURCHARGE[number]>>
+    params: Params<Pick<Surcharge, typeof REQUIRED.EDIT_SURCHARGE[number]>>
   ): Promise<SurchargeReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_SURCHARGE);
 
