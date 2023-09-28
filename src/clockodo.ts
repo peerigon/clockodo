@@ -331,7 +331,7 @@ export class Clockodo {
   }
 
   async getSurcharge(
-    params: Params<{ id: User["id"] }>
+    params: Params<{ id: Surcharge["id"] }>
   ): Promise<SurchargeReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_SURCHARGE);
 
