@@ -11,7 +11,7 @@ export type Surcharge = {
    */
   accumulation: boolean;
   /** Night surcharge configuration */
-  night: SurchargeConfiguration | null;
+  night: NightSurchargeConfiguration | null;
   /** Increased night surcharge configuration */
   nightIncreased: NightSurchargeConfiguration | null;
   /** Nonbusiness surcharge configuration */
