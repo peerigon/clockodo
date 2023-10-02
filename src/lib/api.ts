@@ -29,6 +29,7 @@ export type Params<
 
 export type ParamsWithPage = {
   page?: number;
+  itemsPerPage?: number;
 };
 
 export type Paging = {
