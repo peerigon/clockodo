@@ -156,6 +156,7 @@ export const createWorkTimeChangeRequestMocks = ({
     return createChangeRequest({
       date,
       id,
+      createdAt: date,
     });
   });
 };
