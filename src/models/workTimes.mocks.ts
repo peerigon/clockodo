@@ -105,22 +105,26 @@ const createChangeRequest = ({
   date,
   id,
   status = WorkTimeChangeRequestStatus.Requested,
+  createdAt,
 }: {
   date: Date;
   id: number;
   status?: WorkTimeChangeRequestStatus;
+  createdAt?: Date;
 }): WorkTimeChangeRequest => {
   const changes = generateChangeRequestChanges({
     count: faker.datatype.number({ min: 1, max: 4 }),
     date,
   });
   const isoDate = isoDateFromDateTime(date);
+  const isoCreatedAt = isoDateFromDateTime(createdAt ?? new Date());
 
   return {
     id,
     date: isoDate,
     usersId: 0,
     changes,
+    createdAt: isoCreatedAt,
     ...(status === WorkTimeChangeRequestStatus.Declined
       ? {
           status: WorkTimeChangeRequestStatus.Declined,
