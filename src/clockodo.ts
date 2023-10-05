@@ -267,8 +267,26 @@ export class Clockodo {
     return this.api.get("/services/" + id, remainingParams);
   }
 
-  async getServices(params?: Params): Promise<ServicesReturnType> {
-    return this.api.get("/services", params);
+  async getServices(
+    params?: Params<ServiceParams>
+  ): Promise<ResponseWithoutPaging<ServicesReturnType>> {
+    const pages = await this.api.getAllPages<ServicesReturnType>(
+      "/v2/services",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const services = pages.flatMap(({ services }) => services);
+
+    return {
+      ...remainingResponse,
+      services,
+    };
+  }
+
+  async getServicesPage(
+    params?: Params<ServiceParams & ParamsWithPage>
+  ): Promise<ServicesReturnType> {
+    return this.api.get("/v2/services", params);
   }
 
   async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
@@ -459,7 +477,7 @@ export class Clockodo {
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
-    return this.api.post("/services", params);
+    return this.api.post("/v2/services", params);
   }
 
   async addTeam(
@@ -575,7 +593,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/services/" + id, params);
+    return this.api.put("/v2/services/" + id, params);
   }
 
   async editTeam(
@@ -598,34 +616,34 @@ export class Clockodo {
     return this.api.put("/users/" + id, params);
   }
 
-  async deactivateCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
+  async deleteCustomer(
+    params: Params<Pick<Customer, typeof REQUIRED.DELETE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_CUSTOMER);
 
     const { id } = params;
 
     return this.api.delete("/v2/customers/" + id, params);
   }
 
-  async deactivateProject(
-    params: Params<Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>>
+  async deleteProject(
+    params: Params<Pick<Project, typeof REQUIRED.DELETE_PROJECT[number]>>
   ): Promise<ProjectReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_PROJECT);
 
     const { id } = params;
 
     return this.api.delete("/v2/projects/" + id, params);
   }
 
-  async deactivateService(
-    params: Params<Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>>
+  async deleteService(
+    params: Params<Pick<Service, typeof REQUIRED.DELETE_SERVICE[number]>>
   ): Promise<ServiceReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SERVICE);
 
     const { id } = params;
 
-    return this.api.delete("/services/" + id, params);
+    return this.api.delete("/v2/services/" + id, params);
   }
 
   async deactivateUser(
@@ -847,8 +865,17 @@ export type ProjectsReturnType = ResponseWithPaging &
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+
+export type ServiceParams = {
+  /** Filter service by search term */
+  filterFulltext?: string;
+  /** Filter service by active flag */
+  filterActive?: boolean;
+};
 export type ServiceReturnType = { service: Service };
-export type ServicesReturnType = { services: Array<Service> };
+export type ServicesReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "fulltext"> & { services: Array<Service> };
+
 export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
 

@@ -31,11 +31,11 @@ export const CHANGE_CLOCK_DURATION = [
   "durationBefore",
   "duration",
 ] as const;
-export const DEACTIVATE_CUSTOMER = ["id"] as const;
-export const DEACTIVATE_PROJECT = ["id"] as const;
-export const DEACTIVATE_SERVICE = ["id"] as const;
+export const DELETE_CUSTOMER = ["id"] as const;
+export const DELETE_PROJECT = ["id"] as const;
 export const DEACTIVATE_USER = ["id"] as const;
 export const DELETE_ENTRY = ["id"] as const;
+export const DELETE_SERVICE = ["id"] as const;
 export const DELETE_LUMPSUM_SERVICE = ["id"] as const;
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const DELETE_ABSENCE = ["id"] as const;
