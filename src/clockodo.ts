@@ -41,6 +41,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
+import { OvertimecarryRow } from "./models/overtimecarry.js";
 
 export class Clockodo {
   api: Api;
@@ -765,6 +766,12 @@ export class Clockodo {
       remainingParams
     );
   }
+
+  async getOvertimecarry(
+    params?: Params<OvertimecarryRowParams>
+  ): Promise<OvertimecarryRowReturnType> {
+    return this.api.get("/overtimecarry", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -1053,3 +1060,13 @@ export type AddWorkTimesChangeRequestReturnType =
        **/
       replacedChangeRequest: null;
     };
+
+export type OvertimecarryRowReturnType = {
+  overtimecarry: Array<OvertimecarryRow>;
+};
+export type OvertimecarryRowParams = {
+  /** The user ID by which the overtime carry rows should be filtered */
+  usersId?: number;
+  /** The year to which the data should be restricted to */
+  year?: number;
+};
