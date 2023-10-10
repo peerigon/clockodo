@@ -20,6 +20,7 @@ export const queryParamMapping: Record<string, string> = {
   filterTimeSince: "filter[time_since]",
   filterTimeUntil: "filter[time_until]",
   filterActive: "filter[active]",
+  filterFulltext: "filter[fulltext]",
   // excludeIds needs to stay in camelCase.
   // This seems to be an inconsistency in the API.
   excludeIds: "excludeIds",
