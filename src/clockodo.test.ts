@@ -1088,11 +1088,11 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("deactivateUser()", () => {
-      it("correctly builds deactivateUser() request", async () => {
+    describe("deleteUser()", () => {
+      it("correctly builds deleteUser() request", async () => {
         const nockScope = nock(CLOCKODO_API).delete("/users/7").reply(200, {});
 
-        await clockodo.deactivateUser({ id: 7 });
+        await clockodo.deleteUser({ id: 7 });
 
         nockScope.done();
       });
