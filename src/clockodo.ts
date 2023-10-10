@@ -41,6 +41,8 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
+import { HolidaysquotaRow } from "./models/holidaysquota.js";
+import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimecarryRow } from "./models/overtimecarry.js";
 
 export class Clockodo {
@@ -767,6 +769,18 @@ export class Clockodo {
     );
   }
 
+  async getHolidaysquota(
+    params?: Params<HolidaysquotaRowParams>
+  ): Promise<HolidaysquotaRowReturnType> {
+    return this.api.get("/holidaysquota", params);
+  }
+
+  async getHolidayscarry(
+    params?: Params<HolidayscarryRowParams>
+  ): Promise<HolidayscarryRowReturnType> {
+    return this.api.get("/holidayscarry", params);
+  }
+
   async getOvertimecarry(
     params?: Params<OvertimecarryRowParams>
   ): Promise<OvertimecarryRowReturnType> {
@@ -1060,6 +1074,24 @@ export type AddWorkTimesChangeRequestReturnType =
        **/
       replacedChangeRequest: null;
     };
+
+export type HolidaysquotaRowReturnType = {
+  holidaysquota: Array<HolidaysquotaRow>;
+};
+export type HolidaysquotaRowParams = {
+  /** The user ID by which the holidays quota rows should be filtered */
+  usersId?: number;
+};
+
+export type HolidayscarryRowReturnType = {
+  holidayscarry: Array<HolidayscarryRow>;
+};
+export type HolidayscarryRowParams = {
+  /** The user ID by which the holidays carry rows should be filtered */
+  usersId?: number;
+  /** The year to which the data should be restricted to */
+  year?: number;
+};
 
 export type OvertimecarryRowReturnType = {
   overtimecarry: Array<OvertimecarryRow>;
