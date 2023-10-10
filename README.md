@@ -790,14 +790,14 @@ await clockodo.deactivateService({ id: 94 });
 
 ---
 
-### deactivateUser()
+### deleteUser()
 
-Deactivates (not deletes) user.
+Deletes user.
 
 #### Example:
 
 ```js
-await clockodo.deactivateUser({ id: 7 });
+await clockodo.deleteUser({ id: 7 });
 ```
 
 ---
