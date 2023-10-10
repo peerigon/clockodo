@@ -362,11 +362,11 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/users/" + id, remainingParams);
+    return this.api.get("/v2/users/" + id, remainingParams);
   }
 
   async getUsers(params?: Params): Promise<UsersReturnType> {
-    return this.api.get("/users", params);
+    return this.api.get("/v2/users", params);
   }
 
   async getUserReport<
@@ -496,7 +496,7 @@ export class Clockodo {
   ): Promise<AddUserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
-    return this.api.post("/users", params);
+    return this.api.post("/v2/users", params);
   }
 
   async startClock(
@@ -616,7 +616,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/users/" + id, params);
+    return this.api.put("/v2/users/" + id, params);
   }
 
   async deleteCustomer(
@@ -649,14 +649,14 @@ export class Clockodo {
     return this.api.delete("/v2/services/" + id, params);
   }
 
-  async deactivateUser(
-    params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
+  async deleteUser(
+    params: Params<Pick<User, typeof REQUIRED.DELETE_USER[number]>>
   ): Promise<UserReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_USER);
 
     const { id } = params;
 
-    return this.api.delete("/users/" + id, params);
+    return this.api.delete("/v2/users/" + id, params);
   }
 
   async deleteAbsence(
