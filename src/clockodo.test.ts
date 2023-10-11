@@ -194,6 +194,46 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getLumpSumService()", () => {
+      it("correctly builds getLumpSumService() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/lumpsumservices/777")
+          .reply(200, {});
+
+        await clockodo.getLumpSumService({ id: 777 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getLumpSumServicesPage()", () => {
+      it("correctly builds getLumpSumServicesPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/lumpsumservices")
+          .reply(200, {});
+
+        await clockodo.getLumpSumServicesPage();
+
+        nockScope.done();
+      });
+    });
+
+    describe("getLumpSumServices()", () => {
+      it("requests all lumpSumService pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/lumpsumservices?",
+          countPages: 3,
+          createPageResponse: (page) => ({ lumpSumServices: [page] }),
+        });
+
+        const { lumpSumServices } = await clockodo.getLumpSumServices();
+
+        expect(lumpSumServices).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
+
     describe("getEntry()", () => {
       it("correctly builds getEntry() request", async () => {
         const nockScope = nock(CLOCKODO_API)
@@ -413,11 +453,27 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getServices()", () => {
-      it("correctly builds getServices() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/services").reply(200, {});
+    describe("getServicesPage()", () => {
+      it("correctly builds getServicesPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API).get("/v2/services").reply(200, {});
 
-        await clockodo.getServices();
+        await clockodo.getServicesPage();
+
+        nockScope.done();
+      });
+    });
+
+    describe("getServices()", () => {
+      it("requests all getServices pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v2/services?",
+          countPages: 3,
+          createPageResponse: (page) => ({ services: [page] }),
+        });
+
+        const { services } = await clockodo.getServices();
+
+        expect(services).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -649,6 +705,26 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("addLumpsumService()", () => {
+      it("correctly builds addLumpsumService() request", async () => {
+        const expectedParameters = {
+          name: "Weyland-Yutani",
+          price: 1,
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/lumpsumservices", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.addLumpsumService({
+          name: "Weyland-Yutani",
+          price: 1,
+        });
+
+        nockScope.done();
+      });
+    });
+
     describe("addProject()", () => {
       it("correctly builds addProject() request", async () => {
         const expectedParameters = {
@@ -679,7 +755,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .post("/services", expectedParameters)
+          .post("/v2/services", expectedParameters)
           .reply(200, {});
 
         await clockodo.addService({ name: "Thinking", active: true });
@@ -923,6 +999,23 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("editLumpsumService()", () => {
+      it("correctly builds editLumpsumService() request", async () => {
+        const lumpsumService = {
+          id: 15,
+          name: "Mystery Gang",
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .put("/v2/lumpsumservices/15", mapRequestBody(lumpsumService))
+          .reply(200, {});
+
+        await clockodo.editLumpsumService(lumpsumService);
+
+        nockScope.done();
+      });
+    });
+
     describe("editProject()", () => {
       it("correctly builds editProject() request", async () => {
         const project = {
@@ -949,7 +1042,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/services/23", mapRequestBody(service))
+          .put("/v2/services/23", mapRequestBody(service))
           .reply(200, {});
 
         await clockodo.editService(service);
@@ -1079,10 +1172,22 @@ describe("Clockodo (instance)", () => {
     describe("deleteService()", () => {
       it("correctly builds deleteService() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .delete("/services/94")
+          .delete("/v2/services/94")
           .reply(200, {});
 
         await clockodo.deleteService({ id: 94 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteLumpsumService()", () => {
+      it("correctly builds deleteLumpsumService() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/lumpsumservices/94")
+          .reply(200, {});
+
+        await clockodo.deleteLumpsumService({ id: 94 });
 
         nockScope.done();
       });
