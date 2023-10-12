@@ -82,6 +82,14 @@ export type User = {
    * The user's team leader's / boss' id
    */
   boss: number | null;
+  /**
+   * Specifies if the user uses the default holidays count
+   */
+  defaultHolidaysCount: boolean;
+  /**
+   * Specifies if the user uses the default target hours
+   */
+  defaultTargetHours: boolean;
 };
 
 export enum UserRole {
