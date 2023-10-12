@@ -6,6 +6,7 @@ export const worktimeRegulationCountryPresets: Record<
 > = {
   Germany: {
     id: -1,
+    name: "Germany",
     addToWorktime: false,
     dailyMax: 10,
     weeklyMax: 60,
@@ -30,6 +31,7 @@ export const worktimeRegulationCountryPresets: Record<
   },
   Austria: {
     id: -2,
+    name: "Austria",
     addToWorktime: false,
     dailyMax: 12,
     weeklyMax: 48,
@@ -47,6 +49,7 @@ export const worktimeRegulationCountryPresets: Record<
   },
   Switzerland: {
     id: -3,
+    name: "Switzerland",
     addToWorktime: false,
     dailyMax: 12.5,
     weeklyMax: 50,
@@ -73,6 +76,7 @@ export const worktimeRegulationCountryPresets: Record<
   },
   Netherlands: {
     id: -4,
+    name: "Netherlands",
     addToWorktime: false,
     dailyMax: 12,
     weeklyMax: 60,
@@ -97,6 +101,7 @@ export const worktimeRegulationCountryPresets: Record<
   },
   Greece: {
     id: -6,
+    name: "Greece",
     addToWorktime: false,
     dailyMax: null,
     weeklyMax: 48,
@@ -111,6 +116,7 @@ export const worktimeRegulationCountryPresets: Record<
   },
   France: {
     id: -7,
+    name: "France",
     addToWorktime: false,
     dailyMax: null,
     weeklyMax: null,

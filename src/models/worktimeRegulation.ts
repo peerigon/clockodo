@@ -1,6 +1,8 @@
 export type WorktimeRegulation = {
   /** ID of the worktime regulation  */
   id: number;
+  /** The name of the worktime regulation */
+  name: string;
   /** Do mandatory breaks count as worktime?  */
   addToWorktime: boolean;
   /** Maximum allowed worktime per week (in hours)  */

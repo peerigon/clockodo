@@ -765,6 +765,12 @@ export class Clockodo {
       remainingParams
     );
   }
+
+  async getWorktimeRegulations(
+    params?: Params
+  ): Promise<WorktimeRegulationsReturnType> {
+    return this.api.get("/worktimeregulations", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -1053,3 +1059,8 @@ export type AddWorkTimesChangeRequestReturnType =
        **/
       replacedChangeRequest: null;
     };
+
+/** The user ID by which the overtime carry rows should be filtered */
+export type WorktimeRegulationsReturnType = {
+  worktimeregulations: Array<WorktimeRegulation>;
+};
