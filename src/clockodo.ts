@@ -44,6 +44,7 @@ import {
 import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimecarryRow } from "./models/overtimecarry.js";
+import { OvertimereducedRow } from "./models/overtimereduced.js";
 
 export class Clockodo {
   api: Api;
@@ -855,6 +856,12 @@ export class Clockodo {
   ): Promise<OvertimecarryRowReturnType> {
     return this.api.get("/overtimecarry", params);
   }
+
+  async getOvertimereduced(
+    params?: Params<OvertimereducedRowParams>
+  ): Promise<OvertimereducedRowReturnType> {
+    return this.api.get("/overtimereduced", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -1183,7 +1190,17 @@ export type OvertimecarryRowReturnType = {
   overtimecarry: Array<OvertimecarryRow>;
 };
 export type OvertimecarryRowParams = {
-  /** The user ID by which the overtime carry rows should be filtered */
+  usersId?: number;
+  /** The year to which the data should be restricted to */
+  year?: number;
+};
+
+/** The user ID by which the overtime carry rows should be filtered */
+export type OvertimereducedRowReturnType = {
+  overtimereduced: Array<OvertimereducedRow>;
+};
+export type OvertimereducedRowParams = {
+  /** The user ID by which the overtime reduced rows should be filtered */
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
