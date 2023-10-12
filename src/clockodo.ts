@@ -862,6 +862,12 @@ export class Clockodo {
   ): Promise<OvertimereducedRowReturnType> {
     return this.api.get("/overtimereduced", params);
   }
+
+  async getWorktimeRegulations(
+    params?: Params
+  ): Promise<WorktimeRegulationsReturnType> {
+    return this.api.get("/worktimeregulations", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -1190,12 +1196,12 @@ export type OvertimecarryRowReturnType = {
   overtimecarry: Array<OvertimecarryRow>;
 };
 export type OvertimecarryRowParams = {
+  /** The user ID by which the overtime carry rows should be filtered */
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
 };
 
-/** The user ID by which the overtime carry rows should be filtered */
 export type OvertimereducedRowReturnType = {
   overtimereduced: Array<OvertimereducedRow>;
 };
@@ -1204,4 +1210,8 @@ export type OvertimereducedRowParams = {
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
+};
+
+export type WorktimeRegulationsReturnType = {
+  worktimeregulations: Array<WorktimeRegulation>;
 };
