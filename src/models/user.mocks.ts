@@ -37,5 +37,7 @@ export const createUserMocks = ({
       nonbusinessgroupsId: null,
       workTimeEditLockDays,
       boss: boss ?? null,
+      defaultHolidaysCount: faker.datatype.boolean(),
+      defaultTargetHours: faker.datatype.boolean(),
     };
   });
