@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import {
   isoDateFromDateTime,
+  isoUtcDateTimeFromDateTime,
   isoUtcDateTimeFromTimestamp,
 } from "../lib/dateTime.js";
 import {
@@ -96,6 +97,7 @@ const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
         type: faker.datatype.boolean()
           ? WorkTimeChangeRequestIntervalType.Add
           : WorkTimeChangeRequestIntervalType.Remove,
+        createdAt: interval.timeSince,
       };
     }
   );
@@ -117,14 +119,13 @@ const createChangeRequest = ({
     date,
   });
   const isoDate = isoDateFromDateTime(date);
-  const isoCreatedAt = isoDateFromDateTime(createdAt ?? new Date());
+  const isoCreatedAt = isoUtcDateTimeFromDateTime(createdAt ?? new Date());
 
   return {
     id,
     date: isoDate,
     usersId: 0,
     changes,
-    createdAt: isoCreatedAt,
     ...(status === WorkTimeChangeRequestStatus.Declined
       ? {
           status: WorkTimeChangeRequestStatus.Declined,
