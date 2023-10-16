@@ -592,6 +592,18 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getOvertimecarry()", () => {
+      it("correctly builds getOvertimecarry() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/overtimecarry?users_id=17&year=2028")
+          .reply(200, {});
+
+        await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
