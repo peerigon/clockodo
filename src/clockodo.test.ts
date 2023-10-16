@@ -592,6 +592,30 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getHolidaysquota()", () => {
+      it("correctly builds getHolidaysquota() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidaysquota?users_id=17")
+          .reply(200, {});
+
+        await clockodo.getHolidaysquota({ usersId: 17 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getHolidayscarry()", () => {
+      it("correctly builds getHolidayscarry() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidayscarry?users_id=17&year=2028")
+          .reply(200, {});
+
+        await clockodo.getHolidayscarry({ usersId: 17, year: 2028 });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
