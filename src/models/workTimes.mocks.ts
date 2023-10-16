@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import {
   isoDateFromDateTime,
+  isoUtcDateTimeFromDateTime,
   isoUtcDateTimeFromTimestamp,
 } from "../lib/dateTime.js";
 import {
@@ -117,7 +118,7 @@ const createChangeRequest = ({
     date,
   });
   const isoDate = isoDateFromDateTime(date);
-  const isoCreatedAt = isoDateFromDateTime(createdAt ?? new Date());
+  const isoCreatedAt = isoUtcDateTimeFromDateTime(createdAt ?? new Date());
 
   return {
     id,

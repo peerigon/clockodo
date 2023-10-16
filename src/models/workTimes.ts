@@ -21,7 +21,7 @@ export type WorkTimeChangeRequest = {
   id: number;
   date: IsoDate;
   usersId: number;
-  createdAt: IsoDate;
+  createdAt: IsoUtcDateTime;
   changes: Array<WorkTimeChangeRequestInterval>;
 } & (
   | {
