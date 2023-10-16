@@ -1,3 +1,10 @@
+# [21.13.0](https://github.com/peerigon/clockodo/compare/v21.12.0...v21.13.0) (2023-10-16)
+
+
+### Features
+
+* expand workTimes model with new property ([828a6e7](https://github.com/peerigon/clockodo/commit/828a6e7ed0065c9195b8df260ccb97b07eb7509a))
+
 # [21.12.0](https://github.com/peerigon/clockodo/compare/v21.11.0...v21.12.0) (2023-09-26)
 
 
