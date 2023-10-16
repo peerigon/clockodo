@@ -592,6 +592,18 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getOvertimereduced()", () => {
+      it("correctly builds getOvertimereduced() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/overtimereduced?users_id=17&year=2028")
+          .reply(200, {});
+
+        await clockodo.getOvertimereduced({ usersId: 17, year: 2028 });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
