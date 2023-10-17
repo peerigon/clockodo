@@ -45,6 +45,7 @@ import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimecarryRow } from "./models/overtimecarry.js";
 import { OvertimereducedRow } from "./models/overtimereduced.js";
+import { Surcharge } from "./models/surcharge.js";
 
 export class Clockodo {
   api: Api;
@@ -370,6 +371,20 @@ export class Clockodo {
     return this.api.get("/v2/users", params);
   }
 
+  async getSurcharge(
+    params: Params<{ id: Surcharge["id"] }>
+  ): Promise<SurchargeReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_SURCHARGE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v2/surcharges/" + id, remainingParams);
+  }
+
+  async getSurcharges(params?: Params): Promise<SurchargesReturnType> {
+    return this.api.get("/v2/surcharges", params);
+  }
+
   async getUserReport<
     GivenUserReportType extends UserReportType = UserReportType.Year
   >(
@@ -500,6 +515,14 @@ export class Clockodo {
     return this.api.post("/v2/users", params);
   }
 
+  async addSurcharge(
+    params: Params<Pick<Surcharge, typeof REQUIRED.ADD_SURCHARGE[number]>>
+  ): Promise<AddSurchargeReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE);
+
+    return this.api.post("/v2/surcharges", params);
+  }
+
   async startClock(
     params: Params<
       Pick<TimeEntry, typeof REQUIRED.START_CLOCK[number]> & {
@@ -620,6 +643,16 @@ export class Clockodo {
     return this.api.put("/v2/users/" + id, params);
   }
 
+  async editSurcharge(
+    params: Params<Pick<Surcharge, typeof REQUIRED.EDIT_SURCHARGE[number]>>
+  ): Promise<SurchargeReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_SURCHARGE);
+
+    const { id } = params;
+
+    return this.api.put("/v2/surcharges/" + id, params);
+  }
+
   async deleteCustomer(
     params: Params<Pick<Customer, typeof REQUIRED.DELETE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
@@ -658,6 +691,16 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v2/users/" + id, params);
+  }
+
+  async deleteSurcharge(
+    params: Params<Pick<Surcharge, typeof REQUIRED.DELETE_SURCHARGE[number]>>
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SURCHARGE);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/surcharges/" + id);
   }
 
   async deleteAbsence(
@@ -930,6 +973,8 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
   };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
+export type SurchargeReturnType = { surcharge: Surcharge };
+export type SurchargesReturnType = { surcharges: Array<Surcharge> };
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {
@@ -1118,6 +1163,10 @@ export type TargethoursReturnType = {
 };
 export type AddUserReturnType = {
   user: User;
+};
+
+export type AddSurchargeReturnType = {
+  surcharge: Surcharge;
 };
 
 export type WorkTimesParams = {
