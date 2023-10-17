@@ -592,6 +592,30 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getSurcharge()", () => {
+      it("correctly builds getSurcharge() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/surcharges/7")
+          .reply(200, {});
+
+        await clockodo.getSurcharge({ id: 7 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getSurcharges()", () => {
+      it("correctly builds getSurcharges() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/surcharges")
+          .reply(200, {});
+
+        await clockodo.getSurcharges();
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
@@ -871,6 +895,26 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("addSurcharge()", () => {
+      it("correctly builds addSurcharge() request", async () => {
+        const expectedParameters = {
+          name: "Weyland-Yutani",
+          accumulation: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/surcharges", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.addSurcharge({
+          name: "Weyland-Yutani",
+          accumulation: true,
+        });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("PUT", () => {
@@ -1027,6 +1071,23 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("editSurcharge()", () => {
+      it("correctly builds editSurcharge() request", async () => {
+        const entry = {
+          id: 365,
+          name: "ABC",
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .put("/v2/surcharges/365", mapRequestBody(entry))
+          .reply(200, {});
+
+        await clockodo.editSurcharge(entry);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("DELETE", () => {
@@ -1149,6 +1210,18 @@ describe("Clockodo (instance)", () => {
         await clockodo.withdrawWorkTimesChangeRequest({
           id: 17,
         });
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteSurcharge()", () => {
+      it("correctly builds deleteSurcharge() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/surcharges/31")
+          .reply(200, {});
+
+        await clockodo.deleteSurcharge({ id: 31 });
 
         nockScope.done();
       });
