@@ -466,7 +466,7 @@ export class Clockodo {
 
   async addSurcharge(
     params: Params<Pick<Surcharge, typeof REQUIRED.ADD_SURCHARGE[number]>>
-  ): Promise<AddSurchargeReturnType> {
+  ): Promise<SurchargeReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE);
 
     return this.api.post("/v2/surcharges", params);
@@ -1043,10 +1043,6 @@ export type TargethoursReturnType = {
 };
 export type AddUserReturnType = {
   user: User;
-};
-
-export type AddSurchargeReturnType = {
-  surcharge: Surcharge;
 };
 
 export type WorkTimesParams = {
