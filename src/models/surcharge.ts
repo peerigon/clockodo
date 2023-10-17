@@ -15,7 +15,7 @@ export type Surcharge = {
   /** Increased night surcharge configuration */
   nightIncreased: NightSurchargeConfiguration | null;
   /** Nonbusiness surcharge configuration */
-  nonbusiness: NightSurchargeConfiguration | null;
+  nonbusiness: SurchargeConfiguration | null;
   /** Nonbusiness surcharge configuration for special nonbusiness days */
   nonbusinessSpecial: SurchargeConfiguration | null;
   /** Sunday surcharge configuration */
@@ -42,7 +42,6 @@ type NightSurchargeConfiguration = {
 export type SurchargeConfiguration = NightSurchargeConfiguration & {
   /**
    * Does the surcharge period start on the previous day?
-   *
    * Not for `night` and `nightIncreased`, as these surcharges apply every day
    */
   timeSinceIsPreviousDay: boolean;
