@@ -517,7 +517,7 @@ export class Clockodo {
     return this.api.post("/v2/users", params);
   }
 
-  async addSurcharge(
+  async addSurchargeModel(
     params: Params<
       Pick<SurchargeModel, typeof REQUIRED.ADD_SURCHARGE_MODEL[number]>
     >
