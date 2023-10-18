@@ -41,7 +41,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
-import { Surcharge } from "./models/surcharge.js";
+import { SurchargeModel } from "./models/surchargeModel.js";
 
 export class Clockodo {
   api: Api;
@@ -330,17 +330,19 @@ export class Clockodo {
     return this.api.get("/users", params);
   }
 
-  async getSurcharge(
-    params: Params<{ id: Surcharge["id"] }>
-  ): Promise<SurchargeReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_SURCHARGE);
+  async getSurchargeModel(
+    params: Params<{ id: SurchargeModel["id"] }>
+  ): Promise<SurchargeModelReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_SURCHARGE_MODEL);
 
     const { id, ...remainingParams } = params;
 
     return this.api.get("/v2/surcharges/" + id, remainingParams);
   }
 
-  async getSurcharges(params?: Params): Promise<SurchargesReturnType> {
+  async getSurchargeModels(
+    params?: Params
+  ): Promise<SurchargeModelsReturnType> {
     return this.api.get("/v2/surcharges", params);
   }
 
@@ -464,10 +466,12 @@ export class Clockodo {
     return this.api.post("/users", params);
   }
 
-  async addSurcharge(
-    params: Params<Pick<Surcharge, typeof REQUIRED.ADD_SURCHARGE[number]>>
-  ): Promise<SurchargeReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE);
+  async addSurchargeModel(
+    params: Params<
+      Pick<SurchargeModel, typeof REQUIRED.ADD_SURCHARGE_MODEL[number]>
+    >
+  ): Promise<SurchargeModelReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE_MODEL);
 
     return this.api.post("/v2/surcharges", params);
   }
@@ -580,10 +584,12 @@ export class Clockodo {
     return this.api.put("/users/" + id, params);
   }
 
-  async editSurcharge(
-    params: Params<Pick<Surcharge, typeof REQUIRED.EDIT_SURCHARGE[number]>>
-  ): Promise<SurchargeReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.EDIT_SURCHARGE);
+  async editSurchargeModel(
+    params: Params<
+      Pick<SurchargeModel, typeof REQUIRED.EDIT_SURCHARGE_MODEL[number]>
+    >
+  ): Promise<SurchargeModelReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_SURCHARGE_MODEL);
 
     const { id } = params;
 
@@ -630,10 +636,12 @@ export class Clockodo {
     return this.api.delete("/users/" + id, params);
   }
 
-  async deleteSurcharge(
-    params: Params<Pick<Surcharge, typeof REQUIRED.DELETE_SURCHARGE[number]>>
+  async deleteSurchargeModel(
+    params: Params<
+      Pick<SurchargeModel, typeof REQUIRED.DELETE_SURCHARGE_MODEL[number]>
+    >
   ): Promise<DeleteReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DELETE_SURCHARGE);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SURCHARGE_MODEL);
 
     const { id } = params;
 
@@ -853,8 +861,8 @@ export type LumpsumServicesReturnType = {
 };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
-export type SurchargeReturnType = { surcharge: Surcharge };
-export type SurchargesReturnType = { surcharges: Array<Surcharge> };
+export type SurchargeModelReturnType = { surcharge: SurchargeModel };
+export type SurchargeModelsReturnType = { surcharges: Array<SurchargeModel> };
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {

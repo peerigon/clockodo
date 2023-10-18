@@ -1,8 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { Surcharge } from "./surcharge.js";
+import { SurchargeModel } from "./surchargeModel.js";
 
-export const createSurchargeMocks = ({ count = 1 }: { count?: number } = {}) =>
-  Array.from({ length: count }, (_, index): Surcharge => {
+export const createSurchargeModelMocks = ({
+  count = 1,
+}: { count?: number } = {}) =>
+  Array.from({ length: count }, (_, index): SurchargeModel => {
     return {
       id: index,
       name: faker.commerce.productName(),
