@@ -124,9 +124,7 @@ export const createTargethoursRowMonthlyMocks = ({
           ? null
           : isoDateFromDateTime(endOfMonth(new Date(to))),
       type: TargethoursRowType.Monthly,
-      monthlyTarget: parseFloat(
-        faker.datatype.float({ min: 0, max: 744 }).toFixed(2)
-      ),
+      monthlyTarget: faker.datatype.number(),
       workdayMonday: faker.datatype.boolean(),
       workdayTuesday: faker.datatype.boolean(),
       workdayWednesday: faker.datatype.boolean(),
