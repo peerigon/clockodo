@@ -2,19 +2,26 @@ import { faker } from "@faker-js/faker";
 import { OvertimereducedRow } from "./overtimereduced.js";
 import { isoDateFromDateTime } from "../lib/dateTime.js";
 
+type Options = {
+  count?: number;
+  hoursMinMax?: [number, number];
+};
+
 export const createOvertimereducedMocks = ({
   count = 1,
-  usersId = 0,
-  usersIdAdded = 1,
-}: { count?: number; usersId?: number; usersIdAdded?: number } = {}) => {
+  hoursMinMax = [0, 100],
+}: Options = {}) => {
   return Array.from({ length: count }, (_, index): OvertimereducedRow => {
     return {
       id: index,
-      usersId,
-      usersIdAdded,
+      usersId: 0,
+      usersIdAdded: 1,
       dateAdded: isoDateFromDateTime(faker.date.past()),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
-      hours: faker.datatype.number({ min: 0, max: 100 }),
+      hours: faker.datatype.number({
+        min: hoursMinMax[0],
+        max: hoursMinMax[1],
+      }),
       createdAfterEndOfMonth: faker.datatype.boolean(),
     };
   });
