@@ -24,6 +24,8 @@ type CommonTargethoursRow = {
   usersId: number;
   /** The corresponding surcharge model */
   surchargeModelsId: number | null;
+  /** Defines if the Targethoursrow was generated as test data */
+  testData: boolean;
 };
 
 export type TargethoursRowWeekly = CommonTargethoursRow & {
