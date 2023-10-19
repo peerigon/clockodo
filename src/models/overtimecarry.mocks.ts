@@ -1,16 +1,26 @@
 import { faker } from "@faker-js/faker";
 import { OvertimecarryRow } from "./overtimecarry.js";
 
+type Options = {
+  count?: number;
+  hoursMinMax?: [number, number];
+  yearMinMax?: [number, number];
+};
+
 export const createOvertimecarryMocks = ({
   count = 1,
-  usersId = 0,
-}: { count?: number; usersId?: number } = {}) => {
+  hoursMinMax = [0, 100],
+  yearMinMax = [1900, 2024],
+}: Options = {}) => {
   return Array.from({ length: count }, (): OvertimecarryRow => {
     return {
-      usersId,
-      year: faker.datatype.number({ min: 1900, max: 2024 }),
+      usersId: 0,
+      year: faker.datatype.number({ min: yearMinMax[0], max: yearMinMax[1] }),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
-      hours: faker.datatype.number({ min: 0, max: 100 }),
+      hours: faker.datatype.number({
+        min: hoursMinMax[0],
+        max: hoursMinMax[1],
+      }),
     };
   });
 };
