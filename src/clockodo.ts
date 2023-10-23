@@ -1,5 +1,8 @@
 import { NonbusinessGroup } from "./models/nonbusinessGroup.js";
-import { WorktimeRegulation } from "./models/worktimeRegulation.js";
+import {
+  WorktimeRegulation,
+  WorktimeRegulationWithRules,
+} from "./models/worktimeRegulation.js";
 import { Absence } from "./models/absence.js";
 import { Customer } from "./models/customer.js";
 import {
@@ -917,7 +920,7 @@ export class Clockodo {
   async getWorktimeRegulations(
     params?: Params
   ): Promise<WorktimeRegulationsReturnType> {
-    return this.api.get("/worktimeregulations", params);
+    return this.api.get("/v2/worktimeregulations", params);
   }
 }
 
@@ -1118,7 +1121,7 @@ export type NonbusinessDaysReturnType = {
 export type AggregatesUsersMeReturnType = {
   user: User;
   company: Company;
-  worktimeRegulation: WorktimeRegulation;
+  worktimeRegulation: WorktimeRegulationWithRules;
 };
 export type ClockReturnType = {
   /** The currently running entry */

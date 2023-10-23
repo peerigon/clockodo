@@ -720,6 +720,18 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getWorktimeRegulations()", () => {
+      it("correctly builds getWorktimeRegulations() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/worktimeregulations")
+          .reply(200, {});
+
+        await clockodo.getWorktimeRegulations();
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
