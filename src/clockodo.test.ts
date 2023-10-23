@@ -604,6 +604,18 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getBreakRules()", () => {
+      it("correctly builds getBreakRules() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/breakrules")
+          .reply(200, {});
+
+        await clockodo.getBreakRules();
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {

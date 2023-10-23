@@ -44,6 +44,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
+import { BreakRule } from "./models/breakRule.js";
 
 export class Clockodo {
   api: Api;
@@ -774,6 +775,10 @@ export class Clockodo {
   ): Promise<WorktimeRegulationsReturnType> {
     return this.api.get("/v2/worktimeregulations", params);
   }
+
+  async getBreakRules(params?: Params): Promise<BreakRulesReturnType> {
+    return this.api.get("/v2/breakrules", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -1066,4 +1071,8 @@ export type AddWorkTimesChangeRequestReturnType =
 /** The user ID by which the overtime carry rows should be filtered */
 export type WorktimeRegulationsReturnType = {
   worktimeregulations: Array<WorktimeRegulation>;
+};
+
+export type BreakRulesReturnType = {
+  breakrules: Array<BreakRule>;
 };
