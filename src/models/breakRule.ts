@@ -1,4 +1,6 @@
 export type BreakRule = {
+  /** ID of the break rule */
+  id: number;
   /** ID of the corresponding worktime regulation */
   worktimeRegulationsId: number;
   /** Daily worktime (in hours), above which the rule applies */
