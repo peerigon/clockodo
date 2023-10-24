@@ -5,12 +5,10 @@ export type HolidaysquotaRow = {
   usersId: number;
   /**
    * Year from which on the holiday quota setting apply
-   * Format YYYY
    */
   yearSince: number;
   /**
    * Year until which the holiday quota setting apply
-   * Format YYYY
    */
   yearUntil: number | null;
   /** Count of holidays */

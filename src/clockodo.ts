@@ -382,13 +382,13 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/surcharges/" + id, remainingParams);
+    return this.api.get("/v2/surchargeModels/" + id, remainingParams);
   }
 
   async getSurchargeModels(
     params?: Params
   ): Promise<SurchargeModelsReturnType> {
-    return this.api.get("/v2/surcharges", params);
+    return this.api.get("/v2/surchargeModels", params);
   }
 
   async getUserReport<
@@ -528,7 +528,7 @@ export class Clockodo {
   ): Promise<SurchargeModelReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE_MODEL);
 
-    return this.api.post("/v2/surcharges", params);
+    return this.api.post("/v2/surchargeModels", params);
   }
 
   async startClock(
@@ -660,7 +660,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/v2/surcharges/" + id, params);
+    return this.api.put("/v2/surchargeModels/" + id, params);
   }
 
   async editCompany(
@@ -722,7 +722,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/v2/surcharges/" + id);
+    return this.api.delete("/v2/surchargeModels/" + id);
   }
 
   async deleteAbsence(
@@ -999,9 +999,11 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
   };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
-export type SurchargeModelReturnType = { surcharge: SurchargeModel };
-export type SurchargeModelsReturnType = { surcharges: Array<SurchargeModel> };
 export type CompanyReturnType = { company: Company };
+export type SurchargeModelReturnType = { surchargeModel: SurchargeModel };
+export type SurchargeModelsReturnType = {
+  surchargeModels: Array<SurchargeModel>;
+};
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {

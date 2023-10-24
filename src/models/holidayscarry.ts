@@ -3,7 +3,6 @@ export type HolidayscarryRow = {
   usersId: number;
   /**
    * Year for which the holiday carryover applies
-   * Format YYYY
    */
   year: number;
   /** Day count */
