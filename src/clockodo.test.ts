@@ -975,18 +975,17 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("editCompany()", () => {
-      it("correctly builds editCompany() request", async () => {
+    describe("editMyCompany()", () => {
+      it("correctly builds editMyCompany() request", async () => {
         const company = {
-          id: 33,
           name: "Moalo Loco",
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/v2/company/33", mapRequestBody(company))
+          .put("/v2/company", mapRequestBody(company))
           .reply(200, {});
 
-        await clockodo.editCompany(company);
+        await clockodo.editMyCompany(company);
 
         nockScope.done();
       });
