@@ -663,14 +663,10 @@ export class Clockodo {
     return this.api.put("/v2/surchargeModels/" + id, params);
   }
 
-  async editCompany(
-    params: Params<Pick<Company, typeof REQUIRED.EDIT_COMPANY[number]>>
+  async editMyCompany(
+    params: Params<Partial<Company>>
   ): Promise<CompanyReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.EDIT_COMPANY);
-
-    const { id } = params;
-
-    return this.api.put("/v2/company/" + id, params);
+    return this.api.put("/v2/company", params);
   }
 
   async deleteCustomer(
