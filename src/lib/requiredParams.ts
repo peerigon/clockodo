@@ -51,6 +51,7 @@ export const EDIT_SERVICE = ["id"] as const;
 export const EDIT_TEAM = ["id"] as const;
 export const EDIT_USER = ["id"] as const;
 export const EDIT_SURCHARGE_MODEL = ["id"] as const;
+export const EDIT_COMPANY = ["id"] as const;
 export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const EDIT_ABSENCE = ["id"] as const;
 export const EDIT_ENTRY = ["id"] as const;
