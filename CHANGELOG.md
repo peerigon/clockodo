@@ -1,3 +1,10 @@
+# [21.14.0](https://github.com/peerigon/clockodo/compare/v21.13.0...v21.14.0) (2023-10-24)
+
+
+### Features
+
+* Add holidaysquota and holidayscarry endpoints ([f342c2f](https://github.com/peerigon/clockodo/commit/f342c2fe9e6a2dbcb23ce0fb5181f3a5f9c26494)), closes [#31](https://github.com/peerigon/clockodo/issues/31)
+
 # [21.13.0](https://github.com/peerigon/clockodo/compare/v21.12.0...v21.13.0) (2023-10-16)
 
 
