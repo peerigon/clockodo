@@ -786,7 +786,7 @@ export class Clockodo {
   async getWorktimeRegulations(
     params?: Params
   ): Promise<WorktimeRegulationsReturnType> {
-    return this.api.get("/v2/worktimeregulations", params);
+    return this.api.get("/v2/worktimeRegulations", params);
   }
 }
 
@@ -1097,5 +1097,5 @@ export type HolidayscarryRowParams = {
 
 /** The user ID by which the overtime carry rows should be filtered */
 export type WorktimeRegulationsReturnType = {
-  worktimeregulations: Array<WorktimeRegulation>;
+  worktimeRegulations: Array<WorktimeRegulation>;
 };

@@ -1,4 +1,4 @@
-import { BreakRule } from "./breakRule.js";
+import { WorktimeBreakRule } from "./worktimeBreakRule.js";
 
 export type WorktimeRegulation = {
   /** ID of the worktime regulation  */
@@ -22,5 +22,5 @@ export type WorktimeRegulationWithRules = Omit<
   "name" | "preset"
 > & {
   /** Contains objects of the type "breakrule" */
-  rules: Array<Omit<BreakRule, "worktimeRegulationsId">>;
+  rules: Array<Omit<WorktimeBreakRule, "worktimeRegulationsId">>;
 };
