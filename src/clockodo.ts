@@ -557,6 +557,16 @@ export class Clockodo {
     return this.api.put("/users/" + id, params);
   }
 
+  async editCompany(
+    params: Params<Pick<Company, typeof REQUIRED.EDIT_COMPANY[number]>>
+  ): Promise<CompanyReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_COMPANY);
+
+    const { id } = params;
+
+    return this.api.put("/v2/company/" + id, params);
+  }
+
   async deactivateCustomer(
     params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
@@ -810,6 +820,7 @@ export type LumpsumServicesReturnType = {
 };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
+export type CompanyReturnType = { company: Company };
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {
