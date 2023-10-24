@@ -931,7 +931,7 @@ export class Clockodo {
   async getWorktimeRegulations(
     params?: Params
   ): Promise<WorktimeRegulationsReturnType> {
-    return this.api.get("/v2/worktimeregulations", params);
+    return this.api.get("/v2/worktimeRegulations", params);
   }
 
   async getBreakRules(params?: Params): Promise<BreakRulesReturnType> {
@@ -1287,7 +1287,7 @@ export type OvertimereducedRowParams = {
 };
 
 export type WorktimeRegulationsReturnType = {
-  worktimeregulations: Array<WorktimeRegulation>;
+  worktimeRegulations: Array<WorktimeRegulation>;
 };
 
 export type BreakRulesReturnType = {

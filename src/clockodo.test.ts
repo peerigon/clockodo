@@ -724,7 +724,7 @@ describe("Clockodo (instance)", () => {
     describe("getWorktimeRegulations()", () => {
       it("correctly builds getWorktimeRegulations() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/worktimeregulations")
+          .get("/v2/worktimeRegulations")
           .reply(200, {});
 
         await clockodo.getWorktimeRegulations();
