@@ -593,10 +593,34 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getHolidaysquota()", () => {
+      it("correctly builds getHolidaysquota() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidaysquota?users_id=17")
+          .reply(200, {});
+
+        await clockodo.getHolidaysquota({ usersId: 17 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getHolidayscarry()", () => {
+      it("correctly builds getHolidayscarry() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidayscarry?users_id=17&year=2028")
+          .reply(200, {});
+
+        await clockodo.getHolidayscarry({ usersId: 17, year: 2028 });
+
+        nockScope.done();
+      });
+    });
+
     describe("getSurchargeModel()", () => {
       it("correctly builds getSurchargeModel() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/surcharges/7")
+          .get("/v2/surchargeModels/7")
           .reply(200, {});
 
         await clockodo.getSurchargeModel({ id: 7 });
@@ -608,7 +632,7 @@ describe("Clockodo (instance)", () => {
     describe("getSurchargeModels()", () => {
       it("correctly builds getSurchargeModels() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/surcharges")
+          .get("/v2/surchargeModels")
           .reply(200, {});
 
         await clockodo.getSurchargeModels();
@@ -904,7 +928,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .post("/v2/surcharges", expectedParameters)
+          .post("/v2/surchargeModels", expectedParameters)
           .reply(200, {});
 
         await clockodo.addSurchargeModel({
@@ -1080,7 +1104,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/v2/surcharges/365", mapRequestBody(entry))
+          .put("/v2/surchargeModels/365", mapRequestBody(entry))
           .reply(200, {});
 
         await clockodo.editSurchargeModel(entry);
@@ -1218,7 +1242,7 @@ describe("Clockodo (instance)", () => {
     describe("deleteSurchargeModel()", () => {
       it("correctly builds deleteSurchargeModel() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .delete("/v2/surcharges/31")
+          .delete("/v2/surchargeModels/31")
           .reply(200, {});
 
         await clockodo.deleteSurchargeModel({ id: 31 });

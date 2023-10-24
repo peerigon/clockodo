@@ -41,6 +41,8 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
+import { HolidaysquotaRow } from "./models/holidaysquota.js";
+import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { SurchargeModel } from "./models/surchargeModel.js";
 
 export class Clockodo {
@@ -337,13 +339,13 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/surcharges/" + id, remainingParams);
+    return this.api.get("/v2/surchargeModels/" + id, remainingParams);
   }
 
   async getSurchargeModels(
     params?: Params
   ): Promise<SurchargeModelsReturnType> {
-    return this.api.get("/v2/surcharges", params);
+    return this.api.get("/v2/surchargeModels", params);
   }
 
   async getUserReport<
@@ -473,7 +475,7 @@ export class Clockodo {
   ): Promise<SurchargeModelReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE_MODEL);
 
-    return this.api.post("/v2/surcharges", params);
+    return this.api.post("/v2/surchargeModels", params);
   }
 
   async startClock(
@@ -593,7 +595,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/v2/surcharges/" + id, params);
+    return this.api.put("/v2/surchargeModels/" + id, params);
   }
 
   async deactivateCustomer(
@@ -645,7 +647,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/v2/surcharges/" + id);
+    return this.api.delete("/v2/surchargeModels/" + id);
   }
 
   async deleteAbsence(
@@ -816,6 +818,18 @@ export class Clockodo {
       remainingParams
     );
   }
+
+  async getHolidaysquota(
+    params?: Params<HolidaysquotaRowParams>
+  ): Promise<HolidaysquotaRowReturnType> {
+    return this.api.get("/holidaysquota", params);
+  }
+
+  async getHolidayscarry(
+    params?: Params<HolidayscarryRowParams>
+  ): Promise<HolidayscarryRowReturnType> {
+    return this.api.get("/holidayscarry", params);
+  }
 }
 
 export type AbsenceReturnType = { absence: Absence };
@@ -861,8 +875,10 @@ export type LumpsumServicesReturnType = {
 };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
-export type SurchargeModelReturnType = { surcharge: SurchargeModel };
-export type SurchargeModelsReturnType = { surcharges: Array<SurchargeModel> };
+export type SurchargeModelReturnType = { surchargeModel: SurchargeModel };
+export type SurchargeModelsReturnType = {
+  surchargeModels: Array<SurchargeModel>;
+};
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {
@@ -1106,3 +1122,21 @@ export type AddWorkTimesChangeRequestReturnType =
        **/
       replacedChangeRequest: null;
     };
+
+export type HolidaysquotaRowReturnType = {
+  holidaysquota: Array<HolidaysquotaRow>;
+};
+export type HolidaysquotaRowParams = {
+  /** The user ID by which the holidays quota rows should be filtered */
+  usersId?: number;
+};
+
+export type HolidayscarryRowReturnType = {
+  holidayscarry: Array<HolidayscarryRow>;
+};
+export type HolidayscarryRowParams = {
+  /** The user ID by which the holidays carry rows should be filtered */
+  usersId?: number;
+  /** The year to which the data should be restricted to */
+  year?: number;
+};
