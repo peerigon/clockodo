@@ -593,10 +593,34 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getHolidaysquota()", () => {
+      it("correctly builds getHolidaysquota() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidaysquota?users_id=17")
+          .reply(200, {});
+
+        await clockodo.getHolidaysquota({ usersId: 17 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getHolidayscarry()", () => {
+      it("correctly builds getHolidayscarry() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/holidayscarry?users_id=17&year=2028")
+          .reply(200, {});
+
+        await clockodo.getHolidayscarry({ usersId: 17, year: 2028 });
+
+        nockScope.done();
+      });
+    });
+
     describe("getWorktimeRegulations()", () => {
       it("correctly builds getWorktimeRegulations() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/worktimeregulations")
+          .get("/v2/worktimeRegulations")
           .reply(200, {});
 
         await clockodo.getWorktimeRegulations();
@@ -608,7 +632,7 @@ describe("Clockodo (instance)", () => {
     describe("getBreakRules()", () => {
       it("correctly builds getBreakRules() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/breakrules")
+          .get("/v2/worktimeBreakRules")
           .reply(200, {});
 
         await clockodo.getBreakRules();
