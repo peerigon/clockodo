@@ -1108,5 +1108,5 @@ export type WorktimeRegulationsReturnType = {
 };
 
 export type WorktimeBreakRulesReturnType = {
-  workTimeBreakRules: Array<WorktimeBreakRule>;
+  worktimeBreakRules: Array<WorktimeBreakRule>;
 };
