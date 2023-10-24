@@ -736,7 +736,7 @@ describe("Clockodo (instance)", () => {
     describe("getBreakRules()", () => {
       it("correctly builds getBreakRules() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/v2/breakrules")
+          .get("/v2/worktimeBreakRules")
           .reply(200, {});
 
         await clockodo.getBreakRules();

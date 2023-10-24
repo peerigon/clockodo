@@ -21,6 +21,6 @@ export type WorktimeRegulationWithRules = Omit<
   WorktimeRegulation,
   "name" | "preset"
 > & {
-  /** Contains objects of the type "breakrule" */
+  /** Contains objects of the type "worktimeBreakRules" */
   rules: Array<Omit<WorktimeBreakRule, "id" | "worktimeRegulationsId">>;
 };

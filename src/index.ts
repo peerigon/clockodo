@@ -1,6 +1,6 @@
 export * from "./models/absence.js";
 export * from "./models/access.js";
-export * from "./models/breakRule.js";
+export * from "./models/worktimeBreakRule.js";
 export * from "./models/company.js";
 export * from "./models/customer.js";
 export * from "./models/dateTime.js";

@@ -49,7 +49,7 @@ import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimecarryRow } from "./models/overtimecarry.js";
 import { OvertimereducedRow } from "./models/overtimereduced.js";
 import { SurchargeModel } from "./models/surchargeModel.js";
-import { BreakRule } from "./models/breakRule.js";
+import { WorktimeBreakRule } from "./models/worktimeBreakRule.js";
 
 export class Clockodo {
   api: Api;
@@ -934,8 +934,8 @@ export class Clockodo {
     return this.api.get("/v2/worktimeRegulations", params);
   }
 
-  async getBreakRules(params?: Params): Promise<BreakRulesReturnType> {
-    return this.api.get("/v2/breakrules", params);
+  async getBreakRules(params?: Params): Promise<WorktimeBreakRulesReturnType> {
+    return this.api.get("/v2/worktimeBreakRules", params);
   }
 }
 
@@ -1290,6 +1290,6 @@ export type WorktimeRegulationsReturnType = {
   worktimeRegulations: Array<WorktimeRegulation>;
 };
 
-export type BreakRulesReturnType = {
-  breakrules: Array<BreakRule>;
+export type WorktimeBreakRulesReturnType = {
+  workTimeBreakRules: Array<WorktimeBreakRule>;
 };
