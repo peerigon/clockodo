@@ -790,7 +790,9 @@ export class Clockodo {
     return this.api.get("/v2/worktimeRegulations", params);
   }
 
-  async getBreakRules(params?: Params): Promise<WorktimeBreakRulesReturnType> {
+  async getWorktimeBreakRules(
+    params?: Params
+  ): Promise<WorktimeBreakRulesReturnType> {
     return this.api.get("/v2/worktimeBreakRules", params);
   }
 }
