@@ -1054,37 +1054,37 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("deactivateCustomer()", () => {
-      it("correctly builds deactivateCustomer() request", async () => {
+    describe("deleteCustomer()", () => {
+      it("correctly builds deleteCustomer() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .delete("/v2/customers/343")
           .reply(200, {});
 
-        await clockodo.deactivateCustomer({ id: 343 });
+        await clockodo.deleteCustomer({ id: 343 });
 
         nockScope.done();
       });
     });
 
-    describe("deactivateProject()", () => {
-      it("correctly builds deactivateProject() request", async () => {
+    describe("deleteProject()", () => {
+      it("correctly builds deleteProject() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .delete("/v2/projects/8")
           .reply(200, {});
 
-        await clockodo.deactivateProject({ id: 8 });
+        await clockodo.deleteProject({ id: 8 });
 
         nockScope.done();
       });
     });
 
-    describe("deactivateService()", () => {
-      it("correctly builds deactivateService() request", async () => {
+    describe("deleteService()", () => {
+      it("correctly builds deleteService() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .delete("/services/94")
           .reply(200, {});
 
-        await clockodo.deactivateService({ id: 94 });
+        await clockodo.deleteService({ id: 94 });
 
         nockScope.done();
       });

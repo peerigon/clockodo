@@ -557,30 +557,30 @@ export class Clockodo {
     return this.api.put("/v2/users/" + id, params);
   }
 
-  async deactivateCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
+  async deleteCustomer(
+    params: Params<Pick<Customer, typeof REQUIRED.DELETE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_CUSTOMER);
 
     const { id } = params;
 
     return this.api.delete("/v2/customers/" + id, params);
   }
 
-  async deactivateProject(
-    params: Params<Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>>
+  async deleteProject(
+    params: Params<Pick<Project, typeof REQUIRED.DELETE_PROJECT[number]>>
   ): Promise<ProjectReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_PROJECT);
 
     const { id } = params;
 
     return this.api.delete("/v2/projects/" + id, params);
   }
 
-  async deactivateService(
-    params: Params<Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>>
+  async deleteService(
+    params: Params<Pick<Service, typeof REQUIRED.DELETE_SERVICE[number]>>
   ): Promise<ServiceReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SERVICE);
 
     const { id } = params;
 

@@ -754,38 +754,38 @@ await clockodo.editUser({ id: 33, name: "Moalo Loco" });
 
 ## Delete methods
 
-### deactivateCustomer()
+### deleteCustomer()
 
-Deactivates (not deletes) customer.
+Deletes the customer.
 
 #### Example:
 
 ```js
-await clockodo.deactivateCustomer({ id: 343 });
+await clockodo.deleteCustomer({ id: 343 });
 ```
 
 ---
 
-### deactivateProject()
+### deleteProject()
 
-Deactivates (not deletes) project.
+Deletes the project.
 
 #### Example:
 
 ```js
-await clockodo.deactivateProject({ id: 8 });
+await clockodo.deleteProject({ id: 8 });
 ```
 
 ---
 
-### deactivateService()
+### deleteService()
 
-Deactivates (not deletes) service.
+Deletes the service.
 
 #### Example:
 
 ```js
-await clockodo.deactivateService({ id: 94 });
+await clockodo.deleteService({ id: 94 });
 ```
 
 ---
