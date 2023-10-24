@@ -1,3 +1,15 @@
+# [22.0.0](https://github.com/peerigon/clockodo/compare/v21.15.0...v22.0.0) (2023-10-24)
+
+
+### Features
+
+* Replace deactivate... with delete... ([67e0b33](https://github.com/peerigon/clockodo/commit/67e0b336a342886c04df8a70636c020a58a02f28))
+
+
+### BREAKING CHANGES
+
+* There are no `deactivate...` methods anymore. In order to deactivate a customer, project, ..., you need to call `edit...` with `active: false`.
+
 # [21.15.0](https://github.com/peerigon/clockodo/compare/v21.14.0...v21.15.0) (2023-10-24)
 
 
