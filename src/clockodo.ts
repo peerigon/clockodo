@@ -325,11 +325,11 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/users/" + id, remainingParams);
+    return this.api.get("/v2/users/" + id, remainingParams);
   }
 
   async getUsers(params?: Params): Promise<UsersReturnType> {
-    return this.api.get("/users", params);
+    return this.api.get("/v2/users", params);
   }
 
   async getUserReport<
@@ -449,7 +449,7 @@ export class Clockodo {
   ): Promise<AddUserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
-    return this.api.post("/users", params);
+    return this.api.post("/v2/users", params);
   }
 
   async startClock(
@@ -557,47 +557,47 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/users/" + id, params);
+    return this.api.put("/v2/users/" + id, params);
   }
 
-  async deactivateCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
+  async deleteCustomer(
+    params: Params<Pick<Customer, typeof REQUIRED.DELETE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_CUSTOMER);
 
     const { id } = params;
 
     return this.api.delete("/v2/customers/" + id, params);
   }
 
-  async deactivateProject(
-    params: Params<Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>>
+  async deleteProject(
+    params: Params<Pick<Project, typeof REQUIRED.DELETE_PROJECT[number]>>
   ): Promise<ProjectReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_PROJECT);
 
     const { id } = params;
 
     return this.api.delete("/v2/projects/" + id, params);
   }
 
-  async deactivateService(
-    params: Params<Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>>
+  async deleteService(
+    params: Params<Pick<Service, typeof REQUIRED.DELETE_SERVICE[number]>>
   ): Promise<ServiceReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SERVICE);
 
     const { id } = params;
 
     return this.api.delete("/services/" + id, params);
   }
 
-  async deactivateUser(
-    params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
+  async deleteUser(
+    params: Params<Pick<User, typeof REQUIRED.DELETE_USER[number]>>
   ): Promise<UserReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_USER);
 
     const { id } = params;
 
-    return this.api.delete("/users/" + id, params);
+    return this.api.delete("/v2/users/" + id, params);
   }
 
   async deleteAbsence(
