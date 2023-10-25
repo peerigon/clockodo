@@ -503,7 +503,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getUser()", () => {
       it("correctly builds getUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/users/1263").reply(200, {});
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/users/1263")
+          .reply(200, {});
 
         await clockodo.getUser({ id: 1263 });
 
@@ -513,7 +515,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getUsers()", () => {
       it("correctly builds getUsers() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/users").reply(200, {});
+        const nockScope = nock(CLOCKODO_API).get("/v2/users").reply(200, {});
 
         await clockodo.getUsers();
 
@@ -567,8 +569,8 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getNonbusinessDays()", () => {
-      it("correctly builds getNonbusinessDays() request", async () => {
+    describe("getEvaluatedNonbusinessDays()", () => {
+      it("correctly builds getEvaluatedNonbusinessDays() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get(
             "/nonbusinessdays?" +
@@ -579,7 +581,7 @@ describe("Clockodo (instance)", () => {
           )
           .reply(200, {});
 
-        await clockodo.getNonbusinessDays({
+        await clockodo.getEvaluatedNonbusinessDays({
           nonbusinessgroupsId: [123],
           year: 2021,
         });
@@ -587,11 +589,11 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
 
-      it("throws an error when getNonbusinessDays() is missing param", async () => {
+      it("throws an error when getEvaluatedNonbusinessDays() is missing param", async () => {
         expect.assertions(1);
 
         return expect(
-          clockodo.getNonbusinessDays(
+          clockodo.getEvaluatedNonbusinessDays(
             // @ts-expect-error Year is missing
             { nonbusinessgroupsId: 123 }
           )
@@ -870,7 +872,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .post("/users", expectedParameters)
+          .post("/v2/users", expectedParameters)
           .reply(200, {});
 
         await clockodo.addUser({
@@ -1175,7 +1177,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/users/33", mapRequestBody(user))
+          .put("/v2/users/33", mapRequestBody(user))
           .reply(200, {});
 
         await clockodo.editUser(user);
@@ -1344,7 +1346,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteUser()", () => {
       it("correctly builds deleteUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API).delete("/users/7").reply(200, {});
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/users/7")
+          .reply(200, {});
 
         await clockodo.deleteUser({ id: 7 });
 

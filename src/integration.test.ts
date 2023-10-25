@@ -338,7 +338,7 @@ describe("Clockodo", () => {
     });
   });
 
-  describe("getNonbusinessGroups() / getNonbusinessDays()", () => {
+  describe("getNonbusinessGroups() / getEvaluatedNonbusinessDays()", () => {
     it("returns expected data format", async () => {
       const { nonbusinessgroups: nonbusinessGroups } =
         await clockodo.getNonbusinessGroups();
@@ -352,7 +352,7 @@ describe("Clockodo", () => {
       const [firstNonbusinessGroup] = nonbusinessGroups;
 
       const { nonbusinessdays: nonbusinessDays } =
-        await clockodo.getNonbusinessDays({
+        await clockodo.getEvaluatedNonbusinessDays({
           nonbusinessgroupsId: firstNonbusinessGroup.id,
           year: 2021,
         });

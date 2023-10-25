@@ -9,4 +9,10 @@ export type NonbusinessDay = {
   name: string;
   /** It is half a nonbusiness day */
   halfDay: boolean;
+  /** It is a special nonbusiness day */
+  surchargeSpecial: boolean;
+  /** It is a recurring nonbusiness day */
+  periodic: boolean;
+  /** Varies from year per year */
+  differentPerYear: boolean;
 };

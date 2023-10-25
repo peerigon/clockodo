@@ -424,6 +424,12 @@ export class Clockodo {
   }
 
   async getNonbusinessDays(
+    params?: Params
+  ): Promise<NonbusinessDaysReturnType> {
+    return this.api.get("/v2/nonbusinessdays", params);
+  }
+
+  async getEvaluatedNonbusinessDays(
     params: Params<{
       nonbusinessgroupsId?:
         | NonbusinessGroup["id"]
@@ -433,7 +439,7 @@ export class Clockodo {
   ): Promise<NonbusinessDaysReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
 
-    return this.api.get("/nonbusinessdays", params);
+    return this.api.get("/v2/nonbusinessdays/evaluated", params);
   }
 
   async getAggregatesUsersMe(
