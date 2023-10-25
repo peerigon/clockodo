@@ -513,8 +513,8 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getNonbusinessDays()", () => {
-      it("correctly builds getNonbusinessDays() request", async () => {
+    describe("getEvaluatedNonbusinessDays()", () => {
+      it("correctly builds getEvaluatedNonbusinessDays() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get(
             "/nonbusinessdays?" +
@@ -525,7 +525,7 @@ describe("Clockodo (instance)", () => {
           )
           .reply(200, {});
 
-        await clockodo.getNonbusinessDays({
+        await clockodo.getEvaluatedNonbusinessDays({
           nonbusinessgroupsId: [123],
           year: 2021,
         });
@@ -533,11 +533,11 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
 
-      it("throws an error when getNonbusinessDays() is missing param", async () => {
+      it("throws an error when getEvaluatedNonbusinessDays() is missing param", async () => {
         expect.assertions(1);
 
         return expect(
-          clockodo.getNonbusinessDays(
+          clockodo.getEvaluatedNonbusinessDays(
             // @ts-expect-error Year is missing
             { nonbusinessgroupsId: 123 }
           )

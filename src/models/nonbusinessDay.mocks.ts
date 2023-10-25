@@ -32,12 +32,17 @@ export const createNonbusinessDayMocks = ({
     const name = faker.lorem.words();
     const isHalfDay = faker.datatype.number({ min: 0, max: 10 }) > 8;
 
+    const periodic = faker.datatype.boolean();
+
     return {
       date: isoDateFromDateTime(dateTime),
       id,
       nonbusinessgroupsId: 0,
       name,
       halfDay: isHalfDay,
+      surchargeSpecial: faker.datatype.boolean(),
+      periodic,
+      differentPerYear: periodic ? faker.datatype.boolean() : false,
     };
   });
 };
