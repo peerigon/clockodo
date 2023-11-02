@@ -267,14 +267,14 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/services/" + id, remainingParams);
+    return this.api.get("/v3/services/" + id, remainingParams);
   }
 
   async getServices(
     params?: Params<ServiceParams>
   ): Promise<ResponseWithoutPaging<ServicesReturnType>> {
     const pages = await this.api.getAllPages<ServicesReturnType>(
-      "/v2/services",
+      "/v3/services",
       params
     );
     const [{ paging, ...remainingResponse }] = pages;
@@ -289,7 +289,7 @@ export class Clockodo {
   async getServicesPage(
     params?: Params<ServiceParams & ParamsWithPage>
   ): Promise<ServicesReturnType> {
-    return this.api.get("/v2/services", params);
+    return this.api.get("/v3/services", params);
   }
 
   async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
@@ -312,7 +312,7 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/v2/lumpsumservices/" + id, remainingParams);
+    return this.api.get("/v3/lumpsumservices/" + id, remainingParams);
   }
 
   // This endpoint still uses the old lumpSum casing
@@ -320,7 +320,7 @@ export class Clockodo {
     params?: Params<LumpsumServiceParams>
   ): Promise<ResponseWithoutPaging<LumpsumServicesReturnType>> {
     const pages = await this.api.getAllPages<LumpsumServicesReturnType>(
-      "/v2/lumpsumservices",
+      "/v3/lumpsumservices",
       params
     );
     const [{ paging, ...remainingResponse }] = pages;
@@ -338,7 +338,7 @@ export class Clockodo {
   async getLumpSumServicesPage(
     params?: Params<LumpsumServiceParams & ParamsWithPage>
   ): Promise<LumpsumServicesReturnType> {
-    return this.api.get("/v2/lumpsumservices", params);
+    return this.api.get("/v3/lumpsumservices", params);
   }
 
   async getTargethoursRow(
@@ -443,7 +443,7 @@ export class Clockodo {
   ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE);
 
-    return this.api.post("/v2/lumpsumservices", params);
+    return this.api.post("/v3/lumpsumservices", params);
   }
 
   async addEntry(
@@ -480,7 +480,7 @@ export class Clockodo {
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
-    return this.api.post("/v2/services", params);
+    return this.api.post("/v3/services", params);
   }
 
   async addTeam(
@@ -558,7 +558,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/v2/lumpsumservices/" + id, params);
+    return this.api.put("/v3/lumpsumservices/" + id, params);
   }
 
   async editEntry(
@@ -596,7 +596,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/v2/services/" + id, params);
+    return this.api.put("/v3/services/" + id, params);
   }
 
   async editTeam(
@@ -646,7 +646,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/v2/services/" + id, params);
+    return this.api.delete("/v3/services/" + id, params);
   }
 
   async deleteUser(
@@ -686,7 +686,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/v2/lumpsumservices/" + id, params);
+    return this.api.delete("/v3/lumpsumservices/" + id, params);
   }
 
   async deleteEntryGroup(
