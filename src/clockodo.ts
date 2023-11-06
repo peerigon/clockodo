@@ -680,7 +680,9 @@ export class Clockodo {
   }
 
   async deleteLumpsumService(
-    params: Params<Pick<Entry, typeof REQUIRED.DELETE_LUMPSUM_SERVICE[number]>>
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.DELETE_LUMPSUM_SERVICE[number]>
+    >
   ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_LUMPSUM_SERVICE);
 
