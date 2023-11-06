@@ -1,3 +1,10 @@
+# [22.2.0](https://github.com/peerigon/clockodo/compare/v22.1.0...v22.2.0) (2023-11-06)
+
+
+### Features
+
+* Use v3 API for services and lumpsum services ([#131](https://github.com/peerigon/clockodo/issues/131)) ([1a8ba9d](https://github.com/peerigon/clockodo/commit/1a8ba9d1fad6a6251a1116a39bfd1886a048bce1))
+
 # [22.1.0](https://github.com/peerigon/clockodo/compare/v22.0.0...v22.1.0) (2023-11-06)
 
 
