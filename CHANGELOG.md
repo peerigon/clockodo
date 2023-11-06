@@ -1,3 +1,10 @@
+# [22.1.0](https://github.com/peerigon/clockodo/compare/v22.0.0...v22.1.0) (2023-11-06)
+
+
+### Features
+
+* Add testData property to targethoursRow ([#140](https://github.com/peerigon/clockodo/issues/140)) ([9c2e511](https://github.com/peerigon/clockodo/commit/9c2e5119004eeb89c95b53e42815e95fbf5e071e))
+
 # [22.0.0](https://github.com/peerigon/clockodo/compare/v21.15.0...v22.0.0) (2023-10-24)
 
 
