@@ -267,11 +267,29 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/services/" + id, remainingParams);
+    return this.api.get("/v3/services/" + id, remainingParams);
   }
 
-  async getServices(params?: Params): Promise<ServicesReturnType> {
-    return this.api.get("/services", params);
+  async getServices(
+    params?: Params<ServiceParams>
+  ): Promise<ResponseWithoutPaging<ServicesReturnType>> {
+    const pages = await this.api.getAllPages<ServicesReturnType>(
+      "/v3/services",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const services = pages.flatMap(({ services }) => services);
+
+    return {
+      ...remainingResponse,
+      services,
+    };
+  }
+
+  async getServicesPage(
+    params?: Params<ServiceParams & ParamsWithPage>
+  ): Promise<ServicesReturnType> {
+    return this.api.get("/v3/services", params);
   }
 
   async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
@@ -294,14 +312,33 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/lumpsumservices/" + id, remainingParams);
+    return this.api.get("/v3/lumpsumservices/" + id, remainingParams);
   }
 
   // This endpoint still uses the old lumpSum casing
   async getLumpSumServices(
-    params?: Params
+    params?: Params<LumpsumServiceParams>
+  ): Promise<ResponseWithoutPaging<LumpsumServicesReturnType>> {
+    const pages = await this.api.getAllPages<LumpsumServicesReturnType>(
+      "/v3/lumpsumservices",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const lumpSumServices = pages.flatMap(
+      ({ lumpSumServices }) => lumpSumServices
+    );
+
+    return {
+      ...remainingResponse,
+      lumpSumServices,
+    };
+  }
+
+  // This endpoint still uses the old lumpSum casing
+  async getLumpSumServicesPage(
+    params?: Params<LumpsumServiceParams & ParamsWithPage>
   ): Promise<LumpsumServicesReturnType> {
-    return this.api.get("/lumpsumservices", params);
+    return this.api.get("/v3/lumpsumservices", params);
   }
 
   async getTargethoursRow(
@@ -399,6 +436,16 @@ export class Clockodo {
     return this.api.post("/v2/customers", params);
   }
 
+  async addLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.ADD_LUMPSUM_SERVICE[number]>
+    >
+  ): Promise<LumpsumServiceReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE);
+
+    return this.api.post("/v3/lumpsumservices", params);
+  }
+
   async addEntry(
     params: Params<
       | Pick<TimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
@@ -433,7 +480,7 @@ export class Clockodo {
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
-    return this.api.post("/services", params);
+    return this.api.post("/v3/services", params);
   }
 
   async addTeam(
@@ -502,6 +549,18 @@ export class Clockodo {
     return this.api.put("/v2/customers/" + id, params);
   }
 
+  async editLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.EDIT_LUMPSUM_SERVICE[number]>
+    >
+  ) {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_LUMPSUM_SERVICE);
+
+    const { id } = params;
+
+    return this.api.put("/v3/lumpsumservices/" + id, params);
+  }
+
   async editEntry(
     params: Params<Pick<Entry, typeof REQUIRED.EDIT_ENTRY[number]>>
   ): Promise<EditEntryReturnType> {
@@ -537,7 +596,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/services/" + id, params);
+    return this.api.put("/v3/services/" + id, params);
   }
 
   async editTeam(
@@ -587,7 +646,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/services/" + id, params);
+    return this.api.delete("/v3/services/" + id, params);
   }
 
   async deleteUser(
@@ -618,6 +677,18 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v2/entries/" + id, params);
+  }
+
+  async deleteLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.DELETE_LUMPSUM_SERVICE[number]>
+    >
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_LUMPSUM_SERVICE);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/lumpsumservices/" + id, params);
   }
 
   async deleteEntryGroup(
@@ -817,18 +888,35 @@ export type ProjectsReturnType = ResponseWithPaging &
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+
+export type ServiceParams = {
+  /** Filter service by search term */
+  filterFulltext?: string;
+  /** Filter service by active flag */
+  filterActive?: boolean;
+};
 export type ServiceReturnType = { service: Service };
-export type ServicesReturnType = { services: Array<Service> };
+export type ServicesReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "fulltext"> & { services: Array<Service> };
+
 export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
+
+export type LumpsumServiceParams = {
+  /** Filter lumpsum service by search term */
+  filterFulltext?: string;
+  /** Filter lumpsum service by active flag */
+  filterActive?: boolean;
+};
 export type LumpsumServiceReturnType = {
   // This endpoint still uses the old lumpSum casing
   lumpSumService: LumpsumService;
 };
-export type LumpsumServicesReturnType = {
-  // This endpoint still uses the old lumpSum casing
-  lumpSumServices: Array<LumpsumService>;
-};
+export type LumpsumServicesReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "fulltext"> & {
+    // This endpoint still uses the old lumpSum casing
+    lumpSumServices: Array<LumpsumService>;
+  };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
 export type EntryReturnType = { entry: Entry };

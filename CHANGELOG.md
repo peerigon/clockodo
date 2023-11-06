@@ -7,23 +7,20 @@
 
 # [22.0.0](https://github.com/peerigon/clockodo/compare/v21.15.0...v22.0.0) (2023-10-24)
 
-
 ### Features
 
-* Replace deactivate... with delete... ([67e0b33](https://github.com/peerigon/clockodo/commit/67e0b336a342886c04df8a70636c020a58a02f28))
-
+- Replace deactivate... with delete... ([67e0b33](https://github.com/peerigon/clockodo/commit/67e0b336a342886c04df8a70636c020a58a02f28))
 
 ### BREAKING CHANGES
 
-* There are no `deactivate...` methods anymore. In order to deactivate a customer, project, ..., you need to call `edit...` with `active: false`.
+- There are no `deactivate...` methods anymore. In order to deactivate a customer, project, ..., you need to call `edit...` with `active: false`.
 
 # [21.15.0](https://github.com/peerigon/clockodo/compare/v21.14.0...v21.15.0) (2023-10-24)
 
-
 ### Features
 
-* Add overtimecarry endpoint ([db9aca4](https://github.com/peerigon/clockodo/commit/db9aca46e6fec0366767e8c63d3d6509e11381d8))
-* added overtimecarry model and api request ([b062946](https://github.com/peerigon/clockodo/commit/b0629465e8213cd3e5ef8e6e29acf9fa6eb1bab2))
+- Add overtimecarry endpoint ([db9aca4](https://github.com/peerigon/clockodo/commit/db9aca46e6fec0366767e8c63d3d6509e11381d8))
+- added overtimecarry model and api request ([b062946](https://github.com/peerigon/clockodo/commit/b0629465e8213cd3e5ef8e6e29acf9fa6eb1bab2))
 
 # [21.14.0](https://github.com/peerigon/clockodo/compare/v21.13.0...v21.14.0) (2023-10-24)
 
