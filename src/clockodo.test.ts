@@ -895,8 +895,8 @@ describe("Clockodo (instance)", () => {
           .reply(200, {});
 
         await clockodo.addAbsence({
-          dateSince: "2017-08-18 00:00:00",
-          dateUntil: "2018-02-09 00:00:00",
+          dateSince: "2017-08-18",
+          dateUntil: "2018-02-09",
           type: AbsenceType.SpecialLeave,
           note: "elternzeit",
         });
@@ -909,8 +909,8 @@ describe("Clockodo (instance)", () => {
         return expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.addAbsence({
-            dateSince: "2017-08-18 00:00:00",
-            dateUntil: "2018-02-09 00:00:00",
+            dateSince: "2017-08-18",
+            dateUntil: "2018-02-09",
           })
         ).rejects.toThrowError('Missing required parameter "type"');
       });
