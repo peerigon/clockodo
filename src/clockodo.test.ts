@@ -884,8 +884,8 @@ describe("Clockodo (instance)", () => {
     describe("addAbsence()", () => {
       it("correctly builds addAbsence() request", async () => {
         const expectedParameters = {
-          date_since: "2017-08-18 00:00:00",
-          date_until: "2018-02-09 00:00:00",
+          date_since: "2017-08-18",
+          date_until: "2018-02-09",
           type: AbsenceType.SpecialLeave,
           note: "elternzeit",
         };
