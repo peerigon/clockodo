@@ -41,6 +41,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
+import { OvertimecarryRow } from "./models/overtimecarry.js";
 import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { SurchargeModel } from "./models/surchargeModel.js";
@@ -267,11 +268,29 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/services/" + id, remainingParams);
+    return this.api.get("/v3/services/" + id, remainingParams);
   }
 
-  async getServices(params?: Params): Promise<ServicesReturnType> {
-    return this.api.get("/services", params);
+  async getServices(
+    params?: Params<ServiceParams>
+  ): Promise<ResponseWithoutPaging<ServicesReturnType>> {
+    const pages = await this.api.getAllPages<ServicesReturnType>(
+      "/v3/services",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const services = pages.flatMap(({ services }) => services);
+
+    return {
+      ...remainingResponse,
+      services,
+    };
+  }
+
+  async getServicesPage(
+    params?: Params<ServiceParams & ParamsWithPage>
+  ): Promise<ServicesReturnType> {
+    return this.api.get("/v3/services", params);
   }
 
   async getTeam(params: Params<{ id: Team["id"] }>): Promise<TeamReturnType> {
@@ -294,14 +313,33 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/lumpsumservices/" + id, remainingParams);
+    return this.api.get("/v3/lumpsumservices/" + id, remainingParams);
   }
 
   // This endpoint still uses the old lumpSum casing
   async getLumpSumServices(
-    params?: Params
+    params?: Params<LumpsumServiceParams>
+  ): Promise<ResponseWithoutPaging<LumpsumServicesReturnType>> {
+    const pages = await this.api.getAllPages<LumpsumServicesReturnType>(
+      "/v3/lumpsumservices",
+      params
+    );
+    const [{ paging, ...remainingResponse }] = pages;
+    const lumpSumServices = pages.flatMap(
+      ({ lumpSumServices }) => lumpSumServices
+    );
+
+    return {
+      ...remainingResponse,
+      lumpSumServices,
+    };
+  }
+
+  // This endpoint still uses the old lumpSum casing
+  async getLumpSumServicesPage(
+    params?: Params<LumpsumServiceParams & ParamsWithPage>
   ): Promise<LumpsumServicesReturnType> {
-    return this.api.get("/lumpsumservices", params);
+    return this.api.get("/v3/lumpsumservices", params);
   }
 
   async getTargethoursRow(
@@ -325,11 +363,11 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/users/" + id, remainingParams);
+    return this.api.get("/v2/users/" + id, remainingParams);
   }
 
   async getUsers(params?: Params): Promise<UsersReturnType> {
-    return this.api.get("/users", params);
+    return this.api.get("/v2/users", params);
   }
 
   async getSurchargeModel(
@@ -415,6 +453,16 @@ export class Clockodo {
     return this.api.post("/v2/customers", params);
   }
 
+  async addLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.ADD_LUMPSUM_SERVICE[number]>
+    >
+  ): Promise<LumpsumServiceReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE);
+
+    return this.api.post("/v3/lumpsumservices", params);
+  }
+
   async addEntry(
     params: Params<
       | Pick<TimeEntry, typeof REQUIRED.ADD_TIME_ENTRY[number]>
@@ -449,7 +497,7 @@ export class Clockodo {
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
-    return this.api.post("/services", params);
+    return this.api.post("/v3/services", params);
   }
 
   async addTeam(
@@ -465,7 +513,7 @@ export class Clockodo {
   ): Promise<AddUserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
-    return this.api.post("/users", params);
+    return this.api.post("/v2/users", params);
   }
 
   async addSurchargeModel(
@@ -528,6 +576,18 @@ export class Clockodo {
     return this.api.put("/v2/customers/" + id, params);
   }
 
+  async editLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.EDIT_LUMPSUM_SERVICE[number]>
+    >
+  ) {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_LUMPSUM_SERVICE);
+
+    const { id } = params;
+
+    return this.api.put("/v3/lumpsumservices/" + id, params);
+  }
+
   async editEntry(
     params: Params<Pick<Entry, typeof REQUIRED.EDIT_ENTRY[number]>>
   ): Promise<EditEntryReturnType> {
@@ -563,7 +623,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/services/" + id, params);
+    return this.api.put("/v3/services/" + id, params);
   }
 
   async editTeam(
@@ -583,7 +643,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/users/" + id, params);
+    return this.api.put("/v2/users/" + id, params);
   }
 
   async editSurchargeModel(
@@ -598,44 +658,44 @@ export class Clockodo {
     return this.api.put("/v2/surchargeModels/" + id, params);
   }
 
-  async deactivateCustomer(
-    params: Params<Pick<Customer, typeof REQUIRED.DEACTIVATE_CUSTOMER[number]>>
+  async deleteCustomer(
+    params: Params<Pick<Customer, typeof REQUIRED.DELETE_CUSTOMER[number]>>
   ): Promise<CustomerReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_CUSTOMER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_CUSTOMER);
 
     const { id } = params;
 
     return this.api.delete("/v2/customers/" + id, params);
   }
 
-  async deactivateProject(
-    params: Params<Pick<Project, typeof REQUIRED.DEACTIVATE_PROJECT[number]>>
+  async deleteProject(
+    params: Params<Pick<Project, typeof REQUIRED.DELETE_PROJECT[number]>>
   ): Promise<ProjectReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_PROJECT);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_PROJECT);
 
     const { id } = params;
 
     return this.api.delete("/v2/projects/" + id, params);
   }
 
-  async deactivateService(
-    params: Params<Pick<Service, typeof REQUIRED.DEACTIVATE_SERVICE[number]>>
+  async deleteService(
+    params: Params<Pick<Service, typeof REQUIRED.DELETE_SERVICE[number]>>
   ): Promise<ServiceReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_SERVICE);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SERVICE);
 
     const { id } = params;
 
-    return this.api.delete("/services/" + id, params);
+    return this.api.delete("/v3/services/" + id, params);
   }
 
-  async deactivateUser(
-    params: Params<Pick<User, typeof REQUIRED.DEACTIVATE_USER[number]>>
+  async deleteUser(
+    params: Params<Pick<User, typeof REQUIRED.DELETE_USER[number]>>
   ): Promise<UserReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DEACTIVATE_USER);
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_USER);
 
     const { id } = params;
 
-    return this.api.delete("/users/" + id, params);
+    return this.api.delete("/v2/users/" + id, params);
   }
 
   async deleteSurchargeModel(
@@ -668,6 +728,18 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v2/entries/" + id, params);
+  }
+
+  async deleteLumpsumService(
+    params: Params<
+      Pick<LumpsumService, typeof REQUIRED.DELETE_LUMPSUM_SERVICE[number]>
+    >
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_LUMPSUM_SERVICE);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/lumpsumservices/" + id, params);
   }
 
   async deleteEntryGroup(
@@ -819,6 +891,12 @@ export class Clockodo {
     );
   }
 
+  async getOvertimecarry(
+    params?: Params<OvertimecarryRowParams>
+  ): Promise<OvertimecarryRowReturnType> {
+    return this.api.get("/overtimecarry", params);
+  }
+
   async getHolidaysquota(
     params?: Params<HolidaysquotaRowParams>
   ): Promise<HolidaysquotaRowReturnType> {
@@ -861,18 +939,35 @@ export type ProjectsReturnType = ResponseWithPaging &
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+
+export type ServiceParams = {
+  /** Filter service by search term */
+  filterFulltext?: string;
+  /** Filter service by active flag */
+  filterActive?: boolean;
+};
 export type ServiceReturnType = { service: Service };
-export type ServicesReturnType = { services: Array<Service> };
+export type ServicesReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "fulltext"> & { services: Array<Service> };
+
 export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
+
+export type LumpsumServiceParams = {
+  /** Filter lumpsum service by search term */
+  filterFulltext?: string;
+  /** Filter lumpsum service by active flag */
+  filterActive?: boolean;
+};
 export type LumpsumServiceReturnType = {
   // This endpoint still uses the old lumpSum casing
   lumpSumService: LumpsumService;
 };
-export type LumpsumServicesReturnType = {
-  // This endpoint still uses the old lumpSum casing
-  lumpSumServices: Array<LumpsumService>;
-};
+export type LumpsumServicesReturnType = ResponseWithPaging &
+  ResponseWithFilter<"active" | "fulltext"> & {
+    // This endpoint still uses the old lumpSum casing
+    lumpSumServices: Array<LumpsumService>;
+  };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
 export type SurchargeModelReturnType = { surchargeModel: SurchargeModel };
@@ -1122,6 +1217,16 @@ export type AddWorkTimesChangeRequestReturnType =
        **/
       replacedChangeRequest: null;
     };
+
+export type OvertimecarryRowReturnType = {
+  overtimecarry: Array<OvertimecarryRow>;
+};
+export type OvertimecarryRowParams = {
+  /** The user ID by which the overtime carry rows should be filtered */
+  usersId?: number;
+  /** The year to which the data should be restricted to */
+  year?: number;
+};
 
 export type HolidaysquotaRowReturnType = {
   holidaysquota: Array<HolidaysquotaRow>;
