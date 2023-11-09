@@ -11,7 +11,7 @@ export * from "./models/holidaysquota.js";
 export * from "./models/lumpsumService.js";
 export * from "./models/nonbusinessDay.js";
 export * from "./models/nonbusinessGroup.js";
-export * from "./models/overtimecarry.js";
+export * from "./models/overtimeCarry.js";
 export * from "./models/overtimeReduction.js";
 export * from "./models/project.js";
 export * from "./models/service.js";

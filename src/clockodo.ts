@@ -41,7 +41,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
-import { OvertimeCarry } from "./models/overtimecarry.js";
+import { OvertimeCarry } from "./models/overtimeCarry.js";
 import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimeReduction } from "./models/overtimeReduction.js";
