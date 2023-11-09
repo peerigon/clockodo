@@ -659,19 +659,19 @@ describe("Clockodo (instance)", () => {
           .get("/overtimecarry?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
+        await clockodo.getOvertimeCarry({ usersId: 17, year: 2028 });
 
         nockScope.done();
       });
     });
 
-    describe("getOvertimereduced()", () => {
-      it("correctly builds getOvertimereduced() request", async () => {
+    describe("getOvertimeReductions()", () => {
+      it("correctly builds getOvertimeReductions() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/overtimereduced?users_id=17&year=2028")
+          .get("/overtimeReductions?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getOvertimereduced({ usersId: 17, year: 2028 });
+        await clockodo.getOvertimeReductions({ usersId: 17, year: 2028 });
 
         nockScope.done();
       });

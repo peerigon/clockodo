@@ -1,13 +1,13 @@
 import { IsoDate } from "./dateTime.js";
 
-export type OvertimereducedRow = {
-  /** The ID of the overtime reduced row */
+export type OvertimeReduction = {
+  /** The ID of the overtime reduction */
   id: number;
   /** The related employee's ID */
   usersId: number;
-  /** The user who added the over time reduced */
+  /** The user who added the overtime reduction */
   usersIdAdded: number;
-  /** The date when the overtime reduced was added */
+  /** The date when the overtime reduction was added */
   dateAdded: IsoDate;
   /** Number of hours */
   hours: number;

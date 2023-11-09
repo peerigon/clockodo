@@ -1,4 +1,4 @@
-export type OvertimecarryRow = {
+export type OvertimeCarry = {
   /** The related employee's ID */
   usersId: number;
   /**

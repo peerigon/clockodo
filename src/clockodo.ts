@@ -41,10 +41,10 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
-import { OvertimecarryRow } from "./models/overtimecarry.js";
+import { OvertimeCarry } from "./models/overtimecarry.js";
 import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
-import { OvertimereducedRow } from "./models/overtimereduced.js";
+import { OvertimeReduction } from "./models/overtimeReduction.js";
 
 export class Clockodo {
   api: Api;
@@ -841,9 +841,9 @@ export class Clockodo {
     );
   }
 
-  async getOvertimecarry(
-    params?: Params<OvertimecarryRowParams>
-  ): Promise<OvertimecarryRowReturnType> {
+  async getOvertimeCarry(
+    params?: Params<OvertimeCarryParams>
+  ): Promise<OvertimeCarryReturnType> {
     return this.api.get("/overtimecarry", params);
   }
 
@@ -859,10 +859,10 @@ export class Clockodo {
     return this.api.get("/holidayscarry", params);
   }
 
-  async getOvertimereduced(
-    params?: Params<OvertimereducedRowParams>
-  ): Promise<OvertimereducedRowReturnType> {
-    return this.api.get("/overtimereduced", params);
+  async getOvertimeReductions(
+    params?: Params<OvertimeReductionsParams>
+  ): Promise<OvertimeReductionsReturnType> {
+    return this.api.get("/overtimeReductions", params);
   }
 }
 
@@ -1170,21 +1170,22 @@ export type AddWorkTimesChangeRequestReturnType =
       replacedChangeRequest: null;
     };
 
-export type OvertimecarryRowReturnType = {
-  overtimecarry: Array<OvertimecarryRow>;
+export type OvertimeCarryReturnType = {
+  overtimecarry: Array<OvertimeCarry>;
 };
-export type OvertimecarryRowParams = {
+export type OvertimeCarryParams = {
   /** The user ID by which the overtime carry rows should be filtered */
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
 };
 
-export type OvertimereducedRowReturnType = {
-  overtimereduced: Array<OvertimereducedRow>;
+export type OvertimeReductionsReturnType = {
+  overtimeReductions: Array<OvertimeReduction>;
 };
-export type OvertimereducedRowParams = {
+export type OvertimeReductionsParams = {
   /** The user ID by which the overtime reduced rows should be filtered */
+  usersId?: number;
 };
 
 export type HolidaysquotaRowReturnType = {

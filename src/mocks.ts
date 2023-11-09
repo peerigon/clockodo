@@ -10,7 +10,7 @@ export * from "./models/lumpsumService.mocks.js";
 export * from "./models/service.mocks.js";
 export * from "./models/nonbusinessDay.mocks.js";
 export * from "./models/overtimecarry.mocks.js";
-export * from "./models/overtimereduced.mocks.js";
+export * from "./models/overtimeReduction.mocks.js";
 export * from "./models/project.mocks.js";
 // export * from "./models/service.mocks.js";
 export * from "./models/targethours.mocks.js";
