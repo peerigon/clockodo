@@ -1,240 +1,246 @@
-# [21.13.0](https://github.com/peerigon/clockodo/compare/v21.12.0...v21.13.0) (2023-10-16)
-
+# [22.2.0](https://github.com/peerigon/clockodo/compare/v22.1.0...v22.2.0) (2023-11-06)
 
 ### Features
 
-* expand workTimes model with new property ([828a6e7](https://github.com/peerigon/clockodo/commit/828a6e7ed0065c9195b8df260ccb97b07eb7509a))
+- Use v3 API for services and lumpsum services ([#131](https://github.com/peerigon/clockodo/issues/131)) ([1a8ba9d](https://github.com/peerigon/clockodo/commit/1a8ba9d1fad6a6251a1116a39bfd1886a048bce1))
+
+# [22.1.0](https://github.com/peerigon/clockodo/compare/v22.0.0...v22.1.0) (2023-11-06)
+
+### Features
+
+- Add testData property to targethoursRow ([#140](https://github.com/peerigon/clockodo/issues/140)) ([9c2e511](https://github.com/peerigon/clockodo/commit/9c2e5119004eeb89c95b53e42815e95fbf5e071e))
+
+# [22.0.0](https://github.com/peerigon/clockodo/compare/v21.15.0...v22.0.0) (2023-10-24)
+
+### Features
+
+- Replace deactivate... with delete... ([67e0b33](https://github.com/peerigon/clockodo/commit/67e0b336a342886c04df8a70636c020a58a02f28))
+
+### BREAKING CHANGES
+
+- There are no `deactivate...` methods anymore. In order to deactivate a customer, project, ..., you need to call `edit...` with `active: false`.
+
+# [21.15.0](https://github.com/peerigon/clockodo/compare/v21.14.0...v21.15.0) (2023-10-24)
+
+### Features
+
+- Add overtimecarry endpoint ([db9aca4](https://github.com/peerigon/clockodo/commit/db9aca46e6fec0366767e8c63d3d6509e11381d8))
+- added overtimecarry model and api request ([b062946](https://github.com/peerigon/clockodo/commit/b0629465e8213cd3e5ef8e6e29acf9fa6eb1bab2))
+
+# [21.14.0](https://github.com/peerigon/clockodo/compare/v21.13.0...v21.14.0) (2023-10-24)
+
+### Features
+
+- Add holidaysquota and holidayscarry endpoints ([f342c2f](https://github.com/peerigon/clockodo/commit/f342c2fe9e6a2dbcb23ce0fb5181f3a5f9c26494)), closes [#31](https://github.com/peerigon/clockodo/issues/31)
+
+# [21.13.0](https://github.com/peerigon/clockodo/compare/v21.12.0...v21.13.0) (2023-10-16)
+
+### Features
+
+- expand workTimes model with new property ([828a6e7](https://github.com/peerigon/clockodo/commit/828a6e7ed0065c9195b8df260ccb97b07eb7509a))
 
 # [21.12.0](https://github.com/peerigon/clockodo/compare/v21.11.0...v21.12.0) (2023-09-26)
 
-
 ### Features
 
-* nonbusinessgroupsId is now optional for getNonbusinessDays ([fe6384a](https://github.com/peerigon/clockodo/commit/fe6384a93e528f3c8e18ff4acf529f1a109a8792))
-* nonbusinessgroupsId is now optional for the getNonbusinessDays API call ([cf98a8c](https://github.com/peerigon/clockodo/commit/cf98a8c4bf0ab099ac8840cb372aa24e01d79dd5))
+- nonbusinessgroupsId is now optional for getNonbusinessDays ([fe6384a](https://github.com/peerigon/clockodo/commit/fe6384a93e528f3c8e18ff4acf529f1a109a8792))
+- nonbusinessgroupsId is now optional for the getNonbusinessDays API call ([cf98a8c](https://github.com/peerigon/clockodo/commit/cf98a8c4bf0ab099ac8840cb372aa24e01d79dd5))
 
 # [21.11.0](https://github.com/peerigon/clockodo/compare/v21.10.4...v21.11.0) (2023-09-14)
 
-
 ### Features
 
-* Company expansion ([065fc38](https://github.com/peerigon/clockodo/commit/065fc3802bfcf2e46c7d2dccb15b1c1c54a41f87))
+- Company expansion ([065fc38](https://github.com/peerigon/clockodo/commit/065fc3802bfcf2e46c7d2dccb15b1c1c54a41f87))
 
 ## [21.10.4](https://github.com/peerigon/clockodo/compare/v21.10.3...v21.10.4) (2023-09-13)
 
-
 ### Bug Fixes
 
-* Incorrect pagination types ([d5ddd74](https://github.com/peerigon/clockodo/commit/d5ddd745ecff9449e5415891931aa671b54c9d9c))
-* Incorrect pagination types ([412d610](https://github.com/peerigon/clockodo/commit/412d610e7c2dd3eab8d9a75ae2d92c0c2bc98314))
+- Incorrect pagination types ([d5ddd74](https://github.com/peerigon/clockodo/commit/d5ddd745ecff9449e5415891931aa671b54c9d9c))
+- Incorrect pagination types ([412d610](https://github.com/peerigon/clockodo/commit/412d610e7c2dd3eab8d9a75ae2d92c0c2bc98314))
 
 ## [21.10.3](https://github.com/peerigon/clockodo/compare/v21.10.2...v21.10.3) (2023-09-13)
 
-
 ### Bug Fixes
 
-* Incorrect AccessToCustomersProjects type ([a3c9574](https://github.com/peerigon/clockodo/commit/a3c957460e950be661a08a1987f4a75c07b7bebe))
-* make top-level props accept false ([3c31fa3](https://github.com/peerigon/clockodo/commit/3c31fa3b86b1aa11a372a9b51d8467872791325a))
+- Incorrect AccessToCustomersProjects type ([a3c9574](https://github.com/peerigon/clockodo/commit/a3c957460e950be661a08a1987f4a75c07b7bebe))
+- make top-level props accept false ([3c31fa3](https://github.com/peerigon/clockodo/commit/3c31fa3b86b1aa11a372a9b51d8467872791325a))
 
 ## [21.10.2](https://github.com/peerigon/clockodo/compare/v21.10.1...v21.10.2) (2023-09-13)
 
-
 ### Bug Fixes
 
-* Incorrect type of company.worktimeForceBreaks ([2c699dd](https://github.com/peerigon/clockodo/commit/2c699dd32672a9d10887c8c266f437181767ebb2))
-* move comments ([f281997](https://github.com/peerigon/clockodo/commit/f28199714131d2b8ec187b94263d81b63e0c3f12))
-* use work time force breaks enum ([3a7b396](https://github.com/peerigon/clockodo/commit/3a7b3963aa149e977185eefd092dc8156df77e05))
+- Incorrect type of company.worktimeForceBreaks ([2c699dd](https://github.com/peerigon/clockodo/commit/2c699dd32672a9d10887c8c266f437181767ebb2))
+- move comments ([f281997](https://github.com/peerigon/clockodo/commit/f28199714131d2b8ec187b94263d81b63e0c3f12))
+- use work time force breaks enum ([3a7b396](https://github.com/peerigon/clockodo/commit/3a7b3963aa149e977185eefd092dc8156df77e05))
 
 ## [21.10.1](https://github.com/peerigon/clockodo/compare/v21.10.0...v21.10.1) (2023-09-12)
 
-
 ### Bug Fixes
 
-* Add missing exports ([7ab415e](https://github.com/peerigon/clockodo/commit/7ab415e286f5371cdcb1007d542a4528af33b902))
-* Add missing exports ([2e1f654](https://github.com/peerigon/clockodo/commit/2e1f654be533116ed0350e5f2f1626dedb6f8f36))
+- Add missing exports ([7ab415e](https://github.com/peerigon/clockodo/commit/7ab415e286f5371cdcb1007d542a4528af33b902))
+- Add missing exports ([2e1f654](https://github.com/peerigon/clockodo/commit/2e1f654be533116ed0350e5f2f1626dedb6f8f36))
 
 # [21.10.0](https://github.com/peerigon/clockodo/compare/v21.9.0...v21.10.0) (2023-09-12)
 
-
 ### Features
 
-* Add upcoming `allowEntryOverlaps` to company type ([5b76f64](https://github.com/peerigon/clockodo/commit/5b76f64db5ad6f197c9957c92a6e25f55d87ca8c))
-* Add upcoming allowEntryOverlaps to company type ([73ee73c](https://github.com/peerigon/clockodo/commit/73ee73c369213c1d2f59d0926aa821b75a769d40))
+- Add upcoming `allowEntryOverlaps` to company type ([5b76f64](https://github.com/peerigon/clockodo/commit/5b76f64db5ad6f197c9957c92a6e25f55d87ca8c))
+- Add upcoming allowEntryOverlaps to company type ([73ee73c](https://github.com/peerigon/clockodo/commit/73ee73c369213c1d2f59d0926aa821b75a769d40))
 
 # [21.9.0](https://github.com/peerigon/clockodo/compare/v21.8.0...v21.9.0) (2023-09-06)
 
-
 ### Features
 
-* adjust absence, targethours and nonbusinessday APIs to handle multiple ids at once ([b571c21](https://github.com/peerigon/clockodo/commit/b571c214803df4c0c16ed4d601b039ec837310bc))
-* Support filtering by multiple ids ([567bb22](https://github.com/peerigon/clockodo/commit/567bb22a8ae4681e8c88028af24578f933360cba))
+- adjust absence, targethours and nonbusinessday APIs to handle multiple ids at once ([b571c21](https://github.com/peerigon/clockodo/commit/b571c214803df4c0c16ed4d601b039ec837310bc))
+- Support filtering by multiple ids ([567bb22](https://github.com/peerigon/clockodo/commit/567bb22a8ae4681e8c88028af24578f933360cba))
 
 # [21.8.0](https://github.com/peerigon/clockodo/compare/v21.7.0...v21.8.0) (2023-09-06)
 
-
 ### Features
 
-* edit test for omitted billable feature ([d8689ad](https://github.com/peerigon/clockodo/commit/d8689adab8ecbd0b28bb7f2c8a5632d2ca4a4410))
-* support default configured billable ([da085fa](https://github.com/peerigon/clockodo/commit/da085faebfa9159d553824552ee604b6094237c3))
-* Support omitting billable from startClock() ([6b73818](https://github.com/peerigon/clockodo/commit/6b73818fdd9138223ee7d6bef5c467534ca431dd))
+- edit test for omitted billable feature ([d8689ad](https://github.com/peerigon/clockodo/commit/d8689adab8ecbd0b28bb7f2c8a5632d2ca4a4410))
+- support default configured billable ([da085fa](https://github.com/peerigon/clockodo/commit/da085faebfa9159d553824552ee604b6094237c3))
+- Support omitting billable from startClock() ([6b73818](https://github.com/peerigon/clockodo/commit/6b73818fdd9138223ee7d6bef5c467534ca431dd))
 
 # [21.7.0](https://github.com/peerigon/clockodo/compare/v21.6.0...v21.7.0) (2023-08-09)
 
-
 ### Features
 
-* expose nonbusiness group model ([eb4e568](https://github.com/peerigon/clockodo/commit/eb4e568dfa2aaec4401c8d8ef1a67f6bcfbe6ebb))
+- expose nonbusiness group model ([eb4e568](https://github.com/peerigon/clockodo/commit/eb4e568dfa2aaec4401c8d8ef1a67f6bcfbe6ebb))
 
 # [21.6.0](https://github.com/peerigon/clockodo/compare/v21.5.1...v21.6.0) (2023-07-28)
 
-
 ### Bug Fixes
 
-* make mocks more consistent ([1fd9177](https://github.com/peerigon/clockodo/commit/1fd91773ab079bcfaccb47361807bc9f169bcda0))
-
+- make mocks more consistent ([1fd9177](https://github.com/peerigon/clockodo/commit/1fd91773ab079bcfaccb47361807bc9f169bcda0))
 
 ### Features
 
-* add declined props ([1d80925](https://github.com/peerigon/clockodo/commit/1d80925c2c6de61c4fb4f8da65fb60f89068560a))
+- add declined props ([1d80925](https://github.com/peerigon/clockodo/commit/1d80925c2c6de61c4fb4f8da65fb60f89068560a))
 
 ## [21.5.1](https://github.com/peerigon/clockodo/compare/v21.5.0...v21.5.1) (2023-07-19)
 
-
 ### Bug Fixes
 
-* Incorrect absence and user types ([91a00b8](https://github.com/peerigon/clockodo/commit/91a00b89d6e18d6cbe3fbee8625a54e9c1223ae9))
+- Incorrect absence and user types ([91a00b8](https://github.com/peerigon/clockodo/commit/91a00b89d6e18d6cbe3fbee8625a54e9c1223ae9))
 
 # [21.5.0](https://github.com/peerigon/clockodo/compare/v21.4.0...v21.5.0) (2023-07-11)
 
-
 ### Bug Fixes
 
-* Remove status from required properties of addWorkTimesChangeRequest() ([40bd5cd](https://github.com/peerigon/clockodo/commit/40bd5cd15913f2579cb8c23110dde8d8992c39ca))
-* Remove status from required properties of addWorkTimesChangeRequest() ([65dbd8e](https://github.com/peerigon/clockodo/commit/65dbd8eb6a7815100291421569cabffbeb575a74))
-
+- Remove status from required properties of addWorkTimesChangeRequest() ([40bd5cd](https://github.com/peerigon/clockodo/commit/40bd5cd15913f2579cb8c23110dde8d8992c39ca))
+- Remove status from required properties of addWorkTimesChangeRequest() ([65dbd8e](https://github.com/peerigon/clockodo/commit/65dbd8eb6a7815100291421569cabffbeb575a74))
 
 ### Features
 
-* add optional param to type ([d4cb3c6](https://github.com/peerigon/clockodo/commit/d4cb3c604300406832d6192e52293a5ea88178c4))
-* Improve types of getTargethours() ([3ecfb8f](https://github.com/peerigon/clockodo/commit/3ecfb8ffd549dbf2fbb7faeb0006c9597854b492))
+- add optional param to type ([d4cb3c6](https://github.com/peerigon/clockodo/commit/d4cb3c604300406832d6192e52293a5ea88178c4))
+- Improve types of getTargethours() ([3ecfb8f](https://github.com/peerigon/clockodo/commit/3ecfb8ffd549dbf2fbb7faeb0006c9597854b492))
 
 # [21.4.0](https://github.com/peerigon/clockodo/compare/v21.3.0...v21.4.0) (2023-07-10)
 
-
 ### Features
 
-* add boss prop to user model ([dcc7e15](https://github.com/peerigon/clockodo/commit/dcc7e15ccf4de2af52d1c896aa315803ffddea71))
-* Add boss reference to user model ([aa66df7](https://github.com/peerigon/clockodo/commit/aa66df7838f60d4e27736c22a629f9f98aca41e1))
+- add boss prop to user model ([dcc7e15](https://github.com/peerigon/clockodo/commit/dcc7e15ccf4de2af52d1c896aa315803ffddea71))
+- Add boss reference to user model ([aa66df7](https://github.com/peerigon/clockodo/commit/aa66df7838f60d4e27736c22a629f9f98aca41e1))
 
 # [21.3.0](https://github.com/peerigon/clockodo/compare/v21.2.0...v21.3.0) (2023-07-10)
 
-
 ### Bug Fixes
 
-* Use v2 endpoint for entrygroups (and adjust types) ([1647db4](https://github.com/peerigon/clockodo/commit/1647db4fe0e3f844be2afb54d4139d6c1a1a5dbb))
-
+- Use v2 endpoint for entrygroups (and adjust types) ([1647db4](https://github.com/peerigon/clockodo/commit/1647db4fe0e3f844be2afb54d4139d6c1a1a5dbb))
 
 ### Features
 
-* update entrygroups endpoints ([82ff3b4](https://github.com/peerigon/clockodo/commit/82ff3b41152ea476afb1cae57c24bb1a6d3ec527))
+- update entrygroups endpoints ([82ff3b4](https://github.com/peerigon/clockodo/commit/82ff3b41152ea476afb1cae57c24bb1a6d3ec527))
 
 # [21.2.0](https://github.com/peerigon/clockodo/compare/v21.1.0...v21.2.0) (2023-06-07)
 
-
 ### Bug Fixes
 
-* rename workTimeEditLock prop ([4d83f26](https://github.com/peerigon/clockodo/commit/4d83f26f0d2cc9a92b51340e785e2ce52bdcd2f5))
-
+- rename workTimeEditLock prop ([4d83f26](https://github.com/peerigon/clockodo/commit/4d83f26f0d2cc9a92b51340e785e2ce52bdcd2f5))
 
 ### Features
 
-* add status prop to change request model ([315a4a0](https://github.com/peerigon/clockodo/commit/315a4a0db94c89de7665669db9846623d8a7a613))
+- add status prop to change request model ([315a4a0](https://github.com/peerigon/clockodo/commit/315a4a0db94c89de7665669db9846623d8a7a613))
 
 # [21.1.0](https://github.com/peerigon/clockodo/compare/v21.0.1...v21.1.0) (2023-06-01)
 
-
 ### Features
 
-* add withdrawWorkTimeChangeRequest method ([#105](https://github.com/peerigon/clockodo/issues/105)) ([1b5eade](https://github.com/peerigon/clockodo/commit/1b5eade65f6a96e23f4add258bab56db64788446))
+- add withdrawWorkTimeChangeRequest method ([#105](https://github.com/peerigon/clockodo/issues/105)) ([1b5eade](https://github.com/peerigon/clockodo/commit/1b5eade65f6a96e23f4add258bab56db64788446))
 
 ## [21.0.1](https://github.com/peerigon/clockodo/compare/v21.0.0...v21.0.1) (2023-04-11)
 
-
 ### Bug Fixes
 
-* Missing README on NPM ([fcdb878](https://github.com/peerigon/clockodo/commit/fcdb878e23cb1fae5c72460ebaca12cf0c884db5))
+- Missing README on NPM ([fcdb878](https://github.com/peerigon/clockodo/commit/fcdb878e23cb1fae5c72460ebaca12cf0c884db5))
 
 # [21.0.0](https://github.com/peerigon/clockodo/compare/v20.0.0...v21.0.0) (2023-04-11)
 
-
 ### Bug Fixes
 
-* add approvedImmediately=false case ([2cb939b](https://github.com/peerigon/clockodo/commit/2cb939b0ab2d67f2525ddc9a856155f59885a7a1))
-* add comment ([781c6a1](https://github.com/peerigon/clockodo/commit/781c6a186b6603b983d7460960b34eb877f37a63))
-* add mock functions export ([53c38a4](https://github.com/peerigon/clockodo/commit/53c38a46b515ec16cc398483667174d0f880421d))
-* add mocks for workTimes ([6752007](https://github.com/peerigon/clockodo/commit/675200770834008596a362afbbdc8e66794f571d))
-* change error message to have type correctly ([2f2c88e](https://github.com/peerigon/clockodo/commit/2f2c88e6a912a05704ddda9ded4e2b48482de207))
-* correct return type of approve/decline ([671d4c0](https://github.com/peerigon/clockodo/commit/671d4c096c2395add676d7f85fe20952f8995ec1))
-* Improve AddWorkTimesChangeRequestReturnType type ([0620097](https://github.com/peerigon/clockodo/commit/06200974909f5b3ccdb9eae26def31f383bca5f5))
-* Incorrect param type of addWorkTimesChangeRequest() ([18fddb1](https://github.com/peerigon/clockodo/commit/18fddb1ba5aadfb5ddb91cd8304ce77d92d16a12))
-* make mock generation slimmer ([09016c9](https://github.com/peerigon/clockodo/commit/09016c91a6e128844f3b69390c83f8f0eb1ef141))
-* reflect concept changes ([8ba8355](https://github.com/peerigon/clockodo/commit/8ba83554efdfcb53f9019ab43a5fe00160a12ee1))
-* return single mock instead of array ([fee1ff2](https://github.com/peerigon/clockodo/commit/fee1ff2a582e86e60c228385be5316bada150c32))
-* update user mock ([1a4864e](https://github.com/peerigon/clockodo/commit/1a4864e3d1fc78d1adf2cffb1968fcab604f66df))
-
+- add approvedImmediately=false case ([2cb939b](https://github.com/peerigon/clockodo/commit/2cb939b0ab2d67f2525ddc9a856155f59885a7a1))
+- add comment ([781c6a1](https://github.com/peerigon/clockodo/commit/781c6a186b6603b983d7460960b34eb877f37a63))
+- add mock functions export ([53c38a4](https://github.com/peerigon/clockodo/commit/53c38a46b515ec16cc398483667174d0f880421d))
+- add mocks for workTimes ([6752007](https://github.com/peerigon/clockodo/commit/675200770834008596a362afbbdc8e66794f571d))
+- change error message to have type correctly ([2f2c88e](https://github.com/peerigon/clockodo/commit/2f2c88e6a912a05704ddda9ded4e2b48482de207))
+- correct return type of approve/decline ([671d4c0](https://github.com/peerigon/clockodo/commit/671d4c096c2395add676d7f85fe20952f8995ec1))
+- Improve AddWorkTimesChangeRequestReturnType type ([0620097](https://github.com/peerigon/clockodo/commit/06200974909f5b3ccdb9eae26def31f383bca5f5))
+- Incorrect param type of addWorkTimesChangeRequest() ([18fddb1](https://github.com/peerigon/clockodo/commit/18fddb1ba5aadfb5ddb91cd8304ce77d92d16a12))
+- make mock generation slimmer ([09016c9](https://github.com/peerigon/clockodo/commit/09016c91a6e128844f3b69390c83f8f0eb1ef141))
+- reflect concept changes ([8ba8355](https://github.com/peerigon/clockodo/commit/8ba83554efdfcb53f9019ab43a5fe00160a12ee1))
+- return single mock instead of array ([fee1ff2](https://github.com/peerigon/clockodo/commit/fee1ff2a582e86e60c228385be5316bada150c32))
+- update user mock ([1a4864e](https://github.com/peerigon/clockodo/commit/1a4864e3d1fc78d1adf2cffb1968fcab604f66df))
 
 ### Features
 
-* add workTimeEditLock prop to User ([89c3c86](https://github.com/peerigon/clockodo/commit/89c3c86bfe61953e94436ffbd00ef319d74c29fb))
-* Add workTimes API methods ([#101](https://github.com/peerigon/clockodo/issues/101)) ([8bbca40](https://github.com/peerigon/clockodo/commit/8bbca40cd69a3ffc8ca6031e97fee9517c91b667))
-* add workTimes types ([4c8f6e4](https://github.com/peerigon/clockodo/commit/4c8f6e44649a8e3f26d3f723eade7d3c5e06eec5))
-* expand change request return type ([d337cc3](https://github.com/peerigon/clockodo/commit/d337cc30e512238ae9b2b0f75837fb13e29e7499))
-* Expose team types ([952f700](https://github.com/peerigon/clockodo/commit/952f70017ee7d037670ac6ee493e07eb7a59afe6))
-* Improve workTimes mocks ([3499590](https://github.com/peerigon/clockodo/commit/34995901a1a87054afd7592fd38eccfb772b6721))
-* Introduce special IsoDate and IsoUtcDateTime types ([6fe88e2](https://github.com/peerigon/clockodo/commit/6fe88e240c480466ae8a83748128d27dd8601609))
-* parametrize user mock's workTimeEditLock ([f976f7f](https://github.com/peerigon/clockodo/commit/f976f7f00f42e4c36c713cbb899640f56d1c59a8))
-* Update Node ([40f81b6](https://github.com/peerigon/clockodo/commit/40f81b66c53f9b8dd4afd2f2919a359615dceb13))
-
+- add workTimeEditLock prop to User ([89c3c86](https://github.com/peerigon/clockodo/commit/89c3c86bfe61953e94436ffbd00ef319d74c29fb))
+- Add workTimes API methods ([#101](https://github.com/peerigon/clockodo/issues/101)) ([8bbca40](https://github.com/peerigon/clockodo/commit/8bbca40cd69a3ffc8ca6031e97fee9517c91b667))
+- add workTimes types ([4c8f6e4](https://github.com/peerigon/clockodo/commit/4c8f6e44649a8e3f26d3f723eade7d3c5e06eec5))
+- expand change request return type ([d337cc3](https://github.com/peerigon/clockodo/commit/d337cc30e512238ae9b2b0f75837fb13e29e7499))
+- Expose team types ([952f700](https://github.com/peerigon/clockodo/commit/952f70017ee7d037670ac6ee493e07eb7a59afe6))
+- Improve workTimes mocks ([3499590](https://github.com/peerigon/clockodo/commit/34995901a1a87054afd7592fd38eccfb772b6721))
+- Introduce special IsoDate and IsoUtcDateTime types ([6fe88e2](https://github.com/peerigon/clockodo/commit/6fe88e240c480466ae8a83748128d27dd8601609))
+- parametrize user mock's workTimeEditLock ([f976f7f](https://github.com/peerigon/clockodo/commit/f976f7f00f42e4c36c713cbb899640f56d1c59a8))
+- Update Node ([40f81b6](https://github.com/peerigon/clockodo/commit/40f81b66c53f9b8dd4afd2f2919a359615dceb13))
 
 ### BREAKING CHANGES
 
-* Removed official Node 14 support. We don't know of an actual breaking change for Node 14, but it might happen in future releases.
+- Removed official Node 14 support. We don't know of an actual breaking change for Node 14, but it might happen in future releases.
 
 # [21.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v20.0.0...v21.0.0-beta.1) (2023-04-11)
 
-
 ### Bug Fixes
 
-* add approvedImmediately=false case ([2cb939b](https://github.com/peerigon/clockodo/commit/2cb939b0ab2d67f2525ddc9a856155f59885a7a1))
-* add comment ([781c6a1](https://github.com/peerigon/clockodo/commit/781c6a186b6603b983d7460960b34eb877f37a63))
-* add mock functions export ([53c38a4](https://github.com/peerigon/clockodo/commit/53c38a46b515ec16cc398483667174d0f880421d))
-* add mocks for workTimes ([6752007](https://github.com/peerigon/clockodo/commit/675200770834008596a362afbbdc8e66794f571d))
-* change error message to have type correctly ([2f2c88e](https://github.com/peerigon/clockodo/commit/2f2c88e6a912a05704ddda9ded4e2b48482de207))
-* correct return type of approve/decline ([671d4c0](https://github.com/peerigon/clockodo/commit/671d4c096c2395add676d7f85fe20952f8995ec1))
-* Improve AddWorkTimesChangeRequestReturnType type ([0620097](https://github.com/peerigon/clockodo/commit/06200974909f5b3ccdb9eae26def31f383bca5f5))
-* Incorrect param type of addWorkTimesChangeRequest() ([18fddb1](https://github.com/peerigon/clockodo/commit/18fddb1ba5aadfb5ddb91cd8304ce77d92d16a12))
-* make mock generation slimmer ([09016c9](https://github.com/peerigon/clockodo/commit/09016c91a6e128844f3b69390c83f8f0eb1ef141))
-* reflect concept changes ([8ba8355](https://github.com/peerigon/clockodo/commit/8ba83554efdfcb53f9019ab43a5fe00160a12ee1))
-* return single mock instead of array ([fee1ff2](https://github.com/peerigon/clockodo/commit/fee1ff2a582e86e60c228385be5316bada150c32))
-* update user mock ([1a4864e](https://github.com/peerigon/clockodo/commit/1a4864e3d1fc78d1adf2cffb1968fcab604f66df))
-
+- add approvedImmediately=false case ([2cb939b](https://github.com/peerigon/clockodo/commit/2cb939b0ab2d67f2525ddc9a856155f59885a7a1))
+- add comment ([781c6a1](https://github.com/peerigon/clockodo/commit/781c6a186b6603b983d7460960b34eb877f37a63))
+- add mock functions export ([53c38a4](https://github.com/peerigon/clockodo/commit/53c38a46b515ec16cc398483667174d0f880421d))
+- add mocks for workTimes ([6752007](https://github.com/peerigon/clockodo/commit/675200770834008596a362afbbdc8e66794f571d))
+- change error message to have type correctly ([2f2c88e](https://github.com/peerigon/clockodo/commit/2f2c88e6a912a05704ddda9ded4e2b48482de207))
+- correct return type of approve/decline ([671d4c0](https://github.com/peerigon/clockodo/commit/671d4c096c2395add676d7f85fe20952f8995ec1))
+- Improve AddWorkTimesChangeRequestReturnType type ([0620097](https://github.com/peerigon/clockodo/commit/06200974909f5b3ccdb9eae26def31f383bca5f5))
+- Incorrect param type of addWorkTimesChangeRequest() ([18fddb1](https://github.com/peerigon/clockodo/commit/18fddb1ba5aadfb5ddb91cd8304ce77d92d16a12))
+- make mock generation slimmer ([09016c9](https://github.com/peerigon/clockodo/commit/09016c91a6e128844f3b69390c83f8f0eb1ef141))
+- reflect concept changes ([8ba8355](https://github.com/peerigon/clockodo/commit/8ba83554efdfcb53f9019ab43a5fe00160a12ee1))
+- return single mock instead of array ([fee1ff2](https://github.com/peerigon/clockodo/commit/fee1ff2a582e86e60c228385be5316bada150c32))
+- update user mock ([1a4864e](https://github.com/peerigon/clockodo/commit/1a4864e3d1fc78d1adf2cffb1968fcab604f66df))
 
 ### Features
 
-* add workTimeEditLock prop to User ([89c3c86](https://github.com/peerigon/clockodo/commit/89c3c86bfe61953e94436ffbd00ef319d74c29fb))
-* Add workTimes API methods ([#101](https://github.com/peerigon/clockodo/issues/101)) ([8bbca40](https://github.com/peerigon/clockodo/commit/8bbca40cd69a3ffc8ca6031e97fee9517c91b667))
-* add workTimes types ([4c8f6e4](https://github.com/peerigon/clockodo/commit/4c8f6e44649a8e3f26d3f723eade7d3c5e06eec5))
-* expand change request return type ([d337cc3](https://github.com/peerigon/clockodo/commit/d337cc30e512238ae9b2b0f75837fb13e29e7499))
-* Expose team types ([952f700](https://github.com/peerigon/clockodo/commit/952f70017ee7d037670ac6ee493e07eb7a59afe6))
-* Improve workTimes mocks ([3499590](https://github.com/peerigon/clockodo/commit/34995901a1a87054afd7592fd38eccfb772b6721))
-* Introduce special IsoDate and IsoUtcDateTime types ([6fe88e2](https://github.com/peerigon/clockodo/commit/6fe88e240c480466ae8a83748128d27dd8601609))
-* parametrize user mock's workTimeEditLock ([f976f7f](https://github.com/peerigon/clockodo/commit/f976f7f00f42e4c36c713cbb899640f56d1c59a8))
-* Update Node ([40f81b6](https://github.com/peerigon/clockodo/commit/40f81b66c53f9b8dd4afd2f2919a359615dceb13))
-
+- add workTimeEditLock prop to User ([89c3c86](https://github.com/peerigon/clockodo/commit/89c3c86bfe61953e94436ffbd00ef319d74c29fb))
+- Add workTimes API methods ([#101](https://github.com/peerigon/clockodo/issues/101)) ([8bbca40](https://github.com/peerigon/clockodo/commit/8bbca40cd69a3ffc8ca6031e97fee9517c91b667))
+- add workTimes types ([4c8f6e4](https://github.com/peerigon/clockodo/commit/4c8f6e44649a8e3f26d3f723eade7d3c5e06eec5))
+- expand change request return type ([d337cc3](https://github.com/peerigon/clockodo/commit/d337cc30e512238ae9b2b0f75837fb13e29e7499))
+- Expose team types ([952f700](https://github.com/peerigon/clockodo/commit/952f70017ee7d037670ac6ee493e07eb7a59afe6))
+- Improve workTimes mocks ([3499590](https://github.com/peerigon/clockodo/commit/34995901a1a87054afd7592fd38eccfb772b6721))
+- Introduce special IsoDate and IsoUtcDateTime types ([6fe88e2](https://github.com/peerigon/clockodo/commit/6fe88e240c480466ae8a83748128d27dd8601609))
+- parametrize user mock's workTimeEditLock ([f976f7f](https://github.com/peerigon/clockodo/commit/f976f7f00f42e4c36c713cbb899640f56d1c59a8))
+- Update Node ([40f81b6](https://github.com/peerigon/clockodo/commit/40f81b66c53f9b8dd4afd2f2919a359615dceb13))
 
 ### BREAKING CHANGES
 
-* Removed official Node 14 support. We don't know of an actual breaking change for Node 14, but it might happen in future releases.
+- Removed official Node 14 support. We don't know of an actual breaking change for Node 14, but it might happen in future releases.
 
 # [20.0.0](https://github.com/peerigon/clockodo/compare/v19.1.2...v20.0.0) (2023-04-06)
 
