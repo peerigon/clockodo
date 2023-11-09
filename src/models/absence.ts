@@ -1,15 +1,17 @@
+import { IsoDate } from "./dateTime.js";
+
 type CommonAbsence = {
   /** ID of the absence */
   id: number;
   /** ID of the corresponding co-worker  */
   usersId: number;
   /** Start date in YYYY-MM-DD format */
-  dateSince: string;
+  dateSince: IsoDate;
   /**
    * End date in YYYY-MM-DD format
    * Is the same date as dateSince in case the absence is only one day long
    **/
-  dateUntil: string; // | null (as stated in the docs) doesn't seem to be correct
+  dateUntil: IsoDate; // | null (as stated in the docs) doesn't seem to be correct
   /**
    * Status of the absence.
    */
@@ -27,12 +29,12 @@ type CommonAbsence = {
    * Date at which the absence request has been enquired in YYYY-MM-DD format.
    * Only with access rights for absence administration or in case of own absences
    */
-  dateEnquired?: string | null;
+  dateEnquired?: IsoDate | null;
   /**
    * Date at which the absence request has been approved, declined or cancelled in format YYYY-MM-DD.
    * Only with access rights for absence administration or in case of own absences
    */
-  dateApproved?: string | null;
+  dateApproved?: IsoDate | null;
   /**
    * The ID of the co-worker who has approved, declined or cancelled the request.
    * Only with access rights for absence administration or in case of own absences
