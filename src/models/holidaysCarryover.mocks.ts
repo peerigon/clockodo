@@ -1,16 +1,16 @@
 import { faker } from "@faker-js/faker";
-import { HolidayscarryRow } from "./holidayscarry.js";
+import { HolidaysCarryover } from "./holidaysCarryover.js";
 
 type Options = {
   count?: number;
   yearMinMax?: [number, number];
 };
 
-export const createHolidayscarryMocks = ({
+export const createHolidaysCarryoverMocks = ({
   count = 1,
   yearMinMax = [1900, 2024],
 }: Options = {}) => {
-  return Array.from({ length: count }, (): HolidayscarryRow => {
+  return Array.from({ length: count }, (): HolidaysCarryover => {
     return {
       usersId: 0,
       year: faker.datatype.number({ min: yearMinMax[0], max: yearMinMax[1] }),
