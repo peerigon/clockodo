@@ -22,6 +22,8 @@ type CommonTargethoursRow = {
   compensationMonthly: number;
   /** The related employee's ID */
   usersId: number;
+  /** Defines if the Targethoursrow was generated as test data */
+  testData: boolean;
 };
 
 export type TargethoursRowWeekly = CommonTargethoursRow & {
