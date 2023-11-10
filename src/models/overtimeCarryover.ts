@@ -1,4 +1,4 @@
-export type OvertimeCarry = {
+export type OvertimeCarryover = {
   /** The related employee's ID */
   usersId: number;
   /**

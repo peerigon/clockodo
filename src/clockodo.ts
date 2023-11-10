@@ -41,7 +41,7 @@ import {
   WorkTimeChangeRequestStatus,
   WorkTimeDay,
 } from "./models/workTimes.js";
-import { OvertimeCarry } from "./models/overtimeCarry.js";
+import { OvertimeCarryover } from "./models/overtimeCarryover.js";
 import { HolidaysquotaRow } from "./models/holidaysquota.js";
 import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { OvertimeReduction } from "./models/overtimeReduction.js";
@@ -841,9 +841,9 @@ export class Clockodo {
     );
   }
 
-  async getOvertimeCarry(
-    params?: Params<OvertimeCarryParams>
-  ): Promise<OvertimeCarryReturnType> {
+  async getOvertimeCarryovers(
+    params?: Params<OvertimeCarryoversParams>
+  ): Promise<OvertimeCarryoverReturnType> {
     return this.api.get("/overtimecarry", params);
   }
 
@@ -1170,10 +1170,10 @@ export type AddWorkTimesChangeRequestReturnType =
       replacedChangeRequest: null;
     };
 
-export type OvertimeCarryReturnType = {
-  overtimecarry: Array<OvertimeCarry>;
+export type OvertimeCarryoverReturnType = {
+  overtimecarry: Array<OvertimeCarryover>;
 };
-export type OvertimeCarryParams = {
+export type OvertimeCarryoversParams = {
   /** The user ID by which the overtime carry rows should be filtered */
   usersId?: number;
   /** The year to which the data should be restricted to */

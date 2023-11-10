@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { OvertimeCarry } from "./overtimeCarry.js";
+import { OvertimeCarryover } from "./overtimeCarryover.js";
 
 type Options = {
   count?: number;
@@ -7,12 +7,12 @@ type Options = {
   yearMinMax?: [number, number];
 };
 
-export const createOvertimeCarryMocks = ({
+export const createOvertimeCarryoverMocks = ({
   count = 1,
   hoursMinMax = [0, 100],
   yearMinMax = [1900, 2024],
 }: Options = {}) => {
-  return Array.from({ length: count }, (): OvertimeCarry => {
+  return Array.from({ length: count }, (): OvertimeCarryover => {
     return {
       usersId: 0,
       year: faker.datatype.number({ min: yearMinMax[0], max: yearMinMax[1] }),

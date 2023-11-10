@@ -653,13 +653,13 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getOvertimecarry()", () => {
-      it("correctly builds getOvertimecarry() request", async () => {
+    describe("getOvertimeCarryovers()", () => {
+      it("correctly builds getOvertimeCarryovers() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get("/overtimecarry?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getOvertimeCarry({ usersId: 17, year: 2028 });
+        await clockodo.getOvertimeCarryovers({ usersId: 17, year: 2028 });
 
         nockScope.done();
       });
