@@ -665,25 +665,25 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getHolidaysquota()", () => {
-      it("correctly builds getHolidaysquota() request", async () => {
+    describe("getHolidaysQuotas()", () => {
+      it("correctly builds getHolidaysQuotas() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get("/holidaysquota?users_id=17")
           .reply(200, {});
 
-        await clockodo.getHolidaysquota({ usersId: 17 });
+        await clockodo.getHolidaysQuotas({ usersId: 17 });
 
         nockScope.done();
       });
     });
 
-    describe("getHolidayscarry()", () => {
-      it("correctly builds getHolidayscarry() request", async () => {
+    describe("getHolidaysCarryovers()", () => {
+      it("correctly builds getHolidaysCarryovers() request", async () => {
         const nockScope = nock(CLOCKODO_API)
           .get("/holidayscarry?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getHolidayscarry({ usersId: 17, year: 2028 });
+        await clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 });
 
         nockScope.done();
       });
