@@ -1,5 +1,6 @@
 export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"] as const;
 export const ADD_CUSTOMER = ["name"] as const;
+export const ADD_LUMPSUM_SERVICE = ["name", "price"] as const;
 export const ADD_TIME_ENTRY = [
   "customersId",
   "servicesId",
@@ -30,15 +31,17 @@ export const CHANGE_CLOCK_DURATION = [
   "durationBefore",
   "duration",
 ] as const;
-export const DEACTIVATE_CUSTOMER = ["id"] as const;
-export const DEACTIVATE_PROJECT = ["id"] as const;
-export const DEACTIVATE_SERVICE = ["id"] as const;
-export const DEACTIVATE_USER = ["id"] as const;
+export const DELETE_CUSTOMER = ["id"] as const;
+export const DELETE_PROJECT = ["id"] as const;
+export const DELETE_USER = ["id"] as const;
 export const DELETE_ENTRY = ["id"] as const;
+export const DELETE_SERVICE = ["id"] as const;
+export const DELETE_LUMPSUM_SERVICE = ["id"] as const;
 export const DELETE_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const DELETE_ABSENCE = ["id"] as const;
 export const DELETE_TEAM = ["id"] as const;
 export const EDIT_CUSTOMER = ["id"] as const;
+export const EDIT_LUMPSUM_SERVICE = ["id"] as const;
 export const EDIT_PROJECT = ["id"] as const;
 export const EDIT_SERVICE = ["id"] as const;
 export const EDIT_TEAM = ["id"] as const;
@@ -64,9 +67,9 @@ export const GET_TEAM = ["id"] as const;
 export const GET_USER = ["id"] as const;
 export const GET_USER_REPORT = ["usersId", "year"] as const;
 export const GET_USER_REPORTS = ["year"] as const;
-export const GET_NONBUSINESS_DAYS = ["nonbusinessgroupsId", "year"] as const;
+export const GET_NONBUSINESS_DAYS = ["year"] as const;
 export const REGISTER = ["companiesName", "name", "email"] as const;
-export const START_CLOCK = ["customersId", "servicesId", "billable"] as const;
+export const START_CLOCK = ["customersId", "servicesId"] as const;
 export const STOP_CLOCK = ["entriesId"] as const;
 
 export const ADD_WORK_TIMES_CHANGE_REQUEST = [

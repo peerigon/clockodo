@@ -13,13 +13,7 @@ const paramsSerializer = (params: Record<string, string>) => {
   const urlParams = [];
 
   for (const [key, value] of Object.entries(params)) {
-    if (key === "grouping") {
-      urlParams.push(
-        qs.stringify({ [key]: value }, { arrayFormat: "brackets" })
-      );
-    } else {
-      urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "repeat" }));
-    }
+    urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "brackets" }));
   }
 
   return urlParams.join("&");
@@ -35,6 +29,7 @@ export type Params<
 
 export type ParamsWithPage = {
   page?: number;
+  itemsPerPage?: number;
 };
 
 export type Paging = {
@@ -59,6 +54,7 @@ export type Filter = {
   timeSince: string;
   timeUntil: string;
   active: BooleanAsNumber;
+  fulltext: string;
 };
 
 export type ResponseWithPaging = {
