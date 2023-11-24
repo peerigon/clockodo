@@ -40,11 +40,6 @@ type CommonAbsence = {
    * Only with access rights for absence administration or in case of own absences
    */
   approvedBy?: number | null;
-  /**
-   * Wether or not the absence is with or without a sick note
-   * Only with access rights for absence administration or in case of own absences
-   */
-  sickNote?: null;
 };
 
 export type DaysAbsence = CommonAbsence & {
@@ -52,7 +47,7 @@ export type DaysAbsence = CommonAbsence & {
    * Type of the absence.
    * Only with access rights for absence administration or in case of own absences
    */
-  type?: Exclude<AbsenceType, AbsenceType.ReductionOfOvertime | AbsenceType.SickDay | AbsenceType.SickDayOfChild>;
+  type?: Exclude<AbsenceType, AbsenceType.ReductionOfOvertime>;
   /**
    * Amount of absence days (null for overtime reduction).
    * Only with access rights for absence administration or in case of own absences
@@ -83,20 +78,7 @@ export type HoursAbsence = CommonAbsence & {
   countHours?: number;
 };
 
-export type SickAbsence = DaysAbsence & {
-  /**
-   * Type of the absence.
-   * Only with access rights for absence administration or in case of own absences
-   */
-  type?: AbsenceType.SickDay | AbsenceType.SickDayOfChild;
-  /**
-   * Wether or not the absence is with or without a sick note
-   * Only with access rights for absence administration or in case of own absences
-   */
-  sickNote: boolean | null;
-} 
-
-export type Absence = DaysAbsence | HoursAbsence | SickAbsence;
+export type Absence = DaysAbsence | HoursAbsence;
 
 export enum AbsenceStatus {
   Reported = 0,

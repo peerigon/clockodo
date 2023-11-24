@@ -51,7 +51,7 @@
   },
   "homepage": "https://github.com/peerigon/clockodo#readme",
   "dependencies": {
-    "@faker-js/faker": "^8.0.2",
+    "@faker-js/faker": "^7.6.0",
     "axios": "^0.21.4",
     "map-obj": "^5.0.1",
     "p-limit": "^4.0.0",
