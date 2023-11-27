@@ -98,13 +98,16 @@ export const createAbsenceMocks = ({
       };
     }
 
+    const type =
+      absenceTypesWithoutOvertimeReduction[
+        index % absenceTypesWithoutOvertimeReduction.length
+      ];
+
     return {
       ...commonAbsence,
       // Make sure that we get the most important absence types
       // also for lower mock counts.
-      type: absenceTypesWithoutOvertimeReduction[
-        index % absenceTypesWithoutOvertimeReduction.length
-      ],
+      type,
       countDays: isHalfDay
         ? 0.5
         : Math.max(
@@ -113,6 +116,9 @@ export const createAbsenceMocks = ({
             1
           ),
       countHours: null,
+      sickNote: [AbsenceType.SickDay, AbsenceType.SickDayOfChild].includes(type)
+        ? faker.datatype.number({ min: 0, max: 10 }) > 5
+        : null,
     };
   });
 };
