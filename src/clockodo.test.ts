@@ -668,10 +668,10 @@ describe("Clockodo (instance)", () => {
     describe("getHolidaysQuotas()", () => {
       it("correctly builds getHolidaysQuotas() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/holidaysquota?users_id=17")
+          .get("/holidaysquota?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getHolidaysQuotas({ usersId: 17 });
+        await clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 });
 
         nockScope.done();
       });
