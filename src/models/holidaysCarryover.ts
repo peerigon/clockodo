@@ -1,4 +1,4 @@
-export type HolidayscarryRow = {
+export type HolidaysCarryover = {
   /** The related employee's ID */
   usersId: number;
   /**

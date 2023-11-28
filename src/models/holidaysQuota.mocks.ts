@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { HolidaysquotaRow } from "./holidaysquota.js";
+import { HolidaysQuota } from "./holidaysQuota.js";
 
 type Options = {
   count?: number;
@@ -7,12 +7,12 @@ type Options = {
   yearUntilMinMax?: [number, number];
 };
 
-export const createHolidaysquotaMocks = ({
+export const createHolidaysQuotaMocks = ({
   count = 1,
   yearSinceMinMax = [2020, 2021],
   yearUntilMinMax = [2021, 2022],
 }: Options = {}) => {
-  return Array.from({ length: count }, (_, index): HolidaysquotaRow => {
+  return Array.from({ length: count }, (_, index): HolidaysQuota => {
     const id = index;
 
     return {
