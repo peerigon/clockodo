@@ -970,9 +970,9 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
   };
 export type UserReturnType = { user: User };
 export type UsersReturnType = { users: Array<User> };
-export type SurchargeModelReturnType = { surchargeModel: SurchargeModel };
+export type SurchargeModelReturnType = { data: SurchargeModel };
 export type SurchargeModelsReturnType = {
-  surchargeModels: Array<SurchargeModel>;
+  data: Array<SurchargeModel>;
 };
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
