@@ -668,7 +668,7 @@ describe("Clockodo (instance)", () => {
     describe("getOvertimeReductions()", () => {
       it("correctly builds getOvertimeReductions() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .get("/overtimeReductions?users_id=17&year=2028")
+          .get("/v2/overtimeReductions?users_id=17&year=2028")
           .reply(200, {});
 
         await clockodo.getOvertimeReductions({ usersId: 17, year: 2028 });
