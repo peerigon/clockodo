@@ -42,9 +42,9 @@ import {
   WorkTimeDay,
 } from "./models/workTimes.js";
 import { OvertimecarryRow } from "./models/overtimecarry.js";
-import { HolidaysquotaRow } from "./models/holidaysquota.js";
-import { HolidayscarryRow } from "./models/holidayscarry.js";
 import { SurchargeModel } from "./models/surchargeModel.js";
+import { HolidaysQuota } from "./models/holidaysQuota.js";
+import { HolidaysCarryover } from "./models/holidaysCarryover.js";
 
 export class Clockodo {
   api: Api;
@@ -897,15 +897,15 @@ export class Clockodo {
     return this.api.get("/overtimecarry", params);
   }
 
-  async getHolidaysquota(
-    params?: Params<HolidaysquotaRowParams>
-  ): Promise<HolidaysquotaRowReturnType> {
+  async getHolidaysQuotas(
+    params?: Params<HolidaysQuotasParams>
+  ): Promise<HolidaysQuotasReturnType> {
     return this.api.get("/holidaysquota", params);
   }
 
-  async getHolidayscarry(
-    params?: Params<HolidayscarryRowParams>
-  ): Promise<HolidayscarryRowReturnType> {
+  async getHolidaysCarryovers(
+    params?: Params<HolidaysCarryoversParams>
+  ): Promise<HolidaysCarryoversReturnType> {
     return this.api.get("/holidayscarry", params);
   }
 }
@@ -1228,18 +1228,18 @@ export type OvertimecarryRowParams = {
   year?: number;
 };
 
-export type HolidaysquotaRowReturnType = {
-  holidaysquota: Array<HolidaysquotaRow>;
+export type HolidaysQuotasReturnType = {
+  holidaysquota: Array<HolidaysQuota>;
 };
-export type HolidaysquotaRowParams = {
+export type HolidaysQuotasParams = {
   /** The user ID by which the holidays quota rows should be filtered */
   usersId?: number;
 };
 
-export type HolidayscarryRowReturnType = {
-  holidayscarry: Array<HolidayscarryRow>;
+export type HolidaysCarryoversReturnType = {
+  holidayscarry: Array<HolidaysCarryover>;
 };
-export type HolidayscarryRowParams = {
+export type HolidaysCarryoversParams = {
   /** The user ID by which the holidays carry rows should be filtered */
   usersId?: number;
   /** The year to which the data should be restricted to */

@@ -1,4 +1,4 @@
-export type HolidaysquotaRow = {
+export type HolidaysQuota = {
   /** The ID of the holiday quota settings */
   id: number;
   /** The related employee's ID */
@@ -15,8 +15,3 @@ export type HolidaysquotaRow = {
   count: number;
   note: string | null;
 };
-
-/**
- * @deprecated Please use HolidaysquotaRow type
- */
-export type HolidayquotaRow = HolidaysquotaRow;

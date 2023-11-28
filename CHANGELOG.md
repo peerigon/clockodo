@@ -1,3 +1,13 @@
+# [23.0.0](https://github.com/peerigon/clockodo/compare/v22.2.0...v23.0.0) (2023-11-21)
+
+### Bug Fixes
+
+- Rename HolidaysQuota and HolidaysCarryover ([#145](https://github.com/peerigon/clockodo/issues/145)) ([16543bf](https://github.com/peerigon/clockodo/commit/16543bffc60339daf05f1ad1f46efd2a4ef30207))
+
+### BREAKING CHANGES
+
+- We've renamed `HolidayscarryRow` to `HolidaysCarryover` and `HolidaysquotaRow` to `HolidaysQuota` and adjusted all method names accordingly to make the naming more consistent.
+
 # [22.2.0](https://github.com/peerigon/clockodo/compare/v22.1.0...v22.2.0) (2023-11-06)
 
 ### Features
