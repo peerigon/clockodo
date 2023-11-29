@@ -83,6 +83,10 @@ export type User = {
    */
   boss: number | null;
   /**
+   * The ids of the co-workers that are allowed to manage the absences of this co-worker
+   */
+  absenceManagersId: Array<number> | null;
+  /**
    * Specifies if the user uses the default holidays count
    */
   defaultHolidaysCount: boolean;

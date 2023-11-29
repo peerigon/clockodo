@@ -58,6 +58,11 @@ export type DaysAbsence = CommonAbsence & {
    * Only with access rights for absence administration or in case of own absences
    */
   countHours?: null;
+  /**
+   * Wether or not the absence has a sick note (Only for AbsenceType.SickDay | AbsenceType.SickDayOfChild)
+   * Only with access rights for absence administration or in case of own absences
+   */
+  sickNote?: boolean | null;
 };
 
 export type HoursAbsence = CommonAbsence & {

@@ -26,11 +26,13 @@ export const ADD_PROJECT = ["name", "customersId"] as const;
 export const ADD_SERVICE = ["name"] as const;
 export const ADD_TEAM = ["name"] as const;
 export const ADD_USER = ["name", "number", "email", "role"] as const;
+export const ADD_SURCHARGE_MODEL = ["name", "accumulation"] as const;
 export const CHANGE_CLOCK_DURATION = [
   "entriesId",
   "durationBefore",
   "duration",
 ] as const;
+export const DELETE_SURCHARGE_MODEL = ["id"] as const;
 export const DELETE_CUSTOMER = ["id"] as const;
 export const DELETE_PROJECT = ["id"] as const;
 export const DELETE_USER = ["id"] as const;
@@ -46,6 +48,7 @@ export const EDIT_PROJECT = ["id"] as const;
 export const EDIT_SERVICE = ["id"] as const;
 export const EDIT_TEAM = ["id"] as const;
 export const EDIT_USER = ["id"] as const;
+export const EDIT_SURCHARGE_MODEL = ["id"] as const;
 export const EDIT_ENTRY_GROUP = ["timeSince", "timeUntil"] as const;
 export const EDIT_ABSENCE = ["id"] as const;
 export const EDIT_ENTRY = ["id"] as const;
@@ -65,6 +68,7 @@ export const GET_LUMPSUM_SERVICE = ["id"] as const;
 export const GET_TARGETHOURS_ROW = ["id"] as const;
 export const GET_TEAM = ["id"] as const;
 export const GET_USER = ["id"] as const;
+export const GET_SURCHARGE_MODEL = ["id"] as const;
 export const GET_USER_REPORT = ["usersId", "year"] as const;
 export const GET_USER_REPORTS = ["year"] as const;
 export const GET_NONBUSINESS_DAYS = ["year"] as const;

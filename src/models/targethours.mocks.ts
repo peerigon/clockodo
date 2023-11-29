@@ -32,6 +32,7 @@ const createCommonTargethoursRowMock = (dateSince: Date) => {
     dateUntil: null,
     compensationMonthly: faker.datatype.number({ min: 0, max: 8 }),
     usersId: 0,
+    surchargeModelsId: null,
     testData: false,
   };
 };
