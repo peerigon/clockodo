@@ -1,3 +1,10 @@
+# [23.1.0](https://github.com/peerigon/clockodo/compare/v23.0.0...v23.1.0) (2023-11-29)
+
+
+### Features
+
+* Add surcharge model and api request handlers ([#124](https://github.com/peerigon/clockodo/issues/124)) ([4447bc2](https://github.com/peerigon/clockodo/commit/4447bc201b921d95d8cddfb65124ccb628741305))
+
 # [23.0.0](https://github.com/peerigon/clockodo/compare/v22.2.0...v23.0.0) (2023-11-21)
 
 ### Bug Fixes
