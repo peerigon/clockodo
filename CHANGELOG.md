@@ -1,3 +1,10 @@
+# [23.3.0](https://github.com/peerigon/clockodo/compare/v23.2.0...v23.3.0) (2023-11-29)
+
+
+### Features
+
+* Add sickNote flag for absence ([#150](https://github.com/peerigon/clockodo/issues/150)) ([1e9f744](https://github.com/peerigon/clockodo/commit/1e9f7442f8219b724f516839949c8618f062c1ec))
+
 # [23.2.0](https://github.com/peerigon/clockodo/compare/v23.1.0...v23.2.0) (2023-11-29)
 
 
