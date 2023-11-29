@@ -15,14 +15,14 @@ export const createOvertimeReductionMocks = ({
     return {
       id: index,
       usersId: 0,
-      usersIdAdded: 1,
-      dateAdded: isoDateFromDateTime(faker.date.past()),
+      addedByUsersId: 1,
+      addedAt: isoDateFromDateTime(faker.date.past()),
+      date: isoDateFromDateTime(faker.date.past()),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
       hours: faker.datatype.number({
         min: hoursMinMax[0],
         max: hoursMinMax[1],
       }),
-      createdAfterEndOfMonth: faker.datatype.boolean(),
     };
   });
 };

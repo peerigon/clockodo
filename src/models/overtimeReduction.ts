@@ -6,12 +6,12 @@ export type OvertimeReduction = {
   /** The related employee's ID */
   usersId: number;
   /** The user who added the overtime reduction */
-  usersIdAdded: number;
+  addedByUsersId: number;
   /** The date when the overtime reduction was added */
-  dateAdded: IsoDate;
+  addedAt: IsoDate;
+  /** The date when the overtime reduction was taken */
+  date: IsoDate;
   /** Number of hours */
   hours: number;
   note: string | null;
-  // TODO: will probably be renamed
-  createdAfterEndOfMonth: boolean;
 };
