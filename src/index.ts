@@ -15,6 +15,7 @@ export * from "./models/overtimeCarryover.js";
 export * from "./models/overtimeReduction.js";
 export * from "./models/project.js";
 export * from "./models/service.js";
+export * from "./models/surchargeModel.js";
 export * from "./models/targethours.js";
 export * from "./models/team.js";
 export * from "./models/user.js";

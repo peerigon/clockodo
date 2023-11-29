@@ -82,6 +82,10 @@ export type User = {
    * The user's team leader's / boss' id
    */
   boss: number | null;
+  /**
+   * The ids of the co-workers that are allowed to manage the absences of this co-worker
+   */
+  absenceManagersId: Array<number> | null;
 };
 
 export enum UserRole {

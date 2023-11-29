@@ -1,3 +1,21 @@
+# [23.3.0](https://github.com/peerigon/clockodo/compare/v23.2.0...v23.3.0) (2023-11-29)
+
+### Features
+
+- Add sickNote flag for absence ([#150](https://github.com/peerigon/clockodo/issues/150)) ([1e9f744](https://github.com/peerigon/clockodo/commit/1e9f7442f8219b724f516839949c8618f062c1ec))
+
+# [23.2.0](https://github.com/peerigon/clockodo/compare/v23.1.0...v23.2.0) (2023-11-29)
+
+### Features
+
+- Add absenceManagersId ([#147](https://github.com/peerigon/clockodo/issues/147)) ([a2fc3f0](https://github.com/peerigon/clockodo/commit/a2fc3f0f99ddd301de31a19e5f80942abe9936ae))
+
+# [23.1.0](https://github.com/peerigon/clockodo/compare/v23.0.0...v23.1.0) (2023-11-29)
+
+### Features
+
+- Add surcharge model and api request handlers ([#124](https://github.com/peerigon/clockodo/issues/124)) ([4447bc2](https://github.com/peerigon/clockodo/commit/4447bc201b921d95d8cddfb65124ccb628741305))
+
 # [23.0.0](https://github.com/peerigon/clockodo/compare/v22.2.0...v23.0.0) (2023-11-21)
 
 ### Bug Fixes
