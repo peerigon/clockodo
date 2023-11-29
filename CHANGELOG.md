@@ -1,3 +1,10 @@
+# [23.2.0](https://github.com/peerigon/clockodo/compare/v23.1.0...v23.2.0) (2023-11-29)
+
+
+### Features
+
+* Add absenceManagersId ([#147](https://github.com/peerigon/clockodo/issues/147)) ([a2fc3f0](https://github.com/peerigon/clockodo/commit/a2fc3f0f99ddd301de31a19e5f80942abe9936ae))
+
 # [23.1.0](https://github.com/peerigon/clockodo/compare/v23.0.0...v23.1.0) (2023-11-29)
 
 
