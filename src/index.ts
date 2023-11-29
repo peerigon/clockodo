@@ -14,6 +14,7 @@ export * from "./models/nonbusinessGroup.js";
 export * from "./models/overtimecarry.js";
 export * from "./models/project.js";
 export * from "./models/service.js";
+export * from "./models/surchargeModel.js";
 export * from "./models/targethours.js";
 export * from "./models/team.js";
 export * from "./models/user.js";

@@ -11,6 +11,14 @@ export type IsoDate =
   `${number}${number}${number}${number}-${number}${number}-${number}${number}`;
 
 /**
+ * An ISO 8601 time format.
+ *
+ * Example: 23:00:00 (hh:mm:ss)
+ */
+export type IsoTime =
+  `${number}${number}:${number}${number}:${number}${number}`;
+
+/**
  * An ISO 8601 time stamp:
  *
  * - Normalized to UTC
@@ -20,4 +28,4 @@ export type IsoDate =
  */
 export type IsoUtcDateTime =
   // This type is not 100% correct but enough for our use-case
-  `${IsoDate}T${number}${number}:${number}${number}:${number}${number}Z`;
+  `${IsoDate}T${IsoTime}Z`;

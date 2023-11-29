@@ -688,6 +688,30 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getSurchargeModel()", () => {
+      it("correctly builds getSurchargeModel() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/surchargeModels/7")
+          .reply(200, {});
+
+        await clockodo.getSurchargeModel({ id: 7 });
+
+        nockScope.done();
+      });
+    });
+
+    describe("getSurchargeModels()", () => {
+      it("correctly builds getSurchargeModels() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/surchargeModels")
+          .reply(200, {});
+
+        await clockodo.getSurchargeModels();
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
@@ -987,6 +1011,26 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("addSurchargeModel()", () => {
+      it("correctly builds addSurchargeModel() request", async () => {
+        const expectedParameters = {
+          name: "Weyland-Yutani",
+          accumulation: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .post("/v2/surchargeModels", expectedParameters)
+          .reply(200, {});
+
+        await clockodo.addSurchargeModel({
+          name: "Weyland-Yutani",
+          accumulation: true,
+        });
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("PUT", () => {
@@ -1160,6 +1204,23 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("editSurchargeModel()", () => {
+      it("correctly builds editSurchargeModel() request", async () => {
+        const entry = {
+          id: 365,
+          name: "ABC",
+        };
+
+        const nockScope = nock(CLOCKODO_API)
+          .put("/v2/surchargeModels/365", mapRequestBody(entry))
+          .reply(200, {});
+
+        await clockodo.editSurchargeModel(entry);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("DELETE", () => {
@@ -1296,6 +1357,18 @@ describe("Clockodo (instance)", () => {
         await clockodo.withdrawWorkTimesChangeRequest({
           id: 17,
         });
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteSurchargeModel()", () => {
+      it("correctly builds deleteSurchargeModel() request", async () => {
+        const nockScope = nock(CLOCKODO_API)
+          .delete("/v2/surchargeModels/31")
+          .reply(200, {});
+
+        await clockodo.deleteSurchargeModel({ id: 31 });
 
         nockScope.done();
       });

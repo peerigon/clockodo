@@ -22,6 +22,8 @@ type CommonTargethoursRow = {
   compensationMonthly: number;
   /** The related employee's ID */
   usersId: number;
+  /** The corresponding surcharge model */
+  surchargeModelsId: number | null;
   /** Defines if the Targethoursrow was generated as test data */
   testData: boolean;
 };

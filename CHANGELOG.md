@@ -1,28 +1,24 @@
 # [23.0.0](https://github.com/peerigon/clockodo/compare/v22.2.0...v23.0.0) (2023-11-21)
 
-
 ### Bug Fixes
 
-* Rename HolidaysQuota and HolidaysCarryover ([#145](https://github.com/peerigon/clockodo/issues/145)) ([16543bf](https://github.com/peerigon/clockodo/commit/16543bffc60339daf05f1ad1f46efd2a4ef30207))
-
+- Rename HolidaysQuota and HolidaysCarryover ([#145](https://github.com/peerigon/clockodo/issues/145)) ([16543bf](https://github.com/peerigon/clockodo/commit/16543bffc60339daf05f1ad1f46efd2a4ef30207))
 
 ### BREAKING CHANGES
 
-* We've renamed `HolidayscarryRow` to `HolidaysCarryover` and `HolidaysquotaRow` to `HolidaysQuota` and adjusted all method names accordingly to make the naming more consistent.
+- We've renamed `HolidayscarryRow` to `HolidaysCarryover` and `HolidaysquotaRow` to `HolidaysQuota` and adjusted all method names accordingly to make the naming more consistent.
 
 # [22.2.0](https://github.com/peerigon/clockodo/compare/v22.1.0...v22.2.0) (2023-11-06)
 
-
 ### Features
 
-* Use v3 API for services and lumpsum services ([#131](https://github.com/peerigon/clockodo/issues/131)) ([1a8ba9d](https://github.com/peerigon/clockodo/commit/1a8ba9d1fad6a6251a1116a39bfd1886a048bce1))
+- Use v3 API for services and lumpsum services ([#131](https://github.com/peerigon/clockodo/issues/131)) ([1a8ba9d](https://github.com/peerigon/clockodo/commit/1a8ba9d1fad6a6251a1116a39bfd1886a048bce1))
 
 # [22.1.0](https://github.com/peerigon/clockodo/compare/v22.0.0...v22.1.0) (2023-11-06)
 
-
 ### Features
 
-* Add testData property to targethoursRow ([#140](https://github.com/peerigon/clockodo/issues/140)) ([9c2e511](https://github.com/peerigon/clockodo/commit/9c2e5119004eeb89c95b53e42815e95fbf5e071e))
+- Add testData property to targethoursRow ([#140](https://github.com/peerigon/clockodo/issues/140)) ([9c2e511](https://github.com/peerigon/clockodo/commit/9c2e5119004eeb89c95b53e42815e95fbf5e071e))
 
 # [22.0.0](https://github.com/peerigon/clockodo/compare/v21.15.0...v22.0.0) (2023-10-24)
 
