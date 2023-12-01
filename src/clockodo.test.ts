@@ -120,7 +120,9 @@ describe("Clockodo (instance)", () => {
   describe("GET", () => {
     describe("getAbsence()", () => {
       it("correctly builds getAbsence() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/absences/7").reply(200, {});
+        const nockScope = nock(CLOCKODO_API)
+          .get("/v2/absences/7")
+          .reply(200, {});
 
         await clockodo.getAbsence({ id: 7 });
 
@@ -135,7 +137,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .get("/absences?" + qs.stringify(expectedParameters))
+          .get("/v2/absences?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
         await clockodo.getAbsences({ year: 218 });
@@ -915,7 +917,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .post("/absences", expectedParameters)
+          .post("/v2/absences", expectedParameters)
           .reply(200, {});
 
         await clockodo.addAbsence({
@@ -1179,7 +1181,7 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API)
-          .put("/absences/74", mapRequestBody(absence))
+          .put("/v2/absences/74", mapRequestBody(absence))
           .reply(200, {});
 
         await clockodo.editAbsence(absence);
@@ -1339,7 +1341,7 @@ describe("Clockodo (instance)", () => {
     describe("deleteAbsence()", () => {
       it("correctly builds deleteAbsence() request", async () => {
         const nockScope = nock(CLOCKODO_API)
-          .delete("/absences/31")
+          .delete("/v2/absences/31")
           .reply(200, {});
 
         await clockodo.deleteAbsence({ id: 31 });
