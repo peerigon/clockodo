@@ -1,3 +1,10 @@
+# [23.4.0](https://github.com/peerigon/clockodo/compare/v23.3.0...v23.4.0) (2023-12-04)
+
+
+### Features
+
+* update absences api to v2 ([#152](https://github.com/peerigon/clockodo/issues/152)) ([997a5eb](https://github.com/peerigon/clockodo/commit/997a5ebfd6e0c52f1f040f4a1b5572ef0c01d3bc))
+
 # [23.3.0](https://github.com/peerigon/clockodo/compare/v23.2.0...v23.3.0) (2023-11-29)
 
 ### Features
