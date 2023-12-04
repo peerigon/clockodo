@@ -1,3 +1,11 @@
+# [23.5.0](https://github.com/peerigon/clockodo/compare/v23.4.0...v23.5.0) (2023-12-04)
+
+
+### Features
+
+* added users default holidaycount and targethours ([2439f40](https://github.com/peerigon/clockodo/commit/2439f4035c8ac0f84691fc385093726791ab5986))
+* added users default holidaycount and targethours ([#137](https://github.com/peerigon/clockodo/issues/137)) ([e96713d](https://github.com/peerigon/clockodo/commit/e96713d9b6354b6d724761f1e93656d86afce157))
+
 # [23.4.0](https://github.com/peerigon/clockodo/compare/v23.3.0...v23.4.0) (2023-12-04)
 
 
