@@ -67,7 +67,7 @@ export class Clockodo {
 
     const { id, ...remainingParams } = params;
 
-    return this.api.get("/absences/" + id, remainingParams);
+    return this.api.get("/v2/absences/" + id, remainingParams);
   }
 
   async getAbsences(
@@ -75,7 +75,7 @@ export class Clockodo {
   ): Promise<AbsencesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
-    return this.api.get("/absences", params);
+    return this.api.get("/v2/absences", params);
   }
 
   async getUsersAccessCustomersProjects(
@@ -442,7 +442,7 @@ export class Clockodo {
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 
-    return this.api.post("/absences", params);
+    return this.api.post("/v2/absences", params);
   }
 
   async addCustomer(
@@ -563,7 +563,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.put("/absences/" + id, params);
+    return this.api.put("/v2/absences/" + id, params);
   }
 
   async editCustomer(
@@ -717,7 +717,7 @@ export class Clockodo {
 
     const { id } = params;
 
-    return this.api.delete("/absences/" + id, params);
+    return this.api.delete("/v2/absences/" + id, params);
   }
 
   async deleteEntry(
