@@ -40,7 +40,7 @@ export const createUserMocks = ({
       workTimeEditLockDays,
       boss: boss ?? null,
       absenceManagersId: absenceManagersId ?? null,
-      defaultHolidaysCount: faker.datatype.boolean(),
-      defaultTargetHours: faker.datatype.boolean(),
+      defaultHolidaysCount: false,
+      defaultTargetHours: false,
     };
   });
