@@ -1,4 +1,6 @@
 export type HolidaysCarryover = {
+  /** The ID of the holiday carryover */
+  id: number;
   /** The related employee's ID */
   usersId: number;
   /**

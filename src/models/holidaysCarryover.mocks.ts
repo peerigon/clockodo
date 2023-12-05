@@ -10,8 +10,11 @@ export const createHolidaysCarryoverMocks = ({
   count = 1,
   yearMinMax = [1900, 2024],
 }: Options = {}) => {
-  return Array.from({ length: count }, (): HolidaysCarryover => {
+  return Array.from({ length: count }, (_, index): HolidaysCarryover => {
+    const id = index;
+
     return {
+      id,
       usersId: 0,
       year: faker.datatype.number({ min: yearMinMax[0], max: yearMinMax[1] }),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
