@@ -1,3 +1,11 @@
+## [23.5.1](https://github.com/peerigon/clockodo/compare/v23.5.0...v23.5.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* set default holidayscount and target hours ([b1d0bfb](https://github.com/peerigon/clockodo/commit/b1d0bfbfd52c056a2dcde549bfe2c9ff9bd84e0e))
+* set default holidayscount and target hours ([#153](https://github.com/peerigon/clockodo/issues/153)) ([98c5f15](https://github.com/peerigon/clockodo/commit/98c5f15ce90d667b303ca9e447349a9424ab91a3))
+
 # [23.5.0](https://github.com/peerigon/clockodo/compare/v23.4.0...v23.5.0) (2023-12-04)
 
 
