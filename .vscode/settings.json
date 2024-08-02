@@ -1,0 +1,32 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "search.exclude": {
+    "node_modules": true,
+    "dist": true,
+    ".git": true,
+    ".eslintcache": true
+  },
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "javascript.preferences.importModuleSpecifier": "shortest",
+  // Although it says "js", it will import it as ".ts"
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).*",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, .npmrc"
+  }
+}

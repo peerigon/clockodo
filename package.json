@@ -1,0 +1,29 @@
+{
+  "name": "@peerigon/template",
+  "version": "1.0.0",
+  "description": "Boilerplate template to kick start new projects at Peerigon",
+  "keywords": [],
+  "license": "MIT License",
+  "author": "hello@peerigon.com",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "test": "run-p test:*",
+    "test:format": "prettier --check .",
+    "test:types": "tsc",
+    "test:unit": "vitest --run",
+    "vitest": "vitest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@peerigon/configs": "^7.0.0",
+    "eslint": "^9.31.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "npm-run-all2": "^8.0.4",
+    "pin-github-action": "^3.4.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
