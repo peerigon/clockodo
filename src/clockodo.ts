@@ -603,7 +603,13 @@ export class Clockodo {
   ): Promise<EditEntryGroupsReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ENTRY_GROUP);
 
-    return this.api.put("/v2/entrygroups", params);
+    const { timeSince, timeUntil, ...optionalParams } = params;
+
+    return this.api.put(
+      "/v2/entrygroups",
+      { timeSince, timeUntil },
+      { params: optionalParams }
+    );
   }
 
   async editProject(

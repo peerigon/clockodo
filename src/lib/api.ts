@@ -300,6 +300,14 @@ export class Api {
     body = {},
     options?: AxiosRequestConfig
   ): Promise<Result> {
+    if (options?.params !== undefined) {
+      options.params = mapQueryParams(options.params);
+
+      if (options.paramsSerializer === undefined) {
+        options.paramsSerializer = paramsSerializer;
+      }
+    }
+
     const response = await this[axiosClient].put(
       url,
       mapRequestBody(body),
