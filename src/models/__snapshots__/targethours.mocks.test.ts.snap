@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createTargethoursRowMocks() It creates realistic mocks 1`] = `
-Array [
-  Object {
+[
+  {
     "compensationMonthly": 6,
     "dateSince": "2019-03-01",
     "dateUntil": "2019-04-30",
@@ -20,7 +20,7 @@ Array [
     "workdayTuesday": false,
     "workdayWednesday": false,
   },
-  Object {
+  {
     "compensationMonthly": 3,
     "dateSince": "2019-06-01",
     "dateUntil": "2019-07-31",
@@ -38,7 +38,7 @@ Array [
     "workdayTuesday": false,
     "workdayWednesday": true,
   },
-  Object {
+  {
     "compensationMonthly": 2,
     "dateSince": "2019-09-01",
     "dateUntil": "2019-09-30",
@@ -56,7 +56,7 @@ Array [
     "workdayTuesday": false,
     "workdayWednesday": false,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 48,
     "compensationMonthly": 4,
@@ -75,7 +75,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 53,
     "compensationMonthly": 2,
@@ -94,7 +94,7 @@ Array [
     "usersId": 0,
     "wednesday": 6,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 32,
     "compensationMonthly": 2,
@@ -113,7 +113,7 @@ Array [
     "usersId": 0,
     "wednesday": 24,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 12,
     "compensationMonthly": 1,
@@ -132,7 +132,7 @@ Array [
     "usersId": 0,
     "wednesday": 5,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 18,
     "compensationMonthly": 4,
@@ -151,7 +151,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 55,
     "compensationMonthly": 4,
@@ -170,7 +170,7 @@ Array [
     "usersId": 0,
     "wednesday": 24,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 14,
     "compensationMonthly": 1,
@@ -189,7 +189,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 3,
     "compensationMonthly": 3,
@@ -208,7 +208,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 53,
     "compensationMonthly": 0,
@@ -227,7 +227,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 11,
     "compensationMonthly": 0,
@@ -246,7 +246,7 @@ Array [
     "usersId": 0,
     "wednesday": 0.84,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 52,
     "compensationMonthly": 2,
@@ -265,7 +265,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 18,
     "compensationMonthly": 3,
@@ -284,7 +284,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": true,
     "compensationDaily": 17,
     "compensationMonthly": 8,
@@ -303,7 +303,7 @@ Array [
     "usersId": 0,
     "wednesday": 0,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 38,
     "compensationMonthly": 2,
@@ -322,7 +322,7 @@ Array [
     "usersId": 0,
     "wednesday": 6,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 3,
     "compensationMonthly": 7,
@@ -341,7 +341,7 @@ Array [
     "usersId": 0,
     "wednesday": 1,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 49,
     "compensationMonthly": 0,
@@ -360,7 +360,7 @@ Array [
     "usersId": 0,
     "wednesday": 8,
   },
-  Object {
+  {
     "absenceFixedCredit": false,
     "compensationDaily": 43,
     "compensationMonthly": 2,

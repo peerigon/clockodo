@@ -1,141 +1,141 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createNonbusinessDayMocks() It creates realistic mocks 1`] = `
-Array [
-  Object {
+[
+  {
     "date": "2020-02-21",
     "halfDay": false,
     "id": 0,
     "name": "similique libero ad",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-03-24",
     "halfDay": false,
     "id": 1,
     "name": "velit ipsa quidem",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-04-14",
     "halfDay": false,
     "id": 2,
     "name": "perspiciatis cum similique",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-05-05",
     "halfDay": false,
     "id": 3,
     "name": "reprehenderit dolores veritatis",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-05-23",
     "halfDay": false,
     "id": 4,
     "name": "expedita voluptatum vel",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-05-26",
     "halfDay": false,
     "id": 5,
     "name": "magnam illum dignissimos",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-05-30",
     "halfDay": false,
     "id": 6,
     "name": "cum iste corporis",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-06-03",
     "halfDay": false,
     "id": 7,
     "name": "commodi ad animi",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-06-05",
     "halfDay": false,
     "id": 8,
     "name": "voluptas amet consectetur",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-06-25",
     "halfDay": false,
     "id": 9,
     "name": "doloribus similique cumque",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-06-28",
     "halfDay": false,
     "id": 10,
     "name": "quo eum voluptatem",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-07-20",
     "halfDay": false,
     "id": 11,
     "name": "dolores dignissimos quia",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-07-31",
     "halfDay": false,
     "id": 12,
     "name": "inventore quaerat officiis",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-09-07",
     "halfDay": true,
     "id": 13,
     "name": "nobis debitis quidem",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-09-09",
     "halfDay": false,
     "id": 14,
     "name": "laudantium blanditiis quam",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-09-11",
     "halfDay": false,
     "id": 15,
     "name": "excepturi dicta aliquam",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-09-17",
     "halfDay": true,
     "id": 16,
     "name": "ducimus commodi fuga",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-09-20",
     "halfDay": false,
     "id": 17,
     "name": "voluptates non beatae",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-10-12",
     "halfDay": false,
     "id": 18,
     "name": "ducimus doloribus consectetur",
     "nonbusinessgroupsId": 0,
   },
-  Object {
+  {
     "date": "2020-12-24",
     "halfDay": false,
     "id": 19,

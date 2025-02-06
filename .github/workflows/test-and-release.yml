@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16.x, 18.x, 19.x ]
+        node-version: [18.x, 20.x, 22.x]
 
     concurrency:
       group: ${{ github.ref }}-node-${{ matrix.node-version }}
@@ -53,6 +53,7 @@ jobs:
           CLOCKODO_USER: ${{ secrets.CLOCKODO_USER }}
           CLOCKODO_API_KEY: ${{ secrets.CLOCKODO_API_KEY }}
       - name: ⬆️ Upload coverage report
+        if: "matrix.node-version == '22.x'"
         uses: coverallsapp/github-action@9ba913c152ae4be1327bfb9085dc806cedb44057 # pin@1.1.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,7 +61,7 @@ jobs:
       # - RELEASE ---------------------------------------------------------------------------------------
       - name: 🚀 Release on npm
         if: "contains(' refs/heads/main refs/heads/beta ', github.ref) &&
-          matrix.node-version == '18.x'"
+          matrix.node-version == '22.x'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
