@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16.x, 18.x, 19.x ]
+        node-version: [22.x]
 
     concurrency:
       group: ${{ github.ref }}-node-${{ matrix.node-version }}
@@ -60,7 +60,7 @@ jobs:
       # - RELEASE ---------------------------------------------------------------------------------------
       - name: 🚀 Release on npm
         if: "contains(' refs/heads/main refs/heads/beta ', github.ref) &&
-          matrix.node-version == '18.x'"
+          matrix.node-version == '22.x'"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
