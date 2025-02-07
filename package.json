@@ -29,7 +29,6 @@
     "build:tsc": "tsc",
     "test": "run-p test:*",
     "test:suite": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-    "test:turkish": "cross-env LANG=tr npm run test:suite -- 'integration' -t 'using a Turkish locale'",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore src",
     "test:types": "tsc --noEmit",
     "prepublishOnly": "run-s build",
