@@ -1,13 +1,13 @@
 import { faker } from "@faker-js/faker";
 import { isoDateFromDateTime, isoDateFromTimestamp } from "../lib/dateTime.js";
 import {
-  ONE_YEAR,
-  ONE_DAY,
+  endOfMonth,
   generateRandomDates,
   generateRandomMonths,
-  toPairs,
-  endOfMonth,
+  ONE_DAY,
+  ONE_YEAR,
   startOfNextDay,
+  toPairs,
 } from "../lib/mocks.js";
 import {
   TargethoursRow,
@@ -30,7 +30,7 @@ const createCommonTargethoursRowMock = (dateSince: Date) => {
     id: 0,
     dateSince: isoDateFromDateTime(dateSince),
     dateUntil: null,
-    compensationMonthly: faker.datatype.number({ min: 0, max: 8 }),
+    compensationMonthly: faker.number.int({ min: 0, max: 8 }),
     usersId: 0,
     surchargeModelsId: null,
     testData: false,
@@ -47,14 +47,14 @@ export const createTargethoursRowWeeklyMocks = ({
       count: count * 2,
       between: [from, to],
       maxDuplicates: 2,
-    })
+    }),
   );
   let previousTo: undefined | number;
 
   return dayPairs.map(([from, to], index): TargethoursRowWeekly => {
     const dateSince =
       // Make it more unlikely that there are "holes" between to and from
-      previousTo !== undefined && faker.datatype.number({ min: 0, max: 10 }) < 7
+      previousTo !== undefined && faker.number.int({ min: 0, max: 10 }) < 7
         ? startOfNextDay(new Date(previousTo))
         : new Date(from);
     const commonTargethoursRow = createCommonTargethoursRowMock(dateSince);
@@ -62,9 +62,9 @@ export const createTargethoursRowWeeklyMocks = ({
     const typicalHours = [
       0,
       0,
-      faker.datatype.number({ min: 1, max: 4 }),
-      faker.datatype.number({ min: 4, max: 8 }),
-      parseFloat(faker.datatype.float({ min: 0, max: 8 }).toFixed(2)),
+      faker.number.int({ min: 1, max: 4 }),
+      faker.number.int({ min: 4, max: 8 }),
+      parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 
@@ -86,7 +86,7 @@ export const createTargethoursRowWeeklyMocks = ({
       saturday: typicalHours[5 % typicalHours.length],
       sunday: typicalHours[6 % typicalHours.length],
       absenceFixedCredit: absenceFixedCredit ?? faker.datatype.boolean(),
-      compensationDaily: faker.datatype.number({ min: 0, max: 60 }),
+      compensationDaily: faker.number.int({ min: 0, max: 60 }),
     };
   });
 };
@@ -100,7 +100,7 @@ export const createTargethoursRowMonthlyMocks = ({
       count: count * 2,
       between: [from, to],
       maxDuplicates: 2,
-    })
+    }),
   );
 
   return monthPairs.map(([from, to], index): TargethoursRowMonthly => {
@@ -109,9 +109,9 @@ export const createTargethoursRowMonthlyMocks = ({
     const typicalHours = [
       0,
       0,
-      faker.datatype.number({ min: 1, max: 4 }),
-      faker.datatype.number({ min: 4, max: 8 }),
-      parseFloat(faker.datatype.float({ min: 0, max: 8 }).toFixed(2)),
+      faker.number.int({ min: 1, max: 4 }),
+      faker.number.int({ min: 4, max: 8 }),
+      parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 
@@ -125,7 +125,7 @@ export const createTargethoursRowMonthlyMocks = ({
           ? null
           : isoDateFromDateTime(endOfMonth(new Date(to))),
       type: TargethoursRowType.Monthly,
-      monthlyTarget: faker.datatype.number(),
+      monthlyTarget: faker.number.int(),
       workdayMonday: faker.datatype.boolean(),
       workdayTuesday: faker.datatype.boolean(),
       workdayWednesday: faker.datatype.boolean(),
@@ -138,7 +138,7 @@ export const createTargethoursRowMonthlyMocks = ({
 };
 
 export const createTargethoursRowMocks = (
-  options: CommonOptions = {}
+  options: CommonOptions = {},
 ): Array<TargethoursRow> => {
   const {
     count = 1,
@@ -172,6 +172,6 @@ export const createTargethoursRowMocks = (
     (targethoursRow, index) => ({
       ...targethoursRow,
       id: index,
-    })
+    }),
   );
 };

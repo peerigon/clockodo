@@ -1,26 +1,21 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`workTimesMocks createChangeRequestMocks 1`] = `
+exports[`workTimesMocks > createChangeRequestMocks 1`] = `
 [
   {
     "changes": [
       {
-        "timeSince": "2020-03-24T14:09:16Z",
-        "timeUntil": "2020-03-24T15:47:12Z",
+        "timeSince": "2020-03-24T08:24:38Z",
+        "timeUntil": "2020-03-24T10:32:32Z",
         "type": 1,
       },
       {
-        "timeSince": "2020-03-24T17:13:53Z",
-        "timeUntil": "2020-03-24T21:15:34Z",
+        "timeSince": "2020-03-24T15:26:09Z",
+        "timeUntil": "2020-03-24T22:32:18Z",
         "type": 2,
       },
-      {
-        "timeSince": "2020-03-24T21:16:02Z",
-        "timeUntil": "2020-03-24T22:43:14Z",
-        "type": 1,
-      },
     ],
-    "createdAt": "2020-03-24T04:00:00Z",
+    "createdAt": "2020-03-23T23:00:00Z",
     "date": "2020-03-24",
     "id": 0,
     "status": 1,
@@ -29,22 +24,17 @@ exports[`workTimesMocks createChangeRequestMocks 1`] = `
   {
     "changes": [
       {
-        "timeSince": "2020-04-14T07:21:31Z",
-        "timeUntil": "2020-04-14T12:14:10Z",
+        "timeSince": "2020-04-13T23:25:56Z",
+        "timeUntil": "2020-04-14T02:22:47Z",
         "type": 1,
       },
       {
-        "timeSince": "2020-04-14T13:24:38Z",
-        "timeUntil": "2020-04-14T13:37:27Z",
-        "type": 2,
-      },
-      {
-        "timeSince": "2020-04-14T15:32:32Z",
-        "timeUntil": "2020-04-14T19:03:20Z",
+        "timeSince": "2020-04-14T07:33:11Z",
+        "timeUntil": "2020-04-14T15:42:42Z",
         "type": 2,
       },
     ],
-    "createdAt": "2020-04-14T04:00:00Z",
+    "createdAt": "2020-04-13T22:00:00Z",
     "date": "2020-04-14",
     "id": 1,
     "status": 1,
@@ -53,13 +43,23 @@ exports[`workTimesMocks createChangeRequestMocks 1`] = `
   {
     "changes": [
       {
-        "timeSince": "2020-06-05T05:25:56Z",
-        "timeUntil": "2020-06-05T20:40:26Z",
-        "type": 2,
+        "timeSince": "2020-07-20T05:45:03Z",
+        "timeUntil": "2020-07-20T12:39:52Z",
+        "type": 1,
+      },
+      {
+        "timeSince": "2020-07-20T13:13:32Z",
+        "timeUntil": "2020-07-20T15:20:19Z",
+        "type": 1,
+      },
+      {
+        "timeSince": "2020-07-20T15:23:12Z",
+        "timeUntil": "2020-07-20T18:23:10Z",
+        "type": 1,
       },
     ],
-    "createdAt": "2020-06-05T04:00:00Z",
-    "date": "2020-06-05",
+    "createdAt": "2020-07-19T22:00:00Z",
+    "date": "2020-07-20",
     "id": 2,
     "status": 1,
     "usersId": 0,
@@ -67,22 +67,22 @@ exports[`workTimesMocks createChangeRequestMocks 1`] = `
   {
     "changes": [
       {
-        "timeSince": "2020-09-11T06:00:33Z",
-        "timeUntil": "2020-09-11T08:12:39Z",
+        "timeSince": "2020-09-11T00:12:37Z",
+        "timeUntil": "2020-09-11T05:29:39Z",
         "type": 1,
       },
       {
-        "timeSince": "2020-09-11T08:22:47Z",
-        "timeUntil": "2020-09-11T14:33:58Z",
-        "type": 1,
+        "timeSince": "2020-09-11T08:13:11Z",
+        "timeUntil": "2020-09-11T08:20:26Z",
+        "type": 2,
       },
       {
-        "timeSince": "2020-09-11T19:09:46Z",
-        "timeUntil": "2020-09-11T21:42:42Z",
-        "type": 1,
+        "timeSince": "2020-09-11T08:24:31Z",
+        "timeUntil": "2020-09-11T09:50:54Z",
+        "type": 2,
       },
     ],
-    "createdAt": "2020-09-11T04:00:00Z",
+    "createdAt": "2020-09-10T22:00:00Z",
     "date": "2020-09-11",
     "id": 3,
     "status": 1,
@@ -91,18 +91,23 @@ exports[`workTimesMocks createChangeRequestMocks 1`] = `
   {
     "changes": [
       {
-        "timeSince": "2020-09-17T11:08:48Z",
-        "timeUntil": "2020-09-17T15:48:36Z",
+        "timeSince": "2020-09-20T00:46:29Z",
+        "timeUntil": "2020-09-20T04:00:39Z",
         "type": 1,
       },
       {
-        "timeSince": "2020-09-17T19:13:32Z",
-        "timeUntil": "2020-09-18T00:23:10Z",
-        "type": 1,
+        "timeSince": "2020-09-20T05:36:53Z",
+        "timeUntil": "2020-09-20T07:57:20Z",
+        "type": 2,
+      },
+      {
+        "timeSince": "2020-09-20T12:58:29Z",
+        "timeUntil": "2020-09-20T18:47:29Z",
+        "type": 2,
       },
     ],
-    "createdAt": "2020-09-17T04:00:00Z",
-    "date": "2020-09-17",
+    "createdAt": "2020-09-19T22:00:00Z",
+    "date": "2020-09-20",
     "id": 4,
     "status": 1,
     "usersId": 0,
@@ -110,22 +115,18 @@ exports[`workTimesMocks createChangeRequestMocks 1`] = `
 ]
 `;
 
-exports[`workTimesMocks createWorkDayMocks 1`] = `
+exports[`workTimesMocks > createWorkDayMocks 1`] = `
 [
   {
     "date": "2020-03-24",
     "intervals": [
       {
-        "timeSince": "2020-03-24T14:09:16Z",
-        "timeUntil": "2020-03-24T15:47:12Z",
+        "timeSince": "2020-03-24T08:24:38Z",
+        "timeUntil": "2020-03-24T10:32:32Z",
       },
       {
-        "timeSince": "2020-03-24T17:13:53Z",
-        "timeUntil": "2020-03-24T21:15:34Z",
-      },
-      {
-        "timeSince": "2020-03-24T21:16:02Z",
-        "timeUntil": "2020-03-24T22:43:14Z",
+        "timeSince": "2020-03-24T15:26:09Z",
+        "timeUntil": "2020-03-24T22:32:18Z",
       },
     ],
     "offset": 0,
@@ -135,39 +136,31 @@ exports[`workTimesMocks createWorkDayMocks 1`] = `
     "date": "2020-04-14",
     "intervals": [
       {
-        "timeSince": "2020-04-14T07:21:31Z",
-        "timeUntil": "2020-04-14T12:14:10Z",
+        "timeSince": "2020-04-13T23:25:56Z",
+        "timeUntil": "2020-04-14T07:33:11Z",
       },
       {
-        "timeSince": "2020-04-14T13:24:38Z",
-        "timeUntil": "2020-04-14T13:37:27Z",
-      },
-      {
-        "timeSince": "2020-04-14T13:51:43Z",
-        "timeUntil": "2020-04-14T15:32:32Z",
-      },
-      {
-        "timeSince": "2020-04-14T17:54:45Z",
-        "timeUntil": "2020-04-14T20:26:09Z",
+        "timeSince": "2020-04-14T08:31:32Z",
+        "timeUntil": "2020-04-14T15:29:49Z",
       },
     ],
     "offset": 0,
     "usersId": 0,
   },
   {
-    "date": "2020-06-05",
+    "date": "2020-07-20",
     "intervals": [
       {
-        "timeSince": "2020-06-05T05:25:56Z",
-        "timeUntil": "2020-06-05T09:52:27Z",
+        "timeSince": "2020-07-20T02:12:39Z",
+        "timeUntil": "2020-07-20T02:22:47Z",
       },
       {
-        "timeSince": "2020-06-05T11:46:46Z",
-        "timeUntil": "2020-06-05T14:31:32Z",
+        "timeSince": "2020-07-20T10:45:26Z",
+        "timeUntil": "2020-07-20T10:45:49Z",
       },
       {
-        "timeSince": "2020-06-05T20:40:26Z",
-        "timeUntil": "2020-06-05T21:29:49Z",
+        "timeSince": "2020-07-20T13:13:32Z",
+        "timeUntil": "2020-07-20T18:23:10Z",
       },
     ],
     "offset": 0,
@@ -177,27 +170,35 @@ exports[`workTimesMocks createWorkDayMocks 1`] = `
     "date": "2020-09-11",
     "intervals": [
       {
-        "timeSince": "2020-09-11T08:22:47Z",
-        "timeUntil": "2020-09-11T18:15:13Z",
+        "timeSince": "2020-09-11T03:28:41Z",
+        "timeUntil": "2020-09-11T05:02:56Z",
       },
       {
-        "timeSince": "2020-09-11T19:09:46Z",
-        "timeUntil": "2020-09-11T21:42:42Z",
+        "timeSince": "2020-09-11T05:45:03Z",
+        "timeUntil": "2020-09-11T06:40:58Z",
+      },
+      {
+        "timeSince": "2020-09-11T12:39:52Z",
+        "timeUntil": "2020-09-11T15:20:19Z",
       },
     ],
     "offset": 0,
     "usersId": 0,
   },
   {
-    "date": "2020-09-17",
+    "date": "2020-09-20",
     "intervals": [
       {
-        "timeSince": "2020-09-17T06:00:33Z",
+        "timeSince": "2020-09-20T00:12:37Z",
         "timeUntil": null,
       },
       {
-        "timeSince": "2020-09-17T16:45:26Z",
-        "timeUntil": "2020-09-17T21:05:45Z",
+        "timeSince": "2020-09-20T08:13:11Z",
+        "timeUntil": "2020-09-20T08:20:26Z",
+      },
+      {
+        "timeSince": "2020-09-20T08:24:31Z",
+        "timeUntil": "2020-09-20T09:50:54Z",
       },
     ],
     "offset": 0,

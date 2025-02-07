@@ -15,7 +15,7 @@ export enum UserReportType {
 }
 
 export type UserReport<
-  GivenUserReportType extends UserReportType = UserReportType.Year
+  GivenUserReportType extends UserReportType = UserReportType.Year,
 > = {
   /** ID of the corresponding co-worker */
   usersId: number;

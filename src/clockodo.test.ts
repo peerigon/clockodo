@@ -1,16 +1,18 @@
-import qs from "qs";
 import nock from "nock";
+import qs from "qs";
+import { afterAll, describe, expect, it } from "vitest";
+import { CLOCKODO_API_BASE_URL } from "./consts.js";
 import {
+  AbsenceStatus,
+  AbsenceType,
+  Billability,
   Clockodo,
   Config,
-  Billability,
-  UserRole,
-  AbsenceType,
-  AbsenceStatus,
   mapRequestBody,
+  UserRole,
 } from "./index.js";
 
-const CLOCKODO_API = "https://my.clockodo.com/api";
+const CLOCKODO_API = `${CLOCKODO_API_BASE_URL}/api`;
 const config: Config = {
   client: {
     name: "Clockodo SDK Unit Test",
@@ -33,9 +35,9 @@ describe("Clockodo (instance)", () => {
           new Clockodo({
             // @ts-expect-error 2322
             client: {},
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"name should be a string but given value undefined is typeof undefined"`
+        `[TypeError: name should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing client email", () => {
@@ -46,9 +48,9 @@ describe("Clockodo (instance)", () => {
             client: {
               name: config.client.name,
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"email should be a string but given value undefined is typeof undefined"`
+        `[TypeError: email should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing user email", () => {
@@ -61,9 +63,9 @@ describe("Clockodo (instance)", () => {
               user: undefined,
               apiKey: "dfdsg34t643",
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"user should be a string but given value undefined is typeof undefined"`
+        `[TypeError: user should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing API key", () => {
@@ -76,9 +78,9 @@ describe("Clockodo (instance)", () => {
               // @ts-expect-error 2322
               apiKey: undefined,
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"apiKey should be a string but given value undefined is typeof undefined"`
+        `[TypeError: apiKey should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor has baseUrl with type other than string", () => {
@@ -88,9 +90,9 @@ describe("Clockodo (instance)", () => {
             ...config,
             // @ts-expect-error 2322
             baseUrl: 5678,
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"baseUrl should be undefined or a string but given value 5678 is typeof number"`
+        `[TypeError: baseUrl should be undefined or a string but given value 5678 is typeof number]`,
       );
     });
   });
@@ -106,9 +108,9 @@ describe("Clockodo (instance)", () => {
           .get("/anything")
           .reply(200, {});
 
-        clockodo.api.config({
+        clockodo.api.config = {
           locale: "de-DE",
-        });
+        };
 
         await clockodo.api.get("/anything");
 
@@ -290,7 +292,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesPage({
             timeSince: "2017-08-18 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
       });
     });
@@ -323,7 +325,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntries({
             timeSince: "2017-08-18 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
       });
     });
@@ -352,7 +354,7 @@ describe("Clockodo (instance)", () => {
 
         return expect(
           // @ts-expect-error Intentional error just for the test
-          clockodo.getEntriesTexts({})
+          clockodo.getEntriesTexts({}),
         ).rejects.toThrowError('Missing required parameter "text"');
       });
     });
@@ -381,7 +383,7 @@ describe("Clockodo (instance)", () => {
                 arrayFormat: "brackets",
               }) +
               "&" +
-              qs.stringify(optionalParameters)
+              qs.stringify(optionalParameters),
           )
           .reply(200, {});
 
@@ -402,7 +404,7 @@ describe("Clockodo (instance)", () => {
           clockodo.getEntryGroups({
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "grouping"');
       });
     });
@@ -543,8 +545,8 @@ describe("Clockodo (instance)", () => {
         return expect(
           clockodo.getUserReport(
             // @ts-expect-error Year is missing
-            { usersId: 200 }
-          )
+            { usersId: 200 },
+          ),
         ).rejects.toThrowError('Missing required parameter "year"');
       });
     });
@@ -580,8 +582,8 @@ describe("Clockodo (instance)", () => {
             "/nonbusinessdays?" +
               qs.stringify(
                 { nonbusinessgroups_id: [123], year: 2021 },
-                { arrayFormat: "brackets" }
-              )
+                { arrayFormat: "brackets" },
+              ),
           )
           .reply(200, {});
 
@@ -599,8 +601,8 @@ describe("Clockodo (instance)", () => {
         return expect(
           clockodo.getNonbusinessDays(
             // @ts-expect-error Year is missing
-            { nonbusinessgroupsId: 123 }
-          )
+            { nonbusinessgroupsId: 123 },
+          ),
         ).rejects.toThrowError('Missing required parameter "year"');
       });
     });
@@ -746,7 +748,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.startClock({
             customersId: 24,
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "servicesId"');
       });
     });
@@ -861,7 +863,7 @@ describe("Clockodo (instance)", () => {
             name: "Merkel",
             number: "8",
             email: "angela@eu.eu",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "role"');
       });
     });
@@ -902,7 +904,7 @@ describe("Clockodo (instance)", () => {
             servicesId: 2,
             timeSince: "2020-06-02 00:00:00",
             timeUntil: "2020-06-02 00:00:01",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "billable"');
       });
     });
@@ -937,7 +939,7 @@ describe("Clockodo (instance)", () => {
           clockodo.addAbsence({
             dateSince: "2017-08-18",
             dateUntil: "2018-02-09",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "type"');
       });
     });
@@ -1063,7 +1065,7 @@ describe("Clockodo (instance)", () => {
           clockodo.changeClockDuration({
             entriesId: 782,
             durationBefore: 540,
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "duration"');
       });
     });
