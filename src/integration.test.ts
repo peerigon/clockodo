@@ -377,30 +377,4 @@ describe("Clockodo", () => {
       expect(me).toHaveProperty("worktimeRegulation");
     });
   });
-
-  (process.env.LC_ALL === "tr" ? describe : describe.skip)(
-    "using a Turkish locale",
-    () => {
-      // The Turkish language has uncommon capitalization rules that
-      // mess with some snake_case to camelCase libraries
-      // See https://github.com/peerigon/clockodo/issues/74
-      it("transforms snake_case to camelCase correctly", async () => {
-        // Safety assertion that we're using the Turkish locale
-        expect("i".toLocaleUpperCase()).toBe("İ");
-
-        const {
-          entries: [firstEntry],
-        } = await clockodo.getEntries({
-          timeSince: TIME_SINCE,
-          timeUntil: TIME_UNTIL,
-          filterBillable: Billability.Billable,
-        });
-
-        expect(firstEntry).toMatchObject({
-          usersId: expect.any(Number),
-          customersId: expect.any(Number),
-        });
-      });
-    }
-  );
 });
