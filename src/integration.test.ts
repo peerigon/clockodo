@@ -15,7 +15,7 @@ const config: Config = {
   },
 };
 
-describe("Clockodo", () => {
+describe("Clockodo", { timeout: 20000 }, () => {
   if (hasCredentials === false) {
     if (process.env.CI)
       throw new Error("Cannot run tests: Credentials are missing");
