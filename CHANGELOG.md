@@ -1,3 +1,18 @@
+# [25.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v24.0.0...v25.0.0-beta.1) (2025-02-07)
+
+
+### chore
+
+* Refactor and update ([#161](https://github.com/peerigon/clockodo/issues/161)) ([859e894](https://github.com/peerigon/clockodo/commit/859e894737c9791735e2ef1314b618314c517453))
+
+
+### BREAKING CHANGES
+
+* Changed `api` `config` method to a setter and getter property
+* Removed Axios options from `api` methods. We plan to remove Axios in the future. You can pass headers instead of Axios options as third parameter to `post`, `put` and `delete` now.
+* Updated TypeScript which might affect the generated code.
+* Updated Faker and mocks. This will change the produced mock data in case you snapshotted it.
+
 # [24.0.0](https://github.com/peerigon/clockodo/compare/v23.5.1...v24.0.0) (2025-02-07)
 
 ### chore
