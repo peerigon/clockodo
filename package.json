@@ -12,7 +12,7 @@
     "build:clean": "rimraf dist",
     "build:tsc": "tsc -p tsconfig.build.json",
     "lint": "eslint --max-warnings 0 --cache --no-ignore",
-    "test": "run-p test:unit test:lint test:types",
+    "test": "run-p test:*",
     "test:unit": "vitest run",
     "test:lint": "eslint --max-warnings 0 --cache --ext js,ts --ignore-path .gitignore .",
     "test:format": "prettier --check --ignore-path .gitignore .",

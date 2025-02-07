@@ -1,15 +1,16 @@
 /** Special id that is used when no worktime regulation should be applied */
-export const NO_WORKTIME_REGULATIONS_ID_FOR_USER = 0 as const;
+export const NO_WORKTIME_REGULATIONS_ID_FOR_USER = 0;
 
 /** Special id that is used when the user is has no nonbusiness group */
-export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0 as const;
+export const NO_NONBUSINESS_GROUPS_ID_FOR_USER = 0;
 
 /** Special cases for work time edit lock */
-export const WORK_TIME_EDIT_LOCK_CLOCK_ONLY = 0 as const;
+export const WORK_TIME_EDIT_LOCK_CLOCK_ONLY = 0;
 export const WORK_TIME_EDIT_LOCK_DISABLED = null;
 
 /** Type for the user's work time edit lock setting */
 export type WorkTimeEditLock =
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
   | typeof WORK_TIME_EDIT_LOCK_DISABLED
   | number;
@@ -62,6 +63,7 @@ export type User = {
    **/
   worktimeRegulationId:
     | number
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     | typeof NO_WORKTIME_REGULATIONS_ID_FOR_USER
     | null;
   /** The co-worker's team id */
@@ -71,6 +73,7 @@ export type User = {
    * - "0" if the co-worker has no nonbusiness group
    * - "null" if the company default is applicable
    */
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
   /**
    * The number can be used to calculate the work time edit lock.
