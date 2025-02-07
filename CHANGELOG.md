@@ -1,3 +1,15 @@
+# [24.0.0](https://github.com/peerigon/clockodo/compare/v23.5.1...v24.0.0) (2025-02-07)
+
+
+### chore
+
+* Update dev dependencies ([#157](https://github.com/peerigon/clockodo/issues/157)) ([8254189](https://github.com/peerigon/clockodo/commit/8254189c50d4bc9c7a964b89bd558c424610594b))
+
+
+### BREAKING CHANGES
+
+* Dropped official Node 16 support. We don't know of an actual breaking change, but you're on your own now :)
+
 ## [23.5.1](https://github.com/peerigon/clockodo/compare/v23.5.0...v23.5.1) (2023-12-05)
 
 
