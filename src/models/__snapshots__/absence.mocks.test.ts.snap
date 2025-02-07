@@ -35,7 +35,7 @@ exports[`createAbsenceMocks() > It creates realistic mocks 1`] = `
     "approvedBy": 1,
     "countDays": 1,
     "countHours": null,
-    "dateApproved": "2020-01-19",
+    "dateApproved": "2020-01-18",
     "dateEnquired": null,
     "dateSince": "2020-03-24",
     "dateUntil": "2020-03-24",
