@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import {
   createWorkTimeChangeRequestMocks,
   createWorkTimeDayMocks,
@@ -8,7 +9,7 @@ describe("workTimesMocks", () => {
     expect(
       createWorkTimeDayMocks({
         count: 5,
-      })
+      }),
     ).toMatchSnapshot();
   });
 
@@ -16,7 +17,7 @@ describe("workTimesMocks", () => {
     expect(
       createWorkTimeChangeRequestMocks({
         count: 5,
-      })
+      }),
     ).toMatchSnapshot();
   });
 });

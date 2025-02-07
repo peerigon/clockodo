@@ -15,9 +15,9 @@ export const createOvertimecarryMocks = ({
   return Array.from({ length: count }, (): OvertimecarryRow => {
     return {
       usersId: 0,
-      year: faker.datatype.number({ min: yearMinMax[0], max: yearMinMax[1] }),
+      year: faker.number.int({ min: yearMinMax[0], max: yearMinMax[1] }),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
-      hours: faker.datatype.number({
+      hours: faker.number.int({
         min: hoursMinMax[0],
         max: hoursMinMax[1],
       }),

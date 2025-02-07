@@ -3,9 +3,9 @@ import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
   Billability,
   Entry,
-  TimeEntry,
-  LumpsumValueEntry,
   LumpsumServiceEntry,
+  LumpsumValueEntry,
+  TimeEntry,
 } from "./entry.js";
 
 type CommonOptions = {
@@ -17,8 +17,8 @@ const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
 const createCommonEntryMock = (from: Date, to: Date) => {
-  const hasText = faker.datatype.number({ min: 0, max: 10 }) > 2;
-  const timeSince = faker.date.between(from, to);
+  const hasText = faker.number.int({ min: 0, max: 10 }) > 2;
+  const timeSince = faker.date.between({ from, to });
   const timeSinceAsIsoString = isoUtcDateTimeFromDateTime(timeSince);
 
   return {
@@ -28,7 +28,7 @@ const createCommonEntryMock = (from: Date, to: Date) => {
     usersId: 0,
     textsId: hasText ? 0 : null,
     text: hasText
-      ? faker.lorem.words(faker.datatype.number({ min: 2, max: 10 }))
+      ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
       : null,
     timeSince: timeSinceAsIsoString,
     timeUntil: timeSinceAsIsoString,
@@ -48,7 +48,7 @@ export const createTimeEntryMocks = ({
     const commonEntry = createCommonEntryMock(from, to);
     const timeEntryType =
       timeEntryTypes[
-        faker.datatype.number({
+        faker.number.int({
           min: 0,
           max: timeEntryTypes.length - 1,
         })
@@ -59,8 +59,8 @@ export const createTimeEntryMocks = ({
         : isoUtcDateTimeFromDateTime(
             new Date(
               new Date(commonEntry.timeSince).getTime() +
-                faker.datatype.number({ min: 1, max: 8 * 60 * 60 }) * 1000
-            )
+                faker.number.int({ min: 1, max: 8 * 60 * 60 }) * 1000,
+            ),
           );
 
     return {
@@ -76,21 +76,21 @@ export const createTimeEntryMocks = ({
         Billability.NotBillable,
         Billability.Billable,
         Billability.Billed,
-      ][faker.datatype.number({ min: 0, max: 2 })],
+      ][faker.number.int({ min: 0, max: 2 })],
       duration:
         timeUntil === null
           ? null
           : Math.floor(
               (new Date(timeUntil).getTime() -
                 new Date(commonEntry.timeSince).getTime()) /
-                1000
+                1000,
             ),
       clocked: timeEntryType !== "manual",
       clockedOffline:
         timeEntryType === "manual"
           ? false
-          : faker.datatype.number({ min: 0, max: 10 }) < 1,
-      hourlyRate: faker.datatype.number({ min: 40, max: 150 }),
+          : faker.number.int({ min: 0, max: 10 }) < 1,
+      hourlyRate: faker.number.int({ min: 40, max: 150 }),
     };
   });
 
@@ -109,7 +109,7 @@ export const createLumpsumValueEntryMocks = ({
         index % 2
       ],
       servicesId: 0,
-      lumpsum: faker.datatype.float({ min: 0.2, max: 150 }),
+      lumpsum: faker.number.float({ min: 0.2, max: 150 }),
     };
   });
 
@@ -128,7 +128,7 @@ export const createLumpsumServiceEntryMocks = ({
         index % 2
       ],
       lumpsumServicesId: 0,
-      lumpsumServicesAmount: faker.datatype.float({ min: 0.2, max: 150 }),
+      lumpsumServicesAmount: faker.number.float({ min: 0.2, max: 150 }),
     };
   });
 
@@ -139,13 +139,13 @@ export const createEntryMocks = (options: CommonOptions = {}) => {
   const lumpsumServiceEntryMocks = createLumpsumServiceEntryMocks(options);
 
   return Array.from({ length: count }, (_, index): Entry => {
-    const typeSeed = faker.datatype.number({ min: 0, max: 10 });
+    const typeSeed = faker.number.int({ min: 0, max: 10 });
     const entry =
       typeSeed > 2
         ? timeEntryMocks[index]
         : typeSeed > 1
-        ? lumpsumValueEntryMocks[index]
-        : lumpsumServiceEntryMocks[index];
+          ? lumpsumValueEntryMocks[index]
+          : lumpsumServiceEntryMocks[index];
 
     return {
       ...entry,

@@ -2,10 +2,12 @@
 // However, we don't have typings for the snake_case models which is why we don't
 // gain much more confidence by removing 'any' here
 
-import mapObject from "map-obj";
+import mapObject, { mapObjectSkip } from "map-obj";
 
 export const queryParamMapping: Record<string, string> = {
+  filterId: "filter[id]",
   filterUsersId: "filter[users_id]",
+  filterYear: "filter[year]",
   filterCustomersId: "filter[customers_id]",
   filterProjectsId: "filter[projects_id]",
   filterServicesId: "filter[services_id]",
@@ -19,34 +21,48 @@ export const queryParamMapping: Record<string, string> = {
   filterLumpsumsId: "filter[lumpsums_id]",
   filterTimeSince: "filter[time_since]",
   filterTimeUntil: "filter[time_until]",
+  filterTeamsId: "filter[teams_id]",
   filterActive: "filter[active]",
   filterFulltext: "filter[fulltext]",
-  // excludeIds needs to stay in camelCase.
+
+  // these params needs to stay in camelCase.
   // This seems to be an inconsistency in the API.
   excludeIds: "excludeIds",
 };
 
 export const mapQueryParams = <Result = Record<string, unknown>>(
-  queryParams: Record<string, any>
+  queryParams: Record<string, any>,
 ) => {
   return mapObject(
     queryParams,
     (key, value) => {
+      if (value === undefined || value === null) {
+        return mapObjectSkip;
+      }
+
+      if (value === "") {
+        return mapObjectSkip;
+      }
+
       const mappedKey =
         key in queryParamMapping
           ? queryParamMapping[key]
           : camelCaseToSnakeCase(key);
 
+      if (mappedKey === "include" && Array.isArray(value)) {
+        return [mappedKey, value.join(",")];
+      }
+
       return [mappedKey, value];
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
 export const mapRequestBody = <Result = Record<string, unknown>>(
-  requestBody: Record<string, any>
+  requestBody: Record<string, any>,
 ) => {
   return mapObject(
     requestBody,
@@ -57,12 +73,12 @@ export const mapRequestBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
 export const mapResponseBody = <Result = Record<string, unknown>>(
-  responseBody: Record<string, any>
+  responseBody: Record<string, any>,
 ) => {
   return mapObject(
     responseBody,
@@ -73,7 +89,7 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 

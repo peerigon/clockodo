@@ -1,11 +1,12 @@
-import axios, { AxiosRequestConfig } from "axios";
-import qs from "qs";
+import axios from "axios";
 import pLimit from "p-limit";
-import { axiosClient } from "./symbols.js";
-import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
+import qs from "qs";
+import { CLOCKODO_API_BASE_URL } from "../consts.js";
 import { Billability } from "../models/entry.js";
+import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
+import { RequestHeaders } from "./requests.js";
+import { axiosClient } from "./symbols.js";
 
-const DEFAULT_BASE_URL = "https://my.clockodo.com/api";
 const MAX_PARALLEL_REQUESTS_WHEN_STREAMING = 3;
 const EXTERNAL_APPLICATION_HEADER_MAX_LENGTH = 50;
 
@@ -24,12 +25,16 @@ const paramsSerializer = (params: Record<string, string>) => {
  * This is necessary so that the SDK doesn't disallow unknown params that we haven't implemented yet.
  */
 export type Params<
-  KnownParams extends Record<string, unknown> = Record<string, unknown>
-> = KnownParams & Record<string, unknown>;
+  KnownParams extends Record<string, unknown> = Record<string, unknown>,
+> = KnownParams & Record<Exclude<string, keyof KnownParams>, unknown>;
 
 export type ParamsWithPage = {
   page?: number;
   itemsPerPage?: number;
+};
+
+export type ParamsWithSort<SortParams extends string> = {
+  sort?: Array<SortParams | `-${SortParams}`>;
 };
 
 export type Paging = {
@@ -110,8 +115,12 @@ export class Api {
     },
   });
 
+  defaultHeaders: undefined | (() => RequestHeaders);
+
+  _config: Partial<Config> = {};
+
   constructor({
-    baseUrl = DEFAULT_BASE_URL,
+    baseUrl = CLOCKODO_API_BASE_URL,
     authentication,
     client,
     locale,
@@ -120,13 +129,14 @@ export class Api {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
       throw new Error(
-        `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`
+        `Client identification missing: The Clockodo API requires a client identification now. See "Installation and usage" instructions for more information.`,
       );
     }
-    this.config({ client, authentication, baseUrl, locale });
+    this.config = { client, authentication, baseUrl, locale };
   }
 
-  config(config: Partial<Config>) {
+  set config(config: Partial<Config>) {
+    this._config = config;
     const defaults = this[axiosClient].defaults;
 
     if ("locale" in config) {
@@ -149,7 +159,7 @@ export class Api {
       const { baseUrl } = config;
 
       if (baseUrl === undefined) {
-        defaults.baseURL = DEFAULT_BASE_URL;
+        defaults.baseURL = CLOCKODO_API_BASE_URL;
       } else if (typeof baseUrl === "string") {
         defaults.baseURL = baseUrl;
       } else {
@@ -183,7 +193,7 @@ export class Api {
 
       if (externalApplication.length > EXTERNAL_APPLICATION_HEADER_MAX_LENGTH) {
         throw new Error(
-          `External application header "${externalApplication}" is longer than ${EXTERNAL_APPLICATION_HEADER_MAX_LENGTH} characters (was ${externalApplication.length}). Please use a shorter name.`
+          `External application header "${externalApplication}" is longer than ${EXTERNAL_APPLICATION_HEADER_MAX_LENGTH} characters (was ${externalApplication.length}). Please use a shorter name.`,
         );
       }
 
@@ -224,15 +234,17 @@ export class Api {
     }
   }
 
-  async get<Result = any>(
-    url: string,
-    queryParams = {},
-    options?: AxiosRequestConfig
-  ): Promise<Result> {
-    const response = await this[axiosClient].get(url, {
-      params: mapQueryParams(queryParams),
+  get config() {
+    return this._config;
+  }
+
+  async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
+    const response = await this[axiosClient].request({
+      method: "GET",
+      url,
+      params: mapQueryParams({ ...queryParams }),
       paramsSerializer,
-      ...options,
+      headers: this.defaultHeaders?.(),
     });
 
     return mapResponseBody<Result>(response.data);
@@ -241,27 +253,25 @@ export class Api {
   async *getPagesStreaming<Result extends ResponseWithPaging>(
     ...args: Parameters<Api["get"]>
   ) {
-    const [url, queryParams = {}, options] = args;
+    const [url, queryParams = {}] = args;
     const getPage = async (page: number) => {
-      return this.get<Result & ResponseWithPaging>(
-        url,
-        { ...queryParams, page },
-        options
-      );
+      return this.get<Result & ResponseWithPaging>(url, {
+        ...queryParams,
+        page,
+      });
     };
     const firstResponse = await getPage(1);
 
     yield firstResponse;
-
     const { paging } = firstResponse;
     const limit = pLimit(MAX_PARALLEL_REQUESTS_WHEN_STREAMING);
     const remainingPages = Array.from(
       { length: paging.countPages - 1 },
-      (_, index) => index + 2
+      (_, index) => index + 2,
     );
 
     yield* yieldPagesAsap(
-      remainingPages.map(async (page) => limit(getPage, page))
+      remainingPages.map(async (page) => limit(getPage, page)),
     );
   }
 
@@ -275,7 +285,7 @@ export class Api {
     }
 
     pages.sort(
-      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage
+      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage,
     );
 
     return pages;
@@ -284,13 +294,17 @@ export class Api {
   async post<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    headers: RequestHeaders = {},
   ): Promise<Result> {
-    const response = await this[axiosClient].post(
+    const response = await this[axiosClient].request({
+      method: "POST",
       url,
-      mapRequestBody(body),
-      options
-    );
+      data: mapRequestBody(body),
+      headers: {
+        ...this.defaultHeaders?.(),
+        ...headers,
+      },
+    });
 
     return mapResponseBody<Result>(response.data);
   }
@@ -298,13 +312,17 @@ export class Api {
   async put<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    headers: RequestHeaders = {},
   ): Promise<Result> {
-    const response = await this[axiosClient].put(
+    const response = await this[axiosClient].request({
+      method: "PUT",
       url,
-      mapRequestBody(body),
-      options
-    );
+      data: mapRequestBody(body),
+      headers: {
+        ...this.defaultHeaders?.(),
+        ...headers,
+      },
+    });
 
     return mapResponseBody<Result>(response.data);
   }
@@ -312,11 +330,16 @@ export class Api {
   async delete<Result = any>(
     url: string,
     body = {},
-    options?: AxiosRequestConfig
+    headers: RequestHeaders = {},
   ): Promise<Result> {
-    const response = await this[axiosClient].delete(url, {
+    const response = await this[axiosClient].request({
+      method: "DELETE",
+      url,
       data: mapRequestBody(body),
-      ...options,
+      headers: {
+        ...this.defaultHeaders?.(),
+        ...headers,
+      },
     });
 
     return mapResponseBody<Result>(response.data);
@@ -333,18 +356,18 @@ const createTypeError = ({
   actual: any;
 }) => {
   return new TypeError(
-    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`
+    `${name} should be ${expected} but given value ${actual} is typeof ${typeof actual}`,
   );
 };
 
 const yieldPagesAsap = async function* <Result>(
-  pagePromises: Array<Promise<Result>>
+  pagePromises: Array<Promise<Result>>,
 ) {
   const pending = new Map(
-    pagePromises.map((promise, index) => [
-      index,
-      promise.then((result) => [index, result] as const),
-    ])
+    pagePromises.map(
+      (promise, index) =>
+        [index, promise.then((result) => [index, result] as const)] as const,
+    ),
   );
 
   while (pending.size > 0) {

@@ -1,3 +1,5 @@
+import { IsoDate } from "./dateTime";
+
 export enum TargethoursRowType {
   Weekly = "weekly",
   Monthly = "monthly",
@@ -10,12 +12,12 @@ type CommonTargethoursRow = {
    * Date from which on the target hours apply
    * Format YYYY-MM-DD
    */
-  dateSince: string;
+  dateSince: IsoDate;
   /**
    * Date until which the target hours apply
    * Format YYYY-MM-DD
    */
-  dateUntil: string | null;
+  dateUntil: IsoDate | null;
   /**
    * Automatic time compensation per month in hours
    */

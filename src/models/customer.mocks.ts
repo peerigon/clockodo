@@ -8,11 +8,11 @@ export const createCustomerMocks = ({ count = 1 }: { count?: number } = {}) => {
     return {
       id: customerId,
       name: faker.company.name(),
-      number: faker.datatype.hexadecimal(),
-      active: faker.datatype.float({ min: 0, max: 10 }) > 1,
+      number: faker.string.hexadecimal(),
+      active: faker.number.float({ min: 0, max: 10 }) > 1,
       billableDefault: faker.datatype.boolean(),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
-      color: faker.datatype.number({ min: 1, max: 9 }),
+      color: faker.number.int({ min: 1, max: 9 }),
     };
   });
 };

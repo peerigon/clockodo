@@ -30,7 +30,7 @@ export const createNonbusinessDayMocks = ({
     const dateTime = new Date(timestamp);
     const id = getNextIdForYear(dateTime.getFullYear());
     const name = faker.lorem.words();
-    const isHalfDay = faker.datatype.number({ min: 0, max: 10 }) > 8;
+    const isHalfDay = faker.number.int({ min: 0, max: 10 }) > 8;
 
     return {
       date: isoDateFromDateTime(dateTime),

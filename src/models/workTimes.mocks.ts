@@ -7,8 +7,8 @@ import {
 import {
   generateRandomDates,
   generateRandomDateTimes,
-  startOfNextDay,
   startOfDay,
+  startOfNextDay,
   toPairs,
 } from "../lib/mocks.js";
 import {
@@ -42,7 +42,7 @@ const generateIntervals = ({
 
 const createWorkTimeDayMock = ({ date }: { date: Date }): WorkTimeDay => {
   const intervals = generateIntervals({
-    count: faker.datatype.number({ min: 1, max: 4 }),
+    count: faker.number.int({ min: 1, max: 4 }),
     date,
   });
 
@@ -61,13 +61,10 @@ export const createWorkTimeDayMocks = ({
   count?: number;
   dateBetween?: readonly [Date, Date];
 }) => {
-  let id = -1;
-
   const workTimeDays = generateRandomDates({
     count,
     between: [from, to],
   }).map((timestamp) => {
-    id = id + 1;
     const date = startOfDay(new Date(timestamp));
 
     return createWorkTimeDayMock({
@@ -98,7 +95,7 @@ const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
           ? WorkTimeChangeRequestIntervalType.Add
           : WorkTimeChangeRequestIntervalType.Remove,
       };
-    }
+    },
   );
 };
 
@@ -114,7 +111,7 @@ const createChangeRequest = ({
   createdAt?: Date;
 }): WorkTimeChangeRequest => {
   const changes = generateChangeRequestChanges({
-    count: faker.datatype.number({ min: 1, max: 4 }),
+    count: faker.number.int({ min: 1, max: 4 }),
     date,
   });
   const isoDate = isoDateFromDateTime(date);

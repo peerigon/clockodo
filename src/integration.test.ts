@@ -1,4 +1,4 @@
-import { jest } from "@jest/globals";
+import { beforeAll, describe, expect, it } from "vitest";
 import { Billability, Clockodo, Config, UserReportType } from "./index.js";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
@@ -15,7 +15,7 @@ const config: Config = {
   },
 };
 
-describe("Clockodo", () => {
+describe("Clockodo", { timeout: 20000 }, () => {
   if (hasCredentials === false) {
     if (process.env.CI)
       throw new Error("Cannot run tests: Credentials are missing");
@@ -34,14 +34,12 @@ describe("Clockodo", () => {
   };
 
   beforeAll(() => {
-    jest.setTimeout(10000);
-
-    clockodo.api.config({
+    clockodo.api.config = {
       authentication: {
         user: process.env.CLOCKODO_USER!,
         apiKey: process.env.CLOCKODO_API_KEY!,
       },
-    });
+    };
   });
 
   describe("getUsers()", () => {
@@ -73,7 +71,7 @@ describe("Clockodo", () => {
       const data = await clockodo.getUsers();
 
       expect(Object.keys(data.users[0])).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
   });
@@ -239,7 +237,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(data.groups[0])).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
 
@@ -252,7 +250,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(data.groups[0])).toEqual(
-        expect.arrayContaining(expectedKeys.concat(["subGroups"]))
+        expect.arrayContaining(expectedKeys.concat(["subGroups"])),
       );
     });
   });
@@ -281,7 +279,7 @@ describe("Clockodo", () => {
       const [lumpSumService] = lumpSumServices;
 
       expect(Object.keys(lumpSumService)).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
 
       const getLumpSumServiceResponse = await clockodo.getLumpSumService({
@@ -289,7 +287,7 @@ describe("Clockodo", () => {
       });
 
       expect(Object.keys(getLumpSumServiceResponse.lumpSumService)).toEqual(
-        expect.arrayContaining(expectedKeys)
+        expect.arrayContaining(expectedKeys),
       );
     });
   });

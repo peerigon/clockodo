@@ -1,37 +1,32 @@
 # [24.0.0](https://github.com/peerigon/clockodo/compare/v23.5.1...v24.0.0) (2025-02-07)
 
-
 ### chore
 
-* Update dev dependencies ([#157](https://github.com/peerigon/clockodo/issues/157)) ([8254189](https://github.com/peerigon/clockodo/commit/8254189c50d4bc9c7a964b89bd558c424610594b))
-
+- Update dev dependencies ([#157](https://github.com/peerigon/clockodo/issues/157)) ([8254189](https://github.com/peerigon/clockodo/commit/8254189c50d4bc9c7a964b89bd558c424610594b))
 
 ### BREAKING CHANGES
 
-* Dropped official Node 16 support. We don't know of an actual breaking change, but you're on your own now :)
+- Dropped official Node 16 support. We don't know of an actual breaking change, but you're on your own now :)
 
 ## [23.5.1](https://github.com/peerigon/clockodo/compare/v23.5.0...v23.5.1) (2023-12-05)
 
-
 ### Bug Fixes
 
-* set default holidayscount and target hours ([b1d0bfb](https://github.com/peerigon/clockodo/commit/b1d0bfbfd52c056a2dcde549bfe2c9ff9bd84e0e))
-* set default holidayscount and target hours ([#153](https://github.com/peerigon/clockodo/issues/153)) ([98c5f15](https://github.com/peerigon/clockodo/commit/98c5f15ce90d667b303ca9e447349a9424ab91a3))
+- set default holidayscount and target hours ([b1d0bfb](https://github.com/peerigon/clockodo/commit/b1d0bfbfd52c056a2dcde549bfe2c9ff9bd84e0e))
+- set default holidayscount and target hours ([#153](https://github.com/peerigon/clockodo/issues/153)) ([98c5f15](https://github.com/peerigon/clockodo/commit/98c5f15ce90d667b303ca9e447349a9424ab91a3))
 
 # [23.5.0](https://github.com/peerigon/clockodo/compare/v23.4.0...v23.5.0) (2023-12-04)
 
-
 ### Features
 
-* added users default holidaycount and targethours ([2439f40](https://github.com/peerigon/clockodo/commit/2439f4035c8ac0f84691fc385093726791ab5986))
-* added users default holidaycount and targethours ([#137](https://github.com/peerigon/clockodo/issues/137)) ([e96713d](https://github.com/peerigon/clockodo/commit/e96713d9b6354b6d724761f1e93656d86afce157))
+- added users default holidaycount and targethours ([2439f40](https://github.com/peerigon/clockodo/commit/2439f4035c8ac0f84691fc385093726791ab5986))
+- added users default holidaycount and targethours ([#137](https://github.com/peerigon/clockodo/issues/137)) ([e96713d](https://github.com/peerigon/clockodo/commit/e96713d9b6354b6d724761f1e93656d86afce157))
 
 # [23.4.0](https://github.com/peerigon/clockodo/compare/v23.3.0...v23.4.0) (2023-12-04)
 
-
 ### Features
 
-* update absences api to v2 ([#152](https://github.com/peerigon/clockodo/issues/152)) ([997a5eb](https://github.com/peerigon/clockodo/commit/997a5ebfd6e0c52f1f040f4a1b5572ef0c01d3bc))
+- update absences api to v2 ([#152](https://github.com/peerigon/clockodo/issues/152)) ([997a5eb](https://github.com/peerigon/clockodo/commit/997a5ebfd6e0c52f1f040f4a1b5572ef0c01d3bc))
 
 # [23.3.0](https://github.com/peerigon/clockodo/compare/v23.2.0...v23.3.0) (2023-11-29)
 

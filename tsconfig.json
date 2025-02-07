@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
     "target": "es2015",
     "module": "esnext",
     "strict": true,
     "sourceMap": true,
     "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "lib": ["es2017"],
-    "moduleResolution": "node"
-  },
-  "include": ["./**/*.ts"]
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  }
 }

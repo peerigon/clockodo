@@ -18,18 +18,18 @@ export const createHolidaysQuotaMocks = ({
     return {
       id,
       usersId: 0,
-      yearSince: faker.datatype.number({
+      yearSince: faker.number.int({
         min: yearSinceMinMax[0],
         max: yearSinceMinMax[1],
       }),
       yearUntil: faker.datatype.boolean()
-        ? faker.datatype.number({
+        ? faker.number.int({
             min: yearUntilMinMax[0],
             max: yearUntilMinMax[1],
           })
         : null,
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
-      count: faker.datatype.number({ min: 0, max: 100 }),
+      count: faker.number.int({ min: 0, max: 100 }),
     };
   });
 };
