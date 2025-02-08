@@ -31,6 +31,6 @@ describe("createTargethoursRowMocks()", () => {
     expect(targethoursRow).toMatchObject({
       dateSince: "2020-01-01",
     });
-    expect(["2020-01-01", null]).toContain(targethoursRow.dateUntil);
+    expect(["2020-01-01", null]).toContain(targethoursRow!.dateUntil);
   }
 });

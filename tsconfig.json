@@ -1,16 +1,8 @@
 {
+  "extends": "@peerigon/configs/typescript",
   "compilerOptions": {
-    "noEmit": true,
-    "checkJs": true,
-    "target": "es2015",
-    "module": "node16",
-    "strict": true,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "lib": ["es2021"],
-    "skipLibCheck": true
+    "target": "ES2022",
+    "lib": ["ES2022"]
   },
   "exclude": ["dist", "coverage"]
 }

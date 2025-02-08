@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Service } from "./service.js";
+import { type Service } from "./service.js";
 
 export const createServiceMocks = ({ count = 1 }: { count?: number } = {}) =>
   Array.from({ length: count }, (_, index): Service => {

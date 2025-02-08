@@ -1,7 +1,7 @@
 import nock from "nock";
 import { CLOCKODO_API_BASE_URL } from "../consts.js";
-import { Api, Config } from "../lib/api.js";
-import { RequestHeaders } from "../lib/requests.js";
+import { Api, type Config } from "../lib/api.js";
+import { type RequestHeaders } from "../lib/requests.js";
 
 export const testApiConfig = {
   locale: "en",

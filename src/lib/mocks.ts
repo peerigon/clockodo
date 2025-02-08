@@ -145,7 +145,7 @@ export const toPairs = <Item>(array: Array<Item>) => {
   const pairs: Array<[Item, Item]> = Array.from({ length: count });
 
   for (let i = 0; i < count; i++) {
-    pairs[i] = [array[i * 2], array[i * 2 + 1]];
+    pairs[i] = [array[i * 2]!, array[i * 2 + 1]!];
   }
 
   return pairs;

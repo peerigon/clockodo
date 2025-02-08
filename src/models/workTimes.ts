@@ -1,4 +1,4 @@
-import { IsoDate, IsoUtcDateTime } from "./dateTime.js";
+import { type IsoDate, type IsoUtcDateTime } from "./dateTime.js";
 
 export type WorkTimeDay = {
   date: IsoDate;

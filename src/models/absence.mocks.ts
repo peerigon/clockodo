@@ -7,7 +7,7 @@ import {
   startOfDay,
   toPairs,
 } from "../lib/mocks.js";
-import { Absence, AbsenceStatus, AbsenceType } from "./absence.js";
+import { AbsenceStatus, AbsenceType, type Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
@@ -100,7 +100,7 @@ export const createAbsenceMocks = ({
     const type =
       absenceTypesWithoutOvertimeReduction[
         index % absenceTypesWithoutOvertimeReduction.length
-      ];
+      ]!;
 
     return {
       ...commonAbsence,

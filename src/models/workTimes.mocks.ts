@@ -12,11 +12,11 @@ import {
   toPairs,
 } from "../lib/mocks.js";
 import {
-  WorkTimeChangeRequest,
-  WorkTimeChangeRequestInterval,
   WorkTimeChangeRequestIntervalType,
   WorkTimeChangeRequestStatus,
-  WorkTimeDay,
+  type WorkTimeChangeRequest,
+  type WorkTimeChangeRequestInterval,
+  type WorkTimeDay,
 } from "./workTimes.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
@@ -75,12 +75,14 @@ export const createWorkTimeDayMocks = ({
   const lastWorkTimeDay = workTimeDays.at(-1);
 
   if (lastWorkTimeDay) {
-    const [firstInterval] = lastWorkTimeDay.intervals;
+    const firstInterval = lastWorkTimeDay.intervals[0];
 
-    // Now let's simulate an unfinished WorkTimeDay
-    // We take the first interval on purpose because it's technically possible
-    // to have future work times.
-    firstInterval.timeUntil = null;
+    if (firstInterval) {
+      // Now let's simulate an unfinished WorkTimeDay
+      // We take the first interval on purpose because it's technically possible
+      // to have future work times.
+      firstInterval.timeUntil = null;
+    }
   }
 
   return workTimeDays;

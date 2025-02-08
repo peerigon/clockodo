@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { HolidaysCarryover } from "./holidaysCarryover.js";
+import { type HolidaysCarryover } from "./holidaysCarryover.js";
 
 type Options = {
   count?: number;

@@ -1,13 +1,14 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Billability, Clockodo, Config, UserReportType } from "./index.js";
+import { Billability, Clockodo, UserReportType, type Config } from "./index.js";
+import { assertExists } from "./lib/assert.ts";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
 // These tests depend on our real Clockodo account.
 // They should only be executed by our clockodo-dev user or Travis CI.
 const hasCredentials =
-  typeof process.env.CLOCKODO_USER === "string" &&
-  typeof process.env.CLOCKODO_API_KEY === "string";
+  typeof process.env["CLOCKODO_USER"] === "string" &&
+  typeof process.env["CLOCKODO_API_KEY"] === "string";
 const config: Config = {
   client: {
     name: "SDK Integration Test",
@@ -17,7 +18,7 @@ const config: Config = {
 
 describe("Clockodo", { timeout: 20_000 }, () => {
   if (hasCredentials === false) {
-    if (process.env.CI)
+    if (process.env["CI"])
       throw new Error("Cannot run tests: Credentials are missing");
 
     it("cannot run tests because credentials are missing", () => {});
@@ -36,8 +37,8 @@ describe("Clockodo", { timeout: 20_000 }, () => {
   beforeAll(() => {
     clockodo.api.config = {
       authentication: {
-        user: process.env.CLOCKODO_USER!,
-        apiKey: process.env.CLOCKODO_API_KEY!,
+        user: process.env["CLOCKODO_USER"]!,
+        apiKey: process.env["CLOCKODO_API_KEY"]!,
       },
     };
   });
@@ -69,8 +70,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
     it("returns expected data format", async () => {
       const data = await clockodo.getUsers();
+      const firstUser = assertExists(data.users[0]);
 
-      expect(Object.keys(data.users[0])).toEqual(
+      expect(Object.keys(firstUser)).toEqual(
         expect.arrayContaining(expectedKeys),
       );
     });
@@ -235,8 +237,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
         timeUntil: TIME_UNTIL,
         grouping: ["customers_id"],
       });
+      const firstGroup = assertExists(data.groups[0]);
 
-      expect(Object.keys(data.groups[0])).toEqual(
+      expect(Object.keys(firstGroup)).toEqual(
         expect.arrayContaining(expectedKeys),
       );
     });
@@ -248,8 +251,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
         // Should both support camelCase and snake_case
         grouping: ["projectsId", "services_id"],
       });
+      const firstGroup = assertExists(data.groups[0]);
 
-      expect(Object.keys(data.groups[0])).toEqual(
+      expect(Object.keys(firstGroup)).toEqual(
         expect.arrayContaining([...expectedKeys, "subGroups"]),
       );
     });
@@ -276,14 +280,14 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
     it("returns expected data format", async () => {
       const { lumpSumServices } = await clockodo.getLumpSumServices();
-      const [lumpSumService] = lumpSumServices;
+      const firstLumpsumService = assertExists(lumpSumServices[0]);
 
-      expect(Object.keys(lumpSumService)).toEqual(
+      expect(Object.keys(firstLumpsumService)).toEqual(
         expect.arrayContaining(expectedKeys),
       );
 
       const getLumpSumServiceResponse = await clockodo.getLumpSumService({
-        id: lumpSumService.id,
+        id: firstLumpsumService.id,
       });
 
       expect(Object.keys(getLumpSumServiceResponse.lumpSumService)).toEqual(
@@ -310,9 +314,11 @@ describe("Clockodo", { timeout: 20_000 }, () => {
         });
       });
 
+      const firstUserReport = assertExists(userreports[0]);
+
       const { userreport } = await clockodo.getUserReport({
         year: 2019,
-        usersId: userreports[0].usersId,
+        usersId: firstUserReport.usersId,
         type: UserReportType.YearMonthsWeeksAndDays,
       });
 
@@ -347,7 +353,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
         expect(nonbusinessGroup).toHaveProperty("name");
       });
 
-      const [firstNonbusinessGroup] = nonbusinessGroups;
+      const firstNonbusinessGroup = assertExists(nonbusinessGroups[0]);
 
       const { nonbusinessdays: nonbusinessDays } =
         await clockodo.getNonbusinessDays({

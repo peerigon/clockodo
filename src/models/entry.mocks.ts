@@ -1,11 +1,12 @@
 import { faker } from "@faker-js/faker";
+import { assertExists } from "../lib/assert.ts";
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
   Billability,
-  Entry,
-  LumpsumServiceEntry,
-  LumpsumValueEntry,
-  TimeEntry,
+  type Entry,
+  type LumpsumServiceEntry,
+  type LumpsumValueEntry,
+  type TimeEntry,
 } from "./entry.js";
 
 type CommonOptions = {
@@ -76,7 +77,7 @@ export const createTimeEntryMocks = ({
         Billability.NotBillable,
         Billability.Billable,
         Billability.Billed,
-      ][faker.number.int({ min: 0, max: 2 })],
+      ][faker.number.int({ min: 0, max: 2 })]!,
       duration:
         timeUntil === null
           ? null
@@ -107,7 +108,7 @@ export const createLumpsumValueEntryMocks = ({
       type: 2,
       billable: [Billability.Billable as const, Billability.Billed as const][
         index % 2
-      ],
+      ]!,
       servicesId: 0,
       lumpsum: faker.number.float({ min: 0.2, max: 150 }),
     };
@@ -126,7 +127,7 @@ export const createLumpsumServiceEntryMocks = ({
       type: 3,
       billable: [Billability.Billable as const, Billability.Billed as const][
         index % 2
-      ],
+      ]!,
       lumpsumServicesId: 0,
       lumpsumServicesAmount: faker.number.float({ min: 0.2, max: 150 }),
     };
@@ -142,10 +143,10 @@ export const createEntryMocks = (options: CommonOptions = {}) => {
     const typeSeed = faker.number.int({ min: 0, max: 10 });
     const entry =
       typeSeed > 2
-        ? timeEntryMocks[index]
+        ? assertExists(timeEntryMocks[index])
         : typeSeed > 1
-          ? lumpsumValueEntryMocks[index]
-          : lumpsumServiceEntryMocks[index];
+          ? assertExists(lumpsumValueEntryMocks[index])
+          : assertExists(lumpsumServiceEntryMocks[index]);
 
     return {
       ...entry,

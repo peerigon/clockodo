@@ -1,4 +1,4 @@
-import { WorkTimeRegulationWithRules } from "./workTimeRegulationWithRules.js";
+import { type WorkTimeRegulationWithRules } from "./workTimeRegulationWithRules.js";
 
 export const workTimeRegulationWithRulesCountryPresets: Record<
   "Germany" | "Austria" | "Switzerland" | "Netherlands" | "Greece" | "France",

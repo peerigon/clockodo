@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { OvertimecarryRow } from "./overtimecarry.js";
+import { type OvertimecarryRow } from "./overtimecarry.js";
 
 type Options = {
   count?: number;

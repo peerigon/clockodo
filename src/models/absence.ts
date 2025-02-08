@@ -1,4 +1,4 @@
-import { IsoDate } from "./dateTime.js";
+import { type IsoDate } from "./dateTime.js";
 
 type CommonAbsence = {
   /** ID of the absence */

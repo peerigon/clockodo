@@ -7,9 +7,9 @@ import {
   AbsenceType,
   Billability,
   Clockodo,
-  Config,
   mapRequestBody,
   UserRole,
+  type Config,
 } from "./index.js";
 
 const config: Config = {

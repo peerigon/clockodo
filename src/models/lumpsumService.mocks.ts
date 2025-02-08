@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { LumpsumService } from "./lumpsumService.js";
+import { type LumpsumService } from "./lumpsumService.js";
 
 export const createLumpsumServiceMocks = ({
   count = 1,

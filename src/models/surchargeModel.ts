@@ -1,4 +1,4 @@
-import { IsoTime } from "./dateTime.js";
+import { type IsoTime } from "./dateTime.js";
 
 export type SurchargeModel = {
   /** The ID of the surcharge model */

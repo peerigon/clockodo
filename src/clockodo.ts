@@ -1,49 +1,50 @@
 import {
   Api,
-  Config,
-  Params,
-  ParamsWithPage,
-  ResponseWithFilter,
-  ResponseWithoutPaging,
-  ResponseWithPaging,
+  type Config,
+  type Params,
+  type ParamsWithPage,
+  type ResponseWithFilter,
+  type ResponseWithoutPaging,
+  type ResponseWithPaging,
 } from "./lib/api.js";
+import { assertExists } from "./lib/assert.ts";
 import { camelCaseToSnakeCase } from "./lib/mappings.js";
 import * as REQUIRED from "./lib/requiredParams.js";
-import { Absence } from "./models/absence.js";
+import { type Absence } from "./models/absence.js";
 import {
-  AccessToCustomersProjects,
-  AccessToServices,
+  type AccessToCustomersProjects,
+  type AccessToServices,
 } from "./models/access.js";
-import { Company } from "./models/company.js";
-import { Customer } from "./models/customer.js";
-import { EntriesText } from "./models/entriesText.js";
+import { type Company } from "./models/company.js";
+import { type Customer } from "./models/customer.js";
+import { type EntriesText } from "./models/entriesText.js";
 import {
   Billability,
-  ClockingTimeEntryBillability,
-  Entry,
-  LumpsumServiceEntry,
-  LumpsumValueEntry,
-  TimeEntry,
+  type ClockingTimeEntryBillability,
+  type Entry,
+  type LumpsumServiceEntry,
+  type LumpsumValueEntry,
+  type TimeEntry,
 } from "./models/entry.js";
-import { EntryGroup } from "./models/entryGroup.js";
-import { HolidaysCarryover } from "./models/holidaysCarryover.js";
-import { HolidaysQuota } from "./models/holidaysQuota.js";
-import { LumpsumService } from "./models/lumpsumService.js";
-import { NonbusinessDay } from "./models/nonbusinessDay.js";
-import { NonbusinessGroup } from "./models/nonbusinessGroup.js";
-import { OvertimecarryRow } from "./models/overtimecarry.js";
-import { Project } from "./models/project.js";
-import { Service } from "./models/service.js";
-import { SurchargeModel } from "./models/surchargeModel.js";
-import { TargethoursRow } from "./models/targethours.js";
-import { Team } from "./models/team.js";
-import { User } from "./models/user.js";
-import { UserReport, UserReportType } from "./models/userReport.js";
-import { WorktimeRegulation } from "./models/worktimeRegulation.js";
+import { type EntryGroup } from "./models/entryGroup.js";
+import { type HolidaysCarryover } from "./models/holidaysCarryover.js";
+import { type HolidaysQuota } from "./models/holidaysQuota.js";
+import { type LumpsumService } from "./models/lumpsumService.js";
+import { type NonbusinessDay } from "./models/nonbusinessDay.js";
+import { type NonbusinessGroup } from "./models/nonbusinessGroup.js";
+import { type OvertimecarryRow } from "./models/overtimecarry.js";
+import { type Project } from "./models/project.js";
+import { type Service } from "./models/service.js";
+import { type SurchargeModel } from "./models/surchargeModel.js";
+import { type TargethoursRow } from "./models/targethours.js";
+import { type Team } from "./models/team.js";
+import { type User } from "./models/user.js";
+import { UserReportType, type UserReport } from "./models/userReport.js";
+import { type WorktimeRegulation } from "./models/worktimeRegulation.js";
 import {
-  WorkTimeChangeRequest,
   WorkTimeChangeRequestStatus,
-  WorkTimeDay,
+  type WorkTimeChangeRequest,
+  type WorkTimeDay,
 } from "./models/workTimes.js";
 
 export class Clockodo {
@@ -132,7 +133,8 @@ export class Clockodo {
       "/v2/customers",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const customers = pages.flatMap(({ customers }) => customers);
 
     return {
@@ -164,7 +166,8 @@ export class Clockodo {
       "/v2/projects",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const projects = pages.flatMap(({ projects }) => projects);
 
     return {
@@ -202,7 +205,8 @@ export class Clockodo {
       "/v2/entries",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const entries = pages.flatMap(({ entries }) => entries);
 
     return {
@@ -228,7 +232,8 @@ export class Clockodo {
       "/v2/entriesTexts",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const texts = Object.fromEntries(
       pages.flatMap(({ texts }) => Object.entries(texts)),
     );
@@ -279,7 +284,8 @@ export class Clockodo {
       "/v3/services",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const services = pages.flatMap(({ services }) => services);
 
     return {
@@ -325,7 +331,8 @@ export class Clockodo {
       "/v3/lumpsumservices",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const lumpSumServices = pages.flatMap(
       ({ lumpSumServices }) => lumpSumServices,
     );
@@ -797,7 +804,8 @@ export class Clockodo {
       "/v2/workTimes",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const workTimeDays = pages.flatMap(({ workTimeDays }) => workTimeDays);
 
     return {
@@ -819,7 +827,8 @@ export class Clockodo {
       "/v2/workTimes/changeRequests",
       params,
     );
-    const [{ paging, ...remainingResponse }] = pages;
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
     const changeRequests = pages.flatMap(
       ({ changeRequests }) => changeRequests,
     );

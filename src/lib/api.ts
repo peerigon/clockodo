@@ -4,7 +4,7 @@ import qs from "qs";
 import { CLOCKODO_API_BASE_URL } from "../consts.js";
 import { Billability } from "../models/entry.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
-import { RequestHeaders } from "./requests.js";
+import { type RequestHeaders } from "./requests.js";
 import { axiosClient } from "./symbols.js";
 
 const MAX_PARALLEL_REQUESTS_WHEN_STREAMING = 3;

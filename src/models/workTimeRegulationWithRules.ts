@@ -1,4 +1,4 @@
-import { WorkTimeBreakRule } from "./workTimeBreakRule.js";
+import { type WorkTimeBreakRule } from "./workTimeBreakRule.js";
 
 export type WorkTimeRegulationWithRules = {
   /** ID of the worktime regulation */

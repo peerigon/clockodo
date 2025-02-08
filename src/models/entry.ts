@@ -1,6 +1,6 @@
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
-import { LumpsumService } from "./lumpsumService.js";
-import { Project } from "./project.js";
+import { type LumpsumService } from "./lumpsumService.js";
+import { type Project } from "./project.js";
 
 export enum EntryType {
   Time = 1,

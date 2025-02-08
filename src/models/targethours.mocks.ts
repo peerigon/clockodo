@@ -10,10 +10,10 @@ import {
   toPairs,
 } from "../lib/mocks.js";
 import {
-  TargethoursRow,
-  TargethoursRowMonthly,
   TargethoursRowType,
-  TargethoursRowWeekly,
+  type TargethoursRow,
+  type TargethoursRowMonthly,
+  type TargethoursRowWeekly,
 } from "./targethours.js";
 
 type CommonOptions = {
@@ -78,13 +78,13 @@ export const createTargethoursRowWeeklyMocks = ({
       dateUntil:
         isLastOne && faker.datatype.boolean() ? null : isoDateFromTimestamp(to),
       type: TargethoursRowType.Weekly,
-      monday: typicalHours[0 % typicalHours.length],
-      tuesday: typicalHours[1 % typicalHours.length],
-      wednesday: typicalHours[2 % typicalHours.length],
-      thursday: typicalHours[3 % typicalHours.length],
-      friday: typicalHours[4 % typicalHours.length],
-      saturday: typicalHours[5 % typicalHours.length],
-      sunday: typicalHours[6 % typicalHours.length],
+      monday: typicalHours[0 % typicalHours.length]!,
+      tuesday: typicalHours[1 % typicalHours.length]!,
+      wednesday: typicalHours[2 % typicalHours.length]!,
+      thursday: typicalHours[3 % typicalHours.length]!,
+      friday: typicalHours[4 % typicalHours.length]!,
+      saturday: typicalHours[5 % typicalHours.length]!,
+      sunday: typicalHours[6 % typicalHours.length]!,
       absenceFixedCredit: absenceFixedCredit ?? faker.datatype.boolean(),
       compensationDaily: faker.number.int({ min: 0, max: 60 }),
     };

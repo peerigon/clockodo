@@ -1,11 +1,12 @@
+import { assertExists } from "../lib/assert.ts";
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
   Billability,
-  Entry,
   EntryType,
-  LumpsumEntryBillability,
-  TimeEntry,
-  TimeEntryBillability,
+  type Entry,
+  type LumpsumEntryBillability,
+  type TimeEntry,
+  type TimeEntryBillability,
 } from "./entry.js";
 
 const EXPECTED_COLUMN_COUNT = 27;
@@ -24,35 +25,33 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     );
   }
 
-  const [
-    id,
-    usersId,
-    projectsId,
-    customersId,
-    servicesId,
-    textsId,
-    hourlyRate,
-    timeInsert,
-    timeLastChange,
-    timeLastChangeWorkTime,
-    timeClockedSince,
-    timeSince,
-    timeUntil,
-    offset,
-    duration,
-    clocked,
-    clockedOffline,
-    lumpsum,
-    lumpsumServicesId,
-    lumpsumServicesAmount,
-    billable,
-    _user,
-    _project,
-    _customer,
-    _service,
-    _lumpsumService,
-    text,
-  ] = row;
+  const id = assertExists(row[0]);
+  const usersId = assertExists(row[1]);
+  const projectsId = assertExists(row[2]);
+  const customersId = assertExists(row[3]);
+  const servicesId = assertExists(row[4]);
+  const textsId = assertExists(row[5]);
+  const hourlyRate = assertExists(row[6]);
+  const timeInsert = assertExists(row[7]);
+  const timeLastChange = assertExists(row[8]);
+  const timeLastChangeWorkTime = assertExists(row[9]);
+  const timeClockedSince = assertExists(row[10]);
+  const timeSince = assertExists(row[11]);
+  const timeUntil = assertExists(row[12]);
+  const offset = assertExists(row[13]);
+  const duration = assertExists(row[14]);
+  const clocked = assertExists(row[15]);
+  const clockedOffline = assertExists(row[16]);
+  const lumpsum = assertExists(row[17]);
+  const lumpsumServicesId = assertExists(row[18]);
+  const lumpsumServicesAmount = assertExists(row[19]);
+  const billable = assertExists(row[20]);
+  const _user = assertExists(row[21]);
+  const _project = assertExists(row[22]);
+  const _customer = assertExists(row[23]);
+  const _service = assertExists(row[24]);
+  const _lumpsumService = assertExists(row[25]);
+  const text = assertExists(row[26]);
 
   const commonEntry = {
     id: parseNumber("id", id, "int"),

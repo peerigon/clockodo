@@ -48,7 +48,7 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
 
       const mappedKey =
         key in queryParamMapping
-          ? queryParamMapping[key]
+          ? queryParamMapping[key]!
           : camelCaseToSnakeCase(key);
 
       if (mappedKey === "include" && Array.isArray(value)) {

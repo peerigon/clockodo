@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Customer } from "./customer.js";
+import { type Customer } from "./customer.js";
 
 export const createCustomerMocks = ({ count = 1 }: { count?: number } = {}) => {
   return Array.from({ length: count }, (_, index): Customer => {

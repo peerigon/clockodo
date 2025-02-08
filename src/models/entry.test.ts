@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { assertExists } from "../lib/assert.ts";
 import {
   Billability,
   getEntryDurationUntilNow,
@@ -184,12 +185,12 @@ const createMocks = () => {
   const [lumpsumService] = createLumpsumServiceMocks();
 
   return {
-    clockingTimeEntry,
-    clockedTimeEntry,
-    manualTimeEntry,
-    lumpsumValueEntry,
-    lumpsumServiceEntry,
-    project,
-    lumpsumService,
+    clockingTimeEntry: assertExists(clockingTimeEntry),
+    clockedTimeEntry: assertExists(clockedTimeEntry),
+    manualTimeEntry: assertExists(manualTimeEntry),
+    lumpsumValueEntry: assertExists(lumpsumValueEntry),
+    lumpsumServiceEntry: assertExists(lumpsumServiceEntry),
+    project: assertExists(project),
+    lumpsumService: assertExists(lumpsumService),
   };
 };

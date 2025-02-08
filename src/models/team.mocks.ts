@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Team } from "./team.js";
+import { type Team } from "./team.js";
 
 export const createTeamMocks = ({ count = 1 }: { count?: number }) =>
   Array.from({ length: count }, (_, index): Team => {
