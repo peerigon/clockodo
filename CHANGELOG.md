@@ -1,3 +1,18 @@
+# [25.0.0-beta.2](https://github.com/peerigon/clockodo/compare/v25.0.0-beta.1...v25.0.0-beta.2) (2025-02-08)
+
+### chore
+
+- Add @peerigon/configs for linting ([b71843c](https://github.com/peerigon/clockodo/commit/b71843cc6c75cc0097b45de6e06ab33fe41b000e))
+- Switch TypeScript lib option to "es2021" ([faa5b7c](https://github.com/peerigon/clockodo/commit/faa5b7c36f640e6ee58f48bdd97dc38bc11fb701))
+- Use TypeScript config from @peerigon/configs ([b8aa1be](https://github.com/peerigon/clockodo/commit/b8aa1becbedca98482887944077bd48bc632091e))
+
+### BREAKING CHANGES
+
+- The TypeScript target has now been set to ES2022. The package must be transpiled for older runtimes.
+- editCustomer() and editLumpsumService() return a type now instead of implicit any
+- Throw TypeError instead of Error where appropiate
+- We expect String.prototype.replaceAll to be present. According to MDN, that's baseline.
+
 # [25.0.0-beta.1](https://github.com/peerigon/clockodo/compare/v24.0.0...v25.0.0-beta.1) (2025-02-07)
 
 ### chore
