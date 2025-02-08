@@ -6,7 +6,7 @@ export const createProjectMocks = ({ count = 1 }: { count?: number } = {}) =>
     const projectId = index;
     const budget =
       faker.number.int({ min: 0, max: 10 }) > 2
-        ? faker.number.int({ min: 10, max: 999999 })
+        ? faker.number.int({ min: 10, max: 999_999 })
         : null;
     const billedCompletely = budget === null ? null : faker.datatype.boolean();
 

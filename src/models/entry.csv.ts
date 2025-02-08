@@ -24,7 +24,6 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     );
   }
 
-  // prettier-ignore
   const [
     id,
     usersId,
@@ -47,11 +46,11 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     lumpsumServicesId,
     lumpsumServicesAmount,
     billable,
-    , // user
-    , // project
-    , // customer
-    , // service
-    , // lumpsumService
+    _user,
+    _project,
+    _customer,
+    _service,
+    _lumpsumService,
     text,
   ] = row;
 
@@ -108,7 +107,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
       : null,
     timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
     timeLastChangeWorkTime: parseIsoUtcDateTime(
-      timeLastChangeWorkTime ? timeLastChangeWorkTime : timeInsert,
+      timeLastChangeWorkTime === "" ? timeInsert : timeLastChangeWorkTime,
     ),
     billable: parseTimeEntryBillability("billable", billable),
     duration: parseOptionalNumber("duration", duration, "int"),
@@ -126,10 +125,12 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
 
 const parseBoolean = (columnName: string, columnValue: string) => {
   switch (columnValue) {
-    case "0":
+    case "0": {
       return false;
-    case "1":
+    }
+    case "1": {
       return true;
+    }
     default: {
       throw new Error(
         `Could not parse ${columnName} "${columnValue}" as a boolean`,
@@ -151,7 +152,7 @@ const parseNumber = (
       : Number.parseFloat(columnValue);
 
   if (Number.isNaN(number)) {
-    throw new Error(
+    throw new TypeError(
       `Could not parse ${columnName} "${columnValue}" as a number`,
     );
   }
@@ -178,12 +179,15 @@ const parseTimeEntryBillability = (
   columnValue: string,
 ): TimeEntryBillability => {
   switch (columnValue) {
-    case "0":
+    case "0": {
       return Billability.NotBillable;
-    case "1":
+    }
+    case "1": {
       return Billability.Billable;
-    case "2":
+    }
+    case "2": {
       return Billability.Billed;
+    }
     default: {
       throw new Error(
         `Could not parse ${columnName} "${columnValue}" as a valid TimeEntryBillability value`,
@@ -197,10 +201,12 @@ const parseLumpsumEntryBillability = (
   columnValue: string,
 ): LumpsumEntryBillability => {
   switch (columnValue) {
-    case "1":
+    case "1": {
       return Billability.Billable;
-    case "2":
+    }
+    case "2": {
       return Billability.Billed;
+    }
     default: {
       throw new Error(
         `Could not parse ${columnName} "${columnValue}" as a valid LumpsumEntryBillability value`,

@@ -15,7 +15,7 @@ const config: Config = {
   },
 };
 
-describe("Clockodo", { timeout: 20000 }, () => {
+describe("Clockodo", { timeout: 20_000 }, () => {
   if (hasCredentials === false) {
     if (process.env.CI)
       throw new Error("Cannot run tests: Credentials are missing");
@@ -113,8 +113,8 @@ describe("Clockodo", { timeout: 20000 }, () => {
   describe("addEntry(), getEntry(), editEntry(), and deleteEntry()", () => {
     it("returns expected data format and throws no error", async () => {
       const addTimeEntryResponse = await clockodo.addEntry({
-        customersId: 619336,
-        servicesId: 288646,
+        customersId: 619_336,
+        servicesId: 288_646,
         billable: Billability.Billable,
         timeSince: "2020-06-02T00:00:00Z",
         timeUntil: "2020-06-02T00:00:01Z",
@@ -123,8 +123,8 @@ describe("Clockodo", { timeout: 20000 }, () => {
 
       expect(addTimeEntryResponse).toMatchObject({
         entry: {
-          customersId: 619336,
-          servicesId: 288646,
+          customersId: 619_336,
+          servicesId: 288_646,
           billable: Billability.Billable,
           timeSince: "2020-06-02T00:00:00Z",
           timeUntil: "2020-06-02T00:00:01Z",
@@ -133,8 +133,8 @@ describe("Clockodo", { timeout: 20000 }, () => {
       });
 
       const addLumpsumValueEntryResponse = await clockodo.addEntry({
-        customersId: 619336,
-        servicesId: 288646,
+        customersId: 619_336,
+        servicesId: 288_646,
         billable: Billability.Billed,
         timeSince: "2020-06-02T00:00:00Z",
         lumpsum: 123,
@@ -143,8 +143,8 @@ describe("Clockodo", { timeout: 20000 }, () => {
 
       expect(addLumpsumValueEntryResponse).toMatchObject({
         entry: {
-          customersId: 619336,
-          servicesId: 288646,
+          customersId: 619_336,
+          servicesId: 288_646,
           billable: Billability.Billed,
           timeSince: "2020-06-02T00:00:00Z",
           lumpsum: 123,
@@ -153,7 +153,7 @@ describe("Clockodo", { timeout: 20000 }, () => {
       });
 
       const addLumpsumServiceEntryResponse = await clockodo.addEntry({
-        customersId: 619336,
+        customersId: 619_336,
         billable: Billability.Billed,
         timeSince: "2020-06-02T00:00:00Z",
         lumpsumServicesId: 4966,
@@ -163,7 +163,7 @@ describe("Clockodo", { timeout: 20000 }, () => {
 
       expect(addLumpsumServiceEntryResponse).toMatchObject({
         entry: {
-          customersId: 619336,
+          customersId: 619_336,
           billable: Billability.Billed,
           timeSince: "2020-06-02T00:00:00Z",
           lumpsumServicesId: 4966,
@@ -250,7 +250,7 @@ describe("Clockodo", { timeout: 20000 }, () => {
       });
 
       expect(Object.keys(data.groups[0])).toEqual(
-        expect.arrayContaining(expectedKeys.concat(["subGroups"])),
+        expect.arrayContaining([...expectedKeys, "subGroups"]),
       );
     });
   });

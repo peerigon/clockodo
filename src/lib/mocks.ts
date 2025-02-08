@@ -19,7 +19,7 @@ export const ONE_DAY = 24 * 60 * 60 * 1000;
 /** The number of milliseconds on a typical year. */
 export const ONE_YEAR = 356 * ONE_DAY;
 
-const MAX_ITERATION_COUNT = 10000;
+const MAX_ITERATION_COUNT = 10_000;
 
 export const startOfDay = (date: Date) => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -68,7 +68,7 @@ This usually happens when the generated values create too many conflicts (e.g. t
     acceptedCount++;
   }
 
-  return Array.from(accepted.values()).flat();
+  return [...accepted.values()].flat();
 };
 
 export const generateRandomDateTimes = ({

@@ -16,7 +16,7 @@ import {
 } from "./models/access.js";
 import { Company } from "./models/company.js";
 import { Customer } from "./models/customer.js";
-import { EntriesText } from "./models/entriesText";
+import { EntriesText } from "./models/entriesText.js";
 import {
   Billability,
   ClockingTimeEntryBillability,
@@ -574,7 +574,7 @@ export class Clockodo {
 
   async editCustomer(
     params: Params<Pick<Customer, (typeof REQUIRED.EDIT_CUSTOMER)[number]>>,
-  ) {
+  ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_CUSTOMER);
 
     const { id } = params;
@@ -586,7 +586,7 @@ export class Clockodo {
     params: Params<
       Pick<LumpsumService, (typeof REQUIRED.EDIT_LUMPSUM_SERVICE)[number]>
     >,
-  ) {
+  ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_LUMPSUM_SERVICE);
 
     const { id } = params;

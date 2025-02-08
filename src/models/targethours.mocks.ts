@@ -64,7 +64,7 @@ export const createTargethoursRowWeeklyMocks = ({
       0,
       faker.number.int({ min: 1, max: 4 }),
       faker.number.int({ min: 4, max: 8 }),
-      parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
+      Number.parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 
@@ -111,7 +111,7 @@ export const createTargethoursRowMonthlyMocks = ({
       0,
       faker.number.int({ min: 1, max: 4 }),
       faker.number.int({ min: 4, max: 8 }),
-      parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
+      Number.parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 

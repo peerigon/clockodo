@@ -1,4 +1,4 @@
-import { IsoDate } from "./dateTime";
+import { IsoDate } from "./dateTime.js";
 
 export enum TargethoursRowType {
   Weekly = "weekly",
