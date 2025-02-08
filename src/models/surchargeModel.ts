@@ -1,13 +1,13 @@
 import { IsoTime } from "./dateTime.js";
 
 export type SurchargeModel = {
-  /** The ID of the surcharge model  */
+  /** The ID of the surcharge model */
   id: number;
   /** The name of the surcharge model */
   name: string;
   /**
-   * Should night surcharges apply in addition to another surcharge?
-   * If `false`, only the surcharge with the higher percent value applies
+   * Should night surcharges apply in addition to another surcharge? If `false`,
+   * only the surcharge with the higher percent value applies
    */
   accumulation: boolean;
   /** Night surcharge configuration */
@@ -29,11 +29,13 @@ type NightSurchargeConfiguration = {
   percent: number;
   /**
    * Start of the period during which the surcharge applies
+   *
    * - Format hh:mm:ss, e.g. 23:00:00
    */
   timeSince: IsoTime;
   /**
    * End of the period during which the surcharge applies
+   *
    * - Format hh:mm:ss, e.g. 23:00:00
    */
   timeUntil: IsoTime;
@@ -41,13 +43,13 @@ type NightSurchargeConfiguration = {
 
 export type SurchargeConfiguration = NightSurchargeConfiguration & {
   /**
-   * Does the surcharge period start on the previous day?
-   * Not for `night` and `nightIncreased`, as these surcharges apply every day
+   * Does the surcharge period start on the previous day? Not for `night` and
+   * `nightIncreased`, as these surcharges apply every day
    */
   timeSinceIsPreviousDay: boolean;
   /**
-   * Does the surcharge period end on the next day?
-   * Not for `night` and `nightIncreased`, as these surcharges apply every day
+   * Does the surcharge period end on the next day? Not for `night` and
+   * `nightIncreased`, as these surcharges apply every day
    */
   timeUntilIsNextDay: boolean;
 };

@@ -13,14 +13,10 @@ export const setFakerSeed = (seed: number) => {
   faker.seed(seed);
 };
 
-/**
- * The number of milliseconds on a typical day.
- */
+/** The number of milliseconds on a typical day. */
 export const ONE_DAY = 24 * 60 * 60 * 1000;
 
-/**
- * The number of milliseconds on a typical year.
- */
+/** The number of milliseconds on a typical year. */
 export const ONE_YEAR = 356 * ONE_DAY;
 
 const MAX_ITERATION_COUNT = 10000;

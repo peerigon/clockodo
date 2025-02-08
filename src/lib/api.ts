@@ -21,8 +21,9 @@ const paramsSerializer = (params: Record<string, string>) => {
 };
 
 /**
- * Allows additional properties to be present on the params object.
- * This is necessary so that the SDK doesn't disallow unknown params that we haven't implemented yet.
+ * Allows additional properties to be present on the params object. This is
+ * necessary so that the SDK doesn't disallow unknown params that we haven't
+ * implemented yet.
  */
 export type Params<
   KnownParams extends Record<string, unknown> = Record<string, unknown>,
@@ -79,32 +80,20 @@ export type Authentication = {
 
 export type Config = {
   /**
-   * Information about the client that is going to do the requests.
-   * Will be sent as X-Clockodo-External-Application.
+   * Information about the client that is going to do the requests. Will be sent
+   * as X-Clockodo-External-Application.
    */
   client: {
-    /**
-     * Name of the application or your company
-     */
+    /** Name of the application or your company */
     name: string;
-    /**
-     * E-mail address of a technical contact person
-     */
+    /** E-mail address of a technical contact person */
     email: string;
   };
-  /**
-   * Authentication for all requests.
-   * Uses cookie authentication if undefined.
-   */
+  /** Authentication for all requests. Uses cookie authentication if undefined. */
   authentication?: Authentication | undefined;
-  /**
-   * The API base url.
-   * Falls back to "https://my.clockodo.com/api" if undefined.
-   */
+  /** The API base url. Falls back to "https://my.clockodo.com/api" if undefined. */
   baseUrl?: string | undefined;
-  /**
-   * Will be sent as Accept-Language header.
-   */
+  /** Will be sent as Accept-Language header. */
   locale?: string | undefined;
 };
 

@@ -54,7 +54,8 @@ export class Clockodo {
   }
 
   /**
-   * @deprecated We will remove plugins because we're planing to move away from axios to fetch()
+   * @deprecated We will remove plugins because we're planing to move away from
+   *   axios to fetch()
    */
   use(plugin: (clockodo: Clockodo) => void) {
     plugin(this);
@@ -535,8 +536,8 @@ export class Clockodo {
     params: Params<
       Pick<TimeEntry, (typeof REQUIRED.START_CLOCK)[number]> & {
         /**
-         * Billability of the time entry that is about to be created.
-         * Omit it if you want to use the project's default.
+         * Billability of the time entry that is about to be created. Omit it if
+         * you want to use the project's default.
          */
         billable?: ClockingTimeEntryBillability;
       }
@@ -986,9 +987,9 @@ export type EditEntryReturnType = {
   running: null | TimeEntry;
 };
 export type EntriesParams = {
-  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z"  */
+  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z" */
   timeSince: string;
-  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z"  */
+  /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z" */
   timeUntil: string;
   filterUsersId?: number;
   filterCustomersId?: number;
@@ -996,10 +997,9 @@ export type EntriesParams = {
   filterServicesId?: number;
   filterLumpsumServicesId?: number;
   /**
-   * 0, 1 or 2
-   * With filterBillable: 2 you only receive
-   * entries which are billable AND already billed.
-   **/
+   * 0, 1 or 2 With filterBillable: 2 you only receive entries which are
+   * billable AND already billed.
+   */
   filterBillable?: Billability;
   filterText?: string;
   filterTextsId?: number;
@@ -1025,52 +1025,32 @@ export type EntriesTextsParams = {
   mode?: EntriesTextsMode;
   sort?: EntriesTextsSort;
 };
-/**
- * Can be specified when requesting entries texts
- */
+/** Can be specified when requesting entries texts */
 export enum EntriesTextsMode {
-  /**
-   * Descriptions that exactly match the submitted text (default).
-   */
+  /** Descriptions that exactly match the submitted text (default). */
   ExactMatch = "exact_match",
 
-  /**
-   * Descriptions that start with the submitted text fragment.
-   */
+  /** Descriptions that start with the submitted text fragment. */
   StartsWith = "starts_with",
 
-  /**
-   * Descriptions that end with the submitted text fragment.
-   */
+  /** Descriptions that end with the submitted text fragment. */
   EndsWith = "ends_with",
 
-  /**
-   * Descriptions that contain the submitted text fragment.
-   */
+  /** Descriptions that contain the submitted text fragment. */
   Contains = "contains",
 }
-/**
- * Can be specified when requesting entries texts
- */
+/** Can be specified when requesting entries texts */
 export enum EntriesTextsSort {
-  /**
-   * Alphabetically ascending (default).
-   */
+  /** Alphabetically ascending (default). */
   TextAsc = "text_asc",
 
-  /**
-   * Alphabetically descending.
-   */
+  /** Alphabetically descending. */
   TextDesc = "text_desc",
 
-  /**
-   * Chronologically ascending.
-   */
+  /** Chronologically ascending. */
   TimeAsc = "time_asc",
 
-  /**
-   * Chronologically descending.
-   */
+  /** Chronologically descending. */
   TimeDesc = "time_desc",
 }
 export type EntriesTextsReturnType = ResponseWithPaging &
@@ -1127,7 +1107,10 @@ export type ClockStartReturnType = {
   running: TimeEntry;
   /** Returns the previously running entry that has been stopped by this call */
   stopped: null | TimeEntry;
-  /** Whether the previously running entry has been truncated to the max length of 23:59:59h */
+  /**
+   * Whether the previously running entry has been truncated to the max length
+   * of 23:59:59h
+   */
   stoppedHasBeenTruncated: boolean;
   /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
@@ -1138,9 +1121,9 @@ export type ClockStopReturnType = {
   /** Whether the stopped entry has been truncated to the max length of 23:59:59h */
   stoppedHasBeenTruncated: boolean;
   /**
-   * The entry that has been started implicitly by this call.
-   * Only relevant if the away parameter has been provided.
-   **/
+   * The entry that has been started implicitly by this call. Only relevant if
+   * the away parameter has been provided.
+   */
   running: null | TimeEntry;
   /** Timestamp of the server time. Can be used for clock synchronization */
   currentTime: string;
@@ -1198,28 +1181,30 @@ export type ApproveOrDeclineWorkTimesChangeRequestReturnType = Record<
 export type AddWorkTimesChangeRequestReturnType =
   | {
       changeRequest: WorkTimeChangeRequest;
-      /**
-       * Is false if the change request is being returned
-       **/
+      /** Is false if the change request is being returned */
       approvedImmediately: false;
       /**
-       * Will be set in case the given work time change request replaced a previous one.
-       * This is because on a certain day there can only be one change request per user.
-       **/
+       * Will be set in case the given work time change request replaced a
+       * previous one. This is because on a certain day there can only be one
+       * change request per user.
+       */
       replacedChangeRequest: null | WorkTimeChangeRequest;
     }
   | {
       /**
-       * Is null if the change request was immediately approved (because the rights imply no need for approval)
-       **/
+       * Is null if the change request was immediately approved (because the
+       * rights imply no need for approval)
+       */
       changeRequest: null;
       /**
-       * Is true if the change request was immediately approved (because the rights imply no need for approval)
-       **/
+       * Is true if the change request was immediately approved (because the
+       * rights imply no need for approval)
+       */
       approvedImmediately: true;
       /**
-       * Is null if the change request was immediately approved (because the rights imply no need for approval)
-       **/
+       * Is null if the change request was immediately approved (because the
+       * rights imply no need for approval)
+       */
       replacedChangeRequest: null;
     };
 

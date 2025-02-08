@@ -1,23 +1,29 @@
 export type Company = {
   /** ID of the company */
   id: number;
-  /** Name of the company  */
+  /** Name of the company */
   name: string;
   /** Default timezone of the company */
   timezoneDefault: string;
-  /** Currency of the company  */
+  /** Currency of the company */
   currency: string;
-  /** Are time and lump sum entries with multiline descriptions allowed?  */
+  /** Are time and lump sum entries with multiline descriptions allowed? */
   allowEntriesTextMultiline: boolean;
-  /** Can time and lump sum entries be directly assigned to customers (or only to projects)? */
+  /**
+   * Can time and lump sum entries be directly assigned to customers (or only to
+   * projects)?
+   */
   allowEntriesForCustomers: boolean;
   /** Are entries of a single user allowed to overlap with each other? */
   allowEntryOverlaps: boolean;
-  /** Does the duration of a time entry have to be equal to the difference between start and end?  */
+  /**
+   * Does the duration of a time entry have to be equal to the difference
+   * between start and end?
+   */
   forceLinkedEntryTimes: boolean;
-  /** ID of the default customer  */
+  /** ID of the default customer */
   defaultCustomersId: number | null;
-  /** ID of the default service  */
+  /** ID of the default service */
   defaultServicesId: number | null;
   /** Is the absence module active for the company? */
   moduleAbsence: boolean;
@@ -31,21 +37,22 @@ export type Company = {
   moduleTargetHours: boolean;
   /** Is the user-reports module active for the company? */
   moduleUserReports: boolean;
-  /** ID of the default nonbusiness group  */
+  /** ID of the default nonbusiness group */
   nonbusinessGroupDefault: number | null;
-  /** ID of the default worktime regulation  */
+  /** ID of the default worktime regulation */
   worktimeRegulationDefault: number | null;
   /**
-   * Date from which worktime regulations are evaluated for the company in YYYY-MM-DD format
+   * Date from which worktime regulations are evaluated for the company in
+   * YYYY-MM-DD format
    */
   worktimeEvaluateRegulationsSince: string | null;
   /** Subtraction of missing break time */
   worktimeForceBreaks: WorktimeForceBreaks;
-  /** Number of days in the default holiday quota of the company  */
+  /** Number of days in the default holiday quota of the company */
   holidaysCountDefault: number;
   /**
-   * Are absences handled by reducing the target hours for the day?
-   * If not, time is added to the worktime account for absences
+   * Are absences handled by reducing the target hours for the day? If not, time
+   * is added to the worktime account for absences
    */
   absenceReducesTargetHours: boolean;
   /** Default value for automatically compensated overtime per day (in minutes) */
@@ -68,21 +75,15 @@ export type Company = {
     /** Default value for targethours on sundays */
     sunday: number;
   };
-  /** Has the registration process been completed?  */
+  /** Has the registration process been completed? */
   onboardingComplete: boolean;
 };
 
 export enum WorktimeForceBreaks {
-  /**
-   * 0: no subtraction
-   */
+  /** 0: no subtraction */
   Off = 0,
-  /**
-   * 1: full subtraction
-   */
+  /** 1: full subtraction */
   Full = 1,
-  /**
-   * 2: full subtraction / floating subtraction as of 2022
-   */
+  /** 2: full subtraction / floating subtraction as of 2022 */
   Floating = 2,
 }

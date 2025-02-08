@@ -13,9 +13,9 @@ const EXPECTED_COLUMN_COUNT = 27;
 /**
  * Transforms a row from the CSV entry backup to an entry object.
  *
- * Please note: Entries before 2014-09 will have their
- * timeLastChange and timeLastChangeWorkTime set to timeInsert
- * since these properties didn't exist back then.
+ * Please note: Entries before 2014-09 will have their timeLastChange and
+ * timeLastChangeWorkTime set to timeInsert since these properties didn't exist
+ * back then.
  */
 export const parseEntryFromCsv = (row: Array<string>): Entry => {
   if (row.length !== EXPECTED_COLUMN_COUNT) {

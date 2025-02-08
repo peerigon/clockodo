@@ -137,9 +137,9 @@ export const isLumpsumEntry = (entry: Entry): entry is LumpsumEntry => {
 };
 
 /**
- * Returns the entry's timeUntil property as ISO string.
- * If the entry is currently clocking, timeUntil is
- * new Date().toISOString() without milliseconds precision.
+ * Returns the entry's timeUntil property as ISO string. If the entry is
+ * currently clocking, timeUntil is new Date().toISOString() without
+ * milliseconds precision.
  */
 export const getEntryTimeUntilNow = (entry: Entry) => {
   return entry.timeUntil ?? isoUtcDateTimeFromDateTime(new Date());
@@ -171,7 +171,8 @@ export const getEntryDurationUntilNow = (entry: Entry) => {
  * Returns undefined if the entry or project did not contain enough information
  * to calculate the revenue (because of insufficient access rights).
  *
- * Throws an error if the provided project or lumpsum service does not match the entry.
+ * Throws an error if the provided project or lumpsum service does not match the
+ * entry.
  */
 export const getEntryRevenue = ({
   entry,

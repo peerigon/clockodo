@@ -11,6 +11,6 @@ export type LumpsumService = {
   number: string | null;
   /** Is the lump sum service active? */
   active: boolean;
-  /** Note about the lump sum service  */
+  /** Note about the lump sum service */
   note: string | null;
 };
