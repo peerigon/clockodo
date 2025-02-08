@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
+    "noEmit": true,
+    "checkJs": true,
     "target": "es2015",
-    "module": "esnext",
+    "module": "node16",
     "strict": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "lib": ["es2017"],
-    "moduleResolution": "node",
+    "lib": ["es2021"],
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["dist", "coverage"]
 }
