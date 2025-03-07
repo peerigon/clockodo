@@ -366,7 +366,7 @@ export class Clockodo {
     return this.api.get("/v2/users/" + id, remainingParams);
   }
 
-  async getUsers(params?: Params): Promise<UsersReturnType> {
+  async getUsers(params?: Params<UsersParam>): Promise<UsersReturnType> {
     return this.api.get("/v2/users", params);
   }
 
@@ -968,7 +968,11 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
     // This endpoint still uses the old lumpSum casing
     lumpSumServices: Array<LumpsumService>;
   };
+
 export type UserReturnType = { user: User };
+export type UsersParam = {
+  filterScope?: "manageAbsences" | "viewAbsences" | "manage";
+};
 export type UsersReturnType = { users: Array<User> };
 export type SurchargeModelReturnType = { data: SurchargeModel };
 export type SurchargeModelsReturnType = {
