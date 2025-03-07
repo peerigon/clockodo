@@ -53,6 +53,7 @@
     "test:lint": "eslint --max-warnings 0 --cache .",
     "test:format": "prettier --check --ignore-path .gitignore .",
     "test:types": "tsc --noEmit",
+    "integration-test": "vitest run --coverage integration.test.ts",
     "prepublishOnly": "run-s build",
     "release": "semantic-release"
   },
