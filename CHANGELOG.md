@@ -1,3 +1,10 @@
+# [25.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v25.0.0-beta.2...v25.0.0-beta.3) (2025-03-07)
+
+### Features
+
+- Add user scope filter ([#148](https://github.com/peerigon/clockodo/issues/148)) ([8ec4895](https://github.com/peerigon/clockodo/commit/8ec48953f0b75ebc06d4f7320f323de099252a38))
+- Add year filter for holidays-quota query ([#149](https://github.com/peerigon/clockodo/issues/149)) ([5a643a0](https://github.com/peerigon/clockodo/commit/5a643a0cd107147074707342d57556525058c48b))
+
 # [24.2.0](https://github.com/peerigon/clockodo/compare/v24.1.0...v24.2.0) (2025-03-07)
 
 ### Features
