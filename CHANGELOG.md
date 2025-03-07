@@ -1,3 +1,10 @@
+# [24.1.0](https://github.com/peerigon/clockodo/compare/v24.0.0...v24.1.0) (2025-03-07)
+
+
+### Features
+
+* Add year filter for holidays-quota query ([#149](https://github.com/peerigon/clockodo/issues/149)) ([5a643a0](https://github.com/peerigon/clockodo/commit/5a643a0cd107147074707342d57556525058c48b))
+
 # [24.0.0](https://github.com/peerigon/clockodo/compare/v23.5.1...v24.0.0) (2025-02-07)
 
 
