@@ -1,3 +1,23 @@
+# [25.0.0](https://github.com/peerigon/clockodo/compare/v24.2.0...v25.0.0) (2025-03-07)
+
+### chore
+
+- Add @peerigon/configs for linting ([b71843c](https://github.com/peerigon/clockodo/commit/b71843cc6c75cc0097b45de6e06ab33fe41b000e))
+- Refactor and update ([#161](https://github.com/peerigon/clockodo/issues/161)) ([859e894](https://github.com/peerigon/clockodo/commit/859e894737c9791735e2ef1314b618314c517453))
+- Switch TypeScript lib option to "es2021" ([faa5b7c](https://github.com/peerigon/clockodo/commit/faa5b7c36f640e6ee58f48bdd97dc38bc11fb701))
+- Use TypeScript config from @peerigon/configs ([b8aa1be](https://github.com/peerigon/clockodo/commit/b8aa1becbedca98482887944077bd48bc632091e))
+
+### BREAKING CHANGES
+
+- The TypeScript target has now been set to ES2022. The package must be transpiled for older runtimes.
+- editCustomer() and editLumpsumService() return a type now instead of implicit any
+- Throw TypeError instead of Error where appropiate
+- We expect String.prototype.replaceAll to be present. According to MDN, that's baseline.
+- Changed `api` `config` method to a setter and getter property
+- Removed Axios options from `api` methods. We plan to remove Axios in the future. You can pass headers instead of Axios options as third parameter to `post`, `put` and `delete` now.
+- Updated TypeScript which might affect the generated code.
+- Updated Faker and mocks. This will change the produced mock data in case you snapshotted it.
+
 # [25.0.0-beta.3](https://github.com/peerigon/clockodo/compare/v25.0.0-beta.2...v25.0.0-beta.3) (2025-03-07)
 
 ### Features
