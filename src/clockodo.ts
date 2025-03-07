@@ -1234,6 +1234,7 @@ export type HolidaysQuotasReturnType = {
 export type HolidaysQuotasParams = {
   /** The user ID by which the holidays quota rows should be filtered */
   usersId?: number;
+  year?: number;
 };
 
 export type HolidaysCarryoversReturnType = {
