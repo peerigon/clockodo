@@ -42,13 +42,13 @@ jobs:
           cache: "npm"
       - name: 🗄 Cache node_modules
         id: cache-node_modules
-        uses: actions/cache@36f1e144e1c8edb0a652766b484448563d8baf46 # pin@main
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # pin@main
         with:
           path: "**/node_modules"
           key: node_modules-${{ runner.os }}-node-${{ matrix.node-version }}-${{
             hashFiles('**/package-lock.json') }}
       - name: 🗄 Cache .eslintcache
-        uses: actions/cache@36f1e144e1c8edb0a652766b484448563d8baf46 # pin@main
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # pin@main
         with:
           path: .eslintcache
           key: eslintcache-${{ runner.os }}-node-${{ matrix.node-version }}-${{
@@ -60,8 +60,11 @@ jobs:
       - name: 🧪 Test
         run: |
           npm test
+      - name: 🧪 Integration test
+        if: "github.event_name == 'workflow_dispatch'"
+        run: |
+          npm run integration-test
         env:
-          CI: true
           CLOCKODO_USER: ${{ secrets.CLOCKODO_USER }}
           CLOCKODO_API_KEY: ${{ secrets.CLOCKODO_API_KEY }}
       - name: ⬆️ Upload coverage report
