@@ -1,3 +1,10 @@
+# [24.2.0](https://github.com/peerigon/clockodo/compare/v24.1.0...v24.2.0) (2025-03-07)
+
+
+### Features
+
+* Add user scope filter ([#148](https://github.com/peerigon/clockodo/issues/148)) ([8ec4895](https://github.com/peerigon/clockodo/commit/8ec48953f0b75ebc06d4f7320f323de099252a38))
+
 # [24.1.0](https://github.com/peerigon/clockodo/compare/v24.0.0...v24.1.0) (2025-03-07)
 
 
