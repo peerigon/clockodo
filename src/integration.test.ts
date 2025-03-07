@@ -4,11 +4,6 @@ import { assertExists } from "./lib/assert.ts";
 
 const TIME_SINCE = "2018-10-01T00:00:00Z";
 const TIME_UNTIL = "2018-12-30T00:00:00Z";
-// These tests depend on our real Clockodo account.
-// They should only be executed by our clockodo-dev user or Travis CI.
-const hasCredentials =
-  typeof process.env["CLOCKODO_USER"] === "string" &&
-  typeof process.env["CLOCKODO_API_KEY"] === "string";
 const config: Config = {
   client: {
     name: "SDK Integration Test",
@@ -17,13 +12,10 @@ const config: Config = {
 };
 
 describe("Clockodo", { timeout: 20_000 }, () => {
-  if (hasCredentials === false) {
-    if (process.env["CI"])
-      throw new Error("Cannot run tests: Credentials are missing");
+  const { CLOCKODO_USER: user, CLOCKODO_API_KEY: apiKey } = process.env;
 
-    it("cannot run tests because credentials are missing", () => {});
-
-    return;
+  if (!user || !apiKey) {
+    throw new Error("Cannot run tests: Credentials are missing");
   }
 
   const clockodo = new Clockodo(config);
@@ -37,8 +29,8 @@ describe("Clockodo", { timeout: 20_000 }, () => {
   beforeAll(() => {
     clockodo.api.config = {
       authentication: {
-        user: process.env["CLOCKODO_USER"]!,
-        apiKey: process.env["CLOCKODO_API_KEY"]!,
+        user,
+        apiKey,
       },
     };
   });
