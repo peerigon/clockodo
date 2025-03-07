@@ -1,16 +1,17 @@
-import qs from "qs";
 import nock from "nock";
+import qs from "qs";
+import { afterAll, describe, expect, it } from "vitest";
+import { CLOCKODO_API_BASE_URL } from "./consts.js";
 import {
-  Clockodo,
-  Config,
-  Billability,
-  UserRole,
-  AbsenceType,
   AbsenceStatus,
+  AbsenceType,
+  Billability,
+  Clockodo,
   mapRequestBody,
+  UserRole,
+  type Config,
 } from "./index.js";
 
-const CLOCKODO_API = "https://my.clockodo.com/api";
 const config: Config = {
   client: {
     name: "Clockodo SDK Unit Test",
@@ -33,9 +34,9 @@ describe("Clockodo (instance)", () => {
           new Clockodo({
             // @ts-expect-error 2322
             client: {},
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"name should be a string but given value undefined is typeof undefined"`
+        `[TypeError: name should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing client email", () => {
@@ -46,9 +47,9 @@ describe("Clockodo (instance)", () => {
             client: {
               name: config.client.name,
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"email should be a string but given value undefined is typeof undefined"`
+        `[TypeError: email should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing user email", () => {
@@ -61,9 +62,9 @@ describe("Clockodo (instance)", () => {
               user: undefined,
               apiKey: "dfdsg34t643",
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"user should be a string but given value undefined is typeof undefined"`
+        `[TypeError: user should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor is missing API key", () => {
@@ -76,9 +77,9 @@ describe("Clockodo (instance)", () => {
               // @ts-expect-error 2322
               apiKey: undefined,
             },
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"apiKey should be a string but given value undefined is typeof undefined"`
+        `[TypeError: apiKey should be a string but given value undefined is typeof undefined]`,
       );
     });
     it("throws an error when constructor has baseUrl with type other than string", () => {
@@ -88,9 +89,9 @@ describe("Clockodo (instance)", () => {
             ...config,
             // @ts-expect-error 2322
             baseUrl: 5678,
-          })
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
-        `"baseUrl should be undefined or a string but given value 5678 is typeof number"`
+        `[TypeError: baseUrl should be undefined or a string but given value 5678 is typeof number]`,
       );
     });
   });
@@ -98,7 +99,7 @@ describe("Clockodo (instance)", () => {
   describe("Config", () => {
     describe("locale", () => {
       it("sends request with the given Accept-Language header", async () => {
-        const nockScope = nock(CLOCKODO_API, {
+        const nockScope = nock(CLOCKODO_API_BASE_URL, {
           reqheaders: {
             "Accept-Language": "de-DE",
           },
@@ -106,9 +107,9 @@ describe("Clockodo (instance)", () => {
           .get("/anything")
           .reply(200, {});
 
-        clockodo.api.config({
+        clockodo.api.config = {
           locale: "de-DE",
-        });
+        };
 
         await clockodo.api.get("/anything");
 
@@ -120,7 +121,7 @@ describe("Clockodo (instance)", () => {
   describe("GET", () => {
     describe("getAbsence()", () => {
       it("correctly builds getAbsence() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/absences/7")
           .reply(200, {});
 
@@ -136,7 +137,7 @@ describe("Clockodo (instance)", () => {
           year: 218,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/absences?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
@@ -148,7 +149,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getClock()", () => {
       it("correctly builds getClock() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/v2/clock").reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/clock")
+          .reply(200, {});
 
         await clockodo.getClock();
 
@@ -158,7 +161,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getCustomer()", () => {
       it("correctly builds getCustomer() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/customers/777")
           .reply(200, {});
 
@@ -170,7 +173,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getCustomersPage()", () => {
       it("correctly builds getCustomersPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/customers")
           .reply(200, {});
 
@@ -198,7 +201,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getLumpSumService()", () => {
       it("correctly builds getLumpSumService() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v3/lumpsumservices/777")
           .reply(200, {});
 
@@ -210,7 +213,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getLumpSumServicesPage()", () => {
       it("correctly builds getLumpSumServicesPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v3/lumpsumservices")
           .reply(200, {});
 
@@ -238,7 +241,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getEntry()", () => {
       it("correctly builds getEntry() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/entries/4")
           .reply(200, {});
 
@@ -250,7 +253,7 @@ describe("Clockodo (instance)", () => {
 
     describe.skip("splitAllEntriesAtMidnight()", () => {
       it("correctly builds splitAllEntriesAtMidnight() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/entries/splitAllAtMidnight")
           .reply(200, {});
 
@@ -271,7 +274,7 @@ describe("Clockodo (instance)", () => {
           "filter[billable]": Billability.Billed,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/entries?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
@@ -290,7 +293,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesPage({
             timeSince: "2017-08-18 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
       });
     });
@@ -323,7 +326,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntries({
             timeSince: "2017-08-18 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "timeUntil"');
       });
     });
@@ -352,7 +355,7 @@ describe("Clockodo (instance)", () => {
 
         return expect(
           // @ts-expect-error Intentional error just for the test
-          clockodo.getEntriesTexts({})
+          clockodo.getEntriesTexts({}),
         ).rejects.toThrowError('Missing required parameter "text"');
       });
     });
@@ -372,7 +375,7 @@ describe("Clockodo (instance)", () => {
           round_to_minutes: 15,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get(
             "/v2/entrygroups?" +
               qs.stringify(timeRangeParameters) +
@@ -381,7 +384,7 @@ describe("Clockodo (instance)", () => {
                 arrayFormat: "brackets",
               }) +
               "&" +
-              qs.stringify(optionalParameters)
+              qs.stringify(optionalParameters),
           )
           .reply(200, {});
 
@@ -402,14 +405,14 @@ describe("Clockodo (instance)", () => {
           clockodo.getEntryGroups({
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "grouping"');
       });
     });
 
     describe("getProject()", () => {
       it("correctly builds getProject() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/projects/1985")
           .reply(200, {});
 
@@ -421,7 +424,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getProjectsPage()", () => {
       it("correctly builds getProjectsPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/v2/projects").reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/projects")
+          .reply(200, {});
 
         await clockodo.getProjectsPage();
 
@@ -447,7 +452,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getService()", () => {
       it("correctly builds getService() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v3/services/10")
           .reply(200, {});
 
@@ -459,7 +464,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getServicesPage()", () => {
       it("correctly builds getServicesPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/v3/services").reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/services")
+          .reply(200, {});
 
         await clockodo.getServicesPage();
 
@@ -485,7 +492,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getSingleTargetHourSet", () => {
       it("correctly builds getSingleTargetHourSet() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/targethours/1234")
           .reply(200, {});
 
@@ -497,7 +504,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getTargetHours", () => {
       it("correctly builds getTargetHours() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/targethours").reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/targethours")
+          .reply(200, {});
 
         await clockodo.getTargethours();
 
@@ -507,7 +516,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getUser()", () => {
       it("correctly builds getUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/users/1263")
           .reply(200, {});
 
@@ -519,7 +528,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getUsers()", () => {
       it("correctly builds getUsers() request", async () => {
-        const nockScope = nock(CLOCKODO_API).get("/v2/users").reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/users")
+          .reply(200, {});
 
         await clockodo.getUsers();
 
@@ -529,7 +540,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getUserReport()", () => {
       it("correctly builds getUserReport() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/userreports/1263?" + qs.stringify({ year: 217 }))
           .reply(200, {});
 
@@ -543,15 +554,15 @@ describe("Clockodo (instance)", () => {
         return expect(
           clockodo.getUserReport(
             // @ts-expect-error Year is missing
-            { usersId: 200 }
-          )
+            { usersId: 200 },
+          ),
         ).rejects.toThrowError('Missing required parameter "year"');
       });
     });
 
     describe("getUserReports()", () => {
       it("correctly builds getUserReports() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/userreports?" + qs.stringify({ year: 217 }))
           .reply(200, {});
 
@@ -563,7 +574,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getNonbusinessGroups()", () => {
       it("correctly builds getNonbusinessGroups() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/nonbusinessgroups")
           .reply(200, {});
 
@@ -575,13 +586,13 @@ describe("Clockodo (instance)", () => {
 
     describe("getNonbusinessDays()", () => {
       it("correctly builds getNonbusinessDays() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get(
             "/nonbusinessdays?" +
               qs.stringify(
                 { nonbusinessgroups_id: [123], year: 2021 },
-                { arrayFormat: "brackets" }
-              )
+                { arrayFormat: "brackets" },
+              ),
           )
           .reply(200, {});
 
@@ -599,8 +610,8 @@ describe("Clockodo (instance)", () => {
         return expect(
           clockodo.getNonbusinessDays(
             // @ts-expect-error Year is missing
-            { nonbusinessgroupsId: 123 }
-          )
+            { nonbusinessgroupsId: 123 },
+          ),
         ).rejects.toThrowError('Missing required parameter "year"');
       });
     });
@@ -657,7 +668,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getOvertimecarry()", () => {
       it("correctly builds getOvertimecarry() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/overtimecarry?users_id=17&year=2028")
           .reply(200, {});
 
@@ -669,7 +680,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getHolidaysQuotas()", () => {
       it("correctly builds getHolidaysQuotas() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/holidaysquota?users_id=17&year=2028")
           .reply(200, {});
 
@@ -681,7 +692,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getHolidaysCarryovers()", () => {
       it("correctly builds getHolidaysCarryovers() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/holidayscarry?users_id=17&year=2028")
           .reply(200, {});
 
@@ -693,7 +704,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getSurchargeModel()", () => {
       it("correctly builds getSurchargeModel() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/surchargeModels/7")
           .reply(200, {});
 
@@ -705,7 +716,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getSurchargeModels()", () => {
       it("correctly builds getSurchargeModels() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v2/surchargeModels")
           .reply(200, {});
 
@@ -726,7 +737,7 @@ describe("Clockodo (instance)", () => {
           billable: Billability.Billable,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/clock", expectedParameters)
           .reply(200, {});
 
@@ -746,7 +757,7 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.startClock({
             customersId: 24,
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "servicesId"');
       });
     });
@@ -758,7 +769,7 @@ describe("Clockodo (instance)", () => {
           billable_default: Billability.Billable,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/customers", expectedParameters)
           .reply(200, {});
 
@@ -778,7 +789,7 @@ describe("Clockodo (instance)", () => {
           price: 1,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v3/lumpsumservices", expectedParameters)
           .reply(200, {});
 
@@ -799,7 +810,7 @@ describe("Clockodo (instance)", () => {
           active: true,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/projects", expectedParameters)
           .reply(200, {});
 
@@ -820,7 +831,7 @@ describe("Clockodo (instance)", () => {
           active: true,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v3/services", expectedParameters)
           .reply(200, {});
 
@@ -839,7 +850,7 @@ describe("Clockodo (instance)", () => {
           role: UserRole.Owner,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/users", expectedParameters)
           .reply(200, {});
 
@@ -861,7 +872,7 @@ describe("Clockodo (instance)", () => {
             name: "Merkel",
             number: "8",
             email: "angela@eu.eu",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "role"');
       });
     });
@@ -877,7 +888,7 @@ describe("Clockodo (instance)", () => {
           text: "this is an optional description",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/entries", expectedParameters)
           .reply(200, {});
 
@@ -902,7 +913,7 @@ describe("Clockodo (instance)", () => {
             servicesId: 2,
             timeSince: "2020-06-02 00:00:00",
             timeUntil: "2020-06-02 00:00:01",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "billable"');
       });
     });
@@ -916,7 +927,7 @@ describe("Clockodo (instance)", () => {
           note: "elternzeit",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/absences", expectedParameters)
           .reply(200, {});
 
@@ -937,7 +948,7 @@ describe("Clockodo (instance)", () => {
           clockodo.addAbsence({
             dateSince: "2017-08-18",
             dateUntil: "2018-02-09",
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "type"');
       });
     });
@@ -950,7 +961,7 @@ describe("Clockodo (instance)", () => {
           gtc_agreed: true,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/register", expectedParameters)
           .reply(200, {});
 
@@ -972,7 +983,7 @@ describe("Clockodo (instance)", () => {
           users_id: 12,
           changes: [],
         };
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/workTimes/changeRequests", expectedParameters)
           .reply(200, {});
 
@@ -988,7 +999,7 @@ describe("Clockodo (instance)", () => {
 
     describe("approveWorkTimesChangeRequest()", () => {
       it("correctly builds approveWorkTimesChangeRequest() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/workTimes/changeRequests/17/approve")
           .reply(200, {});
 
@@ -1002,7 +1013,7 @@ describe("Clockodo (instance)", () => {
 
     describe("declineWorkTimesChangeRequest()", () => {
       it("correctly builds declineWorkTimesChangeRequest() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/workTimes/changeRequests/17/decline")
           .reply(200, {});
 
@@ -1021,7 +1032,7 @@ describe("Clockodo (instance)", () => {
           accumulation: true,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .post("/v2/surchargeModels", expectedParameters)
           .reply(200, {});
 
@@ -1043,7 +1054,7 @@ describe("Clockodo (instance)", () => {
           duration: 540,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/clock/782", expectedParameters)
           .reply(200, {});
 
@@ -1063,7 +1074,7 @@ describe("Clockodo (instance)", () => {
           clockodo.changeClockDuration({
             entriesId: 782,
             durationBefore: 540,
-          })
+          }),
         ).rejects.toThrowError('Missing required parameter "duration"');
       });
     });
@@ -1075,7 +1086,7 @@ describe("Clockodo (instance)", () => {
           name: "Mystery Gang",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/customers/15", mapRequestBody(customer))
           .reply(200, {});
 
@@ -1092,7 +1103,7 @@ describe("Clockodo (instance)", () => {
           name: "Mystery Gang",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v3/lumpsumservices/15", mapRequestBody(lumpsumService))
           .reply(200, {});
 
@@ -1110,7 +1121,7 @@ describe("Clockodo (instance)", () => {
           hourlyRate: 91,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/projects/20", mapRequestBody(project))
           .reply(200, {});
 
@@ -1127,7 +1138,7 @@ describe("Clockodo (instance)", () => {
           name: "room service",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v3/services/23", mapRequestBody(service))
           .reply(200, {});
 
@@ -1144,7 +1155,7 @@ describe("Clockodo (instance)", () => {
           name: "Moalo Loco",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/users/33", mapRequestBody(user))
           .reply(200, {});
 
@@ -1162,7 +1173,7 @@ describe("Clockodo (instance)", () => {
           text: "chillin everyday",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
@@ -1180,7 +1191,7 @@ describe("Clockodo (instance)", () => {
           status: AbsenceStatus.Approved,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/absences/74", mapRequestBody(absence))
           .reply(200, {});
 
@@ -1197,7 +1208,7 @@ describe("Clockodo (instance)", () => {
           duration: 540,
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/entries/365", mapRequestBody(entry))
           .reply(200, {});
 
@@ -1214,7 +1225,7 @@ describe("Clockodo (instance)", () => {
           name: "ABC",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/surchargeModels/365", mapRequestBody(entry))
           .reply(200, {});
 
@@ -1228,7 +1239,7 @@ describe("Clockodo (instance)", () => {
   describe("DELETE", () => {
     describe("stopClock()", () => {
       it("correctly builds stopClock() request without optional usersId", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/clock/782")
           .reply(200, {});
 
@@ -1238,7 +1249,7 @@ describe("Clockodo (instance)", () => {
       });
 
       it("correctly builds stopClock() request with optional usersId", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/clock/782", { users_id: 123 })
           .reply(200, {});
 
@@ -1250,7 +1261,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteCustomer()", () => {
       it("correctly builds deleteCustomer() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/customers/343")
           .reply(200, {});
 
@@ -1262,7 +1273,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteProject()", () => {
       it("correctly builds deleteProject() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/projects/8")
           .reply(200, {});
 
@@ -1274,7 +1285,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteService()", () => {
       it("correctly builds deleteService() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v3/services/94")
           .reply(200, {});
 
@@ -1286,7 +1297,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteLumpsumService()", () => {
       it("correctly builds deleteLumpsumService() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v3/lumpsumservices/94")
           .reply(200, {});
 
@@ -1298,7 +1309,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteUser()", () => {
       it("correctly builds deleteUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/users/7")
           .reply(200, {});
 
@@ -1310,7 +1321,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteEntry()", () => {
       it("correctly builds deleteEntry() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/entries/45")
           .reply(200, {});
 
@@ -1328,7 +1339,7 @@ describe("Clockodo (instance)", () => {
           text: "chilin everyday",
         };
 
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
@@ -1340,7 +1351,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteAbsence()", () => {
       it("correctly builds deleteAbsence() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/absences/31")
           .reply(200, {});
 
@@ -1352,7 +1363,7 @@ describe("Clockodo (instance)", () => {
 
     describe("withdrawWorkTimesChangeRequest()", () => {
       it("correctly builds withdrawWorkTimesChangeRequest() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/workTimes/changeRequests/17")
           .reply(200, {});
 
@@ -1366,7 +1377,7 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteSurchargeModel()", () => {
       it("correctly builds deleteSurchargeModel() request", async () => {
-        const nockScope = nock(CLOCKODO_API)
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
           .delete("/v2/surchargeModels/31")
           .reply(200, {});
 
@@ -1387,7 +1398,7 @@ const setupPaginatedApiMock = ({
   countPages: number;
   createPageResponse: (page: number) => Record<string, unknown>;
 }) => {
-  let nockScope = nock(CLOCKODO_API);
+  let nockScope = nock(CLOCKODO_API_BASE_URL);
 
   Array.from({ length: countPages }).forEach((_, index) => {
     const page = index + 1;

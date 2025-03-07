@@ -5,16 +5,21 @@
 import { faker } from "@faker-js/faker";
 
 /**
- * The number of milliseconds on a typical day.
+ * Sets the seed for Faker.js (which is used by the mocks).
+ *
+ * @see https://github.com/Marak/Faker.js
  */
+export const setFakerSeed = (seed: number) => {
+  faker.seed(seed);
+};
+
+/** The number of milliseconds on a typical day. */
 export const ONE_DAY = 24 * 60 * 60 * 1000;
 
-/**
- * The number of milliseconds on a typical year.
- */
+/** The number of milliseconds on a typical year. */
 export const ONE_YEAR = 356 * ONE_DAY;
 
-const MAX_ITERATION_COUNT = 10000;
+const MAX_ITERATION_COUNT = 10_000;
 
 export const startOfDay = (date: Date) => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -50,7 +55,7 @@ const generateWithMaxDuplicates = <Value>({
     if (i === MAX_ITERATION_COUNT) {
       throw new Error(
         `Couldn't generate enough unique values before reaching the max iteration count.
-This usually happens when the generated values create too many conflicts (e.g. too many dates on a small date range).`
+This usually happens when the generated values create too many conflicts (e.g. too many dates on a small date range).`,
       );
     }
     const value = generate();
@@ -63,7 +68,7 @@ This usually happens when the generated values create too many conflicts (e.g. t
     acceptedCount++;
   }
 
-  return Array.from(accepted.values()).flat();
+  return [...accepted.values()].flat();
 };
 
 export const generateRandomDateTimes = ({
@@ -79,7 +84,7 @@ export const generateRandomDateTimes = ({
     count,
     maxDuplicates,
     generate: () => {
-      return faker.date.between(from, to).getTime();
+      return faker.date.between({ from, to }).getTime();
     },
   }).sort();
 };
@@ -97,12 +102,12 @@ export const generateRandomDates = ({
     count,
     maxDuplicates,
     generate: () => {
-      const randomDate = faker.date.between(from, to);
+      const randomDate = faker.date.between({ from, to });
 
       return new Date(
         randomDate.getFullYear(),
         randomDate.getMonth(),
-        randomDate.getDate()
+        randomDate.getDate(),
       ).getTime();
     },
   }).sort();
@@ -121,11 +126,11 @@ export const generateRandomMonths = ({
     count,
     maxDuplicates,
     generate: () => {
-      const randomDate = faker.date.between(from, to);
+      const randomDate = faker.date.between({ from, to });
 
       return new Date(
         randomDate.getFullYear(),
-        randomDate.getMonth()
+        randomDate.getMonth(),
       ).getTime();
     },
   }).sort();
@@ -137,10 +142,10 @@ export const toPairs = <Item>(array: Array<Item>) => {
   }
 
   const count = array.length / 2;
-  const pairs = new Array<[Item, Item]>(count);
+  const pairs: Array<[Item, Item]> = Array.from({ length: count });
 
   for (let i = 0; i < count; i++) {
-    pairs[i] = [array[i * 2], array[i * 2 + 1]];
+    pairs[i] = [array[i * 2]!, array[i * 2 + 1]!];
   }
 
   return pairs;

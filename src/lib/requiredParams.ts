@@ -87,18 +87,18 @@ export const DECLINE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 
 export const checkRequired = (
   params: Record<string, unknown> = {},
-  requiredList: ReadonlyArray<string>
+  requiredList: ReadonlyArray<string>,
 ) => {
   const missingParamName = requiredList.find(
-    (paramName) => paramName in params === false
+    (paramName) => paramName in params === false,
   );
   const undefinedParam = requiredList.find(
-    (paramName) => typeof params[paramName] === "undefined"
+    (paramName) => params[paramName] === undefined,
   );
 
-  if (typeof missingParamName !== "undefined") {
-    throw new Error(`Missing required parameter "${missingParamName}"`);
-  } else if (typeof undefinedParam !== "undefined") {
-    throw new Error(`Missing required parameter "${undefinedParam}"`);
+  if (missingParamName !== undefined) {
+    throw new TypeError(`Missing required parameter "${missingParamName}"`);
+  } else if (undefinedParam !== undefined) {
+    throw new TypeError(`Missing required parameter "${undefinedParam}"`);
   }
 };

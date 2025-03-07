@@ -1,8 +1,9 @@
+import { describe, expect, it } from "vitest";
 import {
-  queryParamMapping,
   mapQueryParams,
   mapRequestBody,
   mapResponseBody,
+  queryParamMapping,
 } from "./mappings.js";
 
 describe("mapQueryParams()", () => {
@@ -19,8 +20,20 @@ describe("mapQueryParams()", () => {
 
     expectKeysToMatch(
       Object.keys(mappedQueryParams),
-      Object.values(queryParamMapping)
+      Object.values(queryParamMapping),
     );
+  });
+
+  it("should exclude 'empty' values", () => {
+    const queryParams = {
+      1: null,
+      2: undefined,
+      3: "",
+    };
+
+    const mappedQueryParams = mapQueryParams(queryParams);
+
+    expect(Object.keys(mappedQueryParams)).toHaveLength(0);
   });
 });
 
@@ -52,13 +65,11 @@ describe("mapResponseBody()", () => {
 });
 
 const expectKeysToMatch = (keysA: Array<string>, keysB: Array<string>) => {
-  expect(Array.from(new Set(keysA)).sort()).toMatchObject(
-    Array.from(new Set(keysB)).sort()
-  );
+  expect([...new Set(keysA)].sort()).toMatchObject([...new Set(keysB)].sort());
 };
 
 const createObjectFromKeys = (keys: Array<string>) =>
-  Object.fromEntries(keys.map((key) => [key, null]));
+  Object.fromEntries(keys.map((key) => [key, 1]));
 
 const commonKeys = {
   snakeCase: [
@@ -88,7 +99,7 @@ const commonKeys = {
     "customers_id",
     "billable_default",
     "note",
-    "budget_money",
+    "budget_amount",
     "budget_is_hours",
     "budget_is_not_strict",
     "billed_money",
@@ -205,6 +216,7 @@ const commonKeys = {
     "module_work_time",
     "module_project_times",
     "module_entries_texts",
+    "module_access_groups",
     "nonbusiness_group_default",
     "worktime_regulation_default",
     "worktime_evaluate_regulations_since",
@@ -261,7 +273,7 @@ const commonKeys = {
     "customersId",
     "billableDefault",
     "note",
-    "budgetMoney",
+    "budgetAmount",
     "budgetIsHours",
     "budgetIsNotStrict",
     "billedMoney",
@@ -378,6 +390,7 @@ const commonKeys = {
     "moduleWorkTime",
     "moduleProjectTimes",
     "moduleEntriesTexts",
+    "moduleAccessGroups",
     "nonbusinessGroupDefault",
     "worktimeRegulationDefault",
     "worktimeEvaluateRegulationsSince",

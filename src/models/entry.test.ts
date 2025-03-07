@@ -1,19 +1,24 @@
-import { advanceTo } from "jest-date-mock";
-import { createProjectMocks } from "./project.mocks.js";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { assertExists } from "../lib/assert.ts";
 import {
   Billability,
   getEntryDurationUntilNow,
   getEntryRevenue,
 } from "./entry.js";
 import {
-  createTimeEntryMocks,
-  createLumpsumValueEntryMocks,
   createLumpsumServiceEntryMocks,
+  createLumpsumValueEntryMocks,
+  createTimeEntryMocks,
 } from "./entry.mocks.js";
 import { createLumpsumServiceMocks } from "./lumpsumService.mocks.js";
+import { createProjectMocks } from "./project.mocks.js";
 
 beforeEach(() => {
-  advanceTo("2020-01-01T01:00:00Z");
+  vi.setSystemTime(new Date("2020-01-01T01:00:00Z"));
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 describe("getEntryDurationUntilNow()", () => {
@@ -61,7 +66,7 @@ describe("getEntryRevenue()", () => {
     project.revenueFactor = 0.25;
 
     expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      0.25 * 1.5 * 100
+      0.25 * 1.5 * 100,
     );
   });
 
@@ -110,7 +115,7 @@ describe("getEntryRevenue()", () => {
     project.revenueFactor = undefined;
 
     expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      undefined
+      undefined,
     );
   });
 
@@ -133,7 +138,7 @@ describe("getEntryRevenue()", () => {
     lumpsumService.price = 100;
 
     expect(
-      getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService })
+      getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService }),
     ).toBe(200);
   });
 
@@ -144,9 +149,9 @@ describe("getEntryRevenue()", () => {
     project.id = 2;
 
     expect(() =>
-      getEntryRevenue({ entry: clockedTimeEntry, project })
+      getEntryRevenue({ entry: clockedTimeEntry, project }),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"The entries projects id (1) does not match the project's id (2)"`
+      `[Error: The entries projects id (1) does not match the project's id (2)]`,
     );
   });
 
@@ -157,9 +162,9 @@ describe("getEntryRevenue()", () => {
     lumpsumService.id = 2;
 
     expect(() =>
-      getEntryRevenue({ entry: lumpsumServiceEntry, lumpsumService })
+      getEntryRevenue({ entry: lumpsumServiceEntry, lumpsumService }),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"The entries lumpsum services id (1) does not match the lumpsum service's id (2)"`
+      `[Error: The entries lumpsum services id (1) does not match the lumpsum service's id (2)]`,
     );
   });
 });
@@ -180,12 +185,12 @@ const createMocks = () => {
   const [lumpsumService] = createLumpsumServiceMocks();
 
   return {
-    clockingTimeEntry,
-    clockedTimeEntry,
-    manualTimeEntry,
-    lumpsumValueEntry,
-    lumpsumServiceEntry,
-    project,
-    lumpsumService,
+    clockingTimeEntry: assertExists(clockingTimeEntry),
+    clockedTimeEntry: assertExists(clockedTimeEntry),
+    manualTimeEntry: assertExists(manualTimeEntry),
+    lumpsumValueEntry: assertExists(lumpsumValueEntry),
+    lumpsumServiceEntry: assertExists(lumpsumServiceEntry),
+    project: assertExists(project),
+    lumpsumService: assertExists(lumpsumService),
   };
 };

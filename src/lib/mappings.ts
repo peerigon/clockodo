@@ -2,10 +2,12 @@
 // However, we don't have typings for the snake_case models which is why we don't
 // gain much more confidence by removing 'any' here
 
-import mapObject from "map-obj";
+import mapObject, { mapObjectSkip } from "map-obj";
 
 export const queryParamMapping: Record<string, string> = {
+  filterId: "filter[id]",
   filterUsersId: "filter[users_id]",
+  filterYear: "filter[year]",
   filterCustomersId: "filter[customers_id]",
   filterProjectsId: "filter[projects_id]",
   filterServicesId: "filter[services_id]",
@@ -19,34 +21,52 @@ export const queryParamMapping: Record<string, string> = {
   filterLumpsumsId: "filter[lumpsums_id]",
   filterTimeSince: "filter[time_since]",
   filterTimeUntil: "filter[time_until]",
+  filterTeamsId: "filter[teams_id]",
   filterActive: "filter[active]",
   filterFulltext: "filter[fulltext]",
-  // excludeIds needs to stay in camelCase.
+
+  // these params needs to stay in camelCase.
   // This seems to be an inconsistency in the API.
   excludeIds: "excludeIds",
 };
 
+// The purpose of the type parameter is to provide an easy way to specify the type of the result.
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapQueryParams = <Result = Record<string, unknown>>(
-  queryParams: Record<string, any>
+  queryParams: Record<string, any>,
 ) => {
   return mapObject(
     queryParams,
     (key, value) => {
+      if (value === undefined || value === null) {
+        return mapObjectSkip;
+      }
+
+      if (value === "") {
+        return mapObjectSkip;
+      }
+
       const mappedKey =
         key in queryParamMapping
-          ? queryParamMapping[key]
+          ? queryParamMapping[key]!
           : camelCaseToSnakeCase(key);
+
+      if (mappedKey === "include" && Array.isArray(value)) {
+        return [mappedKey, value.join(",")];
+      }
 
       return [mappedKey, value];
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
+// The purpose of the type parameter is to provide an easy way to specify the type of the result.
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapRequestBody = <Result = Record<string, unknown>>(
-  requestBody: Record<string, any>
+  requestBody: Record<string, any>,
 ) => {
   return mapObject(
     requestBody,
@@ -57,12 +77,14 @@ export const mapRequestBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
+// The purpose of the type parameter is to provide an easy way to specify the type of the result.
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapResponseBody = <Result = Record<string, unknown>>(
-  responseBody: Record<string, any>
+  responseBody: Record<string, any>,
 ) => {
   return mapObject(
     responseBody,
@@ -73,18 +95,18 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
     },
     {
       deep: true,
-    }
+    },
   ) as unknown as Result;
 };
 
 export const snakeCaseToCamelCase = (key: string) => {
-  return key.replace(/_+(\d*)([a-z])/gi, (_, $1, $2) => {
+  return key.replaceAll(/_+(\d*)([a-z])/gi, (_, $1, $2) => {
     return ($1 + $2.toUpperCase()) as string;
   });
 };
 
 export const camelCaseToSnakeCase = (key: string) => {
-  return key.replace(/(\d*)([A-Z])/g, (_, $1, $2) => {
+  return key.replaceAll(/(\d*)([A-Z])/g, (_, $1, $2) => {
     return "_" + $1 + $2.toLowerCase();
   });
 };

@@ -7,16 +7,16 @@ import {
 import {
   generateRandomDates,
   generateRandomDateTimes,
-  startOfNextDay,
   startOfDay,
+  startOfNextDay,
   toPairs,
 } from "../lib/mocks.js";
 import {
-  WorkTimeChangeRequest,
-  WorkTimeChangeRequestInterval,
   WorkTimeChangeRequestIntervalType,
   WorkTimeChangeRequestStatus,
-  WorkTimeDay,
+  type WorkTimeChangeRequest,
+  type WorkTimeChangeRequestInterval,
+  type WorkTimeDay,
 } from "./workTimes.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
@@ -42,7 +42,7 @@ const generateIntervals = ({
 
 const createWorkTimeDayMock = ({ date }: { date: Date }): WorkTimeDay => {
   const intervals = generateIntervals({
-    count: faker.datatype.number({ min: 1, max: 4 }),
+    count: faker.number.int({ min: 1, max: 4 }),
     date,
   });
 
@@ -61,13 +61,10 @@ export const createWorkTimeDayMocks = ({
   count?: number;
   dateBetween?: readonly [Date, Date];
 }) => {
-  let id = -1;
-
   const workTimeDays = generateRandomDates({
     count,
     between: [from, to],
   }).map((timestamp) => {
-    id = id + 1;
     const date = startOfDay(new Date(timestamp));
 
     return createWorkTimeDayMock({
@@ -78,12 +75,14 @@ export const createWorkTimeDayMocks = ({
   const lastWorkTimeDay = workTimeDays.at(-1);
 
   if (lastWorkTimeDay) {
-    const [firstInterval] = lastWorkTimeDay.intervals;
+    const firstInterval = lastWorkTimeDay.intervals[0];
 
-    // Now let's simulate an unfinished WorkTimeDay
-    // We take the first interval on purpose because it's technically possible
-    // to have future work times.
-    firstInterval.timeUntil = null;
+    if (firstInterval) {
+      // Now let's simulate an unfinished WorkTimeDay
+      // We take the first interval on purpose because it's technically possible
+      // to have future work times.
+      firstInterval.timeUntil = null;
+    }
   }
 
   return workTimeDays;
@@ -98,7 +97,7 @@ const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
           ? WorkTimeChangeRequestIntervalType.Add
           : WorkTimeChangeRequestIntervalType.Remove,
       };
-    }
+    },
   );
 };
 
@@ -114,7 +113,7 @@ const createChangeRequest = ({
   createdAt?: Date;
 }): WorkTimeChangeRequest => {
   const changes = generateChangeRequestChanges({
-    count: faker.datatype.number({ min: 1, max: 4 }),
+    count: faker.number.int({ min: 1, max: 4 }),
     date,
   });
   const isoDate = isoDateFromDateTime(date);

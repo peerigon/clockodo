@@ -1,4 +1,4 @@
-import { IsoDate, IsoUtcDateTime } from "../models/dateTime.js";
+import { type IsoDate, type IsoUtcDateTime } from "../models/dateTime.js";
 
 export const isoDateFromDateTime = (dateTime: Date) => {
   return [

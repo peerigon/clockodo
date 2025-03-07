@@ -1,6 +1,6 @@
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
-import { LumpsumService } from "./lumpsumService.js";
-import { Project } from "./project.js";
+import { type LumpsumService } from "./lumpsumService.js";
+import { type Project } from "./project.js";
 
 export enum EntryType {
   Time = 1,
@@ -98,7 +98,7 @@ export type LumpsumEntry = LumpsumValueEntry | LumpsumServiceEntry;
 export type Entry = TimeEntry | LumpsumEntry;
 
 export const isClockingTimeEntry = (
-  entry: Entry
+  entry: Entry,
 ): entry is ClockingTimeEntry => {
   return entry.type === EntryType.Time && entry.timeUntil === null;
 };
@@ -120,7 +120,7 @@ export const isManualTimeEntry = (entry: Entry): entry is ManualTimeEntry => {
 };
 
 export const isFinishedTimeEntry = (
-  entry: Entry
+  entry: Entry,
 ): entry is FinishedTimeEntry => {
   return isClockedTimeEntry(entry) || isManualTimeEntry(entry);
 };
@@ -137,9 +137,9 @@ export const isLumpsumEntry = (entry: Entry): entry is LumpsumEntry => {
 };
 
 /**
- * Returns the entry's timeUntil property as ISO string.
- * If the entry is currently clocking, timeUntil is
- * new Date().toISOString() without milliseconds precision.
+ * Returns the entry's timeUntil property as ISO string. If the entry is
+ * currently clocking, timeUntil is new Date().toISOString() without
+ * milliseconds precision.
  */
 export const getEntryTimeUntilNow = (entry: Entry) => {
   return entry.timeUntil ?? isoUtcDateTimeFromDateTime(new Date());
@@ -171,7 +171,8 @@ export const getEntryDurationUntilNow = (entry: Entry) => {
  * Returns undefined if the entry or project did not contain enough information
  * to calculate the revenue (because of insufficient access rights).
  *
- * Throws an error if the provided project or lumpsum service does not match the entry.
+ * Throws an error if the provided project or lumpsum service does not match the
+ * entry.
  */
 export const getEntryRevenue = ({
   entry,
@@ -193,7 +194,7 @@ export const getEntryRevenue = ({
       } else {
         if (entry.projectsId !== project?.id) {
           throw new Error(
-            `The entries projects id (${entry.projectsId}) does not match the project's id (${project?.id})`
+            `The entries projects id (${entry.projectsId}) does not match the project's id (${project?.id})`,
           );
         }
         revenueFactor = project.revenueFactor;
@@ -215,7 +216,7 @@ export const getEntryRevenue = ({
     case EntryType.LumpsumService: {
       if (entry.lumpsumServicesId !== lumpsumService?.id) {
         throw new Error(
-          `The entries lumpsum services id (${entry.lumpsumServicesId}) does not match the lumpsum service's id (${lumpsumService?.id})`
+          `The entries lumpsum services id (${entry.lumpsumServicesId}) does not match the lumpsum service's id (${lumpsumService?.id})`,
         );
       }
 

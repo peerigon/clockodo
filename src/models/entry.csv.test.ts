@@ -1,10 +1,11 @@
+import { describe, expect, test } from "vitest";
 import { parseEntryFromCsv } from "./entry.csv.js";
 import {
   Billability,
   EntryType,
-  LumpsumServiceEntry,
-  LumpsumValueEntry,
-  TimeEntry,
+  type LumpsumServiceEntry,
+  type LumpsumValueEntry,
+  type TimeEntry,
 } from "./entry.js";
 
 describe("parseEntryFromCsv()", () => {

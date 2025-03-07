@@ -62,7 +62,7 @@ For any questions about the different properties please consult the official [Cl
 Some constants are also available for import:
 
 ```js
-import { EntryType, Billability, AbsenceStatus, AbsenceType } from "clockodo";
+import { AbsenceStatus, AbsenceType, Billability, EntryType } from "clockodo";
 
 console.log(EntryType.Time); // 1
 console.log(EntryType.LumpsumValue); // 2

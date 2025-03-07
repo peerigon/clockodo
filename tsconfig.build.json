@@ -1,0 +1,5 @@
+{
+  "extends": ["./tsconfig.json", "@peerigon/configs/typescript/lib"],
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts", "src/tests/**/*.ts"]
+}

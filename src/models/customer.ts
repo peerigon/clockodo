@@ -9,13 +9,8 @@ export type Customer = {
   active: boolean;
   /** Is the customer billable by default? */
   billableDefault: boolean;
-  /**
-   * Note about the customer.
-   * Only for owners and managers
-   **/
+  /** Note about the customer. Only for owners and managers */
   note?: string | null;
-  /**
-   * Customer color
-   */
+  /** Customer color */
   color: number;
 };

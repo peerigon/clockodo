@@ -1,24 +1,18 @@
+import { type IsoDate } from "./dateTime.js";
+
 export enum TargethoursRowType {
   Weekly = "weekly",
   Monthly = "monthly",
 }
 
 type CommonTargethoursRow = {
-  /** The ID of the target hour settings  */
+  /** The ID of the target hour settings */
   id: number;
-  /**
-   * Date from which on the target hours apply
-   * Format YYYY-MM-DD
-   */
-  dateSince: string;
-  /**
-   * Date until which the target hours apply
-   * Format YYYY-MM-DD
-   */
-  dateUntil: string | null;
-  /**
-   * Automatic time compensation per month in hours
-   */
+  /** Date from which on the target hours apply Format YYYY-MM-DD */
+  dateSince: IsoDate;
+  /** Date until which the target hours apply Format YYYY-MM-DD */
+  dateUntil: IsoDate | null;
+  /** Automatic time compensation per month in hours */
   compensationMonthly: number;
   /** The related employee's ID */
   usersId: number;
@@ -46,18 +40,19 @@ export type TargethoursRowWeekly = CommonTargethoursRow & {
   /** Target hours for Sunday */
   sunday: number;
   /**
-   * true if credited absence hours are applied against the average target hours,
-   * false if credited absence hours match the target hours of the specific day .
+   * True if credited absence hours are applied against the average target
+   * hours, false if credited absence hours match the target hours of the
+   * specific day .
    */
   absenceFixedCredit: boolean;
-  /** Automatic time compensation per day in minutes  */
+  /** Automatic time compensation per day in minutes */
   compensationDaily: number;
 };
 
 export type TargethoursRowMonthly = CommonTargethoursRow & {
   /** Type of the target hours row */
   type: TargethoursRowType.Monthly;
-  /** Monthly target hours to attain  */
+  /** Monthly target hours to attain */
   monthlyTarget: number;
   /** Is Monday a work day? */
   workdayMonday: boolean;

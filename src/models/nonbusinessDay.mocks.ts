@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { isoDateFromDateTime } from "../lib/dateTime.js";
 import { generateRandomDates } from "../lib/mocks.js";
-import { NonbusinessDay } from "./nonbusinessDay.js";
+import { type NonbusinessDay } from "./nonbusinessDay.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
@@ -30,7 +30,7 @@ export const createNonbusinessDayMocks = ({
     const dateTime = new Date(timestamp);
     const id = getNextIdForYear(dateTime.getFullYear());
     const name = faker.lorem.words();
-    const isHalfDay = faker.datatype.number({ min: 0, max: 10 }) > 8;
+    const isHalfDay = faker.number.int({ min: 0, max: 10 }) > 8;
 
     return {
       date: isoDateFromDateTime(dateTime),

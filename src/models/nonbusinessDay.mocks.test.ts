@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { createNonbusinessDayMocks } from "./nonbusinessDay.mocks.js";
 
 describe("createNonbusinessDayMocks()", () => {
@@ -11,6 +12,6 @@ describe("createNonbusinessDayMocks()", () => {
       dateBetween: [new Date(2020, 11, 31), new Date(2021, 0, 2)],
     });
 
-    expect(nonbusinessDay1.id === nonbusinessDay2.id);
+    expect(nonbusinessDay1!.id === nonbusinessDay2!.id);
   });
 });
