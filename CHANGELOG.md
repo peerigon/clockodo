@@ -1,3 +1,9 @@
+# [25.1.0](https://github.com/peerigon/clockodo/compare/v25.0.0...v25.1.0) (2025-05-07)
+
+### Features
+
+- bump axios from 1.8.4 to 1.9.0 ([#210](https://github.com/peerigon/clockodo/issues/210)) ([3e58782](https://github.com/peerigon/clockodo/commit/3e58782198cf0017028c18c16ecdb9d38c462471))
+
 # [25.0.0](https://github.com/peerigon/clockodo/compare/v24.2.0...v25.0.0) (2025-03-07)
 
 ### chore
