@@ -1,3 +1,9 @@
+# [25.2.0](https://github.com/peerigon/clockodo/compare/v25.1.0...v25.2.0) (2025-05-26)
+
+### Features
+
+- **deps:** bump @faker-js/faker from 9.7.0 to 9.8.0 ([#218](https://github.com/peerigon/clockodo/issues/218)) ([a68f8b9](https://github.com/peerigon/clockodo/commit/a68f8b9440af033be25879958a22fc0e7db49675))
+
 # [25.1.0](https://github.com/peerigon/clockodo/compare/v25.0.0...v25.1.0) (2025-05-07)
 
 ### Features
