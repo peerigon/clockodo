@@ -78,7 +78,7 @@
     "@peerigon/configs": "^6.1.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@types/node": "^22.13.9",
+    "@types/node": "^24.0.8",
     "@types/qs": "^6.9.18",
     "@vitest/coverage-v8": "^3.0.5",
     "dotenv": "^16.4.7",
