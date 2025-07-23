@@ -1,4 +1,4 @@
-name: 🧪 Test
+name: 🧪 Test and 🚀 Release
 
 on:
   push:
@@ -9,13 +9,23 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  test:
+  test-and-release:
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
+
+    permissions:
+      # Necessary for semantic-release
+      contents: write
+      issues: write
+      pull-requests: write
+      # Necessary for npm publish --provenance
+      # See https://docs.npmjs.com/generating-provenance-statements#example-github-actions-workflow
+      id-token: write
+      packages: write
 
     steps:
       - name: 📥 Checkout repository
@@ -50,3 +60,16 @@ jobs:
           npm test
         env:
           CI: true
+
+      - name: 🚀 Release preview
+        if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/beta' }}
+        run: |
+          npx pkg-pr-new publish
+
+      - name: 🚀 Release on npm and jsr
+        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run release

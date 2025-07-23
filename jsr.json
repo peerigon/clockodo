@@ -1,0 +1,13 @@
+{
+  "name": "@peerigon/template-public-package",
+  "version": "0.0.0-semantically-released",
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/main.js",
+    "./add": "./dist/add.js"
+  },
+  "publish": {
+    "include": ["dist", "CHANGELOG.md", "README.md"]
+  },
+  "$schema": "https://jsr.io/schema/config-file.v1.json"
+}
