@@ -3,11 +3,16 @@
   "version": "0.0.0-semantically-released",
   "license": "MIT",
   "exports": {
-    ".": "./dist/main.js",
-    "./add": "./dist/add.js"
+    ".": "./src/main.js",
+    "./add": "./src/add.js"
   },
   "publish": {
-    "include": ["dist", "CHANGELOG.md", "README.md"]
+    "include": ["src", "CHANGELOG.md", "README.md"],
+    "exclude": [
+      "src/**/*.test.ts",
+      "src/**/*.test.ts.snap",
+      "src/tests/**/*.ts"
+    ]
   },
   "$schema": "https://jsr.io/schema/config-file.v1.json"
 }
