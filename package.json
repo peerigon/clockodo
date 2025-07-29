@@ -38,8 +38,10 @@
     "release": "semantic-release"
   },
   "devDependencies": {
-    "@peerigon/configs": "^7.0.0",
-    "eslint": "^9.31.0",
+    "@peerigon/configs": "^7.0.1",
+    "@types/node": "^24.1.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.32.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "npm-run-all2": "^8.0.4",
