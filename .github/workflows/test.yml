@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709 # main
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@7e24a656e1c7a0d6f3eaef8d8e84ae379a5b035b # main
+        uses: actions/setup-node@5e2628c959b9ade56971c0afcebbe5332d44b398 # main
         with:
           node-version-file: ".nvmrc"
           cache: "npm"
