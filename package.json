@@ -16,14 +16,14 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@peerigon/configs": "^7.0.0",
-    "eslint": "^9.31.0",
+    "@peerigon/configs": "^7.0.1",
+    "eslint": "^9.32.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "npm-run-all2": "^8.0.4",
     "pin-github-action": "^3.4.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   }
 }
