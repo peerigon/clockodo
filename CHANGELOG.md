@@ -1,3 +1,10 @@
+## [25.2.1](https://github.com/peerigon/clockodo/compare/v25.2.0...v25.2.1) (2025-08-04)
+
+### Bug Fixes
+
+- **deps:** bump axios from 1.10.0 to 1.11.0 ([#251](https://github.com/peerigon/clockodo/issues/251)) ([f63ccaf](https://github.com/peerigon/clockodo/commit/f63ccafafcd3e0fd9c46a521a26b84d9cbc3bb14))
+- **deps:** bump form-data from 4.0.1 to 4.0.4 ([#250](https://github.com/peerigon/clockodo/issues/250)) ([931e03b](https://github.com/peerigon/clockodo/commit/931e03be5982a22f96deaf0b2b610cb14134096d))
+
 # [25.2.0](https://github.com/peerigon/clockodo/compare/v25.1.0...v25.2.0) (2025-05-26)
 
 ### Features
