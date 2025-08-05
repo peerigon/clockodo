@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "author": "Peerigon GmbH <hello@peerigon.com>",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": "./dist/main.js",
