@@ -3,8 +3,8 @@
   "version": "0.0.0-semantically-released",
   "license": "MIT",
   "exports": {
-    ".": "./src/main.js",
-    "./add": "./src/add.js"
+    ".": "./src/main.ts",
+    "./add": "./src/add.ts"
   },
   "publish": {
     "include": ["src", "CHANGELOG.md", "README.md"],
