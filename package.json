@@ -75,7 +75,7 @@
     "qs": "^6.14.0"
   },
   "devDependencies": {
-    "@peerigon/configs": "^6.1.0",
+    "@peerigon/configs": "^7.0.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^24.0.8",
