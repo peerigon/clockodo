@@ -10,6 +10,7 @@
     "prepare": "husky",
     "test": "run-p test:*",
     "test:format": "prettier --check .",
+    "test:lint": "eslint --max-warnings 0 --cache .",
     "test:types": "tsc",
     "test:unit": "vitest --run",
     "vitest": "vitest"
