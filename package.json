@@ -29,6 +29,7 @@
     "prepare": "husky",
     "test": "run-p test:*",
     "test:format": "prettier --check .",
+    "test:lint": "eslint --max-warnings 0 --cache .",
     "test:types": "tsc",
     "test:unit": "vitest --run",
     "vitest": "vitest",
@@ -39,18 +40,19 @@
     "release": "semantic-release"
   },
   "devDependencies": {
-    "@peerigon/configs": "^7.0.2",
-    "@types/node": "^24.2.0",
+    "@peerigon/configs": "^7.3.0",
+    "@types/node": "^24.5.2",
     "@vitest/coverage-v8": "^3.2.4",
-    "eslint": "^9.32.0",
+    "eslint": "^9.36.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.4",
+    "lint-staged": "^16.1.6",
     "npm-run-all2": "^8.0.4",
     "pin-github-action": "^3.4.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "semantic-release": "^24.2.7",
     "typescript": "^5.9.2",
+    "typescript-language-server": "^5.0.0",
     "vitest": "^3.2.4"
   },
   "publishConfig": {
