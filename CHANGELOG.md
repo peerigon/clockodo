@@ -1,3 +1,9 @@
+## [25.2.2](https://github.com/peerigon/clockodo/compare/v25.2.1...v25.2.2) (2025-09-22)
+
+### Bug Fixes
+
+- **deps:** bump axios from 1.11.0 to 1.12.0 ([#266](https://github.com/peerigon/clockodo/issues/266)) ([a126245](https://github.com/peerigon/clockodo/commit/a126245af2cee26a4f730ae319da10cff1c4e613))
+
 ## [25.2.1](https://github.com/peerigon/clockodo/compare/v25.2.0...v25.2.1) (2025-08-04)
 
 ### Bug Fixes
