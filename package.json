@@ -16,7 +16,7 @@
     "vitest": "vitest"
   },
   "devDependencies": {
-    "@peerigon/configs": "^7.3.0",
+    "@peerigon/configs": "^7.4.0",
     "@types/node": "^24.6.1",
     "eslint": "^9.36.0",
     "husky": "^9.1.7",
@@ -24,7 +24,7 @@
     "npm-run-all2": "^8.0.4",
     "pin-github-action": "^3.4.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "typescript-language-server": "^5.0.0",
     "vitest": "^3.2.4"
   }
