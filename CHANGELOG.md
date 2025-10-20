@@ -1,3 +1,13 @@
+# [26.0.0](https://github.com/peerigon/clockodo/compare/v25.2.2...v26.0.0) (2025-10-20)
+
+### chore
+
+- **deps:** bump map-obj from 5.0.2 to 6.0.0 ([#272](https://github.com/peerigon/clockodo/issues/272)) ([cb16006](https://github.com/peerigon/clockodo/commit/cb16006e2f029b277952476d6a7fbcb3f37537ca))
+
+### BREAKING CHANGES
+
+- **deps:** Requires Node 20 because of map-obj update
+
 ## [25.2.2](https://github.com/peerigon/clockodo/compare/v25.2.1...v25.2.2) (2025-09-22)
 
 ### Bug Fixes
