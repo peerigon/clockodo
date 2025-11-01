@@ -25,7 +25,7 @@
     "pin-github-action": "^3.4.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
-    "typescript-language-server": "^5.0.0",
+    "typescript-language-server": "^5.0.1",
     "vitest": "^3.2.4"
   }
 }
