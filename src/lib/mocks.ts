@@ -68,7 +68,7 @@ This usually happens when the generated values create too many conflicts (e.g. t
     acceptedCount++;
   }
 
-  return [...accepted.values()].flat();
+  return [...accepted.values()].flat().toSorted();
 };
 
 export const generateRandomDateTimes = ({
@@ -86,7 +86,7 @@ export const generateRandomDateTimes = ({
     generate: () => {
       return faker.date.between({ from, to }).getTime();
     },
-  }).sort();
+  });
 };
 
 export const generateRandomDates = ({
@@ -110,7 +110,7 @@ export const generateRandomDates = ({
         randomDate.getDate(),
       ).getTime();
     },
-  }).sort();
+  });
 };
 
 export const generateRandomMonths = ({
@@ -133,7 +133,7 @@ export const generateRandomMonths = ({
         randomDate.getMonth(),
       ).getTime();
     },
-  }).sort();
+  });
 };
 
 export const toPairs = <Item>(array: Array<Item>) => {

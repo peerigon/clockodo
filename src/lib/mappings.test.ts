@@ -65,7 +65,9 @@ describe("mapResponseBody()", () => {
 });
 
 const expectKeysToMatch = (keysA: Array<string>, keysB: Array<string>) => {
-  expect([...new Set(keysA)].sort()).toMatchObject([...new Set(keysB)].sort());
+  expect([...new Set(keysA)].toSorted()).toMatchObject(
+    [...new Set(keysB)].toSorted(),
+  );
 };
 
 const createObjectFromKeys = (keys: Array<string>) =>
