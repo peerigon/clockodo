@@ -1,3 +1,28 @@
+# [27.0.0](https://github.com/peerigon/clockodo/compare/v26.0.0...v27.0.0) (2025-11-03)
+
+### chore
+
+- Update dependencies and modernize TypeScript ([407d503](https://github.com/peerigon/clockodo/commit/407d5036f24370bd73b2a42e7fee5aba7c428451))
+- Update dependencies and modernize TypeScript ([#286](https://github.com/peerigon/clockodo/issues/286)) ([861300f](https://github.com/peerigon/clockodo/commit/861300fd5d2b97a4ee71448eef958ff553e6ee35))
+
+### BREAKING CHANGES
+
+- Uses ES2023 as TypeScript target. Also updates
+  @faker-js to next major version `10.1.0`.
+
+Update dependencies including @faker-js/faker, p-limit, vitest, and
+@peerigon/configs to latest versions. Upgrade TypeScript target from
+ES2022 to ES2023 to support modern JavaScript features. Replace
+Array.sort() with toSorted() method for immutable sorting.
+
+- Uses ES2023 as TypeScript target.
+
+Update dependencies including @faker-js/faker, p-limit, vitest,
+and @peerigon/configs to latest versions. Upgrade TypeScript
+target from ES2022 to ES2023 to support modern JavaScript
+features. Replace Array.sort() with toSorted() method
+for immutable sorting.
+
 # [26.0.0](https://github.com/peerigon/clockodo/compare/v25.2.2...v26.0.0) (2025-10-20)
 
 ### chore
