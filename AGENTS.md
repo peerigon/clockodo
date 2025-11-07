@@ -30,3 +30,38 @@ This project uses npm scripts for all development tasks:
 - Functions are implemented in individual files in `src/`
 - Each function has comprehensive unit tests using Vitest
 - Uses ES module syntax throughout (`.ts` extensions in imports)
+
+## Pulling Updates from Upstream
+
+If user is asking you to pull in updates from the upstream repository, you can do so by following these steps:
+
+### Step 1: Merge Template Updates
+
+```bash
+git fetch upstream
+git merge --strategy-option theirs --no-commit upstream/main
+```
+
+This will:
+
+- Prefer template files in conflicts (`--strategy-option theirs`)
+- Stage changes without committing (`--no-commit`)
+
+### Step 2: Restore Project Specific Files
+
+Restore project-specific files and changes:
+
+- **package.json**: Restore original dependencies but keep the dependency updates from the upstream repository
+- **README.md**: Restore original project documentation
+- **AGENTS.md**: Restore project specific instructions and include changes from the upstream repository
+- **src/**: Restore project specific source code and include changes from the upstream repository
+
+### Step 3: Verify and Clean Up
+
+1. Run `npm install` to update lockfile
+2. Run `npm test` to verify everything works
+3. Review `git status` and `git diff --staged` for unexpected changes
+
+### Step 4: Stage Changes
+
+**IMPORTANT**: Stage your changes, but **do not commit**. Ask the user to review the changes first.
