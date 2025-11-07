@@ -166,12 +166,9 @@ Decide on treatment of `src/` directory:
 ## Phase 6: Staging
 
 **IMPORTANT**: Stage your changes, but **do not** commit any changes. Ask the user to review the changes.
-
-```
+````
 
 </details>
-```
-````
 
 ## How to pull in updates from the upstream repository
 
