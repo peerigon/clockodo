@@ -4,6 +4,18 @@ This file provides guidance to AI coding assistants when working with code in th
 
 **Important**: You **must** follow [these rules](./node_modules/@peerigon/configs/ai/rules.mdc) and its language-specific rules referenced in that file.
 
+## Keeping This File Updated
+
+When you make changes to the project that affect how AI agents should work with the codebase, update this file accordingly. This includes changes to:
+
+- Overall folder structure
+- Tech stack (frameworks, libraries, languages)
+- npm scripts and development commands
+- Testing approaches
+- Build and deployment processes
+
+**Important: Keep this file concise**. Only include information that is relevant for most or all development tasks. Omit specific implementation details that don't affect how agents interact with the codebase.
+
 ## Development Commands
 
 This project uses npm scripts for all development tasks:
