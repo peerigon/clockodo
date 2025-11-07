@@ -81,10 +81,6 @@ The `src/` directory contains example files (`add.ts`, `add.test.ts`, `main.ts`)
 
 </details>
 
-#### Step 3:
-
-Later you can ask your AI coding assistant to pull in updates from the upstream repository as mentioned in the [AGENTS.md](./AGENTS.md) file.
-
 ### Option B: With an already existing repository
 
 #### Step 1:
@@ -176,3 +172,7 @@ Decide on treatment of `src/` directory:
 </details>
 ```
 ````
+
+## How to pull in updates from the upstream repository
+
+Ask your AI coding assistant to pull in updates from the upstream repository as mentioned in the [AGENTS.md](./AGENTS.md) file.
