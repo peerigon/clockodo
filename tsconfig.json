@@ -1,6 +1,3 @@
 {
-  "extends": "@peerigon/configs/typescript",
-  "compilerOptions": {
-    "lib": ["es2023", "dom"]
-  }
+  "extends": "@peerigon/configs/typescript"
 }
