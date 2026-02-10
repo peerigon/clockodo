@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@peerigon/configs": "^12.0.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.2.2",
     "eslint": "9.39.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
