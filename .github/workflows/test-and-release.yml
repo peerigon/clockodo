@@ -29,23 +29,23 @@ jobs:
 
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # main
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # main
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@89d709d423dc495668cd762a18dd4a070611be3f # main
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # main
         with:
-          node-version-file: ".nvmrc"
+          node-version-file: ".tool-versions"
           cache: "npm"
 
       - name: 🗄 Cache node_modules
         id: cache-node_modules
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # main
+        uses: actions/cache@b7e8d49f17405cc70c1c120101943203c98d3a4b # main
         with:
           path: "**/node_modules"
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🗄 Cache .eslintcache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # main
+        uses: actions/cache@b7e8d49f17405cc70c1c120101943203c98d3a4b # main
         with:
           path: .eslintcache
           key: eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -62,7 +62,7 @@ jobs:
           CI: true
 
       - name: ⬆️ Upload coverage report
-        uses: coverallsapp/github-action@e988b39f49526ccb8bd19453bd2198bf4156bb7f # main
+        uses: coverallsapp/github-action@ba6dae83310bbd6d33ff77092650dc40bd444a2a # main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
