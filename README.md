@@ -172,4 +172,8 @@ Decide on treatment of `src/` directory:
 
 ## How to pull in updates from the upstream repository
 
-Ask your AI coding assistant to pull in updates from the upstream repository as mentioned in the [AGENTS.md](./AGENTS.md) file.
+Ask your AI coding assistant:
+
+```prompt
+Merge the "upstream" remote into the current branch as described in the AGENTS.md file.
+```
