@@ -30,6 +30,11 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # main
+        with:
+          # Fetches 20 commits.
+          # This is trade-off between checkout speed and ability to create an accurate CHANGELOG.md
+          # See https://github.com/peerigon/template-public-package/issues/2
+          fetch-depth: 20
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb # main
@@ -56,10 +61,10 @@ jobs:
           npm ci --ignore-scripts --prefer-offline --no-audit
 
       - name: 🧪 Run tests
-        run: |
-          npm test
         env:
           CI: true
+        run: |
+          npm test
 
       - name: 🧪 Run integration test
         if: "github.event_name == 'workflow_dispatch'"
