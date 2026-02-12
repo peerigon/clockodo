@@ -68,7 +68,9 @@ This usually happens when the generated values create too many conflicts (e.g. t
     acceptedCount++;
   }
 
-  return [...accepted.values()].flat().toSorted();
+  // toSorted() is not yet supported by our target
+  // eslint-disable-next-line unicorn/no-array-sort
+  return [...accepted.values()].flat().sort();
 };
 
 export const generateRandomDateTimes = ({
