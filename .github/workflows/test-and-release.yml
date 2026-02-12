@@ -61,10 +61,10 @@ jobs:
           npm ci --ignore-scripts --prefer-offline --no-audit
 
       - name: 🧪 Run tests
-        run: |
-          npm test
         env:
           CI: true
+        run: |
+          npm test
 
       - name: ⬆️ Upload coverage report
         uses: coverallsapp/github-action@ba6dae83310bbd6d33ff77092650dc40bd444a2a # main
