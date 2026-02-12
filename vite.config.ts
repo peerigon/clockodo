@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     env: loadEnv(mode, import.meta.dirname, ""),
     include: ["src/**/*.test.?(c|m)[jt]s?(x)"],
     exclude: isIntegrationTest ? [] : ["src/integration.test.ts"],
-    setupFiles: ["dotenv/config", "./src/tests/setup.ts"],
+    setupFiles: ["./src/tests/setup.ts"],
     coverage: {
       enabled: CI,
       reporter: ["html", "lcov"],
