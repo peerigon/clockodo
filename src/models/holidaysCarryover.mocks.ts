@@ -9,7 +9,7 @@ type Options = {
 export const createHolidaysCarryoverMocks = ({
   count = 1,
   yearMinMax = [1900, 2024],
-}: Options = {}) => {
+}: Options = {}): Array<HolidaysCarryover> => {
   return Array.from({ length: count }, (): HolidaysCarryover => {
     return {
       usersId: 0,

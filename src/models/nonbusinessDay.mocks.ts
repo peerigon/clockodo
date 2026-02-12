@@ -12,7 +12,7 @@ export const createNonbusinessDayMocks = ({
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
-}) => {
+}): Array<NonbusinessDay> => {
   const nextIdPerYear = new Map<number, number>();
 
   const getNextIdForYear = (year: number) => {

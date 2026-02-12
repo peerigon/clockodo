@@ -3,7 +3,7 @@ import { type SurchargeModel } from "./surchargeModel.js";
 
 export const createSurchargeModelMocks = ({
   count = 1,
-}: { count?: number } = {}) =>
+}: { count?: number } = {}): Array<SurchargeModel> =>
   Array.from({ length: count }, (_, index): SurchargeModel => {
     return {
       id: index,

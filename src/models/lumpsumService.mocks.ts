@@ -3,7 +3,7 @@ import { type LumpsumService } from "./lumpsumService.js";
 
 export const createLumpsumServiceMocks = ({
   count = 1,
-}: { count?: number } = {}) =>
+}: { count?: number } = {}): Array<LumpsumService> =>
   Array.from({ length: count }, (_, index): LumpsumService => {
     return {
       id: index,

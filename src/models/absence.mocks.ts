@@ -23,7 +23,10 @@ const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
 export const createAbsenceMocks = ({
   count = 1,
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: { count?: number; dateSinceBetween?: readonly [Date, Date] } = {}) => {
+}: {
+  count?: number;
+  dateSinceBetween?: readonly [Date, Date];
+} = {}): Array<Absence> => {
   const dayPairs = toPairs(
     generateRandomDates({
       count: count * 2,

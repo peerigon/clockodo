@@ -98,7 +98,7 @@ export type Config = {
 };
 
 export class Api {
-  [axiosClient] = axios.create({
+  private [axiosClient] = axios.create({
     headers: {
       "X-ClockodoEnableIsoUtcDateTimes": "1",
     },
@@ -223,7 +223,7 @@ export class Api {
     }
   }
 
-  get config() {
+  get config(): Partial<Config> {
     return this._config;
   }
 
@@ -241,7 +241,7 @@ export class Api {
 
   async *getPagesStreaming<Result extends ResponseWithPaging>(
     ...args: Parameters<Api["get"]>
-  ) {
+  ): AsyncGenerator<Result, void, undefined> {
     const [url, queryParams = {}] = args;
     const getPage = async (page: number) => {
       return this.get<Result & ResponseWithPaging>(url, {

@@ -9,7 +9,7 @@ import { faker } from "@faker-js/faker";
  *
  * @see https://github.com/Marak/Faker.js
  */
-export const setFakerSeed = (seed: number) => {
+export const setFakerSeed = (seed: number): void => {
   faker.seed(seed);
 };
 
@@ -21,19 +21,19 @@ export const ONE_YEAR = 356 * ONE_DAY;
 
 const MAX_ITERATION_COUNT = 10_000;
 
-export const startOfDay = (date: Date) => {
+export const startOfDay = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
 
-export const endOfMonth = (date: Date) => {
+export const endOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999);
 };
 
-export const endOfYear = (dateTime: Date) => {
+export const endOfYear = (dateTime: Date): Date => {
   return new Date(dateTime.getFullYear() + 1, 0, 0, 23, 59, 59, 999);
 };
 
-export const startOfNextDay = (date: Date) => {
+export const startOfNextDay = (date: Date): Date => {
   const nextDay = new Date(startOfDay(date).getTime() + 1.5 * ONE_DAY);
 
   return new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
@@ -79,7 +79,7 @@ export const generateRandomDateTimes = ({
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
-}) => {
+}): Array<number> => {
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
@@ -97,7 +97,7 @@ export const generateRandomDates = ({
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
-}) => {
+}): Array<number> => {
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
@@ -121,7 +121,7 @@ export const generateRandomMonths = ({
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
-}) => {
+}): Array<number> => {
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
@@ -136,7 +136,7 @@ export const generateRandomMonths = ({
   });
 };
 
-export const toPairs = <Item>(array: Array<Item>) => {
+export const toPairs = <Item>(array: Array<Item>): Array<[Item, Item]> => {
   if (array.length % 2 !== 0) {
     throw new Error("Cannot create pairs: Array length must be divisible by 2");
   }

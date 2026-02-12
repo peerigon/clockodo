@@ -41,7 +41,7 @@ export const createTargethoursRowWeeklyMocks = ({
   count = 1,
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
   absenceFixedCredit,
-}: CommonOptions = {}) => {
+}: CommonOptions = {}): Array<TargethoursRowWeekly> => {
   const dayPairs = toPairs(
     generateRandomDates({
       count: count * 2,
@@ -94,7 +94,7 @@ export const createTargethoursRowWeeklyMocks = ({
 export const createTargethoursRowMonthlyMocks = ({
   count = 1,
   dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: CommonOptions = {}) => {
+}: CommonOptions = {}): Array<TargethoursRowMonthly> => {
   const monthPairs = toPairs(
     generateRandomMonths({
       count: count * 2,
