@@ -1,3 +1,9 @@
+# [27.1.0](https://github.com/peerigon/clockodo/compare/v27.0.2...v27.1.0) (2026-02-12)
+
+### Features
+
+- **deps:** Update dependencies in package.json and package-lock.json ([cbd6af7](https://github.com/peerigon/clockodo/commit/cbd6af7629b813ca3b9a04326eabfa6e6b6090c8))
+
 ## [27.0.2](https://github.com/peerigon/clockodo/compare/v27.0.1...v27.0.2) (2026-02-12)
 
 ### Bug Fixes
