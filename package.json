@@ -15,9 +15,13 @@
     "test:unit": "vitest --run",
     "vitest": "vitest"
   },
+  "dependencies": {
+    "env-var": "^7.5.0"
+  },
   "devDependencies": {
     "@peerigon/configs": "^14.0.1",
     "@types/node": "^25.2.2",
+    "@vitest/coverage-v8": "^4.0.18",
     "eslint": "9.39.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",

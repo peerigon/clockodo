@@ -42,6 +42,7 @@ This project uses npm scripts for all development tasks:
 - Functions are implemented in individual files in `src/`
 - Each function has comprehensive unit tests using Vitest
 - Uses ES module syntax throughout (`.ts` extensions in imports)
+- **Environment variables**: Use `src/env.ts`; destructure at top-level module scope so missing vars fail immediately.
 
 ## Pulling Updates from Upstream
 

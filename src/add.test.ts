@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { add } from "./add.ts";
+import { env } from "./env.ts";
 
 describe("add", () => {
   it("should return the sum of two positive numbers", () => {
@@ -24,5 +25,11 @@ describe("add", () => {
 
   it("should return the sum of a number and zero", () => {
     expect(add(5, 0)).toBe(5);
+  });
+});
+
+describe("env", () => {
+  it("should load env vars in tests", () => {
+    expect(typeof env.CI).toBe("boolean");
   });
 });
