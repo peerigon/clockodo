@@ -111,7 +111,9 @@ describe("Clockodo (instance)", () => {
           locale: "de-DE",
         };
 
-        await clockodo.api.get("/anything");
+        await expect(clockodo.api.get("/anything")).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -125,7 +127,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/absences/7")
           .reply(200, {});
 
-        await clockodo.getAbsence({ id: 7 });
+        await expect(
+          clockodo.getAbsence({ id: 7 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -141,7 +145,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/absences?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
-        await clockodo.getAbsences({ year: 218 });
+        await expect(
+          clockodo.getAbsences({ year: 218 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -153,7 +159,7 @@ describe("Clockodo (instance)", () => {
           .get("/v2/clock")
           .reply(200, {});
 
-        await clockodo.getClock();
+        await expect(clockodo.getClock()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -165,7 +171,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/customers/777")
           .reply(200, {});
 
-        await clockodo.getCustomer({ id: 777 });
+        await expect(
+          clockodo.getCustomer({ id: 777 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -177,7 +185,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/customers")
           .reply(200, {});
 
-        await clockodo.getCustomersPage();
+        await expect(clockodo.getCustomersPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -205,7 +215,9 @@ describe("Clockodo (instance)", () => {
           .get("/v3/lumpsumservices/777")
           .reply(200, {});
 
-        await clockodo.getLumpSumService({ id: 777 });
+        await expect(
+          clockodo.getLumpSumService({ id: 777 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -217,7 +229,9 @@ describe("Clockodo (instance)", () => {
           .get("/v3/lumpsumservices")
           .reply(200, {});
 
-        await clockodo.getLumpSumServicesPage();
+        await expect(
+          clockodo.getLumpSumServicesPage(),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -245,22 +259,26 @@ describe("Clockodo (instance)", () => {
           .get("/v2/entries/4")
           .reply(200, {});
 
-        await clockodo.getEntry({ id: 4 });
+        await expect(clockodo.getEntry({ id: 4 })).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
     });
 
-    describe.skip("splitAllEntriesAtMidnight()", () => {
+    describe("splitAllEntriesAtMidnight()", () => {
       it("correctly builds splitAllEntriesAtMidnight() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
           .put("/v2/entries/splitAllAtMidnight")
           .reply(200, {});
 
-        await clockodo.splitAllEntriesAtMidnight({
-          day: "2022-12-19",
-          usersId: 1,
-        });
+        await expect(
+          clockodo.splitAllEntriesAtMidnight({
+            day: "2022-12-19",
+            usersId: 1,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -278,18 +296,20 @@ describe("Clockodo (instance)", () => {
           .get("/v2/entries?" + qs.stringify(expectedParameters))
           .reply(200, {});
 
-        await clockodo.getEntriesPage({
-          timeSince: "2017-08-18 00:00:00",
-          timeUntil: "2018-02-09 00:00:00",
-          filterBillable: Billability.Billed,
-        });
+        await expect(
+          clockodo.getEntriesPage({
+            timeSince: "2017-08-18 00:00:00",
+            timeUntil: "2018-02-09 00:00:00",
+            filterBillable: Billability.Billed,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when getEntriesPage() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesPage({
             timeSince: "2017-08-18 00:00:00",
@@ -322,7 +342,7 @@ describe("Clockodo (instance)", () => {
       it("throws an error when getEntries() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntries({
             timeSince: "2017-08-18 00:00:00",
@@ -353,7 +373,7 @@ describe("Clockodo (instance)", () => {
       it("throws an error when getEntriesTexts() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesTexts({}),
         ).rejects.toThrowError('Missing required parameter "text"');
@@ -388,19 +408,21 @@ describe("Clockodo (instance)", () => {
           )
           .reply(200, {});
 
-        await clockodo.getEntryGroups({
-          timeSince: "2017-08-18 00:00:00",
-          timeUntil: "2018-02-09 00:00:00",
-          grouping: ["customers_id", "projects_id"],
-          roundToMinutes: 15,
-        });
+        await expect(
+          clockodo.getEntryGroups({
+            timeSince: "2017-08-18 00:00:00",
+            timeUntil: "2018-02-09 00:00:00",
+            grouping: ["customers_id", "projects_id"],
+            roundToMinutes: 15,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when getEntryGroups() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntryGroups({
             timeSince: "2017-08-18 00:00:00",
@@ -416,7 +438,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/projects/1985")
           .reply(200, {});
 
-        await clockodo.getProject({ id: 1985 });
+        await expect(
+          clockodo.getProject({ id: 1985 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -428,7 +452,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/projects")
           .reply(200, {});
 
-        await clockodo.getProjectsPage();
+        await expect(clockodo.getProjectsPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -456,7 +482,9 @@ describe("Clockodo (instance)", () => {
           .get("/v3/services/10")
           .reply(200, {});
 
-        await clockodo.getService({ id: 10 });
+        await expect(
+          clockodo.getService({ id: 10 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -468,7 +496,9 @@ describe("Clockodo (instance)", () => {
           .get("/v3/services")
           .reply(200, {});
 
-        await clockodo.getServicesPage();
+        await expect(clockodo.getServicesPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -496,7 +526,9 @@ describe("Clockodo (instance)", () => {
           .get("/targethours/1234")
           .reply(200, {});
 
-        await clockodo.getTargethoursRow({ id: 1234 });
+        await expect(
+          clockodo.getTargethoursRow({ id: 1234 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -508,7 +540,9 @@ describe("Clockodo (instance)", () => {
           .get("/targethours")
           .reply(200, {});
 
-        await clockodo.getTargethours();
+        await expect(clockodo.getTargethours()).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -520,7 +554,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/users/1263")
           .reply(200, {});
 
-        await clockodo.getUser({ id: 1263 });
+        await expect(
+          clockodo.getUser({ id: 1263 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -532,7 +568,7 @@ describe("Clockodo (instance)", () => {
           .get("/v2/users")
           .reply(200, {});
 
-        await clockodo.getUsers();
+        await expect(clockodo.getUsers()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -544,14 +580,16 @@ describe("Clockodo (instance)", () => {
           .get("/userreports/1263?" + qs.stringify({ year: 217 }))
           .reply(200, {});
 
-        await clockodo.getUserReport({ usersId: 1263, year: 217 });
+        await expect(
+          clockodo.getUserReport({ usersId: 1263, year: 217 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when getUserReport() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           clockodo.getUserReport(
             // @ts-expect-error Year is missing
             { usersId: 200 },
@@ -566,7 +604,9 @@ describe("Clockodo (instance)", () => {
           .get("/userreports?" + qs.stringify({ year: 217 }))
           .reply(200, {});
 
-        await clockodo.getUserReports({ year: 217 });
+        await expect(
+          clockodo.getUserReports({ year: 217 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -578,7 +618,9 @@ describe("Clockodo (instance)", () => {
           .get("/nonbusinessgroups")
           .reply(200, {});
 
-        await clockodo.getNonbusinessGroups();
+        await expect(
+          clockodo.getNonbusinessGroups(),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -596,10 +638,12 @@ describe("Clockodo (instance)", () => {
           )
           .reply(200, {});
 
-        await clockodo.getNonbusinessDays({
-          nonbusinessgroupsId: [123],
-          year: 2021,
-        });
+        await expect(
+          clockodo.getNonbusinessDays({
+            nonbusinessgroupsId: [123],
+            year: 2021,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -607,7 +651,7 @@ describe("Clockodo (instance)", () => {
       it("throws an error when getNonbusinessDays() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           clockodo.getNonbusinessDays(
             // @ts-expect-error Year is missing
             { nonbusinessgroupsId: 123 },
@@ -672,7 +716,9 @@ describe("Clockodo (instance)", () => {
           .get("/overtimecarry?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
+        await expect(
+          clockodo.getOvertimecarry({ usersId: 17, year: 2028 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -684,7 +730,9 @@ describe("Clockodo (instance)", () => {
           .get("/holidaysquota?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 });
+        await expect(
+          clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -696,7 +744,9 @@ describe("Clockodo (instance)", () => {
           .get("/holidayscarry?users_id=17&year=2028")
           .reply(200, {});
 
-        await clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 });
+        await expect(
+          clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -708,7 +758,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/surchargeModels/7")
           .reply(200, {});
 
-        await clockodo.getSurchargeModel({ id: 7 });
+        await expect(
+          clockodo.getSurchargeModel({ id: 7 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -720,7 +772,9 @@ describe("Clockodo (instance)", () => {
           .get("/v2/surchargeModels")
           .reply(200, {});
 
-        await clockodo.getSurchargeModels();
+        await expect(clockodo.getSurchargeModels()).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -741,19 +795,21 @@ describe("Clockodo (instance)", () => {
           .post("/v2/clock", expectedParameters)
           .reply(200, {});
 
-        await clockodo.startClock({
-          customersId: 24,
-          servicesId: 7,
-          projectsId: 365,
-          billable: Billability.Billable,
-        });
+        await expect(
+          clockodo.startClock({
+            customersId: 24,
+            servicesId: 7,
+            projectsId: 365,
+            billable: Billability.Billable,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when startClock() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.startClock({
             customersId: 24,
@@ -773,10 +829,12 @@ describe("Clockodo (instance)", () => {
           .post("/v2/customers", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addCustomer({
-          name: "Weyland-Yutani",
-          billableDefault: Billability.Billable,
-        });
+        await expect(
+          clockodo.addCustomer({
+            name: "Weyland-Yutani",
+            billableDefault: Billability.Billable,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -793,10 +851,12 @@ describe("Clockodo (instance)", () => {
           .post("/v3/lumpsumservices", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addLumpsumService({
-          name: "Weyland-Yutani",
-          price: 1,
-        });
+        await expect(
+          clockodo.addLumpsumService({
+            name: "Weyland-Yutani",
+            price: 1,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -814,11 +874,13 @@ describe("Clockodo (instance)", () => {
           .post("/v2/projects", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addProject({
-          name: "Clockodo Api Wrapper",
-          customersId: 1,
-          active: true,
-        });
+        await expect(
+          clockodo.addProject({
+            name: "Clockodo Api Wrapper",
+            customersId: 1,
+            active: true,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -835,7 +897,9 @@ describe("Clockodo (instance)", () => {
           .post("/v3/services", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addService({ name: "Thinking", active: true });
+        await expect(
+          clockodo.addService({ name: "Thinking", active: true }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -854,19 +918,21 @@ describe("Clockodo (instance)", () => {
           .post("/v2/users", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addUser({
-          name: "Merkel",
-          number: "8",
-          email: "angela@eu.eu",
-          role: UserRole.Owner,
-        });
+        await expect(
+          clockodo.addUser({
+            name: "Merkel",
+            number: "8",
+            email: "angela@eu.eu",
+            role: UserRole.Owner,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when addUser() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.addUser({
             name: "Merkel",
@@ -892,21 +958,23 @@ describe("Clockodo (instance)", () => {
           .post("/v2/entries", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addEntry({
-          customersId: 1,
-          servicesId: 2,
-          billable: Billability.Billable,
-          timeSince: "2020-06-02 00:00:00",
-          timeUntil: "2020-06-02 00:00:01",
-          text: "this is an optional description",
-        });
+        await expect(
+          clockodo.addEntry({
+            customersId: 1,
+            servicesId: 2,
+            billable: Billability.Billable,
+            timeSince: "2020-06-02 00:00:00",
+            timeUntil: "2020-06-02 00:00:01",
+            text: "this is an optional description",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when addEntry() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.addEntry({
             customersId: 1,
@@ -931,19 +999,21 @@ describe("Clockodo (instance)", () => {
           .post("/v2/absences", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addAbsence({
-          dateSince: "2017-08-18",
-          dateUntil: "2018-02-09",
-          type: AbsenceType.SpecialLeave,
-          note: "elternzeit",
-        });
+        await expect(
+          clockodo.addAbsence({
+            dateSince: "2017-08-18",
+            dateUntil: "2018-02-09",
+            type: AbsenceType.SpecialLeave,
+            note: "elternzeit",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when addAbsence() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.addAbsence({
             dateSince: "2017-08-18",
@@ -965,12 +1035,14 @@ describe("Clockodo (instance)", () => {
           .post("/register", expectedParameters)
           .reply(200, {});
 
-        await clockodo.register({
-          companiesName: "Acme Corporation",
-          name: "Looney Tunes",
-          email: "looney@tunes.com",
-          gtcAgreed: true,
-        });
+        await expect(
+          clockodo.register({
+            companiesName: "Acme Corporation",
+            name: "Looney Tunes",
+            email: "looney@tunes.com",
+            gtcAgreed: true,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -987,11 +1059,13 @@ describe("Clockodo (instance)", () => {
           .post("/v2/workTimes/changeRequests", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addWorkTimesChangeRequest({
-          date: "2023-01-01",
-          usersId: 12,
-          changes: [],
-        });
+        await expect(
+          clockodo.addWorkTimesChangeRequest({
+            date: "2023-01-01",
+            usersId: 12,
+            changes: [],
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1003,9 +1077,11 @@ describe("Clockodo (instance)", () => {
           .post("/v2/workTimes/changeRequests/17/approve")
           .reply(200, {});
 
-        await clockodo.approveWorkTimesChangeRequest({
-          id: 17,
-        });
+        await expect(
+          clockodo.approveWorkTimesChangeRequest({
+            id: 17,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1017,9 +1093,11 @@ describe("Clockodo (instance)", () => {
           .post("/v2/workTimes/changeRequests/17/decline")
           .reply(200, {});
 
-        await clockodo.declineWorkTimesChangeRequest({
-          id: 17,
-        });
+        await expect(
+          clockodo.declineWorkTimesChangeRequest({
+            id: 17,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1036,10 +1114,12 @@ describe("Clockodo (instance)", () => {
           .post("/v2/surchargeModels", expectedParameters)
           .reply(200, {});
 
-        await clockodo.addSurchargeModel({
-          name: "Weyland-Yutani",
-          accumulation: true,
-        });
+        await expect(
+          clockodo.addSurchargeModel({
+            name: "Weyland-Yutani",
+            accumulation: true,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1058,18 +1138,20 @@ describe("Clockodo (instance)", () => {
           .put("/v2/clock/782", expectedParameters)
           .reply(200, {});
 
-        await clockodo.changeClockDuration({
-          entriesId: 782,
-          duration: 540,
-          durationBefore: 300,
-        });
+        await expect(
+          clockodo.changeClockDuration({
+            entriesId: 782,
+            duration: 540,
+            durationBefore: 300,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
       it("throws an error when getUserReports() is missing param", async () => {
         expect.assertions(1);
 
-        return expect(
+        await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.changeClockDuration({
             entriesId: 782,
@@ -1090,7 +1172,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/customers/15", mapRequestBody(customer))
           .reply(200, {});
 
-        await clockodo.editCustomer(customer);
+        await expect(
+          clockodo.editCustomer(customer),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1107,7 +1191,9 @@ describe("Clockodo (instance)", () => {
           .put("/v3/lumpsumservices/15", mapRequestBody(lumpsumService))
           .reply(200, {});
 
-        await clockodo.editLumpsumService(lumpsumService);
+        await expect(
+          clockodo.editLumpsumService(lumpsumService),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1125,7 +1211,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/projects/20", mapRequestBody(project))
           .reply(200, {});
 
-        await clockodo.editProject(project);
+        await expect(clockodo.editProject(project)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1142,7 +1230,9 @@ describe("Clockodo (instance)", () => {
           .put("/v3/services/23", mapRequestBody(service))
           .reply(200, {});
 
-        await clockodo.editService(service);
+        await expect(clockodo.editService(service)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1159,7 +1249,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/users/33", mapRequestBody(user))
           .reply(200, {});
 
-        await clockodo.editUser(user);
+        await expect(clockodo.editUser(user)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1177,7 +1269,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
-        await clockodo.editEntryGroup(entryGroup);
+        await expect(
+          clockodo.editEntryGroup(entryGroup),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1195,7 +1289,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/absences/74", mapRequestBody(absence))
           .reply(200, {});
 
-        await clockodo.editAbsence(absence);
+        await expect(clockodo.editAbsence(absence)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1212,7 +1308,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/entries/365", mapRequestBody(entry))
           .reply(200, {});
 
-        await clockodo.editEntry(entry);
+        await expect(clockodo.editEntry(entry)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1229,7 +1327,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/surchargeModels/365", mapRequestBody(entry))
           .reply(200, {});
 
-        await clockodo.editSurchargeModel(entry);
+        await expect(
+          clockodo.editSurchargeModel(entry),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1243,7 +1343,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/clock/782")
           .reply(200, {});
 
-        await clockodo.stopClock({ entriesId: 782 });
+        await expect(
+          clockodo.stopClock({ entriesId: 782 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1253,7 +1355,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/clock/782", { users_id: 123 })
           .reply(200, {});
 
-        await clockodo.stopClock({ entriesId: 782, usersId: 123 });
+        await expect(
+          clockodo.stopClock({ entriesId: 782, usersId: 123 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1265,7 +1369,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/customers/343")
           .reply(200, {});
 
-        await clockodo.deleteCustomer({ id: 343 });
+        await expect(
+          clockodo.deleteCustomer({ id: 343 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1277,7 +1383,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/projects/8")
           .reply(200, {});
 
-        await clockodo.deleteProject({ id: 8 });
+        await expect(
+          clockodo.deleteProject({ id: 8 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1289,7 +1397,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v3/services/94")
           .reply(200, {});
 
-        await clockodo.deleteService({ id: 94 });
+        await expect(
+          clockodo.deleteService({ id: 94 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1301,7 +1411,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v3/lumpsumservices/94")
           .reply(200, {});
 
-        await clockodo.deleteLumpsumService({ id: 94 });
+        await expect(
+          clockodo.deleteLumpsumService({ id: 94 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1313,7 +1425,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/users/7")
           .reply(200, {});
 
-        await clockodo.deleteUser({ id: 7 });
+        await expect(
+          clockodo.deleteUser({ id: 7 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1325,7 +1439,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/entries/45")
           .reply(200, {});
 
-        await clockodo.deleteEntry({ id: 45 });
+        await expect(
+          clockodo.deleteEntry({ id: 45 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1343,7 +1459,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
-        await clockodo.deleteEntryGroup(entryGroup);
+        await expect(
+          clockodo.deleteEntryGroup(entryGroup),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1355,7 +1473,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/absences/31")
           .reply(200, {});
 
-        await clockodo.deleteAbsence({ id: 31 });
+        await expect(
+          clockodo.deleteAbsence({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1367,9 +1487,11 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/workTimes/changeRequests/17")
           .reply(200, {});
 
-        await clockodo.withdrawWorkTimesChangeRequest({
-          id: 17,
-        });
+        await expect(
+          clockodo.withdrawWorkTimesChangeRequest({
+            id: 17,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1381,7 +1503,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/surchargeModels/31")
           .reply(200, {});
 
-        await clockodo.deleteSurchargeModel({ id: 31 });
+        await expect(
+          clockodo.deleteSurchargeModel({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });

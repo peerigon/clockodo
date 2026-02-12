@@ -11,16 +11,17 @@ describe("mapQueryParams()", () => {
     const queryParams = createObjectFromKeys(commonKeys.camelCase);
     const mappedQueryParams = mapQueryParams(queryParams);
 
-    expectKeysToMatch(Object.keys(mappedQueryParams), commonKeys.snakeCase);
+    expect(uniqueSorted(Object.keys(mappedQueryParams))).toMatchObject(
+      uniqueSorted(commonKeys.snakeCase),
+    );
   });
 
   it("should map specific keys differently", () => {
     const queryParams = createObjectFromKeys(Object.keys(queryParamMapping));
     const mappedQueryParams = mapQueryParams(queryParams);
 
-    expectKeysToMatch(
-      Object.keys(mappedQueryParams),
-      Object.values(queryParamMapping),
+    expect(uniqueSorted(Object.keys(mappedQueryParams))).toMatchObject(
+      uniqueSorted(Object.values(queryParamMapping)),
     );
   });
 
@@ -42,7 +43,9 @@ describe("mapRequestBody()", () => {
     const requestBody = createObjectFromKeys(commonKeys.camelCase);
     const mappedRequestBody = mapRequestBody(requestBody);
 
-    expectKeysToMatch(Object.keys(mappedRequestBody), commonKeys.snakeCase);
+    expect(uniqueSorted(Object.keys(mappedRequestBody))).toMatchObject(
+      uniqueSorted(commonKeys.snakeCase),
+    );
   });
 });
 
@@ -51,7 +54,9 @@ describe("mapResponseBody()", () => {
     const responseBody = createObjectFromKeys(commonKeys.snakeCase);
     const mappedResponseBody = mapResponseBody(responseBody);
 
-    expectKeysToMatch(Object.keys(mappedResponseBody), commonKeys.camelCase);
+    expect(uniqueSorted(Object.keys(mappedResponseBody))).toMatchObject(
+      uniqueSorted(commonKeys.camelCase),
+    );
   });
 
   // The API returns some keys that are already in camelCase
@@ -60,15 +65,13 @@ describe("mapResponseBody()", () => {
     const responseBody = createObjectFromKeys(keys);
     const mappedResponseBody = mapResponseBody(responseBody);
 
-    expectKeysToMatch(Object.keys(mappedResponseBody), keys);
+    expect(uniqueSorted(Object.keys(mappedResponseBody))).toMatchObject(
+      uniqueSorted(keys),
+    );
   });
 });
 
-const expectKeysToMatch = (keysA: Array<string>, keysB: Array<string>) => {
-  expect([...new Set(keysA)].toSorted()).toMatchObject(
-    [...new Set(keysB)].toSorted(),
-  );
-};
+const uniqueSorted = (keysA: Array<string>) => [...new Set(keysA)].toSorted();
 
 const createObjectFromKeys = (keys: Array<string>) =>
   Object.fromEntries(keys.map((key) => [key, 1]));

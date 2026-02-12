@@ -21,16 +21,16 @@ describe("createTargethoursRowMocks()", () => {
         dateSince: "2020-01-01",
       });
     }
-  });
-  for (let i = 0; i < 20; i++) {
-    const [targethoursRow] = createTargethoursRowWeeklyMocks({
-      count: 1,
-      dateSinceBetween: [new Date(2020, 0, 1), new Date(2020, 0, 1)],
-    });
+    for (let i = 0; i < 20; i++) {
+      const [targethoursRow] = createTargethoursRowWeeklyMocks({
+        count: 1,
+        dateSinceBetween: [new Date(2020, 0, 1), new Date(2020, 0, 1)],
+      });
 
-    expect(targethoursRow).toMatchObject({
-      dateSince: "2020-01-01",
-    });
-    expect(["2020-01-01", null]).toContain(targethoursRow!.dateUntil);
-  }
+      expect(targethoursRow).toMatchObject({
+        dateSince: "2020-01-01",
+      });
+      expect(["2020-01-01", null]).toContain(targethoursRow!.dateUntil);
+    }
+  });
 });

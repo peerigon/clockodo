@@ -27,7 +27,7 @@ const generateIntervals = ({
   date = DEFAULT_FROM,
 }: {
   count?: number;
-  date: Date;
+  date?: Date;
 }) => {
   const dateTimes = generateRandomDateTimes({
     count: count * 2,
