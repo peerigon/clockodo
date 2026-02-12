@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # main
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # main
+        uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb # main
         with:
           node-version-file: ".tool-versions"
           cache: "npm"
@@ -76,6 +76,6 @@ jobs:
       - name: 🚀 Release on npm and jsr
         if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta' }}
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm run release
+        run: npm run release
