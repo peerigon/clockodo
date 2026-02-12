@@ -40,6 +40,9 @@
     "prepublishOnly": "npm run build",
     "release": "semantic-release"
   },
+  "dependencies": {
+    "env-var": "^7.5.0"
+  },
   "devDependencies": {
     "@peerigon/configs": "^14.0.1",
     "@types/node": "^25.2.2",
