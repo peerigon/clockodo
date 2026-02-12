@@ -77,8 +77,8 @@
     "qs": "^6.14.0"
   },
   "devDependencies": {
-    "@peerigon/configs": "^14.0.1",
-    "@types/node": "^25.2.2",
+    "@peerigon/configs": "^14.0.8",
+    "@types/node": "^25.2.3",
     "@types/qs": "^6.14.0",
     "@vitest/coverage-v8": "^4.0.18",
     "dotenv": "^17.2.3",
