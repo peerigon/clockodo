@@ -1,3 +1,10 @@
+## [27.0.2](https://github.com/peerigon/clockodo/compare/v27.0.1...v27.0.2) (2026-02-12)
+
+### Bug Fixes
+
+- Add explicit types to exports ([df38280](https://github.com/peerigon/clockodo/commit/df38280f2c8067ddd2183ecbad51da2025906efa))
+- bump axios from 1.13.2 to 1.13.5 ([#321](https://github.com/peerigon/clockodo/issues/321)) ([c21058a](https://github.com/peerigon/clockodo/commit/c21058a7400d1b8b27476d665b51ea4910ec9dd3))
+
 ## [27.0.1](https://github.com/peerigon/clockodo/compare/v27.0.0...v27.0.1) (2026-01-14)
 
 ### Bug Fixes
