@@ -336,8 +336,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
   describe("getNonbusinessGroups() / getNonbusinessDays()", () => {
     it("returns expected data format", async () => {
-      const { nonbusinessgroups: nonbusinessGroups } =
-        await clockodo.getNonbusinessGroups();
+      const { nonbusinessGroups } = await clockodo.getNonbusinessGroups();
 
       expect(nonbusinessGroups.length).toBeGreaterThan(0);
       nonbusinessGroups.forEach((nonbusinessGroup) => {
@@ -347,11 +346,10 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
       const firstNonbusinessGroup = assertExists(nonbusinessGroups[0]);
 
-      const { nonbusinessdays: nonbusinessDays } =
-        await clockodo.getNonbusinessDays({
-          nonbusinessgroupsId: firstNonbusinessGroup.id,
-          year: 2021,
-        });
+      const { nonbusinessDays } = await clockodo.getNonbusinessDays({
+        nonbusinessGroupId: firstNonbusinessGroup.id,
+        year: 2021,
+      });
 
       expect(nonbusinessDays.length).toBeGreaterThan(0);
       nonbusinessDays.forEach((nonbusinessDay) => {
