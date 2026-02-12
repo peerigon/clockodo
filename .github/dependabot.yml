@@ -5,15 +5,24 @@
 
 version: 2
 updates:
-  # Enable version updates for npm
   - package-ecosystem: "npm"
-    # Look for `package.json` and `lock` files in the `root` directory
     directory: "/"
-    # Check the npm registry for updates every day (weekdays)
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     groups:
-      semantic-release:
+      tooling:
         patterns:
+          - "@peerigon/configs"
+          - "eslint"
+          - "prettier"
           - "semantic-release"
-          - "@semantic-release*"
+          - "typescript"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 14

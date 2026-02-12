@@ -34,7 +34,7 @@ export const queryParamMapping: Record<string, string> = {
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapQueryParams = <Result = Record<string, unknown>>(
   queryParams: Record<string, any>,
-) => {
+): Result => {
   return mapObject(
     queryParams,
     (key, value) => {
@@ -67,7 +67,7 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapRequestBody = <Result = Record<string, unknown>>(
   requestBody: Record<string, any>,
-) => {
+): Result => {
   return mapObject(
     requestBody,
     (key, value) => {
@@ -85,7 +85,7 @@ export const mapRequestBody = <Result = Record<string, unknown>>(
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const mapResponseBody = <Result = Record<string, unknown>>(
   responseBody: Record<string, any>,
-) => {
+): Result => {
   return mapObject(
     responseBody,
     (key, value) => {
@@ -99,13 +99,13 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
   ) as unknown as Result;
 };
 
-export const snakeCaseToCamelCase = (key: string) => {
+export const snakeCaseToCamelCase = (key: string): string => {
   return key.replaceAll(/_+(\d*)([a-z])/gi, (_, $1, $2) => {
     return ($1 + $2.toUpperCase()) as string;
   });
 };
 
-export const camelCaseToSnakeCase = (key: string) => {
+export const camelCaseToSnakeCase = (key: string): string => {
   return key.replaceAll(/(\d*)([A-Z])/g, (_, $1, $2) => {
     return "_" + $1 + $2.toLowerCase();
   });

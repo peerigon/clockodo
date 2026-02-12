@@ -1,9 +1,6 @@
 {
   "extends": "@peerigon/configs/typescript",
   "compilerOptions": {
-    "target": "ES2023",
-    "lib": ["DOM", "ES2023"],
     "erasableSyntaxOnly": false
-  },
-  "exclude": ["dist", "coverage"]
+  }
 }

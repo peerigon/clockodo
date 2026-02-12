@@ -141,7 +141,7 @@ export const isLumpsumEntry = (entry: Entry): entry is LumpsumEntry => {
  * currently clocking, timeUntil is new Date().toISOString() without
  * milliseconds precision.
  */
-export const getEntryTimeUntilNow = (entry: Entry) => {
+export const getEntryTimeUntilNow = (entry: Entry): string => {
   return entry.timeUntil ?? isoUtcDateTimeFromDateTime(new Date());
 };
 
@@ -149,7 +149,7 @@ export const getEntryTimeUntilNow = (entry: Entry) => {
  * Returns the entry's duration in seconds. In case the entry is currently
  * clocking, the duration will be from timeSince until now.
  */
-export const getEntryDurationUntilNow = (entry: Entry) => {
+export const getEntryDurationUntilNow = (entry: Entry): number => {
   // We allow passing non-time entries so that you don't need to filter
   // the entries before summing up their durations.
   // This seems to be reasonable since non-time entries have a timeUntil
@@ -182,7 +182,7 @@ export const getEntryRevenue = ({
   entry: Entry;
   project?: Project;
   lumpsumService?: LumpsumService;
-}) => {
+}): number | undefined => {
   if (entry.billable === Billability.NotBillable) return 0;
 
   switch (entry.type) {

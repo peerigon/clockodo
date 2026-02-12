@@ -44,7 +44,7 @@ export const createTimeEntryMocks = ({
   timeEntryTypes = ["clocking", "clocked", "manual"],
 }: CommonOptions & {
   timeEntryTypes?: Array<"clocking" | "clocked" | "manual">;
-} = {}) =>
+} = {}): Array<TimeEntry> =>
   Array.from({ length: count }, (_, index): TimeEntry => {
     const commonEntry = createCommonEntryMock(from, to);
     const timeEntryType =
@@ -98,7 +98,7 @@ export const createTimeEntryMocks = ({
 export const createLumpsumValueEntryMocks = ({
   count = 1,
   timeSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: CommonOptions = {}) =>
+}: CommonOptions = {}): Array<LumpsumValueEntry> =>
   Array.from({ length: count }, (_, index): LumpsumValueEntry => {
     const commonEntry = createCommonEntryMock(from, to);
 
@@ -117,7 +117,7 @@ export const createLumpsumValueEntryMocks = ({
 export const createLumpsumServiceEntryMocks = ({
   count = 1,
   timeSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-}: CommonOptions = {}) =>
+}: CommonOptions = {}): Array<LumpsumServiceEntry> =>
   Array.from({ length: count }, (_, index): LumpsumServiceEntry => {
     const commonEntry = createCommonEntryMock(from, to);
 
@@ -133,7 +133,7 @@ export const createLumpsumServiceEntryMocks = ({
     };
   });
 
-export const createEntryMocks = (options: CommonOptions = {}) => {
+export const createEntryMocks = (options: CommonOptions = {}): Array<Entry> => {
   const { count = 1 } = options;
   const timeEntryMocks = createTimeEntryMocks(options);
   const lumpsumValueEntryMocks = createLumpsumValueEntryMocks(options);

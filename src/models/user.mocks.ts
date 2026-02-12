@@ -16,7 +16,7 @@ export const createUserMocks = ({
   workTimeEditLockDays?: WorkTimeEditLock;
   boss?: number;
   absenceManagersId?: Array<number>;
-}) =>
+}): Array<User> =>
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
 

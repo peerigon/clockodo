@@ -27,7 +27,7 @@ const generateIntervals = ({
   date = DEFAULT_FROM,
 }: {
   count?: number;
-  date: Date;
+  date?: Date;
 }) => {
   const dateTimes = generateRandomDateTimes({
     count: count * 2,
@@ -60,7 +60,7 @@ export const createWorkTimeDayMocks = ({
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
-}) => {
+}): Array<WorkTimeDay> => {
   const workTimeDays = generateRandomDates({
     count,
     between: [from, to],
@@ -143,7 +143,7 @@ export const createWorkTimeChangeRequestMocks = ({
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
-}) => {
+}): Array<WorkTimeChangeRequest> => {
   let id = -1;
 
   return generateRandomDates({

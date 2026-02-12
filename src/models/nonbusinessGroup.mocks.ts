@@ -6,7 +6,7 @@ export const createNonbusinessGroupMocks = ({
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
-}) =>
+}): Array<NonbusinessGroup> =>
   Array.from({ length: count }, (_, index): NonbusinessGroup => {
     return {
       id: index,
