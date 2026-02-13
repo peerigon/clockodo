@@ -83,7 +83,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
       // Check if the filter is working as expected
       const { projects } = await clockodo.getProjects({
-        filterCustomersId: -1,
+        filter: {
+          customersId: -1,
+        },
       });
 
       expect(projects).toHaveLength(0);
@@ -95,7 +97,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const data = await clockodo.getEntries({
         timeSince: TIME_SINCE,
         timeUntil: TIME_UNTIL,
-        filterBillable: Billability.Billable,
+        filter: {
+          billable: Billability.Billable,
+        },
       });
 
       expect(data.entries[0]).toHaveProperty("id");

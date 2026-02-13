@@ -300,7 +300,9 @@ describe("Clockodo (instance)", () => {
           clockodo.getEntriesPage({
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
-            filterBillable: Billability.Billed,
+            filter: {
+              billable: Billability.Billed,
+            },
           }),
         ).resolves.not.toBeInstanceOf(Error);
 

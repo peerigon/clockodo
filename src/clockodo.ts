@@ -935,14 +935,27 @@ export type UsersAccessServicesReturnType = {
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
 export type CustomersParams = {
+  filter?: {
+    /** Filter customers by active flag */
+    active?: boolean;
+  };
+  /** @deprecated Use `filter?.active` instead. */
   /** Filter customers by active flag */
   filterActive?: boolean;
 };
 export type CustomersReturnType = ResponseWithPaging &
   ResponseWithFilter<"active"> & { customers: Array<Customer> };
 export type ProjectsParams = {
+  filter?: {
+    /** Filter projects by customers id */
+    customersId?: number;
+    /** Filter projects by active flag */
+    active?: boolean;
+  };
+  /** @deprecated Use `filter?.customersId` instead. */
   /** Filter projects by customers id */
   filterCustomersId?: number;
+  /** @deprecated Use `filter?.active` instead. */
   /** Filter projects by active flag */
   filterActive?: boolean;
 };
@@ -953,8 +966,16 @@ export type ProjectsReturnType = ResponseWithPaging &
 export type ProjectReturnType = { project: Project };
 
 export type ServiceParams = {
+  filter?: {
+    /** Filter service by search term */
+    fulltext?: string;
+    /** Filter service by active flag */
+    active?: boolean;
+  };
+  /** @deprecated Use `filter?.fulltext` instead. */
   /** Filter service by search term */
   filterFulltext?: string;
+  /** @deprecated Use `filter?.active` instead. */
   /** Filter service by active flag */
   filterActive?: boolean;
 };
@@ -966,8 +987,16 @@ export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
 
 export type LumpsumServiceParams = {
+  filter?: {
+    /** Filter lumpsum service by search term */
+    fulltext?: string;
+    /** Filter lumpsum service by active flag */
+    active?: boolean;
+  };
+  /** @deprecated Use `filter?.fulltext` instead. */
   /** Filter lumpsum service by search term */
   filterFulltext?: string;
+  /** @deprecated Use `filter?.active` instead. */
   /** Filter lumpsum service by active flag */
   filterActive?: boolean;
 };
@@ -981,6 +1010,10 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
 
 export type UserReturnType = { user: User };
 export type UsersParam = {
+  filter?: {
+    scope?: "manageAbsences" | "viewAbsences" | "manage";
+  };
+  /** @deprecated Use `filter?.scope` instead. */
   filterScope?: "manageAbsences" | "viewAbsences" | "manage";
 };
 export type UsersReturnType = { users: Array<User> };
@@ -999,18 +1032,41 @@ export type EntriesParams = {
   timeSince: string;
   /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z" */
   timeUntil: string;
+  filter?: {
+    usersId?: number;
+    customersId?: number;
+    projectsId?: number;
+    servicesId?: number;
+    lumpsumServicesId?: number;
+    /**
+     * 0, 1 or 2 With filter.billable: 2 you only receive entries which are
+     * billable AND already billed.
+     */
+    billable?: Billability;
+    text?: string;
+    textsId?: number;
+    budgetType?: string;
+  };
+  /** @deprecated Use `filter?.usersId` instead. */
   filterUsersId?: number;
+  /** @deprecated Use `filter?.customersId` instead. */
   filterCustomersId?: number;
+  /** @deprecated Use `filter?.projectsId` instead. */
   filterProjectsId?: number;
+  /** @deprecated Use `filter?.servicesId` instead. */
   filterServicesId?: number;
+  /** @deprecated Use `filter?.lumpsumServicesId` instead. */
   filterLumpsumServicesId?: number;
   /**
-   * 0, 1 or 2 With filterBillable: 2 you only receive entries which are
-   * billable AND already billed.
+   * @deprecated Use `filter?.billable` instead. 0, 1 or 2 With filterBillable:
+   *   2 you only receive entries which are billable AND already billed.
    */
   filterBillable?: Billability;
+  /** @deprecated Use `filter?.text` instead. */
   filterText?: string;
+  /** @deprecated Use `filter?.textsId` instead. */
   filterTextsId?: number;
+  /** @deprecated Use `filter?.budgetType` instead. */
   filterBudgetType?: string;
 };
 export type EntriesReturnType = ResponseWithPaging &

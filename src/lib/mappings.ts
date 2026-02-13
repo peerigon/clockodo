@@ -3,6 +3,7 @@
 // gain much more confidence by removing 'any' here
 
 import mapObject, { mapObjectSkip } from "map-obj";
+import { warnDeprecated } from "./deprecations.js";
 
 export const queryParamMapping: Record<string, string> = {
   filterId: "filter[id]",
@@ -50,6 +51,13 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
         key in queryParamMapping
           ? queryParamMapping[key]!
           : camelCaseToSnakeCase(key);
+
+      if (key.startsWith("filter") && key in queryParamMapping) {
+        warnDeprecated(
+          "CLOCKODO_DEPRECATED_FILTER_QUERY_PARAM",
+          `Query parameter "${key}" is deprecated. Use the "filter" object instead.`,
+        );
+      }
 
       if (mappedKey === "include" && Array.isArray(value)) {
         return [mappedKey, value.join(",")];
