@@ -3,6 +3,7 @@ import {
   type Config,
   type Params,
   type ParamsWithPage,
+  type ParamsWithSort,
   type ResponseWithFilter,
   type ResponseWithoutPaging,
   type ResponseWithPaging,
@@ -73,7 +74,7 @@ export class Clockodo {
   }
 
   async getAbsences(
-    params: Params<{ year: number; usersId?: User["id"] | Array<User["id"]> }>,
+    params: Params<AbsencesParams>,
   ): Promise<AbsencesReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCES);
 
@@ -308,7 +309,9 @@ export class Clockodo {
     return this.api.get("/v3/teams/" + id, remainingParams);
   }
 
-  async getTeams(params?: Params): Promise<TeamsReturnType> {
+  async getTeams(
+    params?: Params<TeamsParams & ParamsWithPage>,
+  ): Promise<TeamsReturnType> {
     return this.api.get("/v3/teams", params);
   }
 
@@ -424,12 +427,7 @@ export class Clockodo {
   }
 
   async getNonbusinessDays(
-    params: Params<{
-      nonbusinessGroupId?:
-        | NonbusinessGroup["id"]
-        | Array<NonbusinessGroup["id"]>;
-      year: number;
-    }>,
+    params: Params<NonbusinessDaysParams>,
   ): Promise<NonbusinessDaysReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
 
@@ -924,6 +922,17 @@ export class Clockodo {
 
 export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
+export type AbsencesParams = {
+  filter?: {
+    year?: Array<number>;
+    usersId?: Array<User["id"]>;
+    teamsId?: Array<null | Team["id"]>;
+    status?: Array<Absence["status"]>;
+    type?: Array<NonNullable<Absence["type"]>>;
+    usersActive?: boolean;
+  };
+  scope?: string;
+};
 export type UsersAccessCustomersProjectsReturnType = {
   add: AccessToCustomersProjects;
   report: AccessToCustomersProjects;
@@ -934,30 +943,29 @@ export type UsersAccessServicesReturnType = {
 };
 export type DeleteReturnType = { success: true };
 export type CustomerReturnType = { customer: Customer };
-export type CustomersParams = {
+export type CustomersParams = ParamsWithSort<string> & {
   filter?: {
     /** Filter customers by active flag */
     active?: boolean;
+    /** Filter customers by search term */
+    fulltext?: string;
   };
-  /** @deprecated Use `filter?.active` instead. */
-  /** Filter customers by active flag */
-  filterActive?: boolean;
+  scope?: string;
 };
 export type CustomersReturnType = ResponseWithPaging &
   ResponseWithFilter<"active"> & { customers: Array<Customer> };
-export type ProjectsParams = {
+export type ProjectsParams = ParamsWithSort<string> & {
   filter?: {
     /** Filter projects by customers id */
     customersId?: number;
     /** Filter projects by active flag */
     active?: boolean;
+    /** Filter projects by completed flag */
+    completed?: boolean;
+    /** Filter projects by search term */
+    fulltext?: string;
   };
-  /** @deprecated Use `filter?.customersId` instead. */
-  /** Filter projects by customers id */
-  filterCustomersId?: number;
-  /** @deprecated Use `filter?.active` instead. */
-  /** Filter projects by active flag */
-  filterActive?: boolean;
+  scope?: string;
 };
 export type ProjectsReturnType = ResponseWithPaging &
   ResponseWithFilter<"active" | "customersId"> & {
@@ -965,19 +973,14 @@ export type ProjectsReturnType = ResponseWithPaging &
   };
 export type ProjectReturnType = { project: Project };
 
-export type ServiceParams = {
+export type ServiceParams = ParamsWithSort<string> & {
   filter?: {
     /** Filter service by search term */
     fulltext?: string;
     /** Filter service by active flag */
     active?: boolean;
   };
-  /** @deprecated Use `filter?.fulltext` instead. */
-  /** Filter service by search term */
-  filterFulltext?: string;
-  /** @deprecated Use `filter?.active` instead. */
-  /** Filter service by active flag */
-  filterActive?: boolean;
+  scope?: string;
 };
 export type ServiceReturnType = { service: Service };
 export type ServicesReturnType = ResponseWithPaging &
@@ -985,20 +988,21 @@ export type ServicesReturnType = ResponseWithPaging &
 
 export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
+export type TeamsParams = ParamsWithSort<string> & {
+  filter?: {
+    /** Filter teams by search term */
+    fulltext?: string;
+  };
+  scope?: string;
+};
 
-export type LumpsumServiceParams = {
+export type LumpsumServiceParams = ParamsWithSort<string> & {
   filter?: {
     /** Filter lumpsum service by search term */
     fulltext?: string;
     /** Filter lumpsum service by active flag */
     active?: boolean;
   };
-  /** @deprecated Use `filter?.fulltext` instead. */
-  /** Filter lumpsum service by search term */
-  filterFulltext?: string;
-  /** @deprecated Use `filter?.active` instead. */
-  /** Filter lumpsum service by active flag */
-  filterActive?: boolean;
 };
 export type LumpsumServiceReturnType = {
   lumpSumService: LumpsumService;
@@ -1011,11 +1015,13 @@ export type LumpsumServicesReturnType = ResponseWithPaging &
 export type UserReturnType = { user: User };
 export type UsersParam = {
   filter?: {
+    active?: boolean;
+    fulltext?: string;
+    teamsId?: Array<null | Team["id"]>;
     scope?: "manageAbsences" | "viewAbsences" | "manage";
   };
-  /** @deprecated Use `filter?.scope` instead. */
-  filterScope?: "manageAbsences" | "viewAbsences" | "manage";
-};
+  scope?: string;
+} & ParamsWithSort<string>;
 export type UsersReturnType = { users: Array<User> };
 export type SurchargeModelReturnType = { data: SurchargeModel };
 export type SurchargeModelsReturnType = {
@@ -1047,27 +1053,6 @@ export type EntriesParams = {
     textsId?: number;
     budgetType?: string;
   };
-  /** @deprecated Use `filter?.usersId` instead. */
-  filterUsersId?: number;
-  /** @deprecated Use `filter?.customersId` instead. */
-  filterCustomersId?: number;
-  /** @deprecated Use `filter?.projectsId` instead. */
-  filterProjectsId?: number;
-  /** @deprecated Use `filter?.servicesId` instead. */
-  filterServicesId?: number;
-  /** @deprecated Use `filter?.lumpsumServicesId` instead. */
-  filterLumpsumServicesId?: number;
-  /**
-   * @deprecated Use `filter?.billable` instead. 0, 1 or 2 With filterBillable:
-   *   2 you only receive entries which are billable AND already billed.
-   */
-  filterBillable?: Billability;
-  /** @deprecated Use `filter?.text` instead. */
-  filterText?: string;
-  /** @deprecated Use `filter?.textsId` instead. */
-  filterTextsId?: number;
-  /** @deprecated Use `filter?.budgetType` instead. */
-  filterBudgetType?: string;
 };
 export type EntriesReturnType = ResponseWithPaging &
   ResponseWithFilter<
@@ -1085,9 +1070,23 @@ export type EntriesReturnType = ResponseWithPaging &
   };
 export type EntriesTextsParams = {
   /** Text to search for */
-  text: string;
+  term: string;
+  /** Number of items to return */
+  items?: number;
   mode?: EntriesTextsMode;
-  sort?: EntriesTextsSort;
+  filter?: {
+    customersId?: number;
+    projectsId?: number | Array<number>;
+    servicesId?: number | Array<number>;
+    usersId?: number | Array<number>;
+    billable?: Billability;
+    /** In format YYYY-MM-DD */
+    timeSince?: string;
+    /** In format YYYY-MM-DD */
+    timeUntil?: string;
+    /** In format YYYY-MM-DD */
+    day?: string;
+  };
 };
 /** Can be specified when requesting entries texts */
 export enum EntriesTextsMode {
@@ -1154,6 +1153,10 @@ export type NonbusinessGroupsReturnType = {
 };
 export type NonbusinessDaysReturnType = {
   nonbusinessDays: Array<NonbusinessDay>;
+};
+export type NonbusinessDaysParams = {
+  nonbusinessGroupId?: NonbusinessGroup["id"] | Array<NonbusinessGroup["id"]>;
+  year: number;
 };
 export type AggregatesUsersMeReturnType = {
   user: User;
@@ -1237,10 +1240,9 @@ export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
   changeRequests: Array<WorkTimeChangeRequest>;
 };
 
-export type ApproveOrDeclineWorkTimesChangeRequestReturnType = Record<
-  string,
-  never
->;
+export type ApproveOrDeclineWorkTimesChangeRequestReturnType = {
+  success: boolean;
+};
 
 export type AddWorkTimesChangeRequestReturnType =
   | {
@@ -1286,6 +1288,10 @@ export type HolidaysQuotasReturnType = {
   holidaysQuota: Array<HolidaysQuota>;
 };
 export type HolidaysQuotasParams = {
+  filter?: {
+    usersId?: number;
+    year?: number;
+  };
   /** The user ID by which the holidays quota rows should be filtered */
   usersId?: number;
   year?: number;

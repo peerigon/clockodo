@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 // On first sight, you might think that the typings in this module could be improved.
 // However, we don't have typings for the snake_case models which is why we don't
 // gain much more confidence by removing 'any' here
@@ -5,6 +6,10 @@
 import mapObject, { mapObjectSkip } from "map-obj";
 import { warnDeprecated } from "./deprecations.js";
 
+/**
+ * @deprecated Do not rely on using these query param mappings. You can use the
+ *   "filter" object instead.
+ */
 export const queryParamMapping: Record<string, string> = {
   filterId: "filter[id]",
   filterUsersId: "filter[users_id]",
@@ -13,7 +18,6 @@ export const queryParamMapping: Record<string, string> = {
   filterProjectsId: "filter[projects_id]",
   filterServicesId: "filter[services_id]",
   filterLumpsumServicesId: "filter[lumpsum_services_id]",
-  /** @deprecated Please don't use this anymore, it will be removed someday */
   filterLumpsumsServicesId: "filter[lumpsum_services_id]",
   filterBillable: "filter[billable]",
   filterText: "filter[text]",
@@ -25,10 +29,6 @@ export const queryParamMapping: Record<string, string> = {
   filterTeamsId: "filter[teams_id]",
   filterActive: "filter[active]",
   filterFulltext: "filter[fulltext]",
-
-  // these params needs to stay in camelCase.
-  // This seems to be an inconsistency in the API.
-  excludeIds: "excludeIds",
 };
 
 // The purpose of the type parameter is to provide an easy way to specify the type of the result.

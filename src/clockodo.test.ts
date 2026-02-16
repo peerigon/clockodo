@@ -356,7 +356,7 @@ describe("Clockodo (instance)", () => {
     describe("getEntriesTexts()", () => {
       it("requests all entries texts pages", async () => {
         const expectedParameters = {
-          text: "Some text",
+          term: "Some text",
         };
         const nockScope = setupPaginatedApiMock({
           baseUrl: `/v3/entriesTexts?${qs.stringify(expectedParameters)}&`,
@@ -365,7 +365,7 @@ describe("Clockodo (instance)", () => {
         });
 
         const { texts } = await clockodo.getEntriesTexts({
-          text: "Some text",
+          term: "Some text",
         });
 
         expect(texts).toMatchObject({ 1: true, 2: true, 3: true });
@@ -378,7 +378,7 @@ describe("Clockodo (instance)", () => {
         await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesTexts({}),
-        ).rejects.toThrowError('Missing required parameter "text"');
+        ).rejects.toThrowError('Missing required parameter "term"');
       });
     });
 
