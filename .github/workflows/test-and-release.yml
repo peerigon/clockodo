@@ -70,7 +70,7 @@ jobs:
         if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/beta' }}
         # Call to npm publish --dry-run is currently necessary, see https://github.com/stackblitz-labs/pkg.pr.new/issues/320
         run: |
-          npm publish --dry-run
+          npm publish --dry-run --tag test-release
           npx pkg-pr-new publish
 
       - name: 🚀 Release on npm and jsr
