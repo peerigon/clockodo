@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { isoDateFromDateTime } from "../lib/dateTime.js";
 import {
   UserLanguage,
   UserRole,
@@ -11,14 +12,24 @@ export const createUserMocks = ({
   workTimeEditLockDays = 0,
   boss,
   absenceManagersId,
+  refDate,
 }: {
   count?: number;
   workTimeEditLockDays?: WorkTimeEditLock;
   boss?: number;
   absenceManagersId?: Array<number>;
+  refDate?: Date;
 }): Array<User> =>
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
+    const isFutureCoworker = faker.number.int({ min: 1, max: 10 }) === 1;
+    const startDate = isFutureCoworker
+      ? isoDateFromDateTime(
+          faker.date.soon({ days: 365, ...(refDate ? { refDate } : {}) }),
+        )
+      : isoDateFromDateTime(
+          faker.date.past({ ...(refDate ? { refDate } : {}) }),
+        );
 
     return {
       id: userId,
@@ -48,5 +59,11 @@ export const createUserMocks = ({
       absenceManagersId: absenceManagersId ?? null,
       defaultHolidaysCount: false,
       defaultTargetHours: false,
+      startDate,
+      futureCoworker: isFutureCoworker,
+      defaultWorkTimeRegulation: faker.datatype.boolean(),
+      workTimeRegulationsId: null,
+      budgetNotifications: faker.datatype.boolean(),
+      creator: null,
     };
   });

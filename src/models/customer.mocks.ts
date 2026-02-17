@@ -14,6 +14,9 @@ export const createCustomerMocks = ({
       active: faker.number.float({ min: 0, max: 10 }) > 1,
       billableDefault: faker.datatype.boolean(),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
+      billServiceId: faker.datatype.boolean()
+        ? faker.string.alphanumeric(6)
+        : null,
       color: faker.number.int({ min: 1, max: 9 }),
       testData: faker.datatype.boolean(),
     };
