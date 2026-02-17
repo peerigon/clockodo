@@ -441,9 +441,7 @@ export class Clockodo {
   }
 
   async addAbsence(
-    params: Params<
-      Pick<Required<Absence>, (typeof REQUIRED.ADD_ABSENCE)[number]>
-    >,
+    params: Params<AddAbsenceParams>,
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_ABSENCE);
 
@@ -451,7 +449,7 @@ export class Clockodo {
   }
 
   async addCustomer(
-    params: Params<Pick<Customer, (typeof REQUIRED.ADD_CUSTOMER)[number]>>,
+    params: Params<AddCustomerParams>,
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
@@ -459,9 +457,7 @@ export class Clockodo {
   }
 
   async addLumpsumService(
-    params: Params<
-      Pick<LumpsumService, (typeof REQUIRED.ADD_LUMPSUM_SERVICE)[number]>
-    >,
+    params: Params<AddLumpsumServiceParams>,
   ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_LUMPSUM_SERVICE);
 
@@ -493,7 +489,7 @@ export class Clockodo {
   }
 
   async addProject(
-    params: Params<Pick<Project, (typeof REQUIRED.ADD_PROJECT)[number]>>,
+    params: Params<AddProjectParams>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
@@ -501,24 +497,20 @@ export class Clockodo {
   }
 
   async addService(
-    params: Params<Pick<Service, (typeof REQUIRED.ADD_SERVICE)[number]>>,
+    params: Params<AddServiceParams>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_SERVICE);
 
     return this.api.post("/v4/services", params);
   }
 
-  async addTeam(
-    params: Params<Pick<Team, (typeof REQUIRED.ADD_TEAM)[number]>>,
-  ): Promise<TeamReturnType> {
+  async addTeam(params: Params<AddTeamParams>): Promise<TeamReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_TEAM);
 
     return this.api.post("/v3/teams", params);
   }
 
-  async addUser(
-    params: Params<Pick<User, (typeof REQUIRED.ADD_USER)[number]>>,
-  ): Promise<AddUserReturnType> {
+  async addUser(params: Params<AddUserParams>): Promise<AddUserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
     return this.api.post("/v3/users", params);
@@ -565,7 +557,7 @@ export class Clockodo {
   }
 
   async editAbsence(
-    params: Params<Pick<Absence, (typeof REQUIRED.EDIT_ABSENCE)[number]>>,
+    params: Params<EditAbsenceParams>,
   ): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_ABSENCE);
 
@@ -575,7 +567,7 @@ export class Clockodo {
   }
 
   async editCustomer(
-    params: Params<Pick<Customer, (typeof REQUIRED.EDIT_CUSTOMER)[number]>>,
+    params: Params<EditCustomerParams>,
   ): Promise<CustomerReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_CUSTOMER);
 
@@ -585,9 +577,7 @@ export class Clockodo {
   }
 
   async editLumpsumService(
-    params: Params<
-      Pick<LumpsumService, (typeof REQUIRED.EDIT_LUMPSUM_SERVICE)[number]>
-    >,
+    params: Params<EditLumpsumServiceParams>,
   ): Promise<LumpsumServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_LUMPSUM_SERVICE);
 
@@ -615,7 +605,7 @@ export class Clockodo {
   }
 
   async editProject(
-    params: Params<Pick<Project, (typeof REQUIRED.EDIT_PROJECT)[number]>>,
+    params: Params<EditProjectParams>,
   ): Promise<ProjectReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_PROJECT);
 
@@ -625,7 +615,7 @@ export class Clockodo {
   }
 
   async editService(
-    params: Params<Pick<Service, (typeof REQUIRED.EDIT_SERVICE)[number]>>,
+    params: Params<EditServiceParams>,
   ): Promise<ServiceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_SERVICE);
 
@@ -634,9 +624,7 @@ export class Clockodo {
     return this.api.put("/v4/services/" + id, params);
   }
 
-  async editTeam(
-    params: Params<Pick<Team, (typeof REQUIRED.EDIT_TEAM)[number]>>,
-  ): Promise<TeamReturnType> {
+  async editTeam(params: Params<EditTeamParams>): Promise<TeamReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_TEAM);
 
     const { id } = params;
@@ -644,9 +632,7 @@ export class Clockodo {
     return this.api.put("/v3/teams/" + id, params);
   }
 
-  async editUser(
-    params: Params<Pick<User, (typeof REQUIRED.EDIT_USER)[number]>>,
-  ): Promise<UserReturnType> {
+  async editUser(params: Params<EditUserParams>): Promise<UserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.EDIT_USER);
 
     const { id } = params;
@@ -667,8 +653,8 @@ export class Clockodo {
   }
 
   async deleteCustomer(
-    params: Params<Pick<Customer, (typeof REQUIRED.DELETE_CUSTOMER)[number]>>,
-  ): Promise<CustomerReturnType> {
+    params: Params<DeleteCustomerParams>,
+  ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_CUSTOMER);
 
     const { id } = params;
@@ -677,8 +663,8 @@ export class Clockodo {
   }
 
   async deleteProject(
-    params: Params<Pick<Project, (typeof REQUIRED.DELETE_PROJECT)[number]>>,
-  ): Promise<ProjectReturnType> {
+    params: Params<DeleteProjectParams>,
+  ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_PROJECT);
 
     const { id } = params;
@@ -687,8 +673,8 @@ export class Clockodo {
   }
 
   async deleteService(
-    params: Params<Pick<Service, (typeof REQUIRED.DELETE_SERVICE)[number]>>,
-  ): Promise<ServiceReturnType> {
+    params: Params<DeleteServiceParams>,
+  ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_SERVICE);
 
     const { id } = params;
@@ -698,7 +684,7 @@ export class Clockodo {
 
   async deleteUser(
     params: Params<Pick<User, (typeof REQUIRED.DELETE_USER)[number]>>,
-  ): Promise<UserReturnType> {
+  ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_USER);
 
     const { id } = params;
@@ -739,9 +725,7 @@ export class Clockodo {
   }
 
   async deleteLumpsumService(
-    params: Params<
-      Pick<LumpsumService, (typeof REQUIRED.DELETE_LUMPSUM_SERVICE)[number]>
-    >,
+    params: Params<DeleteLumpsumServiceParams>,
   ): Promise<DeleteReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.DELETE_LUMPSUM_SERVICE);
 
@@ -922,6 +906,57 @@ export class Clockodo {
 
 export type AbsenceReturnType = { absence: Absence };
 export type AbsencesReturnType = { absences: Array<Absence> };
+export type AddAbsenceParams = {
+  dateSince: Absence["dateSince"];
+  dateUntil?: Absence["dateUntil"] | null;
+  type: NonNullable<Absence["type"]>;
+  halfDay?: boolean;
+  countHours?: number | null;
+  usersId?: User["id"];
+  allowOverride?: Array<Absence["id"]>;
+  status?: Absence["status"];
+  sickNote?: boolean;
+  note?: string | null;
+  publicNote?: string | null;
+};
+export type EditAbsenceParams = {
+  id: Absence["id"];
+  dateSince?: Absence["dateSince"];
+  dateUntil?: Absence["dateUntil"];
+  type?: NonNullable<Absence["type"]>;
+  halfDay?: boolean;
+  countHours?: number | null;
+  allowOverride?: Array<Absence["id"]>;
+  status?: Absence["status"];
+  sickNote?: boolean;
+  note?: string | null;
+  publicNote?: string | null;
+};
+export type AbsenceScope = "manageableAbsences" | "viewableAbsences";
+export type SortIdName = "id" | "-id" | "name" | "-name";
+export type SortIdNameActive =
+  | "active"
+  | "-active"
+  | "id"
+  | "-id"
+  | "name"
+  | "-name";
+export type CustomerProjectScope = "manageAccess";
+export type ServiceScope = "manageAccess";
+export type UserScope = "manageAbsences" | "viewAbsences" | "manage";
+export type UsersSortForIndex =
+  | "active"
+  | "-active"
+  | "id"
+  | "-id"
+  | "name"
+  | "-name"
+  | "number"
+  | "-number"
+  | "role"
+  | "-role"
+  | "teams_name"
+  | "-teams_name";
 export type AbsencesParams = {
   filter?: {
     year?: Array<number>;
@@ -931,7 +966,7 @@ export type AbsencesParams = {
     type?: Array<NonNullable<Absence["type"]>>;
     usersActive?: boolean;
   };
-  scope?: string;
+  scope?: AbsenceScope;
 };
 export type UsersAccessCustomersProjectsReturnType = {
   add: AccessToCustomersProjects;
@@ -941,20 +976,44 @@ export type UsersAccessCustomersProjectsReturnType = {
 export type UsersAccessServicesReturnType = {
   add: AccessToServices;
 };
-export type DeleteReturnType = { success: true };
+export type DeleteReturnType = { success: boolean };
 export type CustomerReturnType = { customer: Customer };
-export type CustomersParams = ParamsWithSort<string> & {
+export type AddCustomerParams = {
+  name: Customer["name"];
+  number?: Customer["number"];
+  active?: Customer["active"];
+  billableDefault?: Customer["billableDefault"] | Billability;
+  note?: Customer["note"];
+  color?: Customer["color"];
+  billServiceId?: Customer["billServiceId"];
+};
+export type EditCustomerParams = {
+  id: Customer["id"];
+  name?: Customer["name"];
+  number?: Customer["number"];
+  active?: Customer["active"];
+  billableDefault?: Customer["billableDefault"] | Billability;
+  note?: Customer["note"];
+  color?: Customer["color"];
+  billServiceId?: Customer["billServiceId"];
+};
+export type DeleteCustomerParams = {
+  id: Customer["id"];
+  dryRun?: boolean;
+  force?: boolean;
+};
+export type CustomersParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     /** Filter customers by active flag */
     active?: boolean;
     /** Filter customers by search term */
     fulltext?: string;
   };
-  scope?: string;
+  scope?: CustomerProjectScope;
 };
 export type CustomersReturnType = ResponseWithPaging &
   ResponseWithFilter<"active"> & { customers: Array<Customer> };
-export type ProjectsParams = ParamsWithSort<string> & {
+export type ProjectsParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     /** Filter projects by customers id */
     customersId?: number;
@@ -965,38 +1024,97 @@ export type ProjectsParams = ParamsWithSort<string> & {
     /** Filter projects by search term */
     fulltext?: string;
   };
-  scope?: string;
+  scope?: CustomerProjectScope;
 };
 export type ProjectsReturnType = ResponseWithPaging &
   ResponseWithFilter<"active" | "customersId"> & {
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+export type AddProjectParams = {
+  name: Project["name"];
+  customersId: Project["customersId"];
+  active?: Project["active"];
+  number?: Project["number"];
+  billableDefault?: Project["billableDefault"];
+  note?: Project["note"];
+  deadline?: Project["deadline"];
+  startDate?: Project["startDate"];
+  budget?: Project["budget"];
+  billServiceId?: Project["billServiceId"];
+};
+export type EditProjectParams = {
+  id: Project["id"];
+  name?: Project["name"];
+  customersId?: Project["customersId"];
+  active?: Project["active"];
+  number?: Project["number"];
+  billableDefault?: Project["billableDefault"];
+  note?: Project["note"];
+  deadline?: Project["deadline"];
+  startDate?: Project["startDate"];
+  budget?: Project["budget"];
+  billServiceId?: Project["billServiceId"];
+};
+export type DeleteProjectParams = {
+  id: Project["id"];
+  dryRun?: boolean;
+  force?: boolean;
+};
 
-export type ServiceParams = ParamsWithSort<string> & {
+export type ServiceParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     /** Filter service by search term */
     fulltext?: string;
     /** Filter service by active flag */
     active?: boolean;
   };
-  scope?: string;
+  scope?: ServiceScope;
 };
 export type ServiceReturnType = { service: Service };
+export type AddServiceParams = {
+  name: Service["name"];
+  active?: Service["active"];
+  number?: Service["number"];
+  note?: Service["note"];
+  billServiceId?: Service["billServiceId"];
+};
+export type EditServiceParams = {
+  id: Service["id"];
+  name?: Service["name"];
+  active?: Service["active"];
+  number?: Service["number"];
+  note?: Service["note"];
+  billServiceId?: Service["billServiceId"];
+};
+export type DeleteServiceParams = {
+  id: Service["id"];
+  dryRun?: boolean;
+  force?: boolean;
+};
 export type ServicesReturnType = ResponseWithPaging &
   ResponseWithFilter<"active" | "fulltext"> & { services: Array<Service> };
 
 export type TeamReturnType = { team: Team };
 export type TeamsReturnType = { teams: Array<Team> };
-export type TeamsParams = ParamsWithSort<string> & {
+export type AddTeamParams = {
+  name: Team["name"];
+  leader?: Team["leader"];
+};
+export type EditTeamParams = {
+  id: Team["id"];
+  name?: Team["name"];
+  leader?: Team["leader"];
+};
+export type TeamsParams = ParamsWithSort<SortIdName> & {
   filter?: {
     /** Filter teams by search term */
     fulltext?: string;
   };
-  scope?: string;
+  scope?: UserScope;
 };
 
-export type LumpsumServiceParams = ParamsWithSort<string> & {
+export type LumpsumServiceParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     /** Filter lumpsum service by search term */
     fulltext?: string;
@@ -1006,6 +1124,28 @@ export type LumpsumServiceParams = ParamsWithSort<string> & {
 };
 export type LumpsumServiceReturnType = {
   lumpSumService: LumpsumService;
+};
+export type AddLumpsumServiceParams = {
+  name: LumpsumService["name"];
+  price: LumpsumService["price"];
+  unit?: LumpsumService["unit"];
+  active?: LumpsumService["active"];
+  number?: LumpsumService["number"];
+  note?: LumpsumService["note"];
+};
+export type EditLumpsumServiceParams = {
+  id: LumpsumService["id"];
+  name?: LumpsumService["name"];
+  price?: LumpsumService["price"];
+  unit?: LumpsumService["unit"];
+  active?: LumpsumService["active"];
+  number?: LumpsumService["number"];
+  note?: LumpsumService["note"];
+};
+export type DeleteLumpsumServiceParams = {
+  id: LumpsumService["id"];
+  dryRun?: boolean;
+  force?: boolean;
 };
 export type LumpsumServicesReturnType = ResponseWithPaging &
   ResponseWithFilter<"active" | "fulltext"> & {
@@ -1020,8 +1160,12 @@ export type UsersParam = {
     teamsId?: Array<null | Team["id"]>;
     scope?: "manageAbsences" | "viewAbsences" | "manage";
   };
-  scope?: string;
-} & ParamsWithSort<string>;
+  scope?: UserScope;
+} & ParamsWithSort<UsersSortForIndex>;
+export type AddUserParams = Pick<User, (typeof REQUIRED.ADD_USER)[number]> &
+  Record<string, unknown>;
+export type EditUserParams = Pick<User, (typeof REQUIRED.EDIT_USER)[number]> &
+  Record<string, unknown>;
 export type UsersReturnType = { users: Array<User> };
 export type SurchargeModelReturnType = { data: SurchargeModel };
 export type SurchargeModelsReturnType = {
@@ -1076,9 +1220,9 @@ export type EntriesTextsParams = {
   mode?: EntriesTextsMode;
   filter?: {
     customersId?: number;
-    projectsId?: number | Array<number>;
-    servicesId?: number | Array<number>;
-    usersId?: number | Array<number>;
+    projectsId?: Array<number>;
+    servicesId?: Array<number>;
+    usersId?: Array<number>;
     billable?: Billability;
     /** In format YYYY-MM-DD */
     timeSince?: string;

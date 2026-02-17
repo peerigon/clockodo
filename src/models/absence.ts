@@ -24,6 +24,8 @@ type CommonAbsence = {
    * absences
    */
   note?: string | null;
+  /** Public note visible regardless of elevated absence access */
+  publicNote?: string | null;
   /**
    * Date at which the absence request has been enquired in YYYY-MM-DD format.
    * Only with access rights for absence administration or in case of own
