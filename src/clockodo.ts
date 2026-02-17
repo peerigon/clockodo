@@ -58,6 +58,32 @@ export class Clockodo {
     this.api = new Api(config);
   }
 
+  private async getAllPagesAndMergeArray<
+    ReturnTypeWithPaging extends ResponseWithPaging,
+    RequestParams extends Record<string, unknown>,
+  >(
+    path: string,
+    params: undefined | Params<RequestParams>,
+    key: {
+      [Key in keyof ResponseWithoutPaging<ReturnTypeWithPaging>]: ResponseWithoutPaging<ReturnTypeWithPaging>[Key] extends Array<unknown>
+        ? Key
+        : never;
+    }[keyof ResponseWithoutPaging<ReturnTypeWithPaging>],
+  ): Promise<ResponseWithoutPaging<ReturnTypeWithPaging>> {
+    const pages = await this.api.getAllPages<ReturnTypeWithPaging>(
+      path,
+      params,
+    );
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
+    const mergedData = pages.flatMap((page) => page[key]);
+
+    return {
+      ...remainingResponse,
+      [key]: mergedData,
+    } as ResponseWithoutPaging<ReturnTypeWithPaging>;
+  }
+
   /**
    * @deprecated We will remove plugins because we're planing to move away from
    *   axios to fetch()
@@ -133,18 +159,11 @@ export class Clockodo {
   async getCustomers(
     params?: Params<CustomersParams>,
   ): Promise<ResponseWithoutPaging<CustomersReturnType>> {
-    const pages = await this.api.getAllPages<CustomersReturnType>(
+    return this.getAllPagesAndMergeArray<CustomersReturnType, CustomersParams>(
       "/v3/customers",
       params,
+      "data",
     );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const customers = pages.flatMap(({ customers }) => customers);
-
-    return {
-      ...remainingResponse,
-      customers,
-    };
   }
 
   async getProject(
@@ -166,18 +185,11 @@ export class Clockodo {
   async getProjects(
     params?: Params<ProjectsParams>,
   ): Promise<ResponseWithoutPaging<ProjectsReturnType>> {
-    const pages = await this.api.getAllPages<ProjectsReturnType>(
+    return this.getAllPagesAndMergeArray<ProjectsReturnType, ProjectsParams>(
       "/v4/projects",
       params,
+      "data",
     );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const projects = pages.flatMap(({ projects }) => projects);
-
-    return {
-      ...remainingResponse,
-      projects,
-    };
   }
 
   async getProjectsReportsPage(
@@ -189,18 +201,10 @@ export class Clockodo {
   async getProjectsReports(
     params?: Params<ProjectsReportsParams>,
   ): Promise<ResponseWithoutPaging<ProjectsReportsReturnType>> {
-    const pages = await this.api.getAllPages<ProjectsReportsReturnType>(
-      "/v4/projects/reports",
-      params,
-    );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const data = pages.flatMap((page) => page.data);
-
-    return {
-      ...remainingResponse,
-      data,
-    };
+    return this.getAllPagesAndMergeArray<
+      ProjectsReportsReturnType,
+      ProjectsReportsParams
+    >("/v4/projects/reports", params, "data");
   }
 
   async getSubproject(
@@ -222,18 +226,10 @@ export class Clockodo {
   async getSubprojects(
     params?: Params<SubprojectsParams>,
   ): Promise<ResponseWithoutPaging<SubprojectsReturnType>> {
-    const pages = await this.api.getAllPages<SubprojectsReturnType>(
-      "/v3/subprojects",
-      params,
-    );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const data = pages.flatMap((page) => page.data);
-
-    return {
-      ...remainingResponse,
-      data,
-    };
+    return this.getAllPagesAndMergeArray<
+      SubprojectsReturnType,
+      SubprojectsParams
+    >("/v3/subprojects", params, "data");
   }
 
   async getEntry(
@@ -261,18 +257,11 @@ export class Clockodo {
   ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES);
 
-    const pages = await this.api.getAllPages<EntriesReturnType>(
+    return this.getAllPagesAndMergeArray<EntriesReturnType, EntriesParams>(
       "/v2/entries",
       params,
+      "entries",
     );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const entries = pages.flatMap(({ entries }) => entries);
-
-    return {
-      ...remainingResponse,
-      entries,
-    };
   }
 
   async getEntriesPage(
@@ -288,20 +277,7 @@ export class Clockodo {
   ): Promise<ResponseWithoutPaging<EntriesTextsReturnType>> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ENTRIES_TEXTS);
 
-    const pages = await this.api.getAllPages<EntriesTextsReturnType>(
-      "/v3/entriesTexts",
-      params,
-    );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const texts = Object.fromEntries(
-      pages.flatMap(({ texts }) => Object.entries(texts)),
-    );
-
-    return {
-      ...remainingResponse,
-      texts,
-    };
+    return this.api.get("/v3/entriesTexts", params);
   }
 
   async getEntriesTextsPage(
@@ -340,18 +316,11 @@ export class Clockodo {
   async getServices(
     params?: Params<ServiceParams>,
   ): Promise<ResponseWithoutPaging<ServicesReturnType>> {
-    const pages = await this.api.getAllPages<ServicesReturnType>(
+    return this.getAllPagesAndMergeArray<ServicesReturnType, ServiceParams>(
       "/v4/services",
       params,
+      "data",
     );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const services = pages.flatMap(({ services }) => services);
-
-    return {
-      ...remainingResponse,
-      services,
-    };
   }
 
   async getServicesPage(
@@ -387,20 +356,10 @@ export class Clockodo {
   async getLumpSumServices(
     params?: Params<LumpsumServiceParams>,
   ): Promise<ResponseWithoutPaging<LumpsumServicesReturnType>> {
-    const pages = await this.api.getAllPages<LumpsumServicesReturnType>(
-      "/v4/lumpSumServices",
-      params,
-    );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const lumpSumServices = pages.flatMap(
-      ({ lumpSumServices }) => lumpSumServices,
-    );
-
-    return {
-      ...remainingResponse,
-      lumpSumServices,
-    };
+    return this.getAllPagesAndMergeArray<
+      LumpsumServicesReturnType,
+      LumpsumServiceParams
+    >("/v4/lumpSumServices", params, "data");
   }
 
   async getLumpSumServicesPage(
@@ -1054,18 +1013,11 @@ export class Clockodo {
   async getWorkTimes(
     params: Params<WorkTimesParams>,
   ): Promise<ResponseWithoutPaging<WorkTimesReturnType>> {
-    const pages = await this.api.getAllPages<WorkTimesReturnType>(
+    return this.getAllPagesAndMergeArray<WorkTimesReturnType, WorkTimesParams>(
       "/v2/workTimes",
       params,
+      "workTimeDays",
     );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const workTimeDays = pages.flatMap(({ workTimeDays }) => workTimeDays);
-
-    return {
-      ...remainingResponse,
-      workTimeDays,
-    };
   }
 
   async getWorkTimesChangeRequestsPage(
@@ -1077,20 +1029,10 @@ export class Clockodo {
   async getWorkTimesChangeRequests(
     params: Params<WorkTimesChangeRequestsParams>,
   ): Promise<ResponseWithoutPaging<WorkTimesChangeRequestsReturnType>> {
-    const pages = await this.api.getAllPages<WorkTimesChangeRequestsReturnType>(
-      "/v2/workTimes/changeRequests",
-      params,
-    );
-    const firstPage = assertExists(pages[0]);
-    const { paging, ...remainingResponse } = firstPage;
-    const changeRequests = pages.flatMap(
-      ({ changeRequests }) => changeRequests,
-    );
-
-    return {
-      ...remainingResponse,
-      changeRequests,
-    };
+    return this.getAllPagesAndMergeArray<
+      WorkTimesChangeRequestsReturnType,
+      WorkTimesChangeRequestsParams
+    >("/v2/workTimes/changeRequests", params, "data");
   }
 
   async addWorkTimesChangeRequest(
@@ -1100,7 +1042,7 @@ export class Clockodo {
         (typeof REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST)[number]
       >
     >,
-  ): Promise<AddWorkTimesChangeRequestReturnType> {
+  ): Promise<AddWorkTimesChangeRequestDataReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_WORK_TIMES_CHANGE_REQUEST);
 
     return this.api.post("/v2/workTimes/changeRequests", params);
@@ -1209,8 +1151,8 @@ export class Clockodo {
   }
 }
 
-export type AbsenceReturnType = { absence: Absence };
-export type AbsencesReturnType = { absences: Array<Absence> };
+export type AbsenceReturnType = { data: Absence };
+export type AbsencesReturnType = { data: Array<Absence> };
 export type AddAbsenceParams = {
   dateSince: Absence["dateSince"];
   dateUntil?: Absence["dateUntil"] | null;
@@ -1282,7 +1224,7 @@ export type UsersAccessServicesReturnType = {
   add: AccessToServices;
 };
 export type DeleteReturnType = { success: boolean };
-export type CustomerReturnType = { customer: Customer };
+export type CustomerReturnType = { data: Customer };
 export type AddCustomerParams = {
   name: Customer["name"];
   number?: Customer["number"];
@@ -1316,8 +1258,9 @@ export type CustomersParams = ParamsWithSort<SortIdNameActive> & {
   };
   scope?: CustomerProjectScope;
 };
-export type CustomersReturnType = ResponseWithPaging &
-  ResponseWithFilter<"active"> & { customers: Array<Customer> };
+export type CustomersReturnType = ResponseWithPaging & {
+  data: Array<Customer>;
+};
 export type ProjectsParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     /** Filter projects by customers id */
@@ -1331,11 +1274,10 @@ export type ProjectsParams = ParamsWithSort<SortIdNameActive> & {
   };
   scope?: CustomerProjectScope;
 };
-export type ProjectsReturnType = ResponseWithPaging &
-  ResponseWithFilter<"active" | "customersId"> & {
-    projects: Array<Project>;
-  };
-export type ProjectReturnType = { project: Project };
+export type ProjectsReturnType = ResponseWithPaging & {
+  data: Array<Project>;
+};
+export type ProjectReturnType = { data: Project };
 export type ProjectDataReturnType = { data: Project };
 export type ProjectsReportsSortForIndex =
   | "customers_name"
@@ -1466,7 +1408,7 @@ export type ServiceParams = ParamsWithSort<SortIdNameActive> & {
   };
   scope?: ServiceScope;
 };
-export type ServiceReturnType = { service: Service };
+export type ServiceReturnType = { data: Service };
 export type AddServiceParams = {
   name: Service["name"];
   active?: Service["active"];
@@ -1487,11 +1429,10 @@ export type DeleteServiceParams = {
   dryRun?: boolean;
   force?: boolean;
 };
-export type ServicesReturnType = ResponseWithPaging &
-  ResponseWithFilter<"active" | "fulltext"> & { services: Array<Service> };
+export type ServicesReturnType = ResponseWithPaging & { data: Array<Service> };
 
-export type TeamReturnType = { team: Team };
-export type TeamsReturnType = { teams: Array<Team> };
+export type TeamReturnType = { data: Team };
+export type TeamsReturnType = ResponseWithPaging & { data: Array<Team> };
 export type AddTeamParams = {
   name: Team["name"];
   leader?: Team["leader"];
@@ -1518,7 +1459,7 @@ export type LumpsumServiceParams = ParamsWithSort<SortIdNameActive> & {
   };
 };
 export type LumpsumServiceReturnType = {
-  lumpSumService: LumpsumService;
+  data: LumpsumService;
 };
 export type AddLumpsumServiceParams = {
   name: LumpsumService["name"];
@@ -1542,12 +1483,11 @@ export type DeleteLumpsumServiceParams = {
   dryRun?: boolean;
   force?: boolean;
 };
-export type LumpsumServicesReturnType = ResponseWithPaging &
-  ResponseWithFilter<"active" | "fulltext"> & {
-    lumpSumServices: Array<LumpsumService>;
-  };
+export type LumpsumServicesReturnType = ResponseWithPaging & {
+  data: Array<LumpsumService>;
+};
 
-export type UserReturnType = { user: User };
+export type UserReturnType = { data: User };
 export type UsersParam = {
   filter?: {
     active?: boolean;
@@ -1561,7 +1501,7 @@ export type AddUserParams = Pick<User, (typeof REQUIRED.ADD_USER)[number]> &
   Record<string, unknown>;
 export type EditUserParams = Pick<User, (typeof REQUIRED.EDIT_USER)[number]> &
   Record<string, unknown>;
-export type UsersReturnType = { users: Array<User> };
+export type UsersReturnType = ResponseWithPaging & { data: Array<User> };
 export type SurchargeModelReturnType = { data: SurchargeModel };
 export type SurchargeModelsReturnType = {
   data: Array<SurchargeModel>;
@@ -1655,21 +1595,9 @@ export enum EntriesTextsSort {
   /** Chronologically descending. */
   TimeDesc = "time_desc",
 }
-export type EntriesTextsReturnType = ResponseWithPaging &
-  ResponseWithFilter<
-    | "billable"
-    | "customersId"
-    | "lumpsumServicesId"
-    | "projectsId"
-    | "servicesId"
-    | "usersId"
-    | "timeSince"
-    | "timeUntil"
-  > & {
-    texts: EntriesText;
-    mode: EntriesTextsMode;
-    sort: EntriesTextsSort;
-  };
+export type EntriesTextsReturnType = {
+  data: Array<EntriesText>;
+};
 export type EntryGroupsReturnType = { groups: Array<EntryGroup> };
 export type EditEntryGroupsReturnType =
   | { confirmKey: string; affectedEntries: number }
@@ -1688,7 +1616,7 @@ export type UserReportsReturnType<
   userreports: Array<UserReport<GivenUserReportType>>;
 };
 export type NonbusinessGroupsReturnType = {
-  nonbusinessGroups: Array<NonbusinessGroup>;
+  data: Array<NonbusinessGroup>;
 };
 export type NonbusinessGroupReturnType = {
   data: NonbusinessGroup;
@@ -1705,7 +1633,7 @@ export type DeleteNonbusinessGroupParams = {
   id: NonbusinessGroup["id"];
 };
 export type NonbusinessDaysReturnType = {
-  nonbusinessDays: Array<NonbusinessDay>;
+  data: Array<NonbusinessDay>;
 };
 export type NonbusinessDayReturnType = {
   data: NonbusinessDay;
@@ -1797,7 +1725,7 @@ export type TargethoursReturnType = {
   targethours: Array<TargethoursRow>;
 };
 export type AddUserReturnType = {
-  user: User;
+  data: User;
 };
 
 export type WorkTimesParams = {
@@ -1818,7 +1746,7 @@ export type WorkTimesChangeRequestsParams = {
   status?: WorkTimeChangeRequestStatus;
 };
 export type WorkTimesChangeRequestsReturnType = ResponseWithPaging & {
-  changeRequests: Array<WorkTimeChangeRequest>;
+  data: Array<WorkTimeChangeRequest>;
 };
 
 export type ApproveOrDeclineWorkTimesChangeRequestReturnType = {
@@ -1854,9 +1782,12 @@ export type AddWorkTimesChangeRequestReturnType =
        */
       replacedChangeRequest: null;
     };
+export type AddWorkTimesChangeRequestDataReturnType = {
+  data: AddWorkTimesChangeRequestReturnType;
+};
 
 export type OvertimecarryRowReturnType = {
-  overtimeCarry: Array<OvertimecarryRow>;
+  data: Array<OvertimecarryRow>;
 };
 export type OvertimecarryRowSingleReturnType = {
   data: OvertimecarryRow;
@@ -1884,7 +1815,7 @@ export type OvertimecarryRowParams = {
 };
 
 export type HolidaysQuotasReturnType = {
-  holidaysQuota: Array<HolidaysQuota>;
+  data: Array<HolidaysQuota>;
 };
 export type HolidaysQuotaReturnType = {
   data: HolidaysQuota;
@@ -1917,7 +1848,7 @@ export type HolidaysQuotasParams = {
 };
 
 export type HolidaysCarryoversReturnType = {
-  holidaysCarry: Array<HolidaysCarryover>;
+  data: Array<HolidaysCarryover>;
 };
 export type HolidaysCarryoverReturnType = {
   data: HolidaysCarryover;

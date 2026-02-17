@@ -62,7 +62,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
     it("returns expected data format", async () => {
       const data = await clockodo.getUsers();
-      const firstUser = assertExists(data.users[0]);
+      const firstUser = assertExists(data.data[0]);
 
       expect(Object.keys(firstUser)).toEqual(
         expect.arrayContaining(expectedKeys),
@@ -73,7 +73,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
   describe("getProjects()", () => {
     it("returns expected data format", async () => {
       const {
-        projects: [project],
+        data: [project],
       } = await clockodo.getProjects();
 
       expect(project).toHaveProperty("id");
@@ -82,13 +82,13 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       expect(project).toHaveProperty("completed");
 
       // Check if the filter is working as expected
-      const { projects } = await clockodo.getProjects({
+      const { data } = await clockodo.getProjects({
         filter: {
           customersId: -1,
         },
       });
 
-      expect(projects).toHaveLength(0);
+      expect(data).toHaveLength(0);
     });
   });
 
@@ -275,8 +275,8 @@ describe("Clockodo", { timeout: 20_000 }, () => {
     ];
 
     it("returns expected data format", async () => {
-      const { lumpSumServices } = await clockodo.getLumpSumServices();
-      const firstLumpsumService = assertExists(lumpSumServices[0]);
+      const { data } = await clockodo.getLumpSumServices();
+      const firstLumpsumService = assertExists(data[0]);
 
       expect(Object.keys(firstLumpsumService)).toEqual(
         expect.arrayContaining(expectedKeys),
@@ -286,7 +286,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
         id: firstLumpsumService.id,
       });
 
-      expect(Object.keys(getLumpSumServiceResponse.lumpSumService)).toEqual(
+      expect(Object.keys(getLumpSumServiceResponse.data)).toEqual(
         expect.arrayContaining(expectedKeys),
       );
     });
@@ -340,7 +340,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
   describe("getNonbusinessGroups() / getNonbusinessDays()", () => {
     it("returns expected data format", async () => {
-      const { nonbusinessGroups } = await clockodo.getNonbusinessGroups();
+      const { data: nonbusinessGroups } = await clockodo.getNonbusinessGroups();
 
       expect(nonbusinessGroups.length).toBeGreaterThan(0);
       nonbusinessGroups.forEach((nonbusinessGroup) => {
@@ -350,7 +350,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
       const firstNonbusinessGroup = assertExists(nonbusinessGroups[0]);
 
-      const { nonbusinessDays } = await clockodo.getNonbusinessDays({
+      const { data: nonbusinessDays } = await clockodo.getNonbusinessDays({
         nonbusinessGroupId: firstNonbusinessGroup.id,
         year: 2021,
       });

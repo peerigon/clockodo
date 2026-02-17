@@ -200,12 +200,12 @@ describe("Clockodo (instance)", () => {
         const nockScope = setupPaginatedApiMock({
           baseUrl: "/v3/customers?",
           countPages: 3,
-          createPageResponse: (page) => ({ customers: [page] }),
+          createPageResponse: (page) => ({ data: [page] }),
         });
 
-        const { customers } = await clockodo.getCustomers();
+        const { data } = await clockodo.getCustomers();
 
-        expect(customers).toMatchObject([1, 2, 3]);
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -244,12 +244,12 @@ describe("Clockodo (instance)", () => {
         const nockScope = setupPaginatedApiMock({
           baseUrl: "/v4/lumpSumServices?",
           countPages: 3,
-          createPageResponse: (page) => ({ lumpSumServices: [page] }),
+          createPageResponse: (page) => ({ data: [page] }),
         });
 
-        const { lumpSumServices } = await clockodo.getLumpSumServices();
+        const { data } = await clockodo.getLumpSumServices();
 
-        expect(lumpSumServices).toMatchObject([1, 2, 3]);
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -356,21 +356,19 @@ describe("Clockodo (instance)", () => {
     });
 
     describe("getEntriesTexts()", () => {
-      it("requests all entries texts pages", async () => {
+      it("requests entries texts", async () => {
         const expectedParameters = {
           term: "Some text",
         };
-        const nockScope = setupPaginatedApiMock({
-          baseUrl: `/v3/entriesTexts?${qs.stringify(expectedParameters)}&`,
-          countPages: 3,
-          createPageResponse: (page) => ({ texts: { [page]: true } }),
-        });
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get(`/v3/entriesTexts?${qs.stringify(expectedParameters)}`)
+          .reply(200, { data: [1, 2, 3] });
 
-        const { texts } = await clockodo.getEntriesTexts({
+        const { data } = await clockodo.getEntriesTexts({
           term: "Some text",
         });
 
-        expect(texts).toMatchObject({ 1: true, 2: true, 3: true });
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -469,12 +467,12 @@ describe("Clockodo (instance)", () => {
         const nockScope = setupPaginatedApiMock({
           baseUrl: "/v4/projects?",
           countPages: 3,
-          createPageResponse: (page) => ({ projects: [page] }),
+          createPageResponse: (page) => ({ data: [page] }),
         });
 
-        const { projects } = await clockodo.getProjects();
+        const { data } = await clockodo.getProjects();
 
-        expect(projects).toMatchObject([1, 2, 3]);
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -587,12 +585,12 @@ describe("Clockodo (instance)", () => {
         const nockScope = setupPaginatedApiMock({
           baseUrl: "/v4/services?",
           countPages: 3,
-          createPageResponse: (page) => ({ services: [page] }),
+          createPageResponse: (page) => ({ data: [page] }),
         });
 
-        const { services } = await clockodo.getServices();
+        const { data } = await clockodo.getServices();
 
-        expect(services).toMatchObject([1, 2, 3]);
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
@@ -801,16 +799,16 @@ describe("Clockodo (instance)", () => {
             users_id: 123,
           })}&`,
           countPages: 3,
-          createPageResponse: (page) => ({ changeRequests: [page] }),
+          createPageResponse: (page) => ({ data: [page] }),
         });
 
-        const { changeRequests } = await clockodo.getWorkTimesChangeRequests({
+        const { data } = await clockodo.getWorkTimesChangeRequests({
           dateSince: "2023-01-01",
           dateUntil: "2023-01-07",
           usersId: 123,
         });
 
-        expect(changeRequests).toMatchObject([1, 2, 3]);
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });
