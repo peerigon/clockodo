@@ -1,3 +1,5 @@
+// The Clockodo instance is just too big. We should split it into smaller files.
+/* eslint-disable max-lines */
 import nock from "nock";
 import qs from "qs";
 import { afterAll, describe, expect, it } from "vitest";
