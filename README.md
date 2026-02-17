@@ -24,7 +24,7 @@ const clockodo = new Clockodo({
   client: {
     // You need to add some information about yourself that will be
     // sent along every request,
-    // see https://www.clockodo.com/en/api/ "Client identification"
+    // see Clockodo API docs section "Client identification"
     // PLEASE NOTE: name + ";" + email must not be longer than 50 characters.
     name: "Your application/company",
     email: "technical-contact@your-company.com",
@@ -57,7 +57,7 @@ clockodo.api.config({
 
 We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mappings.ts file](https://github.com/peerigon/clockodo/blob/main/src/lib/mappings.ts).
 
-For any questions about the different properties please consult the official [Clockodo-API](https://www.clockodo.com/en/api/).
+For any questions about the different properties please consult the official Clockodo API documentation.
 
 Some constants are also available for import:
 
@@ -521,7 +521,7 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ---
 
-### [getNonbusinessGroups()](https://www.clockodo.com/en/api/nonbusinessgroups/)
+### getNonbusinessGroups()
 
 Gets all nonbusiness groups.
 
@@ -545,7 +545,7 @@ await clockodo.getNonbusinessGroup({ id: 123 });
 
 ---
 
-### [getNonbusinessDays()](https://www.clockodo.com/en/api/nonbusinessdays/)
+### getNonbusinessDays()
 
 Gets all nonbusiness days for a given year.
 
@@ -572,7 +572,7 @@ await clockodo.getNonbusinessDay({ id: 12, year: 2026 });
 
 ---
 
-### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/users/me/)
+### getAggregatesUsersMe()
 
 Gets user and company settings for the logged-in user.
 
