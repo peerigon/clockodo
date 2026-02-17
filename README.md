@@ -192,6 +192,21 @@ await clockodo.getEntry({ id: 4 });
 
 ---
 
+### splitAllEntriesAtMidnight()
+
+Splits all entries for a given user and day at midnight.
+
+#### Example:
+
+```js
+await clockodo.splitAllEntriesAtMidnight({
+  day: "2026-02-17",
+  usersId: 123,
+});
+```
+
+---
+
 ### getEntries()
 
 Get all entries from all pages.
@@ -336,6 +351,18 @@ await clockodo.getServices();
 
 ---
 
+### getServicesPage()
+
+Get a list of services from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getServicesPage({ page: 2 });
+```
+
+---
+
 ### getTeam()
 
 Get team by id.
@@ -380,6 +407,18 @@ Get a list of all lumpsum services
 
 ```js
 await clockodo.getLumpSumServices();
+```
+
+---
+
+### getLumpSumServicesPage()
+
+Get a list of lumpsum services from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getLumpSumServicesPage({ page: 2 });
 ```
 
 ---
@@ -434,9 +473,33 @@ await clockodo.getUsers();
 
 ---
 
+### getSurchargeModel()
+
+Get a surcharge model by ID.
+
+#### Example:
+
+```js
+await clockodo.getSurchargeModel({ id: 7 });
+```
+
+---
+
+### getSurchargeModels()
+
+Get all surcharge models.
+
+#### Example:
+
+```js
+await clockodo.getSurchargeModels();
+```
+
+---
+
 ### getUserReport()
 
-Get a co-worker by their ID.
+Get a report for a specific user and year.
 
 #### Example:
 
@@ -517,6 +580,72 @@ Gets user and company settings for the logged-in user.
 
 ```js
 await clockodo.getAggregatesUsersMe();
+```
+
+---
+
+### getWorkTimesPage()
+
+Gets work times from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesPage({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+  page: 2,
+});
+```
+
+---
+
+### getWorkTimes()
+
+Gets all work time pages for the given filter.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimes({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+});
+```
+
+---
+
+### getWorkTimesChangeRequestsPage()
+
+Gets work time change requests from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesChangeRequestsPage({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+  page: 2,
+});
+```
+
+---
+
+### getWorkTimesChangeRequests()
+
+Gets all work time change request pages for the given filter.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesChangeRequests({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+});
 ```
 
 ---
@@ -623,6 +752,18 @@ Adds a customer to the organization.
 
 ```js
 await clockodo.addCustomer({ name: "Weyland-Yutani" });
+```
+
+---
+
+### addLumpsumService()
+
+Adds a lumpsum service.
+
+#### Example:
+
+```js
+await clockodo.addLumpsumService({ name: "Flat Rate Support", price: 99 });
 ```
 
 ---
@@ -785,6 +926,18 @@ await clockodo.addUser({
 
 ---
 
+### addSurchargeModel()
+
+Adds a surcharge model.
+
+#### Example:
+
+```js
+await clockodo.addSurchargeModel({ name: "Night Shift", accumulation: true });
+```
+
+---
+
 ### startClock()
 
 Start a new running clockodo entry.
@@ -800,6 +953,54 @@ await clockodo.startClock({
   projectsId: 365,
   billable: Billability.Billable,
 });
+```
+
+---
+
+### addWorkTimesChangeRequest()
+
+Creates a work time change request.
+
+#### Example:
+
+```js
+import { WorkTimeChangeRequestIntervalType } from "clockodo";
+
+await clockodo.addWorkTimesChangeRequest({
+  date: "2026-02-17",
+  usersId: 123,
+  changes: [
+    {
+      type: WorkTimeChangeRequestIntervalType.Add,
+      timeSince: "2026-02-17T08:00:00Z",
+      timeUntil: "2026-02-17T12:00:00Z",
+    },
+  ],
+});
+```
+
+---
+
+### approveWorkTimesChangeRequest()
+
+Approves a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.approveWorkTimesChangeRequest({ id: 17 });
+```
+
+---
+
+### declineWorkTimesChangeRequest()
+
+Declines a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.declineWorkTimesChangeRequest({ id: 17 });
 ```
 
 ---
@@ -842,6 +1043,18 @@ Edit existing Clockodo customer.
 
 ```js
 await clockodo.editCustomer({ id: 15, name: "The Mystery Gang" });
+```
+
+---
+
+### editLumpsumService()
+
+Edit an existing lumpsum service.
+
+#### Example:
+
+```js
+await clockodo.editLumpsumService({ id: 15, name: "Updated Flat Rate" });
 ```
 
 ---
@@ -921,6 +1134,18 @@ Edit existing user.
 
 ```js
 await clockodo.editUser({ id: 33, name: "Moalo Loco" });
+```
+
+---
+
+### editSurchargeModel()
+
+Edit an existing surcharge model.
+
+#### Example:
+
+```js
+await clockodo.editSurchargeModel({ id: 365, name: "ABC" });
 ```
 
 ---
@@ -1039,6 +1264,18 @@ await clockodo.deleteUser({ id: 7 });
 
 ---
 
+### deleteSurchargeModel()
+
+Deletes a surcharge model by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteSurchargeModel({ id: 31 });
+```
+
+---
+
 ### deleteAbsence()
 
 Deletes absence (go figure).
@@ -1059,6 +1296,18 @@ Deletes a single entry by ID
 
 ```js
 await clockodo.deleteEntry({ id: 543512 });
+```
+
+---
+
+### deleteLumpsumService()
+
+Deletes a lumpsum service by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteLumpsumService({ id: 94 });
 ```
 
 ---
@@ -1147,6 +1396,18 @@ await clockodo.deleteEntryGroup({
   timeUntil: "2018-02-09T00:00:00Z",
   text: "chilin everyday",
 });
+```
+
+---
+
+### withdrawWorkTimesChangeRequest()
+
+Withdraws a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.withdrawWorkTimesChangeRequest({ id: 17 });
 ```
 
 ---
