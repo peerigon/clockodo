@@ -13,16 +13,10 @@ export type Project = {
   billableDefault: boolean;
   /** Note about the project, Only with necessary access rights */
   note?: string | null;
-  /** Budget for the project. Only with necessary access rights */
-  budgetMoney?: number | null;
-  /** Is the budget based on hours? Only with necessary access rights */
-  budgetIsHours?: boolean;
-  /** Is the budget not strict? Only with necessary access rights */
-  budgetIsNotStrict?: boolean;
   /** Is the project completed? */
-  completed?: boolean;
+  completed: boolean;
   /** Date and time when the project was completed */
-  completedAt?: string | null;
+  completedAt: string | null;
   /** Billed amount of money. Only with necessary access rights */
   billedMoney?: number | null;
   /** Is the project billed completely? Only with necessary access rights */
@@ -36,9 +30,9 @@ export type Project = {
    */
   revenueFactor?: number | null;
   /** Whether this project is test data */
-  testData?: boolean;
+  testData: boolean;
   /** Number of subprojects */
-  countSubprojects?: number;
+  countSubprojects: number;
   /** Project deadline date */
   deadline?: string | null;
   /** Project start date */

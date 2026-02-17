@@ -357,7 +357,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
       expect(nonbusinessDays.length).toBeGreaterThan(0);
       nonbusinessDays.forEach((nonbusinessDay) => {
-        expect(nonbusinessDay).toHaveProperty("date");
+        expect(nonbusinessDay).toHaveProperty("evaluatedDate");
         expect(nonbusinessDay).toHaveProperty("id");
         expect(nonbusinessDay).toHaveProperty("name");
         expect(nonbusinessDay).toHaveProperty("halfDay");

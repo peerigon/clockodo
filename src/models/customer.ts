@@ -16,5 +16,5 @@ export type Customer = {
   /** Customer color */
   color: number;
   /** Whether this is test data */
-  testData?: boolean;
+  testData: boolean;
 };

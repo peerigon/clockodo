@@ -6,6 +6,7 @@ export const createProjectMocks = ({
 }: { count?: number } = {}): Array<Project> =>
   Array.from({ length: count }, (_, index): Project => {
     const projectId = index;
+    const completed = faker.datatype.boolean();
     const budget =
       faker.number.int({ min: 0, max: 10 }) > 2
         ? faker.number.int({ min: 10, max: 999_999 })
@@ -20,9 +21,6 @@ export const createProjectMocks = ({
       active: faker.datatype.boolean(),
       billableDefault: faker.datatype.boolean(),
       note: faker.lorem.sentences(faker.number.int({ min: 1, max: 3 })),
-      budgetMoney: budget,
-      budgetIsHours: faker.datatype.boolean(),
-      budgetIsNotStrict: faker.datatype.boolean(),
       billedMoney:
         budget === null
           ? null
@@ -30,7 +28,10 @@ export const createProjectMocks = ({
             ? budget
             : faker.number.int({ min: 0, max: budget }),
       billedCompletely,
-      completed: faker.datatype.boolean(),
+      completed,
+      completedAt: completed ? faker.date.recent().toISOString() : null,
+      testData: faker.datatype.boolean(),
+      countSubprojects: faker.number.int({ min: 0, max: 10 }),
       revenueFactor:
         faker.number.int({ min: 0, max: 10 }) > 2
           ? 1

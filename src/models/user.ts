@@ -95,9 +95,9 @@ export type User = {
    * - "null" if the company default is applicable
    */
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
-  /** Newer API field name for nonbusiness group id */
-  nonbusinessGroupsId?: number | null;
+  nonbusinessGroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
+  /** Co-worker initials */
+  initials: string | null;
   /**
    * The number can be used to calculate the work time edit lock. First day that
    * requires a change request is at today - x The values for "no work time edit

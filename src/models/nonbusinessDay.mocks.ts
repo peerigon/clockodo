@@ -33,11 +33,16 @@ export const createNonbusinessDayMocks = ({
     const isHalfDay = faker.number.int({ min: 0, max: 10 }) > 8;
 
     return {
-      date: isoDateFromDateTime(dateTime),
       id,
-      nonbusinessgroupsId: 0,
+      nonbusinessGroupId: 0,
+      type: "DISTINCT_ONCE",
       name,
       halfDay: isHalfDay,
+      surchargeSpecial: faker.datatype.boolean(),
+      evaluatedDate: isoDateFromDateTime(dateTime),
+      day: dateTime.getUTCDate(),
+      month: dateTime.getUTCMonth() + 1,
+      year: dateTime.getUTCFullYear(),
     };
   });
 };

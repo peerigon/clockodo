@@ -15,6 +15,7 @@ export const createCustomerMocks = ({
       billableDefault: faker.datatype.boolean(),
       note: faker.datatype.boolean() ? faker.lorem.sentences(2) : null,
       color: faker.number.int({ min: 1, max: 9 }),
+      testData: faker.datatype.boolean(),
     };
   });
 };

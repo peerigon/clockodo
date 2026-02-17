@@ -25,7 +25,7 @@ type CommonAbsence = {
    */
   note?: string | null;
   /** Public note visible regardless of elevated absence access */
-  publicNote?: string | null;
+  publicNote: string | null;
   /**
    * Date at which the absence request has been enquired in YYYY-MM-DD format.
    * Only with access rights for absence administration or in case of own
@@ -56,7 +56,7 @@ export type DaysAbsence = CommonAbsence & {
    * Amount of absence days (null for overtime reduction). Only with access
    * rights for absence administration or in case of own absences
    */
-  countDays?: number;
+  countDays: number;
   /**
    * Amount of hours of overtime reduction (null in other cases). Only with
    * access rights for absence administration or in case of own absences
@@ -85,7 +85,7 @@ export type HoursAbsence = CommonAbsence & {
    * Amount of hours of overtime reduction (null in other cases). Only with
    * access rights for absence administration or in case of own absences
    */
-  countHours?: number;
+  countHours: number;
 };
 
 export type Absence = DaysAbsence | HoursAbsence;

@@ -11,5 +11,6 @@ export const createNonbusinessGroupMocks = ({
     return {
       id: index,
       name: faker.commerce.productName(),
+      companyDefault: index === 0,
     };
   });

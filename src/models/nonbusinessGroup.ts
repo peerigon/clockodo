@@ -4,5 +4,5 @@ export type NonbusinessGroup = {
   /** The name of the nonbusiness group */
   name: string;
   /** Whether this is the company default group */
-  companyDefault?: boolean;
+  companyDefault: boolean;
 };
