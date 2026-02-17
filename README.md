@@ -252,7 +252,7 @@ Retreive all descriptions (and no additional info) entered for time and lump sum
 #### Example:
 
 ```js
-await clockodo.getEntriesTexts({ text: "meeting with client" });
+await clockodo.getEntriesTexts({ term: "meeting with client" });
 ```
 
 ---
@@ -264,7 +264,7 @@ Retreive all descriptions from a specific page.
 #### Example:
 
 ```js
-await clockodo.getEntriesTextsPage({ text: "meeting with client", page: 2 });
+await clockodo.getEntriesTextsPage({ term: "meeting with client", page: 2 });
 ```
 
 ---
@@ -460,7 +460,7 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ### [getNonbusinessGroups()](https://www.clockodo.com/en/api/nonbusinessgroups/)
 
-With this resource you can read all nonbusiness groups. The editing and adding of nonbusiness groups is currently not possible.
+Gets all nonbusiness groups.
 
 #### Example:
 
@@ -470,29 +470,125 @@ await clockodo.getNonbusinessGroups();
 
 ---
 
+### getNonbusinessGroup()
+
+Gets a nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.getNonbusinessGroup({ id: 123 });
+```
+
+---
+
 ### [getNonbusinessDays()](https://www.clockodo.com/en/api/nonbusinessdays/)
 
-With this resource you can read all nonbusiness days. The editing and adding of nonbusiness days is currently not possible.
+Gets all nonbusiness days for a given year.
 
 #### Example:
 
 ```js
 await clockodo.getNonbusinessDays({
-  nonbusinessgroupsId: 123,
+  nonbusinessGroupId: 123,
   year: 2021,
 });
 ```
 
 ---
 
-### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/aggregates/users/me/)
+### getNonbusinessDay()
 
-With this resource you can read user and company seetings for the logged in user. Editing is currently not possible.
+Gets a nonbusiness day by ID.
+
+#### Example:
+
+```js
+await clockodo.getNonbusinessDay({ id: 12, year: 2026 });
+```
+
+---
+
+### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/users/me/)
+
+Gets user and company settings for the logged-in user.
 
 #### Example:
 
 ```js
 await clockodo.getAggregatesUsersMe();
+```
+
+---
+
+### getOvertimecarry()
+
+Gets overtime carry rows.
+
+#### Example:
+
+```js
+await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
+```
+
+---
+
+### getOvertimecarryRow()
+
+Gets an overtime carry row by ID.
+
+#### Example:
+
+```js
+await clockodo.getOvertimecarryRow({ id: 7 });
+```
+
+---
+
+### getHolidaysQuotas()
+
+Gets holiday quota rows.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 });
+```
+
+---
+
+### getHolidaysQuota()
+
+Gets a holiday quota row by ID.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysQuota({ id: 7 });
+```
+
+---
+
+### getHolidaysCarryovers()
+
+Gets holiday carryover rows.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 });
+```
+
+---
+
+### getHolidaysCarryover()
+
+Gets a holiday carryover row by ID.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysCarryover({ id: 7 });
 ```
 
 ---
@@ -527,6 +623,83 @@ Adds a customer to the organization.
 
 ```js
 await clockodo.addCustomer({ name: "Weyland-Yutani" });
+```
+
+---
+
+### addNonbusinessGroup()
+
+Creates a nonbusiness group.
+
+#### Example:
+
+```js
+await clockodo.addNonbusinessGroup({ name: "NRW", preset: "" });
+```
+
+---
+
+### addNonbusinessDay()
+
+Creates a nonbusiness day.
+
+#### Example:
+
+```js
+await clockodo.addNonbusinessDay({
+  nonbusinessGroupId: 2,
+  type: "DISTINCT_ONCE",
+  name: "Labor Day",
+});
+```
+
+---
+
+### addOvertimecarry()
+
+Creates an overtime carry row.
+
+#### Example:
+
+```js
+await clockodo.addOvertimecarry({
+  usersId: 17,
+  year: 2028,
+  hours: 8,
+  note: "carryover",
+});
+```
+
+---
+
+### addHolidaysQuota()
+
+Creates a holidays quota row.
+
+#### Example:
+
+```js
+await clockodo.addHolidaysQuota({
+  usersId: 17,
+  yearSince: 2028,
+  count: 30,
+});
+```
+
+---
+
+### addHolidaysCarryover()
+
+Creates a holidays carryover row.
+
+#### Example:
+
+```js
+await clockodo.addHolidaysCarryover({
+  usersId: 17,
+  year: 2028,
+  count: 5,
+});
 ```
 
 ---
@@ -752,6 +925,70 @@ await clockodo.editUser({ id: 33, name: "Moalo Loco" });
 
 ---
 
+### editNonbusinessGroup()
+
+Edits a nonbusiness group.
+
+#### Example:
+
+```js
+await clockodo.editNonbusinessGroup({ id: 2, name: "Holidays" });
+```
+
+---
+
+### editNonbusinessDay()
+
+Edits a nonbusiness day.
+
+#### Example:
+
+```js
+await clockodo.editNonbusinessDay({
+  id: 2,
+  name: "Holiday",
+  type: "DISTINCT_RECURRING",
+});
+```
+
+---
+
+### editOvertimecarry()
+
+Edits an overtime carry row.
+
+#### Example:
+
+```js
+await clockodo.editOvertimecarry({ id: 2, hours: 8, note: "updated" });
+```
+
+---
+
+### editHolidaysQuota()
+
+Edits a holidays quota row.
+
+#### Example:
+
+```js
+await clockodo.editHolidaysQuota({ id: 2, count: 25, note: "updated" });
+```
+
+---
+
+### editHolidaysCarryover()
+
+Edits a holidays carryover row.
+
+#### Example:
+
+```js
+await clockodo.editHolidaysCarryover({ id: 2, count: 5, note: "updated" });
+```
+
+---
+
 ## Delete methods
 
 ### deleteCustomer()
@@ -834,6 +1071,66 @@ Deletes a team by ID
 
 ```js
 await clockodo.deleteTeam({ id: 764 });
+```
+
+---
+
+### deleteNonbusinessGroup()
+
+Deletes a nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteNonbusinessGroup({ id: 31 });
+```
+
+---
+
+### deleteNonbusinessDay()
+
+Deletes a nonbusiness day by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteNonbusinessDay({ id: 31 });
+```
+
+---
+
+### deleteOvertimecarry()
+
+Deletes an overtime carry row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteOvertimecarry({ id: 31 });
+```
+
+---
+
+### deleteHolidaysQuota()
+
+Deletes a holidays quota row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteHolidaysQuota({ id: 31 });
+```
+
+---
+
+### deleteHolidaysCarryover()
+
+Deletes a holidays carryover row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteHolidaysCarryover({ id: 31 });
 ```
 
 ---
