@@ -480,6 +480,36 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getProjectsReportsPage()", () => {
+      it("correctly builds getProjectsReportsPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v4/projects/reports")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getProjectsReportsPage(),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getProjectsReports()", () => {
+      it("requests all projects report pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v4/projects/reports?",
+          countPages: 3,
+          createPageResponse: (page) => ({ data: [page] }),
+        });
+
+        const { data } = await clockodo.getProjectsReports();
+
+        expect(data).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
+
     describe("getSubproject()", () => {
       it("correctly builds getSubproject() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -1489,6 +1519,47 @@ describe("Clockodo (instance)", () => {
         await expect(clockodo.editProject(project)).resolves.not.toBeInstanceOf(
           Error,
         );
+
+        nockScope.done();
+      });
+    });
+
+    describe("completeProject()", () => {
+      it("correctly builds completeProject() request", async () => {
+        const expectedParameters = {
+          completed: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v4/projects/20/complete", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.completeProject({ id: 20, completed: true }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("setProjectBilled()", () => {
+      it("correctly builds setProjectBilled() request", async () => {
+        const expectedParameters = {
+          billed: true,
+          billed_money: 1234.5,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v3/projects/20/setBilled", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.setProjectBilled({
+            id: 20,
+            billed: true,
+            billedMoney: 1234.5,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });

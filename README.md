@@ -327,6 +327,30 @@ await clockodo.getProjectsPage({ page: 2 });
 
 ---
 
+### [getProjectsReports()](https://docs.clockodo.com/#tag/ProjectReport/operation/getProjectsReportsV4)
+
+Get all project report rows from all pages.
+
+#### Example:
+
+```js
+await clockodo.getProjectsReports();
+```
+
+---
+
+### [getProjectsReportsPage()](https://docs.clockodo.com/#tag/ProjectReport/operation/getProjectsReportsV4)
+
+Get project report rows from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getProjectsReportsPage({ page: 2 });
+```
+
+---
+
 ### [getSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectByIdV3)
 
 Get a subproject by its ID.
@@ -1146,6 +1170,30 @@ Edit existing project.
 
 ```js
 await clockodo.editProject({ id: 20, name: "Awesome new project" });
+```
+
+---
+
+### [completeProject()](https://docs.clockodo.com/#tag/Project/operation/completeProjectByIdV4)
+
+Set a project's completion status.
+
+#### Example:
+
+```js
+await clockodo.completeProject({ id: 20, completed: true });
+```
+
+---
+
+### [setProjectBilled()](https://docs.clockodo.com/#tag/Project/operation/updateProjectsSetBilledByIdV3)
+
+Set a project's billed status and billed amount.
+
+#### Example:
+
+```js
+await clockodo.setProjectBilled({ id: 20, billed: true, billedMoney: 1234.5 });
 ```
 
 ---

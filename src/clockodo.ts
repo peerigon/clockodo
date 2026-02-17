@@ -178,6 +178,29 @@ export class Clockodo {
     };
   }
 
+  async getProjectsReportsPage(
+    params?: Params<ProjectsReportsParams & ParamsWithPage>,
+  ): Promise<ProjectsReportsReturnType> {
+    return this.api.get("/v4/projects/reports", params);
+  }
+
+  async getProjectsReports(
+    params?: Params<ProjectsReportsParams>,
+  ): Promise<ResponseWithoutPaging<ProjectsReportsReturnType>> {
+    const pages = await this.api.getAllPages<ProjectsReportsReturnType>(
+      "/v4/projects/reports",
+      params,
+    );
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
+    const data = pages.flatMap((page) => page.data);
+
+    return {
+      ...remainingResponse,
+      data,
+    };
+  }
+
   async getSubproject(
     params: Params<{ id: Subproject["id"] }>,
   ): Promise<SubprojectReturnType> {
@@ -712,6 +735,26 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.put("/v4/projects/" + id, params);
+  }
+
+  async completeProject(
+    params: Params<CompleteProjectParams>,
+  ): Promise<ProjectDataReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.COMPLETE_PROJECT);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v4/projects/" + id + "/complete", remainingParams);
+  }
+
+  async setProjectBilled(
+    params: Params<SetProjectBilledParams>,
+  ): Promise<ProjectDataReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.SET_PROJECT_BILLED);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v3/projects/" + id + "/setBilled", remainingParams);
   }
 
   async editSubproject(
@@ -1291,6 +1334,42 @@ export type ProjectsReturnType = ResponseWithPaging &
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+export type ProjectDataReturnType = { data: Project };
+export type ProjectsReportsSortForIndex =
+  | "customers_name"
+  | "-customers_name"
+  | "projects_name"
+  | "-projects_name"
+  | "subprojects_name"
+  | "-subprojects_name";
+export type ProjectsReportProjectReportItem = {
+  customersId: number;
+  customersName: string;
+  customersNumber: string | null;
+  projectsId: number;
+  projectsName: string;
+  projectsNumber: string | null;
+};
+export type ProjectsReportRetainerSubprojectReportItem =
+  ProjectsReportProjectReportItem & {
+    subprojectsId: number;
+    subprojectsName: string;
+    subprojectsNumber: string | null;
+  };
+export type ProjectsReportReportItem =
+  | ProjectsReportProjectReportItem
+  | ProjectsReportRetainerSubprojectReportItem;
+export type ProjectsReportsParams =
+  ParamsWithSort<ProjectsReportsSortForIndex> & {
+    filter?: {
+      active?: boolean;
+      fulltext?: string;
+      budgetSource?: Array<0 | 1 | 2 | 3>;
+    };
+  };
+export type ProjectsReportsReturnType = ResponseWithPaging & {
+  data: Array<ProjectsReportReportItem>;
+};
 export type SubprojectsParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {
     active?: boolean;
@@ -1356,6 +1435,15 @@ export type DeleteProjectParams = {
   id: Project["id"];
   dryRun?: boolean;
   force?: boolean;
+};
+export type CompleteProjectParams = {
+  id: Project["id"];
+  completed: Project["completed"];
+};
+export type SetProjectBilledParams = {
+  id: Project["id"];
+  billed?: boolean;
+  billedMoney?: number | null;
 };
 export type DeleteSubprojectParams = {
   id: Subproject["id"];
