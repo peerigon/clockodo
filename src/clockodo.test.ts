@@ -842,6 +842,37 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("addNonbusinessGroup()", () => {
+      it("correctly builds addNonbusinessGroup() request", async () => {
+        const expectedParameters = {
+          name: "NRW",
+          preset: "",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v2/nonbusinessGroups", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addNonbusinessGroup({
+            name: "NRW",
+            preset: "",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+
+      it("throws an error when addNonbusinessGroup() is missing param", async () => {
+        expect.assertions(1);
+
+        await expect(
+          // @ts-expect-error Intentional error just for the test
+          clockodo.addNonbusinessGroup({}),
+        ).rejects.toThrowError('Missing required parameter "name"');
+      });
+    });
+
     describe("addLumpsumService()", () => {
       it("correctly builds addLumpsumService() request", async () => {
         const expectedParameters = {

@@ -25,6 +25,7 @@ export const ADD_LUMPSUM_SERVICE_ENTRY = [
 export const ADD_PROJECT = ["name", "customersId"] as const;
 export const ADD_SERVICE = ["name"] as const;
 export const ADD_TEAM = ["name"] as const;
+export const ADD_NONBUSINESS_GROUP = ["name"] as const;
 export const ADD_USER = ["name", "number", "email", "role"] as const;
 export const ADD_SURCHARGE_MODEL = ["name", "accumulation"] as const;
 export const CHANGE_CLOCK_DURATION = [

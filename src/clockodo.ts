@@ -526,6 +526,14 @@ export class Clockodo {
     return this.api.post("/v2/surchargeModels", params);
   }
 
+  async addNonbusinessGroup(
+    params: Params<AddNonbusinessGroupParams>,
+  ): Promise<NonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_NONBUSINESS_GROUP);
+
+    return this.api.post("/v2/nonbusinessGroups", params);
+  }
+
   async startClock(
     params: Params<
       Pick<TimeEntry, (typeof REQUIRED.START_CLOCK)[number]> & {
@@ -1294,6 +1302,13 @@ export type UserReportsReturnType<
 };
 export type NonbusinessGroupsReturnType = {
   nonbusinessGroups: Array<NonbusinessGroup>;
+};
+export type NonbusinessGroupReturnType = {
+  data: NonbusinessGroup;
+};
+export type AddNonbusinessGroupParams = {
+  name: NonbusinessGroup["name"];
+  preset?: "";
 };
 export type NonbusinessDaysReturnType = {
   nonbusinessDays: Array<NonbusinessDay>;
