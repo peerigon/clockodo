@@ -24,7 +24,7 @@ const clockodo = new Clockodo({
   client: {
     // You need to add some information about yourself that will be
     // sent along every request,
-    // see Clockodo API docs section "Client identification"
+    // see https://docs.clockodo.com/#section/Clockodo-REST-API/Client-identification
     // PLEASE NOTE: name + ";" + email must not be longer than 50 characters.
     name: "Your application/company",
     email: "technical-contact@your-company.com",
@@ -79,7 +79,7 @@ Checkout [models](https://github.com/peerigon/clockodo/blob/main/src/models) for
 
 ## Get Methods
 
-### getAbsence()
+### [getAbsence()](https://docs.clockodo.com/#tag/Absence/operation/getAbsenceByIdV4)
 
 Gets a selected absence by its ID.
 
@@ -91,7 +91,7 @@ await clockodo.getAbsence({ id: 7 });
 
 ---
 
-### getUsersAccessCustomersProjects()
+### [getUsersAccessCustomersProjects()](https://docs.clockodo.com/#tag/User/operation/getUsersAccessCustomersProjectByIdV2)
 
 Gets a user's (readonly) access rights for customers and projects.
 
@@ -103,7 +103,7 @@ await clockodo.getUsersAccessCustomersProjects({ usersId: 67325 });
 
 ---
 
-### getUsersAccessServices()
+### [getUsersAccessServices()](https://docs.clockodo.com/#tag/User/operation/getUsersAccessServiceByIdV2)
 
 Gets a user's (readonly) access rights for services.
 
@@ -115,7 +115,7 @@ await clockodo.getUsersAccessServices({ usersId: 67325 });
 
 ---
 
-### getAbsences()
+### [getAbsences()](https://docs.clockodo.com/#tag/Absence/operation/getAbsencesV4)
 
 Gets a list of absences in the provided year
 
@@ -127,7 +127,7 @@ await clockodo.getAbsences({ year: 2018 });
 
 ---
 
-### getClock()
+### [getClock()](https://docs.clockodo.com/#tag/Clock/operation/getClockV2)
 
 Get currently running entry for the credentials attached to Clockodo object.
 
@@ -139,7 +139,7 @@ await clockodo.getClock();
 
 ---
 
-### getCustomer()
+### [getCustomer()](https://docs.clockodo.com/#tag/Customer/operation/getCustomerByIdV3)
 
 Get specific customer by ID
 
@@ -151,7 +151,7 @@ await clockodo.getCustomer({ id: 777 });
 
 ---
 
-### getCustomers()
+### [getCustomers()](https://docs.clockodo.com/#tag/Customer/operation/getCustomersV3)
 
 Get all customers from all pages.
 
@@ -168,7 +168,7 @@ await clockodo.getCustomers({
 
 ---
 
-### getCustomersPage()
+### [getCustomersPage()](https://docs.clockodo.com/#tag/Customer/operation/getCustomersV3)
 
 Get all customers from a specific page.
 
@@ -180,7 +180,7 @@ await clockodo.getCustomersPage({ page: 2 });
 
 ---
 
-### getEntry()
+### [getEntry()](https://docs.clockodo.com/#tag/Entry/operation/getEntryByIdV2)
 
 Get an entry by its ID.
 
@@ -207,7 +207,7 @@ await clockodo.splitAllEntriesAtMidnight({
 
 ---
 
-### getEntries()
+### [getEntries()](https://docs.clockodo.com/#tag/Entry/operation/getEntriesV2)
 
 Get all entries from all pages.
 
@@ -227,7 +227,7 @@ await clockodo.getEntries({
 
 ---
 
-### getEntriesPage()
+### [getEntriesPage()](https://docs.clockodo.com/#tag/Entry/operation/getEntriesV2)
 
 Get all entries from a specific page
 
@@ -243,7 +243,7 @@ await clockodo.getEntriesPage({
 
 ---
 
-### getEntryGroups()
+### [getEntryGroups()](https://docs.clockodo.com/#tag/EntryGroup/operation/getEntrygroupsV2)
 
 Get a group of entries defined by your criteria.
 
@@ -260,7 +260,7 @@ await clockodo.getEntryGroups({
 
 ---
 
-### getEntriesTexts()
+### [getEntriesTexts()](https://docs.clockodo.com/#tag/EntryText/operation/getEntriesTextsV3)
 
 Retreive all descriptions (and no additional info) entered for time and lump sum entries from all pages.
 
@@ -272,7 +272,7 @@ await clockodo.getEntriesTexts({ term: "meeting with client" });
 
 ---
 
-### getEntriesTextsPage()
+### [getEntriesTextsPage()](https://docs.clockodo.com/#tag/EntryText/operation/getEntriesTextsV3)
 
 Retreive all descriptions from a specific page.
 
@@ -284,7 +284,7 @@ await clockodo.getEntriesTextsPage({ term: "meeting with client", page: 2 });
 
 ---
 
-### getProject()
+### [getProject()](https://docs.clockodo.com/#tag/Project/operation/getProjectByIdV4)
 
 Get a project by its ID.
 
@@ -296,7 +296,7 @@ await clockodo.getProject({ id: 1985 });
 
 ---
 
-### getProjects()
+### [getProjects()](https://docs.clockodo.com/#tag/Project/operation/getProjectsV4)
 
 Get all projects from all pages.
 
@@ -315,7 +315,7 @@ await clockodo.getProjects({
 
 ---
 
-### getProjectsPage()
+### [getProjectsPage()](https://docs.clockodo.com/#tag/Project/operation/getProjectsV4)
 
 Get all projects from a specific page.
 
@@ -327,7 +327,7 @@ await clockodo.getProjectsPage({ page: 2 });
 
 ---
 
-### getService()
+### [getService()](https://docs.clockodo.com/#tag/Service/operation/getServiceByIdV4)
 
 Get a service by its ID.
 
@@ -339,7 +339,7 @@ await clockodo.getService({ id: 10 });
 
 ---
 
-### getServices()
+### [getServices()](https://docs.clockodo.com/#tag/Service/operation/getServicesV4)
 
 Get list of all services
 
@@ -351,7 +351,7 @@ await clockodo.getServices();
 
 ---
 
-### getServicesPage()
+### [getServicesPage()](https://docs.clockodo.com/#tag/Service/operation/getServicesV4)
 
 Get a list of services from a specific page.
 
@@ -363,7 +363,7 @@ await clockodo.getServicesPage({ page: 2 });
 
 ---
 
-### getTeam()
+### [getTeam()](https://docs.clockodo.com/#tag/Team/operation/getTeamByIdV3)
 
 Get team by id.
 
@@ -375,7 +375,7 @@ await clockodo.getTeam({ id: 10 });
 
 ---
 
-### getTeams()
+### [getTeams()](https://docs.clockodo.com/#tag/Team/operation/getTeamsV3)
 
 Get list of all teams.
 
@@ -387,7 +387,7 @@ await clockodo.getTeams();
 
 ---
 
-### getLumpSumService()
+### [getLumpSumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServiceByIdV4)
 
 Get a lumpsum service by its ID.
 
@@ -399,7 +399,7 @@ await clockodo.getLumpSumService({ id: 10 });
 
 ---
 
-### getLumpSumServices()
+### [getLumpSumServices()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServicesV4)
 
 Get a list of all lumpsum services
 
@@ -411,7 +411,7 @@ await clockodo.getLumpSumServices();
 
 ---
 
-### getLumpSumServicesPage()
+### [getLumpSumServicesPage()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServicesV4)
 
 Get a list of lumpsum services from a specific page.
 
@@ -423,7 +423,7 @@ await clockodo.getLumpSumServicesPage({ page: 2 });
 
 ---
 
-### getTargethoursRow()
+### [getTargethoursRow()](https://docs.clockodo.com/#tag/TargetHour/operation/getTargethourById)
 
 Get a specific target hour period for a specific user by its ID (not the ID of the user)
 
@@ -435,7 +435,7 @@ await clockodo.getTargethoursRow({ id: 1234 });
 
 ---
 
-### getTargethours()
+### [getTargethours()](https://docs.clockodo.com/#tag/TargetHour/operation/getTargethours)
 
 Get list of target hours for all users, with option to pass an object with an `usersId` to filter the history of target hours to a specific user.
 
@@ -449,7 +449,7 @@ await clockodo.getTargethours({ usersId: 346923 });
 
 ---
 
-### getUser()
+### [getUser()](https://docs.clockodo.com/#tag/User/operation/getUserByIdV3)
 
 Get a co-worker by their ID.
 
@@ -461,7 +461,7 @@ await clockodo.getUser({ id: 1263 });
 
 ---
 
-### getUsers()
+### [getUsers()](https://docs.clockodo.com/#tag/User/operation/getUsersV3)
 
 Get list of users
 
@@ -497,7 +497,7 @@ await clockodo.getSurchargeModels();
 
 ---
 
-### getUserReport()
+### [getUserReport()](https://docs.clockodo.com/#tag/UserReport/operation/getUserreportById)
 
 Get a report for a specific user and year.
 
@@ -509,7 +509,7 @@ await clockodo.getUserReport({ usersId: 1263, year: 2017 });
 
 ---
 
-### getUserReports()
+### [getUserReports()](https://docs.clockodo.com/#tag/UserReport/operation/getUserreports)
 
 Get an employee/user's report, which contains data such as hours worked and holidays taken.
 
@@ -521,7 +521,7 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ---
 
-### getNonbusinessGroups()
+### [getNonbusinessGroups()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/getNonbusinessGroupsV2)
 
 Gets all nonbusiness groups.
 
@@ -533,7 +533,7 @@ await clockodo.getNonbusinessGroups();
 
 ---
 
-### getNonbusinessGroup()
+### [getNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/getNonbusinessGroupByIdV2)
 
 Gets a nonbusiness group by ID.
 
@@ -545,7 +545,7 @@ await clockodo.getNonbusinessGroup({ id: 123 });
 
 ---
 
-### getNonbusinessDays()
+### [getNonbusinessDays()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/getNonbusinessDaysV2)
 
 Gets all nonbusiness days for a given year.
 
@@ -560,7 +560,7 @@ await clockodo.getNonbusinessDays({
 
 ---
 
-### getNonbusinessDay()
+### [getNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/getNonbusinessDayByIdV2)
 
 Gets a nonbusiness day by ID.
 
@@ -584,7 +584,7 @@ await clockodo.getAggregatesUsersMe();
 
 ---
 
-### getWorkTimesPage()
+### [getWorkTimesPage()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesV2)
 
 Gets work times from a specific page.
 
@@ -601,7 +601,7 @@ await clockodo.getWorkTimesPage({
 
 ---
 
-### getWorkTimes()
+### [getWorkTimes()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesV2)
 
 Gets all work time pages for the given filter.
 
@@ -617,7 +617,7 @@ await clockodo.getWorkTimes({
 
 ---
 
-### getWorkTimesChangeRequestsPage()
+### [getWorkTimesChangeRequestsPage()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesChangeRequestsV2)
 
 Gets work time change requests from a specific page.
 
@@ -634,7 +634,7 @@ await clockodo.getWorkTimesChangeRequestsPage({
 
 ---
 
-### getWorkTimesChangeRequests()
+### [getWorkTimesChangeRequests()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesChangeRequestsV2)
 
 Gets all work time change request pages for the given filter.
 
@@ -650,7 +650,7 @@ await clockodo.getWorkTimesChangeRequests({
 
 ---
 
-### getOvertimecarry()
+### [getOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/getOvertimeCarryV3)
 
 Gets overtime carry rows.
 
@@ -662,7 +662,7 @@ await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
 
 ---
 
-### getOvertimecarryRow()
+### [getOvertimecarryRow()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/getOvertimeCarryByIdV3)
 
 Gets an overtime carry row by ID.
 
@@ -674,7 +674,7 @@ await clockodo.getOvertimecarryRow({ id: 7 });
 
 ---
 
-### getHolidaysQuotas()
+### [getHolidaysQuotas()](https://docs.clockodo.com/#tag/HolidayQuota/operation/getHolidaysQuotaV2)
 
 Gets holiday quota rows.
 
@@ -686,7 +686,7 @@ await clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 });
 
 ---
 
-### getHolidaysQuota()
+### [getHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/getHolidaysQuotumByIdV2)
 
 Gets a holiday quota row by ID.
 
@@ -698,7 +698,7 @@ await clockodo.getHolidaysQuota({ id: 7 });
 
 ---
 
-### getHolidaysCarryovers()
+### [getHolidaysCarryovers()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/getHolidaysCarryV3)
 
 Gets holiday carryover rows.
 
@@ -710,7 +710,7 @@ await clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 });
 
 ---
 
-### getHolidaysCarryover()
+### [getHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/getHolidaysCarryByIdV3)
 
 Gets a holiday carryover row by ID.
 
@@ -724,7 +724,7 @@ await clockodo.getHolidaysCarryover({ id: 7 });
 
 ## Post Methods
 
-### addAbsence()
+### [addAbsence()](https://docs.clockodo.com/#tag/Absence/operation/createAbsenceV4)
 
 Default behavior adds an absence for the user attached to the credentials given to the clockodo object. To add the absence for another user you can use the `usersId` option if you have the permissions.
 
@@ -744,7 +744,7 @@ await clockodo.addAbsence({
 
 ---
 
-### addCustomer()
+### [addCustomer()](https://docs.clockodo.com/#tag/Customer/operation/createCustomerV3)
 
 Adds a customer to the organization.
 
@@ -756,7 +756,7 @@ await clockodo.addCustomer({ name: "Weyland-Yutani" });
 
 ---
 
-### addLumpsumService()
+### [addLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/createLumpSumServiceV4)
 
 Adds a lumpsum service.
 
@@ -768,7 +768,7 @@ await clockodo.addLumpsumService({ name: "Flat Rate Support", price: 99 });
 
 ---
 
-### addNonbusinessGroup()
+### [addNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/createNonbusinessGroupV2)
 
 Creates a nonbusiness group.
 
@@ -780,7 +780,7 @@ await clockodo.addNonbusinessGroup({ name: "NRW", preset: "" });
 
 ---
 
-### addNonbusinessDay()
+### [addNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/createNonbusinessDayV2)
 
 Creates a nonbusiness day.
 
@@ -796,7 +796,7 @@ await clockodo.addNonbusinessDay({
 
 ---
 
-### addOvertimecarry()
+### [addOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/createOvertimeCarryV3)
 
 Creates an overtime carry row.
 
@@ -813,7 +813,7 @@ await clockodo.addOvertimecarry({
 
 ---
 
-### addHolidaysQuota()
+### [addHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/createHolidaysQuotumV2)
 
 Creates a holidays quota row.
 
@@ -829,7 +829,7 @@ await clockodo.addHolidaysQuota({
 
 ---
 
-### addHolidaysCarryover()
+### [addHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/createHolidaysCarryV3)
 
 Creates a holidays carryover row.
 
@@ -845,7 +845,7 @@ await clockodo.addHolidaysCarryover({
 
 ---
 
-### addEntry()
+### [addEntry()](https://docs.clockodo.com/#tag/Entry/operation/createEntryV2)
 
 Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Depending on the type of entry different properties are required:
 
@@ -871,7 +871,7 @@ await clockodo.addEntry({
 
 ---
 
-### addProject()
+### [addProject()](https://docs.clockodo.com/#tag/Project/operation/createProjectV4)
 
 Creates a project for an existing customer.
 
@@ -883,7 +883,7 @@ await clockodo.addProject({ name: "Clockodo Api Wrapper", customersId: 1 });
 
 ---
 
-### addService()
+### [addService()](https://docs.clockodo.com/#tag/Service/operation/createServiceV4)
 
 Adds to the list of services offered by your organization.
 
@@ -895,7 +895,7 @@ await clockodo.addService({ name: "Thinking" });
 
 ---
 
-### addTeam()
+### [addTeam()](https://docs.clockodo.com/#tag/Team/operation/createTeamV3)
 
 Creates a new team under your organization.
 
@@ -907,7 +907,7 @@ await clockodo.addTeam({ name: "Gold Team" });
 
 ---
 
-### addUser()
+### [addUser()](https://docs.clockodo.com/#tag/User/operation/createUserV3)
 
 Creates new user in organization.
 
@@ -938,7 +938,7 @@ await clockodo.addSurchargeModel({ name: "Night Shift", accumulation: true });
 
 ---
 
-### startClock()
+### [startClock()](https://docs.clockodo.com/#tag/Clock/operation/createClockV2)
 
 Start a new running clockodo entry.
 
@@ -957,7 +957,7 @@ await clockodo.startClock({
 
 ---
 
-### addWorkTimesChangeRequest()
+### [addWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/createWorkTimesChangeRequestV2)
 
 Creates a work time change request.
 
@@ -981,7 +981,7 @@ await clockodo.addWorkTimesChangeRequest({
 
 ---
 
-### approveWorkTimesChangeRequest()
+### [approveWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/approveWorkTimesChangeRequestByIdV3)
 
 Approves a work time change request by ID.
 
@@ -993,7 +993,7 @@ await clockodo.approveWorkTimesChangeRequest({ id: 17 });
 
 ---
 
-### declineWorkTimesChangeRequest()
+### [declineWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/createWorkTimesChangeRequestsDeclineByIdV2)
 
 Declines a work time change request by ID.
 
@@ -1007,7 +1007,7 @@ await clockodo.declineWorkTimesChangeRequest({ id: 17 });
 
 ## Put methods
 
-### changeClockDuration()
+### [changeClockDuration()](https://docs.clockodo.com/#tag/Clock/operation/updateClockByIdV2)
 
 Changes the duration of an entry. Because the ID returned by clock methods is just the entry ID, and this function can only be used after an entry is finished, there seems to be no difference from using editEntry().
 
@@ -1023,7 +1023,7 @@ await clockodo.changeClockDuration({
 
 ---
 
-### editAbsence()
+### [editAbsence()](https://docs.clockodo.com/#tag/Absence/operation/updateAbsenceByIdV4)
 
 Edit existing Clockodo absence.
 
@@ -1035,7 +1035,7 @@ await clockodo.editAbsence({ id: 74, note: "I know what he did last summer" });
 
 ---
 
-### editCustomer()
+### [editCustomer()](https://docs.clockodo.com/#tag/Customer/operation/updateCustomerByIdV3)
 
 Edit existing Clockodo customer.
 
@@ -1047,7 +1047,7 @@ await clockodo.editCustomer({ id: 15, name: "The Mystery Gang" });
 
 ---
 
-### editLumpsumService()
+### [editLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/updateLumpSumServiceByIdV4)
 
 Edit an existing lumpsum service.
 
@@ -1059,7 +1059,7 @@ await clockodo.editLumpsumService({ id: 15, name: "Updated Flat Rate" });
 
 ---
 
-### editEntry()
+### [editEntry()](https://docs.clockodo.com/#tag/Entry/operation/updateEntryByIdV2)
 
 Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry() can seemingly mutate any of the accepted parameters even when the entry is running.
 
@@ -1071,7 +1071,7 @@ await clockodo.editEntry({ id: 365, duration: 540 });
 
 ---
 
-### editEntryGroup()
+### [editEntryGroup()](https://docs.clockodo.com/#tag/EntryGroup/operation/updateEntrygroupV2)
 
 Allows for mass edit of entries based on a set of filters.
 
@@ -1090,7 +1090,7 @@ await clockodo.editEntryGroup({
 
 ---
 
-### editProject()
+### [editProject()](https://docs.clockodo.com/#tag/Project/operation/updateProjectByIdV4)
 
 Edit existing project.
 
@@ -1102,7 +1102,7 @@ await clockodo.editProject({ id: 20, name: "Awesome new project" });
 
 ---
 
-### editService()
+### [editService()](https://docs.clockodo.com/#tag/Service/operation/updateServiceByIdV4)
 
 Edit existing service.
 
@@ -1114,7 +1114,7 @@ await clockodo.editService({ id: 23, name: "Room Service" });
 
 ---
 
-### editTeam()
+### [editTeam()](https://docs.clockodo.com/#tag/Team/operation/updateTeamByIdV3)
 
 Edit existing team.
 
@@ -1126,7 +1126,7 @@ await clockodo.editTeam({ id: 6324, name: "New Team Name" });
 
 ---
 
-### editUser()
+### [editUser()](https://docs.clockodo.com/#tag/User/operation/updateUserByIdV3)
 
 Edit existing user.
 
@@ -1150,7 +1150,7 @@ await clockodo.editSurchargeModel({ id: 365, name: "ABC" });
 
 ---
 
-### editNonbusinessGroup()
+### [editNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/updateNonbusinessGroupByIdV2)
 
 Edits a nonbusiness group.
 
@@ -1162,7 +1162,7 @@ await clockodo.editNonbusinessGroup({ id: 2, name: "Holidays" });
 
 ---
 
-### editNonbusinessDay()
+### [editNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/updateNonbusinessDayByIdV2)
 
 Edits a nonbusiness day.
 
@@ -1178,7 +1178,7 @@ await clockodo.editNonbusinessDay({
 
 ---
 
-### editOvertimecarry()
+### [editOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/updateOvertimeCarryByIdV3)
 
 Edits an overtime carry row.
 
@@ -1190,7 +1190,7 @@ await clockodo.editOvertimecarry({ id: 2, hours: 8, note: "updated" });
 
 ---
 
-### editHolidaysQuota()
+### [editHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/updateHolidaysQuotumByIdV2)
 
 Edits a holidays quota row.
 
@@ -1202,7 +1202,7 @@ await clockodo.editHolidaysQuota({ id: 2, count: 25, note: "updated" });
 
 ---
 
-### editHolidaysCarryover()
+### [editHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/updateHolidaysCarryByIdV3)
 
 Edits a holidays carryover row.
 
@@ -1216,7 +1216,7 @@ await clockodo.editHolidaysCarryover({ id: 2, count: 5, note: "updated" });
 
 ## Delete methods
 
-### deleteCustomer()
+### [deleteCustomer()](https://docs.clockodo.com/#tag/Customer/operation/deleteCustomerByIdV3)
 
 Deletes the customer.
 
@@ -1228,7 +1228,7 @@ await clockodo.deleteCustomer({ id: 343 });
 
 ---
 
-### deleteProject()
+### [deleteProject()](https://docs.clockodo.com/#tag/Project/operation/deleteProjectByIdV4)
 
 Deletes the project.
 
@@ -1240,7 +1240,7 @@ await clockodo.deleteProject({ id: 8 });
 
 ---
 
-### deleteService()
+### [deleteService()](https://docs.clockodo.com/#tag/Service/operation/deleteServiceByIdV4)
 
 Deletes the service.
 
@@ -1252,7 +1252,7 @@ await clockodo.deleteService({ id: 94 });
 
 ---
 
-### deleteUser()
+### [deleteUser()](https://docs.clockodo.com/#tag/User/operation/deleteUserByIdV3)
 
 Deletes user.
 
@@ -1276,7 +1276,7 @@ await clockodo.deleteSurchargeModel({ id: 31 });
 
 ---
 
-### deleteAbsence()
+### [deleteAbsence()](https://docs.clockodo.com/#tag/Absence/operation/deleteAbsenceByIdV4)
 
 Deletes absence (go figure).
 
@@ -1288,7 +1288,7 @@ await clockodo.deleteAbsence({ id: 31 });
 
 ---
 
-### deleteEntry()
+### [deleteEntry()](https://docs.clockodo.com/#tag/Entry/operation/deleteEntryByIdV2)
 
 Deletes a single entry by ID
 
@@ -1300,7 +1300,7 @@ await clockodo.deleteEntry({ id: 543512 });
 
 ---
 
-### deleteLumpsumService()
+### [deleteLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/deleteLumpSumServiceByIdV4)
 
 Deletes a lumpsum service by ID.
 
@@ -1312,7 +1312,7 @@ await clockodo.deleteLumpsumService({ id: 94 });
 
 ---
 
-### deleteTeam()
+### [deleteTeam()](https://docs.clockodo.com/#tag/Team/operation/deleteTeamByIdV3)
 
 Deletes a team by ID
 
@@ -1324,7 +1324,7 @@ await clockodo.deleteTeam({ id: 764 });
 
 ---
 
-### deleteNonbusinessGroup()
+### [deleteNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/deleteNonbusinessGroupByIdV2)
 
 Deletes a nonbusiness group by ID.
 
@@ -1336,7 +1336,7 @@ await clockodo.deleteNonbusinessGroup({ id: 31 });
 
 ---
 
-### deleteNonbusinessDay()
+### [deleteNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/deleteNonbusinessDayByIdV2)
 
 Deletes a nonbusiness day by ID.
 
@@ -1348,7 +1348,7 @@ await clockodo.deleteNonbusinessDay({ id: 31 });
 
 ---
 
-### deleteOvertimecarry()
+### [deleteOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/deleteOvertimeCarryByIdV3)
 
 Deletes an overtime carry row by ID.
 
@@ -1360,7 +1360,7 @@ await clockodo.deleteOvertimecarry({ id: 31 });
 
 ---
 
-### deleteHolidaysQuota()
+### [deleteHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/deleteHolidaysQuotumByIdV2)
 
 Deletes a holidays quota row by ID.
 
@@ -1372,7 +1372,7 @@ await clockodo.deleteHolidaysQuota({ id: 31 });
 
 ---
 
-### deleteHolidaysCarryover()
+### [deleteHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/deleteHolidaysCarryByIdV3)
 
 Deletes a holidays carryover row by ID.
 
@@ -1384,7 +1384,7 @@ await clockodo.deleteHolidaysCarryover({ id: 31 });
 
 ---
 
-### deleteEntryGroup()
+### [deleteEntryGroup()](https://docs.clockodo.com/#tag/EntryGroup/operation/deleteEntrygroupV2)
 
 Deletes one or more entries based on a series of filters that builds an "entry group".
 
@@ -1400,7 +1400,7 @@ await clockodo.deleteEntryGroup({
 
 ---
 
-### withdrawWorkTimesChangeRequest()
+### [withdrawWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/deleteWorkTimesChangeRequestByIdV2)
 
 Withdraws a work time change request by ID.
 
@@ -1412,7 +1412,7 @@ await clockodo.withdrawWorkTimesChangeRequest({ id: 17 });
 
 ---
 
-### register()
+### [register()](https://docs.clockodo.com/#tag/Register/operation/createRegister)
 
 Creates a new clockodo account.
 
@@ -1428,7 +1428,7 @@ await clockodo.register({
 
 ---
 
-### stopClock()
+### [stopClock()](https://docs.clockodo.com/#tag/Clock/operation/deleteClockByIdV2)
 
 Stops a running clock/entry.
 
