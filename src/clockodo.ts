@@ -426,12 +426,32 @@ export class Clockodo {
     return this.api.get("/v2/nonbusinessGroups", params);
   }
 
+  async getNonbusinessGroup(
+    params: Params<{ id: NonbusinessGroup["id"] }>,
+  ): Promise<NonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_GROUP);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v2/nonbusinessGroups/" + id, remainingParams);
+  }
+
   async getNonbusinessDays(
     params: Params<NonbusinessDaysParams>,
   ): Promise<NonbusinessDaysReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAYS);
 
     return this.api.get("/v2/nonbusinessDays", params);
+  }
+
+  async getNonbusinessDay(
+    params: Params<{ id: NonbusinessDay["id"]; year?: number }>,
+  ): Promise<NonbusinessDayReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_NONBUSINESS_DAY);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v2/nonbusinessDays/" + id, remainingParams);
   }
 
   async getAggregatesUsersMe(
@@ -532,6 +552,38 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.ADD_NONBUSINESS_GROUP);
 
     return this.api.post("/v2/nonbusinessGroups", params);
+  }
+
+  async addNonbusinessDay(
+    params: Params<AddNonbusinessDayParams>,
+  ): Promise<NonbusinessDayReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_NONBUSINESS_DAY);
+
+    return this.api.post("/v2/nonbusinessDays", params);
+  }
+
+  async addOvertimecarry(
+    params: Params<AddOvertimecarryParams>,
+  ): Promise<OvertimecarryRowSingleReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_OVERTIMECARRY);
+
+    return this.api.post("/v3/overtimeCarry", params);
+  }
+
+  async addHolidaysQuota(
+    params: Params<AddHolidaysQuotaParams>,
+  ): Promise<HolidaysQuotaReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_HOLIDAYS_QUOTA);
+
+    return this.api.post("/v2/holidaysQuota", params);
+  }
+
+  async addHolidaysCarryover(
+    params: Params<AddHolidaysCarryoverParams>,
+  ): Promise<HolidaysCarryoverReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_HOLIDAYS_CARRYOVER);
+
+    return this.api.post("/v3/holidaysCarry", params);
   }
 
   async startClock(
@@ -660,6 +712,56 @@ export class Clockodo {
     return this.api.put("/v2/surchargeModels/" + id, params);
   }
 
+  async editNonbusinessGroup(
+    params: Params<EditNonbusinessGroupParams>,
+  ): Promise<NonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_NONBUSINESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.put("/v2/nonbusinessGroups/" + id, params);
+  }
+
+  async editNonbusinessDay(
+    params: Params<EditNonbusinessDayParams>,
+  ): Promise<NonbusinessDayReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_NONBUSINESS_DAY);
+
+    const { id } = params;
+
+    return this.api.put("/v2/nonbusinessDays/" + id, params);
+  }
+
+  async editOvertimecarry(
+    params: Params<EditOvertimecarryParams>,
+  ): Promise<OvertimecarryRowSingleReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_OVERTIMECARRY);
+
+    const { id } = params;
+
+    return this.api.put("/v3/overtimeCarry/" + id, params);
+  }
+
+  async editHolidaysQuota(
+    params: Params<EditHolidaysQuotaParams>,
+  ): Promise<HolidaysQuotaReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_HOLIDAYS_QUOTA);
+
+    const { id } = params;
+
+    return this.api.put("/v2/holidaysQuota/" + id, params);
+  }
+
+  async editHolidaysCarryover(
+    params: Params<EditHolidaysCarryoverParams>,
+  ): Promise<HolidaysCarryoverReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_HOLIDAYS_CARRYOVER);
+
+    const { id } = params;
+
+    return this.api.put("/v3/holidaysCarry/" + id, params);
+  }
+
   async deleteCustomer(
     params: Params<DeleteCustomerParams>,
   ): Promise<DeleteReturnType> {
@@ -758,6 +860,56 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v3/teams/" + id, params);
+  }
+
+  async deleteNonbusinessGroup(
+    params: Params<DeleteNonbusinessGroupParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_NONBUSINESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/nonbusinessGroups/" + id, params);
+  }
+
+  async deleteNonbusinessDay(
+    params: Params<DeleteNonbusinessDayParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_NONBUSINESS_DAY);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/nonbusinessDays/" + id, params);
+  }
+
+  async deleteOvertimecarry(
+    params: Params<DeleteOvertimecarryParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_OVERTIMECARRY);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/overtimeCarry/" + id, params);
+  }
+
+  async deleteHolidaysQuota(
+    params: Params<DeleteHolidaysQuotaParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_HOLIDAYS_QUOTA);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/holidaysQuota/" + id, params);
+  }
+
+  async deleteHolidaysCarryover(
+    params: Params<DeleteHolidaysCarryoverParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_HOLIDAYS_CARRYOVER);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/holidaysCarry/" + id, params);
   }
 
   async register(
@@ -899,16 +1051,46 @@ export class Clockodo {
     return this.api.get("/v3/overtimeCarry", params);
   }
 
+  async getOvertimecarryRow(
+    params: Params<{ id: NonNullable<OvertimecarryRow["id"]> }>,
+  ): Promise<OvertimecarryRowSingleReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_OVERTIMECARRY);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v3/overtimeCarry/" + id, remainingParams);
+  }
+
   async getHolidaysQuotas(
     params?: Params<HolidaysQuotasParams>,
   ): Promise<HolidaysQuotasReturnType> {
     return this.api.get("/v2/holidaysQuota", params);
   }
 
+  async getHolidaysQuota(
+    params: Params<{ id: HolidaysQuota["id"] }>,
+  ): Promise<HolidaysQuotaReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_HOLIDAYS_QUOTA);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v2/holidaysQuota/" + id, remainingParams);
+  }
+
   async getHolidaysCarryovers(
     params?: Params<HolidaysCarryoversParams>,
   ): Promise<HolidaysCarryoversReturnType> {
     return this.api.get("/v3/holidaysCarry", params);
+  }
+
+  async getHolidaysCarryover(
+    params: Params<{ id: NonNullable<HolidaysCarryover["id"]> }>,
+  ): Promise<HolidaysCarryoverReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_HOLIDAYS_CARRYOVER);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v3/holidaysCarry/" + id, remainingParams);
   }
 }
 
@@ -1310,8 +1492,43 @@ export type AddNonbusinessGroupParams = {
   name: NonbusinessGroup["name"];
   preset?: "";
 };
+export type EditNonbusinessGroupParams = {
+  id: NonbusinessGroup["id"];
+  name?: NonbusinessGroup["name"];
+};
+export type DeleteNonbusinessGroupParams = {
+  id: NonbusinessGroup["id"];
+};
 export type NonbusinessDaysReturnType = {
   nonbusinessDays: Array<NonbusinessDay>;
+};
+export type NonbusinessDayReturnType = {
+  data: NonbusinessDay;
+};
+export type AddNonbusinessDayParams = {
+  nonbusinessGroupId: NonbusinessGroup["id"];
+  type: NonNullable<NonbusinessDay["type"]>;
+  name: NonbusinessDay["name"];
+  halfDay?: NonbusinessDay["halfDay"];
+  surchargeSpecial?: NonbusinessDay["surchargeSpecial"];
+  specialId?: NonbusinessDay["specialId"];
+  day?: NonbusinessDay["day"];
+  month?: NonbusinessDay["month"];
+  year?: NonbusinessDay["year"];
+};
+export type EditNonbusinessDayParams = {
+  id: NonbusinessDay["id"];
+  type?: NonNullable<NonbusinessDay["type"]>;
+  name?: NonbusinessDay["name"];
+  halfDay?: NonbusinessDay["halfDay"];
+  surchargeSpecial?: NonbusinessDay["surchargeSpecial"];
+  specialId?: NonbusinessDay["specialId"] | null;
+  day?: NonbusinessDay["day"] | null;
+  month?: NonbusinessDay["month"] | null;
+  year?: NonbusinessDay["year"] | null;
+};
+export type DeleteNonbusinessDayParams = {
+  id: NonbusinessDay["id"];
 };
 export type NonbusinessDaysParams = {
   nonbusinessGroupId?: NonbusinessGroup["id"] | Array<NonbusinessGroup["id"]>;
@@ -1436,6 +1653,24 @@ export type AddWorkTimesChangeRequestReturnType =
 export type OvertimecarryRowReturnType = {
   overtimeCarry: Array<OvertimecarryRow>;
 };
+export type OvertimecarryRowSingleReturnType = {
+  data: OvertimecarryRow;
+};
+export type AddOvertimecarryParams = {
+  year: OvertimecarryRow["year"];
+  usersId: OvertimecarryRow["usersId"];
+  hours: OvertimecarryRow["hours"];
+  note?: OvertimecarryRow["note"];
+};
+export type EditOvertimecarryParams = {
+  id: NonNullable<OvertimecarryRow["id"]>;
+  year?: OvertimecarryRow["year"];
+  hours?: OvertimecarryRow["hours"];
+  note?: OvertimecarryRow["note"];
+};
+export type DeleteOvertimecarryParams = {
+  id: NonNullable<OvertimecarryRow["id"]>;
+};
 export type OvertimecarryRowParams = {
   /** The user ID by which the overtime carry rows should be filtered */
   usersId?: number;
@@ -1445,6 +1680,26 @@ export type OvertimecarryRowParams = {
 
 export type HolidaysQuotasReturnType = {
   holidaysQuota: Array<HolidaysQuota>;
+};
+export type HolidaysQuotaReturnType = {
+  data: HolidaysQuota;
+};
+export type AddHolidaysQuotaParams = {
+  usersId: HolidaysQuota["usersId"];
+  yearSince: HolidaysQuota["yearSince"];
+  yearUntil?: HolidaysQuota["yearUntil"];
+  count: HolidaysQuota["count"];
+  note?: HolidaysQuota["note"];
+};
+export type EditHolidaysQuotaParams = {
+  id: HolidaysQuota["id"];
+  yearSince?: HolidaysQuota["yearSince"];
+  yearUntil?: HolidaysQuota["yearUntil"];
+  count?: HolidaysQuota["count"];
+  note?: HolidaysQuota["note"];
+};
+export type DeleteHolidaysQuotaParams = {
+  id: HolidaysQuota["id"];
 };
 export type HolidaysQuotasParams = {
   filter?: {
@@ -1458,6 +1713,24 @@ export type HolidaysQuotasParams = {
 
 export type HolidaysCarryoversReturnType = {
   holidaysCarry: Array<HolidaysCarryover>;
+};
+export type HolidaysCarryoverReturnType = {
+  data: HolidaysCarryover;
+};
+export type AddHolidaysCarryoverParams = {
+  year: HolidaysCarryover["year"];
+  usersId: HolidaysCarryover["usersId"];
+  count: HolidaysCarryover["count"];
+  note?: HolidaysCarryover["note"];
+};
+export type EditHolidaysCarryoverParams = {
+  id: NonNullable<HolidaysCarryover["id"]>;
+  year?: HolidaysCarryover["year"];
+  count?: HolidaysCarryover["count"];
+  note?: HolidaysCarryover["note"];
+};
+export type DeleteHolidaysCarryoverParams = {
+  id: NonNullable<HolidaysCarryover["id"]>;
 };
 export type HolidaysCarryoversParams = {
   /** The user ID by which the holidays carry rows should be filtered */

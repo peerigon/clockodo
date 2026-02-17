@@ -628,6 +628,20 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getNonbusinessGroup()", () => {
+      it("correctly builds getNonbusinessGroup() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/nonbusinessGroups/123")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getNonbusinessGroup({ id: 123 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("getNonbusinessDays()", () => {
       it("correctly builds getNonbusinessDays() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -659,6 +673,20 @@ describe("Clockodo (instance)", () => {
             { nonbusinessgroupsId: 123 },
           ),
         ).rejects.toThrowError('Missing required parameter "year"');
+      });
+    });
+
+    describe("getNonbusinessDay()", () => {
+      it("correctly builds getNonbusinessDay() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/nonbusinessDays/12?year=2026")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getNonbusinessDay({ id: 12, year: 2026 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
       });
     });
 
@@ -726,6 +754,20 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getOvertimecarryRow()", () => {
+      it("correctly builds getOvertimecarryRow() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/overtimeCarry/7")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getOvertimecarryRow({ id: 7 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("getHolidaysQuotas()", () => {
       it("correctly builds getHolidaysQuotas() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -740,6 +782,20 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getHolidaysQuota()", () => {
+      it("correctly builds getHolidaysQuota() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v2/holidaysQuota/7")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getHolidaysQuota({ id: 7 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("getHolidaysCarryovers()", () => {
       it("correctly builds getHolidaysCarryovers() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -748,6 +804,20 @@ describe("Clockodo (instance)", () => {
 
         await expect(
           clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getHolidaysCarryover()", () => {
+      it("correctly builds getHolidaysCarryover() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/holidaysCarry/7")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getHolidaysCarryover({ id: 7 }),
         ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
@@ -870,6 +940,108 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.addNonbusinessGroup({}),
         ).rejects.toThrowError('Missing required parameter "name"');
+      });
+    });
+
+    describe("addNonbusinessDay()", () => {
+      it("correctly builds addNonbusinessDay() request", async () => {
+        const expectedParameters = {
+          nonbusiness_group_id: 2,
+          type: "DISTINCT_ONCE",
+          name: "Labor Day",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v2/nonbusinessDays", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addNonbusinessDay({
+            nonbusinessGroupId: 2,
+            type: "DISTINCT_ONCE",
+            name: "Labor Day",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("addOvertimecarry()", () => {
+      it("correctly builds addOvertimecarry() request", async () => {
+        const expectedParameters = {
+          users_id: 17,
+          year: 2028,
+          hours: 8,
+          note: "carryover",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v3/overtimeCarry", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addOvertimecarry({
+            usersId: 17,
+            year: 2028,
+            hours: 8,
+            note: "carryover",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("addHolidaysQuota()", () => {
+      it("correctly builds addHolidaysQuota() request", async () => {
+        const expectedParameters = {
+          users_id: 17,
+          year_since: 2028,
+          count: 30,
+          note: "default",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v2/holidaysQuota", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addHolidaysQuota({
+            usersId: 17,
+            yearSince: 2028,
+            count: 30,
+            note: "default",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("addHolidaysCarryover()", () => {
+      it("correctly builds addHolidaysCarryover() request", async () => {
+        const expectedParameters = {
+          users_id: 17,
+          year: 2028,
+          count: 5,
+          note: "carry",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v3/holidaysCarry", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addHolidaysCarryover({
+            usersId: 17,
+            year: 2028,
+            count: 5,
+            note: "carry",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
       });
     });
 
@@ -1367,6 +1539,105 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("editNonbusinessGroup()", () => {
+      it("correctly builds editNonbusinessGroup() request", async () => {
+        const nonbusinessGroup = {
+          id: 2,
+          name: "Holidays",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v2/nonbusinessGroups/2", mapRequestBody(nonbusinessGroup))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editNonbusinessGroup(nonbusinessGroup),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editNonbusinessDay()", () => {
+      it("correctly builds editNonbusinessDay() request", async () => {
+        const nonbusinessDay = {
+          id: 2,
+          name: "Holiday",
+          type: "DISTINCT_RECURRING" as const,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v2/nonbusinessDays/2", mapRequestBody(nonbusinessDay))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editNonbusinessDay(nonbusinessDay),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editOvertimecarry()", () => {
+      it("correctly builds editOvertimecarry() request", async () => {
+        const overtimecarryRow = {
+          id: 2,
+          hours: 8,
+          note: "updated",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v3/overtimeCarry/2", mapRequestBody(overtimecarryRow))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editOvertimecarry(overtimecarryRow),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editHolidaysQuota()", () => {
+      it("correctly builds editHolidaysQuota() request", async () => {
+        const holidaysQuota = {
+          id: 2,
+          count: 25,
+          note: "updated",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v2/holidaysQuota/2", mapRequestBody(holidaysQuota))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editHolidaysQuota(holidaysQuota),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editHolidaysCarryover()", () => {
+      it("correctly builds editHolidaysCarryover() request", async () => {
+        const holidaysCarryover = {
+          id: 2,
+          count: 5,
+          note: "updated",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v3/holidaysCarry/2", mapRequestBody(holidaysCarryover))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editHolidaysCarryover(holidaysCarryover),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("DELETE", () => {
@@ -1538,6 +1809,76 @@ describe("Clockodo (instance)", () => {
 
         await expect(
           clockodo.deleteSurchargeModel({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteNonbusinessGroup()", () => {
+      it("correctly builds deleteNonbusinessGroup() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v2/nonbusinessGroups/31")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteNonbusinessGroup({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteNonbusinessDay()", () => {
+      it("correctly builds deleteNonbusinessDay() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v2/nonbusinessDays/31")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteNonbusinessDay({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteOvertimecarry()", () => {
+      it("correctly builds deleteOvertimecarry() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v3/overtimeCarry/31")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteOvertimecarry({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteHolidaysQuota()", () => {
+      it("correctly builds deleteHolidaysQuota() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v2/holidaysQuota/31")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteHolidaysQuota({ id: 31 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteHolidaysCarryover()", () => {
+      it("correctly builds deleteHolidaysCarryover() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v3/holidaysCarry/31")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteHolidaysCarryover({ id: 31 }),
         ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
