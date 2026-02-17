@@ -454,9 +454,7 @@ export class Clockodo {
     return this.api.get("/v2/nonbusinessDays/" + id, remainingParams);
   }
 
-  async getAggregatesUsersMe(
-    params?: Params,
-  ): Promise<AggregatesUsersMeReturnType> {
+  async getMe(params?: Params): Promise<AggregatesUsersMeReturnType> {
     return this.api.get("/v3/users/me", params);
   }
 

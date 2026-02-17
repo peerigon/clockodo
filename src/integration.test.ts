@@ -365,9 +365,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
     });
   });
 
-  describe("getAggregatesUsersMe()", () => {
+  describe("getMe()", () => {
     it("returns expected data format", async () => {
-      const me = await clockodo.getAggregatesUsersMe();
+      const me = await clockodo.getMe();
       const { user, company } = me;
 
       expect(user).toHaveProperty("id");

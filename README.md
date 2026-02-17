@@ -572,14 +572,14 @@ await clockodo.getNonbusinessDay({ id: 12, year: 2026 });
 
 ---
 
-### getAggregatesUsersMe()
+### [getMe()](https://docs.clockodo.com/#tag/User/operation/getUsersMeV4)
 
 Gets user and company settings for the logged-in user.
 
 #### Example:
 
 ```js
-await clockodo.getAggregatesUsersMe();
+await clockodo.getMe();
 ```
 
 ---
