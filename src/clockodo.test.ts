@@ -480,6 +480,50 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getSubproject()", () => {
+      it("correctly builds getSubproject() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/subprojects/11")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getSubproject({ id: 11 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getSubprojectsPage()", () => {
+      it("correctly builds getSubprojectsPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/subprojects")
+          .reply(200, {});
+
+        await expect(clockodo.getSubprojectsPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
+
+    describe("getSubprojects()", () => {
+      it("requests all subproject pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v3/subprojects?",
+          countPages: 3,
+          createPageResponse: (page) => ({ data: [page] }),
+        });
+
+        const { data } = await clockodo.getSubprojects();
+
+        expect(data).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
+
     describe("getService()", () => {
       it("correctly builds getService() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -1093,6 +1137,30 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("addSubproject()", () => {
+      it("correctly builds addSubproject() request", async () => {
+        const expectedParameters = {
+          projects_id: 1,
+          name: "SDK Migration",
+          billable_default: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v3/subprojects", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addSubproject({
+            projectsId: 1,
+            name: "SDK Migration",
+            billableDefault: true,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("addService()", () => {
       it("correctly builds addService() request", async () => {
         const expectedParameters = {
@@ -1426,6 +1494,43 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("editSubproject()", () => {
+      it("correctly builds editSubproject() request", async () => {
+        const subproject = {
+          id: 20,
+          name: "SDK Migration Phase 2",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v3/subprojects/20", mapRequestBody(subproject))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editSubproject(subproject),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("completeSubproject()", () => {
+      it("correctly builds completeSubproject() request", async () => {
+        const expectedParameters = {
+          completed: true,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v3/subprojects/20/complete", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.completeSubproject({ id: 20, completed: true }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("editService()", () => {
       it("correctly builds editService() request", async () => {
         const service = {
@@ -1691,6 +1796,20 @@ describe("Clockodo (instance)", () => {
 
         await expect(
           clockodo.deleteProject({ id: 8 }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteSubproject()", () => {
+      it("correctly builds deleteSubproject() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/v3/subprojects/8")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteSubproject({ id: 8 }),
         ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();

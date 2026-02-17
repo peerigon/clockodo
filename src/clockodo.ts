@@ -36,6 +36,7 @@ import { type NonbusinessGroup } from "./models/nonbusinessGroup.js";
 import { type OvertimecarryRow } from "./models/overtimecarry.js";
 import { type Project } from "./models/project.js";
 import { type Service } from "./models/service.js";
+import { type Subproject } from "./models/subproject.js";
 import { type SurchargeModel } from "./models/surchargeModel.js";
 import { type TargethoursRow } from "./models/targethours.js";
 import { type Team } from "./models/team.js";
@@ -174,6 +175,39 @@ export class Clockodo {
     return {
       ...remainingResponse,
       projects,
+    };
+  }
+
+  async getSubproject(
+    params: Params<{ id: Subproject["id"] }>,
+  ): Promise<SubprojectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_SUBPROJECT);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v3/subprojects/" + id, remainingParams);
+  }
+
+  async getSubprojectsPage(
+    params?: Params<SubprojectsParams & ParamsWithPage>,
+  ): Promise<SubprojectsReturnType> {
+    return this.api.get("/v3/subprojects", params);
+  }
+
+  async getSubprojects(
+    params?: Params<SubprojectsParams>,
+  ): Promise<ResponseWithoutPaging<SubprojectsReturnType>> {
+    const pages = await this.api.getAllPages<SubprojectsReturnType>(
+      "/v3/subprojects",
+      params,
+    );
+    const firstPage = assertExists(pages[0]);
+    const { paging, ...remainingResponse } = firstPage;
+    const data = pages.flatMap((page) => page.data);
+
+    return {
+      ...remainingResponse,
+      data,
     };
   }
 
@@ -514,6 +548,14 @@ export class Clockodo {
     return this.api.post("/v4/projects", params);
   }
 
+  async addSubproject(
+    params: Params<AddSubprojectParams>,
+  ): Promise<SubprojectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_SUBPROJECT);
+
+    return this.api.post("/v3/subprojects", params);
+  }
+
   async addService(
     params: Params<AddServiceParams>,
   ): Promise<ServiceReturnType> {
@@ -672,6 +714,26 @@ export class Clockodo {
     return this.api.put("/v4/projects/" + id, params);
   }
 
+  async editSubproject(
+    params: Params<EditSubprojectParams>,
+  ): Promise<SubprojectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_SUBPROJECT);
+
+    const { id } = params;
+
+    return this.api.put("/v3/subprojects/" + id, params);
+  }
+
+  async completeSubproject(
+    params: Params<CompleteSubprojectParams>,
+  ): Promise<SubprojectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.COMPLETE_SUBPROJECT);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v3/subprojects/" + id + "/complete", remainingParams);
+  }
+
   async editService(
     params: Params<EditServiceParams>,
   ): Promise<ServiceReturnType> {
@@ -778,6 +840,16 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v4/projects/" + id, params);
+  }
+
+  async deleteSubproject(
+    params: Params<DeleteSubprojectParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_SUBPROJECT);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/subprojects/" + id, params);
   }
 
   async deleteService(
@@ -1219,6 +1291,20 @@ export type ProjectsReturnType = ResponseWithPaging &
     projects: Array<Project>;
   };
 export type ProjectReturnType = { project: Project };
+export type SubprojectsParams = ParamsWithSort<SortIdNameActive> & {
+  filter?: {
+    active?: boolean;
+    completed?: boolean;
+    fulltext?: string;
+    projectsId?: number;
+  };
+};
+export type SubprojectsReturnType = ResponseWithPaging & {
+  data: Array<Subproject>;
+};
+export type SubprojectReturnType = {
+  data: Subproject;
+};
 export type AddProjectParams = {
   name: Project["name"];
   customersId: Project["customersId"];
@@ -1230,6 +1316,17 @@ export type AddProjectParams = {
   startDate?: Project["startDate"];
   budget?: Project["budget"];
   billServiceId?: Project["billServiceId"];
+};
+export type AddSubprojectParams = {
+  projectsId: Subproject["projectsId"];
+  name: Subproject["name"];
+  billableDefault?: Subproject["billableDefault"];
+  budget?: Subproject["budget"];
+  number?: Subproject["number"];
+  note?: Subproject["note"];
+  startDate?: Subproject["startDate"];
+  deadline?: Subproject["deadline"];
+  billServiceId?: Subproject["billServiceId"];
 };
 export type EditProjectParams = {
   id: Project["id"];
@@ -1244,10 +1341,30 @@ export type EditProjectParams = {
   budget?: Project["budget"];
   billServiceId?: Project["billServiceId"];
 };
+export type EditSubprojectParams = {
+  id: Subproject["id"];
+  name?: Subproject["name"];
+  billableDefault?: Subproject["billableDefault"];
+  budget?: Subproject["budget"];
+  number?: Subproject["number"];
+  note?: Subproject["note"];
+  startDate?: Subproject["startDate"];
+  deadline?: Subproject["deadline"];
+  billServiceId?: Subproject["billServiceId"];
+};
 export type DeleteProjectParams = {
   id: Project["id"];
   dryRun?: boolean;
   force?: boolean;
+};
+export type DeleteSubprojectParams = {
+  id: Subproject["id"];
+  dryRun?: boolean;
+  force?: boolean;
+};
+export type CompleteSubprojectParams = {
+  id: Subproject["id"];
+  completed: Subproject["completed"];
 };
 
 export type ServiceParams = ParamsWithSort<SortIdNameActive> & {

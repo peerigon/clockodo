@@ -327,6 +327,42 @@ await clockodo.getProjectsPage({ page: 2 });
 
 ---
 
+### [getSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectByIdV3)
+
+Get a subproject by its ID.
+
+#### Example:
+
+```js
+await clockodo.getSubproject({ id: 11 });
+```
+
+---
+
+### [getSubprojects()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectsV3)
+
+Get all subprojects from all pages.
+
+#### Example:
+
+```js
+await clockodo.getSubprojects();
+```
+
+---
+
+### [getSubprojectsPage()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectsV3)
+
+Get all subprojects from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getSubprojectsPage({ page: 2 });
+```
+
+---
+
 ### [getService()](https://docs.clockodo.com/#tag/Service/operation/getServiceByIdV4)
 
 Get a service by its ID.
@@ -883,6 +919,18 @@ await clockodo.addProject({ name: "Clockodo Api Wrapper", customersId: 1 });
 
 ---
 
+### [addSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/createSubprojectV3)
+
+Creates a subproject for an existing project.
+
+#### Example:
+
+```js
+await clockodo.addSubproject({ projectsId: 1, name: "SDK Migration" });
+```
+
+---
+
 ### [addService()](https://docs.clockodo.com/#tag/Service/operation/createServiceV4)
 
 Adds to the list of services offered by your organization.
@@ -1102,6 +1150,30 @@ await clockodo.editProject({ id: 20, name: "Awesome new project" });
 
 ---
 
+### [editSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/updateSubprojectByIdV3)
+
+Edit existing subproject.
+
+#### Example:
+
+```js
+await clockodo.editSubproject({ id: 20, name: "SDK Migration Phase 2" });
+```
+
+---
+
+### [completeSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/completeSubprojectByIdV3)
+
+Set a subproject's completion status.
+
+#### Example:
+
+```js
+await clockodo.completeSubproject({ id: 20, completed: true });
+```
+
+---
+
 ### [editService()](https://docs.clockodo.com/#tag/Service/operation/updateServiceByIdV4)
 
 Edit existing service.
@@ -1236,6 +1308,18 @@ Deletes the project.
 
 ```js
 await clockodo.deleteProject({ id: 8 });
+```
+
+---
+
+### [deleteSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/deleteSubprojectByIdV3)
+
+Deletes the subproject.
+
+#### Example:
+
+```js
+await clockodo.deleteSubproject({ id: 8 });
 ```
 
 ---
