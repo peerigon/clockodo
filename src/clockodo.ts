@@ -18,7 +18,6 @@ import {
   type AccessToCustomersProjects,
   type AccessToServices,
 } from "./models/access.js";
-import { type Company } from "./models/company.js";
 import { type Customer } from "./models/customer.js";
 import { type EntriesText } from "./models/entriesText.js";
 import {
@@ -44,7 +43,6 @@ import { type TargethoursRow } from "./models/targethours.js";
 import { type Team } from "./models/team.js";
 import { type User } from "./models/user.js";
 import { UserReportType, type UserReport } from "./models/userReport.js";
-import { type WorktimeRegulation } from "./models/worktimeRegulation.js";
 import {
   WorkTimeChangeRequestStatus,
   type WorkTimeChangeRequest,
@@ -472,7 +470,7 @@ export class Clockodo {
     return this.api.get("/v2/nonbusinessDays/" + id, remainingParams);
   }
 
-  async getMe(params?: Params): Promise<AggregatesUsersMeReturnType> {
+  async getMe(params?: Params): Promise<MeReturnType> {
     return this.api.get("/v3/users/me", params);
   }
 
@@ -1667,10 +1665,8 @@ export type NonbusinessDaysParams = {
   nonbusinessGroupId?: NonbusinessGroup["id"] | Array<NonbusinessGroup["id"]>;
   year: number;
 };
-export type AggregatesUsersMeReturnType = {
-  user: User;
-  company: Company;
-  worktimeRegulation: WorktimeRegulation;
+export type MeReturnType = {
+  data: User;
 };
 export type ClockReturnType = {
   /** The currently running entry */

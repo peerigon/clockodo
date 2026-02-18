@@ -367,12 +367,9 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
   describe("getMe()", () => {
     it("returns expected data format", async () => {
-      const me = await clockodo.getMe();
-      const { user, company } = me;
+      const { data: user } = await clockodo.getMe();
 
       expect(user).toHaveProperty("id");
-      expect(company).toHaveProperty("id");
-      expect(me).toHaveProperty("worktimeRegulation");
     });
   });
 });
