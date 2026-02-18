@@ -1,3 +1,9 @@
+/**
+ * Key and payload mapping helpers between Clockodo snake_case and SDK
+ * camelCase.
+ *
+ * @module
+ */
 /* eslint-disable @typescript-eslint/no-deprecated */
 // On first sight, you might think that the typings in this module could be improved.
 // However, we don't have typings for the snake_case models which is why we don't

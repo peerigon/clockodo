@@ -1,3 +1,8 @@
+/**
+ * Type definitions for supported HTTP request headers sent to Clockodo.
+ *
+ * @module
+ */
 /** Documents request headers that can be set for requests to the Clockodo API. */
 export type RequestHeaders = Partial<
   WithAcceptLanguage &

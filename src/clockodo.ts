@@ -1,3 +1,8 @@
+/**
+ * Clockodo client class with typed API endpoint methods and DTOs.
+ *
+ * @module
+ */
 // The Clockodo instance is just too big. We should split it into smaller files.
 /* eslint-disable max-lines */
 import {

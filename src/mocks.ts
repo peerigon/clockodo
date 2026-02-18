@@ -1,3 +1,8 @@
+/**
+ * Convenience exports and setup helpers for SDK mock data.
+ *
+ * @module
+ */
 import { faker } from "@faker-js/faker";
 
 export * from "./models/absence.mocks.js";

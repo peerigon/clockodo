@@ -1,3 +1,9 @@
+/**
+ * HTTP API client primitives, shared request/response types, and pagination
+ * helpers.
+ *
+ * @module
+ */
 import axios from "axios";
 import pLimit from "p-limit";
 import qs from "qs";

@@ -1,3 +1,8 @@
+/**
+ * Public package entrypoint for the main Clockodo SDK API.
+ *
+ * @module
+ */
 export * from "../models/absence.js";
 export * from "../models/access.js";
 export * from "../models/company.js";

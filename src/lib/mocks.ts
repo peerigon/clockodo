@@ -1,3 +1,8 @@
+/**
+ * Internal mock generation helpers shared by model mock factories.
+ *
+ * @module
+ */
 // These date helpers are not meant to replace an actual date library.
 // They are inaccurate and sometimes just wrong, see https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca
 // They should only be used for generating mock data.

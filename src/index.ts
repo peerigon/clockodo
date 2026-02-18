@@ -1,3 +1,8 @@
+/**
+ * Legacy aggregate exports for the Clockodo SDK.
+ *
+ * @module
+ */
 export * from "./models/absence.js";
 export * from "./models/access.js";
 export * from "./models/company.js";

@@ -1,3 +1,8 @@
+/**
+ * Public package entrypoint for mock data generators and utilities.
+ *
+ * @module
+ */
 export * from "../lib/mocks.js";
 export * from "../models/absence.mocks.js";
 export * from "../models/customer.mocks.js";

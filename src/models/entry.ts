@@ -1,3 +1,8 @@
+/**
+ * Entry model types and entry-specific runtime utility helpers.
+ *
+ * @module
+ */
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import { type LumpsumService } from "./lumpsumService.js";
 import { type Project } from "./project.js";
