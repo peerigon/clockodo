@@ -1838,10 +1838,6 @@ export type DeleteHolidaysQuotaParams = {
   id: HolidaysQuota["id"];
 };
 export type HolidaysQuotasParams = {
-  filter?: {
-    usersId?: number;
-    year?: number;
-  };
   /** The user ID by which the holidays quota rows should be filtered */
   usersId?: number;
   year?: number;
