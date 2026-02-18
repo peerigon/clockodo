@@ -392,7 +392,7 @@ export class Clockodo {
     return this.api.get("/v3/users/" + id, remainingParams);
   }
 
-  async getUsers(params?: Params<UsersParam>): Promise<UsersReturnType> {
+  async getUsers(params?: Params<UsersParams>): Promise<UsersReturnType> {
     return this.api.get("/v3/users", params);
   }
 
@@ -1488,7 +1488,7 @@ export type LumpsumServicesReturnType = ResponseWithPaging & {
 };
 
 export type UserReturnType = { data: User };
-export type UsersParam = {
+export type UsersParams = {
   filter?: {
     active?: boolean;
     fulltext?: string;
