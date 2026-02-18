@@ -722,7 +722,7 @@ describe("Clockodo (instance)", () => {
           .get(
             "/v2/nonbusinessDays?" +
               qs.stringify(
-                { nonbusinessgroups_id: [123], year: 2021 },
+                { nonbusiness_group_id: [123], year: 2021 },
                 { arrayFormat: "brackets" },
               ),
           )
@@ -730,7 +730,7 @@ describe("Clockodo (instance)", () => {
 
         await expect(
           clockodo.getNonbusinessDays({
-            nonbusinessgroupsId: [123],
+            nonbusinessGroupId: [123],
             year: 2021,
           }),
         ).resolves.not.toBeInstanceOf(Error);
@@ -744,7 +744,7 @@ describe("Clockodo (instance)", () => {
         await expect(
           clockodo.getNonbusinessDays(
             // @ts-expect-error Year is missing
-            { nonbusinessgroupsId: 123 },
+            { nonbusinessGroupId: 123 },
           ),
         ).rejects.toThrowError('Missing required parameter "year"');
       });
