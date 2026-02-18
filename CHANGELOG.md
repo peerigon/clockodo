@@ -1,3 +1,10 @@
+## [28.0.1](https://github.com/peerigon/clockodo/compare/v28.0.0...v28.0.1) (2026-02-18)
+
+### Bug Fixes
+
+- Add [@module](https://github.com/module) docs ([4c3e7da](https://github.com/peerigon/clockodo/commit/4c3e7dab4472b5bc16a5ffacc36fd3aefb8e8827))
+- Incorrect filter examples in README ([eca67ab](https://github.com/peerigon/clockodo/commit/eca67abf278ac3d9573602883f15e93524592b23))
+
 # [28.0.0](https://github.com/peerigon/clockodo/compare/v27.1.0...v28.0.0) (2026-02-18)
 
 - feat!: update SDK routes, docs, and typings to latest API surface ([#324](https://github.com/peerigon/clockodo/issues/324)) ([b059f89](https://github.com/peerigon/clockodo/commit/b059f897dafbcc90018a9cd6607e5bc4ef0c9d1d))
