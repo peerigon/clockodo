@@ -1,3 +1,18 @@
+# [28.0.0](https://github.com/peerigon/clockodo/compare/v27.1.0...v28.0.0) (2026-02-18)
+
+- feat!: update SDK routes, docs, and typings to latest API surface ([#324](https://github.com/peerigon/clockodo/issues/324)) ([b059f89](https://github.com/peerigon/clockodo/commit/b059f897dafbcc90018a9cd6607e5bc4ef0c9d1d))
+
+### BREAKING CHANGES
+
+- `getAggregatesUsersMe()` was renamed to `getMe()`.
+- `getEntriesTexts()` and `getEntriesTextsPage()` now use
+  `term` instead of `text`.
+- legacy top-level `filter*` query params were removed;
+  use the supported current params/filter object.
+- TypeScript method/input/output types were updated and
+  tightened, which may require downstream code changes.
+- Rename `UsersParam` to `UsersParams`
+
 # [27.1.0](https://github.com/peerigon/clockodo/compare/v27.0.2...v27.1.0) (2026-02-12)
 
 ### Features
