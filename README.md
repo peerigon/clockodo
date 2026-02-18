@@ -161,8 +161,10 @@ Get all customers from all pages.
 await clockodo.getCustomers();
 // or
 await clockodo.getCustomers({
-  // Filter by active flag
-  filterActive: true,
+  filter: {
+    // Filter by active flag
+    active: true,
+  },
 });
 ```
 
@@ -220,8 +222,10 @@ await clockodo.getEntries({
   // timeSince and timeUntil are required
   timeSince: "2017-08-18T00:00:00Z",
   timeUntil: "2018-02-09T00:00:00Z",
-  // You can also add additional filters here
-  filterBillable: Billability.Billed,
+  filter: {
+    // You can also add additional filters here
+    billable: Billability.Billed,
+  },
 });
 ```
 
@@ -306,10 +310,12 @@ Get all projects from all pages.
 await clockodo.getProjects();
 // or
 await clockodo.getProjects({
-  // Filter by a specific customer id
-  filterCustomersId: 123,
-  // Filter by active flag
-  filterActive: true,
+  filter: {
+    // Filter by a specific customer id
+    customersId: 123,
+    // Filter by active flag
+    active: true,
+  },
 });
 ```
 
@@ -1155,8 +1161,10 @@ import { Billability } from "clockodo";
 await clockodo.editEntryGroup({
   timeSince: "2017-08-18T00:00:00Z",
   timeUntil: "2018-02-09T00:00:00Z",
-  filterText: "Browsing Reddit",
-  billable: Billability.NotBillable,
+  filter: {
+    text: "Browsing Reddit",
+    billable: Billability.NotBillable,
+  },
 });
 ```
 
