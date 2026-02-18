@@ -11,6 +11,10 @@ export type Customer = {
   billableDefault: boolean;
   /** Note about the customer. Only for owners and managers */
   note?: string | null;
+  /** Linked billing service id */
+  billServiceId?: string | null;
   /** Customer color */
   color: number;
+  /** Whether this is test data */
+  testData: boolean;
 };

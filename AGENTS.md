@@ -45,6 +45,7 @@ This project uses npm scripts for all development tasks:
 - SDK methods live on the Clockodo class in `src/clockodo.ts`; API calls go through `src/lib/api.ts`
 - Request/response keys are mapped to camelCase in `src/lib/mappings.ts`
 - Uses ES module syntax throughout (`.ts` extensions in imports)
+- Keep `README.md` API method documentation in sync whenever public SDK methods are added, removed, or renamed
 
 ## Pulling Updates from Upstream
 

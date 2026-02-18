@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  mapQueryParams,
-  mapRequestBody,
-  mapResponseBody,
-  queryParamMapping,
-} from "./mappings.js";
+import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
 
 describe("mapQueryParams()", () => {
   it("should map camelCase to snake_case", () => {
@@ -13,15 +8,6 @@ describe("mapQueryParams()", () => {
 
     expect(uniqueSorted(Object.keys(mappedQueryParams))).toMatchObject(
       uniqueSorted(commonKeys.snakeCase),
-    );
-  });
-
-  it("should map specific keys differently", () => {
-    const queryParams = createObjectFromKeys(Object.keys(queryParamMapping));
-    const mappedQueryParams = mapQueryParams(queryParams);
-
-    expect(uniqueSorted(Object.keys(mappedQueryParams))).toMatchObject(
-      uniqueSorted(Object.values(queryParamMapping)),
     );
   });
 

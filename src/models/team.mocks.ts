@@ -10,5 +10,6 @@ export const createTeamMocks = ({
     return {
       id: index,
       name: faker.person.jobArea() + " Team",
+      leader: faker.datatype.boolean() ? index : null,
     };
   });

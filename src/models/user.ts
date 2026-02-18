@@ -95,7 +95,9 @@ export type User = {
    * - "null" if the company default is applicable
    */
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  nonbusinessgroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
+  nonbusinessGroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
+  /** Co-worker initials */
+  initials: string | null;
   /**
    * The number can be used to calculate the work time edit lock. First day that
    * requires a change request is at today - x The values for "no work time edit
@@ -113,6 +115,18 @@ export type User = {
   defaultHolidaysCount: boolean;
   /** Specifies if the user uses the default target hours */
   defaultTargetHours: boolean;
+  /** Co-worker start date */
+  startDate?: string | null;
+  /** Whether this is a future co-worker */
+  futureCoworker?: boolean;
+  /** Uses company default work time regulation */
+  defaultWorkTimeRegulation?: boolean;
+  /** Work time regulation id in newer API naming */
+  workTimeRegulationsId?: number | null;
+  /** Budget notification toggle */
+  budgetNotifications?: boolean;
+  /** Creator user id */
+  creator?: number | null;
 };
 
 export enum UserRole {
@@ -128,6 +142,7 @@ export enum UserLanguage {
 }
 
 export enum UserWageType {
+  All = 0,
   Salary = 1,
   HourlyWage = 2,
 }

@@ -24,7 +24,7 @@ const clockodo = new Clockodo({
   client: {
     // You need to add some information about yourself that will be
     // sent along every request,
-    // see https://www.clockodo.com/en/api/ "Client identification"
+    // see https://docs.clockodo.com/#section/Clockodo-REST-API/Client-identification
     // PLEASE NOTE: name + ";" + email must not be longer than 50 characters.
     name: "Your application/company",
     email: "technical-contact@your-company.com",
@@ -55,9 +55,9 @@ clockodo.api.config({
 
 ## API
 
-We have provided methods for each of the endpoints available by the Clockodo API. In order to provide a seamless API to JavaScript, we renamed the request and response object keys from what you will see in the Clockodo docs by removing special characters and converting to camel casing. If you are interested, you can find the mappings in the [mappings.ts file](https://github.com/peerigon/clockodo/blob/main/src/lib/mappings.ts).
+We provide methods for Clockodo endpoints and normalize payload keys automatically: query params and request bodies are mapped from camelCase to snake_case (deeply), response bodies are mapped from snake_case to camelCase (deeply), and empty query values (`undefined`, `null`, `""`) are omitted. You can find the implementation in [`src/lib/mappings.ts`](./src/lib/mappings.ts).
 
-For any questions about the different properties please consult the official [Clockodo-API](https://www.clockodo.com/en/api/).
+For any questions about the different properties please consult the official Clockodo API documentation.
 
 Some constants are also available for import:
 
@@ -79,7 +79,7 @@ Checkout [models](https://github.com/peerigon/clockodo/blob/main/src/models) for
 
 ## Get Methods
 
-### getAbsence()
+### [getAbsence()](https://docs.clockodo.com/#tag/Absence/operation/getAbsenceByIdV4)
 
 Gets a selected absence by its ID.
 
@@ -91,7 +91,7 @@ await clockodo.getAbsence({ id: 7 });
 
 ---
 
-### getUsersAccessCustomersProjects()
+### [getUsersAccessCustomersProjects()](https://docs.clockodo.com/#tag/User/operation/getUsersAccessCustomersProjectByIdV2)
 
 Gets a user's (readonly) access rights for customers and projects.
 
@@ -103,7 +103,7 @@ await clockodo.getUsersAccessCustomersProjects({ usersId: 67325 });
 
 ---
 
-### getUsersAccessServices()
+### [getUsersAccessServices()](https://docs.clockodo.com/#tag/User/operation/getUsersAccessServiceByIdV2)
 
 Gets a user's (readonly) access rights for services.
 
@@ -115,7 +115,7 @@ await clockodo.getUsersAccessServices({ usersId: 67325 });
 
 ---
 
-### getAbsences()
+### [getAbsences()](https://docs.clockodo.com/#tag/Absence/operation/getAbsencesV4)
 
 Gets a list of absences in the provided year
 
@@ -127,7 +127,7 @@ await clockodo.getAbsences({ year: 2018 });
 
 ---
 
-### getClock()
+### [getClock()](https://docs.clockodo.com/#tag/Clock/operation/getClockV2)
 
 Get currently running entry for the credentials attached to Clockodo object.
 
@@ -139,7 +139,7 @@ await clockodo.getClock();
 
 ---
 
-### getCustomer()
+### [getCustomer()](https://docs.clockodo.com/#tag/Customer/operation/getCustomerByIdV3)
 
 Get specific customer by ID
 
@@ -151,7 +151,7 @@ await clockodo.getCustomer({ id: 777 });
 
 ---
 
-### getCustomers()
+### [getCustomers()](https://docs.clockodo.com/#tag/Customer/operation/getCustomersV3)
 
 Get all customers from all pages.
 
@@ -168,7 +168,7 @@ await clockodo.getCustomers({
 
 ---
 
-### getCustomersPage()
+### [getCustomersPage()](https://docs.clockodo.com/#tag/Customer/operation/getCustomersV3)
 
 Get all customers from a specific page.
 
@@ -180,7 +180,7 @@ await clockodo.getCustomersPage({ page: 2 });
 
 ---
 
-### getEntry()
+### [getEntry()](https://docs.clockodo.com/#tag/Entry/operation/getEntryByIdV2)
 
 Get an entry by its ID.
 
@@ -192,7 +192,22 @@ await clockodo.getEntry({ id: 4 });
 
 ---
 
-### getEntries()
+### splitAllEntriesAtMidnight()
+
+Splits all entries for a given user and day at midnight.
+
+#### Example:
+
+```js
+await clockodo.splitAllEntriesAtMidnight({
+  day: "2026-02-17",
+  usersId: 123,
+});
+```
+
+---
+
+### [getEntries()](https://docs.clockodo.com/#tag/Entry/operation/getEntriesV2)
 
 Get all entries from all pages.
 
@@ -212,7 +227,7 @@ await clockodo.getEntries({
 
 ---
 
-### getEntriesPage()
+### [getEntriesPage()](https://docs.clockodo.com/#tag/Entry/operation/getEntriesV2)
 
 Get all entries from a specific page
 
@@ -228,7 +243,7 @@ await clockodo.getEntriesPage({
 
 ---
 
-### getEntryGroups()
+### [getEntryGroups()](https://docs.clockodo.com/#tag/EntryGroup/operation/getEntrygroupsV2)
 
 Get a group of entries defined by your criteria.
 
@@ -245,31 +260,31 @@ await clockodo.getEntryGroups({
 
 ---
 
-### getEntriesTexts()
+### [getEntriesTexts()](https://docs.clockodo.com/#tag/EntryText/operation/getEntriesTextsV3)
 
 Retreive all descriptions (and no additional info) entered for time and lump sum entries from all pages.
 
 #### Example:
 
 ```js
-await clockodo.getEntriesTexts({ text: "meeting with client" });
+await clockodo.getEntriesTexts({ term: "meeting with client" });
 ```
 
 ---
 
-### getEntriesTextsPage()
+### [getEntriesTextsPage()](https://docs.clockodo.com/#tag/EntryText/operation/getEntriesTextsV3)
 
 Retreive all descriptions from a specific page.
 
 #### Example:
 
 ```js
-await clockodo.getEntriesTextsPage({ text: "meeting with client", page: 2 });
+await clockodo.getEntriesTextsPage({ term: "meeting with client", page: 2 });
 ```
 
 ---
 
-### getProject()
+### [getProject()](https://docs.clockodo.com/#tag/Project/operation/getProjectByIdV4)
 
 Get a project by its ID.
 
@@ -281,7 +296,7 @@ await clockodo.getProject({ id: 1985 });
 
 ---
 
-### getProjects()
+### [getProjects()](https://docs.clockodo.com/#tag/Project/operation/getProjectsV4)
 
 Get all projects from all pages.
 
@@ -300,7 +315,7 @@ await clockodo.getProjects({
 
 ---
 
-### getProjectsPage()
+### [getProjectsPage()](https://docs.clockodo.com/#tag/Project/operation/getProjectsV4)
 
 Get all projects from a specific page.
 
@@ -312,7 +327,67 @@ await clockodo.getProjectsPage({ page: 2 });
 
 ---
 
-### getService()
+### [getProjectsReports()](https://docs.clockodo.com/#tag/ProjectReport/operation/getProjectsReportsV4)
+
+Get all project report rows from all pages.
+
+#### Example:
+
+```js
+await clockodo.getProjectsReports();
+```
+
+---
+
+### [getProjectsReportsPage()](https://docs.clockodo.com/#tag/ProjectReport/operation/getProjectsReportsV4)
+
+Get project report rows from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getProjectsReportsPage({ page: 2 });
+```
+
+---
+
+### [getSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectByIdV3)
+
+Get a subproject by its ID.
+
+#### Example:
+
+```js
+await clockodo.getSubproject({ id: 11 });
+```
+
+---
+
+### [getSubprojects()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectsV3)
+
+Get all subprojects from all pages.
+
+#### Example:
+
+```js
+await clockodo.getSubprojects();
+```
+
+---
+
+### [getSubprojectsPage()](https://docs.clockodo.com/#tag/Subproject/operation/getSubprojectsV3)
+
+Get all subprojects from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getSubprojectsPage({ page: 2 });
+```
+
+---
+
+### [getService()](https://docs.clockodo.com/#tag/Service/operation/getServiceByIdV4)
 
 Get a service by its ID.
 
@@ -324,7 +399,7 @@ await clockodo.getService({ id: 10 });
 
 ---
 
-### getServices()
+### [getServices()](https://docs.clockodo.com/#tag/Service/operation/getServicesV4)
 
 Get list of all services
 
@@ -336,7 +411,19 @@ await clockodo.getServices();
 
 ---
 
-### getTeam()
+### [getServicesPage()](https://docs.clockodo.com/#tag/Service/operation/getServicesV4)
+
+Get a list of services from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getServicesPage({ page: 2 });
+```
+
+---
+
+### [getTeam()](https://docs.clockodo.com/#tag/Team/operation/getTeamByIdV3)
 
 Get team by id.
 
@@ -348,7 +435,7 @@ await clockodo.getTeam({ id: 10 });
 
 ---
 
-### getTeams()
+### [getTeams()](https://docs.clockodo.com/#tag/Team/operation/getTeamsV3)
 
 Get list of all teams.
 
@@ -360,7 +447,7 @@ await clockodo.getTeams();
 
 ---
 
-### getLumpSumService()
+### [getLumpSumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServiceByIdV4)
 
 Get a lumpsum service by its ID.
 
@@ -372,7 +459,7 @@ await clockodo.getLumpSumService({ id: 10 });
 
 ---
 
-### getLumpSumServices()
+### [getLumpSumServices()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServicesV4)
 
 Get a list of all lumpsum services
 
@@ -384,7 +471,19 @@ await clockodo.getLumpSumServices();
 
 ---
 
-### getTargethoursRow()
+### [getLumpSumServicesPage()](https://docs.clockodo.com/#tag/LumpSumService/operation/getLumpSumServicesV4)
+
+Get a list of lumpsum services from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getLumpSumServicesPage({ page: 2 });
+```
+
+---
+
+### [getTargethoursRow()](https://docs.clockodo.com/#tag/TargetHour/operation/getTargethourById)
 
 Get a specific target hour period for a specific user by its ID (not the ID of the user)
 
@@ -396,7 +495,7 @@ await clockodo.getTargethoursRow({ id: 1234 });
 
 ---
 
-### getTargethours()
+### [getTargethours()](https://docs.clockodo.com/#tag/TargetHour/operation/getTargethours)
 
 Get list of target hours for all users, with option to pass an object with an `usersId` to filter the history of target hours to a specific user.
 
@@ -410,7 +509,7 @@ await clockodo.getTargethours({ usersId: 346923 });
 
 ---
 
-### getUser()
+### [getUser()](https://docs.clockodo.com/#tag/User/operation/getUserByIdV3)
 
 Get a co-worker by their ID.
 
@@ -422,7 +521,7 @@ await clockodo.getUser({ id: 1263 });
 
 ---
 
-### getUsers()
+### [getUsers()](https://docs.clockodo.com/#tag/User/operation/getUsersV3)
 
 Get list of users
 
@@ -434,9 +533,33 @@ await clockodo.getUsers();
 
 ---
 
-### getUserReport()
+### getSurchargeModel()
 
-Get a co-worker by their ID.
+Get a surcharge model by ID.
+
+#### Example:
+
+```js
+await clockodo.getSurchargeModel({ id: 7 });
+```
+
+---
+
+### getSurchargeModels()
+
+Get all surcharge models.
+
+#### Example:
+
+```js
+await clockodo.getSurchargeModels();
+```
+
+---
+
+### [getUserReport()](https://docs.clockodo.com/#tag/UserReport/operation/getUserreportById)
+
+Get a report for a specific user and year.
 
 #### Example:
 
@@ -446,7 +569,7 @@ await clockodo.getUserReport({ usersId: 1263, year: 2017 });
 
 ---
 
-### getUserReports()
+### [getUserReports()](https://docs.clockodo.com/#tag/UserReport/operation/getUserreports)
 
 Get an employee/user's report, which contains data such as hours worked and holidays taken.
 
@@ -458,9 +581,9 @@ await clockodo.getUserReports({ year: 2017, type: 1 });
 
 ---
 
-### [getNonbusinessGroups()](https://www.clockodo.com/en/api/nonbusinessgroups/)
+### [getNonbusinessGroups()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/getNonbusinessGroupsV2)
 
-With this resource you can read all nonbusiness groups. The editing and adding of nonbusiness groups is currently not possible.
+Gets all nonbusiness groups.
 
 #### Example:
 
@@ -470,36 +593,198 @@ await clockodo.getNonbusinessGroups();
 
 ---
 
-### [getNonbusinessDays()](https://www.clockodo.com/en/api/nonbusinessdays/)
+### [getNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/getNonbusinessGroupByIdV2)
 
-With this resource you can read all nonbusiness days. The editing and adding of nonbusiness days is currently not possible.
+Gets a nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.getNonbusinessGroup({ id: 123 });
+```
+
+---
+
+### [getNonbusinessDays()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/getNonbusinessDaysV2)
+
+Gets all nonbusiness days for a given year.
 
 #### Example:
 
 ```js
 await clockodo.getNonbusinessDays({
-  nonbusinessgroupsId: 123,
+  nonbusinessGroupId: 123,
   year: 2021,
 });
 ```
 
 ---
 
-### [getAggregatesUsersMe()](https://www.clockodo.com/en/api/aggregates/users/me/)
+### [getNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/getNonbusinessDayByIdV2)
 
-With this resource you can read user and company seetings for the logged in user. Editing is currently not possible.
+Gets a nonbusiness day by ID.
 
 #### Example:
 
 ```js
-await clockodo.getAggregatesUsersMe();
+await clockodo.getNonbusinessDay({ id: 12, year: 2026 });
+```
+
+---
+
+### [getMe()](https://docs.clockodo.com/#tag/User/operation/getUsersMeV4)
+
+Gets user and company settings for the logged-in user.
+
+#### Example:
+
+```js
+await clockodo.getMe();
+```
+
+---
+
+### [getWorkTimesPage()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesV2)
+
+Gets work times from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesPage({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+  page: 2,
+});
+```
+
+---
+
+### [getWorkTimes()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesV2)
+
+Gets all work time pages for the given filter.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimes({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+});
+```
+
+---
+
+### [getWorkTimesChangeRequestsPage()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesChangeRequestsV2)
+
+Gets work time change requests from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesChangeRequestsPage({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+  page: 2,
+});
+```
+
+---
+
+### [getWorkTimesChangeRequests()](https://docs.clockodo.com/#tag/WorkTime/operation/getWorkTimesChangeRequestsV2)
+
+Gets all work time change request pages for the given filter.
+
+#### Example:
+
+```js
+await clockodo.getWorkTimesChangeRequests({
+  usersId: 123,
+  dateSince: "2026-02-01",
+  dateUntil: "2026-02-07",
+});
+```
+
+---
+
+### [getOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/getOvertimeCarryV3)
+
+Gets overtime carry rows.
+
+#### Example:
+
+```js
+await clockodo.getOvertimecarry({ usersId: 17, year: 2028 });
+```
+
+---
+
+### [getOvertimecarryRow()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/getOvertimeCarryByIdV3)
+
+Gets an overtime carry row by ID.
+
+#### Example:
+
+```js
+await clockodo.getOvertimecarryRow({ id: 7 });
+```
+
+---
+
+### [getHolidaysQuotas()](https://docs.clockodo.com/#tag/HolidayQuota/operation/getHolidaysQuotaV2)
+
+Gets holiday quota rows.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysQuotas({ usersId: 17, year: 2028 });
+```
+
+---
+
+### [getHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/getHolidaysQuotumByIdV2)
+
+Gets a holiday quota row by ID.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysQuota({ id: 7 });
+```
+
+---
+
+### [getHolidaysCarryovers()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/getHolidaysCarryV3)
+
+Gets holiday carryover rows.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysCarryovers({ usersId: 17, year: 2028 });
+```
+
+---
+
+### [getHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/getHolidaysCarryByIdV3)
+
+Gets a holiday carryover row by ID.
+
+#### Example:
+
+```js
+await clockodo.getHolidaysCarryover({ id: 7 });
 ```
 
 ---
 
 ## Post Methods
 
-### addAbsence()
+### [addAbsence()](https://docs.clockodo.com/#tag/Absence/operation/createAbsenceV4)
 
 Default behavior adds an absence for the user attached to the credentials given to the clockodo object. To add the absence for another user you can use the `usersId` option if you have the permissions.
 
@@ -519,7 +804,7 @@ await clockodo.addAbsence({
 
 ---
 
-### addCustomer()
+### [addCustomer()](https://docs.clockodo.com/#tag/Customer/operation/createCustomerV3)
 
 Adds a customer to the organization.
 
@@ -531,7 +816,96 @@ await clockodo.addCustomer({ name: "Weyland-Yutani" });
 
 ---
 
-### addEntry()
+### [addLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/createLumpSumServiceV4)
+
+Adds a lumpsum service.
+
+#### Example:
+
+```js
+await clockodo.addLumpsumService({ name: "Flat Rate Support", price: 99 });
+```
+
+---
+
+### [addNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/createNonbusinessGroupV2)
+
+Creates a nonbusiness group.
+
+#### Example:
+
+```js
+await clockodo.addNonbusinessGroup({ name: "NRW", preset: "" });
+```
+
+---
+
+### [addNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/createNonbusinessDayV2)
+
+Creates a nonbusiness day.
+
+#### Example:
+
+```js
+await clockodo.addNonbusinessDay({
+  nonbusinessGroupId: 2,
+  type: "DISTINCT_ONCE",
+  name: "Labor Day",
+});
+```
+
+---
+
+### [addOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/createOvertimeCarryV3)
+
+Creates an overtime carry row.
+
+#### Example:
+
+```js
+await clockodo.addOvertimecarry({
+  usersId: 17,
+  year: 2028,
+  hours: 8,
+  note: "carryover",
+});
+```
+
+---
+
+### [addHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/createHolidaysQuotumV2)
+
+Creates a holidays quota row.
+
+#### Example:
+
+```js
+await clockodo.addHolidaysQuota({
+  usersId: 17,
+  yearSince: 2028,
+  count: 30,
+});
+```
+
+---
+
+### [addHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/createHolidaysCarryV3)
+
+Creates a holidays carryover row.
+
+#### Example:
+
+```js
+await clockodo.addHolidaysCarryover({
+  usersId: 17,
+  year: 2028,
+  count: 5,
+});
+```
+
+---
+
+### [addEntry()](https://docs.clockodo.com/#tag/Entry/operation/createEntryV2)
 
 Creates an entry for either the user attached to the Clockodo instance or the passed in `usersId`. Depending on the type of entry different properties are required:
 
@@ -557,7 +931,7 @@ await clockodo.addEntry({
 
 ---
 
-### addProject()
+### [addProject()](https://docs.clockodo.com/#tag/Project/operation/createProjectV4)
 
 Creates a project for an existing customer.
 
@@ -569,7 +943,19 @@ await clockodo.addProject({ name: "Clockodo Api Wrapper", customersId: 1 });
 
 ---
 
-### addService()
+### [addSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/createSubprojectV3)
+
+Creates a subproject for an existing project.
+
+#### Example:
+
+```js
+await clockodo.addSubproject({ projectsId: 1, name: "SDK Migration" });
+```
+
+---
+
+### [addService()](https://docs.clockodo.com/#tag/Service/operation/createServiceV4)
 
 Adds to the list of services offered by your organization.
 
@@ -581,7 +967,7 @@ await clockodo.addService({ name: "Thinking" });
 
 ---
 
-### addTeam()
+### [addTeam()](https://docs.clockodo.com/#tag/Team/operation/createTeamV3)
 
 Creates a new team under your organization.
 
@@ -593,7 +979,7 @@ await clockodo.addTeam({ name: "Gold Team" });
 
 ---
 
-### addUser()
+### [addUser()](https://docs.clockodo.com/#tag/User/operation/createUserV3)
 
 Creates new user in organization.
 
@@ -612,7 +998,19 @@ await clockodo.addUser({
 
 ---
 
-### startClock()
+### addSurchargeModel()
+
+Adds a surcharge model.
+
+#### Example:
+
+```js
+await clockodo.addSurchargeModel({ name: "Night Shift", accumulation: true });
+```
+
+---
+
+### [startClock()](https://docs.clockodo.com/#tag/Clock/operation/createClockV2)
 
 Start a new running clockodo entry.
 
@@ -631,9 +1029,57 @@ await clockodo.startClock({
 
 ---
 
+### [addWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/createWorkTimesChangeRequestV2)
+
+Creates a work time change request.
+
+#### Example:
+
+```js
+import { WorkTimeChangeRequestIntervalType } from "clockodo";
+
+await clockodo.addWorkTimesChangeRequest({
+  date: "2026-02-17",
+  usersId: 123,
+  changes: [
+    {
+      type: WorkTimeChangeRequestIntervalType.Add,
+      timeSince: "2026-02-17T08:00:00Z",
+      timeUntil: "2026-02-17T12:00:00Z",
+    },
+  ],
+});
+```
+
+---
+
+### [approveWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/approveWorkTimesChangeRequestByIdV3)
+
+Approves a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.approveWorkTimesChangeRequest({ id: 17 });
+```
+
+---
+
+### [declineWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/createWorkTimesChangeRequestsDeclineByIdV2)
+
+Declines a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.declineWorkTimesChangeRequest({ id: 17 });
+```
+
+---
+
 ## Put methods
 
-### changeClockDuration()
+### [changeClockDuration()](https://docs.clockodo.com/#tag/Clock/operation/updateClockByIdV2)
 
 Changes the duration of an entry. Because the ID returned by clock methods is just the entry ID, and this function can only be used after an entry is finished, there seems to be no difference from using editEntry().
 
@@ -649,7 +1095,7 @@ await clockodo.changeClockDuration({
 
 ---
 
-### editAbsence()
+### [editAbsence()](https://docs.clockodo.com/#tag/Absence/operation/updateAbsenceByIdV4)
 
 Edit existing Clockodo absence.
 
@@ -661,7 +1107,7 @@ await clockodo.editAbsence({ id: 74, note: "I know what he did last summer" });
 
 ---
 
-### editCustomer()
+### [editCustomer()](https://docs.clockodo.com/#tag/Customer/operation/updateCustomerByIdV3)
 
 Edit existing Clockodo customer.
 
@@ -673,7 +1119,19 @@ await clockodo.editCustomer({ id: 15, name: "The Mystery Gang" });
 
 ---
 
-### editEntry()
+### [editLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/updateLumpSumServiceByIdV4)
+
+Edit an existing lumpsum service.
+
+#### Example:
+
+```js
+await clockodo.editLumpsumService({ id: 15, name: "Updated Flat Rate" });
+```
+
+---
+
+### [editEntry()](https://docs.clockodo.com/#tag/Entry/operation/updateEntryByIdV2)
 
 Changes the values of a Clockodo entry. Unlike changeClockDuration(), editEntry() can seemingly mutate any of the accepted parameters even when the entry is running.
 
@@ -685,7 +1143,7 @@ await clockodo.editEntry({ id: 365, duration: 540 });
 
 ---
 
-### editEntryGroup()
+### [editEntryGroup()](https://docs.clockodo.com/#tag/EntryGroup/operation/updateEntrygroupV2)
 
 Allows for mass edit of entries based on a set of filters.
 
@@ -704,7 +1162,7 @@ await clockodo.editEntryGroup({
 
 ---
 
-### editProject()
+### [editProject()](https://docs.clockodo.com/#tag/Project/operation/updateProjectByIdV4)
 
 Edit existing project.
 
@@ -716,7 +1174,55 @@ await clockodo.editProject({ id: 20, name: "Awesome new project" });
 
 ---
 
-### editService()
+### [completeProject()](https://docs.clockodo.com/#tag/Project/operation/completeProjectByIdV4)
+
+Set a project's completion status.
+
+#### Example:
+
+```js
+await clockodo.completeProject({ id: 20, completed: true });
+```
+
+---
+
+### [setProjectBilled()](https://docs.clockodo.com/#tag/Project/operation/updateProjectsSetBilledByIdV3)
+
+Set a project's billed status and billed amount.
+
+#### Example:
+
+```js
+await clockodo.setProjectBilled({ id: 20, billed: true, billedMoney: 1234.5 });
+```
+
+---
+
+### [editSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/updateSubprojectByIdV3)
+
+Edit existing subproject.
+
+#### Example:
+
+```js
+await clockodo.editSubproject({ id: 20, name: "SDK Migration Phase 2" });
+```
+
+---
+
+### [completeSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/completeSubprojectByIdV3)
+
+Set a subproject's completion status.
+
+#### Example:
+
+```js
+await clockodo.completeSubproject({ id: 20, completed: true });
+```
+
+---
+
+### [editService()](https://docs.clockodo.com/#tag/Service/operation/updateServiceByIdV4)
 
 Edit existing service.
 
@@ -728,7 +1234,7 @@ await clockodo.editService({ id: 23, name: "Room Service" });
 
 ---
 
-### editTeam()
+### [editTeam()](https://docs.clockodo.com/#tag/Team/operation/updateTeamByIdV3)
 
 Edit existing team.
 
@@ -740,7 +1246,7 @@ await clockodo.editTeam({ id: 6324, name: "New Team Name" });
 
 ---
 
-### editUser()
+### [editUser()](https://docs.clockodo.com/#tag/User/operation/updateUserByIdV3)
 
 Edit existing user.
 
@@ -752,9 +1258,85 @@ await clockodo.editUser({ id: 33, name: "Moalo Loco" });
 
 ---
 
+### editSurchargeModel()
+
+Edit an existing surcharge model.
+
+#### Example:
+
+```js
+await clockodo.editSurchargeModel({ id: 365, name: "ABC" });
+```
+
+---
+
+### [editNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/updateNonbusinessGroupByIdV2)
+
+Edits a nonbusiness group.
+
+#### Example:
+
+```js
+await clockodo.editNonbusinessGroup({ id: 2, name: "Holidays" });
+```
+
+---
+
+### [editNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/updateNonbusinessDayByIdV2)
+
+Edits a nonbusiness day.
+
+#### Example:
+
+```js
+await clockodo.editNonbusinessDay({
+  id: 2,
+  name: "Holiday",
+  type: "DISTINCT_RECURRING",
+});
+```
+
+---
+
+### [editOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/updateOvertimeCarryByIdV3)
+
+Edits an overtime carry row.
+
+#### Example:
+
+```js
+await clockodo.editOvertimecarry({ id: 2, hours: 8, note: "updated" });
+```
+
+---
+
+### [editHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/updateHolidaysQuotumByIdV2)
+
+Edits a holidays quota row.
+
+#### Example:
+
+```js
+await clockodo.editHolidaysQuota({ id: 2, count: 25, note: "updated" });
+```
+
+---
+
+### [editHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/updateHolidaysCarryByIdV3)
+
+Edits a holidays carryover row.
+
+#### Example:
+
+```js
+await clockodo.editHolidaysCarryover({ id: 2, count: 5, note: "updated" });
+```
+
+---
+
 ## Delete methods
 
-### deleteCustomer()
+### [deleteCustomer()](https://docs.clockodo.com/#tag/Customer/operation/deleteCustomerByIdV3)
 
 Deletes the customer.
 
@@ -766,7 +1348,7 @@ await clockodo.deleteCustomer({ id: 343 });
 
 ---
 
-### deleteProject()
+### [deleteProject()](https://docs.clockodo.com/#tag/Project/operation/deleteProjectByIdV4)
 
 Deletes the project.
 
@@ -778,7 +1360,19 @@ await clockodo.deleteProject({ id: 8 });
 
 ---
 
-### deleteService()
+### [deleteSubproject()](https://docs.clockodo.com/#tag/Subproject/operation/deleteSubprojectByIdV3)
+
+Deletes the subproject.
+
+#### Example:
+
+```js
+await clockodo.deleteSubproject({ id: 8 });
+```
+
+---
+
+### [deleteService()](https://docs.clockodo.com/#tag/Service/operation/deleteServiceByIdV4)
 
 Deletes the service.
 
@@ -790,7 +1384,7 @@ await clockodo.deleteService({ id: 94 });
 
 ---
 
-### deleteUser()
+### [deleteUser()](https://docs.clockodo.com/#tag/User/operation/deleteUserByIdV3)
 
 Deletes user.
 
@@ -802,7 +1396,19 @@ await clockodo.deleteUser({ id: 7 });
 
 ---
 
-### deleteAbsence()
+### deleteSurchargeModel()
+
+Deletes a surcharge model by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteSurchargeModel({ id: 31 });
+```
+
+---
+
+### [deleteAbsence()](https://docs.clockodo.com/#tag/Absence/operation/deleteAbsenceByIdV4)
 
 Deletes absence (go figure).
 
@@ -814,7 +1420,7 @@ await clockodo.deleteAbsence({ id: 31 });
 
 ---
 
-### deleteEntry()
+### [deleteEntry()](https://docs.clockodo.com/#tag/Entry/operation/deleteEntryByIdV2)
 
 Deletes a single entry by ID
 
@@ -826,7 +1432,19 @@ await clockodo.deleteEntry({ id: 543512 });
 
 ---
 
-### deleteTeam()
+### [deleteLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/deleteLumpSumServiceByIdV4)
+
+Deletes a lumpsum service by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteLumpsumService({ id: 94 });
+```
+
+---
+
+### [deleteTeam()](https://docs.clockodo.com/#tag/Team/operation/deleteTeamByIdV3)
 
 Deletes a team by ID
 
@@ -838,7 +1456,67 @@ await clockodo.deleteTeam({ id: 764 });
 
 ---
 
-### deleteEntryGroup()
+### [deleteNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/deleteNonbusinessGroupByIdV2)
+
+Deletes a nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteNonbusinessGroup({ id: 31 });
+```
+
+---
+
+### [deleteNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/deleteNonbusinessDayByIdV2)
+
+Deletes a nonbusiness day by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteNonbusinessDay({ id: 31 });
+```
+
+---
+
+### [deleteOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/deleteOvertimeCarryByIdV3)
+
+Deletes an overtime carry row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteOvertimecarry({ id: 31 });
+```
+
+---
+
+### [deleteHolidaysQuota()](https://docs.clockodo.com/#tag/HolidayQuota/operation/deleteHolidaysQuotumByIdV2)
+
+Deletes a holidays quota row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteHolidaysQuota({ id: 31 });
+```
+
+---
+
+### [deleteHolidaysCarryover()](https://docs.clockodo.com/#tag/HolidayCarryover/operation/deleteHolidaysCarryByIdV3)
+
+Deletes a holidays carryover row by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteHolidaysCarryover({ id: 31 });
+```
+
+---
+
+### [deleteEntryGroup()](https://docs.clockodo.com/#tag/EntryGroup/operation/deleteEntrygroupV2)
 
 Deletes one or more entries based on a series of filters that builds an "entry group".
 
@@ -854,7 +1532,19 @@ await clockodo.deleteEntryGroup({
 
 ---
 
-### register()
+### [withdrawWorkTimesChangeRequest()](https://docs.clockodo.com/#tag/WorkTime/operation/deleteWorkTimesChangeRequestByIdV2)
+
+Withdraws a work time change request by ID.
+
+#### Example:
+
+```js
+await clockodo.withdrawWorkTimesChangeRequest({ id: 17 });
+```
+
+---
+
+### [register()](https://docs.clockodo.com/#tag/Register/operation/createRegister)
 
 Creates a new clockodo account.
 
@@ -870,7 +1560,7 @@ await clockodo.register({
 
 ---
 
-### stopClock()
+### [stopClock()](https://docs.clockodo.com/#tag/Clock/operation/deleteClockByIdV2)
 
 Stops a running clock/entry.
 

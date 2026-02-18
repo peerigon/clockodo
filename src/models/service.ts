@@ -8,5 +8,7 @@ export type Service = {
   /** Is the service active? */
   active: boolean;
   /** Note about the service */
-  note: string | null;
+  note?: string | null;
+  /** Linked billing service id */
+  billServiceId?: string | null;
 };

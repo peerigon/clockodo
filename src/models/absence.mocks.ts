@@ -72,6 +72,9 @@ export const createAbsenceMocks = ({
       dateSince: isoDateFromDateTime(dateSince),
       dateUntil: isoDateFromDateTime(dateUntil),
       status,
+      publicNote: hasNote
+        ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
+        : null,
       note: hasNote
         ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
         : null,

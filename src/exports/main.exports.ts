@@ -12,6 +12,7 @@ export * from "../models/nonbusinessDay.js";
 export * from "../models/nonbusinessGroup.js";
 export * from "../models/project.js";
 export * from "../models/service.js";
+export * from "../models/subproject.js";
 export * from "../models/surchargeModel.js";
 export * from "../models/targethours.js";
 export * from "../models/team.js";

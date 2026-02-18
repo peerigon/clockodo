@@ -14,5 +14,8 @@ export const createServiceMocks = ({
         index % 2 === 0
           ? null
           : faker.lorem.sentences(faker.number.int({ min: 1, max: 3 })),
+      billServiceId: faker.datatype.boolean()
+        ? faker.string.alphanumeric(6)
+        : null,
     };
   });
