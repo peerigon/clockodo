@@ -1,3 +1,9 @@
+## [28.0.2](https://github.com/peerigon/clockodo/compare/v28.0.1...v28.0.2) (2026-02-21)
+
+### Bug Fixes
+
+- Merge remote-tracking branch 'upstream/main' ([fae8695](https://github.com/peerigon/clockodo/commit/fae869504acdf78a12197e05ab817ebf88f22146))
+
 ## [28.0.1](https://github.com/peerigon/clockodo/compare/v28.0.0...v28.0.1) (2026-02-18)
 
 ### Bug Fixes
