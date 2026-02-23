@@ -1,4 +1,4 @@
-export const ADD_ABSENCE = ["dateSince", "dateUntil", "type"] as const;
+export const ADD_ABSENCE = ["dateSince", "type"] as const;
 export const ADD_CUSTOMER = ["name"] as const;
 export const ADD_LUMPSUM_SERVICE = ["name", "price"] as const;
 export const ADD_TIME_ENTRY = [
@@ -77,7 +77,7 @@ export const EDIT_OVERTIMECARRY = ["id"] as const;
 export const EDIT_HOLIDAYS_QUOTA = ["id"] as const;
 export const EDIT_HOLIDAYS_CARRYOVER = ["id"] as const;
 export const GET_ABSENCE = ["id"] as const;
-export const GET_ABSENCES = ["year"] as const;
+export const GET_ABSENCES = [] as const;
 export const GET_ACCESS_CUSTOMERS_PROJECTS = ["usersId"] as const;
 export const GET_ACCESS_SERVICES = ["usersId"] as const;
 export const GET_CUSTOMER = ["id"] as const;

@@ -140,15 +140,18 @@ describe("Clockodo (instance)", () => {
     describe("getAbsences()", () => {
       it("correctly builds getAbsences() request", async () => {
         const expectedParameters = {
-          year: 218,
+          "filter[year]": [218],
         };
 
         const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/absences?" + qs.stringify(expectedParameters))
+          .get(
+            "/v4/absences?" +
+              qs.stringify(expectedParameters, { arrayFormat: "brackets" }),
+          )
           .reply(200, {});
 
         await expect(
-          clockodo.getAbsences({ year: 218 }),
+          clockodo.getAbsences({ filter: { year: [218] } }),
         ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
@@ -1323,6 +1326,28 @@ describe("Clockodo (instance)", () => {
             dateUntil: "2018-02-09",
           }),
         ).rejects.toThrowError('Missing required parameter "type"');
+      });
+
+      it("allows addAbsence() without dateUntil", async () => {
+        const expectedParameters = {
+          date_since: "2017-08-18",
+          type: AbsenceType.SpecialLeave,
+          note: "elternzeit",
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v4/absences", expectedParameters)
+          .reply(200, {});
+
+        await expect(
+          clockodo.addAbsence({
+            dateSince: "2017-08-18",
+            type: AbsenceType.SpecialLeave,
+            note: "elternzeit",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
       });
     });
     describe("register()", () => {
