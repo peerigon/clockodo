@@ -1,3 +1,9 @@
+## [28.0.3](https://github.com/peerigon/clockodo/compare/v28.0.2...v28.0.3) (2026-02-23)
+
+### Bug Fixes
+
+- Errors due to allegedly required parameters ([25879cc](https://github.com/peerigon/clockodo/commit/25879cc2d93dd91657fc4a0075393fc52e30e798))
+
 ## [28.0.2](https://github.com/peerigon/clockodo/compare/v28.0.1...v28.0.2) (2026-02-21)
 
 ### Bug Fixes
