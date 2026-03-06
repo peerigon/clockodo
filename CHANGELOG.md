@@ -1,3 +1,9 @@
+## [28.0.4](https://github.com/peerigon/clockodo/compare/v28.0.3...v28.0.4) (2026-03-06)
+
+### Bug Fixes
+
+- Add missing pagination to getUsers() and getTeams() ([1c8d183](https://github.com/peerigon/clockodo/commit/1c8d1834aad120c591f37d28fe36e5e1c535a481))
+
 ## [28.0.3](https://github.com/peerigon/clockodo/compare/v28.0.2...v28.0.3) (2026-02-23)
 
 ### Bug Fixes
