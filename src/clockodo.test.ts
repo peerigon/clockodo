@@ -599,6 +599,50 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getTeam()", () => {
+      it("correctly builds getTeam() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/teams/1")
+          .reply(200, {});
+
+        await expect(clockodo.getTeam({ id: 1 })).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
+
+    describe("getTeamsPage()", () => {
+      it("correctly builds getTeamsPage() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/teams")
+          .reply(200, {});
+
+        await expect(clockodo.getTeamsPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
+
+    describe("getTeams()", () => {
+      it("requests all team pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v3/teams?",
+          countPages: 3,
+          createPageResponse: (page) => ({ data: [page] }),
+        });
+
+        const { data } = await clockodo.getTeams();
+
+        expect(data).toMatchObject([1, 2, 3]);
+
+        nockScope.done();
+      });
+    });
+
     describe("getSingleTargetHourSet", () => {
       it("correctly builds getSingleTargetHourSet() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -641,13 +685,31 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("getUsers()", () => {
-      it("correctly builds getUsers() request", async () => {
+    describe("getUsersPage()", () => {
+      it("correctly builds getUsersPage() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get("/v3/users")
           .reply(200, {});
 
-        await expect(clockodo.getUsers()).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getUsersPage()).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
+
+    describe("getUsers()", () => {
+      it("requests all user pages", async () => {
+        const nockScope = setupPaginatedApiMock({
+          baseUrl: "/v3/users?",
+          countPages: 3,
+          createPageResponse: (page) => ({ data: [page] }),
+        });
+
+        const { data } = await clockodo.getUsers();
+
+        expect(data).toMatchObject([1, 2, 3]);
 
         nockScope.done();
       });

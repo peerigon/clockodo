@@ -443,12 +443,24 @@ await clockodo.getTeam({ id: 10 });
 
 ### [getTeams()](https://docs.clockodo.com/#tag/Team/operation/getTeamsV3)
 
-Get list of all teams.
+Get list of all teams from all pages.
 
 #### Example:
 
 ```js
 await clockodo.getTeams();
+```
+
+---
+
+### [getTeamsPage()](https://docs.clockodo.com/#tag/Team/operation/getTeamsV3)
+
+Get all teams from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getTeamsPage({ page: 2 });
 ```
 
 ---
@@ -529,12 +541,24 @@ await clockodo.getUser({ id: 1263 });
 
 ### [getUsers()](https://docs.clockodo.com/#tag/User/operation/getUsersV3)
 
-Get list of users
+Get list of users from all pages.
 
 #### Example:
 
 ```js
 await clockodo.getUsers();
+```
+
+---
+
+### [getUsersPage()](https://docs.clockodo.com/#tag/User/operation/getUsersV3)
+
+Get all users from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getUsersPage({ page: 2 });
 ```
 
 ---

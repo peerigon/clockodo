@@ -340,10 +340,20 @@ export class Clockodo {
     return this.api.get("/v3/teams/" + id, remainingParams);
   }
 
-  async getTeams(
+  async getTeamsPage(
     params?: Params<TeamsParams & ParamsWithPage>,
   ): Promise<TeamsReturnType> {
     return this.api.get("/v3/teams", params);
+  }
+
+  async getTeams(
+    params?: Params<TeamsParams>,
+  ): Promise<ResponseWithoutPaging<TeamsReturnType>> {
+    return this.getAllPagesAndMergeArray<TeamsReturnType, TeamsParams>(
+      "/v3/teams",
+      params,
+      "data",
+    );
   }
 
   async getLumpSumService(
@@ -395,8 +405,20 @@ export class Clockodo {
     return this.api.get("/v3/users/" + id, remainingParams);
   }
 
-  async getUsers(params?: Params<UsersParams>): Promise<UsersReturnType> {
+  async getUsersPage(
+    params?: Params<UsersParams & ParamsWithPage>,
+  ): Promise<UsersReturnType> {
     return this.api.get("/v3/users", params);
+  }
+
+  async getUsers(
+    params?: Params<UsersParams>,
+  ): Promise<ResponseWithoutPaging<UsersReturnType>> {
+    return this.getAllPagesAndMergeArray<UsersReturnType, UsersParams>(
+      "/v3/users",
+      params,
+      "data",
+    );
   }
 
   async getSurchargeModel(
