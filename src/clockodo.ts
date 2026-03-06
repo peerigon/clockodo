@@ -169,6 +169,12 @@ export class Clockodo {
     );
   }
 
+  async getCustomersCountProjects(
+    params?: Params<CustomersCountProjectsParams>,
+  ): Promise<CustomersCountProjectsReturnType> {
+    return this.api.get("/v3/customers/countProjects", params);
+  }
+
   async getProject(
     params: Params<{ id: Project["id"] }>,
   ): Promise<ProjectReturnType> {
@@ -498,7 +504,7 @@ export class Clockodo {
   }
 
   async getMe(params?: Params): Promise<MeReturnType> {
-    return this.api.get("/v3/users/me", params);
+    return this.api.get("/v4/users/me", params);
   }
 
   async addAbsence(
@@ -1285,6 +1291,18 @@ export type CustomersParams = ParamsWithSort<SortIdNameActive> & {
 };
 export type CustomersReturnType = ResponseWithPaging & {
   data: Array<Customer>;
+};
+export type CustomerCountProjects = {
+  customersId: Customer["id"];
+  active: number;
+  inactive: number;
+};
+export type CustomersCountProjectsParams = {
+  customersId?: Customer["id"] | Array<Customer["id"]>;
+  scope?: CustomerProjectScope;
+};
+export type CustomersCountProjectsReturnType = ResponseWithPaging & {
+  data: Array<CustomerCountProjects>;
 };
 export type ProjectsParams = ParamsWithSort<SortIdNameActive> & {
   filter?: {

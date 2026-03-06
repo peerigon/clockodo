@@ -182,6 +182,20 @@ await clockodo.getCustomersPage({ page: 2 });
 
 ---
 
+### [getCustomersCountProjects()](https://docs.clockodo.com/#tag/Customer/operation/getCustomersCountProjectsV3)
+
+Get the number of active and inactive projects per customer.
+
+#### Example:
+
+```js
+await clockodo.getCustomersCountProjects();
+// or
+await clockodo.getCustomersCountProjects({ customersId: [10, 11] });
+```
+
+---
+
 ### [getEntry()](https://docs.clockodo.com/#tag/Entry/operation/getEntryByIdV2)
 
 Get an entry by its ID.

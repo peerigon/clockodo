@@ -214,6 +214,20 @@ describe("Clockodo (instance)", () => {
       });
     });
 
+    describe("getCustomersCountProjects()", () => {
+      it("correctly builds getCustomersCountProjects() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v3/customers/countProjects")
+          .reply(200, {});
+
+        await expect(
+          clockodo.getCustomersCountProjects(),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
     describe("getLumpSumService()", () => {
       it("correctly builds getLumpSumService() request", async () => {
         const nockScope = nock(CLOCKODO_API_BASE_URL)
@@ -824,6 +838,18 @@ describe("Clockodo (instance)", () => {
         await expect(
           clockodo.getNonbusinessDay({ id: 12, year: 2026 }),
         ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getMe()", () => {
+      it("correctly builds getMe() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .get("/v4/users/me")
+          .reply(200, {});
+
+        await expect(clockodo.getMe()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
