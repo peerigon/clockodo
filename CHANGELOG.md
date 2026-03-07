@@ -1,3 +1,10 @@
+# [28.1.0](https://github.com/peerigon/clockodo/compare/v28.0.4...v28.1.0) (2026-03-07)
+
+### Features
+
+- add getCustomersCountProjects and use v4/users/me for getMe ([b179b2b](https://github.com/peerigon/clockodo/commit/b179b2bdb7443888b81ebb03876eed80bc19b8fa))
+- Add several new endpoints ([87d7ef4](https://github.com/peerigon/clockodo/commit/87d7ef42d1bd6a44615a66fe294bc265ff4e9c39))
+
 ## [28.0.4](https://github.com/peerigon/clockodo/compare/v28.0.3...v28.0.4) (2026-03-06)
 
 ### Bug Fixes
