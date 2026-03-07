@@ -541,6 +541,54 @@ await clockodo.getTargethours({ usersId: 346923 });
 
 ---
 
+### [addTargethour()](https://docs.clockodo.com/#tag/TargetHour/operation/createTargethour)
+
+Create a target hour period for a user.
+
+#### Example:
+
+```js
+import { TargethoursRowType } from "clockodo";
+
+await clockodo.addTargethour({
+  usersId: 1,
+  type: TargethoursRowType.Weekly,
+  dateSince: "2023-02-28",
+  dateUntil: null,
+  compensationMonthly: 0,
+});
+```
+
+---
+
+### [editTargethour()](https://docs.clockodo.com/#tag/TargetHour/operation/updateTargethourById)
+
+Update a target hour period by ID.
+
+#### Example:
+
+```js
+await clockodo.editTargethour({
+  id: 1234,
+  type: TargethoursRowType.Weekly,
+  dateSince: "2023-02-28",
+});
+```
+
+---
+
+### [deleteTargethour()](https://docs.clockodo.com/#tag/TargetHour/operation/deleteTargethourById)
+
+Delete a target hour period by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteTargethour({ id: 1234 });
+```
+
+---
+
 ### [getUser()](https://docs.clockodo.com/#tag/User/operation/getUserByIdV3)
 
 Get a co-worker by their ID.
@@ -684,6 +732,176 @@ Gets user and company settings for the logged-in user.
 
 ```js
 await clockodo.getMe();
+```
+
+---
+
+### [getSubscription()](https://docs.clockodo.com/#tag/Subscription/operation/getSubscriptionV2)
+
+Get subscription data.
+
+#### Example:
+
+```js
+await clockodo.getSubscription();
+```
+
+---
+
+### [getAccessGroups()](https://docs.clockodo.com/#tag/AccessGroup/operation/getAccessGroupsV2)
+
+Get list of access groups.
+
+#### Example:
+
+```js
+await clockodo.getAccessGroups();
+```
+
+---
+
+### [getAccessGroup()](https://docs.clockodo.com/#tag/AccessGroup/operation/getAccessGroupByIdV2)
+
+Get an access group by ID.
+
+#### Example:
+
+```js
+await clockodo.getAccessGroup({ id: 1 });
+```
+
+---
+
+### [getAccessGroupsCustomersProjects()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/getAccessGroupsCustomersProjectByAccessGroupsIdV2)
+
+Get customers and projects access for an access group.
+
+#### Example:
+
+```js
+await clockodo.getAccessGroupsCustomersProjects({ accessGroupsId: 1 });
+```
+
+---
+
+### [getAccessGroupsServices()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/getAccessGroupsServiceByAccessGroupsIdV2)
+
+Get services access for an access group.
+
+#### Example:
+
+```js
+await clockodo.getAccessGroupsServices({ accessGroupsId: 1 });
+```
+
+---
+
+### [getIndividualUserAccessCustomersProjects()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/getIndividualUserAccessCustomersProjectByUsersIdV2)
+
+Get a user's access rights for customers and projects.
+
+#### Example:
+
+```js
+await clockodo.getIndividualUserAccessCustomersProjects({ usersId: 67325 });
+```
+
+---
+
+### [getIndividualUserAccessServices()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/getIndividualUserAccessServiceByUsersIdV2)
+
+Get a user's access rights for services.
+
+#### Example:
+
+```js
+await clockodo.getIndividualUserAccessServices({ usersId: 67325 });
+```
+
+---
+
+### [getOvertimeReductions()](https://docs.clockodo.com/#tag/OvertimeReduction/operation/getOvertimeReductionsV3)
+
+Get overtime reduction rows, optionally filtered by user(s).
+
+#### Example:
+
+```js
+await clockodo.getOvertimeReductions();
+// or
+await clockodo.getOvertimeReductions({ usersId: 17 });
+```
+
+---
+
+### [getOvertimeReduction()](https://docs.clockodo.com/#tag/OvertimeReduction/operation/getOvertimeReductionByIdV3)
+
+Get an overtime reduction by ID.
+
+#### Example:
+
+```js
+await clockodo.getOvertimeReduction({ id: 7 });
+```
+
+---
+
+### [getUsersNonbusinessDaysPage()](https://docs.clockodo.com/#tag/UserNonbusinessDay/operation/getUsersNonbusinessDaysV2)
+
+Get user nonbusiness days from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getUsersNonbusinessDaysPage({ page: 1 });
+```
+
+---
+
+### [getUsersNonbusinessDays()](https://docs.clockodo.com/#tag/UserNonbusinessDay/operation/getUsersNonbusinessDaysV2)
+
+Get all user nonbusiness days (all pages).
+
+#### Example:
+
+```js
+await clockodo.getUsersNonbusinessDays();
+```
+
+---
+
+### [getUsersNonbusinessGroupsPage()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/getUsersNonbusinessGroupsV3)
+
+Get user nonbusiness groups from a specific page.
+
+#### Example:
+
+```js
+await clockodo.getUsersNonbusinessGroupsPage({ page: 1 });
+```
+
+---
+
+### [getUsersNonbusinessGroups()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/getUsersNonbusinessGroupsV3)
+
+Get all user nonbusiness groups (all pages).
+
+#### Example:
+
+```js
+await clockodo.getUsersNonbusinessGroups();
+```
+
+---
+
+### [getUsersNonbusinessGroup()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/getUsersNonbusinessGroupByIdV3)
+
+Get a user nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.getUsersNonbusinessGroup({ id: 1 });
 ```
 
 ---
@@ -860,6 +1078,18 @@ await clockodo.addCustomer({ name: "Weyland-Yutani" });
 
 ---
 
+### [addAccessGroup()](https://docs.clockodo.com/#tag/AccessGroup/operation/createAccessGroupV2)
+
+Create an access group (name required; optional user IDs for members).
+
+#### Example:
+
+```js
+await clockodo.addAccessGroup({ name: "Support Team" });
+```
+
+---
+
 ### [addLumpsumService()](https://docs.clockodo.com/#tag/LumpSumService/operation/createLumpSumServiceV4)
 
 Adds a lumpsum service.
@@ -900,6 +1130,22 @@ await clockodo.addNonbusinessDay({
 
 ---
 
+### [addUsersNonbusinessGroup()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/createUsersNonbusinessGroupV3)
+
+Create a user nonbusiness group.
+
+#### Example:
+
+```js
+await clockodo.addUsersNonbusinessGroup({
+  usersId: 17,
+  nonbusinessGroupsId: 1,
+  dateSince: "2023-02-28",
+});
+```
+
+---
+
 ### [addOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/createOvertimeCarryV3)
 
 Creates an overtime carry row.
@@ -912,6 +1158,22 @@ await clockodo.addOvertimecarry({
   year: 2028,
   hours: 8,
   note: "carryover",
+});
+```
+
+---
+
+### [addOvertimeReduction()](https://docs.clockodo.com/#tag/OvertimeReduction/operation/createOvertimeReductionV3)
+
+Create an overtime reduction row.
+
+#### Example:
+
+```js
+await clockodo.addOvertimeReduction({
+  usersId: 17,
+  date: "2028-01-28",
+  hours: 8,
 });
 ```
 
@@ -983,6 +1245,18 @@ Creates a project for an existing customer.
 
 ```js
 await clockodo.addProject({ name: "Clockodo Api Wrapper", customersId: 1 });
+```
+
+---
+
+### [createNextProjectInterval()](https://docs.clockodo.com/#tag/Project/operation/createProjectsCreateNextIntervalByIdV2)
+
+Create the next project interval for a project by ID.
+
+#### Example:
+
+```js
+await clockodo.createNextProjectInterval({ id: 20 });
 ```
 
 ---
@@ -1159,6 +1433,204 @@ Edit existing Clockodo customer.
 
 ```js
 await clockodo.editCustomer({ id: 15, name: "The Mystery Gang" });
+```
+
+---
+
+### [editAccessGroup()](https://docs.clockodo.com/#tag/AccessGroup/operation/updateAccessGroupByIdV2)
+
+Update an access group by ID.
+
+#### Example:
+
+```js
+await clockodo.editAccessGroup({ id: 1, name: "Updated Name" });
+```
+
+---
+
+### [editAccessGroupsCustomer()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/updateAccessGroupsCustomerByAccessGroupsIdV2)
+
+Update an access group's customer access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editAccessGroupsCustomer({
+  accessGroupsId: 1,
+  id: 10,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
+```
+
+---
+
+### [editAccessGroupsCustomersGeneral()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/updateAccessGroupsCustomersGeneralByAccessGroupsIdV2)
+
+Update an access group's general customers access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editAccessGroupsCustomersGeneral({
+  accessGroupsId: 1,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
+```
+
+---
+
+### [editAccessGroupsProject()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/updateAccessGroupsProjectByAccessGroupsIdV2)
+
+Update an access group's project access.
+
+#### Example:
+
+```js
+import { AccessProjectOrServiceValue, AccessType } from "clockodo";
+
+await clockodo.editAccessGroupsProject({
+  accessGroupsId: 1,
+  id: 5,
+  type: AccessType.Add,
+  value: AccessProjectOrServiceValue.FullAccess,
+});
+```
+
+---
+
+### [editAccessGroupsService()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/updateAccessGroupsServiceByAccessGroupsIdV2)
+
+Update an access group's service access.
+
+#### Example:
+
+```js
+import { AccessProjectOrServiceValue, AccessType } from "clockodo";
+
+await clockodo.editAccessGroupsService({
+  accessGroupsId: 1,
+  id: 3,
+  type: AccessType.Add,
+  value: AccessProjectOrServiceValue.FullAccess,
+});
+```
+
+---
+
+### [editAccessGroupsServicesGeneral()](https://docs.clockodo.com/#tag/AccessGroupAccess/operation/updateAccessGroupsServicesGeneralByAccessGroupsIdV2)
+
+Update an access group's general services access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editAccessGroupsServicesGeneral({
+  accessGroupsId: 1,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
+```
+
+---
+
+### [editIndividualUserAccessCustomer()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/updateIndividualUserAccessCustomerByUsersIdV2)
+
+Update a user's customer access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editIndividualUserAccessCustomer({
+  usersId: 67325,
+  id: 10,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
+```
+
+---
+
+### [editIndividualUserAccessCustomersGeneral()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/updateIndividualUserAccessCustomersGeneralByUsersIdV2)
+
+Update a user's general customers access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editIndividualUserAccessCustomersGeneral({
+  usersId: 67325,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
+```
+
+---
+
+### [editIndividualUserAccessProject()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/updateIndividualUserAccessProjectByUsersIdV2)
+
+Update a user's project access.
+
+#### Example:
+
+```js
+import { AccessProjectOrServiceValue, AccessType } from "clockodo";
+
+await clockodo.editIndividualUserAccessProject({
+  usersId: 67325,
+  id: 5,
+  type: AccessType.Add,
+  value: AccessProjectOrServiceValue.FullAccess,
+});
+```
+
+---
+
+### [editIndividualUserAccessService()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/updateIndividualUserAccessServiceByUsersIdV2)
+
+Update a user's service access.
+
+#### Example:
+
+```js
+import { AccessProjectOrServiceValue, AccessType } from "clockodo";
+
+await clockodo.editIndividualUserAccessService({
+  usersId: 67325,
+  id: 3,
+  type: AccessType.Add,
+  value: AccessProjectOrServiceValue.FullAccess,
+});
+```
+
+---
+
+### [editIndividualUserAccessServicesGeneral()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/updateIndividualUserAccessServicesGeneralByUsersIdV2)
+
+Update a user's general services access.
+
+#### Example:
+
+```js
+import { AccessType, AccessValue } from "clockodo";
+
+await clockodo.editIndividualUserAccessServicesGeneral({
+  usersId: 67325,
+  type: AccessType.Add,
+  value: AccessValue.FullAccess,
+});
 ```
 
 ---
@@ -1344,6 +1816,18 @@ await clockodo.editNonbusinessDay({
 
 ---
 
+### [editUsersNonbusinessGroup()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/updateUsersNonbusinessGroupByIdV3)
+
+Update a user nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.editUsersNonbusinessGroup({ id: 1, name: "Updated Group" });
+```
+
+---
+
 ### [editOvertimecarry()](https://docs.clockodo.com/#tag/OvertimeCarry/operation/updateOvertimeCarryByIdV3)
 
 Edits an overtime carry row.
@@ -1352,6 +1836,18 @@ Edits an overtime carry row.
 
 ```js
 await clockodo.editOvertimecarry({ id: 2, hours: 8, note: "updated" });
+```
+
+---
+
+### [editOvertimeReduction()](https://docs.clockodo.com/#tag/OvertimeReduction/operation/updateOvertimeReductionByIdV3)
+
+Update an overtime reduction by ID.
+
+#### Example:
+
+```js
+await clockodo.editOvertimeReduction({ id: 2, hours: 4 });
 ```
 
 ---
@@ -1381,6 +1877,30 @@ await clockodo.editHolidaysCarryover({ id: 2, count: 5, note: "updated" });
 ---
 
 ## Delete methods
+
+### [clearIndividualUserAccess()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/clearIndividualUserAccessByUsersIdV2)
+
+Clear individual user access (customers/projects and services) for a user.
+
+#### Example:
+
+```js
+await clockodo.clearIndividualUserAccess({ usersId: 67325 });
+```
+
+---
+
+### [deleteAccessGroup()](https://docs.clockodo.com/#tag/AccessGroup/operation/deleteAccessGroupByIdV2)
+
+Delete an access group by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteAccessGroup({ id: 1 });
+```
+
+---
 
 ### [deleteCustomer()](https://docs.clockodo.com/#tag/Customer/operation/deleteCustomerByIdV3)
 
@@ -1514,6 +2034,18 @@ await clockodo.deleteNonbusinessGroup({ id: 31 });
 
 ---
 
+### [deleteUsersNonbusinessGroup()](https://docs.clockodo.com/#tag/UserNonbusinessGroup/operation/deleteUsersNonbusinessGroupByIdV3)
+
+Delete a user nonbusiness group by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteUsersNonbusinessGroup({ id: 1 });
+```
+
+---
+
 ### [deleteNonbusinessDay()](https://docs.clockodo.com/#tag/NonbusinessDay/operation/deleteNonbusinessDayByIdV2)
 
 Deletes a nonbusiness day by ID.
@@ -1534,6 +2066,18 @@ Deletes an overtime carry row by ID.
 
 ```js
 await clockodo.deleteOvertimecarry({ id: 31 });
+```
+
+---
+
+### [deleteOvertimeReduction()](https://docs.clockodo.com/#tag/OvertimeReduction/operation/deleteOvertimeReductionByIdV3)
+
+Delete an overtime reduction by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteOvertimeReduction({ id: 31 });
 ```
 
 ---

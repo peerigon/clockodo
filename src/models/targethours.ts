@@ -71,3 +71,6 @@ export type TargethoursRowMonthly = CommonTargethoursRow & {
 };
 
 export type TargethoursRow = TargethoursRowWeekly | TargethoursRowMonthly;
+
+/** Shape for create/update; omits response-only fields (id, testData). */
+export type TargethoursRowInput = Omit<TargethoursRow, "id" | "testData">;

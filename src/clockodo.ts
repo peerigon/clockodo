@@ -20,10 +20,20 @@ import { camelCaseToSnakeCase } from "./lib/mappings.js";
 import * as REQUIRED from "./lib/requiredParams.js";
 import { type Absence } from "./models/absence.js";
 import {
-  type AccessToCustomersProjects,
-  type AccessToServices,
-} from "./models/access.js";
+  type AddAccessGroupParams,
+  type DeleteAccessGroupParams,
+  type EditAccessEntityGeneralParams,
+  type EditAccessEntityGeneralProjectOrServiceParams,
+  type EditAccessEntityParams,
+  type EditAccessEntityProjectOrServiceParams,
+  type EditAccessGroupParams,
+  type UsersAccessCustomersProjects,
+  type UsersAccessServices,
+} from "./models/accessControl.js";
+import { type AccessGroup } from "./models/accessGroup.js";
+import { type AggregatesUsersMe } from "./models/aggregatesUsersMe.js";
 import { type Customer } from "./models/customer.js";
+import { type CustomerCountProjects } from "./models/customerCountProjects.js";
 import { type EntriesText } from "./models/entriesText.js";
 import {
   Billability,
@@ -40,14 +50,23 @@ import { type LumpsumService } from "./models/lumpsumService.js";
 import { type NonbusinessDay } from "./models/nonbusinessDay.js";
 import { type NonbusinessGroup } from "./models/nonbusinessGroup.js";
 import { type OvertimecarryRow } from "./models/overtimecarry.js";
+import { type OvertimeReduction } from "./models/overtimeReduction.js";
 import { type Project } from "./models/project.js";
 import { type Service } from "./models/service.js";
 import { type Subproject } from "./models/subproject.js";
+import { type Subscription } from "./models/subscription.js";
 import { type SurchargeModel } from "./models/surchargeModel.js";
-import { type TargethoursRow } from "./models/targethours.js";
+import {
+  type TargethoursRow,
+  type TargethoursRowInput,
+} from "./models/targethours.js";
 import { type Team } from "./models/team.js";
 import { type User } from "./models/user.js";
 import { UserReportType, type UserReport } from "./models/userReport.js";
+import {
+  type UsersNonbusinessDay,
+  type UsersNonbusinessGroup,
+} from "./models/usersNonbusinessGroup.js";
 import {
   WorkTimeChangeRequestStatus,
   type WorkTimeChangeRequest,
@@ -135,6 +154,81 @@ export class Clockodo {
 
     return this.api.get(
       `/v2/users/${usersId}/access/services`,
+      remainingParams,
+    );
+  }
+
+  async getAccessGroups(params?: Params): Promise<AccessGroupsReturnType> {
+    return this.api.get("/v2/accessGroups", params);
+  }
+
+  async getAccessGroup(
+    params: Params<{ id: AccessGroup["id"] }>,
+  ): Promise<AccessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_GROUP);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get(`/v2/accessGroups/${id}`, remainingParams);
+  }
+
+  async getAccessGroupsCustomersProjects(
+    params: Params<{ accessGroupsId: AccessGroup["id"] }>,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.GET_ACCESS_GROUPS_CUSTOMERS_PROJECTS,
+    );
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.get(
+      `/v2/accessGroups/${accessGroupsId}/customersProjects`,
+      remainingParams,
+    );
+  }
+
+  async getAccessGroupsServices(
+    params: Params<{ accessGroupsId: AccessGroup["id"] }>,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_ACCESS_GROUPS_SERVICES);
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.get(
+      `/v2/accessGroups/${accessGroupsId}/services`,
+      remainingParams,
+    );
+  }
+
+  async getIndividualUserAccessCustomersProjects(
+    params: Params<{ usersId: User["id"] }>,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.GET_INDIVIDUAL_USER_ACCESS_CUSTOMERS_PROJECTS,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.get(
+      `/v2/individualUserAccess/${usersId}/customersProjects`,
+      remainingParams,
+    );
+  }
+
+  async getIndividualUserAccessServices(
+    params: Params<{ usersId: User["id"] }>,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.GET_INDIVIDUAL_USER_ACCESS_SERVICES,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.get(
+      `/v2/individualUserAccess/${usersId}/services`,
       remainingParams,
     );
   }
@@ -403,6 +497,34 @@ export class Clockodo {
     return this.api.get("/targethours", params);
   }
 
+  async addTargethour(
+    params: Params<AddTargethourParams>,
+  ): Promise<TargethoursRowReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_TARGETHOUR);
+
+    return this.api.post("/targethours", params);
+  }
+
+  async editTargethour(
+    params: Params<EditTargethourParams>,
+  ): Promise<TargethoursRowReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_TARGETHOUR);
+
+    const { id } = params;
+
+    return this.api.put("/targethours/" + id, params);
+  }
+
+  async deleteTargethour(
+    params: Params<DeleteTargethourParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_TARGETHOUR);
+
+    const { id } = params;
+
+    return this.api.delete("/targethours/" + id, params);
+  }
+
   async getUser(params: Params<{ id: User["id"] }>): Promise<UserReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_USER);
 
@@ -503,6 +625,66 @@ export class Clockodo {
     return this.api.get("/v2/nonbusinessDays/" + id, remainingParams);
   }
 
+  async getUsersNonbusinessDaysPage(
+    params?: Params<UsersNonbusinessDaysParams & ParamsWithPage>,
+  ): Promise<UsersNonbusinessDaysReturnType> {
+    return this.api.get("/v2/usersNonbusinessDays", params);
+  }
+
+  async getUsersNonbusinessDays(
+    params?: Params<UsersNonbusinessDaysParams>,
+  ): Promise<ResponseWithoutPaging<UsersNonbusinessDaysReturnType>> {
+    return this.getAllPagesAndMergeArray<
+      UsersNonbusinessDaysReturnType,
+      UsersNonbusinessDaysParams
+    >("/v2/usersNonbusinessDays", params, "data");
+  }
+
+  async getUsersNonbusinessGroup(
+    params: Params<{ id: UsersNonbusinessGroup["id"] }>,
+  ): Promise<UsersNonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_USERS_NONBUSINESS_GROUP);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v3/usersNonbusinessGroups/" + id, remainingParams);
+  }
+
+  async getUsersNonbusinessGroupsPage(
+    params?: Params<UsersNonbusinessGroupsParams & ParamsWithPage>,
+  ): Promise<UsersNonbusinessGroupsReturnType> {
+    return this.api.get("/v3/usersNonbusinessGroups", params);
+  }
+
+  async getUsersNonbusinessGroups(
+    params?: Params<UsersNonbusinessGroupsParams>,
+  ): Promise<ResponseWithoutPaging<UsersNonbusinessGroupsReturnType>> {
+    return this.getAllPagesAndMergeArray<
+      UsersNonbusinessGroupsReturnType,
+      UsersNonbusinessGroupsParams
+    >("/v3/usersNonbusinessGroups", params, "data");
+  }
+
+  async getOvertimeReductions(
+    params?: Params<OvertimeReductionsParams>,
+  ): Promise<OvertimeReductionsReturnType> {
+    return this.api.get("/v3/overtimeReductions", params);
+  }
+
+  async getOvertimeReduction(
+    params: Params<{ id: OvertimeReduction["id"] }>,
+  ): Promise<OvertimeReductionReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_OVERTIME_REDUCTION);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v3/overtimeReductions/" + id, remainingParams);
+  }
+
+  async getSubscription(params?: Params): Promise<SubscriptionReturnType> {
+    return this.api.get("/v2/subscription", params);
+  }
+
   async getMe(params?: Params): Promise<MeReturnType> {
     return this.api.get("/v4/users/me", params);
   }
@@ -521,6 +703,14 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.ADD_CUSTOMER);
 
     return this.api.post("/v3/customers", params);
+  }
+
+  async addAccessGroup(
+    params: Params<AddAccessGroupParams>,
+  ): Promise<AccessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_ACCESS_GROUP);
+
+    return this.api.post("/v2/accessGroups", params);
   }
 
   async addLumpsumService(
@@ -561,6 +751,19 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.ADD_PROJECT);
 
     return this.api.post("/v4/projects", params);
+  }
+
+  async createNextProjectInterval(
+    params: Params<{ id: Project["id"] }>,
+  ): Promise<SubprojectReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.CREATE_NEXT_PROJECT_INTERVAL);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.post(
+      `/v2/projects/${id}/createNextInterval`,
+      remainingParams,
+    );
   }
 
   async addSubproject(
@@ -617,12 +820,28 @@ export class Clockodo {
     return this.api.post("/v2/nonbusinessDays", params);
   }
 
+  async addUsersNonbusinessGroup(
+    params: Params<AddUsersNonbusinessGroupParams>,
+  ): Promise<UsersNonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_USERS_NONBUSINESS_GROUP);
+
+    return this.api.post("/v3/usersNonbusinessGroups", params);
+  }
+
   async addOvertimecarry(
     params: Params<AddOvertimecarryParams>,
   ): Promise<OvertimecarryRowSingleReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.ADD_OVERTIMECARRY);
 
     return this.api.post("/v3/overtimeCarry", params);
+  }
+
+  async addOvertimeReduction(
+    params: Params<AddOvertimeReductionParams>,
+  ): Promise<OvertimeReductionReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_OVERTIME_REDUCTION);
+
+    return this.api.post("/v3/overtimeReductions", params);
   }
 
   async addHolidaysQuota(
@@ -689,6 +908,189 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.put("/v3/customers/" + id, params);
+  }
+
+  async editAccessGroup(
+    params: Params<EditAccessGroupParams>,
+  ): Promise<AccessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_ACCESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.put("/v2/accessGroups/" + id, params);
+  }
+
+  async editAccessGroupsCustomer(
+    params: Params<
+      EditAccessEntityParams & { accessGroupsId: AccessGroup["id"] }
+    >,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_ACCESS_GROUPS_CUSTOMERS);
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/accessGroups/${accessGroupsId}/customers`,
+      remainingParams,
+    );
+  }
+
+  async editAccessGroupsCustomersGeneral(
+    params: Params<
+      EditAccessEntityGeneralParams & { accessGroupsId: AccessGroup["id"] }
+    >,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_ACCESS_GROUPS_CUSTOMERS_GENERAL,
+    );
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/accessGroups/${accessGroupsId}/customers/general`,
+      remainingParams,
+    );
+  }
+
+  async editAccessGroupsProject(
+    params: Params<
+      EditAccessEntityProjectOrServiceParams & {
+        accessGroupsId: AccessGroup["id"];
+      }
+    >,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_ACCESS_GROUPS_PROJECTS);
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/accessGroups/${accessGroupsId}/projects`,
+      remainingParams,
+    );
+  }
+
+  async editAccessGroupsService(
+    params: Params<
+      EditAccessEntityProjectOrServiceParams & {
+        accessGroupsId: AccessGroup["id"];
+      }
+    >,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_ACCESS_GROUPS_SERVICES);
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/accessGroups/${accessGroupsId}/services`,
+      remainingParams,
+    );
+  }
+
+  async editAccessGroupsServicesGeneral(
+    params: Params<
+      EditAccessEntityGeneralProjectOrServiceParams & {
+        accessGroupsId: AccessGroup["id"];
+      }
+    >,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_ACCESS_GROUPS_SERVICES_GENERAL,
+    );
+
+    const { accessGroupsId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/accessGroups/${accessGroupsId}/services/general`,
+      remainingParams,
+    );
+  }
+
+  async editIndividualUserAccessCustomer(
+    params: Params<EditAccessEntityParams & { usersId: User["id"] }>,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/individualUserAccess/${usersId}/customers`,
+      remainingParams,
+    );
+  }
+
+  async editIndividualUserAccessCustomersGeneral(
+    params: Params<EditAccessEntityGeneralParams & { usersId: User["id"] }>,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS_GENERAL,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/individualUserAccess/${usersId}/customers/general`,
+      remainingParams,
+    );
+  }
+
+  async editIndividualUserAccessProject(
+    params: Params<
+      EditAccessEntityProjectOrServiceParams & { usersId: User["id"] }
+    >,
+  ): Promise<UsersAccessCustomersProjectsReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_INDIVIDUAL_USER_ACCESS_PROJECTS,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/individualUserAccess/${usersId}/projects`,
+      remainingParams,
+    );
+  }
+
+  async editIndividualUserAccessService(
+    params: Params<
+      EditAccessEntityProjectOrServiceParams & { usersId: User["id"] }
+    >,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_INDIVIDUAL_USER_ACCESS_SERVICES,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/individualUserAccess/${usersId}/services`,
+      remainingParams,
+    );
+  }
+
+  async editIndividualUserAccessServicesGeneral(
+    params: Params<
+      EditAccessEntityGeneralProjectOrServiceParams & { usersId: User["id"] }
+    >,
+  ): Promise<UsersAccessServicesReturnType> {
+    REQUIRED.checkRequired(
+      params,
+      REQUIRED.EDIT_INDIVIDUAL_USER_ACCESS_SERVICES_GENERAL,
+    );
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.put(
+      `/v2/individualUserAccess/${usersId}/services/general`,
+      remainingParams,
+    );
   }
 
   async editLumpsumService(
@@ -837,6 +1239,26 @@ export class Clockodo {
     return this.api.put("/v3/overtimeCarry/" + id, params);
   }
 
+  async editOvertimeReduction(
+    params: Params<EditOvertimeReductionParams>,
+  ): Promise<OvertimeReductionReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_OVERTIME_REDUCTION);
+
+    const { id } = params;
+
+    return this.api.put("/v3/overtimeReductions/" + id, params);
+  }
+
+  async editUsersNonbusinessGroup(
+    params: Params<EditUsersNonbusinessGroupParams>,
+  ): Promise<UsersNonbusinessGroupReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_USERS_NONBUSINESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.put("/v3/usersNonbusinessGroups/" + id, params);
+  }
+
   async editHolidaysQuota(
     params: Params<EditHolidaysQuotaParams>,
   ): Promise<HolidaysQuotaReturnType> {
@@ -865,6 +1287,16 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v3/customers/" + id, params);
+  }
+
+  async deleteAccessGroup(
+    params: Params<DeleteAccessGroupParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_ACCESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/accessGroups/" + id, params);
   }
 
   async deleteProject(
@@ -997,6 +1429,26 @@ export class Clockodo {
     return this.api.delete("/v3/overtimeCarry/" + id, params);
   }
 
+  async deleteOvertimeReduction(
+    params: Params<DeleteOvertimeReductionParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_OVERTIME_REDUCTION);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/overtimeReductions/" + id, params);
+  }
+
+  async deleteUsersNonbusinessGroup(
+    params: Params<DeleteUsersNonbusinessGroupParams>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_USERS_NONBUSINESS_GROUP);
+
+    const { id } = params;
+
+    return this.api.delete("/v3/usersNonbusinessGroups/" + id, params);
+  }
+
   async deleteHolidaysQuota(
     params: Params<DeleteHolidaysQuotaParams>,
   ): Promise<DeleteReturnType> {
@@ -1023,6 +1475,19 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.REGISTER);
 
     return this.api.post("/register", params);
+  }
+
+  async clearIndividualUserAccess(
+    params: Params<{ usersId: User["id"] }>,
+  ): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.CLEAR_INDIVIDUAL_USER_ACCESS);
+
+    const { usersId, ...remainingParams } = params;
+
+    return this.api.post(
+      `/v2/individualUserAccess/${usersId}/clear`,
+      remainingParams,
+    );
   }
 
   async stopClock(
@@ -1246,13 +1711,15 @@ export type AbsencesParams = {
   };
   scope?: AbsenceScope;
 };
-export type UsersAccessCustomersProjectsReturnType = {
-  add: AccessToCustomersProjects;
-  report: AccessToCustomersProjects;
-  edit: AccessToCustomersProjects;
-};
-export type UsersAccessServicesReturnType = {
-  add: AccessToServices;
+export type UsersAccessCustomersProjectsReturnType =
+  UsersAccessCustomersProjects;
+export type UsersAccessServicesReturnType = UsersAccessServices;
+export type AccessGroupsReturnType = { data: Array<AccessGroup> };
+export type AccessGroupReturnType = { data: AccessGroup };
+export type AggregatesUsersMeReturnType = {
+  user: AggregatesUsersMe["user"];
+  company: AggregatesUsersMe["company"];
+  worktimeRegulation: AggregatesUsersMe["worktimeRegulation"];
 };
 export type DeleteReturnType = { success: boolean };
 export type CustomerReturnType = { data: Customer };
@@ -1291,11 +1758,6 @@ export type CustomersParams = ParamsWithSort<SortIdNameActive> & {
 };
 export type CustomersReturnType = ResponseWithPaging & {
   data: Array<Customer>;
-};
-export type CustomerCountProjects = {
-  customersId: Customer["id"];
-  active: number;
-  inactive: number;
 };
 export type CustomersCountProjectsParams = {
   customersId?: Customer["id"] | Array<Customer["id"]>;
@@ -1710,6 +2172,49 @@ export type NonbusinessDaysParams = {
   nonbusinessGroupId?: NonbusinessGroup["id"] | Array<NonbusinessGroup["id"]>;
   year: number;
 };
+export type UsersNonbusinessDaysParams = {
+  filter?: {
+    usersId?: User["id"] | Array<User["id"]>;
+  };
+  year?: number;
+};
+export type UsersNonbusinessDaysReturnType = ResponseWithPaging & {
+  data: Array<UsersNonbusinessDay>;
+};
+export type UsersNonbusinessGroupsParams = {
+  filter?: {
+    usersId?: User["id"] | Array<User["id"]>;
+    nonbusinessGroupsId?:
+      | NonbusinessGroup["id"]
+      | Array<NonbusinessGroup["id"]>;
+  };
+};
+export type UsersNonbusinessGroupsReturnType = ResponseWithPaging & {
+  data: Array<UsersNonbusinessGroup>;
+};
+export type UsersNonbusinessGroupReturnType = {
+  data: UsersNonbusinessGroup;
+};
+export type AddUsersNonbusinessGroupParams = Pick<
+  UsersNonbusinessGroup,
+  "usersId" | "nonbusinessGroupsId" | "dateSince"
+> & {
+  dateUntil?: UsersNonbusinessGroup["dateUntil"];
+};
+export type EditUsersNonbusinessGroupParams = {
+  id: UsersNonbusinessGroup["id"];
+} & Partial<
+  Pick<
+    UsersNonbusinessGroup,
+    "usersId" | "nonbusinessGroupsId" | "dateSince" | "dateUntil"
+  >
+>;
+export type DeleteUsersNonbusinessGroupParams = {
+  id: UsersNonbusinessGroup["id"];
+};
+export type SubscriptionReturnType = {
+  data: Subscription;
+};
 export type MeReturnType = {
   data: User;
 };
@@ -1764,6 +2269,30 @@ export type TargethoursRowReturnType = {
 };
 export type TargethoursReturnType = {
   targethours: Array<TargethoursRow>;
+};
+/** Request-only: API uses holiday_fixed_credit (0|1); response has absence_fixed_credit (boolean). */
+type TargethourRequestHolidayFixedCredit = {
+  holidayFixedCredit?: 0 | 1;
+};
+export type AddTargethourParams = Required<
+  Pick<
+    TargethoursRowInput,
+    "usersId" | "type" | "dateSince" | "dateUntil" | "compensationMonthly"
+  >
+> &
+  Partial<
+    Omit<
+      TargethoursRowInput,
+      "usersId" | "type" | "dateSince" | "dateUntil" | "compensationMonthly"
+    >
+  > &
+  TargethourRequestHolidayFixedCredit;
+export type EditTargethourParams = Pick<TargethoursRow, "id"> &
+  Required<Pick<TargethoursRowInput, "type" | "dateSince">> &
+  Partial<Omit<TargethoursRowInput, "type" | "dateSince">> &
+  TargethourRequestHolidayFixedCredit;
+export type DeleteTargethourParams = {
+  id: TargethoursRow["id"];
 };
 export type AddUserReturnType = {
   data: User;
@@ -1853,6 +2382,27 @@ export type OvertimecarryRowParams = {
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
+};
+export type OvertimeReductionsReturnType = {
+  data: Array<OvertimeReduction>;
+};
+export type OvertimeReductionReturnType = {
+  data: OvertimeReduction;
+};
+export type OvertimeReductionsParams = {
+  usersId?: User["id"] | Array<User["id"]>;
+};
+export type AddOvertimeReductionParams = Pick<
+  OvertimeReduction,
+  "usersId" | "date" | "hours"
+> & {
+  note?: OvertimeReduction["note"];
+};
+export type EditOvertimeReductionParams = {
+  id: OvertimeReduction["id"];
+} & Partial<Pick<OvertimeReduction, "date" | "hours" | "note">>;
+export type DeleteOvertimeReductionParams = {
+  id: OvertimeReduction["id"];
 };
 
 export type HolidaysQuotasReturnType = {

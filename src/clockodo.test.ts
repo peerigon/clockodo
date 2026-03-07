@@ -10,6 +10,7 @@ import {
   Billability,
   Clockodo,
   mapRequestBody,
+  TargethoursRowType,
   UserRole,
   type Config,
 } from "./index.js";
@@ -680,6 +681,58 @@ describe("Clockodo (instance)", () => {
         await expect(clockodo.getTargethours()).resolves.not.toBeInstanceOf(
           Error,
         );
+
+        nockScope.done();
+      });
+    });
+
+    describe("addTargethour()", () => {
+      it("correctly builds addTargethour() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/targethours")
+          .reply(200, {});
+
+        await expect(
+          clockodo.addTargethour({
+            usersId: 1,
+            type: TargethoursRowType.Weekly,
+            dateSince: "2023-02-28",
+            dateUntil: null,
+            compensationMonthly: 0,
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editTargethour()", () => {
+      it("correctly builds editTargethour() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/targethours/1234")
+          .reply(200, {});
+
+        await expect(
+          clockodo.editTargethour({
+            id: 1234,
+            type: TargethoursRowType.Weekly,
+            dateSince: "2023-02-28",
+          }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteTargethour()", () => {
+      it("correctly builds deleteTargethour() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .delete("/targethours/1234")
+          .reply(200, {});
+
+        await expect(
+          clockodo.deleteTargethour({ id: 1234 }),
+        ).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
