@@ -70,7 +70,7 @@ jobs:
           CLOCKODO_API_KEY: ${{ secrets.CLOCKODO_API_KEY }}
 
       - name: ⬆️ Upload coverage report
-        uses: coverallsapp/github-action@ba6dae83310bbd6d33ff77092650dc40bd444a2a # main
+        uses: coverallsapp/github-action@0a51d2e0b5417d06e4ecceb534aec87defc53926 # main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
