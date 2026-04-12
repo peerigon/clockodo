@@ -1,3 +1,9 @@
+## [28.1.1](https://github.com/peerigon/clockodo/compare/v28.1.0...v28.1.1) (2026-04-12)
+
+### Bug Fixes
+
+- replace deprecated toThrowError with toThrow ([a1b9f77](https://github.com/peerigon/clockodo/commit/a1b9f77184a3406a491abc3cf76f09d6a70510e9))
+
 # [28.1.0](https://github.com/peerigon/clockodo/compare/v28.0.4...v28.1.0) (2026-03-07)
 
 ### Features
