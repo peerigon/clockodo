@@ -336,7 +336,7 @@ describe("Clockodo (instance)", () => {
           clockodo.getEntriesPage({
             timeSince: "2017-08-18 00:00:00",
           }),
-        ).rejects.toThrowError('Missing required parameter "timeUntil"');
+        ).rejects.toThrow('Missing required parameter "timeUntil"');
       });
     });
 
@@ -369,7 +369,7 @@ describe("Clockodo (instance)", () => {
           clockodo.getEntries({
             timeSince: "2017-08-18 00:00:00",
           }),
-        ).rejects.toThrowError('Missing required parameter "timeUntil"');
+        ).rejects.toThrow('Missing required parameter "timeUntil"');
       });
     });
 
@@ -396,7 +396,7 @@ describe("Clockodo (instance)", () => {
         await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesTexts({}),
-        ).rejects.toThrowError('Missing required parameter "term"');
+        ).rejects.toThrow('Missing required parameter "term"');
       });
     });
 
@@ -448,7 +448,7 @@ describe("Clockodo (instance)", () => {
             timeSince: "2017-08-18 00:00:00",
             timeUntil: "2018-02-09 00:00:00",
           }),
-        ).rejects.toThrowError('Missing required parameter "grouping"');
+        ).rejects.toThrow('Missing required parameter "grouping"');
       });
     });
 
@@ -802,7 +802,7 @@ describe("Clockodo (instance)", () => {
             // @ts-expect-error Year is missing
             { usersId: 200 },
           ),
-        ).rejects.toThrowError('Missing required parameter "year"');
+        ).rejects.toThrow('Missing required parameter "year"');
       });
     });
 
@@ -878,7 +878,7 @@ describe("Clockodo (instance)", () => {
             // @ts-expect-error Year is missing
             { nonbusinessGroupId: 123 },
           ),
-        ).rejects.toThrowError('Missing required parameter "year"');
+        ).rejects.toThrow('Missing required parameter "year"');
       });
     });
 
@@ -1104,7 +1104,7 @@ describe("Clockodo (instance)", () => {
           clockodo.startClock({
             customersId: 24,
           }),
-        ).rejects.toThrowError('Missing required parameter "servicesId"');
+        ).rejects.toThrow('Missing required parameter "servicesId"');
       });
     });
 
@@ -1157,7 +1157,7 @@ describe("Clockodo (instance)", () => {
         await expect(
           // @ts-expect-error Intentional error just for the test
           clockodo.addNonbusinessGroup({}),
-        ).rejects.toThrowError('Missing required parameter "name"');
+        ).rejects.toThrow('Missing required parameter "name"');
       });
     });
 
@@ -1386,7 +1386,7 @@ describe("Clockodo (instance)", () => {
             number: "8",
             email: "angela@eu.eu",
           }),
-        ).rejects.toThrowError('Missing required parameter "role"');
+        ).rejects.toThrow('Missing required parameter "role"');
       });
     });
 
@@ -1429,7 +1429,7 @@ describe("Clockodo (instance)", () => {
             timeSince: "2020-06-02 00:00:00",
             timeUntil: "2020-06-02 00:00:01",
           }),
-        ).rejects.toThrowError('Missing required parameter "billable"');
+        ).rejects.toThrow('Missing required parameter "billable"');
       });
     });
 
@@ -1466,7 +1466,7 @@ describe("Clockodo (instance)", () => {
             dateSince: "2017-08-18",
             dateUntil: "2018-02-09",
           }),
-        ).rejects.toThrowError('Missing required parameter "type"');
+        ).rejects.toThrow('Missing required parameter "type"');
       });
 
       it("allows addAbsence() without dateUntil", async () => {
@@ -1626,7 +1626,7 @@ describe("Clockodo (instance)", () => {
             entriesId: 782,
             durationBefore: 540,
           }),
-        ).rejects.toThrowError('Missing required parameter "duration"');
+        ).rejects.toThrow('Missing required parameter "duration"');
       });
     });
 
