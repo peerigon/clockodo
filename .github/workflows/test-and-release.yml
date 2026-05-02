@@ -39,13 +39,13 @@ jobs:
 
       - name: 🗄 Cache node_modules
         id: cache-node_modules
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # main
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # main
         with:
           path: "**/node_modules"
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🗄 Cache .eslintcache
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # main
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # main
         with:
           path: .eslintcache
           key: eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
