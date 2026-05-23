@@ -57,7 +57,7 @@ clockodo.api.config({
 
 We provide methods for Clockodo endpoints and normalize payload keys automatically: query params and request bodies are mapped from camelCase to snake_case (deeply), response bodies are mapped from snake_case to camelCase (deeply), and empty query values (`undefined`, `null`, `""`) are omitted. You can find the implementation in [`src/lib/mappings.ts`](./src/lib/mappings.ts).
 
-For any questions about the different properties please consult the official Clockodo API documentation.
+For any questions about the different properties please consult the [official Clockodo API documentation](https://docs.clockodo.com/).
 
 Some constants are also available for import:
 

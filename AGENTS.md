@@ -40,6 +40,11 @@ This project uses npm scripts for all development tasks:
 - **Tests**: Co-located with source using `.test.ts` suffix; integration test in `src/integration.test.ts`
 - **Configuration**: Uses `@peerigon/configs` for shared TypeScript, ESLint, and Prettier configs
 
+## Clockodo API
+
+- API documentation: https://docs.clockodo.com/
+- OpenAPI spec: https://docs.clockodo.com/openapi.yaml
+
 ## Code Organization
 
 - SDK methods live on the Clockodo class in `src/clockodo.ts`; API calls go through `src/lib/api.ts`
