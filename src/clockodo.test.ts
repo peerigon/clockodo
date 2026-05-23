@@ -9,6 +9,7 @@ import {
   AbsenceType,
   Billability,
   Clockodo,
+  EntriesTextsMode,
   mapRequestBody,
   TargethoursRowType,
   UserRole,
@@ -377,6 +378,7 @@ describe("Clockodo (instance)", () => {
       it("requests entries texts", async () => {
         const expectedParameters = {
           term: "Some text",
+          mode: "add",
         };
         const nockScope = nock(CLOCKODO_API_BASE_URL)
           .get(`/v3/entriesTexts?${qs.stringify(expectedParameters)}`)
@@ -384,6 +386,7 @@ describe("Clockodo (instance)", () => {
 
         const { data } = await clockodo.getEntriesTexts({
           term: "Some text",
+          mode: EntriesTextsMode.Add,
         });
 
         expect(data).toMatchObject([1, 2, 3]);
@@ -397,6 +400,14 @@ describe("Clockodo (instance)", () => {
           // @ts-expect-error Intentional error just for the test
           clockodo.getEntriesTexts({}),
         ).rejects.toThrow('Missing required parameter "term"');
+      });
+      it("throws an error when getEntriesTexts() is missing mode", async () => {
+        expect.assertions(1);
+
+        await expect(
+          // @ts-expect-error Intentional error just for the test
+          clockodo.getEntriesTexts({ term: "Some text" }),
+        ).rejects.toThrow('Missing required parameter "mode"');
       });
     });
 

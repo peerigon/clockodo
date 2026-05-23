@@ -2057,7 +2057,7 @@ export type EntriesTextsParams = {
   term: string;
   /** Number of items to return */
   items?: number;
-  mode?: EntriesTextsMode;
+  mode: EntriesTextsMode;
   filter?: {
     customersId?: number;
     projectsId?: Array<number>;
@@ -2072,19 +2072,16 @@ export type EntriesTextsParams = {
     day?: string;
   };
 };
-/** Can be specified when requesting entries texts */
+/** Context for requesting entry text suggestions. */
 export enum EntriesTextsMode {
-  /** Descriptions that exactly match the submitted text (default). */
-  ExactMatch = "exact_match",
+  /** Suggestions when adding a time entry. */
+  Add = "add",
 
-  /** Descriptions that start with the submitted text fragment. */
-  StartsWith = "starts_with",
+  /** Suggestions when editing a time entry. */
+  Edit = "edit",
 
-  /** Descriptions that end with the submitted text fragment. */
-  EndsWith = "ends_with",
-
-  /** Descriptions that contain the submitted text fragment. */
-  Contains = "contains",
+  /** Suggestions in reports. */
+  Reports = "reports",
 }
 /** Can be specified when requesting entries texts */
 export enum EntriesTextsSort {
