@@ -103,7 +103,7 @@ export class Clockodo {
     return {
       ...remainingResponse,
       [key]: mergedData,
-    } as ResponseWithoutPaging<ReturnTypeWithPaging>;
+    };
   }
 
   /**

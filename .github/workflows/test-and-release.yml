@@ -8,17 +8,22 @@ on:
   pull_request: {}
   workflow_dispatch: {}
 
+permissions: {}
+
 jobs:
   test-and-release:
+    name: 🧪 Test and 🚀 Release
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/beta' }}
 
     permissions:
-      # Necessary for semantic-release
+      # Required for concurrency cancel-in-progress on PR branches
+      actions: write
+      # semantic-release: push version commits/tags and create GitHub releases
       contents: write
       issues: write
       pull-requests: write
@@ -29,10 +34,12 @@ jobs:
 
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # main
+        uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # main
+        with:
+          persist-credentials: true
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # main
+        uses: actions/setup-node@670825a89dc0abd596e7a3abd0f5e3f6e5faf37c # main
         with:
           node-version-file: ".tool-versions"
           cache: "npm"

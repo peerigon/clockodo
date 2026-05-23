@@ -27,7 +27,7 @@ This project uses npm scripts for all development tasks:
 - **Type check**: `npm run test:types` - TypeScript compiler check
 - **Format check**: `npm run test:format` - Prettier format validation
 
-**Important**: Use the typescript-lsp MCP to get diagnostics and type information
+**Important**: Use the typescript-lsp MCP (`getDiagnostics`, `getTypeAtPosition`, `getDefinition`, etc.) for type information
 **Important**: Use the vitest-server MCP to run individual tests.
 **Important**: Use the eslint MCP to check for linting errors.
 
@@ -47,15 +47,25 @@ This project uses npm scripts for all development tasks:
 - Uses ES module syntax throughout (`.ts` extensions in imports)
 - Keep `README.md` API method documentation in sync whenever public SDK methods are added, removed, or renamed
 
-## Pulling Updates from Upstream
+## Template as a git remote
 
-If user is asking you to pull in updates from the upstream repository, you can do so by following these steps:
+Configure the `template` remote so it can **only be fetched**, never pushed to:
+
+```bash
+git remote set-url --push template DISABLED
+```
+
+Verify with `git remote -v`: `template` should show a normal fetch URL and `DISABLED` (or empty) for push.
+
+## Pulling Updates from Template
+
+If the user is asking you to pull in updates from the template repository, follow the steps below.
 
 ### Step 1: Merge Template Updates
 
 ```bash
-git fetch upstream
-git merge --strategy-option theirs --no-commit upstream/main
+git fetch template
+git merge --strategy-option theirs --no-commit template/main
 ```
 
 This will:
@@ -67,10 +77,11 @@ This will:
 
 Restore project-specific files and changes:
 
-- **package.json**: Restore original dependencies but keep the dependency updates from the upstream repository
+- **package.json**: Restore original dependencies but keep the dependency updates from the template repository
 - **README.md**: Restore original project documentation
-- **AGENTS.md**: Restore project specific instructions and include changes from the upstream repository
-- **src/**: Restore project specific source code and include changes from the upstream repository
+- **AGENTS.md**: Restore project specific instructions and include changes from the template repository
+- **src/**: Restore project specific source code and include changes from the template repository
+- If a file has been deleted in **this** repository, **do not** restore it from the template repository.
 
 ### Step 3: Verify and Clean Up
 
