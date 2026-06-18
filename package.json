@@ -35,5 +35,12 @@
     "ts-lsp-mcp": "0.1.3",
     "typescript": "^5.9.3",
     "vitest": "^4.1.7"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "26.1.0",
+      "onFail": "error"
+    }
   }
 }

@@ -25,15 +25,14 @@ jobs:
 
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # main
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
         with:
           persist-credentials: false
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@0355742c943ddb13ca8a6b700f824231caa91e75 # main
+        uses: actions/setup-node@f4a67bbeca970f103397d3d2b9462cf787cd2980 # main
         with:
-          node-version-file: ".tool-versions"
-          cache: "npm"
+          node-version-file: "package.json"
 
       - name: 🗄 Cache node_modules
         id: cache-node_modules
