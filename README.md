@@ -120,7 +120,6 @@ git remote set-url --push template DISABLED
 git fetch template
 git merge --allow-unrelated-histories --strategy-option theirs --no-commit template/main
 ```
-````
 
 This will:
 
@@ -171,14 +170,9 @@ Decide on treatment of `src/` directory:
 ## Phase 6: Staging
 
 **IMPORTANT**: Stage your changes, but **do not** commit any changes. Ask the user to review the changes.
-
 ````
 
 </details>
-
-## GitHub rulesets (blueprints)
-
-The JSON files under [`.github/rulesets/`](./.github/rulesets/) are **blueprints** for GitHub rulesets. GitHub does not apply them from the repository; import or recreate them in your repo’s (or organization’s) ruleset settings. See [`.github/rulesets/README.md`](./.github/rulesets/README.md) for details.
 
 ## How to pull in updates from the template repository
 
@@ -187,4 +181,7 @@ Ask your AI coding assistant:
 ```prompt
 Merge the "template" remote into the current branch as described in the AGENTS.md file.
 ```
-````
+
+## GitHub rulesets (blueprints)
+
+The JSON files under [`.github/rulesets/`](./.github/rulesets/) are **blueprints** for GitHub rulesets. GitHub does not apply them from the repository; import or recreate them in your repo’s (or organization’s) ruleset settings. See [`.github/rulesets/README.md`](./.github/rulesets/README.md) for details.
