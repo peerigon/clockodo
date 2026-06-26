@@ -64,6 +64,13 @@
     "typescript": "^5.9.3",
     "vitest": "^4.1.7"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "26.1.0",
+      "onFail": "error"
+    }
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
