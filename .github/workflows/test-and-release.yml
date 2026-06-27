@@ -61,6 +61,11 @@ jobs:
         run: |
           npm ci --ignore-scripts --prefer-offline --no-audit --strict-peer-deps
 
+      # `.npmrc` sets `ignore-scripts=true`. In case there is
+      # a build script, it must now get executed explicitly.
+      - name: 📦 Build
+        run: npm run build --if-present
+
       - name: 🧪 Run tests
         env:
           CI: true
