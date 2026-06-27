@@ -32,6 +32,7 @@
     "test:lint": "eslint --max-warnings 0 --cache .",
     "test:types": "tsc",
     "test:unit": "vitest --run",
+    "test:publishable": "verify-publishable",
     "test:jsr": "jsr publish --dry-run --allow-dirty",
     "vitest": "vitest",
     "build": "run-s build:*",
@@ -46,7 +47,7 @@
   "devDependencies": {
     "@djankies/vitest-mcp": "0.5.1",
     "@eslint/mcp": "0.3.7",
-    "@peerigon/configs": "^18.1.1",
+    "@peerigon/configs": "^18.1.2",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
     "@types/node": "^26.0.1",
     "@vitest/coverage-v8": "^4.1.9",
