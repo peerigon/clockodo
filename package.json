@@ -21,7 +21,7 @@
   "devDependencies": {
     "@djankies/vitest-mcp": "0.5.1",
     "@eslint/mcp": "0.3.7",
-    "@peerigon/configs": "^18.1.1",
+    "@peerigon/configs": "^18.1.2",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
     "@types/node": "^26.0.1",
     "@vitest/coverage-v8": "^4.1.9",
