@@ -25,24 +25,24 @@ jobs:
 
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
+        uses: actions/checkout@b9e0990d219a03df7633c93f6f005a8fecbcab22 # main
         with:
           persist-credentials: false
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@f4a67bbeca970f103397d3d2b9462cf787cd2980 # main
+        uses: actions/setup-node@6a61c0375d66246de94630495909f12cf8dac84d # main
         with:
           node-version-file: "package.json"
 
       - name: 🗄 Cache node_modules
         id: cache-node_modules
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # main
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # main
         with:
           path: "**/node_modules"
           key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🗄 Cache .eslintcache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # main
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # main
         with:
           path: .eslintcache
           key: eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -51,6 +51,11 @@ jobs:
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: |
           npm ci --ignore-scripts --prefer-offline --no-audit --strict-peer-deps
+
+      # `.npmrc` sets `ignore-scripts=true`. In case there is
+      # a build script, it must now get executed explicitly.
+      - name: 📦 Build
+        run: npm run build --if-present
 
       - name: 🧪 Run tests
         env:
