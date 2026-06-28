@@ -45,9 +45,9 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # main
         with:
           path: "**/.eslintcache"
-          # Unique key per run so the cache is refreshed with the latest results,
+          # Unique key per commit so the cache is refreshed when code changes,
           # while restore-keys reuses the most recent previous cache as a base.
-          key: eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ github.run_id }}
+          key: eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ github.sha }}
           restore-keys: |
             eslintcache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
             eslintcache-${{ runner.os }}-
