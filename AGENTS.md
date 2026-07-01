@@ -51,6 +51,7 @@ This project uses npm scripts for all development tasks:
 - Request/response keys are mapped to camelCase in `src/lib/mappings.ts`
 - Uses ES module syntax throughout (`.ts` extensions in imports)
 - Keep `README.md` API method documentation in sync whenever public SDK methods are added, removed, or renamed
+- **Environment variables**: Use `src/env.ts`; destructure at top-level module scope so missing vars fail immediately.
 
 ## Template as a git remote
 
