@@ -62,7 +62,13 @@ For any questions about the different properties please consult the [official Cl
 Some constants are also available for import:
 
 ```js
-import { AbsenceStatus, AbsenceType, Billability, EntryType } from "clockodo";
+import {
+  AbsenceStatus,
+  AbsenceType,
+  Billability,
+  EntriesTextsMode,
+  EntryType,
+} from "clockodo";
 
 console.log(EntryType.Time); // 1
 console.log(EntryType.LumpsumValue); // 2
@@ -285,7 +291,10 @@ Retreive all descriptions (and no additional info) entered for time and lump sum
 #### Example:
 
 ```js
-await clockodo.getEntriesTexts({ term: "meeting with client" });
+await clockodo.getEntriesTexts({
+  term: "meeting with client",
+  mode: EntriesTextsMode.Add,
+});
 ```
 
 ---
@@ -297,7 +306,11 @@ Retreive all descriptions from a specific page.
 #### Example:
 
 ```js
-await clockodo.getEntriesTextsPage({ term: "meeting with client", page: 2 });
+await clockodo.getEntriesTextsPage({
+  term: "meeting with client",
+  mode: EntriesTextsMode.Edit,
+  page: 2,
+});
 ```
 
 ---
