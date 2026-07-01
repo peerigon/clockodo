@@ -87,7 +87,7 @@
     "jsr": "^0.14.3",
     "lint-staged": "^16.2.7",
     "nock": "^14.0.11",
-    "npm-run-all2": "^8.0.4",
+    "npm-run-all2": "^9.0.2",
     "pin-github-action": "^3.4.0",
     "prettier": "^3.8.1",
     "rimraf": "^6.1.3",
