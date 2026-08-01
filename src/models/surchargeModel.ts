@@ -6,8 +6,8 @@ export type SurchargeModel = {
   /** The name of the surcharge model */
   name: string;
   /**
-   * Should night surcharges apply in addition to another surcharge? If `false`,
-   * only the surcharge with the higher percent value applies
+   * Should night surcharges apply in addition to another surcharge? If `false`, only the surcharge
+   * with the higher percent value applies
    */
   accumulation: boolean;
   /** Night surcharge configuration */
@@ -43,13 +43,13 @@ type NightSurchargeConfiguration = {
 
 export type SurchargeConfiguration = NightSurchargeConfiguration & {
   /**
-   * Does the surcharge period start on the previous day? Not for `night` and
-   * `nightIncreased`, as these surcharges apply every day
+   * Does the surcharge period start on the previous day? Not for `night` and `nightIncreased`, as
+   * these surcharges apply every day
    */
   timeSinceIsPreviousDay: boolean;
   /**
-   * Does the surcharge period end on the next day? Not for `night` and
-   * `nightIncreased`, as these surcharges apply every day
+   * Does the surcharge period end on the next day? Not for `night` and `nightIncreased`, as these
+   * surcharges apply every day
    */
   timeUntilIsNextDay: boolean;
 };

@@ -1,11 +1,7 @@
 import { faker } from "@faker-js/faker";
+
 import { isoDateFromDateTime } from "../lib/dateTime.js";
-import {
-  UserLanguage,
-  UserRole,
-  type User,
-  type WorkTimeEditLock,
-} from "./user.js";
+import { UserLanguage, UserRole, type User, type WorkTimeEditLock } from "./user.js";
 
 export const createUserMocks = ({
   count = 1,
@@ -24,12 +20,8 @@ export const createUserMocks = ({
     const userId = index;
     const isFutureCoworker = faker.number.int({ min: 1, max: 10 }) === 1;
     const startDate = isFutureCoworker
-      ? isoDateFromDateTime(
-          faker.date.soon({ days: 365, ...(refDate ? { refDate } : {}) }),
-        )
-      : isoDateFromDateTime(
-          faker.date.past({ ...(refDate ? { refDate } : {}) }),
-        );
+      ? isoDateFromDateTime(faker.date.soon({ days: 365, ...(refDate ? { refDate } : {}) }))
+      : isoDateFromDateTime(faker.date.past({ ...(refDate ? { refDate } : {}) }));
 
     return {
       id: userId,

@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { type OvertimecarryRow } from "./overtimecarry.js";
 
 type Options = {
@@ -11,7 +12,7 @@ export const createOvertimecarryMocks = ({
   count = 1,
   hoursMinMax = [0, 100],
   yearMinMax = [1900, 2024],
-}: Options = {}) => {
+}: Options = {}): Array<OvertimecarryRow> => {
   return Array.from({ length: count }, (_, index): OvertimecarryRow => {
     return {
       id: index,

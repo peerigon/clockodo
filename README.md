@@ -47,9 +47,7 @@ You can update the configuration later like this:
 
 ```js
 clockodo.api.config({
-  authentication: {
-    /* ... */
-  },
+  authentication: {/* ... */},
 });
 ```
 
@@ -62,13 +60,7 @@ For any questions about the different properties please consult the [official Cl
 Some constants are also available for import:
 
 ```js
-import {
-  AbsenceStatus,
-  AbsenceType,
-  Billability,
-  EntriesTextsMode,
-  EntryType,
-} from "clockodo";
+import { AbsenceStatus, AbsenceType, Billability, EntriesTextsMode, EntryType } from "clockodo";
 
 console.log(EntryType.Time); // 1
 console.log(EntryType.LumpsumValue); // 2

@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { type SurchargeModel } from "./surchargeModel.js";
 
 export const createSurchargeModelMocks = ({

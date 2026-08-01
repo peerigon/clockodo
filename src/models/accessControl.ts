@@ -1,7 +1,4 @@
-import {
-  type AccessToCustomersProjects,
-  type AccessToServices,
-} from "./access.js";
+import { type AccessToCustomersProjects, type AccessToServices } from "./access.js";
 import {
   type AccessGroup,
   type AccessProjectOrServiceValue,

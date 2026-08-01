@@ -1,10 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+
 import { assertExists } from "../lib/assert.ts";
-import {
-  Billability,
-  getEntryDurationUntilNow,
-  getEntryRevenue,
-} from "./entry.js";
+import { Billability, getEntryDurationUntilNow, getEntryRevenue } from "./entry.js";
 import {
   createLumpsumServiceEntryMocks,
   createLumpsumValueEntryMocks,
@@ -65,9 +62,7 @@ describe("getEntryRevenue()", () => {
     clockedTimeEntry.projectsId = project.id;
     project.revenueFactor = 0.25;
 
-    expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      0.25 * 1.5 * 100,
-    );
+    expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(0.25 * 1.5 * 100);
   });
 
   test("It calculates the revenue until now for clocking time entries", () => {
@@ -114,9 +109,7 @@ describe("getEntryRevenue()", () => {
     clockedTimeEntry.projectsId = project.id;
     project.revenueFactor = undefined;
 
-    expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(
-      undefined,
-    );
+    expect(getEntryRevenue({ entry: clockedTimeEntry, project })).toBe(undefined);
   });
 
   test("It just returns the lumpsum value for lumpsum value entries", () => {
@@ -137,9 +130,7 @@ describe("getEntryRevenue()", () => {
     lumpsumServiceEntry.lumpsumServicesAmount = 2;
     lumpsumService.price = 100;
 
-    expect(
-      getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService }),
-    ).toBe(200);
+    expect(getEntryRevenue({ entry: lumpsumServiceEntry, project, lumpsumService })).toBe(200);
   });
 
   test("It throws an error if the entry's projectsId does not match the project's id", () => {

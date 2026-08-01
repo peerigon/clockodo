@@ -1,6 +1,5 @@
 /**
- * Key and payload mapping helpers between Clockodo snake_case and SDK
- * camelCase.
+ * Key and payload mapping helpers between Clockodo snake_case and SDK camelCase.
  *
  * @module
  */
@@ -10,6 +9,7 @@
 // gain much more confidence by removing 'any' here
 
 import mapObject, { mapObjectSkip } from "map-obj";
+
 import { warnDeprecated } from "./deprecations.js";
 
 /**
@@ -54,9 +54,7 @@ export const mapQueryParams = <Result = Record<string, unknown>>(
       }
 
       const mappedKey =
-        key in queryParamMapping
-          ? queryParamMapping[key]!
-          : camelCaseToSnakeCase(key);
+        key in queryParamMapping ? queryParamMapping[key]! : camelCaseToSnakeCase(key);
 
       if (key.startsWith("filter") && key in queryParamMapping) {
         warnDeprecated(
@@ -114,13 +112,13 @@ export const mapResponseBody = <Result = Record<string, unknown>>(
 };
 
 export const snakeCaseToCamelCase = (key: string): string => {
-  return key.replaceAll(/_+(\d*)([a-z])/gi, (_, $1, $2) => {
-    return ($1 + $2.toUpperCase()) as string;
+  return key.replaceAll(/_+(\d*)([a-z])/gi, (_: string, $1: string, $2: string) => {
+    return $1 + $2.toUpperCase();
   });
 };
 
 export const camelCaseToSnakeCase = (key: string): string => {
-  return key.replaceAll(/(\d*)([A-Z])/g, (_, $1, $2) => {
+  return key.replaceAll(/(\d*)([A-Z])/g, (_: string, $1: string, $2: string) => {
     return "_" + $1 + $2.toLowerCase();
   });
 };

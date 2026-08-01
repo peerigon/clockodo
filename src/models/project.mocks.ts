@@ -1,8 +1,6 @@
 import { faker } from "@faker-js/faker";
-import {
-  isoDateFromDateTime,
-  isoUtcDateTimeFromDateTime,
-} from "../lib/dateTime.js";
+
+import { isoDateFromDateTime, isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import { type Project } from "./project.js";
 
 export const createProjectMocks = ({
@@ -48,28 +46,18 @@ export const createProjectMocks = ({
       billedCompletely,
       completed,
       completedAt: completed
-        ? isoUtcDateTimeFromDateTime(
-            faker.date.recent({ ...(refDate ? { refDate } : {}) }),
-          )
+        ? isoUtcDateTimeFromDateTime(faker.date.recent({ ...(refDate ? { refDate } : {}) }))
         : null,
       testData: faker.datatype.boolean(),
       countSubprojects: faker.number.int({ min: 0, max: 10 }),
       deadline: faker.datatype.boolean()
-        ? isoDateFromDateTime(
-            faker.date.soon({ ...(refDate ? { refDate } : {}) }),
-          )
+        ? isoDateFromDateTime(faker.date.soon({ ...(refDate ? { refDate } : {}) }))
         : null,
-      startDate: isoDateFromDateTime(
-        faker.date.past({ ...(refDate ? { refDate } : {}) }),
-      ),
+      startDate: isoDateFromDateTime(faker.date.past({ ...(refDate ? { refDate } : {}) })),
       automaticCompletion: faker.datatype.boolean(),
       budget,
-      billServiceId: faker.datatype.boolean()
-        ? faker.string.alphanumeric(6)
-        : null,
+      billServiceId: faker.datatype.boolean() ? faker.string.alphanumeric(6) : null,
       revenueFactor:
-        faker.number.int({ min: 0, max: 10 }) > 2
-          ? 1
-          : faker.number.int({ min: 0.1, max: 1 }),
+        faker.number.int({ min: 0, max: 10 }) > 2 ? 1 : faker.number.int({ min: 0.1, max: 1 }),
     };
   });

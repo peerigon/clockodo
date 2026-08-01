@@ -9,17 +9,11 @@ export type Company = {
   currency: string;
   /** Are time and lump sum entries with multiline descriptions allowed? */
   allowEntriesTextMultiline: boolean;
-  /**
-   * Can time and lump sum entries be directly assigned to customers (or only to
-   * projects)?
-   */
+  /** Can time and lump sum entries be directly assigned to customers (or only to projects)? */
   allowEntriesForCustomers: boolean;
   /** Are entries of a single user allowed to overlap with each other? */
   allowEntryOverlaps: boolean;
-  /**
-   * Does the duration of a time entry have to be equal to the difference
-   * between start and end?
-   */
+  /** Does the duration of a time entry have to be equal to the difference between start and end? */
   forceLinkedEntryTimes: boolean;
   /** ID of the default customer */
   defaultCustomersId: number | null;
@@ -41,18 +35,15 @@ export type Company = {
   nonbusinessGroupDefault: number | null;
   /** ID of the default worktime regulation */
   worktimeRegulationDefault: number | null;
-  /**
-   * Date from which worktime regulations are evaluated for the company in
-   * YYYY-MM-DD format
-   */
+  /** Date from which worktime regulations are evaluated for the company in YYYY-MM-DD format */
   worktimeEvaluateRegulationsSince: string | null;
   /** Subtraction of missing break time */
   worktimeForceBreaks: WorktimeForceBreaks;
   /** Number of days in the default holiday quota of the company */
   holidaysCountDefault: number;
   /**
-   * Are absences handled by reducing the target hours for the day? If not, time
-   * is added to the worktime account for absences
+   * Are absences handled by reducing the target hours for the day? If not, time is added to the
+   * worktime account for absences
    */
   absenceReducesTargetHours: boolean;
   /** Default value for automatically compensated overtime per day (in minutes) */

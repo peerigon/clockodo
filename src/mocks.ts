@@ -30,6 +30,6 @@ export * from "./models/workTimes.mocks.js";
  *
  * @see https://github.com/Marak/Faker.js
  */
-export const setFakerSeed = (seed: number) => {
+export const setFakerSeed = (seed: number): void => {
   faker.seed(seed);
 };

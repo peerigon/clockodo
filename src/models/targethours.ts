@@ -40,9 +40,8 @@ export type TargethoursRowWeekly = CommonTargethoursRow & {
   /** Target hours for Sunday */
   sunday: number;
   /**
-   * True if credited absence hours are applied against the average target
-   * hours, false if credited absence hours match the target hours of the
-   * specific day .
+   * True if credited absence hours are applied against the average target hours, false if credited
+   * absence hours match the target hours of the specific day .
    */
   absenceFixedCredit: boolean;
   /** Automatic time compensation per day in minutes */

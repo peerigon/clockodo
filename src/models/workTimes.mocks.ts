@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import {
   isoDateFromDateTime,
   isoUtcDateTimeFromDateTime,
@@ -22,13 +23,7 @@ import {
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
-const generateIntervals = ({
-  count = 1,
-  date = DEFAULT_FROM,
-}: {
-  count?: number;
-  date?: Date;
-}) => {
+const generateIntervals = ({ count = 1, date = DEFAULT_FROM }: { count?: number; date?: Date }) => {
   const dateTimes = generateRandomDateTimes({
     count: count * 2,
     between: [startOfDay(date), startOfNextDay(date)],
@@ -89,16 +84,14 @@ export const createWorkTimeDayMocks = ({
 };
 
 const generateChangeRequestChanges = ({ count = 1, date = DEFAULT_FROM }) => {
-  return generateIntervals({ count, date }).map(
-    (interval): WorkTimeChangeRequestInterval => {
-      return {
-        ...interval,
-        type: faker.datatype.boolean()
-          ? WorkTimeChangeRequestIntervalType.Add
-          : WorkTimeChangeRequestIntervalType.Remove,
-      };
-    },
-  );
+  return generateIntervals({ count, date }).map((interval): WorkTimeChangeRequestInterval => {
+    return {
+      ...interval,
+      type: faker.datatype.boolean()
+        ? WorkTimeChangeRequestIntervalType.Add
+        : WorkTimeChangeRequestIntervalType.Remove,
+    };
+  });
 };
 
 const createChangeRequest = ({

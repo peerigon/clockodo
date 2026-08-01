@@ -19,9 +19,9 @@ export type BreakRule = {
   /** Required total break time */
   breakSum: number;
   /**
-   * Contains the break splitting options as key-value pair. The key represents
-   * the number of breaks into which the required time may be split, the value
-   * contains the minimum length of a single break (in minutes)
+   * Contains the break splitting options as key-value pair. The key represents the number of breaks
+   * into which the required time may be split, the value contains the minimum length of a single
+   * break (in minutes)
    */
   splitting: {
     /** Only one break */

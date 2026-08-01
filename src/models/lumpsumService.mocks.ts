@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { type LumpsumService } from "./lumpsumService.js";
 
 export const createLumpsumServiceMocks = ({
@@ -12,9 +13,6 @@ export const createLumpsumServiceMocks = ({
       unit: index % 2 === 0 ? faker.lorem.word() : null,
       number: faker.string.hexadecimal(),
       active: faker.datatype.boolean(),
-      note:
-        index % 2 === 0
-          ? null
-          : faker.lorem.sentences(faker.number.int({ min: 1, max: 3 })),
+      note: index % 2 === 0 ? null : faker.lorem.sentences(faker.number.int({ min: 1, max: 3 })),
     };
   });

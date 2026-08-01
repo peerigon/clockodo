@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { assertExists } from "../lib/assert.ts";
 import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
@@ -28,9 +29,7 @@ const createCommonEntryMock = (from: Date, to: Date) => {
     projectsId: null,
     usersId: 0,
     textsId: hasText ? 0 : null,
-    text: hasText
-      ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
-      : null,
+    text: hasText ? faker.lorem.words(faker.number.int({ min: 2, max: 10 })) : null,
     timeSince: timeSinceAsIsoString,
     timeUntil: timeSinceAsIsoString,
     timeInsert: timeSinceAsIsoString,
@@ -70,27 +69,20 @@ export const createTimeEntryMocks = ({
       type: 1,
       servicesId: 0,
       timeUntil,
-      timeClockedSince:
-        timeEntryType === "manual" ? null : commonEntry.timeSince,
+      timeClockedSince: timeEntryType === "manual" ? null : commonEntry.timeSince,
       timeLastChangeWorkTime: commonEntry.timeSince,
-      billable: [
-        Billability.NotBillable,
-        Billability.Billable,
-        Billability.Billed,
-      ][faker.number.int({ min: 0, max: 2 })]!,
+      billable: [Billability.NotBillable, Billability.Billable, Billability.Billed][
+        faker.number.int({ min: 0, max: 2 })
+      ]!,
       duration:
         timeUntil === null
           ? null
           : Math.floor(
-              (new Date(timeUntil).getTime() -
-                new Date(commonEntry.timeSince).getTime()) /
-                1000,
+              (new Date(timeUntil).getTime() - new Date(commonEntry.timeSince).getTime()) / 1000,
             ),
       clocked: timeEntryType !== "manual",
       clockedOffline:
-        timeEntryType === "manual"
-          ? false
-          : faker.number.int({ min: 0, max: 10 }) < 1,
+        timeEntryType === "manual" ? false : faker.number.int({ min: 0, max: 10 }) < 1,
       hourlyRate: faker.number.int({ min: 40, max: 150 }),
     };
   });
@@ -106,9 +98,7 @@ export const createLumpsumValueEntryMocks = ({
       ...commonEntry,
       id: index,
       type: 2,
-      billable: [Billability.Billable as const, Billability.Billed as const][
-        index % 2
-      ]!,
+      billable: [Billability.Billable as const, Billability.Billed as const][index % 2]!,
       servicesId: 0,
       lumpsum: faker.number.float({ min: 0.2, max: 150 }),
     };
@@ -125,9 +115,7 @@ export const createLumpsumServiceEntryMocks = ({
       ...commonEntry,
       id: index,
       type: 3,
-      billable: [Billability.Billable as const, Billability.Billed as const][
-        index % 2
-      ]!,
+      billable: [Billability.Billable as const, Billability.Billed as const][index % 2]!,
       lumpsumServicesId: 0,
       lumpsumServicesAmount: faker.number.float({ min: 0.2, max: 150 }),
     };
