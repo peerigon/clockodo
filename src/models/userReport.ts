@@ -8,15 +8,13 @@ export enum UserReportType {
   /** Request key data for the year, months, weeks and days */
   YearMonthsWeeksAndDays = 3,
   /**
-   * Request key data for the year, months, weeks and days; The day data does
-   * also include start and end times, as well as breaks
+   * Request key data for the year, months, weeks and days; The day data does also include start and
+   * end times, as well as breaks
    */
   YearMonthsWeeksDaysAndWorkTimes = 4,
 }
 
-export type UserReport<
-  GivenUserReportType extends UserReportType = UserReportType.Year,
-> = {
+export type UserReport<GivenUserReportType extends UserReportType = UserReportType.Year> = {
   /** ID of the corresponding co-worker */
   usersId: number;
   /** Name of the corresponding co-worker */
@@ -133,21 +131,15 @@ export type UserReportDayDetails = {
   /** Planned work time (in seconds) */
   target: number | null;
   /**
-   * Planned work time which would have been calculated if no nunbusiness day or
-   * absence had reduced the planned work time (in seconds)
+   * Planned work time which would have been calculated if no nunbusiness day or absence had reduced
+   * the planned work time (in seconds)
    */
   targetRaw: number | null;
   /** Worked time (in seconds). Won't be added for future days */
   hours?: number;
-  /**
-   * Worked time when ignoring the daily compensation (in seconds). Won't be
-   * added for future days.
-   */
+  /** Worked time when ignoring the daily compensation (in seconds). Won't be added for future days. */
   hoursWithoutCompensation?: number;
-  /**
-   * Calculated difference of the time account (in seconds). Won't be added for
-   * future days
-   */
+  /** Calculated difference of the time account (in seconds). Won't be added for future days */
   diff?: number;
   countAbsence: {
     /** Absence because of a regular holiday or special leaves (0, 0.5 or 1) */
@@ -177,21 +169,18 @@ export type UserReportDayDetails = {
 
 export type UserReportDayWorkTimes = {
   /**
-   * Begin of the work time (e.g. in format “YYYY-MM-DD HH:MM:SS”; see section
-   * “Localisation”) Only if requested (report type “4”); won't be added for
-   * future days
+   * Begin of the work time (e.g. in format “YYYY-MM-DD HH:MM:SS”; see section “Localisation”) Only
+   * if requested (report type “4”); won't be added for future days
    */
   workStart: string | null;
   /**
-   * End of the work time (e.g. in format “YYYY-MM-DD HH:MM:SS”; see section
-   * “Localisation”) Only if requested (report type “4”), won't be added for
-   * future days
+   * End of the work time (e.g. in format “YYYY-MM-DD HH:MM:SS”; see section “Localisation”) Only if
+   * requested (report type “4”), won't be added for future days
    */
   workEnd: string | null;
   /**
-   * Breaks which have been made (Subarray keys: [string] since, [string] until,
-   * [integer] length). Only if requested (report type “4”), won't be added for
-   * future days
+   * Breaks which have been made (Subarray keys: [string] since, [string] until, [integer] length).
+   * Only if requested (report type “4”), won't be added for future days
    */
   breaks: Array<Break>;
 };

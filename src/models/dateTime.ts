@@ -1,8 +1,7 @@
 /**
  * An ISO 8601 date format.
  *
- * Please note: This date format can only be interpreted in the context of a
- * time zone.
+ * Please note: This date format can only be interpreted in the context of a time zone.
  *
  * Example: 2023-02-20
  */
@@ -15,8 +14,7 @@ export type IsoDate =
  *
  * Example: 23:00:00 (hh:mm:ss)
  */
-export type IsoTime =
-  `${number}${number}:${number}${number}:${number}${number}`;
+export type IsoTime = `${number}${number}:${number}${number}:${number}${number}`;
 
 /**
  * An ISO 8601 time stamp:

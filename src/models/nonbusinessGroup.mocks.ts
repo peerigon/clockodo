@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { type NonbusinessGroup } from "./nonbusinessGroup.js";
 
 export const createNonbusinessGroupMocks = ({

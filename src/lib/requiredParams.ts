@@ -27,11 +27,7 @@ export const ADD_SUBPROJECT = ["projectsId", "name"] as const;
 export const ADD_SERVICE = ["name"] as const;
 export const ADD_TEAM = ["name"] as const;
 export const ADD_NONBUSINESS_GROUP = ["name"] as const;
-export const ADD_NONBUSINESS_DAY = [
-  "nonbusinessGroupId",
-  "type",
-  "name",
-] as const;
+export const ADD_NONBUSINESS_DAY = ["nonbusinessGroupId", "type", "name"] as const;
 export const ADD_OVERTIMECARRY = ["year", "usersId", "hours"] as const;
 export const ADD_HOLIDAYS_QUOTA = ["usersId", "yearSince", "count"] as const;
 export const ADD_HOLIDAYS_CARRYOVER = ["year", "usersId", "count"] as const;
@@ -39,11 +35,7 @@ export const ADD_USER = ["name", "number", "email", "role"] as const;
 export const ADD_SURCHARGE_MODEL = ["name", "accumulation"] as const;
 export const ADD_ACCESS_GROUP = ["name"] as const;
 export const ADD_OVERTIME_REDUCTION = ["usersId", "date", "hours"] as const;
-export const ADD_USERS_NONBUSINESS_GROUP = [
-  "usersId",
-  "nonbusinessGroupsId",
-  "dateSince",
-] as const;
+export const ADD_USERS_NONBUSINESS_GROUP = ["usersId", "nonbusinessGroupsId", "dateSince"] as const;
 export const ADD_TARGETHOUR = [
   "usersId",
   "type",
@@ -51,11 +43,7 @@ export const ADD_TARGETHOUR = [
   "dateUntil",
   "compensationMonthly",
 ] as const;
-export const CHANGE_CLOCK_DURATION = [
-  "entriesId",
-  "durationBefore",
-  "duration",
-] as const;
+export const CHANGE_CLOCK_DURATION = ["entriesId", "durationBefore", "duration"] as const;
 export const DELETE_SURCHARGE_MODEL = ["id"] as const;
 export const DELETE_CUSTOMER = ["id"] as const;
 export const DELETE_PROJECT = ["id"] as const;
@@ -78,62 +66,16 @@ export const DELETE_TARGETHOUR = ["id"] as const;
 export const DELETE_USERS_NONBUSINESS_GROUP = ["id"] as const;
 export const EDIT_CUSTOMER = ["id"] as const;
 export const EDIT_ACCESS_GROUP = ["id"] as const;
-export const EDIT_ACCESS_GROUPS_CUSTOMERS = [
-  "accessGroupsId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_ACCESS_GROUPS_CUSTOMERS_GENERAL = [
-  "accessGroupsId",
-  "type",
-  "value",
-] as const;
-export const EDIT_ACCESS_GROUPS_PROJECTS = [
-  "accessGroupsId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_ACCESS_GROUPS_SERVICES = [
-  "accessGroupsId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_ACCESS_GROUPS_SERVICES_GENERAL = [
-  "accessGroupsId",
-  "type",
-  "value",
-] as const;
-export const EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS = [
-  "usersId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS_GENERAL = [
-  "usersId",
-  "type",
-  "value",
-] as const;
-export const EDIT_INDIVIDUAL_USER_ACCESS_PROJECTS = [
-  "usersId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_INDIVIDUAL_USER_ACCESS_SERVICES = [
-  "usersId",
-  "id",
-  "type",
-  "value",
-] as const;
-export const EDIT_INDIVIDUAL_USER_ACCESS_SERVICES_GENERAL = [
-  "usersId",
-  "type",
-  "value",
-] as const;
+export const EDIT_ACCESS_GROUPS_CUSTOMERS = ["accessGroupsId", "id", "type", "value"] as const;
+export const EDIT_ACCESS_GROUPS_CUSTOMERS_GENERAL = ["accessGroupsId", "type", "value"] as const;
+export const EDIT_ACCESS_GROUPS_PROJECTS = ["accessGroupsId", "id", "type", "value"] as const;
+export const EDIT_ACCESS_GROUPS_SERVICES = ["accessGroupsId", "id", "type", "value"] as const;
+export const EDIT_ACCESS_GROUPS_SERVICES_GENERAL = ["accessGroupsId", "type", "value"] as const;
+export const EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS = ["usersId", "id", "type", "value"] as const;
+export const EDIT_INDIVIDUAL_USER_ACCESS_CUSTOMERS_GENERAL = ["usersId", "type", "value"] as const;
+export const EDIT_INDIVIDUAL_USER_ACCESS_PROJECTS = ["usersId", "id", "type", "value"] as const;
+export const EDIT_INDIVIDUAL_USER_ACCESS_SERVICES = ["usersId", "id", "type", "value"] as const;
+export const EDIT_INDIVIDUAL_USER_ACCESS_SERVICES_GENERAL = ["usersId", "type", "value"] as const;
 export const EDIT_LUMPSUM_SERVICE = ["id"] as const;
 export const EDIT_PROJECT = ["id"] as const;
 export const COMPLETE_PROJECT = ["id", "completed"] as const;
@@ -186,20 +128,14 @@ export const GET_OVERTIME_REDUCTION = ["id"] as const;
 export const GET_HOLIDAYS_QUOTA = ["id"] as const;
 export const GET_HOLIDAYS_CARRYOVER = ["id"] as const;
 export const GET_USERS_NONBUSINESS_GROUP = ["id"] as const;
-export const GET_INDIVIDUAL_USER_ACCESS_CUSTOMERS_PROJECTS = [
-  "usersId",
-] as const;
+export const GET_INDIVIDUAL_USER_ACCESS_CUSTOMERS_PROJECTS = ["usersId"] as const;
 export const GET_INDIVIDUAL_USER_ACCESS_SERVICES = ["usersId"] as const;
 export const REGISTER = ["companiesName", "name", "email"] as const;
 export const START_CLOCK = ["customersId", "servicesId"] as const;
 export const STOP_CLOCK = ["entriesId"] as const;
 export const CLEAR_INDIVIDUAL_USER_ACCESS = ["usersId"] as const;
 
-export const ADD_WORK_TIMES_CHANGE_REQUEST = [
-  "date",
-  "usersId",
-  "changes",
-] as const;
+export const ADD_WORK_TIMES_CHANGE_REQUEST = ["date", "usersId", "changes"] as const;
 export const WITHDRAW_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 export const APPROVE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
 export const DECLINE_WORK_TIMES_CHANGE_REQUEST = ["id"] as const;
@@ -208,13 +144,9 @@ export const COMPLETE_SUBPROJECT = ["id", "completed"] as const;
 export const checkRequired = (
   params: Record<string, unknown> = {},
   requiredList: ReadonlyArray<string>,
-) => {
-  const missingParamName = requiredList.find(
-    (paramName) => paramName in params === false,
-  );
-  const undefinedParam = requiredList.find(
-    (paramName) => params[paramName] === undefined,
-  );
+): void => {
+  const missingParamName = requiredList.find((paramName) => paramName in params === false);
+  const undefinedParam = requiredList.find((paramName) => params[paramName] === undefined);
 
   if (missingParamName !== undefined) {
     throw new TypeError(`Missing required parameter "${missingParamName}"`);

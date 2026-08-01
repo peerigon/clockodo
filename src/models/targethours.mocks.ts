@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+
 import { isoDateFromDateTime, isoDateFromTimestamp } from "../lib/dateTime.js";
 import {
   endOfMonth,
@@ -75,8 +76,7 @@ export const createTargethoursRowWeeklyMocks = ({
     return {
       ...commonTargethoursRow,
       id: index,
-      dateUntil:
-        isLastOne && faker.datatype.boolean() ? null : isoDateFromTimestamp(to),
+      dateUntil: isLastOne && faker.datatype.boolean() ? null : isoDateFromTimestamp(to),
       type: TargethoursRowType.Weekly,
       monday: typicalHours[0 % typicalHours.length]!,
       tuesday: typicalHours[1 % typicalHours.length]!,
@@ -137,13 +137,8 @@ export const createTargethoursRowMonthlyMocks = ({
   });
 };
 
-export const createTargethoursRowMocks = (
-  options: CommonOptions = {},
-): Array<TargethoursRow> => {
-  const {
-    count = 1,
-    dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
-  } = options;
+export const createTargethoursRowMocks = (options: CommonOptions = {}): Array<TargethoursRow> => {
+  const { count = 1, dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO] } = options;
   const dateRangeIsLongEnough = to.getTime() - from.getTime() > 1.5 * ONE_YEAR;
 
   // If the date range is long enough, the first year will use monthly target hours
@@ -160,18 +155,14 @@ export const createTargethoursRowMocks = (
   const weeklyTargethoursRows = createTargethoursRowWeeklyMocks({
     ...options,
     dateSinceBetween: [
-      dateRangeIsLongEnough
-        ? new Date(from.getTime() + ONE_YEAR + ONE_DAY)
-        : from,
+      dateRangeIsLongEnough ? new Date(from.getTime() + ONE_YEAR + ONE_DAY) : from,
       to,
     ],
     count: countOfWeeklyTargethoursRows,
   });
 
-  return [...monthlyTargethoursRows, ...weeklyTargethoursRows].map(
-    (targethoursRow, index) => ({
-      ...targethoursRow,
-      id: index,
-    }),
-  );
+  return [...monthlyTargethoursRows, ...weeklyTargethoursRows].map((targethoursRow, index) => ({
+    ...targethoursRow,
+    id: index,
+  }));
 };

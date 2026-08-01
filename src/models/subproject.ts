@@ -9,20 +9,7 @@ export type Subproject = {
     hard: boolean;
     amount: number | null;
     notificationThresholds?: Array<
-      | 50
-      | 60
-      | 70
-      | 80
-      | 90
-      | 100
-      | 110
-      | 120
-      | 130
-      | 140
-      | 150
-      | 200
-      | 250
-      | 300
+      50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 | 130 | 140 | 150 | 200 | 250 | 300
     >;
   } | null;
   billed: number | null;

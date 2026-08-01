@@ -1,8 +1,6 @@
 import { describe, expect, test } from "vitest";
-import {
-  createWorkTimeChangeRequestMocks,
-  createWorkTimeDayMocks,
-} from "./workTimes.mocks.js";
+
+import { createWorkTimeChangeRequestMocks, createWorkTimeDayMocks } from "./workTimes.mocks.js";
 
 describe("workTimesMocks", () => {
   test("createWorkDayMocks", () => {

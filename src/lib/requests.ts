@@ -20,17 +20,14 @@ type WithAcceptLanguage = {
 
 type WithIsoUtcDateTimes = {
   /**
-   * Enables UTC date times in ISO format for legacy endpoints. Modern endpoints
-   * always return UTC date times in ISO format.
+   * Enables UTC date times in ISO format for legacy endpoints. Modern endpoints always return UTC
+   * date times in ISO format.
    */
   "X-ClockodoEnableIsoUtcDateTimes": string;
 };
 
 type WithExternalApplication = {
-  /**
-   * Identifies the external application and provides contact information for
-   * Clockodo.
-   */
+  /** Identifies the external application and provides contact information for Clockodo. */
   "X-Clockodo-External-Application": string;
 };
 
@@ -40,9 +37,6 @@ type WithApiKeyAuthentication = {
 };
 
 type WithCookieAuthentication = {
-  /**
-   * Custom header that is includes in cookie requests to prevent CSRF attacks
-   * from <form>s.
-   */
+  /** Custom header that is includes in cookie requests to prevent CSRF attacks from <form>s. */
   "X-Requested-With": "XMLHttpRequest";
 };

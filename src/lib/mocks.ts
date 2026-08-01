@@ -135,10 +135,7 @@ export const generateRandomMonths = ({
     generate: () => {
       const randomDate = faker.date.between({ from, to });
 
-      return new Date(
-        randomDate.getFullYear(),
-        randomDate.getMonth(),
-      ).getTime();
+      return new Date(randomDate.getFullYear(), randomDate.getMonth()).getTime();
     },
   });
 };

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { createAbsenceMocks } from "./absence.mocks.js";
 
 describe("createAbsenceMocks()", () => {

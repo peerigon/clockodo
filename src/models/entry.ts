@@ -24,9 +24,7 @@ export type TimeEntryBillability =
   | Billability.Billable
   | Billability.Billed;
 
-export type ClockingTimeEntryBillability =
-  | Billability.NotBillable
-  | Billability.Billable;
+export type ClockingTimeEntryBillability = Billability.NotBillable | Billability.Billable;
 
 export type LumpsumEntryBillability = Billability.Billable | Billability.Billed;
 
@@ -102,17 +100,13 @@ export type LumpsumEntry = LumpsumValueEntry | LumpsumServiceEntry;
 
 export type Entry = TimeEntry | LumpsumEntry;
 
-export const isClockingTimeEntry = (
-  entry: Entry,
-): entry is ClockingTimeEntry => {
+export const isClockingTimeEntry = (entry: Entry): entry is ClockingTimeEntry => {
   return entry.type === EntryType.Time && entry.timeUntil === null;
 };
 
 export const isClockedTimeEntry = (entry: Entry): entry is ClockedTimeEntry => {
   return (
-    entry.type === EntryType.Time &&
-    entry.clocked === true &&
-    typeof entry.timeUntil === "string"
+    entry.type === EntryType.Time && entry.clocked === true && typeof entry.timeUntil === "string"
   );
 };
 
@@ -124,9 +118,7 @@ export const isManualTimeEntry = (entry: Entry): entry is ManualTimeEntry => {
   return entry.type === EntryType.Time && entry.clocked === false;
 };
 
-export const isFinishedTimeEntry = (
-  entry: Entry,
-): entry is FinishedTimeEntry => {
+export const isFinishedTimeEntry = (entry: Entry): entry is FinishedTimeEntry => {
   return isClockedTimeEntry(entry) || isManualTimeEntry(entry);
 };
 
@@ -135,24 +127,20 @@ export const isTimeEntry = (entry: Entry): entry is TimeEntry => {
 };
 
 export const isLumpsumEntry = (entry: Entry): entry is LumpsumEntry => {
-  return (
-    entry.type === EntryType.LumpsumValue ||
-    entry.type === EntryType.LumpsumService
-  );
+  return entry.type === EntryType.LumpsumValue || entry.type === EntryType.LumpsumService;
 };
 
 /**
- * Returns the entry's timeUntil property as ISO string. If the entry is
- * currently clocking, timeUntil is new Date().toISOString() without
- * milliseconds precision.
+ * Returns the entry's timeUntil property as ISO string. If the entry is currently clocking,
+ * timeUntil is new Date().toISOString() without milliseconds precision.
  */
 export const getEntryTimeUntilNow = (entry: Entry): string => {
   return entry.timeUntil ?? isoUtcDateTimeFromDateTime(new Date());
 };
 
 /**
- * Returns the entry's duration in seconds. In case the entry is currently
- * clocking, the duration will be from timeSince until now.
+ * Returns the entry's duration in seconds. In case the entry is currently clocking, the duration
+ * will be from timeSince until now.
  */
 export const getEntryDurationUntilNow = (entry: Entry): number => {
   // We allow passing non-time entries so that you don't need to filter
@@ -163,21 +151,19 @@ export const getEntryDurationUntilNow = (entry: Entry): number => {
   if (entry.duration !== null) return entry.duration + (entry.offset ?? 0);
 
   const timeUntil = getEntryTimeUntilNow(entry);
-  const durationInMillis =
-    new Date(timeUntil).getTime() - new Date(entry.timeSince).getTime();
+  const durationInMillis = new Date(timeUntil).getTime() - new Date(entry.timeSince).getTime();
 
   return Math.floor(durationInMillis / 1000);
 };
 
 /**
- * Calculates the entry's revenue based on the hourly rate and the project's
- * revenue factor or the amount and lumpsum service price.
+ * Calculates the entry's revenue based on the hourly rate and the project's revenue factor or the
+ * amount and lumpsum service price.
  *
- * Returns undefined if the entry or project did not contain enough information
- * to calculate the revenue (because of insufficient access rights).
+ * Returns undefined if the entry or project did not contain enough information to calculate the
+ * revenue (because of insufficient access rights).
  *
- * Throws an error if the provided project or lumpsum service does not match the
- * entry.
+ * Throws an error if the provided project or lumpsum service does not match the entry.
  */
 export const getEntryRevenue = ({
   entry,
@@ -206,8 +192,7 @@ export const getEntryRevenue = ({
       }
       const { hourlyRate } = entry;
 
-      if (hourlyRate === undefined || revenueFactor === undefined)
-        return undefined;
+      if (hourlyRate === undefined || revenueFactor === undefined) return undefined;
       if (revenueFactor === null) return 0;
 
       const durationInHours = getEntryDurationUntilNow(entry) / (60 * 60);

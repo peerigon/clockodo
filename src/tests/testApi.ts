@@ -1,4 +1,5 @@
 import nock from "nock";
+
 import { CLOCKODO_API_BASE_URL } from "../consts.js";
 import { Api, type Config } from "../lib/api.js";
 import { type RequestHeaders } from "../lib/requests.js";
@@ -13,13 +14,12 @@ export const testApiConfig = {
 
 export const testApi = new Api(testApiConfig);
 
-export const nockUsingTestApi = () => {
+export const nockUsingTestApi = (): nock.Scope => {
   const expectedHeaders: RequestHeaders = {
     "Accept-Language": testApiConfig.locale,
-    "X-Clockodo-External-Application": [
-      testApiConfig.client.name,
-      testApiConfig.client.email,
-    ].join(";"),
+    "X-Clockodo-External-Application": [testApiConfig.client.name, testApiConfig.client.email].join(
+      ";",
+    ),
     "X-ClockodoEnableIsoUtcDateTimes": "1",
     "X-Requested-With": "XMLHttpRequest",
   };

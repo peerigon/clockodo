@@ -35,11 +35,7 @@ export * from "./models/userReport.js";
 export * from "./models/worktimeRegulation.js";
 export * from "./models/workTimes.js";
 
-export {
-  mapQueryParams,
-  mapRequestBody,
-  mapResponseBody,
-} from "./lib/mappings.js";
+export { mapQueryParams, mapRequestBody, mapResponseBody } from "./lib/mappings.js";
 
 export type { Config, Paging, Filter } from "./lib/api.js";
 export * from "./clockodo.js";

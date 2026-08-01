@@ -14,9 +14,8 @@ const EXPECTED_COLUMN_COUNT = 27;
 /**
  * Transforms a row from the CSV entry backup to an entry object.
  *
- * Please note: Entries before 2014-09 will have their timeLastChange and
- * timeLastChangeWorkTime set to timeInsert since these properties didn't exist
- * back then.
+ * Please note: Entries before 2014-09 will have their timeLastChange and timeLastChangeWorkTime set
+ * to timeInsert since these properties didn't exist back then.
  */
 export const parseEntryFromCsv = (row: Array<string>): Entry => {
   if (row.length !== EXPECTED_COLUMN_COUNT) {
@@ -62,9 +61,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     text: textsId === "" ? null : text,
     timeSince: parseIsoUtcDateTime(timeSince),
     timeInsert: parseIsoUtcDateTime(timeInsert),
-    timeLastChange: parseIsoUtcDateTime(
-      timeLastChange === "" ? timeInsert : timeLastChange,
-    ),
+    timeLastChange: parseIsoUtcDateTime(timeLastChange === "" ? timeInsert : timeLastChange),
   };
 
   if (lumpsumServicesId !== "") {
@@ -73,16 +70,8 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
       ...commonEntry,
       timeUntil: parseIsoUtcDateTime(timeUntil),
       billable: parseLumpsumEntryBillability("billable", billable),
-      lumpsumServicesId: parseNumber(
-        "lumpsumServicesId",
-        lumpsumServicesId,
-        "int",
-      ),
-      lumpsumServicesAmount: parseNumber(
-        "lumpsumServicesAmount",
-        lumpsumServicesAmount,
-        "float",
-      ),
+      lumpsumServicesId: parseNumber("lumpsumServicesId", lumpsumServicesId, "int"),
+      lumpsumServicesAmount: parseNumber("lumpsumServicesAmount", lumpsumServicesAmount, "float"),
     };
   }
 
@@ -101,9 +90,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     type: EntryType.Time,
     ...commonEntry,
     servicesId: parseNumber("servicesId", servicesId, "int"),
-    timeClockedSince: timeClockedSince
-      ? parseIsoUtcDateTime(timeClockedSince)
-      : null,
+    timeClockedSince: timeClockedSince ? parseIsoUtcDateTime(timeClockedSince) : null,
     timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
     timeLastChangeWorkTime: parseIsoUtcDateTime(
       timeLastChangeWorkTime === "" ? timeInsert : timeLastChangeWorkTime,
@@ -131,39 +118,25 @@ const parseBoolean = (columnName: string, columnValue: string) => {
       return true;
     }
     default: {
-      throw new Error(
-        `Could not parse ${columnName} "${columnValue}" as a boolean`,
-      );
+      throw new Error(`Could not parse ${columnName} "${columnValue}" as a boolean`);
     }
   }
 };
 
 type NumberType = "int" | "float";
 
-const parseNumber = (
-  columnName: string,
-  columnValue: string,
-  numberType: "int" | "float",
-) => {
+const parseNumber = (columnName: string, columnValue: string, numberType: "int" | "float") => {
   const number =
-    numberType === "int"
-      ? Number.parseInt(columnValue)
-      : Number.parseFloat(columnValue);
+    numberType === "int" ? Number.parseInt(columnValue) : Number.parseFloat(columnValue);
 
   if (Number.isNaN(number)) {
-    throw new TypeError(
-      `Could not parse ${columnName} "${columnValue}" as a number`,
-    );
+    throw new TypeError(`Could not parse ${columnName} "${columnValue}" as a number`);
   }
 
   return number;
 };
 
-const parseOptionalNumber = (
-  columnName: string,
-  columnValue: string,
-  numberType: NumberType,
-) => {
+const parseOptionalNumber = (columnName: string, columnValue: string, numberType: NumberType) => {
   if (columnValue === "") return null;
 
   return parseNumber(columnName, columnValue, numberType);

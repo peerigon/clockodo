@@ -8,12 +8,8 @@
     "./mocks": "./src/exports/mocks.exports.ts"
   },
   "publish": {
-    "include": ["src", "CHANGELOG.md", "README.md", "LICENSE"],
-    "exclude": [
-      "src/**/*.test.ts",
-      "src/**/*.test.ts.snap",
-      "src/tests/**/*.ts"
-    ]
+    "include": ["src", "CHANGELOG.md", "README.md"],
+    "exclude": ["src/**/*.test.ts", "src/**/*.test.ts.snap", "src/tests/**/*.ts"]
   },
   "$schema": "https://jsr.io/schema/config-file.v1.json"
 }

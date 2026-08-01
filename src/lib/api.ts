@@ -1,12 +1,12 @@
 /**
- * HTTP API client primitives, shared request/response types, and pagination
- * helpers.
+ * HTTP API client primitives, shared request/response types, and pagination helpers.
  *
  * @module
  */
 import axios from "axios";
 import pLimit from "p-limit";
 import qs from "qs";
+
 import { CLOCKODO_API_BASE_URL } from "../consts.js";
 import { Billability } from "../models/entry.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
@@ -27,13 +27,11 @@ const paramsSerializer = (params: Record<string, string>) => {
 };
 
 /**
- * Allows additional properties to be present on the params object. This is
- * necessary so that the SDK doesn't disallow unknown params that we haven't
- * implemented yet.
+ * Allows additional properties to be present on the params object. This is necessary so that the
+ * SDK doesn't disallow unknown params that we haven't implemented yet.
  */
-export type Params<
-  KnownParams extends Record<string, unknown> = Record<string, unknown>,
-> = KnownParams & Record<Exclude<string, keyof KnownParams>, unknown>;
+export type Params<KnownParams extends Record<string, unknown> = Record<string, unknown>> =
+  KnownParams & Record<Exclude<string, keyof KnownParams>, unknown>;
 
 export type ParamsWithPage = {
   page?: number;
@@ -86,8 +84,8 @@ export type Authentication = {
 
 export type Config = {
   /**
-   * Information about the client that is going to do the requests. Will be sent
-   * as X-Clockodo-External-Application.
+   * Information about the client that is going to do the requests. Will be sent as
+   * X-Clockodo-External-Application.
    */
   client: {
     /** Name of the application or your company */
@@ -114,12 +112,7 @@ export class Api {
 
   _config: Partial<Config> = {};
 
-  constructor({
-    baseUrl = CLOCKODO_API_BASE_URL,
-    authentication,
-    client,
-    locale,
-  }: Config) {
+  constructor({ baseUrl = CLOCKODO_API_BASE_URL, authentication, client, locale }: Config) {
     // This check is for non-TypeScript users only
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!client) {
@@ -260,14 +253,9 @@ export class Api {
     yield firstResponse;
     const { paging } = firstResponse;
     const limit = pLimit(MAX_PARALLEL_REQUESTS_WHEN_STREAMING);
-    const remainingPages = Array.from(
-      { length: paging.countPages - 1 },
-      (_, index) => index + 2,
-    );
+    const remainingPages = Array.from({ length: paging.countPages - 1 }, (_, index) => index + 2);
 
-    yield* yieldPagesAsap(
-      remainingPages.map(async (page) => limit(getPage, page)),
-    );
+    yield* yieldPagesAsap(remainingPages.map(async (page) => limit(getPage, page)));
   }
 
   async getAllPages<Result extends ResponseWithPaging>(
@@ -279,18 +267,12 @@ export class Api {
       pages.push(page);
     }
 
-    pages.sort(
-      (pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage,
-    );
+    pages.sort((pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage);
 
     return pages;
   }
 
-  async post<Result = any>(
-    url: string,
-    body = {},
-    headers: RequestHeaders = {},
-  ): Promise<Result> {
+  async post<Result = any>(url: string, body = {}, headers: RequestHeaders = {}): Promise<Result> {
     const response = await this[axiosClient].request({
       method: "POST",
       url,
@@ -304,11 +286,7 @@ export class Api {
     return mapResponseBody<Result>(response.data);
   }
 
-  async put<Result = any>(
-    url: string,
-    body = {},
-    headers: RequestHeaders = {},
-  ): Promise<Result> {
+  async put<Result = any>(url: string, body = {}, headers: RequestHeaders = {}): Promise<Result> {
     const response = await this[axiosClient].request({
       method: "PUT",
       url,
@@ -355,13 +333,10 @@ const createTypeError = ({
   );
 };
 
-const yieldPagesAsap = async function* <Result>(
-  pagePromises: Array<Promise<Result>>,
-) {
+const yieldPagesAsap = async function* <Result>(pagePromises: Array<Promise<Result>>) {
   const pending = new Map(
     pagePromises.map(
-      (promise, index) =>
-        [index, promise.then((result) => [index, result] as const)] as const,
+      (promise, index) => [index, promise.then((result) => [index, result] as const)] as const,
     ),
   );
 

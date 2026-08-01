@@ -3,6 +3,7 @@
 import nock from "nock";
 import qs from "qs";
 import { afterAll, describe, expect, it } from "vitest";
+
 import { CLOCKODO_API_BASE_URL } from "./consts.js";
 import {
   AbsenceStatus,
@@ -115,9 +116,7 @@ describe("Clockodo (instance)", () => {
           locale: "de-DE",
         };
 
-        await expect(clockodo.api.get("/anything")).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.api.get("/anything")).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -127,13 +126,9 @@ describe("Clockodo (instance)", () => {
   describe("GET", () => {
     describe("getAbsence()", () => {
       it("correctly builds getAbsence() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/absences/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/absences/7").reply(200, {});
 
-        await expect(
-          clockodo.getAbsence({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getAbsence({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -146,15 +141,12 @@ describe("Clockodo (instance)", () => {
         };
 
         const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get(
-            "/v4/absences?" +
-              qs.stringify(expectedParameters, { arrayFormat: "brackets" }),
-          )
+          .get("/v4/absences?" + qs.stringify(expectedParameters, { arrayFormat: "brackets" }))
           .reply(200, {});
 
-        await expect(
-          clockodo.getAbsences({ filter: { year: [218] } }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getAbsences({ filter: { year: [218] } })).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -162,9 +154,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getClock()", () => {
       it("correctly builds getClock() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/clock")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/clock").reply(200, {});
 
         await expect(clockodo.getClock()).resolves.not.toBeInstanceOf(Error);
 
@@ -174,13 +164,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getCustomer()", () => {
       it("correctly builds getCustomer() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/customers/777")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/customers/777").reply(200, {});
 
-        await expect(
-          clockodo.getCustomer({ id: 777 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getCustomer({ id: 777 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -188,13 +174,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getCustomersPage()", () => {
       it("correctly builds getCustomersPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/customers")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/customers").reply(200, {});
 
-        await expect(clockodo.getCustomersPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getCustomersPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -222,9 +204,7 @@ describe("Clockodo (instance)", () => {
           .get("/v3/customers/countProjects")
           .reply(200, {});
 
-        await expect(
-          clockodo.getCustomersCountProjects(),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getCustomersCountProjects()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -232,13 +212,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getLumpSumService()", () => {
       it("correctly builds getLumpSumService() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/lumpSumServices/777")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/lumpSumServices/777").reply(200, {});
 
-        await expect(
-          clockodo.getLumpSumService({ id: 777 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getLumpSumService({ id: 777 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -246,13 +222,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getLumpSumServicesPage()", () => {
       it("correctly builds getLumpSumServicesPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/lumpSumServices")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/lumpSumServices").reply(200, {});
 
-        await expect(
-          clockodo.getLumpSumServicesPage(),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getLumpSumServicesPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -276,13 +248,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getEntry()", () => {
       it("correctly builds getEntry() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/entries/4")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/entries/4").reply(200, {});
 
-        await expect(clockodo.getEntry({ id: 4 })).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getEntry({ id: 4 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -465,13 +433,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getProject()", () => {
       it("correctly builds getProject() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/projects/1985")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/projects/1985").reply(200, {});
 
-        await expect(
-          clockodo.getProject({ id: 1985 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getProject({ id: 1985 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -479,13 +443,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getProjectsPage()", () => {
       it("correctly builds getProjectsPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/projects")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/projects").reply(200, {});
 
-        await expect(clockodo.getProjectsPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getProjectsPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -509,13 +469,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getProjectsReportsPage()", () => {
       it("correctly builds getProjectsReportsPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/projects/reports")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/projects/reports").reply(200, {});
 
-        await expect(
-          clockodo.getProjectsReportsPage(),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getProjectsReportsPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -539,13 +495,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getSubproject()", () => {
       it("correctly builds getSubproject() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/subprojects/11")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/subprojects/11").reply(200, {});
 
-        await expect(
-          clockodo.getSubproject({ id: 11 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getSubproject({ id: 11 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -553,13 +505,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getSubprojectsPage()", () => {
       it("correctly builds getSubprojectsPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/subprojects")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/subprojects").reply(200, {});
 
-        await expect(clockodo.getSubprojectsPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getSubprojectsPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -583,13 +531,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getService()", () => {
       it("correctly builds getService() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/services/10")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/services/10").reply(200, {});
 
-        await expect(
-          clockodo.getService({ id: 10 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getService({ id: 10 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -597,13 +541,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getServicesPage()", () => {
       it("correctly builds getServicesPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/services")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/services").reply(200, {});
 
-        await expect(clockodo.getServicesPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getServicesPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -627,13 +567,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getTeam()", () => {
       it("correctly builds getTeam() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/teams/1")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/teams/1").reply(200, {});
 
-        await expect(clockodo.getTeam({ id: 1 })).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getTeam({ id: 1 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -641,13 +577,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getTeamsPage()", () => {
       it("correctly builds getTeamsPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/teams")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/teams").reply(200, {});
 
-        await expect(clockodo.getTeamsPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getTeamsPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -671,13 +603,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getSingleTargetHourSet", () => {
       it("correctly builds getSingleTargetHourSet() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/targethours/1234")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/targethours/1234").reply(200, {});
 
-        await expect(
-          clockodo.getTargethoursRow({ id: 1234 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getTargethoursRow({ id: 1234 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -685,13 +613,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getTargetHours", () => {
       it("correctly builds getTargetHours() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/targethours")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/targethours").reply(200, {});
 
-        await expect(clockodo.getTargethours()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getTargethours()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -699,9 +623,7 @@ describe("Clockodo (instance)", () => {
 
     describe("addTargethour()", () => {
       it("correctly builds addTargethour() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .post("/targethours")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).post("/targethours").reply(200, {});
 
         await expect(
           clockodo.addTargethour({
@@ -719,9 +641,7 @@ describe("Clockodo (instance)", () => {
 
     describe("editTargethour()", () => {
       it("correctly builds editTargethour() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .put("/targethours/1234")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).put("/targethours/1234").reply(200, {});
 
         await expect(
           clockodo.editTargethour({
@@ -737,13 +657,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteTargethour()", () => {
       it("correctly builds deleteTargethour() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/targethours/1234")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/targethours/1234").reply(200, {});
 
-        await expect(
-          clockodo.deleteTargethour({ id: 1234 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteTargethour({ id: 1234 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -751,13 +667,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getUser()", () => {
       it("correctly builds getUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/users/1263")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/users/1263").reply(200, {});
 
-        await expect(
-          clockodo.getUser({ id: 1263 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getUser({ id: 1263 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -765,13 +677,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getUsersPage()", () => {
       it("correctly builds getUsersPage() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/users")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/users").reply(200, {});
 
-        await expect(clockodo.getUsersPage()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getUsersPage()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -823,9 +731,7 @@ describe("Clockodo (instance)", () => {
           .get("/userreports?" + qs.stringify({ year: 217 }))
           .reply(200, {});
 
-        await expect(
-          clockodo.getUserReports({ year: 217 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getUserReports({ year: 217 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -833,13 +739,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getNonbusinessGroups()", () => {
       it("correctly builds getNonbusinessGroups() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/nonbusinessGroups")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/nonbusinessGroups").reply(200, {});
 
-        await expect(
-          clockodo.getNonbusinessGroups(),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getNonbusinessGroups()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -851,9 +753,7 @@ describe("Clockodo (instance)", () => {
           .get("/v2/nonbusinessGroups/123")
           .reply(200, {});
 
-        await expect(
-          clockodo.getNonbusinessGroup({ id: 123 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getNonbusinessGroup({ id: 123 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -909,9 +809,7 @@ describe("Clockodo (instance)", () => {
 
     describe("getMe()", () => {
       it("correctly builds getMe() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v4/users/me")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/users/me").reply(200, {});
 
         await expect(clockodo.getMe()).resolves.not.toBeInstanceOf(Error);
 
@@ -985,13 +883,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getOvertimecarryRow()", () => {
       it("correctly builds getOvertimecarryRow() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/overtimeCarry/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/overtimeCarry/7").reply(200, {});
 
-        await expect(
-          clockodo.getOvertimecarryRow({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getOvertimecarryRow({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1013,13 +907,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getHolidaysQuota()", () => {
       it("correctly builds getHolidaysQuota() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/holidaysQuota/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/holidaysQuota/7").reply(200, {});
 
-        await expect(
-          clockodo.getHolidaysQuota({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getHolidaysQuota({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1041,13 +931,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getHolidaysCarryover()", () => {
       it("correctly builds getHolidaysCarryover() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v3/holidaysCarry/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v3/holidaysCarry/7").reply(200, {});
 
-        await expect(
-          clockodo.getHolidaysCarryover({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getHolidaysCarryover({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1055,13 +941,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getSurchargeModel()", () => {
       it("correctly builds getSurchargeModel() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/surchargeModels/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/surchargeModels/7").reply(200, {});
 
-        await expect(
-          clockodo.getSurchargeModel({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.getSurchargeModel({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1069,13 +951,9 @@ describe("Clockodo (instance)", () => {
 
     describe("getSurchargeModels()", () => {
       it("correctly builds getSurchargeModels() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .get("/v2/surchargeModels")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/surchargeModels").reply(200, {});
 
-        await expect(clockodo.getSurchargeModels()).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.getSurchargeModels()).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1652,9 +1530,7 @@ describe("Clockodo (instance)", () => {
           .put("/v3/customers/15", mapRequestBody(customer))
           .reply(200, {});
 
-        await expect(
-          clockodo.editCustomer(customer),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editCustomer(customer)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1671,9 +1547,9 @@ describe("Clockodo (instance)", () => {
           .put("/v4/lumpSumServices/15", mapRequestBody(lumpsumService))
           .reply(200, {});
 
-        await expect(
-          clockodo.editLumpsumService(lumpsumService),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editLumpsumService(lumpsumService)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1691,9 +1567,7 @@ describe("Clockodo (instance)", () => {
           .put("/v4/projects/20", mapRequestBody(project))
           .reply(200, {});
 
-        await expect(clockodo.editProject(project)).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.editProject(project)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1751,9 +1625,7 @@ describe("Clockodo (instance)", () => {
           .put("/v3/subprojects/20", mapRequestBody(subproject))
           .reply(200, {});
 
-        await expect(
-          clockodo.editSubproject(subproject),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editSubproject(subproject)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1788,9 +1660,7 @@ describe("Clockodo (instance)", () => {
           .put("/v4/services/23", mapRequestBody(service))
           .reply(200, {});
 
-        await expect(clockodo.editService(service)).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.editService(service)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1807,9 +1677,7 @@ describe("Clockodo (instance)", () => {
           .put("/v3/users/33", mapRequestBody(user))
           .reply(200, {});
 
-        await expect(clockodo.editUser(user)).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.editUser(user)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1827,9 +1695,7 @@ describe("Clockodo (instance)", () => {
           .put("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
-        await expect(
-          clockodo.editEntryGroup(entryGroup),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editEntryGroup(entryGroup)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1847,9 +1713,7 @@ describe("Clockodo (instance)", () => {
           .put("/v4/absences/74", mapRequestBody(absence))
           .reply(200, {});
 
-        await expect(clockodo.editAbsence(absence)).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.editAbsence(absence)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1866,9 +1730,7 @@ describe("Clockodo (instance)", () => {
           .put("/v2/entries/365", mapRequestBody(entry))
           .reply(200, {});
 
-        await expect(clockodo.editEntry(entry)).resolves.not.toBeInstanceOf(
-          Error,
-        );
+        await expect(clockodo.editEntry(entry)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1885,9 +1747,7 @@ describe("Clockodo (instance)", () => {
           .put("/v2/surchargeModels/365", mapRequestBody(entry))
           .reply(200, {});
 
-        await expect(
-          clockodo.editSurchargeModel(entry),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editSurchargeModel(entry)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1904,9 +1764,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/nonbusinessGroups/2", mapRequestBody(nonbusinessGroup))
           .reply(200, {});
 
-        await expect(
-          clockodo.editNonbusinessGroup(nonbusinessGroup),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editNonbusinessGroup(nonbusinessGroup)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1924,9 +1784,9 @@ describe("Clockodo (instance)", () => {
           .put("/v2/nonbusinessDays/2", mapRequestBody(nonbusinessDay))
           .reply(200, {});
 
-        await expect(
-          clockodo.editNonbusinessDay(nonbusinessDay),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editNonbusinessDay(nonbusinessDay)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1944,9 +1804,9 @@ describe("Clockodo (instance)", () => {
           .put("/v3/overtimeCarry/2", mapRequestBody(overtimecarryRow))
           .reply(200, {});
 
-        await expect(
-          clockodo.editOvertimecarry(overtimecarryRow),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editOvertimecarry(overtimecarryRow)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1964,9 +1824,7 @@ describe("Clockodo (instance)", () => {
           .put("/v2/holidaysQuota/2", mapRequestBody(holidaysQuota))
           .reply(200, {});
 
-        await expect(
-          clockodo.editHolidaysQuota(holidaysQuota),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editHolidaysQuota(holidaysQuota)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -1984,9 +1842,9 @@ describe("Clockodo (instance)", () => {
           .put("/v3/holidaysCarry/2", mapRequestBody(holidaysCarryover))
           .reply(200, {});
 
-        await expect(
-          clockodo.editHolidaysCarryover(holidaysCarryover),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.editHolidaysCarryover(holidaysCarryover)).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -1996,13 +1854,9 @@ describe("Clockodo (instance)", () => {
   describe("DELETE", () => {
     describe("stopClock()", () => {
       it("correctly builds stopClock() request without optional usersId", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v2/clock/782")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v2/clock/782").reply(200, {});
 
-        await expect(
-          clockodo.stopClock({ entriesId: 782 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.stopClock({ entriesId: 782 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2022,13 +1876,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteCustomer()", () => {
       it("correctly builds deleteCustomer() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v3/customers/343")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v3/customers/343").reply(200, {});
 
-        await expect(
-          clockodo.deleteCustomer({ id: 343 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteCustomer({ id: 343 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2036,13 +1886,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteProject()", () => {
       it("correctly builds deleteProject() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v4/projects/8")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v4/projects/8").reply(200, {});
 
-        await expect(
-          clockodo.deleteProject({ id: 8 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteProject({ id: 8 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2050,13 +1896,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteSubproject()", () => {
       it("correctly builds deleteSubproject() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v3/subprojects/8")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v3/subprojects/8").reply(200, {});
 
-        await expect(
-          clockodo.deleteSubproject({ id: 8 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteSubproject({ id: 8 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2064,13 +1906,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteService()", () => {
       it("correctly builds deleteService() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v4/services/94")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v4/services/94").reply(200, {});
 
-        await expect(
-          clockodo.deleteService({ id: 94 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteService({ id: 94 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2082,9 +1920,7 @@ describe("Clockodo (instance)", () => {
           .delete("/v4/lumpSumServices/94")
           .reply(200, {});
 
-        await expect(
-          clockodo.deleteLumpsumService({ id: 94 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteLumpsumService({ id: 94 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2092,13 +1928,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteUser()", () => {
       it("correctly builds deleteUser() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v3/users/7")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v3/users/7").reply(200, {});
 
-        await expect(
-          clockodo.deleteUser({ id: 7 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteUser({ id: 7 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2106,13 +1938,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteEntry()", () => {
       it("correctly builds deleteEntry() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v2/entries/45")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v2/entries/45").reply(200, {});
 
-        await expect(
-          clockodo.deleteEntry({ id: 45 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteEntry({ id: 45 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2130,9 +1958,7 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/entrygroups", mapRequestBody(entryGroup))
           .reply(200, {});
 
-        await expect(
-          clockodo.deleteEntryGroup(entryGroup),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteEntryGroup(entryGroup)).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2140,13 +1966,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteAbsence()", () => {
       it("correctly builds deleteAbsence() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v4/absences/31")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v4/absences/31").reply(200, {});
 
-        await expect(
-          clockodo.deleteAbsence({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteAbsence({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2174,9 +1996,7 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/surchargeModels/31")
           .reply(200, {});
 
-        await expect(
-          clockodo.deleteSurchargeModel({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteSurchargeModel({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2188,9 +2008,9 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/nonbusinessGroups/31")
           .reply(200, {});
 
-        await expect(
-          clockodo.deleteNonbusinessGroup({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteNonbusinessGroup({ id: 31 })).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });
@@ -2202,9 +2022,7 @@ describe("Clockodo (instance)", () => {
           .delete("/v2/nonbusinessDays/31")
           .reply(200, {});
 
-        await expect(
-          clockodo.deleteNonbusinessDay({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteNonbusinessDay({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2212,13 +2030,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteOvertimecarry()", () => {
       it("correctly builds deleteOvertimecarry() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v3/overtimeCarry/31")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v3/overtimeCarry/31").reply(200, {});
 
-        await expect(
-          clockodo.deleteOvertimecarry({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteOvertimecarry({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2226,13 +2040,9 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteHolidaysQuota()", () => {
       it("correctly builds deleteHolidaysQuota() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v2/holidaysQuota/31")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v2/holidaysQuota/31").reply(200, {});
 
-        await expect(
-          clockodo.deleteHolidaysQuota({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteHolidaysQuota({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });
@@ -2240,13 +2050,11 @@ describe("Clockodo (instance)", () => {
 
     describe("deleteHolidaysCarryover()", () => {
       it("correctly builds deleteHolidaysCarryover() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v3/holidaysCarry/31")
-          .reply(200, {});
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v3/holidaysCarry/31").reply(200, {});
 
-        await expect(
-          clockodo.deleteHolidaysCarryover({ id: 31 }),
-        ).resolves.not.toBeInstanceOf(Error);
+        await expect(clockodo.deleteHolidaysCarryover({ id: 31 })).resolves.not.toBeInstanceOf(
+          Error,
+        );
 
         nockScope.done();
       });

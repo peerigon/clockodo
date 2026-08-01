@@ -11,9 +11,7 @@ export const WORK_TIME_EDIT_LOCK_DISABLED = null;
 /** Type for the user's work time edit lock setting */
 export type WorkTimeEditLock =
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  | typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY
-  | typeof WORK_TIME_EDIT_LOCK_DISABLED
-  | number;
+  typeof WORK_TIME_EDIT_LOCK_CLOCK_ONLY | typeof WORK_TIME_EDIT_LOCK_DISABLED | number;
 
 export type User = {
   /** ID of the co-worker */
@@ -30,15 +28,9 @@ export type User = {
   active: boolean;
   /** Is the co-worker using the 12h time format? */
   timeformat12h: boolean;
-  /**
-   * Does the week start on Monday for the co-worker? If not, the week starts on
-   * Sunday
-   */
+  /** Does the week start on Monday for the co-worker? If not, the week starts on Sunday */
   weekstartMonday: boolean;
-  /**
-   * Is the weekend Friday and Saturday for the co-worker? If not, it is
-   * Saturday and Sunday
-   */
+  /** Is the weekend Friday and Saturday for the co-worker? If not, it is Saturday and Sunday */
   weekendFriday: boolean;
   /** The co-worker's language */
   language: UserLanguage;
@@ -47,19 +39,16 @@ export type User = {
   /** Only relevant for the DATEV export */
   wageType: UserWageType | null;
   /**
-   * Is the co-worker allowed to see other co-workers' absences? Only editable
-   * for co-workers with the role 'worker'
+   * Is the co-worker allowed to see other co-workers' absences? Only editable for co-workers with
+   * the role 'worker'
    */
   canGenerallySeeAbsences: boolean;
   /**
-   * Is the co-worker allowed to edit other co-workers' absences? Only editable
-   * for co-workers with the role 'manager'
+   * Is the co-worker allowed to edit other co-workers' absences? Only editable for co-workers with
+   * the role 'manager'
    */
   canGenerallyManageAbsences: boolean;
-  /**
-   * Is the co-worker allowed to add customers? Only editable for co-workers
-   * with the role 'worker'
-   */
+  /** Is the co-worker allowed to add customers? Only editable for co-workers with the role 'worker' */
   canAddCustomers: boolean;
   /**
    * Fixed edit lock for this co-worker:
@@ -70,10 +59,7 @@ export type User = {
   editLock: string | null;
   /** Dynamic edit lock for this co-worker */
   editLockDyn: UserEditLockTimeframe | null;
-  /**
-   * Can future changes to the company-wide edit lock overwrite the edit lock
-   * for this co-worker?
-   */
+  /** Can future changes to the company-wide edit lock overwrite the edit lock for this co-worker? */
   editLockSync: boolean | null;
   /**
    * The worktime regulation applicable to the co-worker:
@@ -99,17 +85,14 @@ export type User = {
   /** Co-worker initials */
   initials: string | null;
   /**
-   * The number can be used to calculate the work time edit lock. First day that
-   * requires a change request is at today - x The values for "no work time edit
-   * lock" and "clock only" are explicitly modelled
+   * The number can be used to calculate the work time edit lock. First day that requires a change
+   * request is at today - x The values for "no work time edit lock" and "clock only" are explicitly
+   * modelled
    */
   workTimeEditLockDays: WorkTimeEditLock;
   /** The user's team leader's / boss' id */
   boss: number | null;
-  /**
-   * The ids of the co-workers that are allowed to manage the absences of this
-   * co-worker
-   */
+  /** The ids of the co-workers that are allowed to manage the absences of this co-worker */
   absenceManagersId: Array<number> | null;
   /** Specifies if the user uses the default holidays count */
   defaultHolidaysCount: boolean;

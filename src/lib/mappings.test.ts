@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
 
 describe("mapQueryParams()", () => {
@@ -51,9 +52,7 @@ describe("mapResponseBody()", () => {
     const responseBody = createObjectFromKeys(keys);
     const mappedResponseBody = mapResponseBody(responseBody);
 
-    expect(uniqueSorted(Object.keys(mappedResponseBody))).toMatchObject(
-      uniqueSorted(keys),
-    );
+    expect(uniqueSorted(Object.keys(mappedResponseBody))).toMatchObject(uniqueSorted(keys));
   });
 });
 

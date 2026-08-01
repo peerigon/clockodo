@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { createNonbusinessDayMocks } from "./nonbusinessDay.mocks.js";
 
 describe("createNonbusinessDayMocks()", () => {

@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
+
 import { Billability, Clockodo, UserReportType, type Config } from "./index.js";
 import { assertExists } from "./lib/assert.ts";
 
@@ -64,9 +65,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const data = await clockodo.getUsers();
       const firstUser = assertExists(data.data[0]);
 
-      expect(Object.keys(firstUser)).toEqual(
-        expect.arrayContaining(expectedKeys),
-      );
+      expect(Object.keys(firstUser)).toEqual(expect.arrayContaining(expectedKeys));
     });
   });
 
@@ -235,9 +234,7 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       });
       const firstGroup = assertExists(data.groups[0]);
 
-      expect(Object.keys(firstGroup)).toEqual(
-        expect.arrayContaining(expectedKeys),
-      );
+      expect(Object.keys(firstGroup)).toEqual(expect.arrayContaining(expectedKeys));
     });
 
     it("returns expected data format with multiple groups passed", async () => {
@@ -264,23 +261,13 @@ describe("Clockodo", { timeout: 20_000 }, () => {
   });
 
   describe("getLumpSumServices() and getLumpSumService()", () => {
-    const expectedKeys = [
-      "id",
-      "name",
-      "price",
-      "unit",
-      "active",
-      "number",
-      "note",
-    ];
+    const expectedKeys = ["id", "name", "price", "unit", "active", "number", "note"];
 
     it("returns expected data format", async () => {
       const { data } = await clockodo.getLumpSumServices();
       const firstLumpsumService = assertExists(data[0]);
 
-      expect(Object.keys(firstLumpsumService)).toEqual(
-        expect.arrayContaining(expectedKeys),
-      );
+      expect(Object.keys(firstLumpsumService)).toEqual(expect.arrayContaining(expectedKeys));
 
       const getLumpSumServiceResponse = await clockodo.getLumpSumService({
         id: firstLumpsumService.id,

@@ -1,12 +1,7 @@
 import { faker } from "@faker-js/faker";
+
 import { isoDateFromDateTime } from "../lib/dateTime.js";
-import {
-  endOfYear,
-  generateRandomDates,
-  ONE_DAY,
-  startOfDay,
-  toPairs,
-} from "../lib/mocks.js";
+import { endOfYear, generateRandomDates, ONE_DAY, startOfDay, toPairs } from "../lib/mocks.js";
 import { AbsenceStatus, AbsenceType, type Absence } from "./absence.js";
 
 const DEFAULT_FROM = new Date(2020, 0);
@@ -37,9 +32,7 @@ export const createAbsenceMocks = ({
 
   return dayPairs.map(([from, to], index): Absence => {
     const isOvertimeReduction = faker.number.int({ min: 0, max: 10 }) > 6;
-    const isHalfDay =
-      isOvertimeReduction === false &&
-      faker.number.int({ min: 0, max: 10 }) > 6;
+    const isHalfDay = isOvertimeReduction === false && faker.number.int({ min: 0, max: 10 }) > 6;
     const hasNote = faker.number.int({ min: 0, max: 10 }) > 2;
 
     const absencesId = index;
@@ -51,8 +44,7 @@ export const createAbsenceMocks = ({
           Math.min(
             to,
             // Make sure that we don't get absences that are too long
-            dateSince.getTime() +
-              faker.number.int({ min: 0, max: 30 }) * ONE_DAY,
+            dateSince.getTime() + faker.number.int({ min: 0, max: 30 }) * ONE_DAY,
             // Clockodo makes sure that dateSince and dateUntil are always within the same year
             endOfYear(dateSince).getTime(),
           ),
@@ -72,12 +64,8 @@ export const createAbsenceMocks = ({
       dateSince: isoDateFromDateTime(dateSince),
       dateUntil: isoDateFromDateTime(dateUntil),
       status,
-      publicNote: hasNote
-        ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
-        : null,
-      note: hasNote
-        ? faker.lorem.words(faker.number.int({ min: 2, max: 10 }))
-        : null,
+      publicNote: hasNote ? faker.lorem.words(faker.number.int({ min: 2, max: 10 })) : null,
+      note: hasNote ? faker.lorem.words(faker.number.int({ min: 2, max: 10 })) : null,
       dateEnquired:
         faker.number.int({ min: 0, max: 10 }) > 6
           ? null
@@ -86,8 +74,7 @@ export const createAbsenceMocks = ({
         status === AbsenceStatus.Approved
           ? isoDateFromDateTime(
               new Date(
-                dateEnquiredDateTime.getTime() +
-                  faker.number.int({ min: 0, max: 4 }) * ONE_DAY,
+                dateEnquiredDateTime.getTime() + faker.number.int({ min: 0, max: 4 }) * ONE_DAY,
               ),
             )
           : null,
@@ -104,9 +91,7 @@ export const createAbsenceMocks = ({
     }
 
     const type =
-      absenceTypesWithoutOvertimeReduction[
-        index % absenceTypesWithoutOvertimeReduction.length
-      ]!;
+      absenceTypesWithoutOvertimeReduction[index % absenceTypesWithoutOvertimeReduction.length]!;
 
     return {
       ...commonAbsence,

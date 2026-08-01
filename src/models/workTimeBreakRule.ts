@@ -1,8 +1,5 @@
 export type SplittingOption = {
-  /**
-   * Breaks: either `1+` for flexible splitting or a number [2...99] for regular
-   * splitting
-   */
+  /** Breaks: either `1+` for flexible splitting or a number [2...99] for regular splitting */
   breaks: number | "1+";
   minLength: number;
 };
@@ -16,9 +13,6 @@ export type WorkTimeBreakRule = {
   workTime: number;
   /** Required total break time */
   breakSum: number;
-  /**
-   * Allowed options for splitting the required break time into more than one
-   * break
-   */
+  /** Allowed options for splitting the required break time into more than one break */
   splittingOptions: Array<SplittingOption>;
 };

@@ -25,7 +25,7 @@ This project uses npm scripts for all development tasks:
 - **Watch tests**: `npm run vitest` - Run Vitest in watch mode
 - **Lint**: `npm run test:lint` - ESLint with zero warnings allowed
 - **Type check**: `npm run test:types` - TypeScript compiler check
-- **Format check**: `npm run test:format` - Prettier format validation
+- **Format check**: `npm run test:format` - Oxfmt format validation
 
 **Important**: Use the typescript-lsp MCP (`getDiagnostics`, `getTypeAtPosition`, `getDefinition`, etc.) for type information
 **Important**: Use the vitest-server MCP to run individual tests.
@@ -38,7 +38,7 @@ This project uses npm scripts for all development tasks:
 - **Core**: `src/clockodo.ts` (Clockodo client), `src/lib/` (api, mappings, requests, etc.)
 - **Models**: `src/models/` - TypeScript types and mocks for API entities (entry, customer, project, etc.)
 - **Tests**: Co-located with source using `.test.ts` suffix; integration test in `src/integration.test.ts`
-- **Configuration**: Uses `@peerigon/configs` for shared TypeScript, ESLint, and Prettier configs
+- **Configuration**: Uses `@peerigon/configs` for shared TypeScript, ESLint, and Oxfmt configs
 
 ## Clockodo API
 
@@ -52,6 +52,10 @@ This project uses npm scripts for all development tasks:
 - Uses ES module syntax throughout (`.ts` extensions in imports)
 - Keep `README.md` API method documentation in sync whenever public SDK methods are added, removed, or renamed
 - **Environment variables**: Use `src/env.ts`; destructure at top-level module scope so missing vars fail immediately.
+
+## Commit Messages
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) for all commit messages (e.g. `feat: ...`, `fix: ...`, `chore: ...`).
 
 ## Template as a git remote
 
