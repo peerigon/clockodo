@@ -290,10 +290,11 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       userreports.forEach((userreport) => {
         expect(userreport).toHaveProperty("usersId");
         expect(userreport).toHaveProperty("sumTarget");
-        expect(userreport.monthDetails.length).toBeGreaterThan(0);
-        userreport.monthDetails.forEach((monthDetails) => {
-          expect(monthDetails).toHaveProperty("nr");
-          expect(monthDetails).toHaveProperty("sumTarget");
+        const monthDetails = assertExists(userreport.monthDetails);
+        expect(monthDetails.length).toBeGreaterThan(0);
+        monthDetails.forEach((monthDetail) => {
+          expect(monthDetail).toHaveProperty("nr");
+          expect(monthDetail).toHaveProperty("sumTarget");
         });
       });
 
@@ -307,12 +308,13 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
       expect(userreport).toHaveProperty("usersId");
       expect(userreport).toHaveProperty("sumTarget");
-      expect(userreport.monthDetails.length).toBeGreaterThan(0);
-      userreport.monthDetails.forEach((monthDetails) => {
-        expect(monthDetails).toHaveProperty("nr");
-        expect(monthDetails).toHaveProperty("sumTarget");
-        expect(monthDetails.weekDetails.length).toBeGreaterThan(0);
-        monthDetails.weekDetails.forEach((weekDetails) => {
+      const monthDetails = assertExists(userreport.monthDetails);
+      expect(monthDetails.length).toBeGreaterThan(0);
+      monthDetails.forEach((monthDetail) => {
+        expect(monthDetail).toHaveProperty("nr");
+        expect(monthDetail).toHaveProperty("sumTarget");
+        expect(monthDetail.weekDetails.length).toBeGreaterThan(0);
+        monthDetail.weekDetails.forEach((weekDetails) => {
           expect(weekDetails).toHaveProperty("nr");
           expect(weekDetails).toHaveProperty("sumTarget");
           expect(weekDetails.dayDetails.length).toBeGreaterThan(0);

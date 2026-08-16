@@ -66,7 +66,12 @@ export type UserReport<GivenUserReportType extends UserReportType = UserReportTy
 } & (GivenUserReportType extends UserReportType.Year
   ? unknown
   : {
-      /** Only if month details are requested */
+      /**
+       * Only if month details are requested. `null` when the co-worker has no
+       * data for the requested year (e.g. an archived co-worker in a year they
+       * no longer work): the endpoint answers `200` with `month_details: null`,
+       * not `404`.
+       */
       monthDetails: Array<
         UserReportMonthDetails &
           (GivenUserReportType extends UserReportType.YearAndMonths
@@ -88,7 +93,7 @@ export type UserReport<GivenUserReportType extends UserReportType = UserReportTy
                         })
                 >;
               })
-      >;
+      > | null;
     });
 
 export type UserReportMonthDetails = {
