@@ -14,7 +14,9 @@ export enum UserReportType {
   YearMonthsWeeksDaysAndWorkTimes = 4,
 }
 
-export type UserReport<GivenUserReportType extends UserReportType = UserReportType.Year> = {
+export type UserReport<
+  GivenUserReportType extends UserReportType = UserReportType.Year,
+> = {
   /** ID of the corresponding co-worker */
   usersId: number;
   /** Name of the corresponding co-worker */
@@ -63,6 +65,23 @@ export type UserReport<GivenUserReportType extends UserReportType = UserReportTy
     /** Number of days of military / alternative service */
     militaryService: number;
   };
+  /** Surcharges added to the work time account in the year, per kind (in seconds) */
+  surcharges: {
+    /** Saturday surcharge (in seconds) */
+    saturday: number;
+    /** Sunday surcharge (in seconds) */
+    sunday: number;
+    /** Nonbusiness-day surcharge (in seconds) */
+    nonbusiness: number;
+    /** Surcharge for special nonbusiness days (in seconds) */
+    nonbusinessSpecial: number;
+    /** Night surcharge (in seconds) */
+    night: number;
+    /** Increased night surcharge (in seconds) */
+    nightIncreased: number;
+  };
+  /** Number of workdays in the year */
+  workdays: number;
 } & (GivenUserReportType extends UserReportType.Year
   ? unknown
   : {
