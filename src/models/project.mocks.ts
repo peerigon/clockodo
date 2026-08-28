@@ -25,6 +25,7 @@ export const createProjectMocks = ({
             fromSubprojects: faker.datatype.boolean(),
             interval: faker.helpers.arrayElement([0, 1, 2, 3, null] as const),
             amount: budgetAmount,
+            subprojectsBudgetTotal: faker.number.int({ min: 0, max: 999_999 }),
           }
         : null;
     const billedCompletely = budget === null ? null : faker.datatype.boolean();
@@ -59,5 +60,8 @@ export const createProjectMocks = ({
       billServiceId: faker.datatype.boolean() ? faker.string.alphanumeric(6) : null,
       revenueFactor:
         faker.number.int({ min: 0, max: 10 }) > 2 ? 1 : faker.number.int({ min: 0.1, max: 1 }),
+      serviceAssignments: Array.from({ length: faker.number.int({ min: 0, max: 5 }) }, () =>
+        faker.number.int({ min: 1, max: 100 }),
+      ),
     };
   });

@@ -8,5 +8,9 @@ export const createTeamMocks = ({ count = 1 }: { count?: number }): Array<Team> 
       id: index,
       name: faker.person.jobArea() + " Team",
       leader: faker.datatype.boolean() ? index : null,
+      userIds: Array.from(
+        { length: faker.number.int({ min: 0, max: 5 }) },
+        (_, memberIndex) => memberIndex,
+      ),
     };
   });

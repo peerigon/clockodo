@@ -11,7 +11,7 @@ type CommonAbsence = {
    * End date in YYYY-MM-DD format Is the same date as dateSince in case the absence is only one day
    * long
    */
-  dateUntil: IsoDate; // | null (as stated in the docs) doesn't seem to be correct
+  dateUntil: IsoDate;
   /** Status of the absence. */
   status: AbsenceStatus;
   /**
@@ -80,6 +80,11 @@ export type HoursAbsence = CommonAbsence & {
    * absence administration or in case of own absences
    */
   countHours: number;
+  /**
+   * Always null for hour absences (only set for SickDay | SickDayOfChild day absences). Only with
+   * access rights for absence administration or in case of own absences
+   */
+  sickNote?: null;
 };
 
 export type Absence = DaysAbsence | HoursAbsence;

@@ -27,6 +27,8 @@ const createCommonEntryMock = (from: Date, to: Date) => {
     id: 0,
     customersId: 0,
     projectsId: null,
+    subprojectsId: null,
+    testData: false,
     usersId: 0,
     textsId: hasText ? 0 : null,
     text: hasText ? faker.lorem.words(faker.number.int({ min: 2, max: 10 })) : null,

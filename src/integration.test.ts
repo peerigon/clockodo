@@ -313,12 +313,14 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       monthDetails.forEach((monthDetail) => {
         expect(monthDetail).toHaveProperty("nr");
         expect(monthDetail).toHaveProperty("sumTarget");
-        expect(monthDetail.weekDetails.length).toBeGreaterThan(0);
-        monthDetail.weekDetails.forEach((weekDetails) => {
+        const weekDetailsList = assertExists(monthDetail.weekDetails);
+        expect(weekDetailsList.length).toBeGreaterThan(0);
+        weekDetailsList.forEach((weekDetails) => {
           expect(weekDetails).toHaveProperty("nr");
           expect(weekDetails).toHaveProperty("sumTarget");
-          expect(weekDetails.dayDetails.length).toBeGreaterThan(0);
-          weekDetails.dayDetails.forEach((dayDetails) => {
+          const dayDetailsList = assertExists(weekDetails.dayDetails);
+          expect(dayDetailsList.length).toBeGreaterThan(0);
+          dayDetailsList.forEach((dayDetails) => {
             expect(dayDetails).toHaveProperty("date");
             expect(dayDetails).toHaveProperty("weekday");
           });
@@ -359,6 +361,33 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const { data: user } = await clockodo.getMe();
 
       expect(user).toHaveProperty("id");
+    });
+  });
+
+  describe("getFavorites()", () => {
+    it("returns expected data format", async () => {
+      const { data: favorites } = await clockodo.getFavorites();
+
+      expect(Array.isArray(favorites)).toBe(true);
+      favorites.forEach((favorite) => {
+        expect(favorite).toHaveProperty("id");
+        expect(favorite).toHaveProperty("name");
+        expect(favorite).toHaveProperty("customersId");
+        expect(favorite).toHaveProperty("servicesId");
+        expect(favorite).toHaveProperty("color");
+      });
+    });
+  });
+
+  describe("getRates()", () => {
+    it("returns expected data format", async () => {
+      const { data: rates } = await clockodo.getRates();
+
+      expect(Array.isArray(rates)).toBe(true);
+      rates.forEach((rate) => {
+        expect(rate).toHaveProperty("hourlyRate");
+        expect(rate).toHaveProperty("parentRateId");
+      });
     });
   });
 });

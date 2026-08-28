@@ -45,6 +45,8 @@ describe("parseEntryFromCsv()", () => {
       clocked: false,
       clockedOffline: false,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       duration: 6437,
       hourlyRate: 90.5,
       id: 1,
@@ -195,6 +197,8 @@ describe("parseEntryFromCsv()", () => {
     const entry: LumpsumValueEntry = {
       billable: Billability.Billable,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       id: 1,
       projectsId: 3,
       servicesId: 5,
@@ -269,6 +273,8 @@ describe("parseEntryFromCsv()", () => {
     const entry: LumpsumServiceEntry = {
       billable: Billability.Billable,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       id: 1,
       projectsId: 3,
       lumpsumServicesId: 6,

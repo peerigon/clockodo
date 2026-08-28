@@ -45,10 +45,31 @@ export type Project = {
     fromSubprojects: boolean;
     interval: 0 | 1 | 2 | 3 | null;
     amount: number | null;
+    /** Sum of all subproject budgets of this project */
+    subprojectsBudgetTotal: number;
     notificationThresholds?: Array<
-      50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 | 130 | 140 | 150 | 200 | 250 | 300
+      | 10
+      | 20
+      | 30
+      | 40
+      | 50
+      | 60
+      | 70
+      | 80
+      | 90
+      | 100
+      | 110
+      | 120
+      | 130
+      | 140
+      | 150
+      | 200
+      | 250
+      | 300
     >;
   } | null;
   /** Linked billing service id */
   billServiceId?: string | null;
+  /** IDs of the services assigned to this project */
+  serviceAssignments: Array<number>;
 };

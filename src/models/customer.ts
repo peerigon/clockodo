@@ -17,4 +17,6 @@ export type Customer = {
   color: number;
   /** Whether this is test data */
   testData: boolean;
+  /** IDs of the services assigned to this customer */
+  serviceAssignments?: Array<number>;
 };

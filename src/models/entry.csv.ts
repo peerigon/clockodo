@@ -56,6 +56,9 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     id: parseNumber("id", id, "int"),
     customersId: parseNumber("customersId", customersId, "int"),
     projectsId: parseOptionalNumber("projectsId", projectsId, "int"),
+    // The CSV export has no dedicated columns for these, so they default here.
+    subprojectsId: null,
+    testData: false,
     usersId: parseNumber("usersId", usersId, "int"),
     textsId: parseOptionalNumber("textsId", textsId, "int"),
     text: textsId === "" ? null : text,

@@ -14,30 +14,51 @@ export enum EntryType {
 }
 
 export enum Billability {
+  /** Billability is not available (e.g. due to insufficient access rights) */
+  NotAvailable = -1,
   NotBillable = 0,
   Billable = 1,
   Billed = 2,
 }
 
 export type TimeEntryBillability =
+  | Billability.NotAvailable
   | Billability.NotBillable
   | Billability.Billable
   | Billability.Billed;
 
 export type ClockingTimeEntryBillability = Billability.NotBillable | Billability.Billable;
 
-export type LumpsumEntryBillability = Billability.Billable | Billability.Billed;
+export type LumpsumEntryBillability =
+  | Billability.NotAvailable
+  | Billability.Billable
+  | Billability.Billed;
 
 type CommonEntry = {
   id: number;
   customersId: number;
   projectsId: number | null;
+  subprojectsId: number | null;
   usersId: number;
   textsId: number | null;
   text: string | null;
   timeSince: string;
   timeInsert: string;
   timeLastChange: string;
+  /** Whether this is a test dataset */
+  testData: boolean;
+  /** Only present with enhanced_list=true */
+  customersName?: string;
+  /** Only present with enhanced_list=true */
+  projectsName?: string | null;
+  /** Only present with enhanced_list=true */
+  subprojectsName?: string | null;
+  /** Only present with enhanced_list=true */
+  usersName?: string;
+  /** Only present with enhanced_list=true */
+  servicesName?: string;
+  /** Only present with necessary access rights and enhanced_list=true */
+  revenue?: number;
 };
 
 export type TimeEntry = CommonEntry & {
@@ -53,7 +74,7 @@ export type TimeEntry = CommonEntry & {
   offset?: number;
   clocked: boolean;
   clockedOffline: boolean;
-  /** Only present with sufficient access rights */
+  /** Only present with necessary access rights and enhanced_list=true */
   hourlyRate?: number;
 };
 
@@ -82,7 +103,7 @@ export type ManualTimeEntry = TimeEntry & {
 
 export type LumpsumValueEntry = CommonEntry & {
   type: EntryType.LumpsumValue;
-  timeUntil: string;
+  timeUntil: string | null;
   billable: LumpsumEntryBillability;
   servicesId: number;
   lumpsum: number;
@@ -90,10 +111,12 @@ export type LumpsumValueEntry = CommonEntry & {
 
 export type LumpsumServiceEntry = CommonEntry & {
   type: EntryType.LumpsumService;
-  timeUntil: string;
+  timeUntil: string | null;
   billable: LumpsumEntryBillability;
   lumpsumServicesId: number;
   lumpsumServicesAmount: number;
+  /** Only present with enhanced_list=true */
+  lumpsumServicesPrice?: number;
 };
 
 export type LumpsumEntry = LumpsumValueEntry | LumpsumServiceEntry;

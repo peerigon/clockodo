@@ -43,7 +43,7 @@ export type TargethoursRowWeekly = CommonTargethoursRow & {
    * True if credited absence hours are applied against the average target hours, false if credited
    * absence hours match the target hours of the specific day .
    */
-  absenceFixedCredit: boolean;
+  absenceFixedCredit?: boolean;
   /** Automatic time compensation per day in minutes */
   compensationDaily: number;
 };

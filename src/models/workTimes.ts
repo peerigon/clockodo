@@ -26,11 +26,13 @@ export type WorkTimeChangeRequest = {
 } & (
   | {
       status: WorkTimeChangeRequestStatus.Declined;
-      declinedAt: IsoDate;
+      declinedAt: IsoUtcDateTime;
       declinedBy: number;
     }
   | {
       status: WorkTimeChangeRequestStatus.Requested;
+      declinedAt: null;
+      declinedBy: null;
     }
 );
 

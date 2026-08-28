@@ -10,6 +10,6 @@ export type SubscriptionPlan = {
 export type Subscription = {
   currentUntil: IsoDate;
   current: SubscriptionPlan;
-  upcoming: SubscriptionPlan;
+  upcoming: SubscriptionPlan | null;
   cancelDate: IsoDate | null;
 };

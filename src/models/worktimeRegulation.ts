@@ -14,6 +14,8 @@ export type WorktimeRegulation = {
 };
 
 export type BreakRule = {
+  /** ID of the breakrule */
+  id: number;
   /** Daily worktime (in hours), above which the rule applies */
   worktime: number;
   /** Required total break time */
@@ -32,5 +34,5 @@ export type BreakRule = {
     "2"?: number;
     /** Three breaks */
     "3"?: number;
-  };
+  } | null;
 };

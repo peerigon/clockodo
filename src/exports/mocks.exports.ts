@@ -15,7 +15,6 @@ export * from "../models/nonbusinessDay.mocks.js";
 export * from "../models/nonbusinessGroup.mocks.js";
 export * from "../models/project.mocks.js";
 export * from "../models/service.mocks.js";
-export * from "../models/surchargeModel.mocks.js";
 export * from "../models/targethours.mocks.js";
 export * from "../models/team.mocks.js";
 export * from "../models/user.mocks.js";

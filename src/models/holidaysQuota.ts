@@ -9,5 +9,5 @@ export type HolidaysQuota = {
   yearUntil: number | null;
   /** Count of holidays */
   count: number;
-  note: string | null;
+  note?: string | null;
 };

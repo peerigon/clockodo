@@ -6,7 +6,7 @@ export type Company = {
   /** Default timezone of the company */
   timezoneDefault: string;
   /** Currency of the company */
-  currency: string;
+  currency: string | null;
   /** Are time and lump sum entries with multiline descriptions allowed? */
   allowEntriesTextMultiline: boolean;
   /** Can time and lump sum entries be directly assigned to customers (or only to projects)? */
@@ -29,8 +29,12 @@ export type Company = {
   moduleProjectTimes: boolean;
   /** Is the target-hours module active for the company? */
   moduleTargetHours: boolean;
+  /** Legacy alias of `moduleTargetHours` returned by the API */
+  moduleTargethours: boolean;
   /** Is the user-reports module active for the company? */
   moduleUserReports: boolean;
+  /** Legacy alias of `moduleUserReports` returned by the API */
+  moduleUserreports: boolean;
   /** ID of the default nonbusiness group */
   nonbusinessGroupDefault: number | null;
   /** ID of the default worktime regulation */

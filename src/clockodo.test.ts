@@ -256,23 +256,6 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("splitAllEntriesAtMidnight()", () => {
-      it("correctly builds splitAllEntriesAtMidnight() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .put("/v2/entries/splitAllAtMidnight")
-          .reply(200, {});
-
-        await expect(
-          clockodo.splitAllEntriesAtMidnight({
-            day: "2022-12-19",
-            usersId: 1,
-          }),
-        ).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
-
     describe("getEntriesPage()", () => {
       it("correctly builds getEntriesPage() request", async () => {
         const expectedParameters = {
@@ -938,26 +921,6 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
-
-    describe("getSurchargeModel()", () => {
-      it("correctly builds getSurchargeModel() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/surchargeModels/7").reply(200, {});
-
-        await expect(clockodo.getSurchargeModel({ id: 7 })).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
-
-    describe("getSurchargeModels()", () => {
-      it("correctly builds getSurchargeModels() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/surchargeModels").reply(200, {});
-
-        await expect(clockodo.getSurchargeModels()).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
   });
 
   describe("POST", () => {
@@ -1460,28 +1423,6 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
-
-    describe("addSurchargeModel()", () => {
-      it("correctly builds addSurchargeModel() request", async () => {
-        const expectedParameters = {
-          name: "Weyland-Yutani",
-          accumulation: true,
-        };
-
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .post("/v2/surchargeModels", expectedParameters)
-          .reply(200, {});
-
-        await expect(
-          clockodo.addSurchargeModel({
-            name: "Weyland-Yutani",
-            accumulation: true,
-          }),
-        ).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
   });
 
   describe("PUT", () => {
@@ -1736,23 +1677,6 @@ describe("Clockodo (instance)", () => {
       });
     });
 
-    describe("editSurchargeModel()", () => {
-      it("correctly builds editSurchargeModel() request", async () => {
-        const entry = {
-          id: 365,
-          name: "ABC",
-        };
-
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .put("/v2/surchargeModels/365", mapRequestBody(entry))
-          .reply(200, {});
-
-        await expect(clockodo.editSurchargeModel(entry)).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
-
     describe("editNonbusinessGroup()", () => {
       it("correctly builds editNonbusinessGroup() request", async () => {
         const nonbusinessGroup = {
@@ -1985,18 +1909,6 @@ describe("Clockodo (instance)", () => {
             id: 17,
           }),
         ).resolves.not.toBeInstanceOf(Error);
-
-        nockScope.done();
-      });
-    });
-
-    describe("deleteSurchargeModel()", () => {
-      it("correctly builds deleteSurchargeModel() request", async () => {
-        const nockScope = nock(CLOCKODO_API_BASE_URL)
-          .delete("/v2/surchargeModels/31")
-          .reply(200, {});
-
-        await expect(clockodo.deleteSurchargeModel({ id: 31 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });

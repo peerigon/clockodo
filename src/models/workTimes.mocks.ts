@@ -121,11 +121,13 @@ const createChangeRequest = ({
     ...(status === WorkTimeChangeRequestStatus.Declined
       ? {
           status: WorkTimeChangeRequestStatus.Declined,
-          declinedAt: isoDate,
+          declinedAt: isoCreatedAt,
           declinedBy: 0,
         }
       : {
           status: WorkTimeChangeRequestStatus.Requested,
+          declinedAt: null,
+          declinedBy: null,
         }),
   };
 };

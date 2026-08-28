@@ -1,3 +1,5 @@
+import type { IsoDate, IsoUtcDateTime } from "./dateTime.js";
+
 /** Special id that is used when no worktime regulation should be applied */
 export const NO_WORKTIME_REGULATIONS_ID_FOR_USER = 0;
 
@@ -19,55 +21,61 @@ export type User = {
   /** Name of the co-worker */
   name: string;
   /** Personnel number */
-  number: string | null;
+  number?: string | null;
   /** E-mail-address of the co-worker */
-  email: string;
+  email?: string;
   /** Role of the co-worker */
-  role: UserRole;
+  role?: UserRole;
   /** Is the co-worker active? */
   active: boolean;
   /** Is the co-worker using the 12h time format? */
   timeformat12h: boolean;
   /** Does the week start on Monday for the co-worker? If not, the week starts on Sunday */
   weekstartMonday: boolean;
-  /** Is the weekend Friday and Saturday for the co-worker? If not, it is Saturday and Sunday */
+  /**
+   * Is the weekend Friday and Saturday for the co-worker? If not, it is Saturday and Sunday
+   *
+   * @deprecated This property no longer has any effect
+   */
   weekendFriday: boolean;
   /** The co-worker's language */
   language: UserLanguage;
   /** The co-worker's timezone e.g. 'Europe/Berlin' */
   timezone: string;
   /** Only relevant for the DATEV export */
-  wageType: UserWageType | null;
+  wageType?: UserWageType | null;
   /**
    * Is the co-worker allowed to see other co-workers' absences? Only editable for co-workers with
    * the role 'worker'
    */
-  canGenerallySeeAbsences: boolean;
+  canGenerallySeeAbsences?: boolean;
   /**
    * Is the co-worker allowed to edit other co-workers' absences? Only editable for co-workers with
    * the role 'manager'
    */
-  canGenerallyManageAbsences: boolean;
+  canGenerallyManageAbsences?: boolean;
   /** Is the co-worker allowed to add customers? Only editable for co-workers with the role 'worker' */
-  canAddCustomers: boolean;
+  canAddCustomers?: boolean;
   /**
    * Fixed edit lock for this co-worker:
    *
    * - Null (No edit lock)
    * - YYYY-MM-DD (Not editable until)
    */
-  editLock: string | null;
+  editLock?: string | null;
   /** Dynamic edit lock for this co-worker */
-  editLockDyn: UserEditLockTimeframe | null;
+  editLockDyn?: UserEditLockTimeframe | null;
   /** Can future changes to the company-wide edit lock overwrite the edit lock for this co-worker? */
-  editLockSync: boolean | null;
+  editLockSync?: boolean | null;
   /**
    * The worktime regulation applicable to the co-worker:
    *
    * - "0" if the co-worker has no worktime regulation
    * - "null" if the company default is applicable
+   *
+   * @deprecated Use `workTimeRegulationsId` instead
    */
-  worktimeRegulationId:
+  worktimeRegulationId?:
     | number
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     | typeof NO_WORKTIME_REGULATIONS_ID_FOR_USER
@@ -79,9 +87,17 @@ export type User = {
    *
    * - "0" if the co-worker has no nonbusiness group
    * - "null" if the company default is applicable
+   *
+   * @deprecated Use v2/usersNonbusinessGroups instead
    */
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   nonbusinessGroupsId: number | typeof NO_NONBUSINESS_GROUPS_ID_FOR_USER | null;
+  /**
+   * Legacy alias of `nonbusinessGroupsId` returned by the API
+   *
+   * @deprecated Use `nonbusinessGroupsId` instead
+   */
+  nonbusinessgroupsId?: number;
   /** Co-worker initials */
   initials: string | null;
   /**
@@ -89,15 +105,17 @@ export type User = {
    * request is at today - x The values for "no work time edit lock" and "clock only" are explicitly
    * modelled
    */
-  workTimeEditLockDays: WorkTimeEditLock;
+  workTimeEditLockDays?: WorkTimeEditLock;
   /** The user's team leader's / boss' id */
-  boss: number | null;
+  boss?: number | null;
   /** The ids of the co-workers that are allowed to manage the absences of this co-worker */
-  absenceManagersId: Array<number> | null;
+  absenceManagersId?: Array<number> | null;
+  /** The ids of the access groups this co-worker belongs to */
+  accessGroupsIds?: Array<number>;
   /** Specifies if the user uses the default holidays count */
-  defaultHolidaysCount: boolean;
+  defaultHolidaysCount?: boolean;
   /** Specifies if the user uses the default target hours */
-  defaultTargetHours: boolean;
+  defaultTargetHours?: boolean;
   /** Co-worker start date */
   startDate?: string | null;
   /** Whether this is a future co-worker */
@@ -110,6 +128,16 @@ export type User = {
   budgetNotifications?: boolean;
   /** Creator user id */
   creator?: number | null;
+  /** Exit date of the co-worker. The co-worker is automatically archived when this date is reached. */
+  exitDate?: IsoDate | null;
+  /** Date and time when the co-worker was created */
+  createdAt?: IsoUtcDateTime;
+  /** Linked billing service id */
+  billServiceId?: string | null;
+  /** Support PIN of the co-worker */
+  supportPin?: string;
+  /** Is the co-worker exempt from flextime violation evaluation? */
+  exemptFromFlextime?: boolean;
 };
 
 export enum UserRole {
@@ -138,5 +166,6 @@ export enum UserEditLockTimeframe {
   TodayAnd1WeekBefore = 8,
   TodayAnd2WeeksBefore = 15,
   TodayAnd30DaysBefore = 31,
+  TodayAnd45DaysBefore = 46,
   TodayAnd90DaysBefore = 91,
 }
