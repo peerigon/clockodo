@@ -31,12 +31,11 @@ import {
   type UsersAccessServices,
 } from "./models/accessControl.js";
 import { type AccessGroup } from "./models/accessGroup.js";
-import { type AggregatesUsersMe } from "./models/aggregatesUsersMe.js";
 import { type Customer } from "./models/customer.js";
 import { type CustomerCountProjects } from "./models/customerCountProjects.js";
 import { type EntriesText } from "./models/entriesText.js";
 import {
-  Billability,
+  type BillabilityFilter,
   type ClockingTimeEntryBillability,
   type Entry,
   type LumpsumServiceEntry,
@@ -44,6 +43,7 @@ import {
   type TimeEntry,
 } from "./models/entry.js";
 import { type EntryGroup } from "./models/entryGroup.js";
+import { type Favorite } from "./models/favorite.js";
 import { type HolidaysCarryover } from "./models/holidaysCarryover.js";
 import { type HolidaysQuota } from "./models/holidaysQuota.js";
 import { type LumpsumService } from "./models/lumpsumService.js";
@@ -52,10 +52,10 @@ import { type NonbusinessGroup } from "./models/nonbusinessGroup.js";
 import { type OvertimecarryRow } from "./models/overtimecarry.js";
 import { type OvertimeReduction } from "./models/overtimeReduction.js";
 import { type Project } from "./models/project.js";
+import { type DefaultRate, type Rate } from "./models/rate.js";
 import { type Service } from "./models/service.js";
 import { type Subproject } from "./models/subproject.js";
 import { type Subscription } from "./models/subscription.js";
-import { type SurchargeModel } from "./models/surchargeModel.js";
 import { type TargethoursRow, type TargethoursRowInput } from "./models/targethours.js";
 import { type Team } from "./models/team.js";
 import { type User } from "./models/user.js";
@@ -300,16 +300,6 @@ export class Clockodo {
     return this.api.get("/v2/entries/" + id, remainingParams);
   }
 
-  async splitAllEntriesAtMidnight(
-    params: Params<{ day: string; usersId: number }>,
-  ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
-    REQUIRED.checkRequired(params, REQUIRED.SPLIT_ALL_ENTRIES_AT_MIDNIGHT);
-
-    const { day, usersId } = params;
-
-    return this.api.put("/v2/entries/splitAllAtMidnight", { usersId, day });
-  }
-
   async getEntries(
     params: Params<EntriesParams>,
   ): Promise<ResponseWithoutPaging<EntriesReturnType>> {
@@ -477,20 +467,6 @@ export class Clockodo {
 
   async getUsers(params?: Params<UsersParams>): Promise<ResponseWithoutPaging<UsersReturnType>> {
     return this.getAllPagesAndMergeArray<UsersReturnType, UsersParams>("/v3/users", params, "data");
-  }
-
-  async getSurchargeModel(
-    params: Params<{ id: SurchargeModel["id"] }>,
-  ): Promise<SurchargeModelReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.GET_SURCHARGE_MODEL);
-
-    const { id, ...remainingParams } = params;
-
-    return this.api.get("/v2/surchargeModels/" + id, remainingParams);
-  }
-
-  async getSurchargeModels(params?: Params): Promise<SurchargeModelsReturnType> {
-    return this.api.get("/v2/surchargeModels", params);
   }
 
   async getUserReport<GivenUserReportType extends UserReportType = UserReportType.Year>(
@@ -693,14 +669,6 @@ export class Clockodo {
     REQUIRED.checkRequired(params, REQUIRED.ADD_USER);
 
     return this.api.post("/v3/users", params);
-  }
-
-  async addSurchargeModel(
-    params: Params<Pick<SurchargeModel, (typeof REQUIRED.ADD_SURCHARGE_MODEL)[number]>>,
-  ): Promise<SurchargeModelReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.ADD_SURCHARGE_MODEL);
-
-    return this.api.post("/v2/surchargeModels", params);
   }
 
   async addNonbusinessGroup(
@@ -1017,16 +985,6 @@ export class Clockodo {
     return this.api.put("/v3/users/" + id, params);
   }
 
-  async editSurchargeModel(
-    params: Params<Pick<SurchargeModel, (typeof REQUIRED.EDIT_SURCHARGE_MODEL)[number]>>,
-  ): Promise<SurchargeModelReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.EDIT_SURCHARGE_MODEL);
-
-    const { id } = params;
-
-    return this.api.put("/v2/surchargeModels/" + id, params);
-  }
-
   async editNonbusinessGroup(
     params: Params<EditNonbusinessGroupParams>,
   ): Promise<NonbusinessGroupReturnType> {
@@ -1145,16 +1103,6 @@ export class Clockodo {
     const { id } = params;
 
     return this.api.delete("/v3/users/" + id, params);
-  }
-
-  async deleteSurchargeModel(
-    params: Params<Pick<SurchargeModel, (typeof REQUIRED.DELETE_SURCHARGE_MODEL)[number]>>,
-  ): Promise<DeleteReturnType> {
-    REQUIRED.checkRequired(params, REQUIRED.DELETE_SURCHARGE_MODEL);
-
-    const { id } = params;
-
-    return this.api.delete("/v2/surchargeModels/" + id);
   }
 
   async deleteAbsence(
@@ -1426,6 +1374,96 @@ export class Clockodo {
 
     return this.api.get("/v3/holidaysCarry/" + id, remainingParams);
   }
+
+  async getFavorites(params?: Params): Promise<FavoritesReturnType> {
+    return this.api.get("/v2/favorites", params);
+  }
+
+  async getFavorite(params: Params<{ id: Favorite["id"] }>): Promise<FavoriteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_FAVORITE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v2/favorites/" + id, remainingParams);
+  }
+
+  async addFavorite(params: Params<AddFavoriteParams>): Promise<FavoriteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_FAVORITE);
+
+    return this.api.post("/v2/favorites", params);
+  }
+
+  async editFavorite(params: Params<EditFavoriteParams>): Promise<FavoriteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_FAVORITE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v2/favorites/" + id, remainingParams);
+  }
+
+  async deleteFavorite(params: Params<{ id: Favorite["id"] }>): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_FAVORITE);
+
+    const { id } = params;
+
+    return this.api.delete("/v2/favorites/" + id, params);
+  }
+
+  async startFavorite(params: Params<{ id: Favorite["id"] }>): Promise<ClockStartReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.START_FAVORITE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.post("/v2/favorites/" + id + "/start", remainingParams);
+  }
+
+  async getRates(params?: Params): Promise<RatesReturnType> {
+    return this.api.get("/v4/rates", params);
+  }
+
+  async getRate(params: Params<{ id: NonNullable<Rate["id"]> }>): Promise<RateReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.GET_RATE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.get("/v4/rates/" + id, remainingParams);
+  }
+
+  async addRate(params: Params<AddRateParams>): Promise<RateReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.ADD_RATE);
+
+    return this.api.post("/v4/rates", params);
+  }
+
+  async editRate(params: Params<EditRateParams>): Promise<RateReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.EDIT_RATE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v4/rates/" + id, remainingParams);
+  }
+
+  async deleteRate(params: Params<{ id: NonNullable<Rate["id"]> }>): Promise<DeleteReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.DELETE_RATE);
+
+    const { id } = params;
+
+    return this.api.delete("/v4/rates/" + id, params);
+  }
+
+  async setDefaultRate(params: Params<SetDefaultRateParams>): Promise<DefaultRateReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.SET_DEFAULT_RATE);
+
+    return this.api.put("/v4/rates/default", params);
+  }
+
+  async sortRate(params: Params<SortRateParams>): Promise<RateSortReturnType> {
+    REQUIRED.checkRequired(params, REQUIRED.SORT_RATE);
+
+    const { id, ...remainingParams } = params;
+
+    return this.api.put("/v4/rates/" + id + "/sort", remainingParams);
+  }
 }
 
 export type AbsenceReturnType = { data: Absence };
@@ -1490,18 +1528,13 @@ export type UsersAccessCustomersProjectsReturnType = UsersAccessCustomersProject
 export type UsersAccessServicesReturnType = UsersAccessServices;
 export type AccessGroupsReturnType = { data: Array<AccessGroup> };
 export type AccessGroupReturnType = { data: AccessGroup };
-export type AggregatesUsersMeReturnType = {
-  user: AggregatesUsersMe["user"];
-  company: AggregatesUsersMe["company"];
-  worktimeRegulation: AggregatesUsersMe["worktimeRegulation"];
-};
 export type DeleteReturnType = { success: boolean };
 export type CustomerReturnType = { data: Customer };
 export type AddCustomerParams = {
   name: Customer["name"];
   number?: Customer["number"];
   active?: Customer["active"];
-  billableDefault?: Customer["billableDefault"] | Billability;
+  billableDefault?: Customer["billableDefault"] | ClockingTimeEntryBillability;
   note?: Customer["note"];
   color?: Customer["color"];
   billServiceId?: Customer["billServiceId"];
@@ -1511,7 +1544,7 @@ export type EditCustomerParams = {
   name?: Customer["name"];
   number?: Customer["number"];
   active?: Customer["active"];
-  billableDefault?: Customer["billableDefault"] | Billability;
+  billableDefault?: Customer["billableDefault"] | ClockingTimeEntryBillability;
   note?: Customer["note"];
   color?: Customer["color"];
   billServiceId?: Customer["billServiceId"];
@@ -1774,15 +1807,11 @@ export type UsersParams = {
   };
   scope?: UserScope;
 } & ParamsWithSort<UsersSortForIndex>;
-export type AddUserParams = Pick<User, (typeof REQUIRED.ADD_USER)[number]> &
+export type AddUserParams = Required<Pick<User, (typeof REQUIRED.ADD_USER)[number]>> &
   Record<string, unknown>;
 export type EditUserParams = Pick<User, (typeof REQUIRED.EDIT_USER)[number]> &
   Record<string, unknown>;
 export type UsersReturnType = ResponseWithPaging & { data: Array<User> };
-export type SurchargeModelReturnType = { data: SurchargeModel };
-export type SurchargeModelsReturnType = {
-  data: Array<SurchargeModel>;
-};
 export type EntryReturnType = { entry: Entry };
 export type AddEntryReturnType = { entry: Entry; stopped?: Entry };
 export type EditEntryReturnType = {
@@ -1794,6 +1823,12 @@ export type EntriesParams = {
   timeSince: string;
   /** In format ISO 8601 UTC, e.g. "2021-06-30T12:34:56Z" */
   timeUntil: string;
+  /**
+   * Request additional fields on each entry (e.g. customersName, projectsName, servicesName,
+   * usersName, textsId, revenue). Note: this endpoint variant has a stricter rate limit of 300
+   * requests per 15 minutes.
+   */
+  enhancedList?: boolean;
   filter?: {
     usersId?: number;
     customersId?: number;
@@ -1801,10 +1836,10 @@ export type EntriesParams = {
     servicesId?: number;
     lumpsumServicesId?: number;
     /**
-     * 0, 1 or 2 With filter.billable: 2 you only receive entries which are billable AND already
-     * billed.
+     * 0, 1, 2 or 12. With filter.billable: 2 you only receive entries which are billable AND
+     * already billed. With filter.billable: 12 you receive entries which are billable OR billed.
      */
-    billable?: Billability;
+    billable?: BillabilityFilter;
     text?: string;
     textsId?: number;
     budgetType?: string;
@@ -1835,7 +1870,7 @@ export type EntriesTextsParams = {
     projectsId?: Array<number>;
     servicesId?: Array<number>;
     usersId?: Array<number>;
-    billable?: Billability;
+    billable?: BillabilityFilter;
     /** In format YYYY-MM-DD */
     timeSince?: string;
     /** In format YYYY-MM-DD */
@@ -2213,4 +2248,51 @@ export type HolidaysCarryoversParams = {
   usersId?: number;
   /** The year to which the data should be restricted to */
   year?: number;
+};
+
+export type FavoritesReturnType = { data: Array<Favorite> };
+export type FavoriteReturnType = { data: Favorite };
+export type AddFavoriteParams = Pick<
+  Favorite,
+  "name" | "customersId" | "servicesId" | "color" | "position"
+> & {
+  projectsId?: Favorite["projectsId"];
+  subprojectsId?: Favorite["subprojectsId"];
+  billable?: Favorite["billable"];
+  text?: Favorite["text"];
+};
+export type EditFavoriteParams = { id: Favorite["id"] } & Partial<
+  Pick<
+    Favorite,
+    | "name"
+    | "customersId"
+    | "projectsId"
+    | "subprojectsId"
+    | "servicesId"
+    | "billable"
+    | "text"
+    | "color"
+    | "position"
+  >
+>;
+
+export type RatesReturnType = { data: Array<Rate> };
+export type RateReturnType = { data: Rate };
+export type DefaultRateReturnType = { data: DefaultRate };
+export type RateSortReturnType = { data: { success: boolean } };
+export type AddRateParams = Pick<Rate, "parentRateId" | "hourlyRate"> & {
+  customerIds?: Rate["customerIds"];
+  projectIds?: Rate["projectIds"];
+  serviceIds?: Rate["serviceIds"];
+  userIds?: Rate["userIds"];
+};
+export type EditRateParams = { id: NonNullable<Rate["id"]> } & Partial<
+  Pick<Rate, "customerIds" | "projectIds" | "serviceIds" | "userIds" | "hourlyRate">
+>;
+export type SetDefaultRateParams = Pick<Rate, "hourlyRate">;
+export type SortRateParams = {
+  /** The parent rate ID whose children should be reordered. Pass 0 for root level. */
+  id: number;
+  /** The rate IDs in the desired order */
+  ids: Array<NonNullable<Rate["id"]>>;
 };

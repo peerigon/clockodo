@@ -12,6 +12,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: 6,
     rules: [
       {
+        id: 1,
         worktime: 9,
         breakSum: 45,
         splitting: {
@@ -20,6 +21,7 @@ export const worktimeRegulationCountryPresets: Record<
         },
       },
       {
+        id: 2,
         worktime: 6,
         breakSum: 30,
         splitting: {
@@ -36,6 +38,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: null,
     rules: [
       {
+        id: 3,
         worktime: 6,
         breakSum: 30,
         splitting: {
@@ -53,6 +56,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: null,
     rules: [
       {
+        id: 4,
         worktime: 9,
         breakSum: 60,
         splitting: {
@@ -60,11 +64,13 @@ export const worktimeRegulationCountryPresets: Record<
         },
       },
       {
+        id: 5,
         worktime: 7,
         breakSum: 30,
         splitting: {},
       },
       {
+        id: 6,
         worktime: 5.5,
         breakSum: 15,
         splitting: {},
@@ -79,6 +85,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: null,
     rules: [
       {
+        id: 7,
         worktime: 10,
         breakSum: 45,
         splitting: {
@@ -87,6 +94,7 @@ export const worktimeRegulationCountryPresets: Record<
         },
       },
       {
+        id: 8,
         worktime: 5.5,
         breakSum: 30,
         splitting: {
@@ -103,6 +111,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: null,
     rules: [
       {
+        id: 9,
         worktime: 6,
         breakSum: 15,
         splitting: {},
@@ -117,6 +126,7 @@ export const worktimeRegulationCountryPresets: Record<
     intervalMax: null,
     rules: [
       {
+        id: 10,
         worktime: 6,
         breakSum: 20,
         splitting: {},

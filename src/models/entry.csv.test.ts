@@ -45,6 +45,8 @@ describe("parseEntryFromCsv()", () => {
       clocked: false,
       clockedOffline: false,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       duration: 6437,
       hourlyRate: 90.5,
       id: 1,
@@ -131,6 +133,17 @@ describe("parseEntryFromCsv()", () => {
           billable: Billability.Billed,
         },
       },
+      // Parses Billability.NotAvailable correctly
+      {
+        input: {
+          ...csvRow,
+          "Billable/Billed": "-1",
+        },
+        expected: {
+          ...entry,
+          billable: Billability.NotAvailable,
+        },
+      },
       // Handles missing text correctly
       {
         input: {
@@ -195,6 +208,8 @@ describe("parseEntryFromCsv()", () => {
     const entry: LumpsumValueEntry = {
       billable: Billability.Billable,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       id: 1,
       projectsId: 3,
       servicesId: 5,
@@ -227,6 +242,28 @@ describe("parseEntryFromCsv()", () => {
         expected: {
           ...entry,
           billable: Billability.Billed,
+        },
+      },
+      // Parses Billability.NotAvailable correctly
+      {
+        input: {
+          ...csvRow,
+          "Billable/Billed": "-1",
+        },
+        expected: {
+          ...entry,
+          billable: Billability.NotAvailable,
+        },
+      },
+      // Handles missing end date correctly
+      {
+        input: {
+          ...csvRow,
+          "End (UTC)": "",
+        },
+        expected: {
+          ...entry,
+          timeUntil: null,
         },
       },
     ];
@@ -269,6 +306,8 @@ describe("parseEntryFromCsv()", () => {
     const entry: LumpsumServiceEntry = {
       billable: Billability.Billable,
       customersId: 4,
+      subprojectsId: null,
+      testData: false,
       id: 1,
       projectsId: 3,
       lumpsumServicesId: 6,
@@ -291,6 +330,17 @@ describe("parseEntryFromCsv()", () => {
       {
         input: csvRow,
         expected: entry,
+      },
+      // Handles missing end date correctly
+      {
+        input: {
+          ...csvRow,
+          "End (UTC)": "",
+        },
+        expected: {
+          ...entry,
+          timeUntil: null,
+        },
       },
     ];
 

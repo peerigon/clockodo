@@ -20,8 +20,8 @@ export enum AccessProjectOrServiceValue {
 export type AccessGroup = {
   id: number;
   name: string;
-  usersIds: Array<User["id"]>;
-  hasElevatedAccess: boolean | null;
-  hasMasterDataAccess: boolean | null;
+  usersIds?: Array<User["id"]>;
+  hasElevatedAccess?: boolean | null;
+  hasMasterDataAccess?: boolean | null;
   companyDefault: boolean;
 };

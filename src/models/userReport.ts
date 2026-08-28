@@ -14,9 +14,7 @@ export enum UserReportType {
   YearMonthsWeeksDaysAndWorkTimes = 4,
 }
 
-export type UserReport<
-  GivenUserReportType extends UserReportType = UserReportType.Year,
-> = {
+export type UserReport<GivenUserReportType extends UserReportType = UserReportType.Year> = {
   /** ID of the corresponding co-worker */
   usersId: number;
   /** Name of the corresponding co-worker */
@@ -66,30 +64,16 @@ export type UserReport<
     militaryService: number;
   };
   /** Surcharges added to the work time account in the year, per kind (in seconds) */
-  surcharges: {
-    /** Saturday surcharge (in seconds) */
-    saturday: number;
-    /** Sunday surcharge (in seconds) */
-    sunday: number;
-    /** Nonbusiness-day surcharge (in seconds) */
-    nonbusiness: number;
-    /** Surcharge for special nonbusiness days (in seconds) */
-    nonbusinessSpecial: number;
-    /** Night surcharge (in seconds) */
-    night: number;
-    /** Increased night surcharge (in seconds) */
-    nightIncreased: number;
-  };
+  surcharges: UserReportSurcharges;
   /** Number of workdays in the year */
   workdays: number;
 } & (GivenUserReportType extends UserReportType.Year
   ? unknown
   : {
       /**
-       * Only if month details are requested. `null` when the co-worker has no
-       * data for the requested year (e.g. an archived co-worker in a year they
-       * no longer work): the endpoint answers `200` with `month_details: null`,
-       * not `404`.
+       * Only if month details are requested. `null` when the co-worker has no data for the
+       * requested year (e.g. an archived co-worker in a year they no longer work): the endpoint
+       * answers `200` with `month_details: null`, not `404`.
        */
       monthDetails: Array<
         UserReportMonthDetails &
@@ -108,9 +92,9 @@ export type UserReport<
                               (GivenUserReportType extends UserReportType.YearMonthsWeeksAndDays
                                 ? unknown
                                 : UserReportDayWorkTimes)
-                          >;
+                          > | null;
                         })
-                >;
+                > | null;
               })
       > | null;
     });
@@ -125,11 +109,13 @@ export type UserReportMonthDetails = {
   /** Worked time when ignoring the monthly compensation (in seconds) */
   sumHoursWithoutCompensation: number;
   /** Sum of overtime reductions (in seconds) */
-  sumReductionUsed: number;
+  sumReductionUsed: number | null;
   /** Sum of withdrawed / payed out overtime */
   sumOvertimeReduced: number;
   /** Calculated difference of the time account (in seconds) */
   diff: number;
+  /** Surcharges added to the work time account this month, per kind (in seconds) */
+  surcharges: UserReportSurcharges;
 };
 
 export type UserReportWeekDetails = {
@@ -140,9 +126,11 @@ export type UserReportWeekDetails = {
   /** Worked time (in seconds) */
   sumHours: number;
   /** Sum of overtime reductions (in seconds) */
-  sumReductionUsed: number;
+  sumReductionUsed: number | null;
   /** Calculated difference of the time account (in seconds) */
   diff: number;
+  /** Surcharges added to the work time account this week, per kind (in seconds) */
+  surcharges: UserReportSurcharges;
 };
 
 export type UserReportDayDetails = {
@@ -159,10 +147,12 @@ export type UserReportDayDetails = {
    * the planned work time (in seconds)
    */
   targetRaw: number | null;
+  /** Surcharges added to the work time account this day, per kind (in seconds) */
+  surcharges: UserReportSurcharges;
   /** Worked time (in seconds). Won't be added for future days */
-  hours?: number;
+  hours?: number | null;
   /** Worked time when ignoring the daily compensation (in seconds). Won't be added for future days. */
-  hoursWithoutCompensation?: number;
+  hoursWithoutCompensation?: number | null;
   /** Calculated difference of the time account (in seconds). Won't be added for future days */
   diff?: number;
   countAbsence: {
@@ -216,4 +206,19 @@ export type Break = {
   until: string;
   /** In seconds */
   length: number;
+};
+
+export type UserReportSurcharges = {
+  /** Saturday surcharge (in seconds) */
+  saturday: number;
+  /** Sunday surcharge (in seconds) */
+  sunday: number;
+  /** Nonbusiness-day surcharge (in seconds) */
+  nonbusiness: number;
+  /** Surcharge for special nonbusiness days (in seconds) */
+  nonbusinessSpecial: number;
+  /** Night surcharge (in seconds) */
+  night: number;
+  /** Increased night surcharge (in seconds) */
+  nightIncreased: number;
 };

@@ -1,3 +1,5 @@
+import { type BudgetNotificationThreshold } from "./project.js";
+
 export type Subproject = {
   id: number;
   projectsId: number;
@@ -8,9 +10,7 @@ export type Subproject = {
     monetary: boolean;
     hard: boolean;
     amount: number | null;
-    notificationThresholds?: Array<
-      50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 | 130 | 140 | 150 | 200 | 250 | 300
-    >;
+    notificationThresholds?: Array<BudgetNotificationThreshold>;
   } | null;
   billed: number | null;
   billedMoney: number | null;
@@ -24,4 +24,6 @@ export type Subproject = {
   active: boolean;
   automaticCompletion?: boolean;
   billServiceId?: string | null;
+  /** IDs of the services assigned to this subproject */
+  serviceAssignments: Array<number>;
 };

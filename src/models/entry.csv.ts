@@ -56,6 +56,9 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     id: parseNumber("id", id, "int"),
     customersId: parseNumber("customersId", customersId, "int"),
     projectsId: parseOptionalNumber("projectsId", projectsId, "int"),
+    // The CSV export has no dedicated columns for these, so they default here.
+    subprojectsId: null,
+    testData: false,
     usersId: parseNumber("usersId", usersId, "int"),
     textsId: parseOptionalNumber("textsId", textsId, "int"),
     text: textsId === "" ? null : text,
@@ -68,7 +71,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     return {
       type: EntryType.LumpsumService,
       ...commonEntry,
-      timeUntil: parseIsoUtcDateTime(timeUntil),
+      timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
       billable: parseLumpsumEntryBillability("billable", billable),
       lumpsumServicesId: parseNumber("lumpsumServicesId", lumpsumServicesId, "int"),
       lumpsumServicesAmount: parseNumber("lumpsumServicesAmount", lumpsumServicesAmount, "float"),
@@ -79,7 +82,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     return {
       type: EntryType.LumpsumValue,
       ...commonEntry,
-      timeUntil: parseIsoUtcDateTime(timeUntil),
+      timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
       billable: parseLumpsumEntryBillability("billable", billable),
       servicesId: parseNumber("servicesId", servicesId, "int"),
       lumpsum: parseNumber("lumpsum", lumpsum, "float"),
@@ -151,6 +154,9 @@ const parseTimeEntryBillability = (
   columnValue: string,
 ): TimeEntryBillability => {
   switch (columnValue) {
+    case "-1": {
+      return Billability.NotAvailable;
+    }
     case "0": {
       return Billability.NotBillable;
     }
@@ -173,6 +179,9 @@ const parseLumpsumEntryBillability = (
   columnValue: string,
 ): LumpsumEntryBillability => {
   switch (columnValue) {
+    case "-1": {
+      return Billability.NotAvailable;
+    }
     case "1": {
       return Billability.Billable;
     }

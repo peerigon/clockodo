@@ -66,9 +66,11 @@ console.log(EntryType.Time); // 1
 console.log(EntryType.LumpsumValue); // 2
 console.log(EntryType.LumpsumService); // 3
 
+console.log(Billability.NotAvailable); // -1
 console.log(Billability.NotBillable); // 0
 console.log(Billability.Billable); // 1
 console.log(Billability.Billed); // 2
+console.log(Billability.BillableOrBilled); // 12 (only valid in entry filters)
 ```
 
 Checkout [models](https://github.com/peerigon/clockodo/blob/main/src/models) for more constants and TypeScript types.
@@ -202,21 +204,6 @@ Get an entry by its ID.
 
 ```js
 await clockodo.getEntry({ id: 4 });
-```
-
----
-
-### splitAllEntriesAtMidnight()
-
-Splits all entries for a given user and day at midnight.
-
-#### Example:
-
-```js
-await clockodo.splitAllEntriesAtMidnight({
-  day: "2026-02-17",
-  usersId: 123,
-});
 ```
 
 ---
@@ -630,30 +617,6 @@ await clockodo.getUsersPage({ page: 2 });
 
 ---
 
-### getSurchargeModel()
-
-Get a surcharge model by ID.
-
-#### Example:
-
-```js
-await clockodo.getSurchargeModel({ id: 7 });
-```
-
----
-
-### getSurchargeModels()
-
-Get all surcharge models.
-
-#### Example:
-
-```js
-await clockodo.getSurchargeModels();
-```
-
----
-
 ### [getUserReport()](https://docs.clockodo.com/#tag/UserReport/operation/getUserreportById)
 
 Get a report for a specific user and year.
@@ -1049,6 +1012,54 @@ await clockodo.getHolidaysCarryover({ id: 7 });
 
 ---
 
+### [getFavorites()](https://docs.clockodo.com/#tag/Favorite/operation/getFavoritesV2)
+
+Get list of favorites.
+
+#### Example:
+
+```js
+await clockodo.getFavorites();
+```
+
+---
+
+### [getFavorite()](https://docs.clockodo.com/#tag/Favorite/operation/getFavoriteByIdV2)
+
+Get a favorite by ID.
+
+#### Example:
+
+```js
+await clockodo.getFavorite({ id: 17 });
+```
+
+---
+
+### [getRates()](https://docs.clockodo.com/#tag/Rate/operation/getRatesV4)
+
+Get list of rates.
+
+#### Example:
+
+```js
+await clockodo.getRates();
+```
+
+---
+
+### [getRate()](https://docs.clockodo.com/#tag/Rate/operation/getRateByIdV4)
+
+Get a rate by ID.
+
+#### Example:
+
+```js
+await clockodo.getRate({ id: 17 });
+```
+
+---
+
 ## Post Methods
 
 ### [addAbsence()](https://docs.clockodo.com/#tag/Absence/operation/createAbsenceV4)
@@ -1321,18 +1332,6 @@ await clockodo.addUser({
 
 ---
 
-### addSurchargeModel()
-
-Adds a surcharge model.
-
-#### Example:
-
-```js
-await clockodo.addSurchargeModel({ name: "Night Shift", accumulation: true });
-```
-
----
-
 ### [startClock()](https://docs.clockodo.com/#tag/Clock/operation/createClockV2)
 
 Start a new running clockodo entry.
@@ -1396,6 +1395,48 @@ Declines a work time change request by ID.
 
 ```js
 await clockodo.declineWorkTimesChangeRequest({ id: 17 });
+```
+
+---
+
+### [addFavorite()](https://docs.clockodo.com/#tag/Favorite/operation/createFavoriteV2)
+
+Creates a new favorite.
+
+#### Example:
+
+```js
+await clockodo.addFavorite({
+  name: "Daily standup",
+  customersId: 1,
+  servicesId: 2,
+  color: FavoriteColor.Sky,
+  position: 0,
+});
+```
+
+---
+
+### [startFavorite()](https://docs.clockodo.com/#tag/Favorite/operation/createFavoritesStartByIdV2)
+
+Start the clock from a favorite.
+
+#### Example:
+
+```js
+await clockodo.startFavorite({ id: 17 });
+```
+
+---
+
+### [addRate()](https://docs.clockodo.com/#tag/Rate/operation/createRateV4)
+
+Creates a new rate.
+
+#### Example:
+
+```js
+await clockodo.addRate({ parentRateId: null, hourlyRate: 120, userIds: [1, 2] });
 ```
 
 ---
@@ -1781,18 +1822,6 @@ await clockodo.editUser({ id: 33, name: "Moalo Loco" });
 
 ---
 
-### editSurchargeModel()
-
-Edit an existing surcharge model.
-
-#### Example:
-
-```js
-await clockodo.editSurchargeModel({ id: 365, name: "ABC" });
-```
-
----
-
 ### [editNonbusinessGroup()](https://docs.clockodo.com/#tag/NonbusinessGroup/operation/updateNonbusinessGroupByIdV2)
 
 Edits a nonbusiness group.
@@ -1881,6 +1910,54 @@ await clockodo.editHolidaysCarryover({ id: 2, count: 5, note: "updated" });
 
 ---
 
+### [editFavorite()](https://docs.clockodo.com/#tag/Favorite/operation/updateFavoriteByIdV2)
+
+Edit an existing favorite.
+
+#### Example:
+
+```js
+await clockodo.editFavorite({ id: 17, name: "New name", position: 1 });
+```
+
+---
+
+### [editRate()](https://docs.clockodo.com/#tag/Rate/operation/updateRateByIdV4)
+
+Edit an existing rate.
+
+#### Example:
+
+```js
+await clockodo.editRate({ id: 17, hourlyRate: 130 });
+```
+
+---
+
+### [setDefaultRate()](https://docs.clockodo.com/#tag/Rate/operation/updateRatesDefaultV4)
+
+Set the company-wide default hourly rate.
+
+#### Example:
+
+```js
+await clockodo.setDefaultRate({ hourlyRate: 100 });
+```
+
+---
+
+### [sortRate()](https://docs.clockodo.com/#tag/Rate/operation/updateRatesSortByIdV4)
+
+Reorder the child rates of a parent rate. Pass `id: 0` for the root level.
+
+#### Example:
+
+```js
+await clockodo.sortRate({ id: 0, ids: [3, 1, 2] });
+```
+
+---
+
 ## Delete methods
 
 ### [clearIndividualUserAccess()](https://docs.clockodo.com/#tag/IndividualUserAccess/operation/clearIndividualUserAccessByUsersIdV2)
@@ -1963,18 +2040,6 @@ Deletes user.
 
 ```js
 await clockodo.deleteUser({ id: 7 });
-```
-
----
-
-### deleteSurchargeModel()
-
-Deletes a surcharge model by ID.
-
-#### Example:
-
-```js
-await clockodo.deleteSurchargeModel({ id: 31 });
 ```
 
 ---
@@ -2169,6 +2234,30 @@ await clockodo.stopClock({ entriesId: 7082 });
 
 ```js
 await clockodo.stopClock({ entriesId: 7082, usersId: 123 });
+```
+
+---
+
+### [deleteFavorite()](https://docs.clockodo.com/#tag/Favorite/operation/deleteFavoriteByIdV2)
+
+Deletes a favorite by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteFavorite({ id: 17 });
+```
+
+---
+
+### [deleteRate()](https://docs.clockodo.com/#tag/Rate/operation/deleteRateByIdV4)
+
+Deletes a rate by ID.
+
+#### Example:
+
+```js
+await clockodo.deleteRate({ id: 17 });
 ```
 
 ---

@@ -7,5 +7,5 @@ export type HolidaysCarryover = {
   year: number;
   /** Day count */
   count: number;
-  note: string | null;
+  note?: string | null;
 };
