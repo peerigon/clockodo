@@ -35,7 +35,7 @@ import { type Customer } from "./models/customer.js";
 import { type CustomerCountProjects } from "./models/customerCountProjects.js";
 import { type EntriesText } from "./models/entriesText.js";
 import {
-  Billability,
+  type BillabilityFilter,
   type ClockingTimeEntryBillability,
   type Entry,
   type LumpsumServiceEntry,
@@ -1534,7 +1534,7 @@ export type AddCustomerParams = {
   name: Customer["name"];
   number?: Customer["number"];
   active?: Customer["active"];
-  billableDefault?: Customer["billableDefault"] | Billability;
+  billableDefault?: Customer["billableDefault"] | ClockingTimeEntryBillability;
   note?: Customer["note"];
   color?: Customer["color"];
   billServiceId?: Customer["billServiceId"];
@@ -1544,7 +1544,7 @@ export type EditCustomerParams = {
   name?: Customer["name"];
   number?: Customer["number"];
   active?: Customer["active"];
-  billableDefault?: Customer["billableDefault"] | Billability;
+  billableDefault?: Customer["billableDefault"] | ClockingTimeEntryBillability;
   note?: Customer["note"];
   color?: Customer["color"];
   billServiceId?: Customer["billServiceId"];
@@ -1836,10 +1836,10 @@ export type EntriesParams = {
     servicesId?: number;
     lumpsumServicesId?: number;
     /**
-     * 0, 1 or 2 With filter.billable: 2 you only receive entries which are billable AND already
-     * billed.
+     * 0, 1, 2 or 12. With filter.billable: 2 you only receive entries which are billable AND
+     * already billed. With filter.billable: 12 you receive entries which are billable OR billed.
      */
-    billable?: Billability.NotBillable | Billability.Billable | Billability.Billed;
+    billable?: BillabilityFilter;
     text?: string;
     textsId?: number;
     budgetType?: string;
@@ -1870,7 +1870,7 @@ export type EntriesTextsParams = {
     projectsId?: Array<number>;
     servicesId?: Array<number>;
     usersId?: Array<number>;
-    billable?: Billability;
+    billable?: BillabilityFilter;
     /** In format YYYY-MM-DD */
     timeSince?: string;
     /** In format YYYY-MM-DD */

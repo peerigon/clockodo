@@ -1,3 +1,5 @@
+import { type BudgetNotificationThreshold } from "./project.js";
+
 export type Subproject = {
   id: number;
   projectsId: number;
@@ -8,26 +10,7 @@ export type Subproject = {
     monetary: boolean;
     hard: boolean;
     amount: number | null;
-    notificationThresholds?: Array<
-      | 10
-      | 20
-      | 30
-      | 40
-      | 50
-      | 60
-      | 70
-      | 80
-      | 90
-      | 100
-      | 110
-      | 120
-      | 130
-      | 140
-      | 150
-      | 200
-      | 250
-      | 300
-    >;
+    notificationThresholds?: Array<BudgetNotificationThreshold>;
   } | null;
   billed: number | null;
   billedMoney: number | null;

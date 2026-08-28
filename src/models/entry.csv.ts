@@ -71,7 +71,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     return {
       type: EntryType.LumpsumService,
       ...commonEntry,
-      timeUntil: parseIsoUtcDateTime(timeUntil),
+      timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
       billable: parseLumpsumEntryBillability("billable", billable),
       lumpsumServicesId: parseNumber("lumpsumServicesId", lumpsumServicesId, "int"),
       lumpsumServicesAmount: parseNumber("lumpsumServicesAmount", lumpsumServicesAmount, "float"),
@@ -82,7 +82,7 @@ export const parseEntryFromCsv = (row: Array<string>): Entry => {
     return {
       type: EntryType.LumpsumValue,
       ...commonEntry,
-      timeUntil: parseIsoUtcDateTime(timeUntil),
+      timeUntil: timeUntil ? parseIsoUtcDateTime(timeUntil) : null,
       billable: parseLumpsumEntryBillability("billable", billable),
       servicesId: parseNumber("servicesId", servicesId, "int"),
       lumpsum: parseNumber("lumpsum", lumpsum, "float"),
@@ -154,6 +154,9 @@ const parseTimeEntryBillability = (
   columnValue: string,
 ): TimeEntryBillability => {
   switch (columnValue) {
+    case "-1": {
+      return Billability.NotAvailable;
+    }
     case "0": {
       return Billability.NotBillable;
     }
@@ -176,6 +179,9 @@ const parseLumpsumEntryBillability = (
   columnValue: string,
 ): LumpsumEntryBillability => {
   switch (columnValue) {
+    case "-1": {
+      return Billability.NotAvailable;
+    }
     case "1": {
       return Billability.Billable;
     }

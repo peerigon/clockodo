@@ -1,4 +1,4 @@
-import { Billability } from "./entry.js";
+import { type ClockingTimeEntryBillability } from "./entry.js";
 
 export enum FavoriteColor {
   BloodOrange = 1,
@@ -18,7 +18,7 @@ export type Favorite = {
   projectsId: number | null;
   subprojectsId: number | null;
   servicesId: number;
-  billable: Billability.NotBillable | Billability.Billable;
+  billable: ClockingTimeEntryBillability;
   text: string | null;
   color: FavoriteColor;
   position: number;

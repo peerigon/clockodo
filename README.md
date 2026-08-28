@@ -66,9 +66,11 @@ console.log(EntryType.Time); // 1
 console.log(EntryType.LumpsumValue); // 2
 console.log(EntryType.LumpsumService); // 3
 
+console.log(Billability.NotAvailable); // -1
 console.log(Billability.NotBillable); // 0
 console.log(Billability.Billable); // 1
 console.log(Billability.Billed); // 2
+console.log(Billability.BillableOrBilled); // 12 (only valid in entry filters)
 ```
 
 Checkout [models](https://github.com/peerigon/clockodo/blob/main/src/models) for more constants and TypeScript types.

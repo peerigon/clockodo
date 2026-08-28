@@ -1,3 +1,24 @@
+/** Percentage of the budget at which a notification is sent */
+export type BudgetNotificationThreshold =
+  | 10
+  | 20
+  | 30
+  | 40
+  | 50
+  | 60
+  | 70
+  | 80
+  | 90
+  | 100
+  | 110
+  | 120
+  | 130
+  | 140
+  | 150
+  | 200
+  | 250
+  | 300;
+
 export type Project = {
   /** ID of the project */
   id: number;
@@ -47,26 +68,7 @@ export type Project = {
     amount: number | null;
     /** Sum of all subproject budgets of this project */
     subprojectsBudgetTotal: number;
-    notificationThresholds?: Array<
-      | 10
-      | 20
-      | 30
-      | 40
-      | 50
-      | 60
-      | 70
-      | 80
-      | 90
-      | 100
-      | 110
-      | 120
-      | 130
-      | 140
-      | 150
-      | 200
-      | 250
-      | 300
-    >;
+    notificationThresholds?: Array<BudgetNotificationThreshold>;
   } | null;
   /** Linked billing service id */
   billServiceId?: string | null;

@@ -73,7 +73,7 @@ export const createTimeEntryMocks = ({
       timeUntil,
       timeClockedSince: timeEntryType === "manual" ? null : commonEntry.timeSince,
       timeLastChangeWorkTime: commonEntry.timeSince,
-      billable: [Billability.NotBillable, Billability.Billable, Billability.Billed][
+      billable: ([Billability.NotBillable, Billability.Billable, Billability.Billed] as const)[
         faker.number.int({ min: 0, max: 2 })
       ]!,
       duration:

@@ -133,6 +133,17 @@ describe("parseEntryFromCsv()", () => {
           billable: Billability.Billed,
         },
       },
+      // Parses Billability.NotAvailable correctly
+      {
+        input: {
+          ...csvRow,
+          "Billable/Billed": "-1",
+        },
+        expected: {
+          ...entry,
+          billable: Billability.NotAvailable,
+        },
+      },
       // Handles missing text correctly
       {
         input: {
@@ -233,6 +244,28 @@ describe("parseEntryFromCsv()", () => {
           billable: Billability.Billed,
         },
       },
+      // Parses Billability.NotAvailable correctly
+      {
+        input: {
+          ...csvRow,
+          "Billable/Billed": "-1",
+        },
+        expected: {
+          ...entry,
+          billable: Billability.NotAvailable,
+        },
+      },
+      // Handles missing end date correctly
+      {
+        input: {
+          ...csvRow,
+          "End (UTC)": "",
+        },
+        expected: {
+          ...entry,
+          timeUntil: null,
+        },
+      },
     ];
 
     testCases.forEach(({ input, expected }) => {
@@ -297,6 +330,17 @@ describe("parseEntryFromCsv()", () => {
       {
         input: csvRow,
         expected: entry,
+      },
+      // Handles missing end date correctly
+      {
+        input: {
+          ...csvRow,
+          "End (UTC)": "",
+        },
+        expected: {
+          ...entry,
+          timeUntil: null,
+        },
       },
     ];
 

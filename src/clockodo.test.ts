@@ -11,6 +11,7 @@ import {
   Billability,
   Clockodo,
   EntriesTextsMode,
+  FavoriteColor,
   mapRequestBody,
   TargethoursRowType,
   UserRole,
@@ -921,6 +922,46 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("getFavorites()", () => {
+      it("correctly builds getFavorites() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/favorites").reply(200, {});
+
+        await expect(clockodo.getFavorites()).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getFavorite()", () => {
+      it("correctly builds getFavorite() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v2/favorites/777").reply(200, {});
+
+        await expect(clockodo.getFavorite({ id: 777 })).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getRates()", () => {
+      it("correctly builds getRates() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/rates").reply(200, {});
+
+        await expect(clockodo.getRates()).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("getRate()", () => {
+      it("correctly builds getRate() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).get("/v4/rates/777").reply(200, {});
+
+        await expect(clockodo.getRate({ id: 777 })).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("POST", () => {
@@ -1423,6 +1464,66 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("addFavorite()", () => {
+      it("correctly builds addFavorite() request", async () => {
+        const favorite = {
+          name: "Daily standup",
+          customersId: 24,
+          servicesId: 7,
+          color: FavoriteColor.Sky,
+          position: 1,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v2/favorites", mapRequestBody(favorite))
+          .reply(200, {});
+
+        await expect(clockodo.addFavorite(favorite)).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+
+      it("throws an error when addFavorite() is missing param", async () => {
+        expect.assertions(1);
+
+        await expect(
+          // @ts-expect-error Intentional error just for the test
+          clockodo.addFavorite({
+            name: "Daily standup",
+          }),
+        ).rejects.toThrow('Missing required parameter "customersId"');
+      });
+    });
+
+    describe("startFavorite()", () => {
+      it("correctly builds startFavorite() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v2/favorites/777/start")
+          .reply(200, {});
+
+        await expect(clockodo.startFavorite({ id: 777 })).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("addRate()", () => {
+      it("correctly builds addRate() request", async () => {
+        const rate = {
+          parentRateId: null,
+          hourlyRate: 85,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .post("/v4/rates", mapRequestBody(rate))
+          .reply(200, {});
+
+        await expect(clockodo.addRate(rate)).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("PUT", () => {
@@ -1773,6 +1874,64 @@ describe("Clockodo (instance)", () => {
         nockScope.done();
       });
     });
+
+    describe("editFavorite()", () => {
+      it("correctly builds editFavorite() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v2/favorites/15", mapRequestBody({ name: "Weekly review" }))
+          .reply(200, {});
+
+        await expect(
+          clockodo.editFavorite({ id: 15, name: "Weekly review" }),
+        ).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("editRate()", () => {
+      it("correctly builds editRate() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v4/rates/15", mapRequestBody({ hourlyRate: 95 }))
+          .reply(200, {});
+
+        await expect(clockodo.editRate({ id: 15, hourlyRate: 95 })).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
+
+    describe("setDefaultRate()", () => {
+      it("correctly builds setDefaultRate() request", async () => {
+        const rate = {
+          hourlyRate: 100,
+        };
+
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v4/rates/default", mapRequestBody(rate))
+          .reply(200, {});
+
+        await expect(clockodo.setDefaultRate(rate)).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("sortRate()", () => {
+      it("correctly builds sortRate() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL)
+          .put("/v4/rates/0/sort", mapRequestBody({ ids: [3, 1, 2] }))
+          .reply(200, {});
+
+        await expect(clockodo.sortRate({ id: 0, ids: [3, 1, 2] })).resolves.not.toBeInstanceOf(
+          Error,
+        );
+
+        nockScope.done();
+      });
+    });
   });
 
   describe("DELETE", () => {
@@ -1967,6 +2126,26 @@ describe("Clockodo (instance)", () => {
         await expect(clockodo.deleteHolidaysCarryover({ id: 31 })).resolves.not.toBeInstanceOf(
           Error,
         );
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteFavorite()", () => {
+      it("correctly builds deleteFavorite() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v2/favorites/343").reply(200, {});
+
+        await expect(clockodo.deleteFavorite({ id: 343 })).resolves.not.toBeInstanceOf(Error);
+
+        nockScope.done();
+      });
+    });
+
+    describe("deleteRate()", () => {
+      it("correctly builds deleteRate() request", async () => {
+        const nockScope = nock(CLOCKODO_API_BASE_URL).delete("/v4/rates/343").reply(200, {});
+
+        await expect(clockodo.deleteRate({ id: 343 })).resolves.not.toBeInstanceOf(Error);
 
         nockScope.done();
       });

@@ -19,20 +19,21 @@ export enum Billability {
   NotBillable = 0,
   Billable = 1,
   Billed = 2,
+  /** Matches entries that are billable or already billed. Only valid in entry filters. */
+  BillableOrBilled = 12,
 }
 
-export type TimeEntryBillability =
-  | Billability.NotAvailable
-  | Billability.NotBillable
-  | Billability.Billable
-  | Billability.Billed;
+/** Billability values accepted by the entries filters */
+export type BillabilityFilter = Exclude<Billability, Billability.NotAvailable>;
+
+export type TimeEntryBillability = Exclude<Billability, Billability.BillableOrBilled>;
 
 export type ClockingTimeEntryBillability = Billability.NotBillable | Billability.Billable;
 
-export type LumpsumEntryBillability =
-  | Billability.NotAvailable
-  | Billability.Billable
-  | Billability.Billed;
+export type LumpsumEntryBillability = Exclude<
+  Billability,
+  Billability.NotBillable | Billability.BillableOrBilled
+>;
 
 type CommonEntry = {
   id: number;
