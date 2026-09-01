@@ -6,6 +6,8 @@ import { setFakerSeed } from "../lib/mocks.js";
 
 timezoneMock.register("US/Eastern");
 
+nock.disableNetConnect();
+
 beforeEach(() => {
   setFakerSeed(123);
 });
