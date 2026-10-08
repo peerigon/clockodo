@@ -16,10 +16,10 @@ import { axiosClient } from "./symbols.js";
 const MAX_PARALLEL_REQUESTS_WHEN_STREAMING = 3;
 const EXTERNAL_APPLICATION_HEADER_MAX_LENGTH = 50;
 
-const paramsSerializer = (params: Record<string, string>) => {
+const paramsSerializer = (params: Record<string, string> | undefined) => {
   const urlParams = [];
 
-  for (const [key, value] of Object.entries(params)) {
+  for (const [key, value] of Object.entries(params ?? {})) {
     urlParams.push(qs.stringify({ [key]: value }, { arrayFormat: "brackets" }));
   }
 
