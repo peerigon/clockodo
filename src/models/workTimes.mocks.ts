@@ -51,11 +51,12 @@ const createWorkTimeDayMock = ({ date }: { date: Date }): WorkTimeDay => {
 
 export const createWorkTimeDayMocks = ({
   count = 1,
-  dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  dateBetween: range = [DEFAULT_FROM, DEFAULT_TO],
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
 }): Array<WorkTimeDay> => {
+  const [from, to] = range;
   const workTimeDays = generateRandomDates({
     count,
     between: [from, to],
@@ -134,18 +135,19 @@ const createChangeRequest = ({
 
 export const createWorkTimeChangeRequestMocks = ({
   count = 1,
-  dateBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  dateBetween: range = [DEFAULT_FROM, DEFAULT_TO],
 }: {
   count?: number;
   dateBetween?: readonly [Date, Date];
 }): Array<WorkTimeChangeRequest> => {
+  const [from, to] = range;
   let id = -1;
 
   return generateRandomDates({
     count,
     between: [from, to],
   }).map((timestamp) => {
-    id = id + 1;
+    id += 1;
     const date = startOfDay(new Date(timestamp));
 
     return createChangeRequest({

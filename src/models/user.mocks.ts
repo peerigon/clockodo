@@ -19,9 +19,11 @@ export const createUserMocks = ({
   Array.from({ length: count }, (_, index): User => {
     const userId = index;
     const isFutureCoworker = faker.number.int({ min: 1, max: 10 }) === 1;
-    const startDate = isFutureCoworker
-      ? isoDateFromDateTime(faker.date.soon({ days: 365, ...(refDate ? { refDate } : {}) }))
-      : isoDateFromDateTime(faker.date.past({ ...(refDate ? { refDate } : {}) }));
+    const startDate = isoDateFromDateTime(
+      isFutureCoworker
+        ? faker.date.soon({ days: 365, ...(refDate && { refDate }) })
+        : faker.date.past({ ...(refDate && { refDate }) }),
+    );
 
     return {
       id: userId,

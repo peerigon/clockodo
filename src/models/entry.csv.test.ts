@@ -170,9 +170,9 @@ describe("parseEntryFromCsv()", () => {
       },
     ];
 
-    testCases.forEach(({ input, expected }) => {
+    for (const { input, expected } of testCases) {
       expect(parseEntryFromCsv(Object.values(input))).toMatchObject(expected);
-    });
+    }
   });
 
   test("It parses lumpsum value entries correctly", () => {
@@ -268,9 +268,9 @@ describe("parseEntryFromCsv()", () => {
       },
     ];
 
-    testCases.forEach(({ input, expected }) => {
+    for (const { input, expected } of testCases) {
       expect(parseEntryFromCsv(Object.values(input))).toMatchObject(expected);
-    });
+    }
   });
 
   test("It parses lumpsum service entries correctly", () => {
@@ -344,8 +344,8 @@ describe("parseEntryFromCsv()", () => {
       },
     ];
 
-    testCases.forEach(({ input, expected }) => {
+    for (const { input, expected } of testCases) {
       expect(parseEntryFromCsv(Object.values(input))).toMatchObject(expected);
-    });
+    }
   });
 });

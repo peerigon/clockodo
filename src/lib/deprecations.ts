@@ -7,8 +7,7 @@ export const warnDeprecated = (code: string, message: string): void => {
   }
   seenDeprecationWarnings.add(messageWithCode);
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (typeof process?.emitWarning === "function") {
+  if (typeof process !== "undefined" && typeof process.emitWarning === "function") {
     process.emitWarning(message, {
       type: "DeprecationWarning",
       code,
@@ -17,6 +16,8 @@ export const warnDeprecated = (code: string, message: string): void => {
     return;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  (console?.warn ?? console.log)(messageWithCode);
+  if (typeof console !== "undefined") {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    (console.warn ?? console.log)(messageWithCode);
+  }
 };

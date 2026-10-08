@@ -153,12 +153,13 @@ export const checkRequired = (
   params: Record<string, unknown> = {},
   requiredList: ReadonlyArray<string>,
 ): void => {
-  const missingParamName = requiredList.find((paramName) => paramName in params === false);
+  const missingParamName = requiredList.find((paramName) => !(paramName in params));
   const undefinedParam = requiredList.find((paramName) => params[paramName] === undefined);
 
   if (missingParamName !== undefined) {
     throw new TypeError(`Missing required parameter "${missingParamName}"`);
-  } else if (undefinedParam !== undefined) {
+  }
+  if (undefinedParam !== undefined) {
     throw new TypeError(`Missing required parameter "${undefinedParam}"`);
   }
 };

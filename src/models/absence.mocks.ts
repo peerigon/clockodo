@@ -17,11 +17,12 @@ const absenceTypesWithoutOvertimeReduction = Object.values(AbsenceType).filter(
 
 export const createAbsenceMocks = ({
   count = 1,
-  dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  dateSinceBetween: range = [DEFAULT_FROM, DEFAULT_TO],
 }: {
   count?: number;
   dateSinceBetween?: readonly [Date, Date];
 } = {}): Array<Absence> => {
+  const [from, to] = range;
   const dayPairs = toPairs(
     generateRandomDates({
       count: count * 2,
@@ -32,7 +33,7 @@ export const createAbsenceMocks = ({
 
   return dayPairs.map(([from, to], index): Absence => {
     const isOvertimeReduction = faker.number.int({ min: 0, max: 10 }) > 6;
-    const isHalfDay = isOvertimeReduction === false && faker.number.int({ min: 0, max: 10 }) > 6;
+    const isHalfDay = !isOvertimeReduction && faker.number.int({ min: 0, max: 10 }) > 6;
     const hasNote = faker.number.int({ min: 0, max: 10 }) > 2;
 
     const absencesId = index;

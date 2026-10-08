@@ -40,9 +40,10 @@ const createCommonTargethoursRowMock = (dateSince: Date) => {
 
 export const createTargethoursRowWeeklyMocks = ({
   count = 1,
-  dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  dateSinceBetween: range = [DEFAULT_FROM, DEFAULT_TO],
   absenceFixedCredit,
 }: CommonOptions = {}): Array<TargethoursRowWeekly> => {
+  const [from, to] = range;
   const dayPairs = toPairs(
     generateRandomDates({
       count: count * 2,
@@ -65,7 +66,7 @@ export const createTargethoursRowWeeklyMocks = ({
       0,
       faker.number.int({ min: 1, max: 4 }),
       faker.number.int({ min: 4, max: 8 }),
-      Number.parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
+      Number(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 
@@ -93,8 +94,9 @@ export const createTargethoursRowWeeklyMocks = ({
 
 export const createTargethoursRowMonthlyMocks = ({
   count = 1,
-  dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  dateSinceBetween: range = [DEFAULT_FROM, DEFAULT_TO],
 }: CommonOptions = {}): Array<TargethoursRowMonthly> => {
+  const [from, to] = range;
   const monthPairs = toPairs(
     generateRandomMonths({
       count: count * 2,
@@ -111,7 +113,7 @@ export const createTargethoursRowMonthlyMocks = ({
       0,
       faker.number.int({ min: 1, max: 4 }),
       faker.number.int({ min: 4, max: 8 }),
-      Number.parseFloat(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
+      Number(faker.number.float({ min: 0, max: 8 }).toFixed(2)),
       24,
     ];
 
@@ -138,7 +140,8 @@ export const createTargethoursRowMonthlyMocks = ({
 };
 
 export const createTargethoursRowMocks = (options: CommonOptions = {}): Array<TargethoursRow> => {
-  const { count = 1, dateSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO] } = options;
+  const { count = 1, dateSinceBetween = [DEFAULT_FROM, DEFAULT_TO] } = options;
+  const [from, to] = dateSinceBetween;
   const dateRangeIsLongEnough = to.getTime() - from.getTime() > 1.5 * ONE_YEAR;
 
   // If the date range is long enough, the first year will use monthly target hours

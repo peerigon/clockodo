@@ -74,19 +74,22 @@ This usually happens when the generated values create too many conflicts (e.g. t
   }
 
   // toSorted() is not yet supported by our target
+  const values = accepted.values().toArray().flat();
+
   // eslint-disable-next-line unicorn/no-array-sort
-  return [...accepted.values()].flat().sort();
+  return values.sort((a, b) => String(a).localeCompare(String(b)));
 };
 
 export const generateRandomDateTimes = ({
   count,
-  between: [from, to],
+  between: range,
   maxDuplicates = 1,
 }: {
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
 }): Array<number> => {
+  const [from, to] = range;
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
@@ -98,13 +101,14 @@ export const generateRandomDateTimes = ({
 
 export const generateRandomDates = ({
   count,
-  between: [from, to],
+  between: range,
   maxDuplicates = 1,
 }: {
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
 }): Array<number> => {
+  const [from, to] = range;
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
@@ -122,13 +126,14 @@ export const generateRandomDates = ({
 
 export const generateRandomMonths = ({
   count,
-  between: [from, to],
+  between: range,
   maxDuplicates = 1,
 }: {
   count: number;
   between: readonly [Date, Date];
   maxDuplicates?: number;
 }): Array<number> => {
+  const [from, to] = range;
   return generateWithMaxDuplicates({
     count,
     maxDuplicates,
