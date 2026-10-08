@@ -47,14 +47,14 @@ export const createProjectMocks = ({
       billedCompletely,
       completed,
       completedAt: completed
-        ? isoUtcDateTimeFromDateTime(faker.date.recent({ ...(refDate ? { refDate } : {}) }))
+        ? isoUtcDateTimeFromDateTime(faker.date.recent({ ...(refDate && { refDate }) }))
         : null,
       testData: faker.datatype.boolean(),
       countSubprojects: faker.number.int({ min: 0, max: 10 }),
       deadline: faker.datatype.boolean()
-        ? isoDateFromDateTime(faker.date.soon({ ...(refDate ? { refDate } : {}) }))
+        ? isoDateFromDateTime(faker.date.soon({ ...(refDate && { refDate }) }))
         : null,
-      startDate: isoDateFromDateTime(faker.date.past({ ...(refDate ? { refDate } : {}) })),
+      startDate: isoDateFromDateTime(faker.date.past({ ...(refDate && { refDate }) })),
       automaticCompletion: faker.datatype.boolean(),
       budget,
       billServiceId: faker.datatype.boolean() ? faker.string.alphanumeric(6) : null,

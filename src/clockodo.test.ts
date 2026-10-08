@@ -2164,7 +2164,7 @@ const setupPaginatedApiMock = ({
 }) => {
   let nockScope = nock(CLOCKODO_API_BASE_URL);
 
-  Array.from({ length: countPages }).forEach((_, index) => {
+  for (const index of Array.from({ length: countPages }).keys()) {
     const page = index + 1;
 
     nockScope = nockScope.get(`${baseUrl}page=${page}`).reply(200, {
@@ -2176,7 +2176,7 @@ const setupPaginatedApiMock = ({
         count_items: countPages,
       },
     });
-  });
+  }
 
   return nockScope;
 };

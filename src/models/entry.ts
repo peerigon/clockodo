@@ -129,9 +129,7 @@ export const isClockingTimeEntry = (entry: Entry): entry is ClockingTimeEntry =>
 };
 
 export const isClockedTimeEntry = (entry: Entry): entry is ClockedTimeEntry => {
-  return (
-    entry.type === EntryType.Time && entry.clocked === true && typeof entry.timeUntil === "string"
-  );
+  return entry.type === EntryType.Time && entry.clocked && typeof entry.timeUntil === "string";
 };
 
 export const isClockTimeEntry = (entry: Entry): entry is ClockTimeEntry => {
@@ -139,7 +137,7 @@ export const isClockTimeEntry = (entry: Entry): entry is ClockTimeEntry => {
 };
 
 export const isManualTimeEntry = (entry: Entry): entry is ManualTimeEntry => {
-  return entry.type === EntryType.Time && entry.clocked === false;
+  return entry.type === EntryType.Time && !entry.clocked;
 };
 
 export const isFinishedTimeEntry = (entry: Entry): entry is FinishedTimeEntry => {

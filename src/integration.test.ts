@@ -71,9 +71,8 @@ describe("Clockodo", { timeout: 20_000 }, () => {
 
   describe("getProjects()", () => {
     it("returns expected data format", async () => {
-      const {
-        data: [project],
-      } = await clockodo.getProjects();
+      const { data } = await clockodo.getProjects();
+      const project = data[0];
 
       expect(project).toHaveProperty("id");
       expect(project).toHaveProperty("customersId");
@@ -81,13 +80,13 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       expect(project).toHaveProperty("completed");
 
       // Check if the filter is working as expected
-      const { data } = await clockodo.getProjects({
+      const { data: filteredData } = await clockodo.getProjects({
         filter: {
           customersId: -1,
         },
       });
 
-      expect(data).toHaveLength(0);
+      expect(filteredData).toHaveLength(0);
     });
   });
 
@@ -287,16 +286,16 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       });
 
       expect(userreports.length).toBeGreaterThan(0);
-      userreports.forEach((userreport) => {
+      for (const userreport of userreports) {
         expect(userreport).toHaveProperty("usersId");
         expect(userreport).toHaveProperty("sumTarget");
         const monthDetails = assertExists(userreport.monthDetails);
         expect(monthDetails.length).toBeGreaterThan(0);
-        monthDetails.forEach((monthDetail) => {
+        for (const monthDetail of monthDetails) {
           expect(monthDetail).toHaveProperty("nr");
           expect(monthDetail).toHaveProperty("sumTarget");
-        });
-      });
+        }
+      }
 
       const firstUserReport = assertExists(userreports[0]);
 
@@ -310,22 +309,22 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       expect(userreport).toHaveProperty("sumTarget");
       const monthDetails = assertExists(userreport.monthDetails);
       expect(monthDetails.length).toBeGreaterThan(0);
-      monthDetails.forEach((monthDetail) => {
+      for (const monthDetail of monthDetails) {
         expect(monthDetail).toHaveProperty("nr");
         expect(monthDetail).toHaveProperty("sumTarget");
         const weekDetailsList = assertExists(monthDetail.weekDetails);
         expect(weekDetailsList.length).toBeGreaterThan(0);
-        weekDetailsList.forEach((weekDetails) => {
+        for (const weekDetails of weekDetailsList) {
           expect(weekDetails).toHaveProperty("nr");
           expect(weekDetails).toHaveProperty("sumTarget");
           const dayDetailsList = assertExists(weekDetails.dayDetails);
           expect(dayDetailsList.length).toBeGreaterThan(0);
-          dayDetailsList.forEach((dayDetails) => {
+          for (const dayDetails of dayDetailsList) {
             expect(dayDetails).toHaveProperty("date");
             expect(dayDetails).toHaveProperty("weekday");
-          });
-        });
-      });
+          }
+        }
+      }
     });
   });
 
@@ -334,10 +333,10 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const { data: nonbusinessGroups } = await clockodo.getNonbusinessGroups();
 
       expect(nonbusinessGroups.length).toBeGreaterThan(0);
-      nonbusinessGroups.forEach((nonbusinessGroup) => {
+      for (const nonbusinessGroup of nonbusinessGroups) {
         expect(nonbusinessGroup).toHaveProperty("id");
         expect(nonbusinessGroup).toHaveProperty("name");
-      });
+      }
 
       const firstNonbusinessGroup = assertExists(nonbusinessGroups[0]);
 
@@ -347,12 +346,12 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       });
 
       expect(nonbusinessDays.length).toBeGreaterThan(0);
-      nonbusinessDays.forEach((nonbusinessDay) => {
+      for (const nonbusinessDay of nonbusinessDays) {
         expect(nonbusinessDay).toHaveProperty("evaluatedDate");
         expect(nonbusinessDay).toHaveProperty("id");
         expect(nonbusinessDay).toHaveProperty("name");
         expect(nonbusinessDay).toHaveProperty("halfDay");
-      });
+      }
     });
   });
 
@@ -369,13 +368,13 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const { data: favorites } = await clockodo.getFavorites();
 
       expect(Array.isArray(favorites)).toBe(true);
-      favorites.forEach((favorite) => {
+      for (const favorite of favorites) {
         expect(favorite).toHaveProperty("id");
         expect(favorite).toHaveProperty("name");
         expect(favorite).toHaveProperty("customersId");
         expect(favorite).toHaveProperty("servicesId");
         expect(favorite).toHaveProperty("color");
-      });
+      }
     });
   });
 
@@ -384,10 +383,10 @@ describe("Clockodo", { timeout: 20_000 }, () => {
       const { data: rates } = await clockodo.getRates();
 
       expect(Array.isArray(rates)).toBe(true);
-      rates.forEach((rate) => {
+      for (const rate of rates) {
         expect(rate).toHaveProperty("hourlyRate");
         expect(rate).toHaveProperty("parentRateId");
-      });
+      }
     });
   });
 });

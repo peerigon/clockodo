@@ -130,7 +130,11 @@ type NumberType = "int" | "float";
 
 const parseNumber = (columnName: string, columnValue: string, numberType: "int" | "float") => {
   const number =
-    numberType === "int" ? Number.parseInt(columnValue) : Number.parseFloat(columnValue);
+    numberType === "int"
+      ? Number.parseInt(columnValue)
+      : // Number("") is 0, but parseFloat("") is NaN
+        // eslint-disable-next-line unicorn/prefer-number-coercion
+        Number.parseFloat(columnValue);
 
   if (Number.isNaN(number)) {
     throw new TypeError(`Could not parse ${columnName} "${columnValue}" as a number`);

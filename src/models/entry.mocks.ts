@@ -5,6 +5,7 @@ import { isoUtcDateTimeFromDateTime } from "../lib/dateTime.js";
 import {
   Billability,
   type Entry,
+  EntryType,
   type LumpsumServiceEntry,
   type LumpsumValueEntry,
   type TimeEntry,
@@ -18,7 +19,7 @@ type CommonOptions = {
 const DEFAULT_FROM = new Date(2020, 0);
 const DEFAULT_TO = new Date(2021, 0);
 
-const createCommonEntryMock = (from: Date, to: Date) => {
+const createCommonEntryMock = ([from, to]: readonly [Date, Date]) => {
   const hasText = faker.number.int({ min: 0, max: 10 }) > 2;
   const timeSince = faker.date.between({ from, to });
   const timeSinceAsIsoString = isoUtcDateTimeFromDateTime(timeSince);
@@ -41,13 +42,13 @@ const createCommonEntryMock = (from: Date, to: Date) => {
 
 export const createTimeEntryMocks = ({
   count = 1,
-  timeSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  timeSinceBetween = [DEFAULT_FROM, DEFAULT_TO],
   timeEntryTypes = ["clocking", "clocked", "manual"],
 }: CommonOptions & {
   timeEntryTypes?: Array<"clocking" | "clocked" | "manual">;
 } = {}): Array<TimeEntry> =>
   Array.from({ length: count }, (_, index): TimeEntry => {
-    const commonEntry = createCommonEntryMock(from, to);
+    const commonEntry = createCommonEntryMock(timeSinceBetween);
     const timeEntryType =
       timeEntryTypes[
         faker.number.int({
@@ -68,7 +69,7 @@ export const createTimeEntryMocks = ({
     return {
       ...commonEntry,
       id: index,
-      type: 1,
+      type: EntryType.Time,
       servicesId: 0,
       timeUntil,
       timeClockedSince: timeEntryType === "manual" ? null : commonEntry.timeSince,
@@ -91,15 +92,15 @@ export const createTimeEntryMocks = ({
 
 export const createLumpsumValueEntryMocks = ({
   count = 1,
-  timeSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  timeSinceBetween = [DEFAULT_FROM, DEFAULT_TO],
 }: CommonOptions = {}): Array<LumpsumValueEntry> =>
   Array.from({ length: count }, (_, index): LumpsumValueEntry => {
-    const commonEntry = createCommonEntryMock(from, to);
+    const commonEntry = createCommonEntryMock(timeSinceBetween);
 
     return {
       ...commonEntry,
       id: index,
-      type: 2,
+      type: EntryType.LumpsumValue,
       billable: [Billability.Billable as const, Billability.Billed as const][index % 2]!,
       servicesId: 0,
       lumpsum: faker.number.float({ min: 0.2, max: 150 }),
@@ -108,15 +109,15 @@ export const createLumpsumValueEntryMocks = ({
 
 export const createLumpsumServiceEntryMocks = ({
   count = 1,
-  timeSinceBetween: [from, to] = [DEFAULT_FROM, DEFAULT_TO],
+  timeSinceBetween = [DEFAULT_FROM, DEFAULT_TO],
 }: CommonOptions = {}): Array<LumpsumServiceEntry> =>
   Array.from({ length: count }, (_, index): LumpsumServiceEntry => {
-    const commonEntry = createCommonEntryMock(from, to);
+    const commonEntry = createCommonEntryMock(timeSinceBetween);
 
     return {
       ...commonEntry,
       id: index,
-      type: 3,
+      type: EntryType.LumpsumService,
       billable: [Billability.Billable as const, Billability.Billed as const][index % 2]!,
       lumpsumServicesId: 0,
       lumpsumServicesAmount: faker.number.float({ min: 0.2, max: 150 }),
@@ -131,12 +132,13 @@ export const createEntryMocks = (options: CommonOptions = {}): Array<Entry> => {
 
   return Array.from({ length: count }, (_, index): Entry => {
     const typeSeed = faker.number.int({ min: 0, max: 10 });
-    const entry =
+    const entries =
       typeSeed > 2
-        ? assertExists(timeEntryMocks[index])
+        ? timeEntryMocks
         : typeSeed > 1
-          ? assertExists(lumpsumValueEntryMocks[index])
-          : assertExists(lumpsumServiceEntryMocks[index]);
+          ? lumpsumValueEntryMocks
+          : lumpsumServiceEntryMocks;
+    const entry = assertExists(entries[index]);
 
     return {
       ...entry,

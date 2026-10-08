@@ -108,9 +108,9 @@ export class Api {
     },
   });
 
-  defaultHeaders: undefined | (() => RequestHeaders);
+  #config: Partial<Config> = {};
 
-  _config: Partial<Config> = {};
+  defaultHeaders: undefined | (() => RequestHeaders);
 
   constructor({ baseUrl = CLOCKODO_API_BASE_URL, authentication, client, locale }: Config) {
     // This check is for non-TypeScript users only
@@ -124,7 +124,7 @@ export class Api {
   }
 
   set config(config: Partial<Config>) {
-    this._config = config;
+    this.#config = config;
     const defaults = this[axiosClient].defaults;
 
     if ("locale" in config) {
@@ -223,7 +223,7 @@ export class Api {
   }
 
   get config(): Partial<Config> {
-    return this._config;
+    return this.#config;
   }
 
   async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
@@ -261,11 +261,14 @@ export class Api {
   async getAllPages<Result extends ResponseWithPaging>(
     ...args: Parameters<Api["get"]>
   ): Promise<Array<Result>> {
+    // Array.fromAsync() is not yet supported by our target
+    /* eslint-disable unicorn/prefer-array-from-async */
     const pages: Array<Result> = [];
 
     for await (const page of this.getPagesStreaming<Result>(...args)) {
       pages.push(page);
     }
+    /* eslint-enable unicorn/prefer-array-from-async */
 
     pages.sort((pageA, pageB) => pageA.paging.currentPage - pageB.paging.currentPage);
 
@@ -334,10 +337,10 @@ const createTypeError = ({
 };
 
 const yieldPagesAsap = async function* <Result>(pagePromises: Array<Promise<Result>>) {
+  const withIndex = async (promise: Promise<Result>, index: number) =>
+    [index, await promise] as const;
   const pending = new Map(
-    pagePromises.map(
-      (promise, index) => [index, promise.then((result) => [index, result] as const)] as const,
-    ),
+    pagePromises.map((promise, index) => [index, withIndex(promise, index)] as const),
   );
 
   while (pending.size > 0) {

@@ -84,9 +84,9 @@ export class Clockodo {
     path: string,
     params: undefined | Params<RequestParams>,
     key: {
-      [Key in keyof ResponseWithoutPaging<ReturnTypeWithPaging>]: ResponseWithoutPaging<ReturnTypeWithPaging>[Key] extends Array<unknown>
-        ? Key
-        : never;
+      [
+        Key in keyof ResponseWithoutPaging<ReturnTypeWithPaging>
+      ]: ResponseWithoutPaging<ReturnTypeWithPaging>[Key] extends Array<unknown> ? Key : never;
     }[keyof ResponseWithoutPaging<ReturnTypeWithPaging>],
   ): Promise<ResponseWithoutPaging<ReturnTypeWithPaging>> {
     const pages = await this.api.getAllPages<ReturnTypeWithPaging>(path, params);

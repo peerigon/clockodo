@@ -56,7 +56,8 @@ describe("mapResponseBody()", () => {
   });
 });
 
-const uniqueSorted = (keysA: Array<string>) => [...new Set(keysA)].toSorted();
+const uniqueSorted = (keysA: Array<string>) =>
+  [...new Set(keysA)].toSorted((a, b) => a.localeCompare(b));
 
 const createObjectFromKeys = (keys: Array<string>) =>
   Object.fromEntries(keys.map((key) => [key, 1]));
