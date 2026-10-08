@@ -17,6 +17,10 @@ updates:
           - "oxfmt"
           - "semantic-release"
           - "typescript"
+    ignore:
+      # typescript-eslint doesn't support TypeScript 7 yet (peer dep <6.1.0)
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     cooldown:
       default-days: 7
 
