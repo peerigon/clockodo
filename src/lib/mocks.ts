@@ -74,7 +74,9 @@ This usually happens when the generated values create too many conflicts (e.g. t
   }
 
   // toSorted() is not yet supported by our target
-  const values = accepted.values().toArray().flat();
+  // Iterator#toArray() is not yet supported by our target
+  // eslint-disable-next-line unicorn/prefer-iterator-to-array
+  const values = [...accepted.values()].flat();
 
   // eslint-disable-next-line unicorn/no-array-sort
   return values.sort((a, b) => String(a).localeCompare(String(b)));
