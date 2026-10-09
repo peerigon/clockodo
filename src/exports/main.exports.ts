@@ -45,6 +45,7 @@ export {
 } from "../lib/mappings.js";
 
 export * from "../clockodo.js";
+export { ClockodoApiError } from "../lib/api.js";
 export type {
   Config,
   Filter,

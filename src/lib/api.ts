@@ -3,7 +3,6 @@
  *
  * @module
  */
-import axios from "axios";
 import pLimit from "p-limit";
 import qs from "qs";
 
@@ -11,7 +10,6 @@ import { CLOCKODO_API_BASE_URL } from "../consts.js";
 import { Billability } from "../models/entry.js";
 import { mapQueryParams, mapRequestBody, mapResponseBody } from "./mappings.js";
 import { type RequestHeaders } from "./requests.js";
-import { axiosClient } from "./symbols.js";
 
 const MAX_PARALLEL_REQUESTS_WHEN_STREAMING = 3;
 const EXTERNAL_APPLICATION_HEADER_MAX_LENGTH = 50;
@@ -101,12 +99,41 @@ export type Config = {
   locale?: string | undefined;
 };
 
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+
+type RequestOptions = {
+  queryParams?: Record<string, unknown>;
+  body?: Record<string, unknown>;
+  headers?: RequestHeaders;
+};
+
+/** Thrown when the Clockodo API responds with a non-2xx status code. */
+export class ClockodoApiError extends Error {
+  readonly status: number;
+  /** The parsed JSON response body or the raw text if the body is not JSON. */
+  readonly data: unknown;
+  /** Mirrors the shape of axios errors so that existing error handling code keeps working. */
+  readonly response: { status: number; data: unknown; headers: Record<string, string> };
+
+  constructor({ status, data, headers }: { status: number; data: unknown; headers: Headers }) {
+    super(`Request failed with status code ${status}`);
+    this.name = "ClockodoApiError";
+    this.status = status;
+    this.data = data;
+    // Plain object with lowercase keys like axios so that e.g. headers["retry-after"] keeps working
+    this.response = { status, data, headers: Object.fromEntries(headers) };
+  }
+}
+
 export class Api {
-  private [axiosClient] = axios.create({
-    headers: {
-      "X-ClockodoEnableIsoUtcDateTimes": "1",
-    },
-  });
+  #baseUrl = CLOCKODO_API_BASE_URL;
+
+  #headers: RequestHeaders = {
+    Accept: "application/json",
+    "X-ClockodoEnableIsoUtcDateTimes": "1",
+  };
+
+  #credentials: NonNullable<RequestInit["credentials"]> = "same-origin";
 
   #config: Partial<Config> = {};
 
@@ -123,17 +150,52 @@ export class Api {
     this.config = { client, authentication, baseUrl, locale };
   }
 
+  async #request<Result>(
+    method: HttpMethod,
+    url: string,
+    { queryParams, body, headers }: RequestOptions,
+  ): Promise<Result> {
+    const queryString =
+      queryParams === undefined ? "" : paramsSerializer(mapQueryParams({ ...queryParams }));
+    const requestHeaders = withoutUndefinedValues({
+      ...this.#headers,
+      ...this.defaultHeaders?.(),
+      ...headers,
+    });
+
+    if (body !== undefined) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
+
+    const response = await fetch(
+      joinUrl(this.#baseUrl, url) + (queryString === "" ? "" : `?${queryString}`),
+      {
+        method,
+        headers: requestHeaders,
+        credentials: this.#credentials,
+        body: body === undefined ? undefined : JSON.stringify(mapRequestBody(body)),
+      },
+    );
+    const data = await parseResponseBody(response);
+
+    if (!response.ok) {
+      throw new ClockodoApiError({ status: response.status, data, headers: response.headers });
+    }
+
+    return isObject(data) ? mapResponseBody<Result>(data) : (data as Result);
+  }
+
   set config(config: Partial<Config>) {
     this.#config = config;
-    const defaults = this[axiosClient].defaults;
+    const headers = this.#headers;
 
     if ("locale" in config) {
       const { locale } = config;
 
       if (locale === undefined) {
-        delete defaults.headers["Accept-Language"];
+        delete headers["Accept-Language"];
       } else if (typeof locale === "string") {
-        defaults.headers["Accept-Language"] = locale;
+        headers["Accept-Language"] = locale;
       } else {
         throw createTypeError({
           name: "locale",
@@ -147,9 +209,9 @@ export class Api {
       const { baseUrl } = config;
 
       if (baseUrl === undefined) {
-        defaults.baseURL = CLOCKODO_API_BASE_URL;
+        this.#baseUrl = CLOCKODO_API_BASE_URL;
       } else if (typeof baseUrl === "string") {
-        defaults.baseURL = baseUrl;
+        this.#baseUrl = baseUrl;
       } else {
         throw createTypeError({
           name: "baseUrl",
@@ -185,16 +247,16 @@ export class Api {
         );
       }
 
-      defaults.headers["X-Clockodo-External-Application"] = externalApplication;
+      headers["X-Clockodo-External-Application"] = externalApplication;
     }
     if ("authentication" in config) {
       const { authentication } = config;
 
       if (authentication === undefined) {
-        delete defaults.headers["X-ClockodoApiUser"];
-        delete defaults.headers["X-ClockodoApiKey"];
-        defaults.headers["X-Requested-With"] = "XMLHttpRequest";
-        defaults.withCredentials = true;
+        delete headers["X-ClockodoApiUser"];
+        delete headers["X-ClockodoApiKey"];
+        headers["X-Requested-With"] = "XMLHttpRequest";
+        this.#credentials = "include";
       } else {
         const { user, apiKey } = authentication;
 
@@ -213,11 +275,11 @@ export class Api {
           });
         }
 
-        defaults.headers["X-ClockodoApiUser"] = user;
-        defaults.headers["X-ClockodoApiKey"] = apiKey;
-        delete defaults.headers["X-Requested-With"];
+        headers["X-ClockodoApiUser"] = user;
+        headers["X-ClockodoApiKey"] = apiKey;
+        delete headers["X-Requested-With"];
         // Since we're sending auth headers now, it's not required to also send cookies.
-        defaults.withCredentials = false;
+        this.#credentials = "same-origin";
       }
     }
   }
@@ -227,15 +289,7 @@ export class Api {
   }
 
   async get<Result = any>(url: string, queryParams = {}): Promise<Result> {
-    const response = await this[axiosClient].request({
-      method: "GET",
-      url,
-      params: mapQueryParams({ ...queryParams }),
-      paramsSerializer,
-      headers: this.defaultHeaders?.(),
-    });
-
-    return mapResponseBody<Result>(response.data);
+    return this.#request<Result>("GET", url, { queryParams });
   }
 
   async *getPagesStreaming<Result extends ResponseWithPaging>(
@@ -276,31 +330,11 @@ export class Api {
   }
 
   async post<Result = any>(url: string, body = {}, headers: RequestHeaders = {}): Promise<Result> {
-    const response = await this[axiosClient].request({
-      method: "POST",
-      url,
-      data: mapRequestBody(body),
-      headers: {
-        ...this.defaultHeaders?.(),
-        ...headers,
-      },
-    });
-
-    return mapResponseBody<Result>(response.data);
+    return this.#request<Result>("POST", url, { body, headers });
   }
 
   async put<Result = any>(url: string, body = {}, headers: RequestHeaders = {}): Promise<Result> {
-    const response = await this[axiosClient].request({
-      method: "PUT",
-      url,
-      data: mapRequestBody(body),
-      headers: {
-        ...this.defaultHeaders?.(),
-        ...headers,
-      },
-    });
-
-    return mapResponseBody<Result>(response.data);
+    return this.#request<Result>("PUT", url, { body, headers });
   }
 
   async delete<Result = any>(
@@ -308,19 +342,37 @@ export class Api {
     body = {},
     headers: RequestHeaders = {},
   ): Promise<Result> {
-    const response = await this[axiosClient].request({
-      method: "DELETE",
-      url,
-      data: mapRequestBody(body),
-      headers: {
-        ...this.defaultHeaders?.(),
-        ...headers,
-      },
-    });
-
-    return mapResponseBody<Result>(response.data);
+    return this.#request<Result>("DELETE", url, { body, headers });
   }
 }
+
+const joinUrl = (baseUrl: string, path: string) => {
+  return `${baseUrl.replace(/\/+$/, "")}/${path.replace(/^\/+/, "")}`;
+};
+
+const withoutUndefinedValues = (headers: Record<string, string | undefined>) => {
+  return Object.fromEntries(
+    Object.entries(headers).filter((entry): entry is [string, string] => entry[1] !== undefined),
+  );
+};
+
+const parseResponseBody = async (response: Response): Promise<unknown> => {
+  const text = await response.text();
+
+  if (text === "") {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(text) as unknown;
+  } catch {
+    return text;
+  }
+};
+
+const isObject = (value: unknown): value is Record<string, any> => {
+  return typeof value === "object" && value !== null;
+};
 
 const createTypeError = ({
   name,
