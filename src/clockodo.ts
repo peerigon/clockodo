@@ -100,14 +100,6 @@ export class Clockodo {
     };
   }
 
-  /**
-   * @deprecated We will remove plugins because we're planing to move away from
-   *   axios to fetch()
-   */
-  use(plugin: (clockodo: Clockodo) => void): void {
-    plugin(this);
-  }
-
   async getAbsence(params: Params<{ id: Absence["id"] }>): Promise<AbsenceReturnType> {
     REQUIRED.checkRequired(params, REQUIRED.GET_ABSENCE);
 

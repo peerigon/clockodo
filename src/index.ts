@@ -37,5 +37,6 @@ export * from "./models/workTimes.js";
 
 export { mapQueryParams, mapRequestBody, mapResponseBody } from "./lib/mappings.js";
 
+export { ClockodoApiError } from "./lib/api.js";
 export type { Config, Paging, Filter } from "./lib/api.js";
 export * from "./clockodo.js";
